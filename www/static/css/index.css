@@ -1,0 +1,99 @@
+/* common set */
+.wrap {width: 1000px;margin: 0 auto;}
+/*icon*/
+.arrowd,.arrowl,.circle{ position:absolute;right:10px;top:15px;width:13px; height:6px; line-height:0; font-size:0; background:url(../img/icon-a.png) no-repeat 0 0; vertical-align:middle;}
+.versel:hover .arrowd{ background-position:0 -16px;}
+.arrowl{ right:none; left:-11px;width:11px; height:12px; background-position:0 -58px; vertical-align:baseline;}
+.circle{ right:none; left:-9px;top:18px; width:16px; height:16px; background-position: 0 -32px;}
+/* header */
+ .header { position:relative;height:76px;background: #ffffff; border-bottom:1px solid #dfdfdf; box-shadow: 0 1px 2px rgba(0,0,0,0.1)}
+.logo {float:left;width:146px;height: 55px;margin-top:10px;}
+.headr {float:right;margin-top: 20px;}
+.nav { display:inline-block; *display:inline;*zoom:1; height:40px; line-height:40px; vertical-align:middle;}
+.nav li{ float:left; margin:0 15px;}
+.nav li a{font-size: 16px;color: #9999aa; padding:0;}
+.nav li a:hover,.nav li.current a{color: #337ab7}
+.nav li a:hover,.nav li.current a:hover{background: #fff}
+.version{ position:relative;z-index:11; display: inline-block;*display:inline;*zoom:1; vertical-align:middle;}
+a.versel{ position:relative; display:inline-block;width:100px; height:38px; line-height:38px; padding:0 10px; background-color:#fff; border:1px solid #3a3d5c; border-radius:5px; color:#3a3d5c; font-size:16px;}
+a.versel:hover{ background-color:#223343; color:#fff;}
+.verlist{ display:none; position:absolute; left:0; top:42px; width:100px; border:1px solid #ddd; box-shadow:0 0 4px rgba(0,0,0,0.4);border-radius:5px;}
+.verlist li{ line-height:38px; color:#223343; margin-top:-1px; padding:0 10px; border-top:1px solid #ddd; background-color:#f8f8f8; font-size:14px;}
+.verlist li:hover{ background-color:#ededed}
+/* footer */
+.footer{overflow:hidden;background-color:#223343;}
+.ft-help{ overflow:hidden;*zoom:1;padding:50px 0 30px;}
+.ft-help dl{ float:left; width:120px; margin:0 0 0 70px;} 
+.ft-help dt{color:#8899aa; font-size:18px;}
+.ft-help a{ display:block; line-height:26px;  color:#556677; font-size:14px;}
+.ft-copy{ padding:20px 0;border-top:1px solid #30324c; font-size:14px; color:#556677; text-align:center;}
+/*banarea*/
+.banarea{ height:460px; background:url(../img/banbg.jpg) no-repeat center bottom; text-align:center;}
+.banimg{ margin:90px 0 50px;}
+.btn-link{ display:inline-block; width:260px; height:48px; line-height:48px; border-radius:5px; background:#008CF9; font-size:24px; color:#fff; text-align:center;}
+.banbot{ height:58px; line-height:58px; background:#223343;}
+.banbot .wrap{ position:relative;}
+.banbot p{ font-size:16px; color:#fff;}
+.share{ position:absolute;right:0;top:5px;}
+.share img{margin-left: 5px;height: 20px;}
+/*flinfo*/
+.flinfo{ padding:75px 0; background-color:#f9f9f9; text-align:center;}
+.tit{ margin-bottom:25px; font-size:36px; color:#334455}
+.tips{ margin-bottom:30px; line-height:26px; color:#556677; font-size:14px;}
+/*flfet*/
+.flfet{  padding:75px 0; text-align:center;background-color:#223343;}
+.tit2{ margin-bottom:10px; color:#fff; font-size:48px;}
+.flfet .tips{ padding-bottom:25px; font-size:30px; border-bottom:1px solid #444466;}
+/*feture list*/
+.fetlist{ overflow:hidden;*zoom:1;}
+.fetlist li{ width:48%; float:left; margin:25px 0;margin-right: 2%;height:90px;letter-spacing: 0.5px;}
+.fetlist i{display:inline-block; float:left; width:70px; height:70px; margin-right:25px; background:url(../img/iconfet.png) no-repeat 0 0;}
+i.icon-fet2{ background-position:-70px 0}
+i.icon-fet3{ background-position: 0 -70px;}
+i.icon-fet4{ background-position: -70px -70px;}
+i.icon-fet5{ background-position:0 -140px;}
+i.icon-fet6{ background-position:-70px -140px;}
+i.icon-fet7{ background-position:0 -210px}
+i.icon-fet8{ background-position:-70px -210px;}
+.fetlist p{overflow:hidden; font-size:14px; color:#556677; text-align:left;}
+.fetlist strong{ display:block; margin-bottom:10px; font-size:18px; color:#556677;}
+/*fluser*/
+.fluser{padding:75px 0 150px;background-color:#fff;}
+.userlist{overflow:hidden;*zoom:1;}
+.userlist li{ width:33%; float:left;}
+.usertalk{ width:250px; height:145px; line-height:30px; padding:40px 10px 0 40px; margin-bottom:10px; background:url(../img/dialog.png) no-repeat 0 0; font-size:14px; color:#9999aa;}
+.userinfo img{ float:left; margin-right:20px;}
+.userinfo p{ overflow:hidden; padding-top:10px; font-size:14px; color:#556677;}
+.userinfo strong{ display:block; margin-bottom:5px; font-size:16px; color:#8899aa;}
+/*daily content*/
+.content{ padding:30px 0 80px; background-color:#f8f8f8;}
+.tith2{ margin-bottom:30px; font-size:36px; color:#8899aa;}
+.daily li{ position:relative; *zoom:1; margin-left:10px; padding-left:30px; padding-bottom:10px; border-left:2px solid #dcdce1;}
+.dailycont{ position:relative; padding:10px 15px 15px; background-color:#fff;border:4px solid #f4f4f4; border-radius:4px;}
+.dailycont span{ display:block; margin-bottom:8px; font-size:16px; color:#556677;}
+.dailycont strong{ margin-right:10px; font-size:24px; color:#223343;}
+.dailycont p{line-height:24px; font-size:14px; color:#666;}
+.ploy{ margin-top:40px; padding:10px 20px; background-color:#eeeef0; color:#556677;border-radius:5px;}
+.ploy h4{ margin-bottom:10px; font-size:18px;}
+.ploy p{ font-size:14px; line-height:26px;}
+/*file*/
+.lbox{float: left; width: 199px; padding-right:20px; border-right:1px solid #e8e8e8;}
+.rbox{float: left; width: 800px; padding-left:40px; margin-left:-1px; border-left:1px solid #e8e8e8;}
+.lbox dl{margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid #eee;}
+.lbox dt{ margin-bottom:8px; color:#9999aa; font-size:18px; font-weight:normal;}
+.lbox dd a{ display:block; line-height:26px; color:#8899aa; font-size:14px;}
+.search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:380px;}
+.sea-txt{ background-color:transparent; width:93%; padding:8px; margin:1px 0 0 1px;border:none;outline: none;}
+.sea-btn{ position:absolute;right:0;top:0; width:40px; height:40px; border:none; background:url(../img/sea.png) no-repeat 7px 6px;} 
+.search:hover{ border-color:#428bca;}
+.search:hover .sea-btn{ background-position:7px -35px;}
+.doc-link{line-height: 40px;}
+.doc-link a{margin-right: 20px;}
+
+
+.blue{ color:#428bca;}
+
+.toc{margin-top: 20px;margin-bottom: 50px;}
+.doc ul{margin-left: 20px;}
+.doc li{list-style-type: disc;}
+pre{background: #fff !important;}

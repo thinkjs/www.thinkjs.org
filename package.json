@@ -1,0 +1,35 @@
+{
+  "name": "www.thinkjs.org",
+  "description": "www.thinkjs.org",
+  "version": "2.0.0",
+  "author": {
+    "name": "welefen",
+    "email": "welefen@gmail.com"
+  },
+  "scripts": {
+    "compile": "babel --loose all --optional runtime --stage 0 --modules common src/ --out-dir app/",
+    "watch-compile": "npm run compile -- --watch",
+    "prepublish": "npm run compile"
+  },
+  "contributors": [{
+    "name": "welefen",
+    "email": "welefen@gmail.com"
+  }],
+  "main": "lib/index.js",
+  "dependencies": {
+    "thinkjs": "2.x.x",
+    "babel-runtime": "5.6.17"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/75team/www.thinkjs.org"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/75team/www.thinkjs.org/issues"
+  }
+}

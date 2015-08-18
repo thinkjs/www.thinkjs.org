@@ -1,0 +1,42 @@
+<%include inc/header.html %>
+  <link href="/static/module/highlight/styles/github-gist.css" rel="stylesheet">
+
+<div class="content">
+  <div class="wrap clearfix">
+      <div class="lbox">
+        <%for(var key in sidebar){%>
+        <dl>
+          <dt><%-key%></dt>
+            <dd>
+              <%for(var name in sidebar[key]){%>
+              <a href="/<%-lang%>/doc/<%-version%>/<%-sidebar[key][name]%>.html"><%-name%></a>
+              <%}%>
+            </dd>
+        </dl>
+        <%}%>
+      </div>
+        <div class="rbox">
+          <div class="clearfix">
+            <div class="doc-link pull-left">
+              <a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download all doc as PDF</a>
+              <a href=""><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> View on single page</a>
+            </div>
+            <div class="search pull-right">
+              <form method="get" action="/<%-lang%>/doc/<%-version%>/search">
+                  <input class="sea-txt" value="" name="keyword" placeholder="keyword" />
+                  <input class="sea-btn" type="submit" value="" />
+              </form>
+            </div>
+          </div>
+            <div class="doc">
+                <%-markedContent%>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/static/module/jquery/1.9.1/jquery.js"></script>
+<script src="/static/module/bootstrap/js/bootstrap.js"></script>
+<script src="/static/module/highlight/highlight.pack.js"></script>
+<script >$(function(){hljs.initHighlightingOnLoad();})</script>
+<%include inc/footer.html %>
