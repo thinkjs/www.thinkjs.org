@@ -34,6 +34,7 @@ export default class extends base {
    */
   async getDoc(){
     let doc = this.get('doc');
+
     let lang = this.config('tpl.lang');
     let version = this.get('version');
     let filePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/${doc}.md`;
@@ -45,7 +46,7 @@ export default class extends base {
     let tocContent = marked(markToc(content));
     let markedContent = marked(content).replace(/<h(\d)[^<>]*>(.*?)<\/h\1>/g, (a, b, c) => {
       let id = uslug(c, {allowedChars: '-'});
-      return '<h' + b + ' id="' + id + '">' + c + '</h' + b + '>';
+      return `<h${b} id="${id}">${c}</h${b}>`;
     });
     markedContent = markedContent.replace(/<h(\d)[^<>]*>([^<>]+)<\/h\1>/, (a, b, c) => {
       this.assign('title', `${c}${this.locale("title-doc-suffix")}`);
