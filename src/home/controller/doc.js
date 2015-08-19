@@ -6,6 +6,7 @@ import marked from "marked";
 import markToc from "marked-toc";
 import uslug from 'uslug';
 import pangunode from 'pangunode';
+import child_process from 'child_process';
 
 import base from './base.js';
 
@@ -104,9 +105,88 @@ export default class extends base {
    * view doc in single page
    * @return {} []
    */
-  async singleAction(){
+  singleAction(){
     this.generateSingleDoc();
     this.get('doc', 'single');
     return this.indexAction();
+  }
+  /**
+   * get search result
+   * @param  {String} keyword []
+   * @return {}         []
+   */
+  async getSearchResult(keyword){
+    let lang = this.config('tpl.lang');
+    let version = this.get('version');
+
+    let cmd = `grep '${keyword}' -ri *.md`;
+    let fn = think.promisify(child_process.exec, child_process);
+    let options = {
+      cwd: think.ROOT_PATH + `/view/${lang}/doc/${version}/`
+    }
+    let result = await fn(cmd, options);
+    let data = {};
+    result = result.split('\n').map(item => {
+      if(!item) return;
+      let pos = item.indexOf(':');
+      let filename = item.substr(0, pos);
+      if(!(filename in data)){
+        data[filename] = {filename: filename, text: []};
+      }
+      let text = item.substr(pos + 1);
+      text = this.escapeHtml(text).replace(new RegExp(keyword, 'ig'), `<span style="color:#c7254e">${keyword}</span>`);
+      data[filename].text.push(text);
+    });
+    data = Object.keys(data).map(item => {
+      let itemData = data[item];
+      let filePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/${itemData.filename}`;
+      let content = fs.readFileSync(filePath, 'utf8').trim();
+      content.replace(/#+([^\n]+)/, (a, c) => {
+        itemData.title = c;
+      });
+      return itemData;
+    }).sort((a, b) => {
+      return a.text.length < b.text.length ? 1 : -1;
+    });
+    return data;
+  }
+  /**
+   * escape html
+   * @param  {String} str []
+   * @return {}     []
+   */
+  escapeHtml(str){
+    let htmlMaps = {
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }
+    return (str + '').replace(/[<>'"]/g, function(a){
+      return htmlMaps[a];
+    });
+  }
+  /**
+   * search action
+   * @return {} []
+   */
+  searchAction(){
+    this.assign('currentNav', 'doc');
+    this.assign('hasBootstrap', true);
+    this.assign('hasVersion', true);
+    this.getSideBar();
+
+    let keyword = this.get('keyword').trim();
+    this.assign('keyword', keyword);
+    if(!keyword){
+      return this.display();
+    }
+    this.getSearchResult(keyword).then(result => {
+      this.assign('searchResult', result);
+      this.display();
+    }).catch(err => {
+      this.assign('searchResult', []);
+      this.display();
+    })
   }
 }

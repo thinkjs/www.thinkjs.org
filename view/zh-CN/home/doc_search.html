@@ -23,19 +23,26 @@
             </div>
             <div class="search pull-right">
               <form method="get" action="/<%-lang%>/doc/<%-version%>/search">
-                  <input class="sea-txt" value="" required name="keyword" placeholder="keyword" />
+                  <input class="sea-txt" value="<%=keyword%>" required name="keyword" placeholder="keyword" />
                   <input class="sea-btn" type="submit" value="" />
               </form>
             </div>
           </div>
             <div class="doc">
-                <%-markedContent%>
+                <%if(!keyword){%>
+                <h2 style="color:#555">请输入关键词进行搜索</h2>
+                <%}else if(think.isEmpty(searchResult)){%>
+                <h2 style="color:#555">未查询到相关内容</h2>
+                <%}else{%>
+                  <h2>搜索结果(<%-searchResult.length%>)</h2>
+                  <%searchResult.forEach(function(item){%>
+                  <h4><a target="_blank" href="/<%-lang%>/doc/<%-version%>/<%-item.filename.replace('.md', '')%>.html"><%-item.title%></a></h4>
+                  <%item.text.forEach(function(textItem){%>
+                  <p><%-textItem%></p>
+                  <%})%>
+                  <%})%>
+                <%}%>
             </div>
-            <%if(doc !== 'single'){%>
-            <div class="alert alert-info" style="margin-top:40px;">
-              如果发现文档里有什么问题，请到 <a href="https://github.com/75team/www.thinkjs.org/tree/master/view/<%-lang%>/doc/<%-version%>/<%-doc%>.md" target="_blank">https://github.com/75team/www.thinkjs.org/tree/master/view/<%-lang%>/doc/<%-version%>/<%-doc%>.md</a> 进行修改。
-            </div>
-            <%}%>
         </div>
     </div>
 </div>

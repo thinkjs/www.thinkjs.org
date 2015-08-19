@@ -240,9 +240,13 @@ openAction: function(){
 
 ```js
 // 获取 websocket 的 id
-openAction: function(){var id = this.http.websocket.id;},
+openAction: function(){
+    var id = this.http.websocket.id;
+},
 //message 里也能获取 websocket 的 id
-messageAction: function(){var id = this.http.websocket.id;}
+messageAction: function(){
+    var id = this.http.websocket.id;
+}
 ```
 
 ### 超时处理
