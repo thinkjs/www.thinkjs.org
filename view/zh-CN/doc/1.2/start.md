@@ -1,4 +1,4 @@
-## 快速入门
+## 安装、创建项目
 
 ThinkJS 需要 Node.js 的版本 `>=0.10.x`，可以通过 `node -v` 命令查看当前 node 的版本。如果未安装 node 或者版本过低，请到 [Node.js](http://nodejs.org/) 官网进行安装或升级。
 
