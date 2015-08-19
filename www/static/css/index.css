@@ -15,10 +15,10 @@
 .nav li a:hover,.nav li.current a{color: #337ab7}
 .nav li a:hover,.nav li.current a:hover{background: #fff}
 .version{ position:relative;z-index:11; display: inline-block;*display:inline;*zoom:1; vertical-align:middle;}
-a.versel{ position:relative; display:inline-block;width:100px; height:38px; line-height:38px; padding:0 10px; background-color:#fff; border:1px solid #3a3d5c; border-radius:5px; color:#3a3d5c; font-size:16px;}
+a.versel{ position:relative; display:inline-block;width:100px; height:38px; line-height:38px; padding:0 10px; background-color:#fff; border:1px solid #9999aa; border-radius:5px; color:#9999aa; font-size:16px;}
 a.versel:hover{ background-color:#223343; color:#fff;}
-.verlist{ display:none; position:absolute; left:0; top:42px; width:100px; border:1px solid #ddd; box-shadow:0 0 4px rgba(0,0,0,0.4);border-radius:5px;}
-.verlist li{ line-height:38px; color:#223343; margin-top:-1px; padding:0 10px; border-top:1px solid #ddd; background-color:#f8f8f8; font-size:14px;}
+.verlist{ display:none; position:absolute; left:0; top:42px; width:100px; border:1px solid #ddd; box-shadow:0 0 2px rgba(0,0,0,0.4);border-radius:2px;}
+.verlist li{ line-height:38px; color:#223343; margin-top:-1px; padding:0 10px; border-top:1px solid #ddd; background-color:#f8f8f8; font-size:14px;cursor: pointer;}
 .verlist li:hover{ background-color:#ededed}
 /* footer */
 .footer{overflow:hidden;background-color:#223343;}
@@ -79,7 +79,7 @@ i.icon-fet8{ background-position:-70px -210px;}
 /*file*/
 .lbox{float: left; width: 199px; padding-right:20px; border-right:1px solid #e8e8e8;}
 .rbox{float: left; width: 800px; padding-left:40px; margin-left:-1px; border-left:1px solid #e8e8e8;}
-.lbox dl{margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid #eee;}
+.lbox dl{margin-bottom:8px; padding-bottom:8px; border-bottom:1px dashed #eee;}
 .lbox dt{ margin-bottom:8px; color:#555; font-size:18px; font-weight:normal;}
 .lbox dd a{ display:block; line-height:26px; font-size:14px;}
 .search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:340px;}
@@ -99,3 +99,5 @@ i.icon-fet8{ background-position:-70px -210px;}
 .doc pre{background: #fff !important;}
 .doc h1, .doc .h1, .doc h2, .doc .h2, .doc h3, .doc .h3{margin-top: 30px;margin-bottom: 20px}
 .doc h4, .doc .h4, .doc h5, .doc .h5, .doc h6, .doc .h6{margin-top: 20px;margin-bottom: 15px}
+.doc pre {border: none;padding: 10px 0;border-left: 3px solid #337ab7;padding-left: 10px;border-radius: 0;font-size: 14px;}
+.doc pre code{padding: 0 !important;}

@@ -1,5 +1,4 @@
 <%include inc/header.html %>
-  <link href="/static/module/highlight/styles/github-gist.css" rel="stylesheet">
 
 <div class="content">
   <div class="wrap clearfix">
@@ -43,4 +42,20 @@
 <script src="/static/module/bootstrap/js/bootstrap.js"></script>
 <script src="/static/module/highlight/highlight.pack.js"></script>
 <script >$(function(){hljs.initHighlightingOnLoad();})</script>
+<script>
+function showselect(id){
+  var container = $('#' + id);
+  container.find("a").click(function(){
+    container.find("ul").show();
+  });
+  container.find("li").click(function(){
+    container.find("a").find('span').text($(this).text());
+    container.find("ul").hide();
+    var version = $(this).html();
+    location.href = '/<%-lang%>/doc/' + version + '/index.html';
+  });
+
+};
+showselect("version");
+</script>
 <%include inc/footer.html %>
