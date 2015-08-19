@@ -82,7 +82,7 @@ i.icon-fet8{ background-position:-70px -210px;}
 .lbox dl{margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid #eee;}
 .lbox dt{ margin-bottom:8px; color:#555; font-size:18px; font-weight:normal;}
 .lbox dd a{ display:block; line-height:26px; font-size:14px;}
-.search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:380px;}
+.search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:340px;}
 .sea-txt{ background-color:transparent; width:93%; padding:8px; margin:1px 0 0 1px;border:none;outline: none;}
 .sea-btn{ position:absolute;right:0;top:0; width:40px; height:40px; border:none; background:url(../img/sea.png) no-repeat 7px 6px;} 
 .search:hover{ border-color:#428bca;}
