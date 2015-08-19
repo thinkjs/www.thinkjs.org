@@ -61,7 +61,7 @@ i.icon-fet8{ background-position:-70px -210px;}
 .fluser{padding:75px 0 150px;background-color:#fff;}
 .userlist{overflow:hidden;*zoom:1;}
 .userlist li{ width:33%; float:left;}
-.usertalk{ width:250px; height:145px; line-height:30px; padding:40px 10px 0 40px; margin-bottom:10px; background:url(../img/dialog.png) no-repeat 0 0; font-size:14px; color:#9999aa;}
+.usertalk{ width:250px; line-height:24px; height:155px;padding:30px 10px 0 40px; margin-bottom:10px; background:url(../img/dialog.png) no-repeat 0 0; font-size:14px; color:#9999aa;}
 .userinfo img{ float:left; margin-right:20px;width: 76px;height: 76px;border-radius:38px;-webkit-border-radius:38px;}
 .userinfo p{ overflow:hidden; padding-top:10px; font-size:14px; color:#556677;}
 .userinfo strong{ display:block; margin-bottom:5px; font-size:16px; color:#8899aa;}
