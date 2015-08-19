@@ -35,7 +35,7 @@ D('Group').table('xxx').select();
 
 // 也可以将一条 sql 语句设置为表名
 D('Group').group('name').buildSql().then(function(sql){
-  return D('Article').table(sql, true).select()
+  return D('Article').table(sql, true).select();
 }).then(function(data){
 
 })
@@ -144,15 +144,22 @@ D('Group').alias('a').join({
 }).select()
 
 //SELECT * FROM `meinv_group` LEFT JOIN `meinv_cate` ON meinv_group.`id`=meinv_cate.`id` LEFT JOIN `meinv_group_tag` ON meinv_group.`id`=meinv_group_tag.`group_id`
-D('Group').join({cate: {on: ['id', 'id']
+D('Group').join({
+  cate: {
+    on: ['id', 'id']
   },
-  group_tag: {on: ['id', 'group_id']
+  group_tag: {
+    on: ['id', 'group_id']
   }
 }).select()
 
 //SELECT * FROM `meinv_group` LEFT JOIN `meinv_cate` ON meinv_group.`id`=meinv_cate.`id` LEFT JOIN `meinv_group_tag` ON meinv_group.`id`=meinv_group_tag.`group_id` LEFT JOIN `meinv_tag` ON (meinv_group.`id`=meinv_tag.`id` AND meinv_group.`title`=meinv_tag.`name`)
-D('Group').join({cate: {on: 'id, id'},
-  group_tag: {on: ['id', 'group_id']
+D('Group').join({
+  cate: {
+    on: 'id, id'
+  },
+  group_tag: {
+    on: ['id', 'group_id']
   },
   tag: {
     on: { // 多个字段的 ON
