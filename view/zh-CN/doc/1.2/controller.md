@@ -8,11 +8,16 @@
 
 ```js
 // 控制器文件定义
-module.exports = Controller(function(){return {indexAction: function(){return this.diplay();
+module.exports = Controller(function(){
+    return {
+        indexAction: function(){
+            return this.diplay();
         },
-        listAction: function(){return this.display();
+        listAction: function(){
+            return this.display();
         },
-        detailAction: function(){var doc = this.get("doc");
+        detailAction: function(){
+            var doc = this.get("doc");
         }
     }
 });
@@ -24,7 +29,12 @@ module.exports = Controller(function(){return {indexAction: function(){return th
 
 ```js
 // 继承 Home 分组下的 BaseController
-module.exports = Controller("Home/BaseController", function(){return {indexAction: function(){}}
+module.exports = Controller("Home/BaseController", function(){
+    return {
+        indexAction: function(){
+
+        }
+    }
 })
 ```
 
@@ -39,8 +49,12 @@ js 本身并没有在一个类实例化时自动调用某个方法，但 ThinkJS
 
 如果控制器里要重写 init 方法，那么必须调用父类的 init 方法，如：
 ```js
-module.exports = Controller(function(){return {init: function(http){ // 这里会传递一个包装后的 http 对象进来
-            this.super("init", http); // 调用父级的 init 方法，并将 http 作为参数传递过去
+module.exports = Controller(function(){
+    return {
+        init: function(http){ 
+            // 这里会传递一个包装后的 http 对象进来
+            this.super("init", http); 
+            // 调用父级的 init 方法，并将 http 作为参数传递过去
             // 额外的逻辑
         }
     }
@@ -52,13 +66,18 @@ module.exports = Controller(function(){return {init: function(http){ // 这里�
 这时候就可以在 init 方法里判断是否已经登录，并且把这个 promise 返回，后续的 action 执行则是在这个 then 之后执行。如：
 
 ```
-module.exports = Controller(function(){return {init: function(http){ // 这里会传递一个包装后的 http 对象进来
-            this.super("init", http); // 调用父级的 init 方法，并将 http 作为参数传递过去
+module.exports = Controller(function(){
+    return {
+        // 这里会传递一个包装后的 http 对象进来
+        init: function(http){ 
+            // 调用父级的 init 方法，并将 http 作为参数传递过去
+            this.super("init", http); 
             //login 请求不判断当前是否已经登录
             if(http.action === 'login'){return;}
             // 通过获取 session 判断是否已经登录
             var self = this;
-            return this.session("userInfo").then(function(data){if(isEmpty(data)){
+            return this.session("userInfo").then(function(data){
+                if(isEmpty(data)){
                     // 如果未登录跳转到登录页。由于 redirect 方法返回的是个 pendding promise，那么后面的 action 方法并不会被执行
                     return self.redirect("/login"); 
                 }else{
@@ -85,9 +104,13 @@ ThinkJS 支持前置和后置操作，默认的方法名为 `__before` 和 `__af
 
 ```js
 // 前置和后置操作
-module.exports = Controller(function(){return {__before: function(action){console.log(action)
+module.exports = Controller(function(){
+    return {
+        __before: function(action){
+            console.log(action)
         },
-        __after: function(action){console.log(action);
+        __after: function(action){
+            console.log(action);
         }
     }
 })
@@ -113,7 +136,9 @@ var value = this.post("value");
 开启后，就可以通过下面的方式来获取参数
 
 ```js
-module.exports = Controller(function(){return {detailAction: function(id){
+module.exports = Controller(function(){
+    return {
+        detailAction: function(id){
             // 参数绑定后，这里的参数 id 值即为传递过来的 id 值
             // 如：访问 /article/10 的话，这里的 id 值为 10
             // 这里可以是多个参数
@@ -139,7 +164,10 @@ module.exports = Controller(function(){return {detailAction: function(id){
 
 ```js
 // 空操作方法
-module.exports = Controller(function(){return {__call: function(action){console.log(action);
+module.exports = Controller(function(){
+    return {
+        __call: function(action){
+            console.log(action);
         }
     }
 })
@@ -161,7 +189,9 @@ call_controller: "Home:Index:_404"
 在 `Home/IndexController.js` 里定义 `_404Action` 方法：
 
 ```js
-module.exports = Controller({_404Action: function(){this.status(404); // 发送 404 状态码
+module.exports = Controller({
+    _404Action: function(){
+        this.status(404); // 发送 404 状态码
         this.end('not found');
     }
 })
@@ -206,7 +236,10 @@ Action 里一般会从多个地方拉取数据，如：从数据库中查询数�
 我们知道，Promise 会通过 try{}catch(e){} 来捕获异常，然后传递到 catch 里。如：
 
 ```js
-indexAction: function(){D('User').page(1).then(function(data){}).catch(function(error){
+indexAction: function(){
+    D('User').page(1).then(function(data){
+
+    }).catch(function(error){
         //error 为异常信息
         console.log(error)
     })
@@ -220,7 +253,9 @@ indexAction: function(){D('User').page(1).then(function(data){}).catch(function(
 ```js
 indexAction: function(){
     // 这里将 Promise return 后，如果有异常会打印到控制台里
-    return D('User').page(1).then(function(){})
+    return D('User').page(1).then(function(){
+
+    })
 }
 ```
 
@@ -233,7 +268,8 @@ JS 中，函数是作为一等公民存在的，所以经常有函数嵌套。�
 ```js
 listAciton: function(){
     var self = this;
-    return D('Group').select().then(function(data){self.success(data);
+    return D('Group').select().then(function(data){
+        self.success(data);
     })
 }
 ```

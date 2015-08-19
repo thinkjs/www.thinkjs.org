@@ -54,6 +54,7 @@ export default class extends base {
     });
 
     this.assign('markedContent', markedContent);
+    this.assign('doc', doc);
   }
   /**
    * doc

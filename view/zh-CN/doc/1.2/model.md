@@ -133,7 +133,9 @@ ThinkJS 的基础模型类提供了很多链式调用的方法（类似于 jQuer
 使用非常简单，如：要查询用户表中 name 为 welefen 的部分用户信息，可以用下面的方式：
 
 ```js
-var promise = D('User').where({name: 'welefen'}).field('sex,date').find().then(function(data){//data 为当前查询到用户信息，如果没有匹配到相关的数据，那么 data 为一个空对象})
+var promise = D('User').where({name: 'welefen'}).field('sex,date').find().then(function(data){
+    //data 为当前查询到用户信息，如果没有匹配到相关的数据，那么 data 为一个空对象
+})
 ```
 
 ` 注意：` 由于数据库操作都是异步的，执行 find() 方法后，并不能返回结果，而是返回一个 promise，在 promise.then 方法里可以拿到对应的数据。 
@@ -168,7 +170,9 @@ D("User").add({
     name: "welefen",
     pwd: "xxx",
     email: "welefen@gmail.com"
-}).then(function(insertId){//insertId 为插入到数据库中的 id}).catch(function(err){// 插入异常，比如：email 已经存在})
+}).then(function(insertId){
+    //insertId 为插入到数据库中的 id}).catch(function(err){// 插入异常，比如：email 已经存在
+})
 ```
 
 也可以一次添加多条数据，使用 `addAll` 方法，示例如下：
@@ -189,7 +193,9 @@ D('User').addAll([{
 更新数据使用 `update` 方法，如：
 ```js
 // 更新 email 为 welefen@gmail.com 用户的密码
-D('User').where({email: "welefen@gmail.com"}).update({pwd: "xxx"}).then(function(affectedRows){//affectedRows 为影响的行数})
+D('User').where({email: "welefen@gmail.com"}).update({pwd: "xxx"}).then(function(affectedRows){
+    //affectedRows 为影响的行数
+})
 ```
 
 #### 查询数据
@@ -200,15 +206,19 @@ D('User').where({email: "welefen@gmail.com"}).update({pwd: "xxx"}).then(function
 
 ```js
 // 查询 id=1 的用户数据，只需要 name,email 字段值
-D('User').where({id: 1}).field('name,email').find().then(function(data){// 如果数据存在 data 为 {name: "welefen", "email": "welefen@gmail.com"}
-    // 数据不存在 data 为 {}});
+D('User').where({id: 1}).field('name,email').find().then(function(data){
+    // 如果数据存在 data 为 {name: "welefen", "email": "welefen@gmail.com"}
+    // 数据不存在 data 为 {}
+});
 // 查询 score>1000 的 10 条用户数据，按 score 降序
 D('User').where({score: ['>', 1000]}).order('score DESC').limit(10).select().then(function(data){
     //data 为一个数组，数组里每一项为一个用户的详细信息
     // 如果没有数据，那么 data 为空数组
 })
 // 查询所有的用户数据
-D('User').count().then(function(count){//count 为具体的用户数})
+D('User').count().then(function(count){
+    //count 为具体的用户数
+})
 ```
 
 
@@ -218,7 +228,9 @@ D('User').count().then(function(count){//count 为具体的用户数})
 
 ```js
 // 删除 id 为 1 的数据
-D('User').where({id: 1}).delete().then(function(affectedRows){//affectedRows 为影响的行数});
+D('User').where({id: 1}).delete().then(function(affectedRows){
+    //affectedRows 为影响的行数
+});
 ```
 
 #### thenAdd
@@ -275,14 +287,17 @@ D('Article').page(this.get("page"), 20).countSelect().then(function(data){
 ```js
 module.exports = Model({
     // 定义数据校验的字段
-    fields: {title: {valid: ['required', 'length'],
+    fields: {
+        title: {
+            valid: ['required', 'length'],
             length_args: [10],
             msg: {
                 required: '标题不能为空',
                 length: '标题长度不能小于 10'
             }
         },
-        url: {valid: ['url'],
+        url: {
+            valid: ['url'],
             msg: 'url 格式不正确'
         }
     }
@@ -297,7 +312,8 @@ indexAction: function(){
     D('Article').add({
         title: 'xxx',
         url: 'xxx'
-    }).catch(function(err){var data = JSON.parse(err.json_message);
+    }).catch(function(err){
+        var data = JSON.parse(err.json_message);
         self.error(100, 'data error', data);
     })
 }
@@ -305,4 +321,4 @@ indexAction: function(){
 
 这样在添加数据的时候，自定校验 title 和 url 的值是否合法。
 
-具体是数据格式请见 [数据校验](/doc/data_valid.html)。
+具体是数据格式请见 [数据校验](./data_valid.html)。
