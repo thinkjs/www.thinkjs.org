@@ -19,4 +19,11 @@ export default class extends base {
     this.assign('title', this.locale('title-changelog'));
     this.display();
   }
+  /**
+   * demo list
+   * @return {} []
+   */
+  demoAction(){
+    this.display();
+  }
 }
