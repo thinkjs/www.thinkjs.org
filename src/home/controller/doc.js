@@ -1,6 +1,7 @@
 'use strict';
 
 import fs from 'fs';
+import path from 'path';
 import marked from "marked";
 import markToc from "marked-toc";
 import uslug from 'uslug';
@@ -37,7 +38,12 @@ export default class extends base {
 
     let lang = this.config('tpl.lang');
     let version = this.get('version');
+
     let filePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/${doc}.md`;
+    if(doc === 'single'){
+      filePath = `${think.RESOURCE_PATH}/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
+    }
+
     if(!think.isFile(filePath)){
       return Promise.reject(new Error(`${doc} is not exist`));
     }
@@ -68,6 +74,39 @@ export default class extends base {
 
     await this.getDoc();
 
-    this.display();
+    this.display('doc/index');
+  }
+  /**
+   * generate single doc file
+   * @return {} []
+   */
+  generateSingleDoc(){
+    let lang = this.config('tpl.lang');
+    let version = this.get('version');
+    let filePath = `${think.RESOURCE_PATH}/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
+    think.mkdir(path.dirname(filePath));
+
+    this.getSideBar();
+    let data = this.assign('sidebar');
+    let doc = ['# ThinkJS ' + version + ' Documentation'];
+    for(let type in data){
+      doc.push(`# ${type}`);
+      for(let name in data[type]){
+        let docFilePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/${data[type][name]}.md`;
+        let content = fs.readFileSync(docFilePath, 'utf8');
+        doc.push(content);
+      }
+    }
+    doc = doc.join('\n\n');
+    fs.writeFileSync(filePath, doc);
+  }
+  /**
+   * view doc in single page
+   * @return {} []
+   */
+  async singleAction(){
+    this.generateSingleDoc();
+    this.get('doc', 'single');
+    return this.indexAction();
   }
 }

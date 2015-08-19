@@ -18,8 +18,8 @@
         <div class="rbox">
           <div class="clearfix">
             <div class="doc-link pull-left">
-              <a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download all doc as PDF</a>
-              <a href=""><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> View on single page</a>
+              <a target="_blank" href="/static/module/thinkjs/thinkjs_<%-lang%>_<%-version%>.pdf"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download all doc as PDF</a>
+              <a href="/<%-lang%>/doc/<%-version%>/single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> View on single page</a>
             </div>
             <div class="search pull-right">
               <form method="get" action="/<%-lang%>/doc/<%-version%>/search">
@@ -31,9 +31,11 @@
             <div class="doc">
                 <%-markedContent%>
             </div>
+            <%if(doc !== 'single'){%>
             <div class="alert alert-info" style="margin-top:40px;">
               如果发现文档里有什么问题，请到 <a href="https://github.com/75team/www.thinkjs.org/tree/master/view/<%-lang%>/doc/<%-version%>/<%-doc%>.md" target="_blank">https://github.com/75team/www.thinkjs.org/tree/master/view/<%-lang%>/doc/<%-version%>/<%-doc%>.md</a> 进行修改。
             </div>
+            <%}%>
         </div>
     </div>
 </div>
