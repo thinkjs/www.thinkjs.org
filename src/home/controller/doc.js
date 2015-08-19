@@ -124,10 +124,13 @@ export default class extends base {
     let options = {
       cwd: think.ROOT_PATH + `/view/${lang}/doc/${version}/`
     }
-    let result = await fn(cmd, options);
+    //ignore command error
+    let result = await fn(cmd, options).catch(err => '');
+
     let data = {};
-    result = result.split('\n').map(item => {
-      if(!item) return;
+    result = result.split('\n').filter(item => {
+      return item;
+    }).map(item => {
       let pos = item.indexOf(':');
       let filename = item.substr(0, pos);
       if(!(filename in data)){
@@ -170,7 +173,7 @@ export default class extends base {
    * search action
    * @return {} []
    */
-  searchAction(){
+  async searchAction(){
     this.assign('currentNav', 'doc');
     this.assign('hasBootstrap', true);
     this.assign('hasVersion', true);
@@ -181,12 +184,9 @@ export default class extends base {
     if(!keyword){
       return this.display();
     }
-    this.getSearchResult(keyword).then(result => {
-      this.assign('searchResult', result);
-      this.display();
-    }).catch(err => {
-      this.assign('searchResult', []);
-      this.display();
-    })
+    
+    let result = await this.getSearchResult(keyword);
+    this.assign('searchResult', result);
+    this.display();
   }
 }
