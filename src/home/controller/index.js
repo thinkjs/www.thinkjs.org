@@ -26,4 +26,11 @@ export default class extends base {
   demoAction(){
     this.display();
   }
+  /**
+   * test
+   * @return {} []
+   */
+  testAction(){
+    this.success();
+  }
 }

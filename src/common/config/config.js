@@ -1,4 +1,5 @@
 export default {
+  port: 7777,
   locale: { //i18n
     name: 'think_locale',
     default: 'zh-CN'

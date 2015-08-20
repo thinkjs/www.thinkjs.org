@@ -27,3 +27,5 @@ build/Release
 node_modules
 
 app/
+output/
+output.tar.gz

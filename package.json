@@ -15,7 +15,6 @@
     "email": "welefen@gmail.com"
   }],
   "dependencies": {
-    "thinkjs": "https://github.com/75team/thinkjs/tree/es6",
     "babel-runtime": "5.6.17",
     "marked": "0.3.5",
     "marked-toc": "0.3.0",
