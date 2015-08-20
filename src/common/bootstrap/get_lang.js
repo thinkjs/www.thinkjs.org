@@ -8,11 +8,11 @@ let dirnames = fs.readdirSync(viewPath);
 think.config('locale.support', dirnames);
 
 /**
- * get locale form http pathname
+ * get lang form http pathname
  * @param  {Object} http []
  * @return {}      []
  */
-think.middleware('get_locale', http => {
+think.middleware('get_lang', http => {
   let pos = http.pathname.indexOf('/');
   let prefix = http.pathname;
   if(pos > -1){
@@ -21,7 +21,8 @@ think.middleware('get_locale', http => {
   prefix = prefix.toLowerCase();
 
   let support = think.config('locale.support');
-  let lang;
+  let lang = http.lang();
+
   let flag = support.some(item => {
     if(item.toLowerCase() === prefix){
       lang = item;
@@ -29,10 +30,14 @@ think.middleware('get_locale', http => {
     }
   });
   if(flag){
-    http._lang = lang;
     http.pathname = http.pathname.substr(prefix.length + 1);
   }
+
+  if(support.indexOf(lang) === -1){
+    lang = http.config('locale.default');
+  }
+  http.config('tpl.lang', lang);
 });
 
-think.hook('route_parse', 'get_locale', 'prepend');
+think.hook('route_parse', 'get_lang', 'prepend');
 
