@@ -15,18 +15,18 @@
 .nav li a:hover,.nav li.current a{color: #337ab7}
 .nav li a:hover,.nav li.current a:hover{background: #fff}
 .version{ position:relative;z-index:11; display: inline-block;*display:inline;*zoom:1; vertical-align:middle;}
-a.versel{ position:relative; display:inline-block;width:65px; height:38px; line-height:38px; padding:0 10px; background-color:#fff; border:1px solid #9999aa; border-radius:5px; color:#9999aa; font-size:16px;}
+a.versel{ position:relative; display:inline-block;width:65px; height:38px; line-height:38px; padding:0 10px; background-color:#fff; border:1px solid rgba(0, 0, 0, 0.15); border-radius:5px; color:#9999aa; font-size:16px;}
 a.versel:hover{ background-color:#223343; color:#fff;}
-.verlist{ display:none; position:absolute; left:0; top:42px; width:65px; border:1px solid #ddd; box-shadow:0 0 2px rgba(0,0,0,0.4);border-radius:2px;}
-.verlist li{ line-height:38px; color:#223343; margin-top:-1px; padding:0 10px; border-top:1px solid #ddd; background-color:#f8f8f8; font-size:14px;cursor: pointer;}
-.verlist li:hover{ background-color:#ededed}
+.verlist{ display:none; position:absolute; left:0; top:42px; width:65px; border:1px solid rgba(0, 0, 0, 0.15); box-shadow:0 1px 6px rgba(0, 0, 0, 0.1);border-radius:2px;}
+.verlist li{ line-height:38px; color:#223343; margin-top:-1px; padding:0 10px; border-top:1px solid #ddd; background-color:#fff; font-size:14px;cursor: pointer;}
+.verlist li:hover{ background-color:#f5f5f5}
 /* footer */
 .footer{overflow:hidden;background-color:#223343;}
 .ft-help{ overflow:hidden;*zoom:1;padding:50px 0 30px;}
 .ft-help dl{ float:left; width:120px; margin:0 0 0 70px;} 
 .ft-help dt{color:#8899aa; font-size:18px;}
 .ft-help a{ display:block; line-height:26px;  color:#556677; font-size:14px;}
-.ft-copy{ padding:20px 0;border-top:1px solid #30324c; font-size:14px; color:#556677; text-align:center;}
+.ft-copy{ padding:20px 0;border-top:1px solid #345; font-size:14px; color:#556677; text-align:center;}
 /*banarea*/
 .banarea{ height:460px; background:url(../img/banbg.jpg) no-repeat center bottom; text-align:center;}
 .banimg{ margin:90px 0 50px;}
@@ -43,7 +43,7 @@ a.versel:hover{ background-color:#223343; color:#fff;}
 /*flfet*/
 .flfet{  padding:75px 0; text-align:center;background-color:#223343;}
 .tit2{ margin-bottom:10px; color:#fff; font-size:48px;}
-.flfet .tips{ padding-bottom:25px; font-size:30px; border-bottom:1px solid #444466;}
+.flfet .tips{ padding-bottom:25px; font-size:30px; border-bottom:1px solid #345;}
 /*feture list*/
 .fetlist{ overflow:hidden;*zoom:1;}
 .fetlist li{ width:48%; float:left; margin:25px 0;margin-right: 2%;height:90px;letter-spacing: 0.5px;}
@@ -84,12 +84,12 @@ i.icon-fet8{ background-position:-70px -210px;}
 .lbox dl:after{height:20px;content: '';display: block;}
 .lbox dt{ margin-bottom:8px; color:#555; font-size:18px; font-weight:normal; padding-bottom:10px; border-bottom:1px dashed #eee;}
 .lbox dd a{ display:block; line-height:26px; font-size:14px;}
-.search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:760px;}
+.search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:760px;margin-top: 20px;}
 .sea-txt{ background-color:transparent; width:93%; padding:8px; margin:1px 0 0 1px;border:none;outline: none;}
 .sea-btn{ position:absolute;right:0;top:0; width:40px; height:40px; border:none; background:url(../img/sea.png) no-repeat 7px 6px;} 
 .search:hover{ border-color:#428bca;}
 .search:hover .sea-btn{ background-position:7px -35px;}
-.doc-link{line-height: 40px;margin-top: 10px;}
+.doc-link{line-height: 40px;margin-top: -10px;}
 .doc-link a{margin-right: 20px;}
 
 

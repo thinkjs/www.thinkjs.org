@@ -4,7 +4,7 @@
 
 ## 介绍
 
-ThinkJS 是一款高效、简单易用的 Node.js MVC 框架。基于 [ES6 Promise](http://www.html5rocks.com/en/tutorials/es6/promises/)开发，让异步编程更加简单、方便。   
+ThinkJS 是一款高效、简单易用的 Node.js MVC 框架。基于 [ES6 Promise](http://www.html5rocks.com/en/tutorials/es6/promises/) 开发，让异步编程更加简单、方便。   
 
 ### 特性
 

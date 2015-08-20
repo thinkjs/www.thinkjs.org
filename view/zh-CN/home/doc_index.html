@@ -16,17 +16,19 @@
       </div>
         <div class="rbox">
           <div class="clearfix">
-            
-            <div class="search">
-              <form method="get" action="/<%-lang%>/doc/<%-version%>/search">
-                  <input class="sea-txt" value="" required name="keyword" placeholder="keyword" />
-                  <input class="sea-btn" type="submit" value="" />
-              </form>
-            </div>
+
             <div class="doc-link">
               <a target="_blank" href="/static/module/thinkjs/thinkjs_<%-lang%>_<%-version%>.pdf"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download all documents as PDF</a>
               <a href="/<%-lang%>/doc/<%-version%>/single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> View on single page</a>
             </div>
+
+            <div class="search">
+              <form method="get" action="/<%-lang%>/doc/<%-version%>/search">
+                  <input class="sea-txt" value="" required name="keyword" />
+                  <input class="sea-btn" type="submit" value="" />
+              </form>
+            </div>
+            
           </div>
             <div class="doc">
                 <%-markedContent%>
@@ -52,7 +54,7 @@ function showselect(id){
   container.find("li").click(function(){
     container.find("a").find('span').text($(this).text());
     container.find("ul").hide();
-    var version = $(this).html();
+    var version = $(this).html().trim();
     location.href = '/<%-lang%>/doc/' + version + '/index.html';
   });
 
