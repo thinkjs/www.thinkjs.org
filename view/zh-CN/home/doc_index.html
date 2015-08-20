@@ -1,6 +1,6 @@
 <%include inc/header.html %>
 
-<div class="content">
+<div class="content doc-content">
   <div class="wrap clearfix">
       <div class="lbox">
         <%for(var key in sidebar){%>
@@ -16,15 +16,16 @@
       </div>
         <div class="rbox">
           <div class="clearfix">
-            <div class="doc-link pull-left">
-              <a target="_blank" href="/static/module/thinkjs/thinkjs_<%-lang%>_<%-version%>.pdf"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download all documents as PDF</a>
-              <a href="/<%-lang%>/doc/<%-version%>/single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> View on single page</a>
-            </div>
-            <div class="search pull-right">
+            
+            <div class="search">
               <form method="get" action="/<%-lang%>/doc/<%-version%>/search">
                   <input class="sea-txt" value="" required name="keyword" placeholder="keyword" />
                   <input class="sea-btn" type="submit" value="" />
               </form>
+            </div>
+            <div class="doc-link">
+              <a target="_blank" href="/static/module/thinkjs/thinkjs_<%-lang%>_<%-version%>.pdf"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download all documents as PDF</a>
+              <a href="/<%-lang%>/doc/<%-version%>/single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> View on single page</a>
             </div>
           </div>
             <div class="doc">
