@@ -1,6 +1,6 @@
 ## 介绍
 
-ThinkJS 2.0 是一款使用 ES6/7 特性全新开发的 Node.js MVC框架。该框架使用ES7中`async`和`await`，或者ES6中的`Generator Function`彻底了解决Node.js中异步嵌套的问题。同时吸收了国内外众多框架的设计理念和思想，让开发 Node.js 项目更加简单、高效。
+ThinkJS 2.0 是一款使用 ES6/7 特性全新开发的 Node.js MVC框架。该框架使用ES7中`async`和`await`，或者ES6中的`Generator Function`彻底解决了Node.js中异步嵌套的问题。同时吸收了国内外众多框架的设计理念和思想，让开发 Node.js 项目更加简单、高效。
 
 ### 特性
 
