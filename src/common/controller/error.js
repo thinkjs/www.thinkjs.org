@@ -9,30 +9,21 @@ module.exports = think.controller({
    * @return {Promise}        []
    */
   displayErrorPage: function(status){
-    let file = `common/error/${status}.html`;
-    let options = this.config('tpl');
-    options = think.extend({}, options, {
-      type: 'ejs'
-    });
+    var file = `common/error/${status}.html`;
+    var options = this.config('tpl');
+    options = think.extend({}, options, {type: 'ejs'});
     return this.display(file, options);
   },
   /**
-   * bad request
+   * Forbidden 
    * @param  {Object} self []
-   * @return {Promise}      []
-   */
-  _400Action: function(self){
-    return self.displayErrorPage(400);
-  },
-  /**
-   * forbidden 
    * @return {Promise} []
    */
   _403Action: function(self){
     return self.displayErrorPage(403);
   },
   /**
-   * not found 
+   * Not Found 
    * @param  {Object} self []
    * @return {Promise}      []
    */
@@ -40,7 +31,7 @@ module.exports = think.controller({
     return self.displayErrorPage(404);
   },
   /**
-   * server error 
+   * Internal Server Error
    * @param  {Object} self []
    * @return {Promise}      []
    */
@@ -48,7 +39,7 @@ module.exports = think.controller({
     return self.displayErrorPage(500);
   },
   /**
-   * service unavailable
+   * Service Unavailable
    * @param  {Object} self []
    * @return {Promise}      []
    */
