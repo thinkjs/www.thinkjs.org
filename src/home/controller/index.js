@@ -8,7 +8,7 @@ export default class extends base {
    * @return {} []
    */
   indexAction(){
-    this.display();
+    return this.display();
   }
   /**
    * changelog page
@@ -17,20 +17,20 @@ export default class extends base {
   changelogAction(){
     this.assign('currentNav', 'changelog');
     this.assign('title', this.locale('title-changelog'));
-    this.display();
+    return this.display();
   }
   /**
    * demo list
    * @return {} []
    */
   demoAction(){
-    this.display();
+    return this.display();
   }
   /**
    * test
    * @return {} []
    */
   testAction(){
-    this.success();
+    return this.success();
   }
 }

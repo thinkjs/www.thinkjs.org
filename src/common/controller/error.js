@@ -2,48 +2,55 @@
 /**
  * error controller
  */
-module.exports = think.controller({
+export default class extends think.controller.base {
   /**
    * display error page
    * @param  {Number} status []
    * @return {Promise}        []
    */
-  displayErrorPage: function(status){
-    var file = `common/error/${status}.html`;
-    var options = this.config('tpl');
+  displayErrorPage(status){
+    let module = 'common';
+    if(think.mode !== think.mode_module){
+      module = this.config('default_module');
+    }
+    let file = `${module}/error/${status}.html`;
+    let options = this.config('tpl');
     options = think.extend({}, options, {type: 'ejs'});
     return this.display(file, options);
-  },
+  }
   /**
-   * Forbidden 
-   * @param  {Object} self []
+   * Bad Request 
    * @return {Promise} []
    */
-  _403Action: function(self){
-    return self.displayErrorPage(403);
-  },
+  _400Action(){
+    return this.displayErrorPage(400);
+  }
+  /**
+   * Forbidden 
+   * @return {Promise} []
+   */
+  _403Action(){
+    return this.displayErrorPage(403);
+  }
   /**
    * Not Found 
-   * @param  {Object} self []
    * @return {Promise}      []
    */
-  _404Action: function(self){
-    return self.displayErrorPage(404);
-  },
+  _404Action(){
+    return this.displayErrorPage(404);
+  }
   /**
    * Internal Server Error
-   * @param  {Object} self []
    * @return {Promise}      []
    */
-  _500Action: function(self){
-    return self.displayErrorPage(500);
-  },
+  _500Action(){
+    return this.displayErrorPage(500);
+  }
   /**
    * Service Unavailable
-   * @param  {Object} self []
    * @return {Promise}      []
    */
-  _503Action: function(self){
-    return self.displayErrorPage(503);
+  _503Action(){
+    return this.displayErrorPage(503);
   }
-});
+}
