@@ -36,7 +36,7 @@ think.middleware('get_lang', http => {
   if(support.indexOf(lang) === -1){
     lang = http.config('locale.default');
   }
-  http.config('tpl.lang', lang);
+  http.lang(lang);
 });
 
 think.hook('route_parse', 'get_lang', 'prepend');
