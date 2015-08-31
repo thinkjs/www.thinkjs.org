@@ -9,7 +9,7 @@ export default class extends think.controller.base {
       currentNav: '',
       hasBootstrap: false,
       hasVersion: false,
-      lang: this.config('tpl.lang')
+      lang: this.http.lang()
     });
   }
 }
