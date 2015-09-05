@@ -5,7 +5,7 @@ export default {
     name: 'think_locale',
     default: 'zh-CN'
   },
-  tpl: {
+  view: {
     content_type: 'text/html',
     file_ext: '.html',
     file_depr: '_',
