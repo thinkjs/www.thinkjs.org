@@ -20,7 +20,7 @@ export default class extends think.controller.base {
     //这里可以通过post方法获取所有的数据，数据已经在logic里做了校验
     let data = this.post();
     let md5 = think.md5('think_' + data.pwd);
-    //用用户名和加密后的密码去匹配数据库中对于的条目
+    //用户名和加密后的密码去匹配数据库中对于的条目
     let result = await this.model('user').where({name: data.name, pwd: md5}).find();
     //如果未匹配到任何数据，表示用户名或者密码错误
     if(think.isEmpty(result)){
@@ -49,7 +49,7 @@ module.exports = think.controller({
     //这里可以通过post方法获取所有的数据，数据已经在logic里做了校验
     var data = this.post();
     var md5 = think.md5('think_' + data.pwd);
-    //用用户名和加密后的密码去匹配数据库中对于的条目
+    //用户名和加密后的密码去匹配数据库中对于的条目
     var result = yield this.model('user').where({name: data.name, pwd: md5}).find();
     //如果未匹配到任何数据，表示用户名或者密码错误
     if(think.isEmpty(result)){

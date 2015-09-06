@@ -6,7 +6,7 @@ export default class extends think.logic.base {
   indexAction(){
     let rules = {
       doc: "string|default:index",
-      version: "string|in:1.2,2.0|default:1.2"
+      version: "string|in:1.2,2.0|default:2.0"
     }
     let flag = this.validate(rules);
     if(!flag){
