@@ -7,6 +7,7 @@
     "email": "welefen@gmail.com"
   },
   "scripts": {
+    "start": "node www/index.js",
     "compile": "babel --loose all --optional runtime --stage 0 --modules common src/ --out-dir app/",
     "watch-compile": "npm run compile -- --watch"
   },
@@ -19,7 +20,9 @@
     "marked": "0.3.5",
     "marked-toc": "0.3.0",
     "uslug": "1.0.3",
-    "pangunode": "0.1.0"
+    "pangunode": "0.1.0",
+    "node-crontab": "0.0.8",
+    "superagent": "1.3.0"
   },
   "repository": {
     "type": "git",
