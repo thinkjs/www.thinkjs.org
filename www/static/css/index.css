@@ -38,6 +38,8 @@ a.versel:hover{ background-color:#223343; color:#fff;}
 .share img{margin-left: 5px;height: 20px;overflow: hidden;}
 /*flinfo*/
 .flinfo{ padding:75px 0; background-color:#f9f9f9; text-align:center;}
+.flinfo pre{text-align: left;font-size: 15px; background: url(../img/p.jpg) no-repeat;padding-top: 32px;padding-left: 36px;line-height: 19px;width: 868px;height: 386px;margin: auto}
+.flinfo pre code{background: transparent;}
 .tit{ margin-bottom:25px; font-size:36px; color:#334455}
 .tips{ margin-bottom:30px; line-height:26px; color:#556677; font-size:14px;}
 /*flfet*/

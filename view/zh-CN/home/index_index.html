@@ -32,7 +32,26 @@
   <div class="wrap">
       <div class="tit"><h3>使用全新的特性开发项目</h3></div>
     <p class="tips">使用ES7里的async和await，使用同步的方式书写异步代码，彻底解决异步代码深层次嵌套的问题。配合ES6里的class等特性，让代码更加简洁。<br>通过Babel进行编译，在Node.js和IO.js环境都可以运行。</p>
-        <img src="static/img/p.png" />
+        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">//user controller, home/controller/user.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">think</span>.<span class="hljs-title">controller</span>.<span class="hljs-title">base</span> </span>{
+  <span class="hljs-comment">//login action</span>
+  <span class="hljs-keyword">async</span> loginAction(self){
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.isGet()){
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.display();
+    }
+    <span class="hljs-comment">//data is validated in logic</span>
+    <span class="hljs-keyword">let</span> data = <span class="hljs-keyword">this</span>.post();
+    <span class="hljs-keyword">let</span> md5 = think.md5(<span class="hljs-string">'think_'</span> + data.pwd);
+    <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.model(<span class="hljs-string">'user'</span>).where({name: data.name, pwd: md5}).find();
+    <span class="hljs-keyword">if</span>(think.isEmpty(result)){
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.fail(<span class="hljs-string">'login fail'</span>);
+    }
+    <span class="hljs-comment">//set userInfo to session</span>
+    <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.session(<span class="hljs-string">'userInfo'</span>, result);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.success();
+  }
+}
+</code></pre>
     </div>
 </div>
 <div class="flfet"> 
@@ -108,5 +127,4 @@
         </ul>
     </div>
 </div>
-
 <%include inc/footer.html %>
