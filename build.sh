@@ -34,6 +34,7 @@ npm run compile;
 cp -r app output/;
 
 cd output;
+rm -rf www/static/other/icon/*
 
 tar zcvf ../output.tar.gz *;
 cd ..
