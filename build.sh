@@ -19,8 +19,10 @@ rm -rf www/static/other/icon/*.bak;
 /usr/local/bin/php $STC_PATH/index.php ${path} test $1;
 if [ -f ${path}"/stc.error.log" ]; then
     rm -rf ${path}"/stc.error.log";
-    exit 1;
+    #exit 1;
 fi
+
+#exit;
 
 cp www/*.ico output/www/;
 cp www/*.js output/www/;
@@ -32,7 +34,7 @@ npm run compile;
 cp -r app output/;
 
 cd output;
-rm -rf output/static/other/icon;
+
 tar zcvf ../output.tar.gz *;
 cd ..
 

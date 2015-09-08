@@ -22,7 +22,8 @@ return array (
 	'MOD_CSS_COMPRESS' => true,  //CSS文件是否启用压缩
 	'MOD_OPTI_IMG' => false,  //优化图片
 	'MOD_XSS_AUTO_FIXED' => false,  //模版型XSS自动修复
-	'MOD_IMG_DATAURI' => false,  //CSS中的图片地址转换为dataURI
+	'MOD_IMG_DATAURI' => true,  //CSS中的图片地址转换为dataURI
+	'IMG_DATAURI_SUPPORT_IE' => false,
 	'MOD_STATIC_TO_CDN' => true,  //静态资源上线到CDN
 	'MOD_JS_TPL_REPLACE' => false,  //前端模版替换
 	'MOD_EXTERNAL_TO_INLINE' => false,  //外链资源编译为内联资源
