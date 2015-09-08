@@ -15,17 +15,21 @@ let iconList = {
 
 let fn = () => {
   think.log('icon job', 'CRONTAB');
-  for(let type in iconList){
+  let keys = Object.keys(iconList);
+  keys.forEach(type => {
     let url = iconList[type];
     let filePath = `${think.RESOURCE_PATH}/static/other/icon/${type}.svg`;
     let bakFilePath = `${filePath}.bak`;
     let stream = fs.createWriteStream(bakFilePath);
-    let req = superagent.get(url);
+    let req = superagent.get(url).timeout(5000);
     req.pipe(stream);
     req.on('end', () => {
       fs.renameSync(bakFilePath, filePath);
     })
-  }
+    req.on('error', () => {
+      fs.unlinkSync(bakFilePath);
+    })
+  });
 };
 
 fn();
