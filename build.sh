@@ -14,6 +14,7 @@ mkdir ${path}"/output";
 if [ ! -f ${path}"/config.php" ];then
 	cp $STC_PATH/config/config.php ${path};
 fi
+rm -rf www/static/other/icon/*.bak;
 #path=$(pwd);
 /usr/local/bin/php $STC_PATH/index.php ${path} test $1;
 if [ -f ${path}"/stc.error.log" ]; then
