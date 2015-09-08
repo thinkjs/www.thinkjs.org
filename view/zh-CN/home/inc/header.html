@@ -5,12 +5,12 @@
 <title><%-title%></title>
 <meta name="keywords" content="ThinkJS, Node.js, io.js, MVC, Restful, Generator Function, ES6, ES7, Promise">
 <meta name="description" content="ThinkJS 是一款使用 ES6/7 特性全新开发的 Node.js MVC框架。该框架使用ES7中async和await，或者ES6中的Generator Function彻底解决了Node.js中异步嵌套的问题。">
-<link href="/static/css/reset.css" rel="stylesheet" />
+<%lscookie='header'%>
+<link href="/static/css/reset.css" rel="stylesheet" data-ls="css_reset" />
 <%if(hasBootstrap){%>
-<link href="/static/module/bootstrap/css/bootstrap.css" rel="stylesheet" />
-<link href="/static/module/highlight/styles/github-gist.css" rel="stylesheet">
+<%include bootstrap.html%>
 <%}%>
-<link href="/static/css/index.css" rel="stylesheet" />
+<link href="/static/css/index.css" rel="stylesheet" data-ls="css_index" />
 </head>
 <body>
 <div class="header">
