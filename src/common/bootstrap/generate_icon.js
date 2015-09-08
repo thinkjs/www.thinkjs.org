@@ -17,11 +17,17 @@ let fn = () => {
   think.log('icon job', 'CRONTAB');
   for(let type in iconList){
     let url = iconList[type];
-    let filepath = think.RESOURCE_PATH + '/static/other/icon/' + type + '.svg';
-    let stream = fs.createWriteStream(filepath);
+    let filePath = `${think.RESOURCE_PATH}/static/other/icon/${type}.svg`;
+    let bakFilePath = `${filePath}.bak`;
+    let stream = fs.createWriteStream(bakFilePath);
     let req = superagent.get(url);
     req.pipe(stream);
+    req.on('end', () => {
+      fs.renameSync(bakFilePath, filePath);
+    })
   }
 };
 
-let jobId = crontab.scheduleJob('* */1 * * *', fn);
+fn();
+
+let jobId = crontab.scheduleJob('0 */1 * * *', fn);

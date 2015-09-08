@@ -35,7 +35,7 @@ a.versel:hover{ background-color:#223343; color:#fff;}
 .banbot .wrap{ position:relative;}
 .banbot p{ font-size:16px; color:#fff;}
 .share{ position:absolute;right:0;top:5px;}
-.share img{margin-left: 5px;height: 20px;}
+.share img{margin-left: 5px;height: 20px;overflow: hidden;}
 /*flinfo*/
 .flinfo{ padding:75px 0; background-color:#f9f9f9; text-align:center;}
 .tit{ margin-bottom:25px; font-size:36px; color:#334455}
