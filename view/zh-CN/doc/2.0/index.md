@@ -1,12 +1,12 @@
 ## 介绍
 
-ThinkJS 2.0 是一款使用 ES6/7 特性全新开发的 Node.js MVC框架。该框架使用ES7中`async`和`await`，或者ES6中的`Generator Function`彻底解决了Node.js中异步嵌套的问题。同时吸收了国内外众多框架的设计理念和思想，让开发 Node.js 项目更加简单、高效。
+ThinkJS 是一款使用 ES6/7 特性全新开发的 Node.js MVC 框架。该框架使用 ES7 中`async`和`await`，或者 ES6 中的`Generator Function`彻底解决了 Node.js 中异步嵌套的问题。同时吸收了国内外众多框架的设计理念和思想，让开发 Node.js 项目更加简单、高效。
 
 ### 特性
 
 #### 使用ES6/7特性来开发项目
 
-在 ThinkJS 2.0 中，可以使用ES6里的`class`和`Generator Function`等特性，甚至可以使用ES7里的`async`和`await`等特性来开发项目。虽然最新的Node.js和io.js还不能全部支持这些特性，但可以借助 [Babel](http://babeljs.io/) 对代码进行编译，让其稳定运行在Node.js的环境中。
+在 ThinkJS 中，可以使用 ES6 里的`class`和`Generator Function`等特性，甚至可以使用ES7里的`async`和`await`等特性来开发项目。虽然最新的 Node.js 和 io.js 还不能全部支持这些特性，但可以借助 [Babel](http://babeljs.io/) 对代码进行编译，让其稳定运行在 Node.js 的环境中。
 
 ```js
 //user controller, home/controller/user.js
@@ -33,9 +33,9 @@ export default class extends think.controller.base {
 }
 ```
 
-上面的代码我们使用了ES6里的`class`, `export`, `let`以及ES7里的`async`和`await`等特性，虽然查询数据库和写入 Session 都是异步操作，但借助`await`，代码都是同步书写的。最后使用Babel进行编译，就可以稳定运行在Node.js的环境中了。
+上面的代码我们使用了 ES6 里的`class`, `export`, `let`以及 ES7 里的`async`和`await`等特性，虽然查询数据库和写入 Session 都是异步操作，但借助`await`，代码都是同步书写的。最后使用 Babel 进行编译，就可以稳定运行在 Node.js 的环境中了。
 
-如果不想使用Babel编译，但Node.js环境支持`Generator Function`，那么可以使用`yield`和`*`。
+如果不想使用 Babel 编译，但 Node.js 环境支持`Generator Function`，那么可以使用`yield`和`*`。
 
 ```js
 //user controller, home/controller/user.js
@@ -64,16 +64,31 @@ module.exports = think.controller({
 
 #### 支持丰富的数据库
 
+ThinkJS 支持`mysql`, `mongodb`, `sqlite`等常见的数据库，并且封装了很多操作数据库的接口，自动防止 Sql 注入等安全漏洞。
+
 #### 代码自动更新
+
+ThinkJS 内置了一套代码自动更新的机制，文件修改后立即生效，不用重启 Node.js 服务，也不用借助第三方模块。
 
 #### 自动创建Rest接口
 
-#### 支持多种websocket库    
+使用`thinkjs`命令可以自动创建 Rest 接口，不用写任何的代码即可运行。如果想在 Rest 接口中过滤字段或者进行权限校验，也很方便处理。
+
+#### 支持多种websocket库
+
+ThinkJS 支持`socket.io`，`sockjs`等常见的`websocket`库，并且对这些库进行包装，抹平各个库之间接口调用上的差异，给开发者一致的体验。
 
 #### 丰富的测试用例
 
+ThinkJS 含有 1500+ 的测试用例，代码覆盖率达到 95% ，每一次修改都有对应的测试用例来保障框架功能的稳定。
+
 #### 支持命令行调用执行定时任务
+
+ThinkJS 里的`Action`除了可以响应用户的请求，同时支持在命令行下访问。借助这套机制就可以很方便的执行定时任务。
 
 #### Hook和Middleware
 
+ThinkJS 使用 Hook 和 Middleware 机制，内置了大量的功能，同时也很方便进行扩展。
+
 #### 详细的错误日志
+
