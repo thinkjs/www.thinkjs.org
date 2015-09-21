@@ -2,7 +2,9 @@
 
 ### 安装 Node.js
 
-ThinkJS 是一款 Node.js 的 MVC 框架，所以安装 ThinkJS 之前，需要先安装 Node.js 环境。可以去官方
+ThinkJS 是一款 Node.js 的 MVC 框架，所以安装 ThinkJS 之前，需要先安装 Node.js 环境。可以去 [官方](https://nodejs.org/) 下载最新的安装包进行安装，也可以通过 [taobao](http://npm.taobao.org/mirrors/node) 的镜像下载安装。
+
+安装完成后，在命令行执行`node -v`，如果能看到对应的版本号输出，则表示安装成功。
 
 ### 安装 ThinkJS
 
@@ -76,6 +78,23 @@ node foo/bar/node_modules/thinkjs/bin/index.js new project_path --es6;
 
 进入到项目目录下，执行`npm install`安装依赖。如果执行很慢，可以尝试使用`taobao`的源进行安装。
 
+```
+npm install --registry=https://registry.npm.taobao.org --verbose
+```
+
 ### 启动项目
 
-在项目目录下
+在项目目录下执行`npm start`，如果能看到类似下面的内容，则自动服务成功。
+
+```
+[2015-09-21 20:21:09] [THINK] Server running at http://127.0.0.1:8360/
+[2015-09-21 20:21:09] [THINK] ThinkJS Version: 2.0.0
+[2015-09-21 20:21:09] [THINK] Cluster Status: closed
+[2015-09-21 20:21:09] [THINK] WebSocket Status: closed
+[2015-09-21 20:21:09] [THINK] File Auto Reload: true
+[2015-09-21 20:21:09] [THINK] App Enviroment: development
+```
+
+### 访问项目
+
+打开浏览器，访问`http://127.0.0.1:8360/`即可。
