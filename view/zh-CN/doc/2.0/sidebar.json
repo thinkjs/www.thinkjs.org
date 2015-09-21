@@ -1,8 +1,8 @@
 {
     "快速入门": {
       "介绍": "index",
-      "安装ThinkJS": "install",
-      "创建项目": "project"
+      "创建项目": "create_project",
+      "项目结构": "app_structure"
     },
     "进阶应用": {
       "配置": "config",
@@ -13,9 +13,9 @@
       "视图": "view"
     },
     "API": {
-      "原生对象的扩展": "native",
-      "全局函数": "global",
-      "Controller": "api_controller",
-      "Model": "api_model"
+      "think": "api_think",
+      "http": "api_http",
+      "controller": "api_controller",
+      "model": "api_model"
     }
   }

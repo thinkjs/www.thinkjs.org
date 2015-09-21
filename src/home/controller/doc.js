@@ -47,7 +47,7 @@ export default class extends base {
     }
 
     if(!think.isFile(filePath)){
-      return Promise.reject(new Error(`${doc} is not exist`));
+      return Promise.reject(new Error(`/doc/${doc}.html is not exist`));
     }
     let fn = think.promisify(fs.readFile, fs);
     let content = await fn(filePath, 'utf8');
@@ -74,9 +74,13 @@ export default class extends base {
     this.assign('hasVersion', true);
     this.getSideBar();
 
-    await this.getDoc();
-
-    this.display('doc/index');
+    try{
+      await this.getDoc();
+      this.display('doc/index');
+    }catch(err){
+      this.http.error = err;
+      think.statusAction(404, this.http);
+    }
   }
   /**
    * generate single doc file

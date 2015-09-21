@@ -24,6 +24,9 @@ let fn = () => {
     let req = superagent.get(url).timeout(5000);
     req.pipe(stream);
     req.on('end', () => {
+      if(!think.isFile(bakFilePath)){
+        return;
+      }
       let content = fs.readFileSync(bakFilePath, 'utf8').trim();
       if(content.indexOf('<svg xmlns') === 0){
         fs.renameSync(bakFilePath, filePath);
@@ -32,7 +35,9 @@ let fn = () => {
       }
     })
     req.on('error', () => {
-      fs.unlinkSync(bakFilePath);
+      if(think.isFile(bakFilePath)){
+        fs.unlinkSync(bakFilePath);
+      }
     })
   });
 };

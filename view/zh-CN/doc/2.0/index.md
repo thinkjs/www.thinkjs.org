@@ -2,11 +2,13 @@
 
 ThinkJS 是一款使用 ES6/7 特性全新开发的 Node.js MVC 框架。该框架使用 ES7 中`async`和`await`，或者 ES6 中的`Generator Function`彻底解决了 Node.js 中异步嵌套的问题。同时吸收了国内外众多框架的设计理念和思想，让开发 Node.js 项目更加简单、高效。
 
+使用 ES6/7 特性来开发项目可以大大提高开发效率，是趋势所在。并且新版的 Node.js 对 ES6 特性也有了较好的支持，即使有些特性还没有支持，也可以借助 Babel 编译工具来支持。
+
 ### 特性
 
 #### 使用ES6/7特性来开发项目
 
-在 ThinkJS 中，可以使用 ES6 里的`class`和`Generator Function`等特性，甚至可以使用ES7里的`async`和`await`等特性来开发项目。虽然最新的 Node.js 和 io.js 还不能全部支持这些特性，但可以借助 [Babel](http://babeljs.io/) 对代码进行编译，让其稳定运行在 Node.js 的环境中。
+在 ThinkJS 中，可以使用 ES6 里的`class`和`Generator Function`等特性，甚至可以使用ES7里的`async`和`await`等特性来开发项目。虽然最新的 Node.js还不能全部支持这些特性，但可以借助 [Babel](http://babeljs.io/) 对代码进行编译，让其稳定运行在 Node.js 的环境中。
 
 ```js
 //user controller, home/controller/user.js
@@ -33,7 +35,7 @@ export default class extends think.controller.base {
 }
 ```
 
-上面的代码我们使用了 ES6 里的`class`, `export`, `let`以及 ES7 里的`async`和`await`等特性，虽然查询数据库和写入 Session 都是异步操作，但借助`await`，代码都是同步书写的。最后使用 Babel 进行编译，就可以稳定运行在 Node.js 的环境中了。
+上面的代码我们使用了 ES6 里的`class`, `export`, `let`以及 ES7 里的`async`和`await`等特性，虽然查询数据库和写入`Session`都是异步操作，但借助`await`，代码都是同步书写的。最后使用`Babel`进行编译，就可以稳定运行在 Node.js 的环境中了。
 
 如果不想使用 Babel 编译，但 Node.js 环境支持`Generator Function`，那么可以使用`yield`和`*`。
 
