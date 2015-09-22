@@ -106,8 +106,9 @@ ThinkJS代码`lib/`的具体路径
 默认为深度复制，可以将第一个参数传 `false` 进行浅度复制。  
 
 ```js
-var target = think.extend({}, {name: 'foo'}, {value: 'bar'});
-//taget is {name: 'foo', value: 'bar'}
+think.extend({}, {name: 'foo'}, {value: 'bar'});
+// returns 
+{name: 'foo', value: 'bar'}
 ```
 
 #### think.isBoolean(obj)
@@ -413,7 +414,9 @@ think.chmod("/home/welefen/a", 0777);
 计算字符串的md5值
 
 ```js
-think.md5('thinkjs'); //7821eb623e0b1138a47db6a88c3f56bc
+think.md5('thinkjs'); 
+// returns
+7821eb623e0b1138a47db6a88c3f56bc
 ```
 
 
@@ -513,7 +516,7 @@ fn();
 
 #### think.co
 
-`co`模块的别名
+`co`模块的别名 <https://github.com/tj/co>
 
 
 ### 类
