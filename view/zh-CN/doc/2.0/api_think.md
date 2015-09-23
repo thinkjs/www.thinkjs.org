@@ -522,3 +522,9 @@ fn();
 ### 类
 
 #### think.base
+
+think.base 详细介绍请见 [这里](./api_think_base.html)
+
+#### think.http.base
+
+think.http.base 详细介绍请见 [这里](./api_think_http_base.html)

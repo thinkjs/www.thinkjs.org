@@ -24,13 +24,9 @@ export default class extends base {
    * @return {} []
    */
   demoAction(){
+    this.assign('currentNav', 'demo');
+    this.assign('title', this.locale('title-demo'));
+    this.assign('hasBootstrap', true);
     return this.display();
-  }
-  /**
-   * test
-   * @return {} []
-   */
-  testAction(){
-    return this.success();
   }
 }

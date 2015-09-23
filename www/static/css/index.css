@@ -95,6 +95,7 @@ i.icon-fet8{ background-position:-70px -210px;}
 .doc-link a{margin-right: 20px;}
 
 
+.nav > li > a:hover, .nav > li > a:focus{background-color: #fff !important;}
 .blue{ color:#337ab7;}
 
 .toc{margin-top: 20px;margin-bottom: 50px;}
@@ -106,3 +107,7 @@ i.icon-fet8{ background-position:-70px -210px;}
 .doc h4, .doc .h4, .doc h5, .doc .h5, .doc h6, .doc .h6{margin-top: 20px;margin-bottom: 15px}
 .doc pre {border: none;padding: 10px 0;border-left: 3px solid #337ab7;padding-left: 10px;border-radius: 0;font-size: 14px;}
 .doc pre code{padding: 0 !important;}
+
+.demo-list{font-size: 16px}
+.demo-list ul{margin-left: 20px}
+.demo-list ul li{list-style-type: disc;}

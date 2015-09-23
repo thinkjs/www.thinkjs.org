@@ -7,7 +7,7 @@ import child_process from 'child_process';
 import marked from "marked";
 import markToc from "marked-toc";
 import uslug from 'uslug';
-import pangunode from 'pangunode';
+//import pangunode from 'pangunode';
 
 import base from './base.js';
 
@@ -32,6 +32,39 @@ export default class extends base {
     this.assign('version', version);
   }
   /**
+   * get parsed markdown content
+   * @param  {String} filePath []
+   * @return {Promise}          []
+   */
+  async getMarkedContent(filePath){
+
+    let cache = this.config('cache_markdown_content');
+    if(cache){
+      let content = thinkCache('markdown-doc', filePath);
+      if(content){
+        return content;
+      }
+    }
+
+    let fn = think.promisify(fs.readFile, fs);
+    let content = await fn(filePath, 'utf8');
+    let tocContent = marked(markToc(content));
+    let markedContent = marked(content).replace(/<h(\d)[^<>]*>(.*?)<\/h\1>/g, (a, b, c) => {
+      let id = uslug(c, {allowedChars: '-'});
+      return `<h${b} id="${id}">${c}</h${b}>`;
+    });
+    markedContent = markedContent.replace(/<h(\d)[^<>]*>([^<>]+)<\/h\1>/, (a, b, c) => {
+      this.assign('title', `${c}${this.locale("title-doc-suffix")}`);
+      return `${a}<div class="toc">${tocContent}</div>`;
+    });
+
+    if(cache){
+      thinkCache('markdown-doc', filePath, markedContent);
+    }
+
+    return markedContent;
+  }
+  /**
    * get doc content
    * @return {} []
    */
@@ -49,17 +82,7 @@ export default class extends base {
     if(!think.isFile(filePath)){
       return Promise.reject(new Error(`/doc/${doc}.html is not exist`));
     }
-    let fn = think.promisify(fs.readFile, fs);
-    let content = await fn(filePath, 'utf8');
-    let tocContent = marked(markToc(content));
-    let markedContent = marked(content).replace(/<h(\d)[^<>]*>(.*?)<\/h\1>/g, (a, b, c) => {
-      let id = uslug(c, {allowedChars: '-'});
-      return `<h${b} id="${id}">${c}</h${b}>`;
-    });
-    markedContent = markedContent.replace(/<h(\d)[^<>]*>([^<>]+)<\/h\1>/, (a, b, c) => {
-      this.assign('title', `${c}${this.locale("title-doc-suffix")}`);
-      return `${a}<div class="toc">${tocContent}</div>`;
-    });
+    let markedContent = await this.getMarkedContent(filePath);
 
     this.assign('markedContent', markedContent);
     this.assign('doc', doc);
