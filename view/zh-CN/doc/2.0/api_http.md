@@ -13,6 +13,8 @@ http.createServer(function (request, response) {
 
 如上面的代码所示，Node.js 创建服务时，会传递 request 和 response 2个对象给回调函数。为了后续调用方便， ThinkJS 对这2个对象进行了包装，包装成了 http 对象，并且提供很多有用的方法。
 
+http 对象会在 middleware, logic, controller, view 中传递。
+
 
 `注`：http 对象是 EventEmitter 的一个实例，所以可以对其进行事件监听和执行。
 
