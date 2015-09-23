@@ -6,13 +6,13 @@
 
 ```js
 export default class extends think.base {
-    /**
-     * init method
-     * @return {} []
-     */
-    init(){
+  /**
+   * init method
+   * @return {} []
+   */
+  init(){
 
-    }
+  }
 }
 ```
 
@@ -21,13 +21,13 @@ export default class extends think.base {
 使用普通的方式继承该类：
 ```js
 var Cls = think.Class(think.base, {
-    /**
-     * init method
-     * @return {} []
-     */
-    init: function(){
+  /**
+   * init method
+   * @return {} []
+   */
+  init: function(){
 
-    }
+  }
 })
 ```
 
@@ -39,10 +39,10 @@ var Cls = think.Class(think.base, {
 
 ```js
 class a extends think.base {
-    init(name, value){
-        this.name = name;
-        this.value = value;
-    }
+  init(name, value){
+    this.name = name;
+    this.value = value;
+  }
 }
 ```
 
@@ -54,18 +54,18 @@ class a extends think.base {
 
 ```js
 export default class think.controller.base {
-    /**
-     * 前置魔术方法
-     * @return {Promise} []
-     */
-    * __before(){
-        let userInfo = yield this.session('userInfo');
-        //如果没有登录，则跳转到登录页面
-        if(think.isEmpty(userInfo)){
-            return this.redirect('/logic');
-        }
-        this.assign('userInfo', userInfo)
+  /**
+   * 前置魔术方法
+   * @return {Promise} []
+   */
+  * __before(){
+    let userInfo = yield this.session('userInfo');
+    //如果没有登录，则跳转到登录页面
+    if(think.isEmpty(userInfo)){
+      return this.redirect('/logic');
     }
+    this.assign('userInfo', userInfo)
+  }
 }
 ```
 
@@ -82,10 +82,10 @@ export default class think.controller.base {
 ```js
 //假设当前类文件具体路径为 /home/xxx/project/app/controller/user.js
 class a extends think.base {
-    test(){
-        var filename = this.filename();
-        //returns 'user'
-    }
+  test(){
+    var filename = this.filename();
+    //returns 'user'
+  }
 }
 ```
 
@@ -103,10 +103,10 @@ class a extends think.base {
 ```js
 //使用 async 和 await
 class Cls extends think.base {
-    async getValue(){
-        let value = await this.getValue();
-        return value;
-    }
+  async getValue(){
+    let value = await this.getValue();
+    return value;
+  }
 }
 let instance = new Cls();
 instance.invoke('getValue').then(data => {
@@ -118,10 +118,10 @@ instance.invoke('getValue').then(data => {
 ```js
 //使用 * 和 yield
 class Cls extends think.base {
-    * getValue(){
-        let value = yield this.getValue();
-        return value;
-    }
+  * getValue(){
+    let value = yield this.getValue();
+    return value;
+  }
 }
 let instance = new Cls();
 instance.invoke('getValue').then(data => {

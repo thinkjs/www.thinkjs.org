@@ -14,8 +14,14 @@
     },
     "API": {
       "think": "api_think",
+      "think.base": "api_think_base",
+      "think.http.base": "api_think_http_base",
       "http": "api_http",
       "controller": "api_controller",
-      "model": "api_model"
+      "controller.rest": "api_controller_rest",
+      "model": "api_model",
+      "model.mongo": "api_model_mongo",
+      "middleware": "api_middleware",
+      "adapter": "api_adapter"
     }
   }
