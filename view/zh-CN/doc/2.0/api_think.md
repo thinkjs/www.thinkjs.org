@@ -670,27 +670,313 @@ think.log(function(colors){
 
 #### think.config(name, value, data)
 
+* `name` {String} 配置名称
+* `value` {Mixed} 配置值
+* `data` {Object} 配置对象
+
+读取或者设置配置，可以指定总的配置对象。
+
+```js
+//获取配置
+let value = think.config('name');
+//获取 admin 模块下的配置
+let value = think.config('name', undefined, 'admin');
+
+// 写入配置
+think.config('name', 'value');
+```
+
 #### think.getModuleConfig(module)
+
+* `module` {String} 模块名称
+* `return` {Object}
+
+获取模块的所有配置。该配置包含模块的配置，通用模块的配置，框架默认的配置。
+
+```js
+//获取 admin 模块的所有配置
+let configs = think.getModuleConfig('admin');
+```
 
 #### think.hook()
 
+注册、获取和执行 hook。
+
+系统默认的 hook 列表：
+
+```js
+export default {
+  form_parse: ['parse_json_payload'],
+  resource_check: ['resource'],
+  resource_output: ['output_resource'],
+  route_parse: ['rewrite_pathname', 'subdomain_deploy', 'route'],
+  app_begin: ['check_csrf', 'read_html_cache'],
+  view_init: [],
+  view_template: ['locate_template'],
+  view_parse: ['parse_template'],
+  view_filter: [],
+  view_end: ['write_html_cache'],
+  app_end: []
+};
+```
+
+项目中可以根据需要追加或者修改。
+
+** 获取事件对应的 middleware 列表 **
+
+```js
+think.hook('view_template');
+//returns
+['locate_template']
+```
+
+** 设置 hook **
+
+```js
+//替换原有的 hook
+think.hook('view_template', ['locate_template1']);
+
+//将原有的之前追加
+think.hook('view_template', ['locate_template1'], 'prepend');
+
+//将原有的之后追加
+think.hook('view_template', ['locate_template1'], 'append');
+
+```
+
+** 删除 hook **
+
+```js
+think.hook('view_template', null);
+```
+
+** 执行 hook **
+
+```js
+let result = think.hook('view_template', http, data);
+//result is a promise
+```
+
 #### think.middleware()
+
+注册、创建、获取和执行 middleware。
+
+** 创建 middleware **
+
+```js
+//解析 XML 示例
+var ParseXML = think.middlearea({
+  run: function(){
+    var http = this.http;
+    var payload = http.payload; //payload为上传的post数据
+    var data = xmlParse.parse(payload); //使用一个xml解析，这里 xmlParse 是示例
+    http._post = data; //将解析后的数据赋值给 http._post，后续可以通过 http.post('xxx') 获取
+  }
+});
+```
+
+使用 ES6 创建 middleware。
+
+```js
+let Cls1 = class extends think.middleware.base {
+  run(){
+    let http = this.http;
+  }
+}
+```
+
+** 注册 middleware **
+
+middlearea 可以是个简单的 function，也可以是较为复杂的 class。
+
+```js
+//注册 middleware 为 function
+think.middleware('parse_xml', http => {
+  
+})
+```
+
+```js
+//注册 middleware 为 class
+//会自动调用 run 执行
+let Cls = think.middlearea({
+  run: function(){
+    let http = this.http;
+
+  }
+});
+think.middleware('parse_xml', Cls);
+```
+
+** 获取 middleware **
+
+```js
+let middlearea = think.middleare('parse_xml');
+```
+
+** 执行 middleware **
+
+```js
+let result = think.middleare('parse_xml', http);
+//result is a promise
+```
+
 
 #### think.adapter()
 
-#### think.route()
+创建、注册、获取和执行 adapter。
 
-#### think.gc()
+** 创建 adapter **
 
-#### think.http()
+```js
+//创建一个 adapter
+var Cls = think.adapter({
 
-#### think.uuid()
+});
 
-#### think.session()
+//创建一个 session adapter，继承自 session base 类
+var Cls = think.adapter('session', 'base', {
+  
+})
+```
+
+```js
+//使用 ES6 创建一个 session adapter
+let Cls = class extends think.adapter.session {
+
+}
+```
+
+** 注册 adapter **
+
+```js
+//注册一个 xxx 类型的 session adapter
+think.adapter('session', 'xxx', Cls);
+```
+
+** 获取 adapter **
+
+```js
+//获取 file 类型的 session adapter
+let Cls = think.adapter('session', 'file');
+```
+
+** 执行 adapter **
+
+```js
+let Adapter = think.adapter('session', 'file');
+let instance = new Adapter(options);
+```
+
+
+#### think.gc(instance)
+
+* `instance` {Object} 类的实例
+
+注册实例到 gc 队列中。instance 必须含有属性`gcType`和方法`gc`。
+
+像 cache, session 这些功能一般都是有过期时间，过期后需要要进行清除工作。框架提供了一套机制方便清除过期的文件等。
+
+```js
+let Cls = class extends think.adapter.cache {
+  init(options){
+    super.init(options);
+    this.gcType = 'xFileCache';
+    think.gc(this);
+  }
+  gc(){
+    //寻找过期的内容并清除
+  }
+}
+```
+
+#### think.http(req, res)
+
+* `req` {Object} request 对象
+* `res` {Object} response 对象
+* `return` {Promise}
+
+根据 req 和 res 包装成 http 对象。req 和 res 可以自定义。
+
+```js
+//根据一个 url 生成一个 http 对象，方便命令行下调用
+think.http('/index/test').then(http => {
+  
+});
+```
+
+#### think.uuid(length)
+
+* `length` {Number} 生成字符串的长度，默认为 32
+
+生成一个随机字符串。
+
+
+#### think.session(http)
+
+* `http` {Object} http对象
+
+生成 session，并写到 http 对象上。如果已经存在，则直接返回。
 
 #### think.controller()
 
+创建、执行 controller
+
+** 创建 controller **
+
+```js
+//创建 controller, 继承 think.controller.base
+let Cls = think.controller({
+  
+})
+//创建 controller, 继承 think.controller.rest
+let Cls = think.controller('rest', {
+  
+})
+```
+
+```js
+//使用 ES6 创建 controller
+let Cls1 = class extends think.controller.base {
+  
+}
+```
+
+** 实例化 controller **
+
+```js
+//实例化 home 模块下 user controller
+let instance = think.controller('user', http, 'home');
+```
+
+
 #### think.logic()
+
+创建、执行 logic
+
+** 创建 logic **
+
+```js
+//创建 logic, 继承 think.logic.base
+let Cls = think.logic({
+  
+})
+```
+
+```js
+//使用 ES6 创建 logic
+let Cls1 = class extends think.logic.base {
+  
+}
+```
+
+** 实例化 logic **
+
+```js
+//实例化 home 模块下 user logic
+let instance = think.logic('user', http, 'home');
+```
+
 
 #### think.model()
 
