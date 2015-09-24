@@ -57,15 +57,15 @@ export default class extends think.controller.rest{
 
 #### controller.postAction()
 
-添加数据，请求类型需要是 `POST`
+添加数据
 
 #### controller.deleteAction()
 
-删除数据，请求类型需要是 `DELETE`
+删除数据
 
 #### controller.putAction()
 
-更新数据，请求类型需要是 `PUT`
+更新数据
 
 #### controller.__call()
 
