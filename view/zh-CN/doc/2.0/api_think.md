@@ -94,6 +94,52 @@ ThinkJS代码`lib/`的具体路径
 
 ### 方法
 
+#### think.Class(methods, clean)
+
+动态的创建一个类，默认继承自 think.base 。 如果使用 ES6 特性进行开发的话，可以直接使用 ES6 里的 class 来创建类。
+
+```js
+//继承自 think.base
+var Cls1 = think.Class({
+  getName: function(){
+
+  }
+})
+```
+
+
+** 不继承 think.base ** 
+
+```js
+var Cls2 = think.Class({
+  getName: function(){
+
+  }
+}, true);
+```
+
+
+** 继承一个类 **
+
+```js
+//继承自 Cls2
+var Cls3 = think.Class(Cls2, {
+  init: function(name){
+    this.name = name;
+  },
+  getName: function(){
+
+  }
+})
+```
+
+
+** 实例化类 **
+
+```js
+//获取类的实例，自动调用 init 方法
+var instance = new Cls3('thinkjs');
+```
 
 #### think.extend(target, source1, source2, ...)
 
@@ -356,6 +402,14 @@ think.isHttp(http); // true
 
 判断文件或者目录是否可写，如果不存在则返回 false
 
+
+#### think.isPrevent(obj)
+
+* `obj` {Mixed}
+* `return` {Boolean}
+
+判断是否是个阻止类型的 promise。通过 think.prevent() 会生成该 promise 。
+
 #### think.mkdir(p, mode)
 
 * `p` {String} 要创建的目录
@@ -518,6 +572,378 @@ fn();
 
 `co`模块的别名 <https://github.com/tj/co>
 
+#### think.lookClass(name, type, module, base)
+
+* `name` {String} 类名
+* `type` {String} 类型 (controller | model | logic ...)
+* `module` {String} 模块名
+* `base` {String} 找不到时找对应的基类
+
+根据类型，名称来查找类。如果找不到会到 common 模块下查找，如果还是找不到，则查找对应类型的基类。
+
+```js
+//查找 home 模块下 user controller
+//如果找不到，会找 common 模块下 user controller
+//如果还是找不到，会找 base controller
+think.lookClass('user', 'controller', 'home'); 
+
+//查找 admin 模块下 user controller
+think.lookClass('admin/user', 'controller');
+```
+
+#### think.getPath(module, type, prefix)
+
+* `module` {String} 模块名
+* `type` {String} 类型，如： controller, model, logic
+* `prefix` {String} 前缀
+
+根据当前项目类型获取对应类型的目录。
+
+```js
+let path = think.getPath('home', 'controller');
+```
+
+假如当前项目的根目录是`/foo/bar`，那么获取到的目录为：
+
+* 项目模式`think.mode_mini` 下路径为 `/foo/bar/app/controller`
+* 项目模式`think.mode_normal` 下路径为 `/foo/bar/app/controller/home`
+* 项目模式`think.mode_module` 下路径为 `/foo/bar/app/home/controller`
+
+#### think.require(name, flag)
+
+* `name` {String} 
+* `flag` {Boolean}
+
+#### think.safeRequire(file)
+
+* `file` {String} 要加载的文件
+
+安全的加载一个文件，如果文件不存在，则返回null，并打印错误信息。
+
+#### think.prevent()
+
+返回一个特殊的 reject promise 。该 promise 可以阻止后续的行为且不会报错。
+
+#### think.log(msg, type, showTime)
+
+* `msg` {String | Error} 信息
+* `type` {String} 类型
+* `showTime` {Number | Boolean} 是否显示时间
+
+打印日志，该方法打印出来的日志会有时间，类型等信息，方便查看和后续处理。
+
+```js
+think.log('WebSocket Status: closed', 'THINK');
+//writes '[2015-09-23 17:43:00] [THINK] WebSocket Status: closed'
+```
+
+** 打印错误信息 **
+```js
+think.log(new Error('error'), 'ERROR');
+//writes '[2015-09-23 17:50:17] [Error] Error: error'
+```
+
+** 显示执行时间 **
+
+```js
+think.log('/static/module/jquery/1.9.1/jquery.js', 'HTTP', startTime);
+//writes '[2015-09-23 17:52:13] [HTTP] /static/module/jquery/1.9.1/jquery.js 10ms'
+```
+
+** 不显示时间 **
+
+```js
+think.log('/static/module/jquery/1.9.1/jquery.js', 'HTTP', null);
+//writes '[HTTP] /static/module/jquery/1.9.1/jquery.js'
+```
+
+** 自定义 ** 
+
+```js
+think.log(function(colors){
+  return colors.yellow('[WARNING]') + ' test';
+});
+//writes '[WARNING] test'
+```
+
+其中`colors`为 npm 模块 colors，<https://github.com/Marak/colors.js> 。
+
+#### think.config(name, value, data)
+
+#### think.getModuleConfig(module)
+
+#### think.hook()
+
+#### think.middleware()
+
+#### think.adapter()
+
+#### think.route()
+
+#### think.gc()
+
+#### think.http()
+
+#### think.uuid()
+
+#### think.session()
+
+#### think.controller()
+
+#### think.logic()
+
+#### think.model()
+
+创建或者获取 model。
+
+** 创建 model **
+
+```js
+//创建一个 model
+let model = think.model({
+  getList: function(){
+
+  }
+});
+
+//ES6 里直接继承 think.model.base 类
+let model = class extends think.model.base {
+  getList(){
+
+  }
+}
+
+
+//创建一个 model 继承自 mongo model
+let model = think.model('mongo', {
+  getList: function(){
+
+  }
+});
+//ES6 里直接继承 think.model.mongo 类
+let model = class extends think.model.mongo {
+  getList(){
+
+  }
+}
+```
+
+
+** 获取 model 实例 **
+
+```js
+let configs = {
+  host: '127.0.0.1',
+  name: 'user'
+}
+//获取 home 模块下 user model
+let instance = think.model('user', configs, 'home');
+```
+
+#### think.service()
+
+创建或者获取 service。
+
+** 创建 service ** 
+
+```js
+//创建一个 service 类
+let service = think.service({
+  
+})
+
+//ES6 里直接继承 think.service.base 类
+let service = class extends think.service.base {
+
+}
+```
+
+service 基类继承自 [think.base](./api_think_base.html)，所以可以用 think.base 里的方法。
+
+如果 serivce 不想写成类，那就没必要通过这种方法创建。
+
+
+** 获取 service **
+
+```js
+//获取 home 模块下 post service，并传递参数 {} 
+//如果获取到的 service 是个类，则自动实例化
+think.service('post', {}, 'home');
+```
+
+
+#### think.cache(name, value, options)
+
+* `name` {String} 缓存 key
+* `value` {Mixed} 缓存值
+* `options` {Object} 缓存选项
+* `return` {Promise} 操作都是返回 Promise
+
+获取、设置或者删除缓存， value 是 `undefined` 表示读取缓存。 value 是 `null` 时删除缓存。
+
+value 为 `Function` 时表示获取缓存，如果获取不到，则调用该函数，然后将返回值设置到缓存中并返回。
+
+```js
+//获取缓存
+think.cache('name').then(data => {});
+
+//指定缓存类型获取，从 redis 里获取缓存
+think.cache('name', undefined, {type: 'redis'});
+
+//如果缓存 userList 不存在，则查询数据库，并将值设置到缓存中
+think.cache('userList', () => {
+  return think.model('user').select();
+});
+
+//设置缓存
+think.cache('name', 'value');
+
+//删除缓存
+think.cache('name', null);
+```
+
+#### think.locale(key, ...data)
+
+* `key` {String} 要获取的 key
+* `data` {Array} 参数
+
+根据语言获取对应的值，当前语言存放在`think.lang`，可以在系统启动时指定。
+
+```js
+think.locale('CONTROLLER_NOT_FOUND', 'test', '/index/test');
+//returns 
+'controller `test` not found. url is `/index/test`.'
+```
+
+
+#### think.validate()
+
+注册、获取或执行检测。
+
+** 注册检测方法 **
+
+```js
+//注册检测类型为 not_number
+think.validate('not_number', value => {
+  return !(/^\d+$/.test(value));
+})
+```
+
+** 获取检测方法 **
+
+```js
+let fn = think.validate('not_number');
+```
+
+** 检测数据 **
+
+```js
+let result = think.validate({
+  name: {
+    value: 'name',
+    required: true,
+    not_number: true
+  },
+  pwd: {
+    value: 'xxx',
+    required: true,
+    minLength: 6
+  }
+});
+//如果 result 是 isEmpty，表示数据都正常
+if(think.isEmpty(result)){
+
+}
+```
+
+#### think.await(key, callback)
+
+* `key` {String} 
+* `callback` {Function}
+
+执行等待，避免一个耗时的操作多次被执行。 callback 需要返回一个 promise 。
+
+如：用户访问时，要请求一个远程的接口数据。如果不处理，每个用户请求都会触发这个远程接口的访问，导致有很大的资源浪费。可以让这些用户公用一个远程接口的请求。
+
+```js
+
+import superagent from 'superagent';
+
+export default class extends think.controller.base {
+  * indexAction(){
+    let result = yield think.await('get_xxx_data', () => {
+      let req = superagent.post('xxxx');
+      let fn = think.promisify(req.end, req);
+      return fn();
+    });
+    this.success(result);
+  }
+}
+```
+
+
+#### think.npm(pkg)
+
+* `pkg` {String} 模块名
+
+加载模块。如果模块不存在，则自动安装。这样可以做到动态安装模块。
+
+```js
+//如果mysql模块，则通过npm安装
+let mysql = think.npm('mysql');
+```
+
+```js
+//指定版本加载一个模块
+let mysql = think.npm('mysql@2.0.0')
+```
+
+#### think.error(err, addon)
+
+* `err` {Error | Promise | String} 错误信息
+* `addon` {Error | String} 追加的错误信息
+
+格式化错误信息，将部分系统的错误信息描述完整化。
+
+```js
+let error = think.error(new Error('xxx'));
+```
+
+** 捕获 promise 的错误信息 **
+
+```js
+let promise = Project.reject(new Error('xxx'));
+promise = think.error(promise)
+```
+
+自动给 promise 追加 catch，捕获错误信息。
+
+#### think.statusAction(status, http, log)
+
+* `status` {Number} 状态码
+* `http` {Object} 包装的http对象
+* `log` {Boolean} 是否打印错误信息
+
+当系统出现异常时（系统错误，页面找不到，没权限等），显示对应的错误页面。
+
+创建项目时，会在 common 模块下创建名为 error controller，专门用来处理错误情况。
+
+默认支持的错误类型有：`400`, `403`, `404`, `500`, `503`。
+
+项目里可以根据需要修改错误页面或者扩展。
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    if(xxxx){
+      let error = new Error('not found');
+      //将错误信息写到 http 对象上，用于模版里显示
+      this.http.error = error;
+      return think.statusAction(404, this.http);
+    }
+  }
+}
+```
 
 ### 类
 

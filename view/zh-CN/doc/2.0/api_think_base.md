@@ -20,7 +20,7 @@ export default class extends think.base {
 
 使用普通的方式继承该类：
 ```js
-var Cls = think.Class(think.base, {
+module.exports = think.Class(think.base, {
   /**
    * init method
    * @return {} []
