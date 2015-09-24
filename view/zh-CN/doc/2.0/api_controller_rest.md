@@ -1,6 +1,6 @@
 ## Rest Controller
 
-`think.controller.rest` 继承自 [think.controller.base](./api_controller.html)，用来处理 Rest 接口的。
+`think.controller.rest` 继承自 [think.controller.base](./api_controller.html)，用来处理 Rest 接口。
 
 ### 属性
 
@@ -55,19 +55,91 @@ export default class extends think.controller.rest{
 
 获取资源数据，如果有 id，拉取一条，否则拉取列表。
 
+```js
+//方法实现，可以根据需要修改
+export default class extends think.controller.rest {
+  * getAction(){
+    let data;
+    if (this.id) {
+      let pk = yield this.modelInstance.getPk();
+      data = yield this.modelInstance.where({[pk]: this.id}).find();
+      return this.success(data);
+    }
+    data = yield this.modelInstance.select();
+    return this.success(data);
+  }
+}
+```
+
 #### controller.postAction()
 
 添加数据
+
+```js
+//方法实现，可以根据需要修改
+export default class extends think.controller.rest {
+  * postAction(){
+    let pk = yield this.modelInstance.getPk();
+    let data = this.post();
+    delete data[pk];
+    if(think.isEmpty(data)){
+      return this.fail('data is empty');
+    }
+    let insertId = yield this.modelInstance.add(data);
+    return this.success({id: insertId});
+  }
+}
+```
 
 #### controller.deleteAction()
 
 删除数据
 
+```js
+//方法实现，可以根据需要修改
+export default class extends think.controller.rest {
+  * deleteAction(){
+    if (!this.id) {
+      return this.fail('params error');
+    }
+    let pk = yield this.modelInstance.getPk();
+    let rows = yield this.modelInstance.where({[pk]: this.id}).delete();
+    return this.success({affectedRows: rows});
+  }
+}
+```
+
 #### controller.putAction()
 
 更新数据
+
+```js
+//方法实现，可以根据需要修改
+export default class extends think.controller.rest {
+  * putAction(){
+    if (!this.id) {
+      return this.fail('params error');
+    }
+    let pk = yield this.modelInstance.getPk();
+    let data = this.post();
+    delete data[pk];
+    if (think.isEmpty(data)) {
+      return this.fail('data is empty');
+    }
+    let rows = yield this.modelInstance.where({[pk]: this.id}).update(data);
+    return this.success({affectedRows: rows});
+  }
+}
+```
 
 #### controller.__call()
 
 找不到方法时调用
 
+```js
+export default class extends think.controller.rest {
+  __call(){
+    return this.fail(think.locale('ACTION_INVALID', this.http.action, this.http.url));
+  }
+}
+```
