@@ -6,11 +6,30 @@
     },
     "进阶应用": {
       "配置": "config",
-      "架构": "arch",
       "路由": "route",
       "控制器": "controller",
-      "模型": "model",
       "视图": "view"
+    },
+    "模型": {
+      "介绍": "model_intro",
+      "事务": "model_transaction",
+      "关系模型": "model_relation",
+      "MongoDb": "model_mongodb",
+      "Sqlite": "model_sqlite"
+    },
+    "适配器": {
+      "介绍": "adapter_intro",
+      "Cache": "adapter_cache",
+      "Session": "adapter_session",
+      "WebSocket": "adapter_websocket",
+      "Db": "adapter_db",
+      "Store": "adapter_store",
+      "Template": "adapter_template",
+      "Socket": "adapter_socket"
+    },
+    "更多": {
+      "ThinkJS命令": "thinkjs_command",
+      "Middleware": "middleware"
     },
     "API": {
       "think": "api_think",

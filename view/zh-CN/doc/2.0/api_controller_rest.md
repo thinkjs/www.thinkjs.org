@@ -1,6 +1,22 @@
-## Rest Controller
+## rest controller
 
 `think.controller.rest` 继承自 [think.controller.base](./api_controller.html)，用来处理 Rest 接口。
+
+** 使用 ES6 的语法继承该类 **
+
+```js
+export default class extends think.controller.rest {
+  
+}
+```
+
+** 使用普通方式继承该类 **
+
+```js
+module.exports = think.controller('rest', {
+  
+})
+```
 
 ### 属性
 

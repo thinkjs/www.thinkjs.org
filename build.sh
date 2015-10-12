@@ -21,7 +21,6 @@ if [ -f ${path}"/stc.error.log" ]; then
     rm -rf ${path}"/stc.error.log";
     #exit 1;
 fi
-
 #exit;
 
 cp www/*.ico output/www/;
@@ -32,6 +31,7 @@ cp -r www/static/module/thinkjs output/www/static/module/
 
 npm run compile;
 cp -r app output/;
+cp -r ssl output/;
 
 cd output;
 rm -rf www/static/other/icon/*

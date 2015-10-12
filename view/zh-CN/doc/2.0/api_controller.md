@@ -1,7 +1,27 @@
-## Controller
+## controller
 
-`think.controller.base` 继承自 [think.http.base](./api_think_http_base.html) 类。
+`think.controller.base` 继承自 [think.http.base](./api_think_http_base.html) 类。项目里的控制器需要继承该类。
 
+
+** 使用 ES6 的语法继承该类 **
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+
+  }
+}
+```
+
+** 使用普通方式继承该类 ** 
+
+```js
+module.exports = think.controller({
+  indexAction(){
+
+  }
+})
+```
 ### 属性
 
 #### controller.http

@@ -85,7 +85,7 @@ i.icon-fet8{ background-position:-70px -210px;}
 .lbox dl{margin-bottom:8px; padding-bottom:8px; }
 .lbox dl:after{height:20px;content: '';display: block;}
 .lbox dt{ margin-bottom:8px; color:#555; font-size:18px; font-weight:normal; padding-bottom:10px; border-bottom:1px dashed #eee;}
-.lbox dd a{ display:block; line-height:26px; font-size:14px;}
+.lbox dd a{ display:block; line-height:26px;font-size: 16px;}
 .search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:760px;margin-top: 20px;}
 .sea-txt{ background-color:transparent; width:93%; padding:8px; margin:1px 0 0 1px;border:none;outline: none;}
 .sea-btn{ position:absolute;right:0;top:0; width:40px; height:40px; border:none; background:url(../img/sea.png) no-repeat 7px 6px;} 
@@ -99,13 +99,13 @@ i.icon-fet8{ background-position:-70px -210px;}
 .blue{ color:#337ab7;}
 
 .toc{margin-top: 20px;margin-bottom: 50px;}
-.doc{margin-top: 60px;}
+.doc{margin-top: 60px;font-size: 16px;line-height: 1.6}
 .doc ul{margin-left: 20px;}
 .doc li{list-style-type: disc;}
 .doc pre{background: #fff !important;}
 .doc h1, .doc .h1, .doc h2, .doc .h2, .doc h3, .doc .h3{margin-top: 30px;margin-bottom: 20px}
 .doc h4, .doc .h4, .doc h5, .doc .h5, .doc h6, .doc .h6{margin-top: 20px;margin-bottom: 15px}
-.doc pre {border: none;padding: 10px 0;border-left: 3px solid #337ab7;padding-left: 10px;border-radius: 0;font-size: 14px;}
+.doc pre {border: none;padding: 10px 0;border-left: 1px solid #337ab7;padding-left: 10px;border-radius: 0;font-size: 14px;}
 .doc pre code{padding: 0 !important;}
 
 .demo-list{font-size: 16px}
