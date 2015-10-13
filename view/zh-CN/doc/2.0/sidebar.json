@@ -2,13 +2,15 @@
     "快速入门": {
       "介绍": "index",
       "创建项目": "create_project",
-      "项目结构": "app_structure"
+      "项目结构": "app_structure",
+      "代码规范": "specification"
     },
     "进阶应用": {
-      "配置": "config",
-      "路由": "route",
+      "模块": "module",
       "控制器": "controller",
-      "视图": "view"
+      "视图": "view",
+      "配置": "config",
+      "路由": "route"
     },
     "模型": {
       "介绍": "model_intro",
@@ -29,7 +31,10 @@
     },
     "更多": {
       "ThinkJS命令": "thinkjs_command",
-      "Middleware": "middleware"
+      "Middleware": "middleware",
+      "Service": "service",
+      "路径常量": "path_cost",
+      "推荐模块": "recommend_modules"
     },
     "API": {
       "think": "api_think",

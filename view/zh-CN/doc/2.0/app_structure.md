@@ -20,8 +20,9 @@
    |   |   |   |   |-- en.js
    |   |   |   |   `-- zh-CN.js
    |   |   |   `-- route.js 
-   |   |   `-- controller 
-   |   |       `-- error.js
+   |   |   |-- controller 
+   |   |   |    `-- error.js
+   |   |   `-- runtime
    |   `-- home   
    |       |-- config
    |       |-- controller
@@ -109,9 +110,23 @@ think.middleware('replace_image', http => {
 
 其中：路由配置、Hook配置、本地化配置等必须放在这里。
 
+```js
+'use strict';
+/**
+ * config
+ */
+export default {
+  //key: value
+};
+```
+
 ### src/common/controller
 
 控制器，放一些通用的控制器。其中 `error.js` 里错误处理的不同行为，项目里可以根据需要进行修改。
+
+### src/common/runtime
+
+项目运行时生成的一些目录，如：缓存文件目录，用户上传的文件临时存放的目录。
 
 ### src/home
 
@@ -121,13 +136,48 @@ think.middleware('replace_image', http => {
 
 逻辑处理。每个操作执行前可以先进行逻辑校验，可以包含：参数是否合法、提交的数据是否正常、当前用户是否已经登录、当前用户是否有权限等。这样可以降低 `controller` 里的 `action` 的复杂度。
 
+```js
+'use strict';
+/**
+ * logic
+ * @param  {} []
+ * @return {}     []
+ */
+export default class extends think.logic.base {
+  /**
+   * index action logic
+   * @return {} []
+   */
+  indexAction(){
+   
+  }
+}
+```
+
 ### src/home/controller
 
 控制器。一个 `url` 对应一个 `controller` 下的 `action`。
 
+```js
+'use strict';
+
+import Base from './base.js';
+
+export default class extends Base {
+  /**
+   * index action
+   * @return {Promise} []
+   */
+  indexAction(){
+    //auto render template file index_index.html
+    return this.display();
+  }
+}
+```
+
 ### src/home/model
 
-模型。操作数据库相关逻辑。
+模型。数据库相关操作。
 
 ### view
 
@@ -135,9 +185,29 @@ think.middleware('replace_image', http => {
 
 ### www
 
+项目的可访问根目录，nginx 里的根目录会配置到此目录下。
+
 ### www/index.js
 
 开发模式下项目的入口文件，可以根据项目需要进行修改。`www/production.js` 为线上的入口文件。
+
+入口文件的代码类似如下，可以根据项目需要进行修改。
+
+```js
+var thinkjs = require('thinkjs');
+var path = require('path');
+
+var rootPath = path.dirname(__dirname);
+
+var instance = new thinkjs({
+  APP_PATH: rootPath + '/app',
+  ROOT_PATH: rootPath,
+  RESOURCE_PATH: __dirname,
+  env: 'development'
+});
+
+instance.run();
+```
 
 ### www/static
 

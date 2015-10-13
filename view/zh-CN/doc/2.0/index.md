@@ -2,7 +2,8 @@
 
 ThinkJS 是一款使用 ES6/7 特性全新开发的 Node.js MVC 框架。该框架使用 ES7 中`async`和`await`，或者 ES6 中的`Generator Function`彻底解决了 Node.js 中异步嵌套的问题。同时吸收了国内外众多框架的设计理念和思想，让开发 Node.js 项目更加简单、高效。
 
-使用 ES6/7 特性来开发项目可以大大提高开发效率，是趋势所在。并且新版的 Node.js 对 ES6 特性也有了较好的支持，即使有些特性还没有支持，也可以借助 Babel 编译工具来支持。
+使用 ES6/7 特性来开发项目可以大大提高开发效率，是趋势所在。并且新版的 Node.js 对 ES6 特性也有了较好的支持，即使有些特性还没有支持，也可以借助 [Babel](http://babeljs.io/) 编译工具来支持。
+
 
 ### 特性
 
@@ -97,7 +98,7 @@ ThinkJS 使用 Hook 和 Middleware 机制，内置了大量的功能，同时也
 ThinkJS 内置了详细的日志功能，可以很方便的查看各种日志，方便追查问题。
 
 ** HTTP 请求日志 **
-```sh
+```
 [2015-10-12 14:10:03] [HTTP] GET /favicon.ico 200 5ms
 [2015-10-12 14:10:11] [HTTP] GET /zh-CN/doc.html 200 11ms
 [2015-10-12 14:10:11] [HTTP] GET /static/css/reset.css 200 3ms
@@ -105,13 +106,13 @@ ThinkJS 内置了详细的日志功能，可以很方便的查看各种日志，
 
 ** Socket 连接日志 **
 
-```sh
+```
 [2015-10-12 14:13:54] [SOCKET] Connect mysql with mysql://root:root@127.0.0.1:3306
 ```
 
 ** 错误日志 **
 
-```sh
+```
 [2015-10-12 14:15:32] [Error] Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'root3'@'localhost' (using password: YES)
 
 [2015-10-12 14:16:12] [Error] Error: Address already in use, port:8360. http://www.thinkjs.org/doc/error.html#EADDRINUSE
@@ -120,4 +121,15 @@ ThinkJS 内置了详细的日志功能，可以很方便的查看各种日志，
 #### 支持国际化和多主题
 
 ThinkJS 使用很简单的方法就可以支持国际化和多主题等功能。
+
+
+### ES6/7 参考文档
+
+关于 ES6/7 特性可以参考下面的文档：
+
+* [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
+* [ECMAScript 6 Features](https://github.com/lukehoban/es6features)
+* [ECMAScript 6 compatibility table](http://kangax.github.io/compat-table/es6/)
+* [ECMAScript 7 Features](https://github.com/hemanth/es7-features)
+* [ECMAScript 7 compatibility table](http://kangax.github.io/compat-table/es7/)
 
