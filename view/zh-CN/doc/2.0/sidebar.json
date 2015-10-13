@@ -33,7 +33,11 @@
       "ThinkJS命令": "thinkjs_command",
       "Middleware": "middleware",
       "Service": "service",
+      "错误处理": "error_handle",
+      "数据校验": "validattion",
       "路径常量": "path_cost",
+      "Rest API": "rest_api",
+      "线上部署": "deploy",
       "推荐模块": "recommend_modules"
     },
     "API": {

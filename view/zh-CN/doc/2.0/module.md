@@ -21,7 +21,7 @@ common 模块是个通用模块，该模块下存放一些通用的功能，如�
 
 默认模块为 `home` 模块。当解析用户的请求找不到模块时会自动对应到 `home` 下。
 
-可以通过配置 `default_module` 来修改，修改配置文件 `src/common/config/config.js`：
+可以通过配置 `default_module` 来修改默认模块，修改配置文件 `src/common/config/config.js`：
 
 ```js
 //将默认模块名改为 blog
