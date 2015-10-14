@@ -23,3 +23,32 @@
 ES6 中有大量的语法糖可以简化我们的代码，让代码更加简洁高效。
 Node.js 最新版本已经较好的支持了 ES6 的语法，即使有些语法不支持，也可以通过 Babel 编译来支持。 所以是时候使用 ES6 语法来开发项目了。
 
+### 不要使用 constrcutor 方法
+
+使用 ES6 里的 class 来创建类的时候，可以使用 `constrcutor` 方法达到类实例化的时候自动调用。如：
+
+```js
+export default class think.base {
+  constructor(){
+    ...
+  }
+}
+```
+
+但如果不使用 ES6 里的 class，就没有 constrcutor 方法了。
+
+为了统一处理，ThinkJS 提供了 `init` 方法来代替 `constrcutor` 方法，该方法不管是在 class 下还是动态创建类的情况下都可以做到类实例化的时候自动被调用。
+
+```js
+export default class think.base {
+  /**
+   * 初始化方法，类实例化时自动被调用
+   * @return {} []
+   */
+  init(){
+    ...
+  }
+}
+```
+
+`注：` ThinkJS 里所有的类都会继承 `think.base` 基类。
