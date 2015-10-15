@@ -354,11 +354,63 @@ module.exports = think.controller({
 })
 ```
 
-### 常用方法
+### 常用功能
 
-* `get(key)` 获取 get 参数值
-* `post(key)` 获取 post 参数值
-* `file(key)` 获取 file 参数值
+#### 获取 GET 参数
+
+可以通过 `get` 方法获取 GET 参数，如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let name = this.get('name');
+  }
+}
+```
+
+如果参数不存在，那么值为空字符串。
+
+#### 获取 POST 参数
+
+可以通过 `post` 方法获取 POST 参数，如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let name = this.post('name');
+  }
+}
+```
+
+如果参数不存在，那么值为空字符串。
+
+#### 获取上传的文件
+
+可以通过 `file` 方法获取上传的文件，如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let file = this.post('image');
+  }
+}
+```
+
+返回值是个对象，包含下面的属性：
+
+```js
+{
+  fieldName: 'file', //表单字段名称
+  originalFilename: filename, //原始的文件名
+  path: filepath, //文件保存的临时路径，使用时需要将其移动到项目里的目录，否则请求结束时会被删除
+  size: 1000 //文件大小
+}
+```
+
+如果文件不存在，那么值为一个空对象 `{}`。
+
+#### 更多方法
+
 * `isGet()` 当前是否是 get 请求
 * `isPost()` 当前是否是 post 请求
 * `isAjax()` 是否是 ajax 请求
@@ -380,6 +432,6 @@ module.exports = think.controller({
 * `action(name, data)` 调用其他 Controller 的方法，可以跨分组
 * `model(name, options)` 获取模型实例
 
-更多方法请见 [这里](./api_controller.html)。
+完整方法列表请见 [API -> Controller](./api_controller.html)。
 
 

@@ -69,6 +69,21 @@ http 对象会在 middleware, logic, controller, view 中传递。
 
 当前请求的 payload 数据，提交型的请求才含有该值。
 
+#### http._get
+
+存放 GET 参数值。
+
+#### http._post
+
+存放 POST 参数值
+
+#### http._file
+
+存放上传的文件数据
+
+#### http._cookie
+
+存放 cookie 数据。
 
 ### 方法
 

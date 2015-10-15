@@ -16,7 +16,6 @@ ThinkJS 现在还没有正式发布 2.0 版本，所以无法通过`npm`命令�
 cd foo/bar/node_modules; //进入对应的node_modules目录
 git clone git@github.com:75team/thinkjs.git
 cd thinkjs;
-git checkout es6;//切换到es6分支
 npm install; //安装依赖
 ```
 

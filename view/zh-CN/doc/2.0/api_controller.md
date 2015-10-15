@@ -157,7 +157,18 @@ export default class extends think.controller.base {
 
 * `name` {String} 上传文件对应的字段名
 
-获取上传的文件。
+获取上传的文件，返回值是个对象，包含下面的属性：
+
+```js
+{
+  fieldName: 'file', //表单字段名称
+  originalFilename: filename, //原始的文件名
+  path: filepath, //文件保存的临时路径，使用时需要将其移动到项目里的目录，否则请求结束时会被删除
+  size: 1000 //文件大小
+}
+```
+
+如果文件不存在，那么值为一个空对象 `{}`。
 
 #### controller.header(name)
 

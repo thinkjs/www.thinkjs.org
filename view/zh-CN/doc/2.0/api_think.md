@@ -1212,7 +1212,7 @@ promise = think.error(promise)
 
 当系统出现异常时（系统错误，页面找不到，没权限等），显示对应的错误页面。
 
-创建项目时，会在 common 模块下创建名为 error controller，专门用来处理错误情况。
+创建项目时，会在 common 模块下生成文件 `src/common/controller/error.js`，专门用来处理错误情况。
 
 默认支持的错误类型有：`400`, `403`, `404`, `500`, `503`。
 

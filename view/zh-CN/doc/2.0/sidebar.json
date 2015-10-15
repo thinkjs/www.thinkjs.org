@@ -29,7 +29,7 @@
       "Template": "adapter_template",
       "Socket": "adapter_socket"
     },
-    "更多": {
+    "扩展功能": {
       "ThinkJS命令": "thinkjs_command",
       "Middleware": "middleware",
       "Service": "service",
@@ -40,7 +40,8 @@
       "路径常量": "path_cost",
       "Rest API": "rest_api",
       "线上部署": "deploy",
-      "推荐模块": "recommend_modules"
+      "推荐模块": "recommend_modules",
+      "更多功能": "more"
     },
     "API": {
       "think": "api_think",
