@@ -23,7 +23,7 @@ a.versel:hover{ background-color:#223343; color:#fff;}
 /* footer */
 .footer{overflow:hidden;background-color:#223343;}
 .ft-help{ overflow:hidden;*zoom:1;padding:50px 0 30px;}
-.ft-help dl{ float:left; width:120px; margin:0 0 0 70px;} 
+.ft-help dl{ float:left; width:120px; margin:0 30px 0 40px;} 
 .ft-help dt{color:#8899aa; font-size:18px;}
 .ft-help a{ display:block; line-height:26px;  color:#556677; font-size:14px;}
 .ft-copy{ padding:20px 0;border-top:1px solid #345; font-size:14px; color:#556677; text-align:center;}
@@ -41,7 +41,7 @@ a.versel:hover{ background-color:#223343; color:#fff;}
 .flinfo pre{text-align: left;font-size: 15px; background: url(../img/p.jpg) no-repeat;padding-top: 32px;padding-left: 36px;line-height: 19px;width: 868px;height: 386px;margin: auto}
 .flinfo pre code{background: transparent;}
 .tit{ margin-bottom:25px; font-size:36px; color:#334455}
-.tips{ margin-bottom:30px; line-height:26px; color:#556677; font-size:14px;}
+.tips{ margin-bottom:30px; line-height:26px; color:#556677; font-size:16px;}
 /*flfet*/
 .flfet{  padding:75px 0; text-align:center;background-color:#223343;}
 .tit2{ margin-bottom:10px; color:#fff; font-size:48px;}
