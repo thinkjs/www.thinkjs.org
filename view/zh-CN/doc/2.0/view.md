@@ -25,7 +25,7 @@ export default {
 
 ### 模版引擎
 
-ThinkJS 默认支持的模版引擎有：`ejs`，`jade` 和 `swig`，默认模版引擎为 `ejs`，可以根据需要修改为其他的模版引擎。
+ThinkJS 默认支持的模版引擎有：`ejs`，`jade`，`swig` 和 `nunjucks`，默认模版引擎为 `ejs`，可以根据需要修改为其他的模版引擎。
 
 #### ejs 
 
@@ -86,6 +86,10 @@ jade 模版使用方式请见 [这里](https://github.com/jadejs/jade)。
 #### swig
 
 swig 模版使用方式请见 [这里](http://paularmstrong.github.io/swig/)。
+
+#### nunjucks
+
+nunjucks 是一款类似于 jinja2 的模版引擎，功能异常强大，复杂项目建议使用该模版引擎。使用文档请见 [这里](http://jinja.pocoo.org/docs/dev/)。
 
 #### 扩展模版引擎
 
