@@ -33,6 +33,7 @@
       "ThinkJS命令": "thinkjs_command",
       "Middleware": "middleware",
       "Service": "service",
+      "Cookie": "cookie",
       "错误处理": "error_handle",
       "错误信息": "error_message",
       "数据校验": "validattion",
