@@ -42,6 +42,7 @@ let fn = () => {
   });
 };
 
-fn();
-
-let jobId = crontab.scheduleJob('0 */1 * * *', fn);
+if(think.env === 'production'){
+  fn();
+  let jobId = crontab.scheduleJob('0 */1 * * *', fn);
+}

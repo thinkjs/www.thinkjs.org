@@ -85,16 +85,22 @@ export default {
 
 ### 配置读取
 
-** 控制器、中间件等地方配置读取 **
+** 通过 config 方法获取 **
 
-通过 `this.config()` 方法就可以读取相关的配置。
+在 Controller，Logic，Middleware 等地方可以通过 `this.config` 来获取。如：
 
 ```js
 let db = this.config('db'); //读取数据库的所有配置
 let host = this.config('db.host'); //读取数据库的 host 配置，等同于 db.host
 ```
 
-注：最多支持 2 级的配置读取。
+** 通过 http 对象上的 config 方法获取 **
+
+http 对象也有 config 方法用来获取相关的配置，如：
+
+```js
+let db = http.config('db');
+```
 
 ** 其他地方配置读取 **
 
@@ -105,6 +111,7 @@ let db = think.config('db'); //读取通用模块下的数据库配置
 let db1 = think.config('db', undefined, 'home'); //获取 home 模块下数据库配置
 ```
 
+`注：` 路由解析前，无法通过 `config` 方法或者 http 对象上的 `config` 方法来获取非通用模块下的配置，所以路由解析前就使用的配置需要定义在通用模块里。
 
 ### 系统默认配置
 

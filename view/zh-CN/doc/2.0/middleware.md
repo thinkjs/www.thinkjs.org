@@ -9,6 +9,7 @@ ThinkJS 里通过 middleware 来处理这些逻辑，每个逻辑都是一个独
 框架里包含的 hook 列表如下：
 
 * `payload_parse` 解析提交上来的数据
+* `payload_validate` 验证提交的数据
 * `resource_check` 静态资源请求检测
 * `resource_output` 静态资源输出
 * `route_parse` 路由解析
@@ -24,7 +25,8 @@ ThinkJS 里通过 middleware 来处理这些逻辑，每个逻辑都是一个独
 
 ```js
 export default {
-  payload_parse: ['parse_json_payload'],
+  payload_parse: ['parse_form_payload', 'parse_single_file_payload', 'parse_json_payload', 'parse_querystring_payload'],
+  payload_validate: ['validate_payload'],
   resource_check: ['resource'],
   resource_output: ['output_resource'],
   route_parse: ['rewrite_pathname', 'subdomain_deploy', 'route'],
@@ -138,6 +140,22 @@ think.middleware('parse_xml', http => {
 
 函数式的 middleware 会将 `http` 对象作为一个参数传递进去，如果 middleware 里含有异步操作，需要返回一个 `Promise` 或者使用 Generator Function。
 
+以下是框架里解析 json payload 的实现：
+
+```js
+think.middleware('parse_json_payload', http => {
+  let types = http.config('post.json_content_type');
+  if (types.indexOf(http.type()) === -1) {
+    return;
+  }
+  return http.getPayload().then(payload => {
+    try{
+      http._post = JSON.parse(payload);
+    }catch(e){}
+  });
+});
+```
+
 ### 解析后赋值
 
 有些 middleware 可能会解析相关的数据，然后希望重新赋值到 `http` 对象上，如：解析传递过来的 xml 数据，但后续希望可以通过 `http.get` 方法来获取。
@@ -152,7 +170,7 @@ think.middleware('parse_xml', http => {
     return;
   }
   return parseXML(http.payload).then(data => {
-    http._get = data; //将解析后的数据赋值给 http._get，方便后续获取
+    http._post = data; //将解析后的数据赋值给 http._post，后续可以通过 http.post 方法来获取
   });
 });
 ```
@@ -185,7 +203,7 @@ think.middleware('parse_xml', http => {
 
 ### 使用第三方 middleware
 
-在项目里使用第三方 middleware 可以通过 `think.middleware` 方法来实现，相关代码放在 `src/common/bootstrap/middleware.js` 里。如：
+在项目里使用第三方 middleware 可以通过 `think.middleware` 方法来实现，相关代码存放在 `src/common/bootstrap/middleware.js` 里。如：
 
 ```js
 var parseXML = require('think-middleware-parsexml');
