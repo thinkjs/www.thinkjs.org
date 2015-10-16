@@ -75,7 +75,7 @@ node foo/bar/node_modules/thinkjs/bin/index.js new project_path --es6;
   $ npm start
 ```
 
-关于创建项目命令的更多信息，请见[这里](./thinkjs_command.html)。
+关于创建项目命令的更多信息，请见[扩展功能 -> ThinkJS 命令](./thinkjs_command.html)。
 
 ### 安装依赖
 

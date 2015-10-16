@@ -206,7 +206,7 @@ think.middleware('parse_xml', http => {
 在项目里使用第三方 middleware 可以通过 `think.middleware` 方法来实现，相关代码存放在 `src/common/bootstrap/middleware.js` 里。如：
 
 ```js
-var parseXML = require('think-middleware-parsexml');
+var parseXML = require('think-parsexml');
 
 think.middleware('parseXML', parseXML);
 ```
@@ -216,4 +216,8 @@ think.middleware('parseXML', parseXML);
 
 -----
 
-项目里的 middleware 也推荐发布到 npm 仓库中，middleware 名称推荐使用 `think-middleware-xxx`。
+项目里的一些通用 middleware 也推荐发布到 npm 仓库中，middleware 名称推荐使用 `think-xxx`。
+
+### 第三方 middleware 列表
+
+* [think-wechat](https://github.com/akira-cn/think-wechat) 微信公众平台接口
