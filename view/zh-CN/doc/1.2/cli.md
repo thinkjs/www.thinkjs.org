@@ -4,19 +4,19 @@ ThinkJS 无缝支持命令行模式的调用，控制器的逻辑可以和普通
 
 比如要执行 IndexController 里的 indexAction，可以使用如下的命令：
 
-```shell
+```sh
 node index.js /index/index
 ```
 
 如果需要带上参数，可以直接在后面加上对应的参数即可，如：
 
-```shell
+```sh
 node index.js /index/index?name=welefen
 ```
 
 也可以是：
 
-```shell
+```sh
 node index.js /index/index/name/welefen
 ```
 
@@ -24,7 +24,7 @@ node index.js /index/index/name/welefen
 
 命令行执行默认的请求类型是 GET，如果想改为其他的类型，可以用下面的方法：
 
-```shell
+```sh
 node index.js url=/index/index&method=post
 ```
 
@@ -39,7 +39,7 @@ node index.js url=/index/index&method=post
 
 有时候如果想修改更多的 headers，可以传一个完整的 json 数据，如：
 
-```shell
+```sh
 node index.js {"url":"/index/index","ip":"127.0.0.1","method":"POST","headers":{"xxx":"yyyy"}}
 ```
 

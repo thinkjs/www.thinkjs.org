@@ -14,14 +14,32 @@ mkdir ${path}"/output";
 if [ ! -f ${path}"/config.php" ];then
 	cp $STC_PATH/config/config.php ${path};
 fi
+
+
 rm -rf www/static/other/icon/*.bak;
+
+if [ -d "view_build" ];then
+  rm -rf view_build/;
+fi
+
+mkdir view_build;
+cp -r view/* view_build;
+
+node www/index.js home/generate/single;
+node www/index.js home/generate/html;
+
+
 #path=$(pwd);
 /usr/local/bin/php $STC_PATH/index.php ${path} test $1;
 if [ -f ${path}"/stc.error.log" ]; then
     rm -rf ${path}"/stc.error.log";
     #exit 1;
 fi
-#exit;
+
+rm -rf view_build;
+cd output;
+mv view_build view;
+cd ..;
 
 cp www/*.ico output/www/;
 cp www/*.js output/www/;
@@ -38,6 +56,7 @@ rm -rf www/static/other/icon/*
 
 tar zcvf ../output.tar.gz *;
 cd ..
+
 
 
 scp -r output.tar.gz qiwoo@101.198.153.219:~;

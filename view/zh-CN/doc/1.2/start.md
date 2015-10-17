@@ -9,13 +9,13 @@ ThinkJS 需要 Node.js 的版本 `>=0.10.x`，可以通过 `node -v` 命令查�
 
 安装 ThinkJS 非常简单，通过如下的命令即可安装：
 
-```shell
+```sh
 npm install -g thinkjs-cmd
 ```
 
 如果安装失败，可能是 npm 服务异常或者是被墙了，可以使用国内的 [cnpm](http://cnpmjs.org/) 服务进行安装。如：
 
-```shell
+```sh
 npm install -g thinkjs-cmd --registry=http://r.cnpmjs.org
 ```
 
@@ -59,7 +59,7 @@ npm update thinkjs;
 
 ### 新建项目
 
-```shell
+```sh
 # 在合适的位置创建一个新目录，new_dir_name 为你想创建的文件夹名字
 mkdir new_dir_name; 
 # 进入这个目录

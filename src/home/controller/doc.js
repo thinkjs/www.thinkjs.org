@@ -46,17 +46,7 @@ export default class extends base {
       }
     }
 
-    let fn = think.promisify(fs.readFile, fs);
-    let content = await fn(filePath, 'utf8');
-    let tocContent = marked(markToc(content));
-    let markedContent = marked(content).replace(/<h(\d)[^<>]*>(.*?)<\/h\1>/g, (a, b, c) => {
-      let id = uslug(c, {allowedChars: '-'});
-      return `<h${b} id="${id}">${c}</h${b}>`;
-    });
-    markedContent = markedContent.replace(/<h(\d)[^<>]*>([^<>]+)<\/h\1>/, (a, b, c) => {
-      this.assign('title', `${c}${this.locale("title-doc-suffix")}`);
-      return `${a}<div class="toc">${tocContent}</div>`;
-    });
+    let markedContent = this.markdownToHtml(filePath);
 
     if(cache){
       thinkCache('markdown-doc', filePath, markedContent);
@@ -74,15 +64,28 @@ export default class extends base {
     let lang = this.http.lang();
     let version = this.get('version');
 
-    let filePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/${doc}.md`;
-    if(doc === 'single'){
-      filePath = `${think.RESOURCE_PATH}/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
-    }
 
-    if(!think.isFile(filePath)){
-      return Promise.reject(new Error(`/doc/${doc}.html is not exist`));
+    let filePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/${doc}.md`;
+    let htmlPath = filePath.replace('.md', '.html');
+
+    let markedContent;
+
+    if(think.isFile(htmlPath)){
+      markedContent = fs.readFileSync(htmlPath, 'utf8');
+    }else{
+      if(doc === 'single'){
+        filePath = `${think.RESOURCE_PATH}/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
+        if(think.isFile(!filePath)){
+          filePath = this.generateSingleDoc(this.http.lang(), this.get('version'));
+        }
+      }
+
+      if(!think.isFile(filePath)){
+        return Promise.reject(new Error(`/doc/${doc}.html is not exist`));
+      }
+
+      markedContent = await this.getMarkedContent(filePath);
     }
-    let markedContent = await this.getMarkedContent(filePath);
 
     this.assign('markedContent', markedContent);
     this.assign('doc', doc);
@@ -106,35 +109,10 @@ export default class extends base {
     }
   }
   /**
-   * generate single doc file
-   * @return {} []
-   */
-  generateSingleDoc(){
-    let lang = this.http.lang();
-    let version = this.get('version');
-    let filePath = `${think.RESOURCE_PATH}/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
-    think.mkdir(path.dirname(filePath));
-
-    this.getSideBar();
-    let data = this.assign('sidebar');
-    let doc = ['# ThinkJS ' + version + ' Documentation'];
-    for(let type in data){
-      doc.push(`# ${type}`);
-      for(let name in data[type]){
-        let docFilePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/${data[type][name]}.md`;
-        let content = fs.readFileSync(docFilePath, 'utf8');
-        doc.push(content);
-      }
-    }
-    doc = doc.join('\n\n');
-    fs.writeFileSync(filePath, doc);
-  }
-  /**
    * view doc in single page
    * @return {} []
    */
   singleAction(){
-    this.generateSingleDoc();
     this.get('doc', 'single');
     return this.indexAction();
   }

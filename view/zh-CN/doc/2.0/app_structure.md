@@ -2,7 +2,7 @@
 
 通过 thinkjs 命令创建完项目后，项目目录结构类似如下：
 
-```
+```text
    |-- nginx.conf  
    |-- package.json
    |-- src  

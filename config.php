@@ -5,7 +5,7 @@ return array (
 	'TPL_LEFT_DELIMITER' => '<%',  //模版左界符
 	'TPL_RIGHT_DELIMITER' => '%>',  //模版右界符
 	'TPL_SUFFIX' => 'html',  //模板文件后缀名
-	'TPL_PATH' => 'view/',  //模板根目录
+	'TPL_PATH' => 'view_build/',  //模板根目录
 	'STATIC_PATH' => 'www/static/',  //静态资源的目录
 	'FILE_ENCODING' => 'utf-8',  //项目编码 utf-8或者gbk
 	'MOD_ENCODING_CHECK' => true,  //文件编码检测
@@ -30,6 +30,7 @@ return array (
 	'MOD_STRING_REPLACE' => false,  //代码替换功能
 	'MOD_INLINE_TO_LS' => true,
 	'TUCHUANG_CDN_MULTI_DOMAIN' => array(4),
+	'MODULE_FILE_EXT' => array('md', 'pdf'),
 	'MOD_STATIC_VERSION' => 1  //静态文件版本号，1或者true为query,2为新文件模式
 );
 

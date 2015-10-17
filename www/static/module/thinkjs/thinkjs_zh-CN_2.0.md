@@ -216,7 +216,7 @@ node foo/bar/node_modules/thinkjs/bin/index.js new project_path --es6;
   $ npm start
 ```
 
-关于创建项目命令的更多信息，请见[这里](./thinkjs_command.html)。
+关于创建项目命令的更多信息，请见[扩展功能 -> ThinkJS 命令](./thinkjs_command.html)。
 
 ### 安装依赖
 
@@ -249,7 +249,7 @@ npm install --registry=https://registry.npm.taobao.org --verbose
 
 通过 thinkjs 命令创建完项目后，项目目录结构类似如下：
 
-```
+```text
    |-- nginx.conf  
    |-- package.json
    |-- src  
@@ -815,11 +815,9 @@ export default class extends Base {
 
 ### 数据校验和权限判断
 
-当在 Action 里处理用户的请求时，经常要先获取用户提交过来的数据，然后对其校验，如果校验没问题后才能进行后续的操作。当参数校验完成后，有时候还要进行权限判断，等这些都判断无误后才能进行真正的逻辑处理。
+当在 Action 里处理用户的请求时，经常要先获取用户提交过来的数据，然后对其校验，如果校验没问题后才能进行后续的操作。当参数校验完成后，有时候还要进行权限判断，等这些都判断无误后才能进行真正的逻辑处理。如果将这些代码都放在一个 Action 里，势必让 Action 的代码非常复杂且冗长。
 
-如果将这些代码都放在一个 Action 里，势必让 Action 的代码非常复杂且冗长。为了解决这个问题， ThinkJS 在控制器前面增加了一层 `Logic`，Logic 里的 Action 和控制器里的 Action 一一对应，在调用控制器里的 Action 之前会自动调用 Logic 里的 Action。
-
-如果 Logic 里没有对应的 Action，则不调用，详细信息请见 [这里](./validation.html)。
+为了解决这个问题， ThinkJS 在控制器前面增加了一层 `Logic`，Logic 里的 Action 和控制器里的 Action 一一对应，系统在调用控制器里的 Action 之前会自动调用 Logic 里的 Action。详细信息请见 [扩展功能 -> 数据校验](./validation.html)。
 
 
 ### 变量赋值和模版渲染
@@ -1036,7 +1034,7 @@ export default {
 
 ### 模版引擎
 
-ThinkJS 默认支持的模版引擎有：`ejs`，`jade` 和 `swig`，默认模版引擎为 `ejs`，可以根据需要修改为其他的模版引擎。
+ThinkJS 默认支持的模版引擎有：`ejs`，`jade`，`swig` 和 `nunjucks`，默认模版引擎为 `ejs`，可以根据需要修改为其他的模版引擎。
 
 #### ejs 
 
@@ -1097,6 +1095,10 @@ jade 模版使用方式请见 [这里](https://github.com/jadejs/jade)。
 #### swig
 
 swig 模版使用方式请见 [这里](http://paularmstrong.github.io/swig/)。
+
+#### nunjucks
+
+nunjucks 是一款类似于 jinja2 的模版引擎，功能异常强大，复杂项目建议使用该模版引擎。使用文档请见 [这里](http://jinja.pocoo.org/docs/dev/)。
 
 #### 扩展模版引擎
 
@@ -1339,16 +1341,22 @@ export default {
 
 ### 配置读取
 
-** 控制器、中间件等地方配置读取 **
+** 通过 config 方法获取 **
 
-通过 `this.config()` 方法就可以读取相关的配置。
+在 Controller，Logic，Middleware 等地方可以通过 `this.config` 来获取。如：
 
 ```js
 let db = this.config('db'); //读取数据库的所有配置
 let host = this.config('db.host'); //读取数据库的 host 配置，等同于 db.host
 ```
 
-注：最多支持 2 级的配置读取。
+** 通过 http 对象上的 config 方法获取 **
+
+http 对象也有 config 方法用来获取相关的配置，如：
+
+```js
+let db = http.config('db');
+```
 
 ** 其他地方配置读取 **
 
@@ -1359,6 +1367,7 @@ let db = think.config('db'); //读取通用模块下的数据库配置
 let db1 = think.config('db', undefined, 'home'); //获取 home 模块下数据库配置
 ```
 
+`注：` 路由解析前，无法通过 `config` 方法或者 http 对象上的 `config` 方法来获取非通用模块下的配置，所以路由解析前就使用的配置需要定义在通用模块里。
 
 ### 系统默认配置
 
@@ -2373,22 +2382,1343 @@ transaction 接收一个回调函数，这个回调函数中处理真正的逻�
 
 ## thinkjs 命令
 
-## middleware
+以全局模式安装 thinkjs 模块后，系统下就会有 thinkjs 命令，在终端执行 `thinkjs -h` 可以看到详细介绍。
 
+```text
+  Usage: thinkjs [command] <options ...>
+
+
+  Commands:
+
+    new <projectPath>            create project
+    module <moduleName>          add module
+    controller <controllerName>  add controller
+    service <serviceName>        add service
+    model <modelName>            add model
+    middleware <middlewareName>  add middleware
+    adapter <adapterName>        add adapter
+
+  Options:
+
+    -h, --help         output usage information
+    -V, --version      output the version number
+    -e, --es6          use es6 for project, used in `new` command
+    -r, --rest         create rest controller, used in `controller` command
+    -M, --mongo        create mongo model, used in `model` command
+    -R, --relation     create relation model, used in `model` command
+    -m, --mode <mode>  project mode type(mini, normal, module), default is module, used in `new` command
+```
+
+### 创建项目
+
+创建项目可以通过 `thinkjs new <projectPath>` 来执行，如：
+
+```sh
+thinkjs new thinkjs_demo;
+```
+
+** ES6 方式 **
+
+如果想创建 ES6 模式的项目，需要加上 `--es6` 参数，这样生成文件的里代码都是 ES6 语法的。如：
+
+```sh
+thinkjs new thinkjs_demo --es6
+```
+
+** 设置项目模式 **
+
+默认创建的项目是按模式来划分的。如果项目比较小，不想按模块来划分的话，可以指定 `--mode` 参数。如：
+
+```sh
+thinkjs new thinkjs_demo --mode=mini
+```
+
+支持的模式列表如下：
+
+* `mini`  单模块项目，用于很简单的项目。
+* `normal` 普通项目，模块在功能下划分。
+* `module` 按模块划分，大型项目或者想严格按模块划分的项目。
+
+`注：`创建项目后，会在项目下创建一个名为 `.thinkjsrc` 的隐藏文件，里面标识了当前项目的一些配置，该文件需要纳入到版本库中。
+
+### 创建模块
+
+创建项目时会自动创建模块 `common` 和 `home`，如果还需要创建其他的模块，可以在项目目录下通过 `thinkjs module [name]` 命令来创建。如：
+
+```sh
+thinkjs module admin
+```
+
+执行完成后，会创建目录 `src/admin`，以及在该目录下创建对应的文件。
+
+### 添加 middleware
+
+可以在项目目录下通过 `thinkjs middleware [name]` 命令来添加 middleware。如：
+
+```sh
+thinkjs middleware test;
+```
+
+执行完成后，会创建 `src/common/middleware/test.js` 文件。
+
+### 添加 model
+
+可以在项目目录下通过 `thinkjs model [name]` 命令来添加 model。如：
+
+```sh
+thinkjs model user;
+```
+
+执行完成后，会创建 `src/common/model/user.js` 文件。
+
+默认会在 `common` 模块下创建，如果想在其他模块下创建，可以通过指定模块创建。如：
+
+```sh
+thinkjs model home/user;
+```
+
+指定模块为 `home` 后，会创建 `src/home/model/user.js` 文件。
+
+** 添加 Mongo Model **
+
+默认添加的 Model 是关系数据库的模型，如果想创建 Mongo Model，可以通过指定 `--mongo` 参数来添加。如：
+
+```sh
+thinkjs model home/user --mongo
+```
+
+** 添加 Relation Model **
+
+添加关联模型可以通过指定 `--relation` 参数。如：
+
+```sh
+thinkjs model home/user --relation
+```
+
+### 添加 controller
+
+可以在项目目录下通过 `thinkjs controller [name]` 命令来添加 controller。如：
+
+```sh
+thinkjs controller user;
+```
+
+执行完成后，会创建 `src/common/controller/user.js` 文件，同时会创建 `src/common/logic/user.js` 文件。
+
+默认会在 `common` 模块下创建，如果想在其他模块下创建，可以通过指定模块创建。如：
+
+```sh
+thinkjs controller home/user;
+```
+
+指定模块为 `home` 后，会创建 `src/home/controller/user.js` 文件。
+
+** 添加 Rest Controller **
+
+如果想提供 Rest API，可以带上 `--rest` 参数来创建。如：
+
+```sh
+thinkjs controller home/user --rest;
+```
+
+
+### 添加 service
+
+可以在项目目录下通过 `thinkjs service [name]` 命令来添加 model。如：
+
+```sh
+thinkjs service github; #创建调用 github 接口的 service
+```
+
+执行完成后，会创建 `src/common/service/github.js` 文件。
+
+默认会在 `common` 模块下创建，如果想在其他模块下创建，可以通过指定模块创建。如：
+
+```sh
+thinkjs service home/github;
+```
+
+指定模块为 `home` 后，会创建 `src/home/service/github.js` 文件。
+
+
+### 添加 adapter
+
+可以通过 `thinkjs adapter [type]/[name]` 来创建 adapter。如：
+
+```sh
+thinkjs adapter template/dot
+```
+
+执行后会创建文件 `src/common/adapter/template/dot.js`，表示创建一个名为 dot 的模版类型 adapter。
+
+## Middleware
+
+当处理用户的请求时，需要经过很多处理，如：解析参数，判断是否静态资源访问，路由解析，页面静态化判断，执行操作，查找模版，渲染模版等。项目里根据需要可能还会增加其他的一些处理，如：判断 IP 是否在黑名单中，CSRF 检测等。
+
+ThinkJS 里通过 middleware 来处理这些逻辑，每个逻辑都是一个独立的 middleware。在请求处理中埋很多 hook，每个 hook 串行执行一系列的 middleware，最终完成一个请求的逻辑处理。
+
+### hook 列表
+
+框架里包含的 hook 列表如下：
+
+* `payload_parse` 解析提交上来的数据
+* `payload_validate` 验证提交的数据
+* `resource_check` 静态资源请求检测
+* `resource_output` 静态资源输出
+* `route_parse` 路由解析
+* `app_begin` 项目开始执行
+* `view_init` 视图初始化
+* `view_template` 视图文件处理
+* `view_parse` 视图解析
+* `view_filter` 视图内容过滤
+* `view_end` 视图结束
+* `app_end` 项目结束
+
+每个 hook 里调用多个 middleware 来完成处理，具体包含的 middleware 如下：
+
+```js
+export default {
+  payload_parse: ['parse_form_payload', 'parse_single_file_payload', 'parse_json_payload', 'parse_querystring_payload'],
+  payload_validate: ['validate_payload'],
+  resource_check: ['resource'],
+  resource_output: ['output_resource'],
+  route_parse: ['rewrite_pathname', 'subdomain_deploy', 'route'],
+  app_begin: ['check_csrf', 'read_html_cache'],
+  view_init: [],
+  view_template: ['locate_template'],
+  view_parse: ['parse_template'],
+  view_filter: [],
+  view_end: ['write_html_cache'],
+  app_end: []
+};
+```
+
+### 配置 hook
+
+hook 默认执行的 middleware 往往不能满足项目的需求，可以通过配置修改 hook 对应要执行的 middleware 来完成，hook 的配置文件为 `src/common/config/hook.js`。
+
+```js
+export default {
+  payload_parse: ['parse_xml'], //解析 xml
+}
+```
+
+上面的配置会覆盖掉默认的配置值。如果在原有配置上增加的话，可以通过下面的方式：
+
+** 在前面追加 **
+
+```js
+export default {
+  payload_parse: ['prepend', 'parse_xml'], //在前面追加解析 xml
+}
+```
+
+** 在后面追加 **
+
+```js
+export default {
+  payload_parse: ['append', 'parse_xml'], //在后面追加解析 xml
+}
+```
+
+`注：`建议使用追加的方式配置 middleware，系统的 middleware 名称可能在后续的版本中有所修改。
+
+### 创建 middleware 
+
+ThinkJS 支持 2 种方式的 middleware，即：class 方式和 function 方式。可以根据 middleware 复杂度决定使用哪种方式。
+
+#### class 方式
+
+如果 middleware 需要执行的逻辑比较复杂，需要定义为 class 的方式。可以通过 `thinkjs` 命令来创建 middleware，在项目目录下执行如下的命令：
+
+```sh
+thinkjs middleware xxx
+```
+
+执行完成后，会看到对应的文件 `src/common/middleware/xxx.js`。
+
+** ES6 方式 ** 
+
+```js
+'use strict';
+/**
+ * middleware
+ */
+export default class extends think.middleware.base {
+  /**
+   * run
+   * @return {} []
+   */
+  run(){
+    
+  }
+}
+```
+
+** 动态创建类的方式 **
+
+```js
+'use strict';
+
+/**
+ * middleware
+ */
+module.exports = think.middleware({
+  /**
+   * run
+   * @return {} []
+   */
+  run: function(){
+
+  }
+})
+```
+
+middleware 里会将 `http` 传递进去，可以通过 `this.http` 属性来获取。逻辑代码放在 `run` 方法执行，如果含有异步操作，需要返回一个 `Promise` 或者使用 Generator Function。
+
+#### function 方式
+
+如果 middleware 要处理的逻辑比较简单，可以直接创建为函数的形式。这种 middleware 不建议创建成一个独立的文件，而是放在一起统一处理。
+
+可以建立文件 `src/common/bootstrap/middleware.js`，该文件在服务启动时会自动被加载。可以在这个文件添加多个函数式的 middleware。如：
+
+```js
+think.middleware('parse_xml', http => {
+  if (!http.payload) {
+    return;
+  }
+  ...
+});
+```
+
+函数式的 middleware 会将 `http` 对象作为一个参数传递进去，如果 middleware 里含有异步操作，需要返回一个 `Promise` 或者使用 Generator Function。
+
+以下是框架里解析 json payload 的实现：
+
+```js
+think.middleware('parse_json_payload', http => {
+  let types = http.config('post.json_content_type');
+  if (types.indexOf(http.type()) === -1) {
+    return;
+  }
+  return http.getPayload().then(payload => {
+    try{
+      http._post = JSON.parse(payload);
+    }catch(e){}
+  });
+});
+```
+
+### 解析后赋值
+
+有些 middleware 可能会解析相关的数据，然后希望重新赋值到 `http` 对象上，如：解析传递过来的 xml 数据，但后续希望可以通过 `http.get` 方法来获取。
+
+* `http._get` 用来存放 GET 参数值，http.get(xxx) 从该对象获取数据
+* `http._post` 用来存放 POST 参数值，http.post(xxx) 从该对象获取数据
+* `http._file` 用来存放上传的文件值，http.file(xxx) 从该对象获取数据
+
+```js
+think.middleware('parse_xml', http => {
+  if (!http.payload) {
+    return;
+  }
+  return parseXML(http.payload).then(data => {
+    http._post = data; //将解析后的数据赋值给 http._post，后续可以通过 http.post 方法来获取
+  });
+});
+```
+
+关于 `http` 对象更多信息请见 [API -> http](./api_http.html)。
+
+### 阻止后续执行
+
+有些 middleware 执行到一定条件时，可能希望阻止后面的逻辑继续执行。如：IP 黑名单判断，如果命中了黑名单，那么直接拒绝当前请求，不再执行后续的逻辑。
+
+ThinkJS 提供了 `think.prevent` 方法用来阻止后续的逻辑执行执行，该方法是通过返回一个特定类型的 Reject Promise 来实现的。
+
+```js
+think.middleware('parse_xml', http => {
+  if (!http.payload) {
+    return;
+  }
+  var ip = http.ip();
+  var blackIPs = ['123.456.789.100', ...];
+  if(blackIPs.indexOf(ip) > -1){
+    http.end();//直接结束当前请求
+    return think.prevent(); //阻止后续的代码继续执行
+  }
+});
+```
+
+除了使用 `think.prevent` 方法来阻止后续逻辑继续执行，也可以通过 `think.defer().promise` 返回一个 Pending Promise 来实现。
+
+如果不想直接结束当前请求，而是返回一个错误页面，ThinkJS 提供了 `think.statusAction` 方法来实现，具体使用方式请见 [扩展功能 -> 错误处理](./error_handle.html)。
+
+### 使用第三方 middleware
+
+在项目里使用第三方 middleware 可以通过 `think.middleware` 方法来实现，相关代码存放在 `src/common/bootstrap/middleware.js` 里。如：
+
+```js
+var parseXML = require('think-parsexml');
+
+think.middleware('parseXML', parseXML);
+```
+
+然后将 `parseXML` 配置到 hook 里即可。
+
+
+-----
+
+项目里的一些通用 middleware 也推荐发布到 npm 仓库中，middleware 名称推荐使用 `think-xxx`。
+
+### 第三方 middleware 列表
+
+* [think-wechat](https://github.com/akira-cn/think-wechat) 微信公众平台接口
 
 
 ## Service
 
+有时候项目里需要调用一些第三方的服务，如：调用 Github 相关接口。如果直接在 controller 里直接调用这些接口，一方面导致 controller 代码比较复杂，另一方面也不能更多进行代码复用。
+
+对于这些情况，可以包装成 service 供 controller 里调用。
+
+### 创建 service
+
+可以通过命令 `thinkjs service [name]` 来创建命令，具体使用请见 [扩展功能 -> ThinkJS 命令 -> 添加 service](./thinkjs_command.html#添加-service)。
+
+默认生成的 service 是一个 class，但有些 service 直接提供一些静态方法即可，这时候可以把 class 改为对象即可。
+
+### 加载 service
+
+可以通过 `think.service` 加载一个 service，如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let GithubService = think.service('github');
+    let instance = new GithubService();
+  }
+}
+```
+
+如果想跨模块加载 service，可以通过下面的方式：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let GithubService = think.service('github', 'admin'); //加载 admin 模块下的 github service
+    let instance = new GithubService();
+  }
+}
+```
+
+`注：` 如果项目不是特别复杂，建议把 service 放在 `common` 模块下，可以就都可以方便的加载了。
+
+## Cookie
+
+### 获取 cookie
+
+controller 或者 logic 中，可以通过 `this.cookie` 方法来获取。如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let cookie = this.cookie('theme'); //获取名为 theme 的 cookie
+  }
+}
+```
+
+http 对象里也提供了 `cookie` 方法来获取 cookie。如：
+
+```js
+let cookie = http.cookie('theme');
+```
+
+### cookie 配置
+
+cookie 默认配置如下：
+
+```js
+export default {
+  domain: '', 
+  path: '/',
+  httponly: false, //是否 http only
+  secure: false,
+  timeout: 0  //有效时间，0 为浏览器进程，单位为秒
+};
+```
+
+可以在文件 `src/common/config/cookie.js` 中进行修改，如：
+
+```js
+export default {
+  timeout: 7 * 24 * 3600  //将 cookie 有效时间设置为 7 天
+};
+```
+
+
+### 设置 cookie
+
+controller 或者 logic 中，可以通过 `this.cookie` 方法来设置。如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    this.cookie('theme', 'default'); //将 cookie theme 值设置为 default
+  }
+}
+```
+
+http 对象里也提供了 `cookie` 方法来设置 cookie。如：
+
+```js
+http.cookie('theme', 'default');
+```
+
+如果设置 cookie 时想修改一些参数，可以通过第三个参数来控制，如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    this.cookie('theme', 'default', {
+      timeout: 7 * 24 * 3600 //设置 cookie 有效期为 7 天
+    }); //将 cookie theme 值设置为 default
+  }
+}
+```
+
+
+
+
 ## 错误处理
+
+系统在处理用户请求时，会遇到各种各样的错误情况。如：系统内部错误，url 不存在，没有权限，服务不可用等，这些情况下需要给用户显示对应的错误页面。
+
+### 错误页面
+
+通过 `thinkjs` 命令创建项目时，会自动添加错误处理的逻辑文件以及相应的错误页面。
+
+错误逻辑文件路径为 `src/common/controller/error.js`，该文件内容大致如下：
+
+```js
+'use strict';
+/**
+ * error controller
+ */
+export default class extends think.controller.base {
+  /**
+   * display error page
+   * @param  {Number} status []
+   * @return {Promise}        []
+   */
+  displayErrorPage(status){
+    let module = 'common';
+    if(think.mode !== think.mode_module){
+      module = this.config('default_module');
+    }
+    let file = `${module}/error/${status}.html`;
+    let options = this.config('tpl');
+    options = think.extend({}, options, {type: 'ejs'});
+    return this.display(file, options);
+  }
+  /**
+   * Bad Request 
+   * @return {Promise} []
+   */
+  _400Action(){
+    return this.displayErrorPage(400);
+  }
+  /**
+   * Forbidden 
+   * @return {Promise} []
+   */
+  _403Action(){
+    return this.displayErrorPage(403);
+  }
+  /**
+   * Not Found 
+   * @return {Promise}      []
+   */
+  _404Action(){
+    return this.displayErrorPage(404);
+  }
+  /**
+   * Internal Server Error
+   * @return {Promise}      []
+   */
+  _500Action(){
+    return this.displayErrorPage(500);
+  }
+  /**
+   * Service Unavailable
+   * @return {Promise}      []
+   */
+  _503Action(){
+    return this.displayErrorPage(503);
+  }
+}
+```
+
+对应的模版文件路径为 `view/common/error_{Number}.html`。
+
+### 错误类型
+
+系统默认支持的错误类型有 `400`，`403`，`404`，`500` 和 `503`。
+
+#### 400
+
+错误的请求，如：恶意构造一些非法的数据访问、访问的 url 不合法等。
+
+#### 403
+
+当前访问没有权限。
+
+#### 404
+
+访问的 url 不存在。
+
+#### 500
+
+系统内部出现错误，导致当前请求不可用。
+
+#### 503
+
+服务不可用，需要等到恢复后才能访问。
+
+### 扩展错误类型
+
+项目里可以根据需要扩展错误类型，假如添加一个项目特有的错误 `600`，那么可以通过下面步骤进行：
+
+** 1、添加 _600Action **
+
+在 `src/common/controller/error.js` 文件中，合适的位置添加如下的代码：
+
+```js
+  _600Action(){
+    return this.displayErrorPage(600);
+  }
+```
+
+** 2、添加错误页面 **
+
+添加文件 `view/common/error_600.html`，并在文件里添加显示的错误内容。
+
+** 3、显示错误页面 **
+
+添加完错误后，需要在对应地方调用显示错误才能让用户看到，可以通过 `think.statusAction` 方法实现。如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    if(someError){
+      return think.statusAction(600, this.http); //显示 600 错误，需要将 http 对象传递进去
+    }
+  }
+}
+```
+
+
+### 修改错误页面样式
+
+修改错误页面样式，只需要修改对应的模版文件即可，如：修改 `404` 错误则修改模版文件 `view/common/error_404.html`。
+
 
 
 ## 错误信息
 
+### EPERM
+
+** Operation not permitted **
+
+An attempt was made to perform an operation that requires appropriate privileges.
+
+### ENOENT
+
+** No such file or directory ** 
+
+Commonly raised by fs operations; a component of the specified pathname does not exist -- no entity (file or directory) could be found by the given path.
+
+### EACCES
+
+**  Permission denied **
+
+An attempt was made to access a file in a way forbidden by its file access permissions.
+
+### EEXIST
+
+** File exists **
+
+An existing file was the target of an operation that required that the target not exist.
+
+### ENOTDIR
+
+**  Not a directory **
+
+A component of the given pathname existed, but was not a directory as expected. Commonly raised by fs.readdir.
+
+### EISDIR
+
+** Is a directory ** 
+
+An operation expected a file, but the given pathname was a directory.
+
+### EMFILE
+
+** Too many open files in system ** 
+
+Maximum number of file descriptors allowable on the system has been reached, and requests for another descriptor cannot be fulfilled until at least one has been closed.
+
+Commonly encountered when opening many files at once in parallel, especially on systems (in particular, OS X) where there is a low file descriptor limit for processes. To remedy a low limit, run ulimit -n 2048 in the same sh that will run the Node.js process.
+
+### EPIPE
+
+** Broken pipe **
+
+A write on a pipe, socket, or FIFO for which there is no process to read the data. Commonly encountered at the net and http layers, indicative that the remote side of the stream being written to has been closed.
+
+### EADDRINUSE
+
+** Address already in use **
+
+An attempt to bind a server (net, http, or https) to a local address failed due to another server on the local system already occupying that address.
+
+### ECONNRESET
+
+** Connection reset by peer ** 
+
+A connection was forcibly closed by a peer. This normally results from a loss of the connection on the remote socket due to a timeout or reboot. Commonly encountered via the http and net modules.
+
+### ECONNREFUSED
+
+** Connection refused ** 
+
+No connection could be made because the target machine actively refused it. This usually results from trying to connect to a service that is inactive on the foreign host.
+
+### ENOTEMPTY
+
+** Directory not empty **
+
+A directory with entries was the target of an operation that requires an empty directory -- usually fs.unlink.
+
+### ETIMEDOUT
+
+** Operation timed out **
+
+A connect or send request failed because the connected party did not properly respond after a period of time. Usually encountered by http or net -- often a sign that a connected socket was not .end()'d appropriately.
+
+
+
+
+
+
+
+
+
+
+
+
 ## 数据校验
+
+项目里需要对用户提交过来的数据进行校验，以保证
+
+### logic
+
+### 数据校验配置
+
+### 数据校验方法
+
+### 校验错误信息
+
+### 支持的校验类型
+
+#### required
+
+必填项。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'required' //name 的值必填
+    }
+  }
+}
+```
+
+#### requiredIf
+
+当另一个项的值为某些值其中一项时，该项必填。如：
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'requiredIf:email,admin@example.com,admin1@example.com'
+    }
+  }
+}
+```
+
+当 `email` 的值为 `admin@example.com`，`admin1@example.com` 等其中一项时， `name` 的值必填。
+
+#### requiredNotIf
+
+当另一个项的值不在某些值中时，该项必填。如：
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'requiredNotIf:email,admin@example.com,admin1@example.com'
+    }
+  }
+}
+```
+
+当 `email` 的值不为 `admin@example.com`，`admin1@example.com` 等其中一项时， `name` 的值必填。
+
+
+#### requiredWith
+
+当其他几项有一项值存在时，该项必填。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'requiredWith:email,title'
+    }
+  }
+}
+```
+
+当 `email`, `title` 等项有一项值存在时，`name` 的值必填。
+
+#### requiredWithAll
+
+当其他几项值都存在时，该项必填。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'requiredWithAll:email,title'
+    }
+  }
+}
+```
+
+当 `email`, `title` 等项值都存在时，`name` 的值必填。
+
+#### requiredWithout
+
+当其他几项有一项值不存在时，该项必填。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'requiredWithout:email,title'
+    }
+  }
+}
+```
+
+当 `email`, `title` 等项其中有一项值不存在时，`name` 的值必填。
+
+
+#### requiredWithoutAll
+
+当其他几项值都存在时，该项必填。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'requiredWithoutAll:email,title'
+    }
+  }
+}
+```
+
+当 `email`, `title` 等项值都不存在时，`name` 的值必填。
+
+#### contains
+
+值需要包含某个特定的值。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'contains:thinkjs' //需要包含字符串 thinkjs。
+    }
+  }
+}
+```
+
+#### equals
+
+和另一项的值相等。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'equals:firstname' 
+    }
+  }
+}
+```
+
+`name` 的值需要和 `firstname` 的值相等。
+
+#### different
+
+和另一项的值不等。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'different:firstname'
+    }
+  }
+}
+```
+
+`name` 的值不能和 `firstname` 的值相等。
+
+#### before
+
+值需要在一个日期之后，默认为需要在当前日期之前。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      start_time: 'before', //需要在当前日期之前。
+      start_time1: 'before:2015/10/12 10:10:10' //需要在 2015/10/12 10:10:10 之前。
+    }
+  }
+}
+```
+
+#### after
+
+值需要在一个日期之后，默认为需要在当前日期之后。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      end_time: 'after', //需要在当前日期之后。
+      end_time1: 'after:2015/10/10' //需要在 2015/10/10 之后。
+    }
+  }
+}
+```
+
+#### alpha
+
+值只能是 [a-zA-Z] 组成。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      en_name: 'alpha'
+    }
+  }
+}
+```
+
+`en_name` 的值只能是 [a-zA-Z] 组成。
+
+#### alphaDash
+
+值只能是 [a-zA-Z_] 组成。
+
+#### alphaNumeric
+
+值只能是 [a-zA-Z0-9] 组成。
+
+#### alphaNumericDash
+
+值只能是 [a-zA-Z0-9_] 组成。
+
+#### ascii
+
+值只能是 ascii 字符组成。
+
+#### base64
+
+值必须是 base64 编码。
+
+#### byteLength
+
+字节长度需要在一个区间内。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'byteLength:10' //字节长度不能小于 10
+      name1: 'byteLength:10,100' //字节长度需要在 10 - 100 之间
+    }
+  }
+}
+```
+
+#### creditcard
+
+需要是信用卡数字。
+
+#### currency
+
+需要是货币。
+
+#### date
+
+需要是个日期。
+
+#### decimal
+
+需要是个小数。
+
+#### divisibleBy
+
+需要被一个数整除。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      count: 'divisibleBy:3' //可以被 3 整除
+    }
+  }
+}
+```
+
+#### email
+
+需要是个 email 格式。
+
+#### fqdn
+
+需要是个合格的域名。
+
+#### float
+
+需要是个浮点数。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      money: 'float' //需要是个浮点数
+      money1: 'float:3.2' //需要是个浮点数，且最小值为 3.2
+      money2: 'float:3.2,10.5' //需要是个浮点数，且最小值为 3.2，最大值为 10.5
+    }
+  }
+}
+```
+
+#### fullWidth
+
+包含宽字节字符。
+
+#### halfWidth
+
+包含半字节字符。
+
+#### hexColor
+
+需要是个十六进制颜色值。
+
+#### hex
+
+需要是十六进制。
+
+#### ip
+
+需要是 ip 格式。
+
+#### ip4
+
+需要是 ip4 格式。
+
+#### ip6
+
+需要是 ip6 格式。
+
+#### isbn
+
+需要是图书编码。
+
+#### isin
+
+需要是证券识别编码。
+
+#### iso8601
+
+需要是 iso8601 日期格式。
+
+#### in
+
+在某些值中。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      version: 'in:1.2,2.0' //需要是 1.2，2.0 其中一个
+    }
+  }
+}
+```
+
+#### noin
+
+不能在某些值中。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      version: 'noin:1.2,2.0' //不能是 1.2，2.0 其中一个
+    }
+  }
+}
+```
+
+#### int
+
+需要是 int 型。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      value: 'int' //需要是 int 型
+      value1: 'int:1' //不能小于1
+      value2: 'int:10,100' //需要在 10 - 100 之间
+    }
+  }
+}
+```
+
+#### min
+
+不能小于某个值。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      value: 'min:10' //不能小于10
+    }
+  }
+}
+```
+
+#### max
+
+不能大于某个值。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      value: 'max:10' //不能大于10
+    }
+  }
+}
+```
+
+#### length
+
+长度需要在某个范围。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'length:10' //长度不能小于10
+      name1: 'length:10,100' //长度需要在 10 - 100 之间
+    }
+  }
+}
+```
+
+#### minLength
+
+长度不能小于最小长度。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'minLength:10' //长度不能小于10
+    }
+  }
+}
+```
+
+#### maxLength
+
+长度不能大于最大长度。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      name: 'maxLength:10' //长度不能大于10
+    }
+  }
+}
+```
+
+#### lowercase
+
+需要都是小写字母。
+
+#### uppercase
+
+需要都是大小字母。
+
+#### mobile
+
+需要手机号。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      mobile: 'mobile:zh-CN' //必须为中国的手机号
+    }
+  }
+}
+```
+
+#### mongoId
+
+是 MongoDB 的 ObjectID。
+
+#### multibyte
+
+包含多字节字符。
+
+#### url
+
+是个 url。
+
+#### order
+
+数据库查询 order，如：name DESC。
+
+#### field
+
+数据库查询的字段，如：name,title。
+
+#### image
+
+上传的文件是否是个图片。
+
+#### startWith
+
+以某些字符打头。
+
+#### endWith
+
+以某些字符结束。
+
+#### string
+
+值为字符串。
+
+#### array
+
+值为数组。
+
+#### boolean
+
+值为布尔类型。
+
+#### object
+
+值为对象。
+
+### 扩展校验类型
 
 ## 国际化
 
 ## 路径常量
+
+系统提供了很多常量供项目里使用，利用这些常量可以方便的访问对应的文件。
+
+### think.ROOT_PATH
+
+项目的根目录。
+
+### think.RESOURCE_PATH
+
+静态资源根目录，路径为 `think.ROOT_PATH` + `/www/`。
+
+### think.APP_PATH
+
+APP 代码目录，路径为 `think.ROOT_PATH` + `/app/`。
+
+### think.THINK_PATH
+
+ThinkJS 框架的根目录。
+
+### think.THINK_LIB_PATH
+
+ThinkJS 框架 `lib` 目录。
+
+### think.getPath(module, type)
+
+对于 model，controller，view 等目录，由于每个模块下都有这些目录，所以通过给出一个固定路径值。可以通过 `think.getPath` 来获取模块下的路径。
+
+```js
+let path1 = think.getPath('common', 'model'); //获取 common 下 model 的目录
+let path2 = think.getPath('home', 'controller'); //获取 home 模块下 controller 的目录
+```
+
+### 自定义路径常量
+
+除了通过系统给的属性或者方法来获取路径，还可以在项目里定义额外的路径常量。
+
+** 入口文件里定义 **
+
+项目的入口文件为 `src/index.js` 或者 `src/production.js` 等，可以在这些入口文件里定义一些路径常量。如：
+
+```js
+var thinkjs = require('thinkjs');
+var path = require('path');
+
+var rootPath = path.dirname(__dirname);
+
+var instance = new thinkjs({
+  APP_PATH: rootPath + '/app',
+  ROOT_PATH: rootPath,
+  RESOURCE_PATH: __dirname,
+  UPLOAD_PATH: __dirname + '/upload', // 定义文件上传的目录
+  env: 'development'
+});
+
+instance.run();
+```
+
+** 启动文件里定义 **
+
+定义在 `src/common/bootstrap` 里的文件在项目启动时会自动加载，所以也可以在这些文件里定义路径常量。如：
+
+```js
+// src/common/bootstrap/common.js
+think.UPLOAD_PATH = think.RESOURCE_PATH + '/upload'; //定义文件上传的目录
+```
 
 ## Rest API
 
@@ -3669,7 +4999,7 @@ promise = think.error(promise)
 
 当系统出现异常时（系统错误，页面找不到，没权限等），显示对应的错误页面。
 
-创建项目时，会在 common 模块下创建名为 error controller，专门用来处理错误情况。
+创建项目时，会在 common 模块下生成文件 `src/common/controller/error.js`，专门用来处理错误情况。
 
 默认支持的错误类型有：`400`, `403`, `404`, `500`, `503`。
 
@@ -4108,6 +5438,21 @@ http 对象会在 middleware, logic, controller, view 中传递。
 
 当前请求的 payload 数据，提交型的请求才含有该值。
 
+#### http._get
+
+存放 GET 参数值。
+
+#### http._post
+
+存放 POST 参数值
+
+#### http._file
+
+存放上传的文件数据
+
+#### http._cookie
+
+存放 cookie 数据。
 
 ### 方法
 

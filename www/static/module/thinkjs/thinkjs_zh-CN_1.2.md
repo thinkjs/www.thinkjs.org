@@ -26,13 +26,13 @@ ThinkJS 需要 Node.js 的版本 `>=0.10.x`，可以通过 `node -v` 命令查�
 
 安装 ThinkJS 非常简单，通过如下的命令即可安装：
 
-```shell
+```sh
 npm install -g thinkjs-cmd
 ```
 
 如果安装失败，可能是 npm 服务异常或者是被墙了，可以使用国内的 [cnpm](http://cnpmjs.org/) 服务进行安装。如：
 
-```shell
+```sh
 npm install -g thinkjs-cmd --registry=http://r.cnpmjs.org
 ```
 
@@ -76,7 +76,7 @@ npm update thinkjs;
 
 ### 新建项目
 
-```shell
+```sh
 # 在合适的位置创建一个新目录，new_dir_name 为你想创建的文件夹名字
 mkdir new_dir_name; 
 # 进入这个目录
@@ -2236,19 +2236,19 @@ ThinkJS 无缝支持命令行模式的调用，控制器的逻辑可以和普通
 
 比如要执行 IndexController 里的 indexAction，可以使用如下的命令：
 
-```shell
+```sh
 node index.js /index/index
 ```
 
 如果需要带上参数，可以直接在后面加上对应的参数即可，如：
 
-```shell
+```sh
 node index.js /index/index?name=welefen
 ```
 
 也可以是：
 
-```shell
+```sh
 node index.js /index/index/name/welefen
 ```
 
@@ -2256,7 +2256,7 @@ node index.js /index/index/name/welefen
 
 命令行执行默认的请求类型是 GET，如果想改为其他的类型，可以用下面的方法：
 
-```shell
+```sh
 node index.js url=/index/index&method=post
 ```
 
@@ -2271,7 +2271,7 @@ node index.js url=/index/index&method=post
 
 有时候如果想修改更多的 headers，可以传一个完整的 json 数据，如：
 
-```shell
+```sh
 node index.js {"url":"/index/index","ip":"127.0.0.1","method":"POST","headers":{"xxx":"yyyy"}}
 ```
 
