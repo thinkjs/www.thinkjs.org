@@ -36,8 +36,7 @@ export default class extends base {
    * @param  {String} filePath []
    * @return {Promise}          []
    */
-  async getMarkedContent(filePath){
-
+  getMarkedContent(filePath){
     let cache = this.config('cache_markdown_content');
     if(cache){
       let content = thinkCache('markdown-doc', filePath);
@@ -45,13 +44,10 @@ export default class extends base {
         return content;
       }
     }
-
     let markedContent = this.markdownToHtml(filePath);
-
     if(cache){
       thinkCache('markdown-doc', filePath, markedContent);
     }
-
     return markedContent;
   }
   /**
@@ -60,15 +56,12 @@ export default class extends base {
    */
   async getDoc(){
     let doc = this.get('doc');
-
     let lang = this.http.lang();
     let version = this.get('version');
 
-
+    let markedContent;
     let filePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/${doc}.md`;
     let htmlPath = filePath.replace('.md', '.html');
-
-    let markedContent;
 
     if(think.isFile(htmlPath)){
       markedContent = fs.readFileSync(htmlPath, 'utf8');
@@ -79,12 +72,16 @@ export default class extends base {
           filePath = this.generateSingleDoc(this.http.lang(), this.get('version'));
         }
       }
-
       if(!think.isFile(filePath)){
         return Promise.reject(new Error(`/doc/${doc}.html is not exist`));
       }
+      markedContent = this.getMarkedContent(filePath);
+    }
 
-      markedContent = await this.getMarkedContent(filePath);
+    let titleReg = /<h2(?:[^<>]*)>([^<>]+)<\/h2>/;
+    let match = markedContent.match(titleReg);
+    if(match){
+      this.assign('title', `${match[1]}${this.locale("title-doc-suffix", version)}`);
     }
 
     this.assign('markedContent', markedContent);
@@ -95,6 +92,8 @@ export default class extends base {
    * @return {} []
    */
   async indexAction(){
+    this.expires(86400);
+    
     this.assign('currentNav', 'doc');
     this.assign('hasBootstrap', true);
     this.assign('hasVersion', true);
@@ -102,10 +101,10 @@ export default class extends base {
 
     try{
       await this.getDoc();
-      this.display('doc/index');
+      await this.display('doc/index');
     }catch(err){
       this.http.error = err;
-      think.statusAction(404, this.http);
+      await think.statusAction(404, this.http);
     }
   }
   /**

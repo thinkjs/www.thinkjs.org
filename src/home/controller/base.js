@@ -34,7 +34,7 @@ export default class extends think.controller.base {
       return `<h${b} id="${id}">${c}</h${b}>`;
     });
     markedContent = markedContent.replace(/<h(\d)[^<>]*>([^<>]+)<\/h\1>/, (a, b, c) => {
-      this.assign('title', `${c}${this.locale("title-doc-suffix")}`);
+      //this.assign('title', `${c}${this.locale("title-doc-suffix")}`);
       return `${a}<div class="toc">${tocContent}</div>`;
     });
 

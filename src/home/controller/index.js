@@ -8,6 +8,7 @@ export default class extends base {
    * @return {} []
    */
   indexAction(){
+    this.expires(86400);
     return this.display();
   }
   /**
