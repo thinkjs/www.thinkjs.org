@@ -24,7 +24,7 @@ ThinkJS 框架 `lib` 目录。
 
 ### think.getPath(module, type)
 
-对于 model，controller，view 等目录，由于每个模块下都有这些目录，所以通过给出一个固定路径值。可以通过 `think.getPath` 来获取模块下的路径。
+对于 model，controller，view 等目录，由于每个模块下都有这些目录，所以无法给出一个固定的路径值。可以通过 `think.getPath` 来获取模块下的路径。
 
 ```js
 let path1 = think.getPath('common', 'model'); //获取 common 下 model 的目录

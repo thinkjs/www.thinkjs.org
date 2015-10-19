@@ -239,7 +239,7 @@ export default class extends Base {
 
 ### 错误处理
 
-当 url 不存在或者当前用户没权限等一些异常请求时，这时候会调用错误处理。 ThinkJS 内置了一套详细的错误处理机制，具体请见 [这里](./error_handle.html)。
+当 url 不存在或者当前用户没权限等一些异常请求时，这时候会调用错误处理。 ThinkJS 内置了一套详细的错误处理机制，具体请见 [扩展功能 -> 错误处理](./error_handle.html)。
 
 ### 数据校验
 
@@ -265,6 +265,8 @@ export default class extends think.controller.base {
 }
 ```
 
+model 方法更多使用方式请见 [API -> think.http.base](./api_think_http_base.html#modelname-options)。
+
 ### http 对象
 
 控制器在实例化时，会将 `http` 传递进去。该 `http` 对象是 ThinkJS 对 `req` 和 `res` 重新包装的一个对象，而非 Node.js 内置的 http 对象。
@@ -283,7 +285,7 @@ export default class extends Base {
 }
 ```
 
-关于 `http` 对象包含的属性和方法请见 [这里](./api_http.html)。
+关于 `http` 对象包含的属性和方法请见 [API -> http](./api_http.html)。
 
 ### Rest Api
 
@@ -341,7 +343,6 @@ export default class extends think.controller.base {
 
 ```js
 module.exports = think.controller({
-  //参数 self 等同于 var self = this
   indexAction: function(){
     this.model('user').find().then(data => {
       return this.model('article').where({user_id: data.id}).select();
@@ -350,6 +351,76 @@ module.exports = think.controller({
     })
   }
 })
+```
+
+### JSON 输出
+
+项目中经常要提供一些接口，这些接口一般都是直接输出 JSON 格式的数据，并且会有标识表明当前接口是否正常。如果发生异常，需要将对应的错误信息随着接口一起输出。控制器里提供了 `this.success` 和 `this.fail` 方法来输出这样的接口数据。
+
+#### 输出正常的 JSON
+
+可以通过 `this.success` 方法输出正常的接口数据，如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let data = {name: "thinkjs"};
+    this.success(data);
+  }
+}
+```
+
+输出结果为 `{errno: 0, errmsg: "", data: {"name": "thinkjs"}}`，客户端可以通过 `errno` 是否为 0 来判断当前接口是否有异常。
+
+
+#### 输出含有错误信息的 JSON
+
+可以通过 `this.fail` 方法输出含有错误信息的接口数据，如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    this.fail(1000, 'connect error'); //指定错误号和错误信息
+  }
+}
+```
+
+输出结果为 `{errno: 1000, errmsg: "connect error"}`，客户端判断 `errno` 大于 0，就知道当前接口有异常，并且通过 `errmsg` 拿到具体的错误信息。
+
+如果每个地方输出错误的时候都要指定错误号和错误信息势必比较麻烦，比较好的方式是把错误号和错误信息在一个地方配置，然后输出的时候只要指定错误号，错误信息根据错误号自动读取。
+
+错误信息支持国际化，所以配置放在 `src/common/config/locale/[lang].js` 文件中。如：
+
+```js
+export default {
+  10001: 'get data error'
+}
+```
+
+通过上面的配置后，执行 `this.fail(10001)` 时会自动读取到对应的错误信息。
+
+#### 格式配置
+
+默认输出的错误号的 key 为 `errno`，错误信息的 key 为 `errmsg`。如果不满足需求的话，可以修改配置文件 `src/common/config/error.js`。
+
+```js
+export default {
+  key: 'errno', //error number
+  msg: 'errmsg', //error message
+}
+```
+
+
+#### 输出不包含错误信息的 JSON
+
+如果输出的 JSON 数据里不想包含 `errno` 和 `errmsg` 的话，可以通过 `this.json` 方法输出 JSON。如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    this.json({name: 'thinkjs'});
+  }
+}
 ```
 
 ### 常用功能
@@ -362,6 +433,7 @@ module.exports = think.controller({
 export default class extends think.controller.base {
   indexAction(){
     let name = this.get('name');
+    let allParams = this.get(); //获取所有 GET 参数
   }
 }
 ```
@@ -376,6 +448,7 @@ export default class extends think.controller.base {
 export default class extends think.controller.base {
   indexAction(){
     let name = this.post('name');
+    let allParams = this.post(); //获取所有 POST 参数
   }
 }
 ```
@@ -389,7 +462,8 @@ export default class extends think.controller.base {
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    let file = this.post('image');
+    let file = this.file('image');
+    let allFiles = this.file(); //获取所有上传的文件
   }
 }
 ```
@@ -407,27 +481,31 @@ export default class extends think.controller.base {
 
 如果文件不存在，那么值为一个空对象 `{}`。
 
+#### JSONP 格式数据输出
+
+可以通过 `this.jsonp` 方法输出 JSONP 格式的数据，callback 的请求参数名默认为 `callback`。如果需要修改请求参数名，可以通过修改配置 `callback_name` 来完成。
+
 #### 更多方法
 
-* `isGet()` 当前是否是 get 请求
-* `isPost()` 当前是否是 post 请求
-* `isAjax()` 是否是 ajax 请求
+* `isGet()` 当前是否是 GET 请求
+* `isPost()` 当前是否是 POST 请求
+* `isAjax()` 是否是 AJAX 请求
 * `ip()` 获取请求用户的 ip
-* `redirect(url)` 跳转到一个 url，返回一个 pedding promise 阻止后面的逻辑继续执行
+* `redirect(url)` 跳转到一个 url
 * `echo(data)` 输出数据，会自动调用 JSON.stringify
 * `end(data)` 结束当前的 http 请求
-* `json(data)` 输出 json 数据，自动发送 json 相关的 Content-Type
-* `jsonp(data)` 输出 jsonp 数据，请求参数名默认为 `callback`
-* `success(data)` 输出一个正常的 json 数据，数据格式为 `{errno: 0, errmsg: "", data: data}`，返回一个 pedding promise 阻止后续继续执行
-* `fail(errno, errmsg, data)` 输出一个错误的 json 数据，数据格式为 `{errno: errno_value, errmsg: string, data: data}`，返回一个 pedding promise 阻止后续继续执行
+* `json(data)` 输出 JSON 数据，自动发送 JSON 相关的 Content-Type
+* `jsonp(data)` 输出 JSONP 数据，请求参数名默认为 `callback`
+* `success(data)` 输出一个正常的 JSON 数据，数据格式为 `{errno: 0, errmsg: "", data: data}`
+* `fail(errno, errmsg, data)` 输出一个错误的 JSON 数据，数据格式为 `{errno: errno_value, errmsg: string, data: data}`
 * `download(file)` 下载文件
 * `assign(name, value)` 设置模版变量
-* `display()` 输出一个模版，返回一个 promise
-* `fetch()` 渲染模版并获取内容，返回一个 prmose，内容需要在 promise then 里获取
+* `display()` 输出一个模版
+* `fetch()` 渲染模版并获取内容
 * `cookie(name, value)` 获取或者设置 cookie
 * `session(name, value)` 获取或者设置 session
 * `header(name, value)` 获取或者设置 header
-* `action(name, data)` 调用其他 Controller 的方法，可以跨分组
+* `action(name, data)` 调用其他 Controller 的方法，可以跨模块
 * `model(name, options)` 获取模型实例
 
 完整方法列表请见 [API -> Controller](./api_controller.html)。
