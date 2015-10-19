@@ -79,6 +79,83 @@ ejs 不支持模版继承。但可以将公用的模版独立成一个文件，�
 
 更多 ejs 使用文档请见 [这里](https://www.npmjs.com/package/ejs)。
 
+#### nunjucks
+
+nunjucks 是一款类似于 jinja2 的模版引擎，功能异常强大，复杂项目建议使用该模版引擎。
+
+** 定界符 **
+
+块级定界符为 `{%` 和 `%}`，变量定界符为 `{{` 和 `}}`，注释定界符为 `<#` 和 `#>`。如：
+
+```html
+{{ username }}  
+
+{% block header %} 
+This is the default content
+{% endblock %}
+```
+
+** 模版继承 **
+
+父级模版：
+
+```html
+{% block header %}
+This is the default content
+{% endblock %}
+
+<section class="left">
+  {% block left %}{% endblock %}
+</section>
+
+<section class="right">
+  {% block right %}
+  This is more content
+  {% endblock %}
+</section>
+```
+
+子级模版：
+
+```html
+{% extends "parent.html" %}
+
+{% block left %}
+This is the left side!
+{% endblock %}
+
+{% block right %}
+This is the right side!
+{% endblock %}
+```
+
+** 条件判断 **
+
+```html
+{% if hungry %}
+  I am hungry
+{% elif tired %}
+  I am tired
+{% else %}
+  I am good!
+{% endif %}
+```
+
+** 循环 **
+
+```html
+<h1>Posts</h1>
+<ul>
+{% for item in items %}
+  <li>{{ item.title }}</li>
+{% else %}
+  <li>This would display if the 'item' collection were empty</li>
+{% endfor %}
+</ul>
+```
+
+具体使用文档请见 [这里](http://jinja.pocoo.org/docs/dev/)。
+
 #### jade
 
 jade 模版使用方式请见 [这里](https://github.com/jadejs/jade)。
@@ -87,9 +164,6 @@ jade 模版使用方式请见 [这里](https://github.com/jadejs/jade)。
 
 swig 模版使用方式请见 [这里](http://paularmstrong.github.io/swig/)。
 
-#### nunjucks
-
-nunjucks 是一款类似于 jinja2 的模版引擎，功能异常强大，复杂项目建议使用该模版引擎。使用文档请见 [这里](http://jinja.pocoo.org/docs/dev/)。
 
 #### 扩展模版引擎
 
