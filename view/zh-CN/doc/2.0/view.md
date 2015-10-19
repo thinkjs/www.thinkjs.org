@@ -99,6 +99,10 @@ This is the default content
 {% endblock %}
 ```
 
+** 变量输出 **
+
+可以通过 `{{ username }}` 来输出变量，默认输出的变量会自动转义，如果不想被转义，可以通过 `{{ username | safe }}` 来处理。
+
 ** 模版继承 **
 
 父级模版：
@@ -260,7 +264,7 @@ module.exports = think.controller({
 
 启动国际化后，视图路径会多一层国际化的目录。如：具体的视图路径变为 `view/zh-CN/home/index_index.html`，其中 `zh-CN` 为语言名。
 
-关于如果使用国际化请见 [这里](./i18n.html)。 
+关于如果使用国际化请见 [扩展功能 -> 国际化](./i18n.html)。 
 
 ### 多主题
 
@@ -268,7 +272,7 @@ module.exports = think.controller({
 
 可以通过 `http.theme` 方法来设置当前的主题，设置主题一般是通过 middleware 来实现。
 
-关于 middleware 更多信息请见 [这里](./middleware.html)。
+关于 middleware 更多信息请见 [扩展功能 - Middleware](./middleware.html)。
 
 ### 默认模版变量
 

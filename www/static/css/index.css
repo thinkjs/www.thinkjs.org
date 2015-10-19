@@ -1,5 +1,5 @@
 /* common set */
-.wrap {width: 1000px;margin: 0 auto;}
+.wrap {width: 1000px;margin: 0 auto;position: relative;}
 /*icon*/
 .arrowd,.arrowl,.circle{ position:absolute;right:10px;top:15px;width:13px; height:6px; line-height:0; font-size:0; background:url(../img/icon-a.png) no-repeat 0 0; vertical-align:middle;}
 .versel:hover .arrowd{ background-position:0 -16px;}
@@ -86,13 +86,12 @@ i.icon-fet8{ background-position:-70px -210px;}
 .lbox dl:after{height:20px;content: '';display: block;}
 .lbox dt{ margin-bottom:8px; color:#555; font-size:18px; font-weight:normal; padding-bottom:10px; border-bottom:1px dashed #eee;}
 .lbox dd a{ display:block; line-height:26px;font-size: 16px;}
-.search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:760px;margin-top: 20px;}
+.search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:760px;}
 .sea-txt{ background-color:transparent; width:93%; padding:8px; margin:1px 0 0 1px;border:none;outline: none;}
 .sea-btn{ position:absolute;right:0;top:0; width:40px; height:40px; border:none; background:url(../img/sea.png) no-repeat 7px 6px;} 
 .search:hover{ border-color:#428bca;}
 .search:hover .sea-btn{ background-position:7px -35px;}
-.doc-link{line-height: 40px;margin-top: -10px;}
-.doc-link a{margin-right: 20px;}
+
 
 
 .nav > li > a:hover, .nav > li > a:focus{background-color: #fff !important;}
@@ -111,3 +110,9 @@ i.icon-fet8{ background-position:-70px -210px;}
 .demo-list{font-size: 16px}
 .demo-list ul{margin-left: 20px}
 .demo-list ul li{list-style-type: disc;}
+
+.r-fixed{position: fixed;width: 48px;left: 50%;margin-left: 510px;bottom: 10px;}
+.r-fixed .pdf{display:block;width: 48px;height: 48px;background:#B6BCC1 url(../img/pdf.png) no-repeat center center;border-radius: 3px;}
+.r-fixed .view-single{margin-top:5px;display:block;width: 48px;height: 48px;background:#B6BCC1 url(../img/view-single.png) no-repeat center center;border-radius: 3px;}
+.r-fixed .pdf:hover,
+.r-fixed .view-single:hover{background-color: #23527c}

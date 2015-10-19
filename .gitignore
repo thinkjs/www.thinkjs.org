@@ -32,3 +32,5 @@ output.tar.gz
 www/static/other/icon/*.bak
 
 ssl/
+
+www/static/module/thinkjs/*.md
