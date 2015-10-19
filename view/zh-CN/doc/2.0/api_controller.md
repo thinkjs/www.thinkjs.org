@@ -170,11 +170,35 @@ export default class extends think.controller.base {
 
 如果文件不存在，那么值为一个空对象 `{}`。
 
-#### controller.header(name)
+#### controller.header(name, value)
 
 * `name` {String} header 名
+* `value` {String} header 值
 
-获取 header 值。
+获取或者设置 header。
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let accept = this.header('accept'); //获取 header
+    this.header('X-NAME', 'thinks'); //设置 header
+  }
+}
+```
+
+#### controller.expires(time)
+
+* `time` {Number} 过期时间，单位为秒
+
+强缓存，设置 `Cache-Control` 和 `Expires` 头信息。
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    this.expires(86400); //设置过期时间为 1 天。
+  }
+}
+```
 
 #### controller.userAgent()
 

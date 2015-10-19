@@ -208,6 +208,15 @@ http.header('accept'); //获取accept
 http.header('X-NAME', 'thinkjs'); //设置header
 ```
 
+#### http.expires(time)
+
+* `time` {Number} 过期时间，单位为秒
+
+强缓存，设置 `Cache-Control` 和 `Expires` 头信息。
+
+```js
+http.header(86400); //设置过期时间为 1 天。
+```
 
 #### http.status(status)
 
