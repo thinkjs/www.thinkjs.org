@@ -813,11 +813,11 @@ export default class extends Base {
 
 当 url 不存在或者当前用户没权限等一些异常请求时，这时候会调用错误处理。 ThinkJS 内置了一套详细的错误处理机制，具体请见 [这里](./error_handle.html)。
 
-### 数据校验和权限判断
+### 数据校验
 
-当在 Action 里处理用户的请求时，经常要先获取用户提交过来的数据，然后对其校验，如果校验没问题后才能进行后续的操作。当参数校验完成后，有时候还要进行权限判断，等这些都判断无误后才能进行真正的逻辑处理。如果将这些代码都放在一个 Action 里，势必让 Action 的代码非常复杂且冗长。
+控制器里在使用用户提交的数据之前，需要对数据合法性进行校验。为了降低控制器里的逻辑复杂度，ThinkJS 提供了一层 Logic 专门用来处理数据校验和权限校验等相关操作。
 
-为了解决这个问题， ThinkJS 在控制器前面增加了一层 `Logic`，Logic 里的 Action 和控制器里的 Action 一一对应，系统在调用控制器里的 Action 之前会自动调用 Logic 里的 Action。详细信息请见 [扩展功能 -> 数据校验](./validation.html)。
+详细信息请见 [扩展功能 -> 数据校验](./validation.html)。
 
 
 ### 变量赋值和模版渲染
@@ -1032,6 +1032,10 @@ export default {
 };
 ```
 
+`注：` 视图默认根目录在 `view/`。如果想每个模块有独立的视图目录，将配置 `root_path` 修改为空即可。
+
+
+
 ### 模版引擎
 
 ThinkJS 默认支持的模版引擎有：`ejs`，`jade`，`swig` 和 `nunjucks`，默认模版引擎为 `ejs`，可以根据需要修改为其他的模版引擎。
@@ -1088,6 +1092,83 @@ ejs 不支持模版继承。但可以将公用的模版独立成一个文件，�
 
 更多 ejs 使用文档请见 [这里](https://www.npmjs.com/package/ejs)。
 
+#### nunjucks
+
+nunjucks 是一款类似于 jinja2 的模版引擎，功能异常强大，复杂项目建议使用该模版引擎。
+
+** 定界符 **
+
+块级定界符为 `{%` 和 `%}`，变量定界符为 `{{` 和 `}}`，注释定界符为 `<#` 和 `#>`。如：
+
+```html
+{{ username }}  
+
+{% block header %} 
+This is the default content
+{% endblock %}
+```
+
+** 模版继承 **
+
+父级模版：
+
+```html
+{% block header %}
+This is the default content
+{% endblock %}
+
+<section class="left">
+  {% block left %}{% endblock %}
+</section>
+
+<section class="right">
+  {% block right %}
+  This is more content
+  {% endblock %}
+</section>
+```
+
+子级模版：
+
+```html
+{% extends "parent.html" %}
+
+{% block left %}
+This is the left side!
+{% endblock %}
+
+{% block right %}
+This is the right side!
+{% endblock %}
+```
+
+** 条件判断 **
+
+```html
+{% if hungry %}
+  I am hungry
+{% elif tired %}
+  I am tired
+{% else %}
+  I am good!
+{% endif %}
+```
+
+** 循环 **
+
+```html
+<h1>Posts</h1>
+<ul>
+{% for item in items %}
+  <li>{{ item.title }}</li>
+{% else %}
+  <li>This would display if the 'item' collection were empty</li>
+{% endfor %}
+</ul>
+```
+
+具体使用文档请见 [这里](http://jinja.pocoo.org/docs/dev/)。
+
 #### jade
 
 jade 模版使用方式请见 [这里](https://github.com/jadejs/jade)。
@@ -1096,9 +1177,6 @@ jade 模版使用方式请见 [这里](https://github.com/jadejs/jade)。
 
 swig 模版使用方式请见 [这里](http://paularmstrong.github.io/swig/)。
 
-#### nunjucks
-
-nunjucks 是一款类似于 jinja2 的模版引擎，功能异常强大，复杂项目建议使用该模版引擎。使用文档请见 [这里](http://jinja.pocoo.org/docs/dev/)。
 
 #### 扩展模版引擎
 
@@ -3119,9 +3197,33 @@ A connect or send request failed because the connected party did not properly re
 
 ## 数据校验
 
-项目里需要对用户提交过来的数据进行校验，以保证
+当在 Action 里处理用户的请求时，经常要先获取用户提交过来的数据，然后对其校验，如果校验没问题后才能进行后续的操作。当参数校验完成后，有时候还要进行权限判断，等这些都判断无误后才能进行真正的逻辑处理。如果将这些代码都放在一个 Action 里，势必让 Action 的代码非常复杂且冗长。
 
-### logic
+为了解决这个问题， ThinkJS 在控制器前面增加了一层 `Logic`，Logic 里的 Action 和控制器里的 Action 一一对应，系统在调用控制器里的 Action 之前会自动调用 Logic 里的 Action。
+
+### Logic 层
+
+Logic 目录在 `src/[module]/logic`，在通过命令 `thinkjs controller [name]` 创建 Controller 时会自动创建对应的 Logic。Logic 代码类似如下：
+
+```js
+'use strict';
+/**
+ * logic
+ * @param  {} []
+ * @return {}     []
+ */
+export default class extends think.logic.base {
+  /**
+   * index action logic
+   * @return {} []
+   */
+  indexAction(){
+   
+  }
+}
+```
+
+其中，Logic 里的 Action 和 Controller 里的 Action 一一对应。Logic 里也支持 `__before` 和 `__after` 等魔术方法。
 
 ### 数据校验配置
 
@@ -5577,6 +5679,15 @@ http.header('accept'); //获取accept
 http.header('X-NAME', 'thinkjs'); //设置header
 ```
 
+#### http.expires(time)
+
+* `time` {Number} 过期时间，单位为秒
+
+强缓存，设置 `Cache-Control` 和 `Expires` 头信息。
+
+```js
+http.header(86400); //设置过期时间为 1 天。
+```
 
 #### http.status(status)
 
@@ -5877,11 +5988,35 @@ export default class extends think.controller.base {
 
 如果文件不存在，那么值为一个空对象 `{}`。
 
-#### controller.header(name)
+#### controller.header(name, value)
 
 * `name` {String} header 名
+* `value` {String} header 值
 
-获取 header 值。
+获取或者设置 header。
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let accept = this.header('accept'); //获取 header
+    this.header('X-NAME', 'thinks'); //设置 header
+  }
+}
+```
+
+#### controller.expires(time)
+
+* `time` {Number} 过期时间，单位为秒
+
+强缓存，设置 `Cache-Control` 和 `Expires` 头信息。
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    this.expires(86400); //设置过期时间为 1 天。
+  }
+}
+```
 
 #### controller.userAgent()
 
