@@ -40,22 +40,4 @@
         </div>
     </div>
 </div>
-<%lscookie='js_jquery'%>
-<script src="/static/module/jquery/1.9.1/jquery.js" data-ls="js_jquery"></script>
-<script>
-function showselect(id){
-  var container = $('#' + id);
-  container.find("a").click(function(){
-    container.find("ul").show();
-  });
-  container.find("li").click(function(){
-    container.find("a").find('span').text($(this).text());
-    container.find("ul").hide();
-    var version = $(this).html().trim();
-    location.href = '/<%-lang%>/doc/' + version + '/index.html';
-  });
-
-};
-showselect("version");
-</script>
 <%include inc/footer.html %>

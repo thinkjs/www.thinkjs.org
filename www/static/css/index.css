@@ -2,7 +2,7 @@
 .wrap {width: 1000px;margin: 0 auto;position: relative;}
 /*icon*/
 .arrowd,.arrowl,.circle{ position:absolute;right:10px;top:15px;width:13px; height:6px; line-height:0; font-size:0; background:url(../img/icon-a.png) no-repeat 0 0; vertical-align:middle;}
-.versel:hover .arrowd{ background-position:0 -16px;}
+.versel .arrowd{ background-position:0 -16px;}
 .arrowl{ right:none; left:-11px;width:11px; height:12px; background-position:0 -58px; vertical-align:baseline;}
 .circle{ right:none; left:-9px;top:18px; width:16px; height:16px; background-position: 0 -32px;}
 /* header */
@@ -15,11 +15,13 @@
 .nav li a:hover,.nav li.current a{color: #337ab7}
 .nav li a:hover,.nav li.current a:hover{background: #fff}
 .version{ position:relative;z-index:11; display: inline-block;*display:inline;*zoom:1; vertical-align:middle;}
-a.versel{ position:relative; display:inline-block;width:65px; height:38px; line-height:38px; padding:0 10px; background-color:#fff; border:1px solid rgba(0, 0, 0, 0.15); border-radius:5px; color:#9999aa; font-size:16px;}
-a.versel:hover{ background-color:#223343; color:#fff;}
-.verlist{ display:none; position:absolute; left:0; top:42px; width:65px; border:1px solid rgba(0, 0, 0, 0.15); box-shadow:0 1px 6px rgba(0, 0, 0, 0.1);border-radius:2px;}
+a.versel{ position:relative; display:inline-block;width:65px; height:38px; line-height:38px; padding:0 10px; background-color:#fff; border:1px solid rgba(0, 0, 0, 0.15); border-radius:5px; color:#9999aa; font-size:16px;background-color:#23527c; color:#fff;}
+
+.version:hover .verlist{display: block;}
+.verlist{ display:none; position:absolute; left:0; top:37px; width:65px; border:1px solid rgba(0, 0, 0, 0.15); box-shadow:0 1px 6px rgba(0, 0, 0, 0.1);border-radius:2px;}
 .verlist li{ line-height:38px; color:#223343; margin-top:-1px; padding:0 10px; border-top:1px solid #ddd; background-color:#fff; font-size:14px;cursor: pointer;}
 .verlist li:hover{ background-color:#f5f5f5}
+.verlist li a{display: block;}
 /* footer */
 .footer{overflow:hidden;background-color:#223343;}
 .ft-help{ overflow:hidden;*zoom:1;padding:50px 0 30px;}
