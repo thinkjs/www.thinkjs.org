@@ -23,6 +23,7 @@ return array (
 	'MOD_OPTI_IMG' => false,  //优化图片
 	'MOD_XSS_AUTO_FIXED' => false,  //模版型XSS自动修复
 	'MOD_IMG_DATAURI' => true,  //CSS中的图片地址转换为dataURI
+	'IMG_DATAURI_MAX_SIZE' => 5000,
 	'IMG_DATAURI_SUPPORT_IE' => false,
 	'MOD_STATIC_TO_CDN' => true,  //静态资源上线到CDN
 	'MOD_JS_TPL_REPLACE' => false,  //前端模版替换
