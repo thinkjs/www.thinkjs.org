@@ -515,6 +515,26 @@ export default class think.base {
 
 `注：` ThinkJS 里所有的类都会继承 `think.base` 基类。
 
+### 使用 Babel 编译
+
+虽然现在的 Node.js 版本已经支持了很多 ES6 的特性，但这些特性现在还只是实现了，V8 里还没有对这些特性进行优化。如：Generator Function 等功能。
+
+所以建议使用 Babel 来编译，一方面可以使用 ES6 和 ES7 几乎所有的特性，另一方面编译后的性能也比默认支持的要高。
+
+### 使用 async、await 替代 Generator Function
+
+Generator Function 是 ES6 里提出一种解决异步执行的方法，它只是一个过渡的方案，ES7 里便提出了 async 和 await 来代替它。
+
+相对 async 和 await，Generator Function 有以下的缺陷：
+
+1、Generator Function 调用后返回一个迭代器，需要借助第三方模块来执行。如：`co`
+
+2、Generator Function 无法和 Arrows Function 一起使用。
+
+3、Generator Function 调用另一个 Generator Function 时，需要使用 `yield *`，带来不便。
+
+4、目前 V8 对 Generator Function 还没有做优化，最好也通过 Babel 来编译。
+
 # 进阶应用
 
 ## 模块
@@ -3227,9 +3247,139 @@ export default class extends think.logic.base {
 
 ### 数据校验配置
 
+数据校验的配置如下：
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      doc: "string|default:index",
+      version: "string|in:1.2,2.0|default:2.0"
+    }
+  }
+}
+```
+
+#### 配置格式
+
+配置格式为 `字段名` -> `配置`，每个字段的配置支持多个校验类型，校验类型之间用 `|` 隔开，校验类型和参数之间用 `:` 隔开，参数之间用 `,` 隔开来支持多个参数。
+
+#### 参数格式
+
+校验类型后面可以接参数，除了支持用逗号隔开的简单参数外，还可以支持 JSON 格式的复杂参数。如：
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      field1: "array|default:[1,2]", //参数为数组
+      field2: 'object|default:{\"name\":\"thinkjs\"}' //参数为对象
+    }
+  }
+}
+```
+
+#### 支持的数据类型
+
+支持的数据类型有：`boolean`、`string`、`int`、`float`、`array`、`object`，默认为 `string`。
+
+#### 默认值
+
+使用 `default:value` 来定义字段的默认值，如果当前字段值为空，会将默认值覆盖过去，后续获取到的值为该默认值。
+
+#### 获取数据的方式
+
+默认根据当前请求的类型来获取字段对应的值，如果当前请求类型是 GET，那么会通过 `this.get('version')` 来获取 `version` 字段的值。如果请求类型是 POST，那么会通过 `this.post` 来获取字段的值。
+
+但有时候在 POST 类型下，可能会获取上传的文件或者获取 URL 上的参数，这时候就需要指定获取数据的方式了。支持的获取数据方式为 `get`，`post` 和 `file`。
+
+```js
+export default class extends think.logic.base {
+  /**
+   * 保存数据，POST 请求
+   * @return {} []
+   */
+  saveAction(){
+    let rules = {
+      name: "required",
+      image: "object|file|required",
+      version: "string|get|in:1.2,2.0|default:2.0"
+    }
+  }
+}
+```
+
+上面示例指定了字段 `name` 通过 `post` 方法来获取值，字段 `image` 通过 `file` 方式来获取值，字段 `version` 通过 `get` 方式来获取值。
+
+#### 错误信息
+
+上面的配置只是指定了具体的校验规则，并没有指定校验出错后给出的错误信息。错误信息支持国际化，需要在配置文件 `src/common/config/locale/[lang].js` 中定义。如：
+
+```js
+// src/common/config/locale/en.js
+export default {
+  validate_required: '{name} can not be blank',
+  validate_contains: '{name} need contains {args}',
+}
+```
+
+其中 key 为 `validate_` + `校验类型名称`，值里面支持 `{name}` 和 `{args}`  2个参数，分别代表字段名称和传递的参数。
+
+如果想定义个特定字段某个错误类型的具体信息，可以通过在后面加上字段名。如：
+
+```js
+// src/common/config/locale/en.js
+export default {
+  validate_required: '{name} can not be blank',
+  validate_required_email: 'email can not be blank', //指定字段 email 的 required 错误信息
+}
+```
+
 ### 数据校验方法
 
-### 校验错误信息
+配置好校验规则后，可以通过 `this.validate` 方法进行校验。如：
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      doc: "string|default:index",
+      version: "string|in:1.2,2.0|default:2.0"
+    }
+    let flag = this.validate(rules);
+    if(!flag){
+      return this.fail('validate error', this.errors());
+    }
+  }
+}
+```
+
+如果返回值为 `false`，那么可以通过 `this.errors` 方法获取详细的错误信息。拿到错误信息后，可以通过 `this.fail` 方法把错误信息以 JSON 格式输出，也可以通过 `this.display` 方法输出一个页面。
+
+错误信息通过 `errors` 字段赋值到模版里，模版里通过下面的方式显示错误信息（以 ejs 模版为例）：
+
+```html
+<%for(var field in errors){%>
+  <%-field%>:<%errors[field]%>
+<%}%>
+```
+
+** 自动校验 **
+
+一般情况下，都是校验有问题后，输出一个 JSON 信息。如果每次都要在 Logic 的 Action 手动调用 `this.validate` 进行校验，势必比较麻烦。可以通过将校验规则赋值给 `this.rules` 属性进行自动校验。如：
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    this.rules = {
+      doc: "string|default:index",
+      version: "string|in:1.2,2.0|default:2.0"
+    }
+  }
+}
+```
+
+将校验规则赋值给 `this.rules` 属性后，会在这个 Action 执行完成后自动校验，如果有错误则直接输出 JSON 格式的错误信息。自动校验是通过魔术方法 `__after` 来完成的。
 
 ### 支持的校验类型
 
@@ -3752,6 +3902,34 @@ export default class extends think.logic.base {
 值为对象。
 
 ### 扩展校验类型
+
+如果默认支持的校验类型不能满足需求，可以通过 `think.validate` 方法对校验类型进行扩展。如：
+
+```js
+// src/common/bootstrap/validate.js
+think.validate('validate_name', (value, ...args) => {
+  //需要返回 true 或者 false
+  //true 表示校验成功，false 表示校验失败
+})
+```
+
+上面注册了一个名为 `validate_name` 的校验类型，这样在 Logic 里就可以直接使用该校验类型了。
+
+** 参数解析 **
+
+如果要解析后面的 `args`，如：该字段值跟其他字段值进行比较，这时拿到的参数是其他字段名称，但比较的时候肯定需要拿到这个字段值，所以需要将字段名称解析为对应的字段值。
+
+可以通过注册一个解析参数函数来完成。如：上面的校验类型名称为 `validate_name`，那么对应的解析参数的名称必须为 `_validate_name`，即：`_` + `校验类型`。
+
+```js
+think.validate('_validate_name', (args, data) => {
+  let arg0 = args[0];
+  args[0] = data[arg0].value; //将第一个参数字段名称解析为对应的参数值
+  return args;
+})
+```
+
+
 
 ## 国际化
 
