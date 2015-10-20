@@ -266,12 +266,12 @@ export default class extends think.controller.base {
 }
 ```
 
-#### controller.getLang(useCookie)
+#### controller.lang(lang, asViewPath)
 
-* `userCookie` {Boolean} 是否优先从 cookie 里获取
-* `return` {String}
+* `lang` {String} 要设置的语言
+* `asViewPath` {Boolean} 是否在模版目录添加一层语言目录
 
-从 cookie 和 header 中获取 language。
+读取或者设置语言。
 
 #### controller.locale(key)
 

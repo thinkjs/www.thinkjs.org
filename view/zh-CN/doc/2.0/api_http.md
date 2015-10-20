@@ -230,13 +230,27 @@ http.status(400); //设置状态码为400
 
 获取用户的 ip 。如果使用了代理，获取的值可能不准。
 
-#### http.getLang()
+#### http.lang(lang, asViewPath)
 
-从 headers 中获取语言。
+* `lang` {String} 要设置的语言
+* `asViewPath` {Boolean} 是否添加一层模版语言目录
 
-#### http.lang(lang)
+获取或者设置国际化的语言，可以支持模版路径要多一层语言的目录。
 
-获取或者设置国际化的语言，设置后模版路径要多一层语言的目录。
+** 获取语言 **
+
+```js
+let lang = http.lang();
+```
+
+获取语言的循序为 `http._lang` -> `从 cookie 中获取` -> `从 header 中获取`，如果需要从 url 中解析语言，可以获取后通过 `http.lang(lang)` 方法设置到属性 `http._lang` 中。
+
+** 设置语言 **
+
+```js
+let lang = getFromUrl();
+http.lang(lang, true); //设置语言，并指定模版路径中添加一层语言目录
+```
 
 #### http.theme(theme)
 

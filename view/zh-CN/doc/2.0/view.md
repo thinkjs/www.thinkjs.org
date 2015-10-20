@@ -6,7 +6,7 @@
 
 视图文件默认的规则为 `模块/控制器_操作.html`。
 
-假如 url `home/article/detail` 解析后的模块是 `home`，控制器是 `article`，操作是 `detail`，那么对应的视图文件为 `home/article_detail.html`。
+假如 URL `home/article/detail` 解析后的模块是 `home`，控制器是 `article`，操作是 `detail`，那么对应的视图文件为 `home/article_detail.html`。
 
 ### 视图配置
 
