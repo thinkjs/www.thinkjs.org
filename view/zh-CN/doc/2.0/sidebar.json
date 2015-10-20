@@ -39,7 +39,7 @@
       "数据校验": "validation",
       "国际化": "i18n",
       "路径常量": "path_cost",
-      "Rest API": "rest_api",
+      "REST API": "rest_api",
       "线上部署": "deploy",
       "推荐模块": "recommend_modules",
       "更多功能": "more"

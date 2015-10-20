@@ -32,7 +32,7 @@ export default {
 };
 ```
 
-可以在文件 `src/common/config/cookie.js` 中进行修改，如：
+默认 cookie 是随着浏览器进程关闭而失效，可以在配置文件 `src/common/config/cookie.js` 中进行修改。如：
 
 ```js
 export default {
