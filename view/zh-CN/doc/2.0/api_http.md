@@ -268,6 +268,33 @@ http.cookie('think_test'); //获取名为 think_test 的 cookie
 http.cookie('name', 'value'); //设置 cookie，如果头信息已经发送则设置无效
 ```
 
+
+#### http.session(name, value)
+
+* `name` {String} session 名
+* `value` {Mixed} session 值
+* `return` {Promise}
+
+读取、设置和清除 session。
+
+** 读取 Session **
+
+```js
+let value = yield http.session('userInfo');
+```
+
+** 设置 Session **
+
+```js
+yield http.session('userInfo', data);
+```
+
+** 清除 Session **
+
+```js
+yield http.session();
+```
+
 #### http.redirect(url, status)
 
 * `url` {String} 要跳转的 url

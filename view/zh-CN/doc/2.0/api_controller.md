@@ -246,6 +246,8 @@ export default class extends think.controller.base {
 
 读取、设置和清除 session。
 
+** 读取 Session **
+
 ```js
 export default class extends think.controller.base {
   * indexAction(){
@@ -255,13 +257,24 @@ export default class extends think.controller.base {
 }
 ```
 
+** 设置 Session **
+
 ```js
 export default class extends think.controller.base {
   * indexAction(){
     //设置 session
-    yield think.session('userInfo', data);
+    yield this.session('userInfo', data);
+  }
+}
+```
+
+** 清除 Session **
+
+```js
+export default class extends think.controller.base {
+  * indexAction(){
     //清除当前用户的 session
-    yield think.session();
+    yield this.session();
   }
 }
 ```

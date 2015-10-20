@@ -19,15 +19,12 @@
       "MongoDb": "model_mongodb",
       "SQLite": "model_sqlite"
     },
-    "适配器": {
+    "Adapter": {
       "介绍": "adapter_intro",
       "Cache": "adapter_cache",
       "Session": "adapter_session",
       "WebSocket": "adapter_websocket",
-      "Db": "adapter_db",
-      "Store": "adapter_store",
-      "Template": "adapter_template",
-      "Socket": "adapter_socket"
+      "Template": "adapter_template"
     },
     "扩展功能": {
       "ThinkJS命令": "thinkjs_command",
@@ -54,7 +51,6 @@
       "controller.rest": "api_controller_rest",
       "model": "api_model",
       "model.mongo": "api_model_mongo",
-      "middleware": "api_middleware",
-      "adapter": "api_adapter"
+      "middleware": "api_middleware"
     }
   }

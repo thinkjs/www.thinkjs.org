@@ -72,3 +72,5 @@ Generator Function 是 ES6 里提出一种解决异步执行的方法，它只�
 3、Generator Function 调用另一个 Generator Function 时，需要使用 `yield *`，带来不便。
 
 4、目前 V8 对 Generator Function 还没有做优化，最好也通过 Babel 来编译。
+
+所以完全可以使用 ES7 里的 async 和 await 来代替 Generator Function，然后使用 Babel 编译来运行。
