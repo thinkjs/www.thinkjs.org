@@ -15,7 +15,7 @@
     "模型": {
       "介绍": "model_intro",
       "事务": "model_transaction",
-      "关系模型": "model_relation",
+      "关联模型": "model_relation",
       "MongoDb": "model_mongodb",
       "SQLite": "model_sqlite"
     },
