@@ -82,7 +82,7 @@ node www/prodution.js home/index/index;
 
 ### 使用 node-crontab 模块执行定时任务
 
-除了使用 crontab 和命令行执行联合执行定时任务外，也可以使用 `node-crontab` 模块来执行定时任务。
+除了使用 crontab 和命令行执行联合执行定时任务外，也可以使用 `node-crontab` 模块来执行定时任务。如：
 
 ```js
 import crontab from 'node-crontab';
@@ -91,3 +91,5 @@ let jobId = crontab.scheduleJob('0 */1 * * *', () => {
   
 });
 ```
+
+将上面代码文件存放在 `src/common/bootstrap` 目录下，这样可以在服务启动时自动执行。
