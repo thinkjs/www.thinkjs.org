@@ -45,6 +45,22 @@ node www/production.js url=home/index/index&method=post
 node www/production.js {"url":"/index/index","ip":"127.0.0.1","method":"POST","headers":{"xxx":"yyyy"}}
 ```
 
+** 禁止 URL 访问 **
+
+默认情况下，命令行执行的 Action 通过 URL 也可以访问到。如果禁止 URL 访问到该 Action，可以通过 `think.cli` 来判断。如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    //禁止 URL 访问
+    if(!think.cli){
+      this.fail('only invoked in cli mode');
+    }
+    ...
+  }
+}
+```
+
 ### 执行脚本
 
 可以创建一个简单的执行脚本来调用命令行执行，如：
