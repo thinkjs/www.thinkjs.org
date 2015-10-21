@@ -52,7 +52,7 @@ node www/production.js {"url":"/index/index","ip":"127.0.0.1","method":"POST","h
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //禁止 URL 访问
+    //禁止 URL 访问该 Action
     if(!think.cli){
       this.fail('only invoked in cli mode');
     }
@@ -82,7 +82,7 @@ node www/prodution.js home/index/index;
 
 ### 使用 node-crontab 模块执行定时任务
 
-除了使用 crontab 和命令行执行联合执行定时任务外，也可以使用 `node-crontab` 模块来执行定时任务。如：
+除了使用 crontab 和命令行联合执行定时任务外，也可以使用 `node-crontab` 模块执行定时任务。如：
 
 ```js
 import crontab from 'node-crontab';
