@@ -34,7 +34,7 @@
                   <h2>搜索结果(<%-searchResult.length%>)</h2>
                   <%searchResult.forEach(function(item){%>
                   <h4><a target="_blank" href="/<%-lang%>/doc/<%-version%>/<%-item.filename.replace('.md', '')%>.html"><%-item.title%></a></h4>
-                  <%item.text.forEach(function(textItem){%>
+                  <%item.text.slice(0, 10).forEach(function(textItem){%>
                   <p><%-textItem%></p>
                   <%})%>
                   <%})%>
