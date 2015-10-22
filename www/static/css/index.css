@@ -110,6 +110,16 @@ i.icon-fet8{ background-position:-70px -210px;}
 .doc pre {border: none;padding: 10px 0;border-left: 1px solid #337ab7;padding-left: 10px;border-radius: 0;font-size: 14px;}
 .doc pre code{padding: 0 !important;}
 
+.doc h3, 
+.doc h4{position: relative;}
+.doc h3 a,
+.doc h4 a{position: absolute;left: -15px;width: 15px;display: none;color: #333;opacity: 0.5;}
+.doc h3 a::before,
+.doc h4 a::before{content: '#'}
+.doc h3:hover a,
+.doc h4:hover a{display: block;}
+
+
 .demo-list{font-size: 16px}
 .demo-list ul{margin-left: 20px}
 .demo-list ul li{list-style-type: disc;}

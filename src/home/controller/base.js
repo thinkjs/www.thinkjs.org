@@ -22,19 +22,35 @@ export default class extends think.controller.base {
     });
   }
   /**
+   * generate toc name
+   * @param  {String} name []
+   * @return {String}      []
+   */
+  generateTocName(name){
+    name = name.trim().replace(/\s+/g, '').toLowerCase();
+    if(/^\w+$/.test(name)){
+      return name;
+    }
+    return `toc-${think.md5(name).slice(0, 3)}`;
+  }
+  /**
    * markdown to html
    * @return {} []
    */
   markdownToHtml(filePath){
     let content = fs.readFileSync(filePath, 'utf8');
 
-    let tocContent = marked(markToc(content));
+    let tocContent = marked(markToc(content)).replace(/<a\s+href="#([^\"]+)">([^<>]+)<\/a>/g, (a, b, c) => {
+      return `<a href="#${this.generateTocName(c)}">${c}</a>`;
+    });
+
     let markedContent = marked(content).replace(/<h(\d)[^<>]*>(.*?)<\/h\1>/g, (a, b, c) => {
-      let id = uslug(c, {allowedChars: '-'});
-      return `<h${b} id="${id}">${c}</h${b}>`;
+      if(b == 2){
+        return `<h${b} id="${this.generateTocName(c)}">${c}</h${b}>`;
+      }
+      return `<h${b} id="${this.generateTocName(c)}"><a href="#${this.generateTocName(c)}"></a>${c}</h${b}>`;
     });
     markedContent = markedContent.replace(/<h(\d)[^<>]*>([^<>]+)<\/h\1>/, (a, b, c) => {
-      //this.assign('title', `${c}${this.locale("title-doc-suffix")}`);
       return `${a}<div class="toc">${tocContent}</div>`;
     });
 

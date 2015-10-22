@@ -16,7 +16,8 @@
       "介绍": "model_intro",
       "事务": "model_transaction",
       "关联模型": "model_relation",
-      "MongoDb": "model_mongodb",
+      "Mysql": "model_mysql",
+      "MongoDB": "model_mongodb",
       "SQLite": "model_sqlite"
     },
     "Adapter": {

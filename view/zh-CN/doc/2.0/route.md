@@ -48,11 +48,24 @@ export default {
 
 ### 路由识别
 
-路由识别默认根据 `模块/控制器/操作/参数1/参数1值/参数2/参数2值` 来识别过滤后的 pathname，如：pathname 为 `admin/group/detail`，那么识别后的结果为：module 为 `admin`，controller 为 `group`，action 为 `detail`。
+#### 路由解析
 
-如果项目里并没有 `admin` 这个模块或者这个模块被禁用了，那么识别后的结果为：module 为默认值 `home`，controller 为 `admin`, action 为 `group`，同时含有一个参数名为 `detail` 的请求参数，但该参数值为空。
+路由识别默认根据 `模块/控制器/操作/参数1/参数1值/参数2/参数2值` 来识别过滤后的 pathname，如：pathname 为 `admin/group/detail`，那么识别后的结果为：
 
-`注： 路由识别后，module 和 controller 值会自动转为小写，但 action 值会保持原样。`
+* module 为 `admin`
+* controller 为 `group`
+* action 为 `detail`，对应的方法名为 `detailAction`
+
+如果项目里并没有 `admin` 这个模块或者这个模块被禁用了，那么识别后的结果为：
+
+* module 为默认模块 `home`
+* controller 为 `admin`
+* action 为 `group`，对应的方法名为 `groupAction`
+* 参数为 `{detail: ''}`
+
+#### 大小写转化
+
+路由识别后，`module`、`controller` 和 `Action` 值都会自动转为小写。如果 Action 值里有 `_`，会作一些转化，如：假设识别后的 Controller 值为 `index`，Action 值为 `user_add`，那么对应的 Action 方法名为 `userAddAction`，但模版名还是 `index_user_add.html`。
 
 ### 路由默认值
 

@@ -6,35 +6,20 @@
 
 ### 创建模型
 
-模型定义都是放在 `model/` 文件夹中，如：`src/home/model/user.js`，表示在 `home` 模块下创建了对应 `user` 数据表的模型。
+可以在项目目录下通过命令 `thinkjs model [name]` 来创建模型：
 
-** ES6 语法 **
-
-```js
-export default class extends think.model.base {
-  init(...args){
-    super.init(...args);
-    ...
-  }
-  getList(){
-    ...
-  }
-}
+```sh
+thinkjs model user;
 ```
 
-** 动态创建类的方式 **
+执行完成后，会创建文件 `src/common/model/user.js`。
 
-```js
-module.exports = think.model({
-  init: function(){
-    this.super('init', arguments);
-    ...
-  },
-  getList: function(){
-    ...
-  }
-})
+默认情况下模型文件会创建在 `common` 模块下，如果想创建在其他的模块下，创建时需要指定模块名：
+
+```sh
+thinkjs model home/user
 ```
+
 
 ### 模型配置
 
@@ -299,7 +284,52 @@ export default class extends think.controller.base {
 }
 ```
 
+### 查询缓存
+
+为了性能优化，项目中经常要对一些从数据库中查询的数据进行缓存。如果手工将查询的数据进行缓存，势必比较麻烦，模型中直接提供了 `cache` 方法来设置查询缓存。如：
+
+```js
+export default class extends think.model.base {
+  getList(){
+    //设定缓存 key 和缓存时间
+    return this.cache('get_list', 3600).where({id: {'>': 100}}).select();
+  }
+}
+```
+
+上面的代码为对查询结果进行缓存，如果已经有了缓存，直接从缓存里读取，没有的话才从数据库里查询。缓存保存的 key 为 `get_list`，缓存时间为一个小时。
+
+也可以不指定缓存 key，这样会自动根据 SQL 语句生成一个缓存 key。如：
+
+```js
+export default class extends think.model.base {
+  getList(){
+    //只设定缓存时间
+    return this.cache(3600).where({id: {'>': 100}}).select();
+  }
+}
+```
+
+
+** 缓存配置 **
+
+缓存配置为模型配置中的 `cache` 字段，如：
+
+```js
+export default {
+  cache: {
+    on: true,
+    type: '', 
+    timeout: 3600
+  }
+}
+```
+
+* `on` 数据库缓存配置的总开关，关闭后即使程序中调用 `cache` 方法也无效。
+* `type` 缓存配置类型，默认为内存，支持的缓存类型请见 [Adapter -> Cache](./adapter_cache.html)。
+* `timeout` 默认缓存时间。
 
 ------
 
-模型中更多的操作方式请见相关的 [API](./api_model.html)。
+模型中更多的操作方式请见相关的 [API -> model](./api_model.html)。
+

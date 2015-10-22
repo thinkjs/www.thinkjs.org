@@ -9,7 +9,7 @@
 为了避免这种情况的发生，文件路径尽量都使用小写字符。并且在服务启动时，ThinkJS 会检测项目下文件路径，如果有大写字母则会告警，如：
 
 ```
-[2015-10-13 10:36:59] [WARNING] filepath `admin/controller/apiBase.js` has uppercase chars.
+[2015-10-13 10:36:59] [WARNING] filepath `admin/controller/apiBase.js` has uppercases.
 ```
 
 ### 缩进使用 2 个空格
