@@ -186,11 +186,11 @@ export default class extends think.controller.base {
 
 聊天示例代码请见：<https://github.com/75team/thinkjs2-demos/tree/master/websocket-socket.io>。
 
-### sockjs
+### SockJS
 
 #### 配置
 
-使用 sockjs 库，需要将配置里的 type 修改为 `sockjs`，如：
+使用 SockJS 库，需要将配置里的 type 修改为 `sockjs`，如：
 
 ```js
 export default {
@@ -200,11 +200,11 @@ export default {
 
 #### sockjs 对象
 
-Action 里可以通过 `this.http.sockjs` 拿到 sockjs 对象，该对象为 sockjs 类的一个实例。
+Action 里可以通过 `this.http.sockjs` 拿到 sockjs 对象，该对象为 SockJS 类的一个实例。
 
 #### 设置 path
 
-设置被 sockjs 处理的路径，默认为 `/sockjs`，可以通过下面的配置修改：
+设置被 SockJS 处理的路径，默认为 `/sockjs`，可以通过下面的配置修改：
 
 ```js
 export default {
@@ -212,11 +212,11 @@ export default {
 }
 ```
 
-#### sockjs client
+#### SockJS client
 
-浏览器端需要引入 sockjs client，下载地址为：<https://github.com/sockjs/sockjs-client>。
+浏览器端需要引入 SockJS client，下载地址为：<https://github.com/sockjs/sockjs-client>。
 
-sockjs client 并没有做什么封装，所以需要额外做一层包装，变成事件的方式，以便跟包装后的服务端对应。包装方式参考如下：
+SockJS client 并没有做什么封装，所以需要额外做一层包装，变成事件的方式，以便跟包装后的服务端对应。包装方式参考如下：
 
 ```js
 SockJS.prototype.emit = function(event, data){
@@ -258,7 +258,7 @@ socket.emit('new message', 'xxx');
 
 #### 校验用户登录
 
-sockjs 为了安全，在建立连接时不提供相关的 cookie，所以无法通过 cookie 来校验用户是否登录。可以先在页面里输出一个 token，建立连接时将该 token 发送用来校验是否已经登录。具体请见：<https://github.com/sockjs/sockjs-node#authorisation>。
+SockJS 为了安全，在建立连接时不提供相关的 cookie，所以无法通过 cookie 来校验用户是否登录。可以先在页面里输出一个 token，建立连接时将该 token 发送用来校验是否已经登录。具体请见：<https://github.com/sockjs/sockjs-node#authorisation>。
 
 #### 聊天代码示例
 

@@ -4,5 +4,6 @@ export default {
   'title-doc-suffix': ' - ThinkJS %s 文档',
   'title-demo': 'demo - ThinkJS官网',
   'download-pdf': '下载 PDF 格式文档',
-  'view-on-single-page': '单页显示所有文档'
+  'view-on-single-page': '单页显示所有文档',
+  'all-doc': '全部文档'
 }

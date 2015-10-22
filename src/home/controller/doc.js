@@ -78,11 +78,16 @@ export default class extends base {
       markedContent = this.getMarkedContent(filePath);
     }
 
-    let titleReg = /<h2(?:[^<>]*)>([^<>]+)<\/h2>/;
-    let match = markedContent.match(titleReg);
-    if(match){
-      this.assign('title', `${match[1]}${this.locale("title-doc-suffix", version)}`);
+    if(doc === 'single'){
+      this.assign('title', `${this.locale("all-doc")}${this.locale("title-doc-suffix", version)}`);
+    }else{
+      let titleReg = /<h2(?:[^<>]*)>([^<>]+)<\/h2>/;
+      let match = markedContent.match(titleReg);
+      if(match){
+        this.assign('title', `${match[1]}${this.locale("title-doc-suffix", version)}`);
+      }
     }
+    
 
     this.assign('markedContent', markedContent);
     this.assign('doc', doc);
@@ -92,7 +97,7 @@ export default class extends base {
    * @return {} []
    */
   async indexAction(){
-    this.expires(86400);
+    //this.expires(86400);
     
     this.assign('currentNav', 'doc');
     this.assign('hasBootstrap', true);
