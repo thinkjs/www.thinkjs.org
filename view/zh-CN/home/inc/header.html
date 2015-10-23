@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <title><%-title%></title>
 <meta name="renderer" content="webkit">
+<meta name="format-detection" content="telephone=no">
+<meta name="referrer" content="always">
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 <meta name="keywords" content="ThinkJS, Node.js, io.js, MVC, Restful, Generator Function, ES6, ES7, Promise">
 <meta name="description" content="ThinkJS 是一款使用 ES6/7 特性全新开发的 Node.js MVC框架。该框架使用ES7中async和await，或者ES6中的Generator Function彻底解决了Node.js中异步嵌套的问题。">
 <%lscookie='header'%>
@@ -21,10 +24,10 @@
         <div class="headr">
             <ul class="nav">
                 <li><a href="/<%-lang%>/doc.html">Documentation</a></li>
-                <li><a href="https://github.com/75team/firekylin" target="_blank">FireKylin</a></li>
+                <li class="firekylin"><a href="https://github.com/75team/firekylin" target="_blank">FireKylin</a></li>
                 <li <%if(currentNav === 'demo'){%>class="current"<%}%>><a href="/<%-lang%>/demo.html">Demo</a></li>
                 <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/<%-lang%>/changelog.html">Changelog</a></li>
-                <li><a href="http://www.w3ctech.com/thinkjs" target="_blank">Discuss</a></li>          
+                <li class="discuss"><a href="http://www.w3ctech.com/thinkjs" target="_blank">Discuss</a></li>          
             </ul>
             <%if(hasVersion){%>
             <div class="version" id="version">

@@ -32,7 +32,7 @@ a.versel{ position:relative; display:inline-block;width:65px; height:38px; line-
 .ft-copy{ padding:20px 0;border-top:1px solid #345; font-size:14px; color:#556677; text-align:center;}
 /*banarea*/
 .banarea{ height:460px; background:url(../img/banbg.jpg) no-repeat center bottom; text-align:center;}
-.banimg{ margin:90px 0 50px;}
+.banimg{ margin:90px 0 50px;width: 780px;height: 115px;}
 .btn-link{ display:inline-block; width:260px; height:48px; line-height:48px; border-radius:5px; background:#008CF9; font-size:24px; color:#fff; text-align:center;}
 .banbot{ height:58px; line-height:58px; background:#223343;}
 .banbot .wrap{ position:relative;}
@@ -129,3 +129,52 @@ i.icon-fet8{ background-position:-70px -210px;}
 .r-fixed .view-single{margin-top:5px;display:block;width: 48px;height: 48px;background:#B6BCC1 url(../img/view-single.png) no-repeat center center;border-radius: 3px;}
 .r-fixed .pdf:hover,
 .r-fixed .view-single:hover{background-color: #23527c}
+
+
+@media screen and (max-width: 640px){
+  .header{height:auto;}
+  .wrap{width: 100%;}
+  .logo{margin: 10px auto;float: none}
+  .headr{float:none;border-top: 1px solid #efefef;}
+  .nav li.firekylin,
+  .nav li.discuss{display: none;}
+  .nav{;display: block;}
+  .banimg{width: 90%;height: auto;margin: 70px 0 50px 0;}
+  .banarea{height: auto;padding-bottom: 20px;}
+  .btn-link{width: 180px;height: 32px;font-size: 18px;line-height: 32px;}
+  .share{display: none;}
+  .banbot{display: none;}
+  .tit,.tit2{font-size: 28px;}
+  .flinfo{padding: 35px 0;}
+  .flfet{padding: 35px 0}
+  .flinfo pre{width: 100%;font-size: 12px;background: none;padding-left: 0;padding-top: 0;height: auto}
+  .flinfo pre code{word-wrap:break-word;width: 92%;margin: auto;border-left: 1px solid #337ab7}
+  .fluser{padding: 40px 0 0px 0;}
+  .fetlist li{float: none;width: 90%;padding-left: 5%;height: auto;}
+  .userlist li{float: none;width: 320px;margin:auto;margin-bottom: 40px;}
+  .ft-help dl{width: 40%;margin: 0 5%;}
+  .tith2{font-size: 28px;}
+  .changelog{width: 92%;margin: auto}
+  .daily li{padding-left: 15px;}
+  .dailycont{padding: 8px;}
+  .dailycont strong{font-size: 20px}
+  .demo{width: 92%;margin: auto}
+  .version{display: none;}
+  .lbox{float: none;width: 80%;margin: auto}
+  .rbox{float: none;width: 92%;padding-left: 0;margin: auto}
+  .search{display: none;}
+  .doc-address{display: none;}
+  .doc-sidebar{display: none;}
+  .doc{margin-top: 0px;font-size: 14px;}
+  .doc pre{font-size: 12px;}
+  .doc-content{padding: 0}
+}
+
+@media screen and (max-width: 320px){
+  .nav li a{font-size: 14px;}
+  .tit, .tit2{font-size: 24px}
+  .ft-help dt{font-size: 14px}
+  h2, .h2{font-size: 24px}
+  h3, .h3{font-size: 22px;}
+  .tith2{font-size: 24px;margin-top: 0;font-weight: normal;}
+}
