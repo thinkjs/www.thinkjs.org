@@ -90,7 +90,7 @@ module.exports = think.controller(Base, {
 
 ### 使用 async 和 await
 
-借助 Babel 编译，还是在控制器里使用 async 和 await。
+借助 Babel 编译，还可以在控制器里使用 async 和 await。
 
 ** ES6 方式 **
 

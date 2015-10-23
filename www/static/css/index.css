@@ -139,12 +139,12 @@ i.icon-fet8{ background-position:-70px -210px;}
   .nav li.firekylin,
   .nav li.discuss{display: none;}
   .nav{;display: block;}
-  .banimg{width: 90%;height: auto;margin: 70px 0 50px 0;}
-  .banarea{height: auto;padding-bottom: 20px;}
-  .btn-link{width: 180px;height: 32px;font-size: 18px;line-height: 32px;}
+  .banimg{width: 90%;height: auto;margin: 0}
+  .banarea{height: auto;padding: 30px 0;background-image: url(../img/banbg_640.jpg);}
+  .btn-link{width: 180px;height: 32px;font-size: 16px;line-height: 32px;margin-top: 20px}
   .share{display: none;}
   .banbot{display: none;}
-  .tit,.tit2{font-size: 28px;}
+  .tit,.tit2{font-size: 24px;}
   .flinfo{padding: 35px 0;}
   .flfet{padding: 35px 0}
   .flinfo pre{width: 100%;font-size: 12px;background: none;padding-left: 0;padding-top: 0;height: auto}
@@ -161,7 +161,7 @@ i.icon-fet8{ background-position:-70px -210px;}
   .demo{width: 92%;margin: auto}
   .version{display: none;}
   .lbox{float: none;width: 80%;margin: auto}
-  .rbox{float: none;width: 92%;padding-left: 0;margin: auto}
+  .rbox{float: none;width: 92%;padding-left: 0;margin: auto;border-left: none}
   .search{display: none;}
   .doc-address{display: none;}
   .doc-sidebar{display: none;}
