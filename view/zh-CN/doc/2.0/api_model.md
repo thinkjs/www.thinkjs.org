@@ -96,6 +96,12 @@ export default class extends think.model.base {
 }
 ```
 
+#### model.getTablePrefix()
+
+* `return` {string}
+
+获取表名前缀。
+
 #### model.getConfigKey()
 
 * `return` {String}
@@ -106,7 +112,7 @@ export default class extends think.model.base {
 
 * `return` {Object}
 
-获取 db 实例，如果已经存在则直接返回。
+根据当前的配置获取 db 实例，如果已经存在则直接返回。
 
 #### model.getModelName()
 
@@ -216,7 +222,15 @@ export default class extends think.model.base {
 
 设置 where 查询条件。
 
+
+
 #### model.field(field)
+
+设置要查询的字段。
+
+```js
+
+```
 
 #### model.fieldReverse(field)
 

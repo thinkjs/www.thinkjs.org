@@ -27,8 +27,8 @@ export default class extends think.controller.base {
    * @return {String}      []
    */
   generateTocName(name){
-    name = name.trim().replace(/\s+/g, '').toLowerCase();
-    if(/^\w+$/.test(name)){
+    name = name.trim().replace(/\s+/g, '').replace(/\)/g, '').replace(/[\(\,]/g, '-').toLowerCase();
+    if(/^[\w\-]+$/.test(name)){
       return name;
     }
     return `toc-${think.md5(name).slice(0, 3)}`;

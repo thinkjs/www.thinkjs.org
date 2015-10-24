@@ -12,6 +12,21 @@ export default {
 }
 ```
 
+如果要在连接 MongoDB 服务的时候添加额外的参数，可以通过在 `options` 里追加，如：
+
+```js
+export default {
+  type: 'mongo',
+  options: {
+    authSource: 'admin'
+  }
+}
+```
+
+上面的配置后，连接 MongoDB 的 URL 变成类似于 `mongodb://127.0.0.1:27017/?authSource=admin`。
+
+更多额外的配置请见 <http://mongodb.github.io/node-mongodb-native/2.0/reference/connecting/connection-settings/>。
+
 ### 创建模型
 
 可以通过命令 `thinkjs model [name] --mongo` 来创建模型，如：
@@ -54,4 +69,87 @@ CURD 操作和 Mysql 中接口相同，具体请见 [模型 -> 介绍](./model_i
 
 ### 创建索引
 
+mongo 模型可以配置索引，在增删改查操作之前模型会自动去创建索引，配置放在 `indexes` 属性里。如：
+
+```js
+export default class extends think.model.mongo {
+  init(...args){
+    super.init(...args);
+    //配置索引
+    this.indexes = { 
+
+    }
+  }
+}
+```
+
+#### 单字段索引
+```js
+export default class extends think.model.mongo {
+  init(...args){
+    super.init(...args);
+    //配置索引
+    this.indexes = { 
+      name: 1
+    }
+  }
+}
+```
+
+#### 唯一索引
+
+通过 `$unique` 来指定为唯一索引，如：
+
+```js
+export default class extends think.model.mongo {
+  init(...args){
+    super.init(...args);
+    //配置索引
+    this.indexes = { 
+      name: {$unique: 1}
+    }
+  }
+}
+```
+
+#### 多字段索引
+
+可以将多个字段联合索引，如：
+
+```js
+export default class extends think.model.mongo {
+  init(...args){
+    super.init(...args);
+    //配置索引
+    this.indexes = { 
+      email: 1
+      test: {
+        name: 1,
+        title: 1,
+        $unique: 1
+      }
+    }
+  }
+}
+```
+
+### 获取索引
+
+可以通过方法 `getIndexes` 获取创建的索引。如：
+
+```js
+export default class extends think.controller.base {
+  async indexAction(){
+    let model = this.model('user');
+    let indexes = await model.getIndexes();
+  }
+}
+```
+
+### aggregate
+
+可以通过 `aggregate` 方法进行混合操作。
+
 ### MapReduce
+
+可以通过 `mapReduce` 方法进行 MapReduce 操作。
