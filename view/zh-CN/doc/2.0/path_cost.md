@@ -35,7 +35,7 @@ let path2 = think.getPath('home', 'controller'); //获取 home 模块下 control
 
 除了通过系统给的属性或者方法来获取路径，还可以在项目里定义额外的路径常量。
 
-** 入口文件里定义 **
+##### 入口文件里定义
 
 项目的入口文件为 `src/index.js` 或者 `src/production.js` 等，可以在这些入口文件里定义一些路径常量。如：
 
@@ -56,7 +56,7 @@ var instance = new thinkjs({
 instance.run();
 ```
 
-** 启动文件里定义 **
+##### 启动文件里定义
 
 定义在 `src/common/bootstrap` 里的文件在项目启动时会自动加载，所以也可以在这些文件里定义路径常量。如：
 

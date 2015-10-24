@@ -12,7 +12,7 @@ node www/production.js home/index/index
 
 上面的命令表示执行 `home` 模块下 `index` Controller 里的 indexAction。
 
-** 携带参数 **
+##### 携带参数
 
 如果需要加参数，只要在后面加上对应的参数即可：
 
@@ -22,7 +22,7 @@ node www/production.js home/index/index?name=thinkjs
 
 Action 里就可以通过 `this.get` 方法来获取参数 `name` 了。
 
-** 修改请求方法 **
+##### 修改请求方法
 
 命令行执行默认的请求类型是 GET，如果想改为其他的类型，可以用下面的方法：
 
@@ -37,7 +37,7 @@ node www/production.js url=home/index/index&method=post
 * `host` 修改请求的 host 默认为 127.0.0.1
 * `ip` 修改请求的 ip 默认为 127.0.0.1
 
-** 修改 header **
+##### 修改 header
 
 有时候如果想修改更多的 headers，可以传一个完整的 json 数据，如：
 
@@ -45,7 +45,7 @@ node www/production.js url=home/index/index&method=post
 node www/production.js {"url":"/index/index","ip":"127.0.0.1","method":"POST","headers":{"xxx":"yyyy"}}
 ```
 
-** 禁止 URL 访问 **
+##### 禁止 URL 访问
 
 默认情况下，命令行执行的 Action 通过 URL 也可以访问到。如果禁止 URL 访问到该 Action，可以通过 `think.cli` 来判断。如：
 

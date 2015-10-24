@@ -237,7 +237,7 @@ http.status(400); //设置状态码为400
 
 获取或者设置国际化的语言，可以支持模版路径要多一层语言的目录。
 
-** 获取语言 **
+##### 获取语言
 
 ```js
 let lang = http.lang();
@@ -245,7 +245,7 @@ let lang = http.lang();
 
 获取语言的循序为 `http._lang` -> `从 cookie 中获取` -> `从 header 中获取`，如果需要从 url 中解析语言，可以获取后通过 `http.lang(lang)` 方法设置到属性 `http._lang` 中。
 
-** 设置语言 **
+##### 设置语言
 
 ```js
 let lang = getFromUrl();
@@ -277,19 +277,19 @@ http.cookie('name', 'value'); //设置 cookie，如果头信息已经发送则�
 
 读取、设置和清除 session。
 
-** 读取 Session **
+##### 读取 Session
 
 ```js
 let value = yield http.session('userInfo');
 ```
 
-** 设置 Session **
+##### 设置 Session
 
 ```js
 yield http.session('userInfo', data);
 ```
 
-** 清除 Session **
+##### 清除 Session
 
 ```js
 yield http.session();

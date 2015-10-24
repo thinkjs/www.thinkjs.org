@@ -15,7 +15,7 @@
 * `commit` 正常操作后，提交事务
 * `rollback` 操作异常后进行回滚
 
-** ES6 方式 **
+##### ES6 方式
 
 ```js
 export default class extends think.controller.base {
@@ -33,7 +33,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 动态创建类的方式 ** 
+##### 动态创建类的方式 ##### 
 
 ```js
 module.exports = think.controller({
@@ -56,7 +56,7 @@ module.exports = think.controller({
 
 使用事务时，要一直使用 `startTrans`，`commit` 和 `rollback` 这 3 个方法进行操作，使用起来有一些不便。为了简化这一操作，模型中提供了 `transaction` 方法来更加方便的处理事务。
 
-** ES6 方式 **
+##### ES6 方式
 
 ```js
 export default class extends think.controller.base {
@@ -72,7 +72,7 @@ export default class extends think.controller.base {
 
 注：Arrows Function 无法和 Generator Function 一起写，所以上面为 `function *`。如果想使用 Arrows Function，可以使用 async，如： `async () => {}`。
 
-** 使用动态创建类的方式 **
+##### 使用动态创建类的方式
 
 ```js
 module.exports = think.controller({

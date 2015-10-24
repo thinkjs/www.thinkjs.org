@@ -111,13 +111,18 @@ i.icon-fet8{ background-position:-70px -210px;}
 .doc pre code{padding: 0 !important;}
 
 .doc h3, 
-.doc h4{position: relative;}
+.doc h4,
+.doc h5{position: relative;}
 .doc h3 a,
-.doc h4 a{position: absolute;left: -15px;width: 15px;display: none;color: #333;opacity: 0.5;}
+.doc h4 a,
+.doc h5 a{position: absolute;left: -15px;width: 15px;display: none;color: #333;opacity: 0.5;}
 .doc h3 a::before,
-.doc h4 a::before{content: '#'}
+.doc h4 a::before,
+.doc h5 a::before{content: '#'}
 .doc h3:hover a,
-.doc h4:hover a{display: block;}
+.doc h4:hover a,
+.doc h5:hover a{display: block;}
+.doc h5,.doc .h5{font-size: 16px}
 
 
 .demo-list{font-size: 16px}

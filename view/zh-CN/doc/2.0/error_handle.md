@@ -97,7 +97,7 @@ export default class extends think.controller.base {
 
 项目里可以根据需要扩展错误类型，假如添加一个项目特有的错误 `600`，那么可以通过下面步骤进行：
 
-** 1、添加 _600Action **
+##### 1、添加 _600Action
 
 在 `src/common/controller/error.js` 文件中，合适的位置添加如下的代码：
 
@@ -107,11 +107,11 @@ export default class extends think.controller.base {
   }
 ```
 
-** 2、添加错误页面 **
+##### 2、添加错误页面
 
 添加文件 `view/common/error_600.html`，并在文件里添加显示的错误内容。
 
-** 3、显示错误页面 **
+##### 3、显示错误页面
 
 添加完错误后，需要在对应地方调用显示错误才能让用户看到，可以通过 `think.statusAction` 方法实现。如：
 

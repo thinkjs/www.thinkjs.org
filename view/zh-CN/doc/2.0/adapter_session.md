@@ -9,7 +9,7 @@
 * `db` 数据库类型
 * `redis` Redis 类型
 
-** db Session **
+##### db Session
 
 使用 `db` 类型的 Session 需要创建对应的数据表，可以用下面的 SQL 语句创建：
 
@@ -28,7 +28,7 @@
 
 需要将 `think_` 改为 db 配置中的数据表前缀。
 
-** redis Session **
+##### redis Session
 
 使用 `redis` 类型的 Session 需要配置 Redis，具体见 [配置](./config.html#redis)。
 
@@ -55,7 +55,7 @@ export default {
 
 Controller 或 Logic 里可以通过下面的方式读写 Session：
 
-** 读取 Session **
+##### 读取 Session
 
 ```js
 export default class extends think.controller.base {
@@ -66,7 +66,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 设置 Session **
+##### 设置 Session
 
 ```js
 export default class extends think.controller.base {
@@ -77,7 +77,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 清除 Session **
+##### 清除 Session
 
 ```js
 export default class extends think.controller.base {

@@ -97,20 +97,20 @@ ThinkJS 使用 Hook 和 Middleware 机制，内置了大量的功能，同时也
 
 ThinkJS 内置了详细的日志功能，可以很方便的查看各种日志，方便追查问题。
 
-** HTTP 请求日志 **
+##### HTTP 请求日志
 ```
 [2015-10-12 14:10:03] [HTTP] GET /favicon.ico 200 5ms
 [2015-10-12 14:10:11] [HTTP] GET /zh-CN/doc.html 200 11ms
 [2015-10-12 14:10:11] [HTTP] GET /static/css/reset.css 200 3ms
 ```
 
-** Socket 连接日志 **
+##### Socket 连接日志
 
 ```
 [2015-10-12 14:13:54] [SOCKET] Connect mysql with mysql://root:root@127.0.0.1:3306
 ```
 
-** 错误日志 **
+##### 错误日志
 
 ```
 [2015-10-12 14:15:32] [Error] Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'root3'@'localhost' (using password: YES)

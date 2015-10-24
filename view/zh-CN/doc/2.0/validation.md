@@ -147,7 +147,7 @@ export default class extends think.logic.base {
 <%}%>
 ```
 
-** 自动校验 **
+##### 自动校验
 
 一般情况下，都是校验有问题后，输出一个 JSON 信息。如果每次都要在 Logic 的 Action 手动调用 `this.validate` 进行校验，势必比较麻烦。可以通过将校验规则赋值给 `this.rules` 属性进行自动校验。如：
 
@@ -698,7 +698,7 @@ think.validate('validate_name', (value, ...args) => {
 
 上面注册了一个名为 `validate_name` 的校验类型，这样在 Logic 里就可以直接使用该校验类型了。
 
-** 参数解析 **
+##### 参数解析
 
 如果要解析后面的 `args`，如：该字段值跟其他字段值进行比较，这时拿到的参数是其他字段名称，但比较的时候肯定需要拿到这个字段值，所以需要将字段名称解析为对应的字段值。
 

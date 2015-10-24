@@ -108,7 +108,7 @@ var Cls1 = think.Class({
 ```
 
 
-** 不继承 think.base ** 
+##### 不继承 think.base ##### 
 
 ```js
 var Cls2 = think.Class({
@@ -119,7 +119,7 @@ var Cls2 = think.Class({
 ```
 
 
-** 继承一个类 **
+##### 继承一个类
 
 ```js
 //继承自 Cls2
@@ -134,7 +134,7 @@ var Cls3 = think.Class(Cls2, {
 ```
 
 
-** 实例化类 **
+##### 实例化类
 
 ```js
 //获取类的实例，自动调用 init 方法
@@ -637,27 +637,27 @@ think.log('WebSocket Status: closed', 'THINK');
 //writes '[2015-09-23 17:43:00] [THINK] WebSocket Status: closed'
 ```
 
-** 打印错误信息 **
+##### 打印错误信息
 ```js
 think.log(new Error('error'), 'ERROR');
 //writes '[2015-09-23 17:50:17] [Error] Error: error'
 ```
 
-** 显示执行时间 **
+##### 显示执行时间
 
 ```js
 think.log('/static/module/jquery/1.9.1/jquery.js', 'HTTP', startTime);
 //writes '[2015-09-23 17:52:13] [HTTP] /static/module/jquery/1.9.1/jquery.js 10ms'
 ```
 
-** 不显示时间 **
+##### 不显示时间
 
 ```js
 think.log('/static/module/jquery/1.9.1/jquery.js', 'HTTP', null);
 //writes '[HTTP] /static/module/jquery/1.9.1/jquery.js'
 ```
 
-** 自定义 ** 
+##### 自定义 ##### 
 
 ```js
 think.log(function(colors){
@@ -722,7 +722,7 @@ export default {
 
 项目中可以根据需要追加或者修改。
 
-** 获取事件对应的 middleware 列表 **
+##### 获取事件对应的 middleware 列表
 
 ```js
 think.hook('view_template');
@@ -730,7 +730,7 @@ think.hook('view_template');
 ['locate_template']
 ```
 
-** 设置 hook **
+##### 设置 hook
 
 ```js
 //替换原有的 hook
@@ -744,13 +744,13 @@ think.hook('view_template', ['locate_template1'], 'append');
 
 ```
 
-** 删除 hook **
+##### 删除 hook
 
 ```js
 think.hook('view_template', null);
 ```
 
-** 执行 hook **
+##### 执行 hook
 
 ```js
 let result = think.hook('view_template', http, data);
@@ -761,7 +761,7 @@ let result = think.hook('view_template', http, data);
 
 注册、创建、获取和执行 middleware。
 
-** 创建 middleware **
+##### 创建 middleware
 
 ```js
 //解析 XML 示例
@@ -785,7 +785,7 @@ let Cls1 = class extends think.middleware.base {
 }
 ```
 
-** 注册 middleware **
+##### 注册 middleware
 
 middlearea 可以是个简单的 function，也可以是较为复杂的 class。
 
@@ -808,13 +808,13 @@ let Cls = think.middlearea({
 think.middleware('parse_xml', Cls);
 ```
 
-** 获取 middleware **
+##### 获取 middleware
 
 ```js
 let middlearea = think.middleare('parse_xml');
 ```
 
-** 执行 middleware **
+##### 执行 middleware
 
 ```js
 let result = think.middleare('parse_xml', http);
@@ -826,7 +826,7 @@ let result = think.middleare('parse_xml', http);
 
 创建、注册、获取和执行 adapter。
 
-** 创建 adapter **
+##### 创建 adapter
 
 ```js
 //创建一个 adapter
@@ -847,21 +847,21 @@ let Cls = class extends think.adapter.session {
 }
 ```
 
-** 注册 adapter **
+##### 注册 adapter
 
 ```js
 //注册一个 xxx 类型的 session adapter
 think.adapter('session', 'xxx', Cls);
 ```
 
-** 获取 adapter **
+##### 获取 adapter
 
 ```js
 //获取 file 类型的 session adapter
 let Cls = think.adapter('session', 'file');
 ```
 
-** 执行 adapter **
+##### 执行 adapter
 
 ```js
 let Adapter = think.adapter('session', 'file');
@@ -922,7 +922,7 @@ think.http('/index/test').then(http => {
 
 创建、执行 controller
 
-** 创建 controller **
+##### 创建 controller
 
 ```js
 //创建 controller, 继承 think.controller.base
@@ -942,7 +942,7 @@ let Cls1 = class extends think.controller.base {
 }
 ```
 
-** 实例化 controller **
+##### 实例化 controller
 
 ```js
 //实例化 home 模块下 user controller
@@ -954,7 +954,7 @@ let instance = think.controller('user', http, 'home');
 
 创建、执行 logic
 
-** 创建 logic **
+##### 创建 logic
 
 ```js
 //创建 logic, 继承 think.logic.base
@@ -970,7 +970,7 @@ let Cls1 = class extends think.logic.base {
 }
 ```
 
-** 实例化 logic **
+##### 实例化 logic
 
 ```js
 //实例化 home 模块下 user logic
@@ -982,7 +982,7 @@ let instance = think.logic('user', http, 'home');
 
 创建或者获取 model。
 
-** 创建 model **
+##### 创建 model
 
 ```js
 //创建一个 model
@@ -1015,7 +1015,7 @@ let model = class extends think.model.mongo {
 ```
 
 
-** 获取 model 实例 **
+##### 获取 model 实例
 
 ```js
 let configs = {
@@ -1030,7 +1030,7 @@ let instance = think.model('user', configs, 'home');
 
 创建或者获取 service。
 
-** 创建 service ** 
+##### 创建 service ##### 
 
 ```js
 //创建一个 service 类
@@ -1049,7 +1049,7 @@ service 基类继承自 [think.base](./api_think_base.html)，所以可以用 th
 如果 serivce 不想写成类，那就没必要通过这种方法创建。
 
 
-** 获取 service **
+##### 获取 service
 
 ```js
 //获取 home 模块下 post service，并传递参数 {} 
@@ -1106,7 +1106,7 @@ think.locale('CONTROLLER_NOT_FOUND', 'test', '/index/test');
 
 注册、获取或执行检测。
 
-** 注册检测方法 **
+##### 注册检测方法
 
 ```js
 //注册检测类型为 not_number
@@ -1115,13 +1115,13 @@ think.validate('not_number', value => {
 })
 ```
 
-** 获取检测方法 **
+##### 获取检测方法
 
 ```js
 let fn = think.validate('not_number');
 ```
 
-** 检测数据 **
+##### 检测数据
 
 ```js
 let result = think.validate({
@@ -1195,7 +1195,7 @@ let mysql = think.npm('mysql@2.0.0')
 let error = think.error(new Error('xxx'));
 ```
 
-** 捕获 promise 的错误信息 **
+##### 捕获 promise 的错误信息
 
 ```js
 let promise = Project.reject(new Error('xxx'));

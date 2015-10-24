@@ -48,7 +48,7 @@ module.exports = think.controller(Base, {
 
 控制器里可以很方便的使用 Generator Function 来处理异步嵌套的问题。
 
-** ES6 方式 **
+##### ES6 方式
 
 ```js
 'use strict';
@@ -68,7 +68,7 @@ export default class extends Base {
 }
 ```
 
-** 动态创建类的方式 **
+##### 动态创建类的方式
 
 ```js
 'use strict';
@@ -92,7 +92,7 @@ module.exports = think.controller(Base, {
 
 借助 Babel 编译，还可以在控制器里使用 async 和 await。
 
-** ES6 方式 **
+##### ES6 方式
 
 ```js
 'use strict';
@@ -112,7 +112,7 @@ export default class extends Base {
 }
 ```
 
-** 动态创建类的方式 **
+##### 动态创建类的方式
 
 ```js
 'use strict';
@@ -138,7 +138,7 @@ ES6 里的 class 有 contructor 方法，但动态创建的类就没有该方法
 
 该方法在类实例化的时候自动调用，无需手工调用。
 
-** ES6 方式**
+##### ES6 方式**
 　
 ```js
 'use strict';
@@ -153,7 +153,7 @@ export default class extends Base {
 }
 ```
 
-** 动态创建类方式 **
+##### 动态创建类方式
 
 ```js
 'use strict';
@@ -175,7 +175,7 @@ module.exports = think.controller(Base, {
 
 ThinkJS 支持前置操作，方法名为 `__before`，该方法会在具体的 Action 调用之前自动调用。如果前置操作里阻止了后续代码继续执行，则不会调用具体的 Action，这样可以提前结束请求。
 
-** ES6 方式**
+##### ES6 方式**
 　
 ```js
 'use strict';
@@ -327,7 +327,7 @@ module.exports = think.controller({
 
 当然更好的解决办法是推荐使用 ES6 里的 Generator Function 和 Arrows Function，这样就可以彻底解决 this 作用域的问题。
 
-** 使用 Generator Function **
+##### 使用 Generator Function
 ```js
 export default class extends think.controller.base {
   * indexAction(){
@@ -339,7 +339,7 @@ export default class extends think.controller.base {
 ```
 
 
-** 使用 Arrows Function **
+##### 使用 Arrows Function
 
 ```js
 module.exports = think.controller({

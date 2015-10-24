@@ -52,7 +52,7 @@ export default {
 
 上面的配置会覆盖掉默认的配置值。如果在原有配置上增加的话，可以通过下面的方式：
 
-** 在前面追加 **
+##### 在前面追加
 
 ```js
 export default {
@@ -60,7 +60,7 @@ export default {
 }
 ```
 
-** 在后面追加 **
+##### 在后面追加
 
 ```js
 export default {
@@ -84,7 +84,7 @@ thinkjs middleware xxx
 
 执行完成后，会看到对应的文件 `src/common/middleware/xxx.js`。
 
-** ES6 方式 ** 
+##### ES6 方式 ##### 
 
 ```js
 'use strict';
@@ -102,7 +102,7 @@ export default class extends think.middleware.base {
 }
 ```
 
-** 动态创建类的方式 **
+##### 动态创建类的方式
 
 ```js
 'use strict';

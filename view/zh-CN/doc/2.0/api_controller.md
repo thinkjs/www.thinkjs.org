@@ -3,7 +3,7 @@
 `think.controller.base` 继承自 [think.http.base](./api_think_http_base.html) 类。项目里的控制器需要继承该类。
 
 
-** 使用 ES6 的语法继承该类 **
+##### 使用 ES6 的语法继承该类
 
 ```js
 export default class extends think.controller.base {
@@ -13,7 +13,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 使用普通方式继承该类 ** 
+##### 使用普通方式继承该类 ##### 
 
 ```js
 module.exports = think.controller({
@@ -246,7 +246,7 @@ export default class extends think.controller.base {
 
 读取、设置和清除 session。
 
-** 读取 Session **
+##### 读取 Session
 
 ```js
 export default class extends think.controller.base {
@@ -257,7 +257,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 设置 Session **
+##### 设置 Session
 
 ```js
 export default class extends think.controller.base {
@@ -268,7 +268,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 清除 Session **
+##### 清除 Session
 
 ```js
 export default class extends think.controller.base {
@@ -328,7 +328,7 @@ export default class extends think.controller.base {
 
 获取解析后的模版内容。
 
-** 直接获取 ** 
+##### 直接获取 ##### 
 
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
@@ -340,7 +340,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 改变 action ** 
+##### 改变 action ##### 
 
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
@@ -352,7 +352,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 改变 controller 和 action ** 
+##### 改变 controller 和 action ##### 
 
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
@@ -364,7 +364,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 改变 module, controller 和 action ** 
+##### 改变 module, controller 和 action ##### 
 
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
@@ -376,7 +376,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 改变文件后缀名 ** 
+##### 改变文件后缀名 ##### 
 
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
@@ -388,7 +388,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 获取绝对路径文件 ** 
+##### 获取绝对路径文件 ##### 
 
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js

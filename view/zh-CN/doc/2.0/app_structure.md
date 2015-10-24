@@ -80,7 +80,7 @@ webserver nginx 的配置文件，建议线上使用 nginx 做一层代理。
 
 可以在这个目录下文件里定义一些全局函数、注册中间件等常用的功能。
 
-** 定义全局函数 **
+##### 定义全局函数
 
 ```js
 // src/common/bootstrap/fn.js
@@ -91,7 +91,7 @@ global.formatDate = obj => {
 
 这里定义了一个全局函数 `formatData`，那么项目里任何地方都可以直接使用该函数。
 
-** 注册中间件 **
+##### 注册中间件
 
 ```js
 // src/common/bootstrap/middleware.js

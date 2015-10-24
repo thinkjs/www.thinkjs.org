@@ -97,7 +97,7 @@ thinkjs model home/user;
 
 指定模块为 `home` 后，会创建 `src/home/model/user.js` 文件。
 
-** 添加 Mongo Model **
+##### 添加 Mongo Model
 
 默认添加的 Model 是关系数据库的模型，如果想创建 Mongo Model，可以通过指定 `--mongo` 参数来添加。如：
 
@@ -105,7 +105,7 @@ thinkjs model home/user;
 thinkjs model home/user --mongo
 ```
 
-** 添加 Relation Model **
+##### 添加 Relation Model
 
 添加关联模型可以通过指定 `--relation` 参数。如：
 
@@ -131,7 +131,7 @@ thinkjs controller home/user;
 
 指定模块为 `home` 后，会创建 `src/home/controller/user.js` 文件。
 
-** 添加 Rest Controller **
+##### 添加 Rest Controller
 
 如果想提供 Rest API，可以带上 `--rest` 参数来创建。如：
 

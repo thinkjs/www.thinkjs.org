@@ -57,7 +57,7 @@ export default {
 * `tablePrefix` 表前缀
 * `tableName` 表名，不包含前缀
 
-** ES6 方式 **
+##### ES6 方式
 
 ```js
 export default class extends think.model.base {
@@ -69,7 +69,7 @@ export default class extends think.model.base {
 }
 ```
 
-** 动态创建类方式 **
+##### 动态创建类方式
 
 ```js
 module.exports = think.model({
@@ -143,7 +143,7 @@ export default class extends think.model.base {
 
 #### 添加数据
 
-** 添加一条数据 **
+##### 添加一条数据
 
 使用 `add` 方法可以添加一条数据，返回值为插入数据的 id。如：
 
@@ -156,7 +156,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** 添加多条数据 **
+##### 添加多条数据
 
 使用 `addMany` 方法可以添加一条数据，如：
 
@@ -172,7 +172,7 @@ export default class extends think.controller.base {
 }
 ```
 
-** thenAdd **
+##### thenAdd
 
 数据库设计时，我们经常需要把某个字段设为唯一，表示这个字段值不能重复。这样添加数据的时候只能先去查询下这个数据值是否存在，如果不存在才进行插入操作。
 
@@ -207,7 +207,7 @@ export default class extends think.controlle.base {
 
 模型中提供了多种方式来查询数据，如：查询单条数据，查询多条数据，读取字段值，读取最大值，读取总条数等。
 
-** 查询单条数据 **
+##### 查询单条数据
 
 可以使用 `find` 方法查询单条数据，返回值为对象。如：
 
@@ -223,7 +223,7 @@ export default class extends think.controller.base {
 
 如果数据表没有对应的数据，那么返回值为空对象 `{}`，可以通过 `think.isEmpty` 方法来判断返回值是否为空。
 
-** 查询多条数据 **
+##### 查询多条数据
 
 可以使用 `select` 方法查询多条数据，返回值为数据。如：
 
@@ -239,7 +239,7 @@ export default class extends think.controller.base {
 
 如果数据表中没有对应的数据，那么返回值为空数组 `[]`，可以通过 `think.isEmpty` 方法来判断返回值是否为空。
 
-** 分页查询数据 **
+##### 分页查询数据
 
 页面中经常遇到按分页来展现某些数据，这种情况下就需要先查询总的条数，然后在查询当前分页下的数据。查询完数据后还要计算有多少页。模型中提供了 `countSelect` 方法来方便这一操作，会自动进行总条数的查询。
 
@@ -311,7 +311,7 @@ export default class extends think.model.base {
 ```
 
 
-** 缓存配置 **
+##### 缓存配置
 
 缓存配置为模型配置中的 `cache` 字段，如：
 

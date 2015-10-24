@@ -21,7 +21,7 @@ ThinkJS 默认支持 3 种项目模式，可以根据这 3 种模式设置不同
 * 公共配置目录 `src/common/config`
 * 模块配置目录 `src/[module]/config`
 
-** config/config.js **
+##### config/config.js
 
 存放一些基本的配置，如：
 
@@ -34,7 +34,7 @@ export default {
 }
 ```
 
-** config/[name].js **
+##### config/[name].js
 
 存放具体功能的配置文件，如：`db.js` 为数据库配置，`redis` 为 redis 配置。
 
@@ -50,7 +50,7 @@ export default {
 };
 ```
 
-** config/env/[mode].js **
+##### config/env/[mode].js
 
 项目模式的配置，如：`env/development.js`，`env/testing.js`，`env/production.js`
 
@@ -66,7 +66,7 @@ export default {
 }
 ```
 
-** config/locale/[lang].js **
+##### config/locale/[lang].js
 
 国际化语言包配置，如： `locale/en.js`，`locale/zh-CN.js`。
 
@@ -85,7 +85,7 @@ export default {
 
 ### 配置读取
 
-** 通过 config 方法获取 **
+##### 通过 config 方法获取
 
 在 Controller，Logic，Middleware 等地方可以通过 `this.config` 来获取。如：
 
@@ -94,7 +94,7 @@ let db = this.config('db'); //读取数据库的所有配置
 let host = this.config('db.host'); //读取数据库的 host 配置，等同于 db.host
 ```
 
-** 通过 http 对象上的 config 方法获取 **
+##### 通过 http 对象上的 config 方法获取
 
 http 对象也有 config 方法用来获取相关的配置，如：
 
@@ -102,7 +102,7 @@ http 对象也有 config 方法用来获取相关的配置，如：
 let db = http.config('db');
 ```
 
-** 其他地方配置读取 **
+##### 其他地方配置读取
 
 其他地方可以通过 `think.config` 来读取相关的配置：
 

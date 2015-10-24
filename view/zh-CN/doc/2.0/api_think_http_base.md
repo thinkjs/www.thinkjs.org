@@ -2,7 +2,7 @@
 
 `think.http.base`继承自 [think.base](./api_think_base.html) 类，该类为含有 http 对象处理时的基类。middleware, controller, view 类都继承自该类。
 
-** 使用 ES6 语法继承该类 **
+##### 使用 ES6 语法继承该类
 
 ```js
 export default class extends think.http.base {
@@ -16,7 +16,7 @@ export default class extends think.http.base {
 }
 ```
 
-** 使用普通的方式继承该类 **
+##### 使用普通的方式继承该类
 
 ```js
 module.exports = think.Class(think.http.base, {
