@@ -26,7 +26,15 @@ module.exports = think.Class(think.http.base, {
 });
 ```
 
-### config(name, value)
+### 属性
+
+#### http
+
+封装的 http 对象，包含的属性和方法请见 [API -> http](./api_http.html)。
+
+### 方法
+
+#### config(name, value)
 
 * `name` {String} 配置名称
 * `value` {Mixed} 配置值
@@ -46,7 +54,7 @@ export default class extends think.controller.base {
 }
 ```
 
-### action(controller, action)
+#### action(controller, action)
 
 * `controller` {Object | String} controller实例
 * `action` {String} action名称
@@ -76,7 +84,7 @@ export default class extends think.controller.base {
 }
 ```
 
-### cache(name, value, options)
+#### cache(name, value, options)
 
 * `name` {String} 缓存名称
 * `value` {Mixed | Function} 缓存值
@@ -120,7 +128,7 @@ export default class extends think.controller.base {
 ```
 
 
-### hook(event, data)
+#### hook(event, data)
 
 * `event` {String} 事件名称
 * `data` {Mixed} 参数
@@ -138,7 +146,7 @@ export default class extends think.controller.base {
 }
 ```
 
-### model(name, options)
+#### model(name, options)
 
 * `name` {String} 模型名称
 * `options` {Object} 配置，具体见数据库配置
@@ -162,7 +170,7 @@ export default class extends think.controller.base {
 
 ```
 
-### controller(name)
+#### controller(name)
 
 * `name` {String} controller名称
 * `return` {Object} controller实例
@@ -181,7 +189,7 @@ export default class extends think.controller.base {
 ```
 
 
-### service(name)
+#### service(name)
 
 * `name` {String} service 名称
 * `return` {Class} 
