@@ -144,8 +144,8 @@ i.icon-fet8{ background-position:-70px -210px;}
   .nav li.discuss{display: none;}
   .nav{;display: block;}
   .banimg{width: 90%;height: auto;margin: 0}
-  .banarea{height: auto;padding: 30px 0;background-image: url(../img/banbg_640.jpg);}
-  .btn-link{width: 180px;height: 32px;font-size: 16px;line-height: 32px;margin-top: 20px}
+  .banarea{height: auto;padding: 65px 0;background-image: url(../img/banbg_640.jpg);}
+  .btn-link{width: 180px;height: 32px;font-size: 16px;line-height: 32px;margin-top: 40px}
   .share{display: none;}
   .banbot{display: none;}
   .tit,.tit2{font-size: 24px;}

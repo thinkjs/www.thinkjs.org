@@ -26,7 +26,7 @@ module.exports = think.model('mongo', {
 
 #### model.indexes
 
-设置字段索引。
+设置字段索引，数据操作之前会自动创建索引。
 
 ```js
 export default class extends think.model.mongo {
@@ -110,7 +110,7 @@ export default class extends think.model.mongo {
 }
 ```
 
-#### AND 条件
+##### AND 条件
 
 ```js
 export default class extends think.model.mongo {
@@ -120,7 +120,7 @@ export default class extends think.model.mongo {
 }
 ```
 
-#### OR 条件
+##### OR 条件
 
 ```js
 export default class extends think.model.mongo {
@@ -138,7 +138,7 @@ export default class extends think.model.mongo {
 }
 ```
 
-#### 内嵌文档
+##### 内嵌文档
 
 
 ```js
@@ -177,6 +177,15 @@ export default class extends think.model.mongo {
 * `return` {Promise}
 
 获取操作当前表的句柄。
+
+```js
+export default class extends think.model.mongo {
+  async getIndexes(){
+    let collection = await this.collection();
+    return collection.indexes();
+  }
+}
+```
 
 #### model.aggregate(options)
 

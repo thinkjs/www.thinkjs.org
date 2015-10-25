@@ -148,8 +148,40 @@ export default class extends think.controller.base {
 
 ### aggregate
 
-可以通过 `aggregate` 方法进行混合操作。
+可以通过 `aggregate` 方法进行混合操作。如：
+
+```js
+export default class extends think.model.mongo {
+  match(){
+    return this.aggregate([
+      {$match: {status: 'A'}},
+      {$group: {_id: "$cust_id", total: {$sum: "$amount"}}}
+    ]);
+  }
+}
+```
+
+具体请见 <https://docs.mongodb.org/manual/core/aggregation-introduction/>。
 
 ### MapReduce
 
-可以通过 `mapReduce` 方法进行 MapReduce 操作。
+可以通过 `mapReduce` 方法进行 MapReduce 操作。如：
+
+```js
+export default class extends think.model.mongo {
+  execMapReduce(){
+    let map = () => {
+      emit(this.cust_id, this.amount);
+    }
+    let reduce = (key, values) => {
+      return Array.sum(values);
+    }
+    return this.mapReduce(map, reduce, {
+      query: {status: "A"},
+      out: "order_totals"
+    })
+  }
+}
+```
+
+具体请见 <https://docs.mongodb.org/manual/core/aggregation-introduction/#map-reduce>。
