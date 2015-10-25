@@ -220,18 +220,164 @@ export default class extends think.model.base {
 * `where` {String | Object} where 条件
 * `return` {this}
 
-设置 where 查询条件。
+设置 where 查询条件。可以通过属性 `_logic` 设置逻辑，默认为 `AND`。可以通过属性 `_complex` 设置复合查询。
+
+`注：` 1、以下示例不适合 mongo model，mongo 中设置 where 条件请见 model.mongo 里的 where 条件设定。2、where 条件中的值需要在 Logic 里做数据校验，否则可能会有漏洞。
 
 ##### 普通条件
 
 ```js
 export default class extends think.model.base {
   where1(){
+    //SELECT * FROM `think_user`
     return this.where().select();
+  }
+  where2(){
+    //SELECT * FROM `think_user` WHERE ( `id` = 10 )
+    return this.where({id: 10}).select();
+  }
+  where3(){
+    //SELECT * FROM `think_user` WHERE ( id = 10 OR id < 2 )
+    return this.where('id = 10 OR id < 2').select();
+  }
+  where4(){
+    //SELECT * FROM `think_user` WHERE ( `id` != 10 )
+    return this.where({id: ['!=', 10]}).select();
   }
 }
 ```
 
+##### EXP 条件
+
+ThinkJS 默认会对字段和值进行转义，防止安全漏洞。有时候一些特殊的情况不希望被转义，可以使用 EXP 的方式，如：
+
+```js
+export default class extends think.model.base {
+  where1(){
+    //SELECT * FROM `think_user` WHERE ( (`name` ='name') )
+    return this.where({name: ['EXP', "=\"name\""]}).select();
+  }
+}
+```
+
+##### LIKE 条件
+
+```js
+export default class extends think.model.base {
+  where1(){
+    //SELECT * FROM `think_user` WHERE ( `title` NOT LIKE 'welefen' )
+    return this.where({title: ['NOTLIKE', 'welefen']}).select();
+  }
+  where2(){
+    //SELECT * FROM `think_user` WHERE ( `title` LIKE '%welefen%' )
+    return this.where({title: ['like', '%welefen%']}).select();
+  }
+  //like 多个值
+  where3(){
+    //SELECT * FROM `think_user` WHERE ( (`title` LIKE 'welefen' OR `title` LIKE 'suredy') )
+    return this.where({title: ['like', ['welefen', 'suredy']]}).select();
+  }
+  //多个字段或的关系 like 一个值
+  where4(){
+    //SELECT * FROM `think_user` WHERE ( (`title` LIKE '%welefen%') OR (`content` LIKE '%welefen%') )
+    return this.where({'title|content': ['like', '%welefen%']}).select();
+  }
+  //多个字段与的关系 Like 一个值
+  where5(){
+    //SELECT * FROM `think_user` WHERE ( (`title` LIKE '%welefen%') AND (`content` LIKE '%welefen%') )
+    return this.where({'title&content': ['like', '%welefen%']}).select();
+  }
+}
+```
+
+
+##### IN 条件
+
+```js
+export default class extens think.model.base {
+  where1(){
+    //SELECT * FROM `think_user` WHERE ( `id` IN ('10','20') )
+    return this.where({id: ['IN', '10,20']}).select();
+  }
+  where2(){
+    //SELECT * FROM `think_user` WHERE ( `id` IN (10,20) )
+    return this.where({id: ['IN', [10, 20]]}).select();
+  }
+  where3(){
+    //SELECT * FROM `think_user` WHERE ( `id` NOT IN (10,20) )
+    return this.where({id: ['NOTIN', [10, 20]]}).select();
+  }
+}
+```
+
+##### BETWEEN 查询
+
+```js
+export default class extens think.model.base {
+  where1(){
+    //SELECT * FROM `think_user` WHERE (  (`id` BETWEEN 1 AND 2) )
+    return this.where({id: ['BETWEEN', 1, 2]}).select();
+  }
+  where2(){
+    //SELECT * FROM `think_user` WHERE (  (`id` BETWEEN '1' AND '2') )
+    return this.where({id: ['between', '1,2']}).select();
+  }
+}
+```
+
+##### 多字段查询
+
+```js
+export default class extends think.model.base {
+  where1(){
+    //SELECT * FROM `think_user` WHERE ( `id` = 10 ) AND ( `title` = 'www' )
+    return this.where({id: 10, title: "www"}).select();
+  }
+  //修改逻辑为 OR
+  where2(){
+    //SELECT * FROM `think_user` WHERE ( `id` = 10 ) OR ( `title` = 'www' )
+    return this.where({id: 10, title: "www", _logic: 'OR'}).select();
+  }
+  //修改逻辑为 XOR
+  where2(){
+    //SELECT * FROM `think_user` WHERE ( `id` = 10 ) XOR ( `title` = 'www' )
+    return this.where({id: 10, title: "www", _logic: 'XOR'}).select();
+  }
+}
+```
+
+##### 多条件查询
+
+```js
+export default class extends think.model.base {
+  where1(){
+    //SELECT * FROM `think_user` WHERE ( `id` > 10 AND `id` < 20 )
+    return this.where({id: {'>': 10, '<': 20}}).select();
+  }
+  //修改逻辑为 OR 
+  where2(){
+    //SELECT * FROM `think_user` WHERE ( `id` < 10 OR `id` > 20 )
+    return this.where({id: {'<': 10, '>': 20, _logic: 'OR'}}).select()
+  }
+}
+```
+
+##### 复合查询
+
+```js
+export default class extends think.model.base {
+  where1(){
+    //SELECT * FROM `think_user` WHERE ( `title` = 'test' ) AND (  ( `id` IN (1,2,3) ) OR ( `content` = 'www' ) )
+    return this.where({
+      title: 'test',
+      _complex: {id: ['IN', [1, 2, 3]],
+        content: 'www',
+        _logic: 'or'
+      }
+    }).select()
+  }
+}
+```
 
 
 #### model.field(field)
@@ -669,4 +815,275 @@ export default class extends think.model.base {
 #### model.close()
 
 关于数据库连接，一般情况下不要直接调用。
+
+
+#### model.getTableFields(table)
+
+* `table` {String} 表名
+* `return` {Promise}
+
+获取表的字段信息，自动从数据库中读取。
+
+#### model.getLastSql()
+
+* `return` {String}
+
+获取最后执行的 SQL 语句。
+
+#### model.buildSql()
+
+* `return` {Promise}
+
+将当前的查询条件生成一个 SQL 语句。
+
+#### model.parseOptions(oriOpts, extraOptions)
+
+* `oriOpts` {Object}
+* `extraOptions` {Object}
+* `return` {Promise}
+
+根据已经设定的一些条件解析当前的操作选项。
+
+#### model.getPk()
+
+* `return` {Promise}
+
+返回 `pk` 的值，返回一个 Promise。
+
+#### model.parseType(field, value)
+
+* `field` {String} 数据表中的字段名称
+* `value` {Mixed}
+* `return` {Mixed}
+
+根据数据表中的字段类型解析 value。
+
+#### model.parseData(data)
+
+* `data` {Object} 要解析的数据
+* `return` {Object}
+
+调用 `parseType` 方法解析数据。
+
+#### model.add(data, options, replace)
+
+* `data` {Object} 要添加的数据
+* `options` {Object} 操作选项
+* `replace` {Boolean} 是否是替换操作
+* `return` {Promise} 返回插入的 ID
+
+添加一条数据。
+
+#### model.thenAdd(data, where)
+
+* `data` {Object} 要添加的数据
+* `where` {Object} where 条件
+* `return` {Promise}
+
+当 where 条件未命中到任何数据时才添加数据。
+
+#### model.addMany(dataList, options, replace)
+
+* `dataList` {Array} 要添加的数据列表
+* `options` {Object} 操作选项
+* `replace` {Boolean} 是否是替换操作
+* `return` {Promise} 返回插入的 ID
+
+一次添加多条数据。
+
+#### model.delete(options)
+
+* `options` {Object} 操作选项
+* `return` {Promise} 返回影响的行数
+
+删除数据。
+
+#### model.update(data, options)
+
+* `data` {Object} 要更新的数据
+* `options` {Object} 操作选项
+* `return` {Promise} 返回影响的行数
+
+更新数据。
+
+#### updateMany(dataList, options)
+
+* `dataList` {Array} 要更新的数据列表
+* `options` {Object} 操作选项
+* `return` {Promise}
+
+更新多条数据，dataList 里必须包含主键的值，会自动设置为更新条件。
+
+#### model.increment(field, step)
+
+* `field` {String} 字段名
+* `step` {Number} 增加的值，默认为 1
+* `return` {Promise}
+
+字段值增加。
+
+#### model.decrement(field, step)
+
+* `field` {String} 字段名
+* `step` {Number} 增加的值，默认为 1
+* `return` {Promise}
+
+字段值减少。
+
+#### model.find(options)
+
+* `options` {Object} 操作选项
+* `return` {Promise} 返回单条数据
+
+查询单条数据，返回的数据类型为对象。如果未查询到相关数据，返回值为 `{}`。
+
+#### model.select(options)
+
+* `options` {Object} 操作选项
+* `return` {Promise} 返回多条数据
+
+查询单条数据，返回的数据类型为数组。如果未查询到相关数据，返回值为 `[]`。
+
+#### model.countSelect(options, pageFlag)
+
+* `options` {Object} 操作选项
+* `pageFlag` {Boolean} 当页数不合法时处理，true 为修正到第一页，false 为修正到最后一页，默认不修正
+* `return` {Promise}
+
+分页查询，一般需要结合 `page` 方法一起使用。如：
+
+```js
+export default class extends think.controller.base {
+  async listAction(){
+    let model = this.model('user');
+    let data = await model.page(this.get('page')).countSelect();
+  }
+}
+```
+
+返回值数据结构如下：
+
+```js
+{
+  numsPerPage: 10, //每页显示的条数
+  currentPage: 1, //当前页
+  count: 100, //总条数
+  totalPages: 10, //总页数
+  data: [{ //当前页下的数据列表
+    name: "thinkjs",
+    email: "admin@thinkjs.org"
+  }, ...]
+}
+```
+
+#### model.getField(field, one)
+
+* `field` {String} 字段名，多个字段用逗号隔开
+* `one` {Boolean | Number} 获取的条数
+* `return` {Promise}
+
+获取特定字段的值。
+
+#### model.count(field)
+
+* `field` {String} 字段名
+* `return` {Promise} 返回总条数
+
+获取总条数。
+
+#### model.sum(field)
+
+* `field` {String} 字段名
+* `return` {Promise}
+
+对字段值进行求和。
+
+#### model.min(field)
+
+* `field` {String} 字段名
+* `return` {Promise}
+
+求字段的最小值。
+
+#### model.max(field)
+
+* `field` {String} 字段名
+* `return` {Promise}
+
+求字段的最大值。
+
+#### model.avg(field)
+
+* `field` {String} 字段名
+* `return` {Promise}
+
+求字段的平均值。
+
+#### model.query(...args)
+
+* `return` {Promise}
+
+指定 SQL 语句执行查询。
+
+#### model.execute(...args)
+
+* `return` {Promise}
+
+执行 SQL 语句。
+
+
+#### model.parseSql(sql, ...args)
+
+* `sql` {String} 要解析的 SQL 语句
+* `return` {String}
+
+解析 SQL 语句，调用 `util.format` 方法解析 SQL 语句，并将 SQL 语句中的 `__TABLENAME__` 解析为对应的表名。
+
+```js
+export default class extends think.model.base {
+  getSql(){
+    let sql = 'SELECT * FROM __GROUP__ WHERE id=%d';
+    sql = this.parseSql(sql, 10);
+    //sql is SELECT * FROM think_group WHERE id=10
+  }
+}
+```
+
+#### model.startTrans()
+
+* `return` {Promise}
+
+开启事务。
+
+#### model.commit()
+
+* `return` {Promise}
+
+提交事务。
+
+#### model.rollback()
+
+* `return` {Promise}
+
+回滚事务。
+
+#### model.transaction(fn)
+
+* `fn` {Function} 要执行的函数
+* `return` {Promise}
+
+使用事务来执行传递的函数，函数要返回 Promise。
+
+```js
+export default class extends think.model.base {
+  updateData(data){
+    return this.transaction(async () => {
+      let insertId = await this.add(data);
+      let result = await this.model('user_cate').add({user_id: insertId, cate_id: 100});
+      return result;
+    })
+  }
+}
+```
+
 
