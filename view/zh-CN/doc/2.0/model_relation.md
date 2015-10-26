@@ -40,6 +40,23 @@ export default class extends think.model.relation {
 }
 ```
 
+也可以直接使用 ES7 里的语法直接定义 `relation` 属性。如：
+
+```js
+export default class extends think.model.relation {
+
+  //直接定义 relation 属性
+  relation = {
+    cate: {},
+    comment: {} 
+  }
+
+  init(...args){
+    super.init(...args);
+  }
+}
+```
+
 #### 单个关系模型的数据格式
 
 ```js
