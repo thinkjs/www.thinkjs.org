@@ -31,9 +31,11 @@ a.versel{ position:relative; display:inline-block;width:65px; height:38px; line-
 .ft-help a{ display:block; line-height:26px;  color:#556677; font-size:14px;}
 .ft-copy{ padding:20px 0;border-top:1px solid #345; font-size:14px; color:#556677; text-align:center;}
 /*banarea*/
-.banarea{ height:460px; background:url(../img/banbg.jpg) no-repeat center bottom; text-align:center;}
+.banarea{ height:560px; background:url(../img/banbg.jpg) no-repeat center bottom; text-align:left;}
+.slogan{width:600px;line-height:50px;font-size: 45px;color: #fff;text-align: left;font-weight: normal;font-family: arial;padding-top: 160px;padding-bottom: 10px;-webkit-font-smoothing: antialiased;}
+.slogan-desc{color: #dedede;font-size: 24px;-webkit-font-smoothing: antialiased;text-align: left;}
 .banimg{ margin:90px 0 50px;width: 780px;height: 115px;}
-.btn-link{ display:inline-block; width:260px; height:48px; line-height:48px; border-radius:5px; background:#008CF9; font-size:24px; color:#fff; text-align:center;}
+.btn-link{ display:inline-block; width:260px; height:48px; line-height:48px; border-radius:5px; background:#008CF9; font-size:24px; color:#fff; text-align:center;margin-top: 60px;}
 .banbot{ height:58px; line-height:58px; background:#223343;}
 .banbot .wrap{ position:relative;}
 .banbot p{ font-size:16px; color:#fff;}
@@ -142,10 +144,13 @@ i.icon-fet8{ background-position:-70px -210px;}
   .logo{margin: 10px auto;float: none}
   .headr{float:none;border-top: 1px solid #efefef;}
   .nav li.discuss{display: none;}
-  .nav{;display: block;}
+  .nav{;display: flex;justify-content:space-between;margin-right: 0}
+  .nav li{float: none;flex: ;}
   .banimg{width: 90%;height: auto;margin: 0}
-  .banarea{height: auto;padding: 65px 0;background-image: url(../img/banbg_640.jpg);}
-  .btn-link{width: 180px;height: 32px;font-size: 16px;line-height: 32px;margin-top: 40px}
+  .banarea{height: auto;padding: 0;background-image: url(../img/banbg_640.jpg);text-align: center;}
+  .btn-link{width: 180px;height: 32px;font-size: 16px;line-height: 32px;margin-top: 40px;margin-bottom: 20px;}
+  .slogan{padding-top: 40px;font-size: 26px;text-align: center;width: 80%;text-align: center;margin:auto;line-height: 32px}
+  .slogan-desc{display: none;}
   .share{display: none;}
   .banbot{display: none;}
   .tit,.tit2{font-size: 24px;}
