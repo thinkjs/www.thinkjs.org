@@ -10,7 +10,7 @@
 
 ### 视图配置
 
-视图默认配置为：
+视图默认配置如下，可以在配置文件 `src/common/config/view.js` 中修改：
 
 ```js
 export default {
@@ -24,6 +24,16 @@ export default {
 ```
 
 `注：` 视图默认根目录在 `view/`。如果想每个模块有独立的视图目录，将配置 `root_path` 修改为空即可。
+
+#### 修改连接符
+
+默认控制器和操作之间的连接符是 `_`，文件名类似为 `index_index.html`，如果想将控制器作为一层目录的话，可以将连接符修改为 `/`。
+
+```js
+export default {
+  file_depr: '/'
+}
+```
 
 
 
