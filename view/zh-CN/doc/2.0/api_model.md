@@ -50,9 +50,9 @@ module.exports = think.model({
 
 数据表索引，默认自动从数据表分析。
 
-#### model.readonlyFields
+<!-- #### model.readonlyFields
 
-只读字段列表，数据更新时不会更新这些字段。
+只读字段列表，数据更新时不会更新这些字段。 -->
 
 #### model.config
 

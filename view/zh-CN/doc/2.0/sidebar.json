@@ -38,11 +38,9 @@
       "国际化": "i18n",
       "路径常量": "path_cost",
       "REST API": "rest_api",
-      "页面静态化": "html_cache",
       "定时任务": "crontab",
       "线上部署": "deploy",
-      "推荐模块": "recommend_modules",
-      "更多功能": "more"
+      "推荐模块": "recommend_modules"
     },
     "API": {
       "think": "api_think",
