@@ -130,12 +130,18 @@ module.exports = {
 可以通过下面直接 function 的方式创建一个简单的行为，文件为 `App/Conf/tag.js`：
 
 ```js
-module.exports = {app_begin: [function(http){ // 会传递一个包装的 http 对象
-    if (http.group !== 'Home') {return;};
+module.exports = {app_begin: [
+    function(http){ // 会传递一个包装的 http 对象
+        if (http.group !== 'Home') {
+            return;
+        };
         var userAgent = http.getHeader('user-agent').toLowerCase();
-        var flag = ["iphone", "android"].some(function(item){return userAgent.indexOf(item) > -1;
+        var flag = ["iphone", "android"].some(function(item){
+            return userAgent.indexOf(item) > -1;
         })
-        if (flag) {http.group = "Mobile";}
+        if (flag) {
+            http.group = "Mobile";
+        }
     }]
 }
 ```
@@ -149,11 +155,16 @@ module.exports = Behavior(function(){
     return {
         run: function(){
             var http = this.http; // 基类中的 init 方法会自动把传递进来的 http 对象放在当前对象上。
-            if (http.group !== 'Home') {return;};
+            if (http.group !== 'Home') {
+                return;
+            };
             var userAgent = http.getHeader('user-agent').toLowerCase();
-            var flag = ["iphone", "android"].some(function(item){return userAgent.indexOf(item) > -1;
+            var flag = ["iphone", "android"].some(function(item){
+                return userAgent.indexOf(item) > -1;
             })
-            if (flag) {http.group = "Mobile";}
+            if (flag) {
+                http.group = "Mobile";
+            }
         }
     }
 })

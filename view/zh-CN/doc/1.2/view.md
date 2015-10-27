@@ -64,7 +64,7 @@ http.get.name // 从 http 对象中获取 get 参数 name 的值
 
 模版渲染使用 `display` 方法，如：
 
-```
+```js
 this.display(); // 自动识别模版路径
 this.display("home:group:list"); // 渲染 Home/group_list.html 模版文件
 this.display("/home/welefen/xxx/a.html"); //

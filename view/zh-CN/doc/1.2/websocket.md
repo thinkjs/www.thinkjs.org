@@ -66,7 +66,9 @@ socket.onopen = function(){}
 这里会根据路由解析 url`/websocket/open`，如：解析到的 group 为 home，controller 为 websocket, action 为 open。那么则会执行 `App/Lib/Controller/Home/WebsocketController.js` 下的 `openAction` 方法，并且传递进去的 http 对象上多了如下的属性：
 
 ```js
-openAction: function(){var websocket = this.http.websocket; // 通过这个属性可以取到 WebSocket 对象，如：可以将这个对象存在一个对象池里，方面后续使用（比如：广播事件）}
+openAction: function(){
+    var websocket = this.http.websocket; // 通过这个属性可以取到 WebSocket 对象，如：可以将这个对象存在一个对象池里，方面后续使用（比如：广播事件）
+}
 ```
 
 <div class="alert alert-info">
@@ -127,7 +129,8 @@ params: {
 
 ```js
 //action 里发送数据到浏览器
-messageAction: function(){var data = this.get(); // 获取所有传递过来的参数
+messageAction: function(){
+    var data = this.get(); // 获取所有传递过来的参数
     this.echo(data); // 输出数据到浏览器，框架会自动 JSON.stringify
 }
 ```
@@ -141,7 +144,9 @@ messageAction: function(){var data = this.get(); // 获取所有传递过来的�
 ```js
 openAction: function(){
     // 监听 websocket 关闭事件
-    this.http.on("websocket.close", function(){//websocket 关闭后逻辑处理})
+    this.http.on("websocket.close", function(){
+        //websocket 关闭后逻辑处理
+    })
 }
 ```
 
@@ -168,7 +173,8 @@ socket.onopen = function(){}
 
 ```js
 // 服务端子协议配置
-"websocket_sub_protocal": function(protocals){return protocals[0]; // 选择第一个子协议
+"websocket_sub_protocal": function(protocals){
+    return protocals[0]; // 选择第一个子协议
 }
 ```
 
@@ -224,7 +230,7 @@ httpInstance.run(app.listener);
 
 广播数据发送是指在一个 websocket 请求里向其他所有或者部分的 websocket 发送数据，需要在 `openAction` 里定义 `websocket.send` 方法。如：
 
-```
+```js
 openAction: function(){
     var websocket = this.http.websocket;
     websocket.send = function(data){
@@ -257,7 +263,7 @@ ThinkJS 会每个 websocket 都添加了 `activeTime` 属性，这个属性值�
 
 有了这个时间点，那么就可以在控制器里里加上超时处理的逻辑了。比如：三十分钟清理一次
 
-```
+```js
 var websocketList = {};
 //30 分钟执行一次清理操作
 setInterval(function(){var now = Date.now();

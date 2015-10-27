@@ -18,7 +18,7 @@ global.getPicModel = function(groupId){
 
 所有的类文件都通过函数 `Class` 来创建，没有特殊情况，直接赋值给 module.exports。如：
 
-```
+```js
 //require 模块放在 module.exports 前面
 var marked = require("markded");
 var toc = require("marked-toc");
@@ -36,7 +36,7 @@ module.exports = Class(function(){
 
 如果创建的类还有一些属性或者方法，那么可以重新定义一个变量，如：
 
-```
+```js
 var App = module.exports = Class(function(){...})
 //listener 方法
 App.listener = function(){}

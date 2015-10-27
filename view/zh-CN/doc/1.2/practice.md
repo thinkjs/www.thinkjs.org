@@ -11,7 +11,8 @@
 // App/Lib/Controller/Home/BaseController.js
 module.exports = Controller(function(){
     return {
-        init: function(http){this.super("init", http);
+        init: function(http){
+            this.super("init", http);
             // 给模版里设置 title 等一些字段
             this.assign({
                 title: "ThinkJS 官网",
@@ -69,7 +70,8 @@ module.exprots = Controller(function(){
                 // 用户信息为空
                 if(isEmpty(userInfo)){
                     //ajax 访问返回一个 json 的错误信息
-                    if(self.isAjax()){return self.error(403, "用户未登录，不能访问")
+                    if(self.isAjax()){
+                        return self.error(403, "用户未登录，不能访问")
                     }else{
                         // 跳转到登录页
                         return self.redirect("/index/login");

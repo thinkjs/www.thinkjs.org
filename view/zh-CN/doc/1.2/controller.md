@@ -65,7 +65,7 @@ module.exports = Controller(function(){
 
 这时候就可以在 init 方法里判断是否已经登录，并且把这个 promise 返回，后续的 action 执行则是在这个 then 之后执行。如：
 
-```
+```js
 module.exports = Controller(function(){
     return {
         // 这里会传递一个包装后的 http 对象进来

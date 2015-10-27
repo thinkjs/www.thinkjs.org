@@ -46,7 +46,8 @@ module.exports = {action_init: [function(http){
         // 对 get 请求参数进行变量过滤器
         for(key in http.get){
             // 使用对应的类型转化
-            if(types.indexOf(key) > -1){http.get[key] = filter(http.get[key], key);
+            if(types.indexOf(key) > -1){
+                http.get[key] = filter(http.get[key], key);
             }else if(/_id$/.test(key)){ // 如果参数名是_id 结尾的，使用 `id` 转化
                 http.get[key] = filter(http.get([key], "id"));
             }

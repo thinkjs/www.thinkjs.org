@@ -18,7 +18,8 @@ module.exports = {
     'db_host': '127.0.0.1', // 服务器地址
     'db_name': 'think_web', // 数据库名
     'db_user': 'root', // 用户名
-    'db_pwd': '', // 密码'use_websocket': true, // 使用 websocket
+    'db_pwd': '', // 密码
+    'use_websocket': true, // 使用 websocket
 }
 ```
 
@@ -30,7 +31,9 @@ module.exports = {
 // 配置
 module.exports = {
     'list': ['1', '2'],
-    'fn': function(){//do something}
+    'fn': function(){
+        //do something
+    }
 }
 ```
 

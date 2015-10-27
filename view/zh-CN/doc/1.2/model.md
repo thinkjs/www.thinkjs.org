@@ -171,7 +171,9 @@ D("User").add({
     pwd: "xxx",
     email: "welefen@gmail.com"
 }).then(function(insertId){
-    //insertId 为插入到数据库中的 id}).catch(function(err){// 插入异常，比如：email 已经存在
+    //insertId 为插入到数据库中的 id
+}).catch(function(err){
+    // 插入异常，比如：email 已经存在
 })
 ```
 
@@ -183,7 +185,9 @@ D('User').addAll([{
 }, {
     name: "suredy",
     email: "suredy@gmail.com"
-}]).then(function(insertId){})
+}]).then(function(insertId){
+
+})
 ```
 
 ` 注意：` 这里的一次插入多条数据最终拼成的 sql 语句只有一条，不会智能切割。如果数据量非常大（如：>1W 条）的话，一次插入可能会导致报错，请自行切割分块插入。

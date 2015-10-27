@@ -22,8 +22,14 @@ ThinkJS 中的 Promise 使用了 [es6-promise](http://www.html5rocks.com/en/tuto
 
 ```js
 //A 为通过 Class 动态创建的一个类
-var A = Class(function(){return {init: function(name){this.name = name;},
-        getName: function(){return "A" + this.name;}
+var A = Class(function(){
+    return {
+        init: function(name){
+            this.name = name;
+        },
+        getName: function(){
+            return "A" + this.name;
+        }
     }
 });
 // 实例化类 A，可以不写 new
@@ -43,7 +49,8 @@ var B = Class(A, {}); //B 类从 A 类继承而来
 //B 类的实例化
 var instance = B("welefen");
 var name = instance.getName(); /*name is `A welefen`*/
-B.extend({getName: function(){ //B 类对 getName 方法进行了重写
+B.extend({
+    getName: function(){ //B 类对 getName 方法进行了重写
         return "B" + this.name;
     }
 });
@@ -53,7 +60,9 @@ var name = instance.getName(); /*name is `B welefen`*/
 也可以在重写的方法里调用父类的方法，如：
 
 ```js
-var C = Class(A, {getName: function(){var name = this.super("getName");
+var C = Class(A, {
+    getName: function(){
+        var name = this.super("getName");
         return "C" + name;
     }
 }); // 从 A 类继承
@@ -64,7 +73,9 @@ var name = instance.getName(); /*name is `C A welefen`*/
 如果有多级继承，想跨级调用父类的方法时，只能通过 apply 的方式调用原形链上的方法，如：
 
 ```js
-var D = Class(C, {getName: function(){var name = A.prototype.getName.apply(this, arguments);
+var D = Class(C, {
+    getName: function(){
+        var name = A.prototype.getName.apply(this, arguments);
         return 'D' + name;
     }
 }); // 从 C 类继承
@@ -76,7 +87,9 @@ var name = instnace.getName(); /*name is `D A welefen`*/;
 
 ```js
 var A = Class();
-var B = Class({getName: function(){}}).inherits(A); // 此时 B 不含有 getName 方法
+var B = Class({
+    getName: function(){}
+}).inherits(A); // 此时 B 不含有 getName 方法
 ```
 
 

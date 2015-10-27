@@ -18,7 +18,7 @@ create_server_fn: 'create_server_fn_name',
 
 在 `App/Common/common.js` 文件中添加如下的代码：
 
-```
+```js
 // 函数名 create_server_fn_name 需要跟配置 create_server_fn 值一致
 global.create_server_fn_name = function(App){
     var server = require('http').createServer(function (req, res) {

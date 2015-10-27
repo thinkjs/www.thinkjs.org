@@ -69,11 +69,13 @@ redis_port: 6379, //redis 端口
 
 #### 缓存读写
 
-```
+```js
 // 写入缓存
 S("name", "welefen"); // 返回一个 promise
 // 读取缓存
-S("name").then(function(value){//value 为获取到的缓存值});
+S("name").then(function(value){
+    //value 为获取到的缓存值
+});
 // 删除缓存
 S("name", null); 
 // 缓存写入时改变缓存类型和缓存时间
@@ -82,7 +84,9 @@ S("name", "value", {
     timeout: 100 * 10000
 });
 // 修改缓存类型来获取缓存值
-S("name", undefined, {type: "memcache"}).then(function(value){})
+S("name", undefined, {type: "memcache"}).then(function(value){
+
+})
 ```
 
 缓存的读、写、删都是异步操作，都是返回一个 promise。后续的操作如果有依赖，必须在 promise then 里执行。
@@ -93,7 +97,7 @@ S("name", undefined, {type: "memcache"}).then(function(value){})
 
 可以通过函数 `F` 来对文件内容进行快速的读取和写入操作。文件快速写入和读取的根目录为 `App/Runtime/Data/`
 
-```
+```js
 // 数据快速写入
 F("name", {value: "xxx"}); // 写入的文件为 App/Runtime/Data/name.json
 // 数据读取
@@ -112,36 +116,45 @@ var value = F("name", undefined, "/tmp/data");
 
 数据库查询缓存有如下的配置：
 
-```
-// 数据库查询缓存配置
-db_cache_on: true, // 是否启用查询缓存，如果关闭那么 cache 方法则无效
-db_cache_type: "", // 缓存类型，默认为内存缓存
-db_cache_path: CACHE_PATH + "/db", // 缓存路径，File 类型下有效
-db_cache_timeout: 3600, // 缓存时间，默认为 1 个小时
+```js
+{
+    // 数据库查询缓存配置
+    db_cache_on: true, // 是否启用查询缓存，如果关闭那么 cache 方法则无效
+    db_cache_type: "", // 缓存类型，默认为内存缓存
+    db_cache_path: CACHE_PATH + "/db", // 缓存路径，File 类型下有效
+    db_cache_timeout: 3600, // 缓存时间，默认为 1 个小时
+}
 ```
 
 ```js
 // 查询 score>100 的数据
-D('User').cache(true).where({score: ['>', 100]}).select().then(function(data){// 开启查询缓存后，如果有缓存则直接读取缓存，不再从数据库查询})
+D('User').cache(true).where({score: ['>', 100]}).select().then(function(data){  // 开启查询缓存后，如果有缓存则直接读取缓存，不再从数据库查询
+})
 ```
 
 如果使用了 `cache(true)`，则在查询的时候会根据当前拼装的 sql 生成 md5 值作为缓存 key。也可以手工指定缓存 key，如：
 
-```
-D('User').cache('cache_name').select().then(function(data){//data})
+```js
+D('User').cache('cache_name').select().then(function(data){
+    //data
+})
 ```
 
 也可以指定单条查询的的缓存时间，如：
 
 ```js
 // 手工将缓存时间修改为 3 个小时
-D('User').cache(3 * 3600).select().then(function(){});
+D('User').cache(3 * 3600).select().then(function(){
+
+});
 // 手工指定缓存 key 并修改缓存时间
-D('User').cache('cache_name', 3 * 3600).select().then(function(){});
+D('User').cache('cache_name', 3 * 3600).select().then(function(){
+
+});
 ```
 
 如果指定了缓存 key，那么在外部可以通过 `S` 函数来读取缓存，如：
-```
+```js
 // 如果缓存类型和通用的缓存类型不同，那么这里需要带上缓存类型进行读取
 S('cache_name').then(function(data){})
 ```
@@ -237,10 +250,13 @@ var getCacheFilename = function(key){var value = md5(key);
 
 如果想重新定义生成缓存文件的函数，可以修改配置 `html_cache_file_callback`， 如：
 
-```
-'html_cache_file_callback': function(key, http){var value = md5(key);
-    // 生成二级子目录
-    return value[0] + "/" + value[1] + "/" + value;
+```js
+{
+    "html_cache_file_callback": function(key, http){
+        var value = md5(key);
+        // 生成二级子目录
+        return value[0] + "/" + value[1] + "/" + value;
+    }
 }
 ```
 

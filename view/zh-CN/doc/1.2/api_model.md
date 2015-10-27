@@ -29,7 +29,7 @@ D('Group').field(['id', 'title'], true).select();
 * `table` String 表名
 * `hasPrefix` Boolean 表名里是否已经含有了表前缀
 
-```
+```js
 // 设置表名为 xxx
 D('Group').table('xxx').select();
 
@@ -106,7 +106,10 @@ D('Pic1').union({table: 'meinv_pic2'}, true).union({table: 'meinv_pic3'}).select
 D('Group').join('meinv_cate ON meinv_group.cate_id=meinv_cate.id').select();
 
 // SELECT * FROM `meinv_group` LEFT JOIN meinv_cate ON meinv_group.cate_id=meinv_cate.id RIGHT JION meinv_tag ON meinv_group.tag_id=meinv_tag.id
-D('Group').join(['meinv_cate ON meinv_group.cate_id=meinv_cate.id', 'RIGHT JOIN meinv_tag ON meinv_group.tag_id=meinv_tag.id']).select();
+D('Group').join([
+  'meinv_cate ON meinv_group.cate_id=meinv_cate.id', 
+  'RIGHT JOIN meinv_tag ON meinv_group.tag_id=meinv_tag.id'
+]).select();
 
 // SELECT * FROM meinv_group INNER JOIN `meinv_cate` AS c ON meinv_group.`cate_id`=c.`id`
 D('Group').join({
@@ -183,7 +186,8 @@ return D('team').alias('tt')
   .where('invest_is_cancel = 0 or invest_is_cancel is null')
   .group('tt.id')
   .order({sum: 'desc'})
-  .having('team_partin_year='+year).buildSql();}).then(function(sql){return D('team')
+  .having('team_partin_year='+year).buildSql();}).then(function(sql){
+    return D('team')
     .field('id as team_id, ta.team_name, ifnull(sum, 0) as sum')
     .alias('ta').join({
       table: sql,
@@ -303,6 +307,7 @@ D('GROUP').where({name: ['EXP', "='name'"]});
 // 将 view_nums 字段值加 1
 D('GROUP').update({view_nums: ['EXP', 'view_nums+1']});
 ```
+
 **LIKE 条件 **
 
 ```js
@@ -625,9 +630,13 @@ D('Group').where({id: 1000}).find().then(function(data){
 
 ```js
 // 将 id=10 的浏览数加 1
-D('Group').where({id: 10}).updateInc('view_nums').then(function(){})
+D('Group').where({id: 10}).updateInc('view_nums').then(function(){
+
+})
 // 将 id=100 的浏览数加 10
-D('Group').where({id: 100}).updateInc('view_nums', 10).then(function(){})
+D('Group').where({id: 100}).updateInc('view_nums', 10).then(function(){
+
+})
 ```
 
 #### updateDec(field, step)
@@ -640,9 +649,13 @@ D('Group').where({id: 100}).updateInc('view_nums', 10).then(function(){})
 
 ```js
 // 将 id=10 的浏览数减 1
-D('Group').where({id: 10}).updateDec('view_nums').then(function(){})
+D('Group').where({id: 10}).updateDec('view_nums').then(function(){
+
+})
 // 将 id=100 的浏览数减 10
-D('Group').where({id: 100}).updateDec('view_nums', 10).then(function(){})
+D('Group').where({id: 100}).updateDec('view_nums', 10).then(function(){
+
+})
 ```
 
 #### getField(field, onlyOne)
@@ -700,7 +713,9 @@ D('Article').page(this.get("page"), 20).countSelect().then(function(data){
 D('Article').page(10).group('name').countSelect().then(function(data){})
 
 //countSelect 里有子查询
-D('Group').group('name').buildSql().then(function(sql){return D('Artigle').table(sql, true).countSelect();}).then(function(data){})
+D('Group').group('name').buildSql().then(function(sql){
+  return D('Artigle').table(sql, true).countSelect();
+}).then(function(data){})
 ```
 
 #### buildSql(options)
@@ -736,7 +751,9 @@ var data = [
   mapOptions.model.getPk(),
   value.where ? ('AND' + value.where) : ''
 ]
-D('Group').query('SELECT b.%s, a.%s FROM %s as a, %s as b %s AND a.%s=b.%s %s', data).then(function(data){// 查询的数据})
+D('Group').query('SELECT b.%s, a.%s FROM %s as a, %s as b %s AND a.%s=b.%s %s', data).then(function(data){
+  // 查询的数据
+})
 ```
 
 sql 语句中支持如下字符串的自动替换：
@@ -780,7 +797,7 @@ D('Group').query('SELECT * FROM __TABLE__ as a LEFT JOIN __USER__ as u ON a.id=u
 
 事务操作 DEMO:
 
-```
+```js
 var model = D('Group');
 // 开启事务
 model.startTrans().then(function(){

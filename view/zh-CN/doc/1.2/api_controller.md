@@ -108,6 +108,7 @@ testAction: function(){
 ### post(name)
 
 获取 post 过来的值，默认值为空字符串。
+
 ```js
 testAction: function(){
     // 获取 post 值
@@ -116,6 +117,7 @@ testAction: function(){
 ```
 
 如果不传 `name`，则为获取所有的 post 值。
+
 ```js
 testAction: function(){
     // 获取所有的 post 值
@@ -378,10 +380,13 @@ testAction: function(){
 * 如果 templateFile 是 `group:controller:action`，那么会进行解析再拼接成对应的模版文件路径
 * 如果 templateFile 是个绝对路径，那么直接调用
 
-```
-testAction: function(){this.assign('name', 'xxx');
+```js
+testAction: function(){
+    this.assign('name', 'xxx');
     // 自动分析模版文件路径
-    this.fetch().then(function(content){//content 为渲染后的内容});
+    this.fetch().then(function(content){
+        //content 为渲染后的内容
+    });
     // 路径前面追加 VIEW_PATH
     this.fetch('home/test_a.html');
     // 绝对路径，直接调用
