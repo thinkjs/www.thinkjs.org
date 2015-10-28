@@ -6,7 +6,7 @@ import child_process from 'child_process';
 
 import marked from "marked";
 import markToc from "marked-toc";
-import uslug from 'uslug';
+//import uslug from 'uslug';
 //import pangunode from 'pangunode';
 
 import base from './base.js';

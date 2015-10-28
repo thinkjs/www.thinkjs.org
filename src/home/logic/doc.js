@@ -1,4 +1,7 @@
 export default class extends think.logic.base {
+
+  version = "string|in:1.2,2.0|default:2.0";
+
   /**
    * doc logic
    * @return {} []
@@ -6,7 +9,7 @@ export default class extends think.logic.base {
   indexAction(){
     this.rules = {
       doc: "string|default:index",
-      version: "string|in:1.2,2.0|default:2.0"
+      version: this.version
     }
   }
   /**
@@ -15,7 +18,7 @@ export default class extends think.logic.base {
    */
   searchAction(){
     this.rules = {
-      version: "string|in:1.2,2.0|default:2.0",
+      version: this.version,
       keyword: 'required'
     }
   }
@@ -25,7 +28,7 @@ export default class extends think.logic.base {
    */
   singleAction(){
     this.rules = {
-      version: "string|in:1.2,2.0|default:2.0",
+      version: this.version,
     }
   }
 }
