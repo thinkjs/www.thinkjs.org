@@ -69,6 +69,10 @@ http 对象会在 middleware, logic, controller, view 中传递。
 
 当前请求的 payload 数据，提交型的请求才含有该值。
 
+#### http._payloadParsed
+
+表示当前请求的 payload 数据是否已经解析。
+
 #### http._get
 
 存放 GET 参数值。

@@ -61,3 +61,6 @@ cd ..
 
 scp -r output.tar.gz qiwoo@101.198.153.219:~;
 ssh qiwoo@101.198.153.219 "tar zxvfm ~/output.tar.gz -C /home/qiwoo/www/new.thinkjs.org;rm -rf ~/output.tar.gz;pm2 restart new.thinkjs.org";
+
+wget http://new.thinkjs.org/doc.html;
+rm -rf doc.html;

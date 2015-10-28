@@ -263,3 +263,16 @@ SockJS 为了安全，在建立连接时不提供相关的 cookie，所以无法
 #### 聊天代码示例
 
 聊天示例代码请见：<https://github.com/75team/thinkjs2-demos/tree/master/websocket-sockjs>。
+
+### nginx 反向代理
+
+nginx 从 `1.3.13` 版本开始支持反向代理 WebSocket 请求，如果在项目中使用，需要在 nginx 配置文件中添加如下的配置：
+
+```nginx
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection "upgrade";
+```
+
+`注`： 使用 `thinkjs` 命令创建项目时，会自动创建 nginx 配置文件，并且配置文件已经包含了上面 2 个配置，可以直接使用。
+
+nginx 代理 WebSocket 请求的文档请见 <http://nginx.org/en/docs/http/websocket.html>。
