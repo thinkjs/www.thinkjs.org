@@ -389,6 +389,8 @@ export default class extends think.controller.base {
 
 输出结果为 `{errno: 1000, errmsg: "connect error"}`，客户端判断 `errno` 大于 0，就知道当前接口有异常，并且通过 `errmsg` 拿到具体的错误信息。
 
+##### 配置错误号和错误信息
+
 如果每个地方输出错误的时候都要指定错误号和错误信息势必比较麻烦，比较好的方式是把错误号和错误信息在一个地方配置，然后输出的时候只要指定错误号，错误信息根据错误号自动读取。
 
 错误信息支持国际化，所以配置放在 `src/common/config/locale/[lang].js` 文件中。如：
@@ -400,6 +402,20 @@ export default {
 ```
 
 通过上面的配置后，执行 `this.fail(10001)` 时会自动读取到对应的错误信息。
+
+##### 友好的错误号
+
+在程序里执行 `this.fail(10001)` 虽然能输出正确的错误号和错误信息，但人不能直观的看出来错误号对应的错误信息是什么。
+
+这时可以将 key 配置为大写字符串，值为错误号和错误信息。如:
+
+```js
+export default {
+  GET_DATA_ERROR: [1234, 'get data error'] //key 必须为大写字符或者下划线才有效
+}
+```
+
+执行 `this.fail('GET_DATA_ERROR')` 时也会自动取到对应的错误号和错误信息。
 
 #### 格式配置
 
@@ -494,7 +510,7 @@ export default class extends think.controller.base {
 * `isAjax()` 是否是 AJAX 请求
 * `ip()` 获取请求用户的 ip
 * `redirect(url)` 跳转到一个 url
-* `echo(data)` 输出数据，会自动调用 JSON.stringify
+* `write(data)` 输出数据，会自动调用 JSON.stringify
 * `end(data)` 结束当前的 http 请求
 * `json(data)` 输出 JSON 数据，自动发送 JSON 相关的 Content-Type
 * `jsonp(data)` 输出 JSONP 数据，请求参数名默认为 `callback`
