@@ -214,6 +214,8 @@ export default class extends Base {
 }
 ```
 
+如果解析后的 Action 值里含有 `_`，会自动做转化，具体的转化策略见 [路由 -> 大小写转化](./route.html)。
+
 ### 后置操作 __after
 
 ThinkJS 支持后置操作，方法名为 `__after`，该方法会在具体的 Action 调用之后执行。如果具体的 Action 里阻止了后续的代码继续执行，则后置操作不会调用。

@@ -29,6 +29,8 @@ pm2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用�
 pm2 startOrGracefulReload pm2.json
 ```
 
+pm2 详细的配置请见 <http://pm2.keymetrics.io/docs/usage/application-declaration/>。
+
 ### 使用 nginx 做反向代理
 
 创建项目时，会在项目目录创建一个名为 `nginx.conf` 的 nginx 配置文件。配置文件内容类似如下：
