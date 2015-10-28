@@ -1,6 +1,6 @@
 ## http
 
-这里的 http 对象并不是 Node.js 里的 http 模块，而是 ThinkJS 里的 request 和 response 2个对象进行包装后的对象。
+这里的 http 对象并不是 Node.js 里的 http 模块，而是对 request 和 response 对象包装后一个新的对象。
 
 ```js
 var http = require('http');

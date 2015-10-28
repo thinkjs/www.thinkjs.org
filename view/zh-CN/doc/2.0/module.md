@@ -6,7 +6,7 @@ ThinkJS 创建项目时支持多种项目模式，默认创建的项目是按模
 
 进去 `src/` 目录就可以看到模块列表：
 
-```
+```text
 drwxr-xr-x   5 welefen  staff  170 Aug 18 15:55 common/
 drwxr-xr-x   6 welefen  staff  204 Sep  8 19:14 home/
 ```

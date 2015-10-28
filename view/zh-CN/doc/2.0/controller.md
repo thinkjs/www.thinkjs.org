@@ -325,7 +325,7 @@ module.exports = think.controller({
 })
 ```
 
-当然更好的解决办法是推荐使用 ES6 里的 Generator Function 和 Arrows Function，这样就可以彻底解决 this 作用域的问题。
+当然更好的解决办法是推荐使用 ES6 里的 Generator Function 和 Arrow Function，这样就可以彻底解决 this 作用域的问题。
 
 ##### 使用 Generator Function
 ```js
@@ -339,7 +339,7 @@ export default class extends think.controller.base {
 ```
 
 
-##### 使用 Arrows Function
+##### 使用 Arrow Function
 
 ```js
 module.exports = think.controller({

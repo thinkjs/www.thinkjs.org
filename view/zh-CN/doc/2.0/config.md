@@ -294,8 +294,6 @@ export default {
 };
 ```
 
-#### csrf
-
 #### db
 
 数据库配置，`config/db.js`。

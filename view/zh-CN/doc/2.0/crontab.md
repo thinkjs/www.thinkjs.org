@@ -76,7 +76,7 @@ node www/prodution.js home/index/index;
 
 借助系统里的 crontab 可以做到定时执行，通过命令 `crontab -e` 来编辑定时任务，如：
 
-```
+```sh
 0 */1 * * * /bin/sh project_path/crontab/a.sh # 1 小时执行一次
 ```
 

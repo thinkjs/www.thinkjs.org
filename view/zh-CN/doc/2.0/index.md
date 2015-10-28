@@ -71,7 +71,7 @@ ThinkJS 里的 `Action`除了可以响应用户的请求，同时支持在命令
 
 #### Hook 和 Middleware
 
-ThinkJS 支持 Hook 和 Middleware 机制，内置了大量的功能，同时也很方便进行扩展。
+ThinkJS 使用 Hook 和 Middleware 机制，可以灵活的对访问请求进行拦截处理。
 
 #### 详细的日志
 
@@ -120,7 +120,7 @@ koa 使用 ES6 里的 `Generator Function` 解决了异步回调的问题，但 
 
 sails 也是一个提供整套解决方案的 Node.js 框架，对数据库、REST API、安全方面也很多封装，使用起来比较方便。
 
-但 sails 对异步回调的问题还没有优化，还是使用 callback 的方式，给开发带来很大的不便，项目中无法使用 ES6/7 这些新的特性。
+但 sails 对异步回调的问题还没有优化，还是使用 callback 的方式，给开发带来很大的不便，导致项目中无法较好的使用 ES6/7 特性。
 
 
 #### ThinkJS 的不足
@@ -136,6 +136,7 @@ sails 也是一个提供整套解决方案的 Node.js 框架，对数据库、RE
 
 关于 ES6/7 特性可以参考下面的文档：
 
+* [learn-es2015](http://babeljs.io/docs/learn-es2015/)
 * [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 * [ECMAScript 6 Features](https://github.com/lukehoban/es6features)
 * [ECMAScript 6 compatibility table](http://kangax.github.io/compat-table/es6/)

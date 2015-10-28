@@ -48,7 +48,7 @@ export default class extends think.controller.base {
       if(b == 2){
         return `<h${b} id="${this.generateTocName(c)}">${c}</h${b}>`;
       }
-      return `<h${b} id="${this.generateTocName(c)}"><a href="#${this.generateTocName(c)}"></a>${c}</h${b}>`;
+      return `<h${b} id="${this.generateTocName(c)}"><a class="anchor" href="#${this.generateTocName(c)}"></a>${c}</h${b}>`;
     });
     markedContent = markedContent.replace(/<h(\d)[^<>]*>([^<>]+)<\/h\1>/, (a, b, c) => {
       return `${a}<div class="toc">${tocContent}</div>`;

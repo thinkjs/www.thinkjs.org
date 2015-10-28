@@ -25,7 +25,7 @@ pm2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用�
 
 可以在项目目录下使用下面的命令来启动/重启服务：
 
-```
+```sh
 pm2 start pm2.json
 ```
 
@@ -33,7 +33,7 @@ pm2 start pm2.json
 
 创建项目时，会在项目目录创建一个名为 `nginx.conf` 的 nginx 配置文件。配置文件内容类似如下：
 
-```
+```nginx
 server {
     listen 80;
     server_name localhost;

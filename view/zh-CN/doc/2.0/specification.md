@@ -8,7 +8,7 @@
 
 为了避免这种情况的发生，文件路径尽量都使用小写字符。并且在服务启动时，ThinkJS 会检测项目下文件路径，如果有大写字母则会告警，如：
 
-```
+```text
 [2015-10-13 10:36:59] [WARNING] filepath `admin/controller/apiBase.js` has uppercases.
 ```
 
@@ -67,7 +67,7 @@ Generator Function 是 ES6 里提出一种解决异步执行的方法，它只�
 
 1、Generator Function 调用后返回一个迭代器，需要借助第三方模块来执行。如：`co`
 
-2、Generator Function 无法和 Arrows Function 一起使用。
+2、Generator Function 无法和 Arrow Function 一起使用。
 
 3、Generator Function 调用另一个 Generator Function 时，需要使用 `yield *`，带来不便。
 

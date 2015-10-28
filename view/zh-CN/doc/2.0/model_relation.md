@@ -86,7 +86,7 @@ export default class extends think.model.relation {
 
 * `type` 关联关系类型
 * `model` 关联表的模型名，默认为配置的 key，这里为 `cate`
-* `name` 对应的数据的字段名，默认为配置的 key，这里为 `cate`
+* `name` 对应的数据字段名，默认为配置的 key，这里为 `cate`
 * `key` 当前模型的关联 key
 * `fKey` 关联表与只对应的 key
 * `field` 关联表查询时设置的 field，如果需要设置，必须包含 `fKey` 对应的值

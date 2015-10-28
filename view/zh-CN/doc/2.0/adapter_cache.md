@@ -55,7 +55,7 @@ export default {
 
 可以通过下面的命令创建一个名为 `foo` 缓存类：
 
-```js
+```sh
 thinkjs adapter cache/foo
 ```
 
