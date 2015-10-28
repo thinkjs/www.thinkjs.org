@@ -1,4 +1,4 @@
 export default {
   route_parse: ['prepend', 'get_lang'],
-  view_filter: ['append', 'replace_image']
+  view_parse: ['append', 'replace_image']
 }

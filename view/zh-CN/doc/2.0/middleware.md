@@ -8,35 +8,39 @@ ThinkJS 里通过 middleware 来处理这些逻辑，每个逻辑都是一个独
 
 框架里包含的 hook 列表如下：
 
+* `request_begin` 请求开始
 * `payload_parse` 解析提交上来的数据
 * `payload_validate` 验证提交的数据
-* `resource_check` 静态资源请求检测
-* `resource_output` 静态资源输出
+* `resource` 静态资源请求处理
 * `route_parse` 路由解析
-* `app_begin` 项目开始执行
-* `view_init` 视图初始化
+* `logic_before` logic 处理之前
+* `logic_after` logic 处理之后
+* `controller_before` controller 处理之前
+* `controller_after` controller 处理之后
+* `view_before` 视图处理之前
 * `view_template` 视图文件处理
 * `view_parse` 视图解析
-* `view_filter` 视图内容过滤
-* `view_end` 视图结束
-* `app_end` 项目结束
+* `view_after` 视图处理之后
+* `response_end` 请求响应结束
 
 每个 hook 里调用多个 middleware 来完成处理，具体包含的 middleware 如下：
 
 ```js
 export default {
+  request_begin: [],
   payload_parse: ['parse_form_payload', 'parse_single_file_payload', 'parse_json_payload', 'parse_querystring_payload'],
   payload_validate: ['validate_payload'],
-  resource_check: ['resource'],
-  resource_output: ['output_resource'],
+  resource: ['check_resource', 'output_resource'],
   route_parse: ['rewrite_pathname', 'subdomain_deploy', 'route'],
-  app_begin: ['check_csrf', 'read_html_cache'],
-  view_init: [],
+  logic_before: ['read_html_cache', 'check_csrf'],
+  logic_after: [],
+  controller_before: [],
+  controller_after: [],
+  view_before: [],
   view_template: ['locate_template'],
   view_parse: ['parse_template'],
-  view_filter: [],
-  view_end: ['write_html_cache'],
-  app_end: []
+  view_after: ['write_html_cache'],
+  response_end: []
 };
 ```
 
@@ -69,6 +73,20 @@ export default {
 ```
 
 `注：`建议使用追加的方式配置 middleware，系统的 middleware 名称可能在后续的版本中有所修改。
+
+### 执行 hook
+
+可以通过 `think.hook` 方法执行一个对应的 hook，如：
+
+```js
+await think.hook('payload_parse', http, data); //返回的是一个 Promise
+```
+
+在含有 `http` 对象的类中可以直接使用 `this.hook` 来执行 hook，如：
+
+```js
+await this.hook('payload_parse', data);
+```
 
 ### 创建 middleware 
 

@@ -10,8 +10,8 @@ pm2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用�
 {
   "apps": [{
     "name": "demo",
-    "script": "production.js",
-    "cwd": "/Users/welefen/Develop/git/thinkjs/demo/www",
+    "script": "www/production.js",
+    "cwd": "/Users/welefen/Develop/git/thinkjs/demo",
     "max_memory_restart": "1G",
     "autorestart": true,
     "node_args": [],
@@ -23,10 +23,10 @@ pm2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用�
 }
 ```
 
-可以在项目目录下使用下面的命令来启动/重启服务：
+将 `cwd` 配置值改为线上真实的项目路径，然后在项目目录下使用下面的命令来启动/重启服务：
 
 ```sh
-pm2 start pm2.json
+pm2 startOrGracefulReload pm2.json
 ```
 
 ### 使用 nginx 做反向代理
