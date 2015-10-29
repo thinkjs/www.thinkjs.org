@@ -33,5 +33,7 @@ think.middleware('replace_image', (http, content) => {
   }
   return content.replace(/http:\/\/p(\d)\.qhimg\.com\/(\w+)\.(\w+)/g, (a, b, c, d) => {
     return `http://p${b}.qhimg.com/${c}.webp`;
+  }).replace(/https:\/\/p\.ssl\.qhimg\.com\/(\w+)\.(\w+)/g, (a, b) => {
+    return `https://p.ssl.qhimg.com/${b}.webp`;
   });
 });

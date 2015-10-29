@@ -26,6 +26,7 @@ return array (
 	'IMG_DATAURI_MAX_SIZE' => 5000,
 	'IMG_DATAURI_SUPPORT_IE' => false,
 	'MOD_STATIC_TO_CDN' => true,  //静态资源上线到CDN
+	'CDN_HTTPS' => true,
 	'MOD_JS_TPL_REPLACE' => false,  //前端模版替换
 	'MOD_EXTERNAL_TO_INLINE' => false,  //外链资源编译为内联资源
 	'MOD_STRING_REPLACE' => false,  //代码替换功能
