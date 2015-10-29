@@ -1,4 +1,4 @@
 export default {
-  'title-home': 'ThinkJS - A Node.js MVC Framework Support All Of ES6/7 Features',
+  'title-home': 'ThinkJS - use full ES6/7 features to develop web applications',
   'title-changelog': 'Changelog - ThinkJS'
 }

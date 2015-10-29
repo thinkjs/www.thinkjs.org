@@ -247,6 +247,21 @@ export default class extends think.model.base {
 }
 ```
 
+##### null 条件
+
+```js
+export default class extends think.model.base {
+  where1(){
+    //SELECT * FROM `think_user` where ( title IS NULL );
+    return this.where({title: null}).select();
+  }
+  where2(){
+    //SELECT * FROM `think_user` where ( title IS NOT NULL );
+    return this.where({title: ['!=', null]}).select();
+  }
+}
+```
+
 ##### EXP 条件
 
 ThinkJS 默认会对字段和值进行转义，防止安全漏洞。有时候一些特殊的情况不希望被转义，可以使用 EXP 的方式，如：
@@ -395,6 +410,18 @@ export default class extends think.controller.base {
     let model = this.model('user');
     //设置要查询的字符串，字符串方式，多个用逗号隔开
     let data = await model.field('name,title').select();
+  }
+}
+```
+
+##### 调用 SQL 函数
+
+```js
+export default class extends think.controller.base {
+  //字段里调用 SQL 函数
+  async listAction(){
+    let model = this.model('user');
+    let data = await model.field('id, INSTR(\'30,35,31,\',id + \',\') as d').select();
   }
 }
 ```
@@ -637,8 +664,14 @@ export default class extends think.model.base {
     //SELECT * FROM `think_user` ORDER BY id DESC, name ASC
     return this.order('id DESC, name ASC').select();
   }
+  getList1(){
+    //SELECT * FROM `think_user` ORDER BY count(num) DESC
+    return this.order('count(num) DESC').select();
+  }
 }
 ```
+
+
 
 ##### 数组
 
@@ -737,52 +770,52 @@ export default class extends think.model.base {
 
 是否在 SQL 之前添加 explain 执行，用来查看 SQL 的性能。
 
-#### model._optionsFilter(options)
+#### model.optionsFilter(options)
 
 操作选项过滤。
 
-#### model._dataFilter(data)
+#### model.dataFilter(data)
 
 * `data` {Object | Array} 要操作的数据
 
 数据过滤。
 
-#### model._beforeAdd(data)
+#### model.beforeAdd(data)
 
 * `data` {Object} 要添加的数据
 
 添加前置操作。
 
-#### model._afterAdd(data)
+#### model.afterAdd(data)
 
 * `data` {Object} 要添加的数据
 
 添加后置操作。
 
-#### model._afterDelete(data)
+#### model.afterDelete(data)
 
 删除后置操作。
 
-#### model._beforeUpdate(data)
+#### model.beforeUpdate(data)
 
 * `data` {Object} 要更新的数据
 
 更新前置操作。
 
-#### model._afterUpdate(data)
+#### model.afterUpdate(data)
 
 * `data` {Object} 要更新的数据
 
 更新后置操作。
 
-#### model._afterFind(data)
+#### model.afterFind(data)
 
 * `data` {Object} 查询的单条数据
 * `return` {Object | Promise}
 
 `find` 查询后置操作。
 
-#### model._afterSelect(data)
+#### model.afterSelect(data)
 
 * `data` [Array] 查询的数据数据
 * `return` {Array | Promise}
