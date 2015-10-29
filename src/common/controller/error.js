@@ -9,6 +9,18 @@ export default class extends think.controller.base {
    * @return {Promise}        []
    */
   displayErrorPage(status){
+
+    let lang = this.lang();
+    let supportLangs = think.config('locale.support');
+    if(lang && supportLangs.indexOf(lang) === -1){
+      lang = '';
+    }
+    if(!lang){
+      lang = supportLangs[0];
+    }
+    this.lang(lang, true);
+    
+
     let module = 'common';
     if(think.mode !== think.mode_module){
       module = this.config('default_module');

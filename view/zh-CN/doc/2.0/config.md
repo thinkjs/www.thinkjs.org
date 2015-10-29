@@ -4,15 +4,15 @@ ThinkJS 提供了灵活的配置，可以在不同模式下使用不同的配置
 
 `注意：不可将一个 http 请求中的私有值设置到配置中，这将会被下一个 http 设置的值给冲掉。`
 
-### 项目模式
+### 项目环境
 
-ThinkJS 默认支持 3 种项目模式，可以根据这 3 种模式设置不同的配置，以满足不同情况下的配置需要。
+ThinkJS 默认支持 3 种项目环境，可以根据不同的环境进行配置，以满足不同情况下的配置需要。
 
-* `development` 开发模式
-* `testing` 测试模式
-* `production` 线上模式
+* `development` 开发环境
+* `testing` 测试环境
+* `production` 线上环境
 
-项目里也可以扩展其他的模式，当前使用哪种模式可以在 [入口文件](./app_structure.html#wwwindexjs) 中设置，设置 `env` 值即可。
+项目里也可以扩展其他的环境，当前使用哪种环境可以在 [入口文件](./app_structure.html#wwwindexjs) 中设置，设置 `env` 值即可。
 
 ### 定义配置文件
 
@@ -78,14 +78,11 @@ export default {
 
 框架支持多种级别的配置文件，会按以下顺序进行读取：
 
-框架默认的配置 -> 项目模式下框架配置 -> 项目公共配置 -> 项目模式下的公共配置 -> 模块下的配置。
-
-
-
+`框架默认的配置 -> 项目模式下框架配置 -> 项目公共配置 -> 项目模式下的公共配置 -> 模块下的配置`
 
 ### 配置读取
 
-##### 通过 config 方法获取
+#### 通过 config 方法获取
 
 在 Controller，Logic，Middleware 等地方可以通过 `this.config` 来获取。如：
 
@@ -94,7 +91,7 @@ let db = this.config('db'); //读取数据库的所有配置
 let host = this.config('db.host'); //读取数据库的 host 配置，等同于 db.host
 ```
 
-##### 通过 http 对象上的 config 方法获取
+#### 通过 http 对象上的 config 方法获取
 
 http 对象也有 config 方法用来获取相关的配置，如：
 
@@ -102,7 +99,7 @@ http 对象也有 config 方法用来获取相关的配置，如：
 let db = http.config('db');
 ```
 
-##### 其他地方配置读取
+#### 其他地方配置读取
 
 其他地方可以通过 `think.config` 来读取相关的配置：
 
@@ -479,3 +476,17 @@ export default {
   }
 };
 ```
+
+
+### 扩展配置
+
+项目里可以根据需要扩展配置，扩展配置只需在 `src/common/config/` 建立对应的文件即可，如：
+
+```js
+// src/common/config/foo.js
+export default {
+  name: 'bar'
+}
+```
+
+这样就可以通过 `think.config('foo')` 来获取对应的配置了。 

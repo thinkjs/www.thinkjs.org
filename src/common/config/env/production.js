@@ -1,3 +1,4 @@
 export default {
-  log_request: true
+  log_request: false,
+  proxy_on: true
 }

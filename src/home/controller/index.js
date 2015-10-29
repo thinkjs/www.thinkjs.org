@@ -30,4 +30,8 @@ export default class extends base {
     this.assign('hasBootstrap', true);
     return this.display();
   }
+
+  ipAction(){
+    this.success(this.ip());
+  }
 }

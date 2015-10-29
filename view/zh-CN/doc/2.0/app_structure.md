@@ -62,11 +62,11 @@
 
 ### nginx.conf
 
-webserver nginx 的配置文件，建议线上使用 nginx 做一层代理。
+nginx 的配置文件，建议线上使用 nginx 做反向代理。
 
 ### src
 
-源代码目录，使用 ES6 特性创建项目才有该目录。需要通过 `npm run watch-compile` 命令编译该目录下的文件到 `app/` 目录。
+源代码目录，使用 `--es6` 参数创建项目才有该目录。需要通过 `npm run watch-compile` 命令编译该目录下的文件到 `app/` 目录。
 
 如果没有使用 ES6 特性创建项目，则直接有 `app/` 目录。
 

@@ -2,45 +2,40 @@
 
 ### 安装 Node.js
 
-ThinkJS 是一款 Node.js 的 MVC 框架，所以安装 ThinkJS 之前，需要先安装 Node.js 环境。可以去 [官方](https://nodejs.org/) 下载最新的安装包进行安装，也可以通过 [taobao](http://npm.taobao.org/mirrors/node) 的镜像下载安装。
+ThinkJS 是一款 Node.js 的 MVC 框架，所以安装 ThinkJS 之前，需要先安装 Node.js 环境，可以去 [官方](https://nodejs.org/) 下载最新的安装包进行安装，也可以通过其他一些渠道安装。
 
-安装完成后，在命令行执行`node -v`，如果能看到对应的版本号输出，则表示安装成功。
+安装完成后，在命令行执行 `node -v`，如果能看到对应的版本号输出，则表示安装成功。
 
-ThinkJS 需要 Node.js 的版本 `>=0.12.0`，如果版本小于这个版本，需要升级 Node.js，否则无法启动服务。
+ThinkJS 需要 Node.js 的版本 `>=0.12.0`，如果版本小于这个版本，需要升级 Node.js，否则无法启动服务。建议将 Node.js 版本升级到 `4.2.1`。
 
 ### 安装 ThinkJS
 
-ThinkJS 现在还没有正式发布 2.0 版本，所以无法通过`npm`命令来安装，需要从 github 里拉取最新的代码，然后编译。具体如下：
+通过下面的命令即可安装 ThinkJS：
 
 ```sh
-cd foo/bar/node_modules; //进入对应的node_modules目录
-git clone git@github.com:75team/thinkjs.git
-cd thinkjs;
-npm install; //安装依赖
+npm install thinkjs -g --verbose
 ```
 
-通过`npm install`安装依赖的时候，如果安装很慢的话，可以尝试使用 [taobao](http://npm.taobao.org/) 的源进行安装。具体如下：
+如果安装很慢的话，可以尝试使用 [taobao](http://npm.taobao.org/) 的源进行安装。具体如下：
 
 ```sh
-npm install --registry=https://registry.npm.taobao.org --verbose
+npm install thinkjs -g --registry=https://registry.npm.taobao.org --verbose
 ```
+
+`注`：如果之前安装过 ThinkJS 1.x 的版本，可能需要将之前的版本删除掉。
 
 ### 创建项目
 
-ThinkJS 安装完成后，可以使用对应的命令来创建项目，命令文件在`foo/bar/node_modules/thinkjs/bin/index.js`。
-
-可以通过下面的命令创建项目:
+ThinkJS 安装完成后，就可以通过下面的命令创建项目:
 
 ```sh
-//project_path为项目存放的目录
-node foo/bar/node_modules/thinkjs/bin/index.js new project_path;
+thinkjs new project_path; #project_path为项目存放的目录
 ```
 
 如果想用`ES6`特性来开发项目的话，可以创建一个`ES6`模式的项目，具体如下：
 
 ```sh
-//project_path为项目存放的目录
-node foo/bar/node_modules/thinkjs/bin/index.js new project_path --es6;
+thinkjs new project_path --es6; #project_path为项目存放的目录
 ```
 
 如果能看见类似下面的输出，表示项目创建成功了：
@@ -75,11 +70,11 @@ node foo/bar/node_modules/thinkjs/bin/index.js new project_path --es6;
   $ npm start
 ```
 
-关于创建项目命令的更多信息，请见[扩展功能 -> ThinkJS 命令](./thinkjs_command.html)。
+关于创建项目命令的更多信息，请见 [扩展功能 -> ThinkJS 命令](./thinkjs_command.html)。
 
 ### 安装依赖
 
-进入到项目目录下，执行 `npm install` 安装依赖。如果执行很慢，可以尝试使用 `taobao` 源进行安装。
+项目安装后，进入项目目录，执行 `npm install` 安装依赖，可以使用 `taobao` 源进行安装。
 
 ```sh
 npm install --registry=https://registry.npm.taobao.org --verbose
@@ -107,3 +102,5 @@ npm install --registry=https://registry.npm.taobao.org --verbose
 ### 访问项目
 
 打开浏览器，访问`http://127.0.0.1:8360/`即可。
+
+如果是在远程机器，需要通过远程机器的 IP 访问，同时要保证 8360 端口可访问。
