@@ -36,7 +36,7 @@ export default {
 }
 ```
 
-对应的数据表文件路径为 `path` + `/[name].sqlite`，默认情况下 `think_user` 表对应的文件路径为 `src/common/runtime/sqlite/think_user.sqlite`。
+对应的数据表文件路径为 `path` + `/[name].sqlite`，默认情况下数据库 `demo` 对应的文件路径为 `src/common/runtime/sqlite/demo.sqlite`。
 
 ### CURD 操作
 

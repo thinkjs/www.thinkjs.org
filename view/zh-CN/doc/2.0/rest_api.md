@@ -58,7 +58,7 @@ export default class extends think.controller.rest {
 ```js
 export default class extends think.controller.rest {
   * __before(){
-    let auth = field this.checkAuth();
+    let auth = yield this.checkAuth();
     if(!auth){
       return this.fail('no permissions'); //没权限时直接返回
     }
