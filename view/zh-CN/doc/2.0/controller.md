@@ -88,9 +88,9 @@ module.exports = think.controller(Base, {
 });
 ```
 
-### 使用 async 和 await
+### 使用 async/await
 
-借助 Babel 编译，还可以在控制器里使用 async 和 await。
+借助 Babel 编译，还可以在控制器里使用 ES7 里的 `async/await`。
 
 ##### ES6 方式
 
@@ -267,7 +267,7 @@ export default class extends think.controller.base {
 }
 ```
 
-model 方法更多使用方式请见 [API -> think.http.base](./api_think_http_base.html#modelname-options)。
+model 方法更多使用方式请见 [API -> think.http.base](./api_think_http_base.html#toc-e2b)。
 
 ### http 对象
 
@@ -289,11 +289,11 @@ export default class extends Base {
 
 关于 `http` 对象包含的属性和方法请见 [API -> http](./api_http.html)。
 
-### Rest Api
+### REST API
 
-有时候，项目里需要提供一些 Rest 接口给第三方使用，这些接口无外乎就是增删改查等操作。
+有时候，项目里需要提供一些 REST 接口给第三方使用，这些接口无外乎就是增删改查等操作。
 
-如果手工去书写这些操作则比较麻烦，ThinkJS 提供了 Rest Controller，该控制器会自动含有通用的增删改查等操作。如果这些操作不满足需求，也可以进行定制。具体请见 [这里](./rest_api.html)。
+如果手工去书写这些操作则比较麻烦，ThinkJS 提供了 REST Controller，该控制器会自动含有通用的增删改查等操作。如果这些操作不满足需求，也可以进行定制。具体请见 [这里](./rest_api.html)。
 
 ### this 作用域的问题
 

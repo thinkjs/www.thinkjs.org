@@ -89,6 +89,18 @@ http 对象会在 middleware, logic, controller, view 中传递。
 
 存放 cookie 数据。
 
+#### http.module
+
+当前请求解析后对应的模块名。
+
+#### http.controller
+
+当前请求解析后对应的控制器名。
+
+#### http.action
+
+当前请求解析后对应的操作名。
+
 ### 方法
 
 #### http.config(name)
@@ -356,7 +368,7 @@ http.success({name: 'thinkjs'});
 }
 ```
 
-这样客户端就可以根据`errno`是否为`0`为判断当前请求是否正常。
+这样客户端就可以根据 `errno` 是否为 `0` 为判断当前请求是否正常。
 
 #### http.fail(errno, errmsg, data)
 
@@ -366,7 +378,7 @@ http.success({name: 'thinkjs'});
 
 格式化输出一个异常的数据，一般是操作失败后输出。
 
-`注`：字段名`errno`和`errmsg`可以在配置里进行修改。
+`注`：字段名 `errno` 和 `errmsg` 可以在配置里进行修改。
 
 ```js
 http.fail(100, 'fail')
@@ -380,7 +392,7 @@ http.fail(100, 'fail')
 
 这样客户端就可以拿到具体的错误号和错误信息，然后根据需要显示了。
 
-`注`：字段名`errno`和`errmsg`可以在配置里进行修改。
+`注`：字段名 `errno` 和 `errmsg` 可以在配置里进行修改。
 
 #### http.json(data)
 

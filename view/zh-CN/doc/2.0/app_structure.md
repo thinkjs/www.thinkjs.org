@@ -102,13 +102,13 @@ think.middleware('replace_image', http => {
 
 这里定义了一个中间件 `replace_image`，那么就可以在配置文件 `hook.js` 里将该中间件注册进去了。
 
-`注：`bootstrap 只能放在 common 模块里。
+`注`：bootstrap 只能放在 common 模块里。
 
 ### src/common/config
 
 配置文件，这里放一些通用的配置。
 
-其中：路由配置、Hook配置、本地化配置等必须放在这里。
+其中：路由配置、hook 配置、本地化配置等必须放在这里。
 
 ```js
 'use strict';

@@ -16,9 +16,10 @@ export default class extends think.base {
 }
 ```
 
-`注`： 使用 ES6 里的类时不要写`constructor`，把初始化的一些操作放在`init`方法里，该方法在类实例化时自动被调用，效果等同于`constructor`。
+`注`： 使用 ES6 里的类时不要写 `constructor`，把初始化的一些操作放在 `init`方法里，该方法在类实例化时自动被调用，效果等同于 `constructor`。
 
 使用普通的方式继承该类：
+
 ```js
 module.exports = think.Class(think.base, {
   /**
@@ -46,7 +47,7 @@ class a extends think.base {
 }
 ```
 
-`注`：与`1.x`版本不同的是，`2.x`版本`init`方法不再支持返回一个`Promise`，一些通用操作放在`__before`魔术方法里进行。
+`注`：与 `1.x` 版本不同的是，`2.x` 版本 `init` 方法不再支持返回一个 `Promise`，一些通用操作放在 `__before` 魔术方法里进行。
 
 ### __before()
 

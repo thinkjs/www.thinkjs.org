@@ -11,7 +11,7 @@
 
 ##### db Session
 
-使用 `db` 类型的 Session 需要创建对应的数据表，可以用下面的 SQL 语句创建：
+使用 `db` 类型的 Session 需要创建对应的数据表（如果是 MongoDB 则无需创建），可以用下面的 SQL 语句创建：
 
 ```sql
   DROP TABLE IF EXISTS `think_session`;
@@ -90,7 +90,7 @@ export default class extends think.controller.base {
 
 --------
 
-http 对象上可以通过 `http.session` 方法读写 Session，具体请见 [API -> http](./api_http.html#httpsessionname-value)。
+http 对象上可以通过 `http.session` 方法读写 Session，具体请见 [API -> http](./api_http.html#toc-b20)。
 
 ### 扩展 Session
 
@@ -157,4 +157,4 @@ export default class extends think.adapter.session {
 
 ### 使用第三方 Session Adapter
 
-如何使用第三方的缓存 Adapter 请参见 [Adapter -> 介绍](./adapter_intro.html#使用第三方-adapter)。
+如何使用第三方的缓存 Adapter 请参见 [Adapter -> 介绍](./adapter_intro.html#toc-e7c)。

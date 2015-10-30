@@ -1,6 +1,6 @@
 ## think.http.base
 
-`think.http.base`继承自 [think.base](./api_think_base.html) 类，该类为含有 http 对象处理时的基类。middleware, controller, view 类都继承自该类。
+`think.http.base` 继承自 [think.base](./api_think_base.html) 类，该类为含有 http 对象处理时的基类。middleware, controller, view 类都继承自该类。
 
 ##### 使用 ES6 语法继承该类
 
@@ -60,7 +60,7 @@ export default class extends think.controller.base {
 * `action` {String} action名称
 * `return` {Promise} 
 
-调用 controller 下的 action，返回一个 Promise。自动调用`__before`和`__after`魔术方法。
+调用 controller 下的 action，返回一个 Promise。自动调用 `__before` 和 `__after` 魔术方法。
 
 如果 controller 是字符串，则自动去寻找对应的 controller。
 
@@ -90,7 +90,7 @@ export default class extends think.controller.base {
 * `value` {Mixed | Function} 缓存值
 * `options` {Object} 缓存配置，具体见缓存配置
 
-读取或者设置缓存，`value`为`undefined`时是读取缓存，否则为设置缓存。默认缓存类型为`file`。
+读取或者设置缓存，`value` 为 `undefined` 时是读取缓存，否则为设置缓存。默认缓存类型为 `file`。
 
 ```js
 export default class extends think.controller.base {
@@ -101,7 +101,7 @@ export default class extends think.controller.base {
 }
 ```
 
-当参数`value`为 function 时，表示获取缓存，如果缓存值不存在，则调用该 function，将返回值设置缓存并返回。这样避免在项目开发时要先判断缓存是否存在，然后再从相关地方读取值然后设置缓存的麻烦。
+当参数 `value` 为 function 时，表示获取缓存，如果缓存值不存在，则调用该 function，将返回值设置缓存并返回。这样避免在项目开发时要先判断缓存是否存在，然后再从相关地方读取值然后设置缓存的麻烦。
 
 ```js
 export default class extends think.controller.base {
@@ -136,7 +136,7 @@ export default class extends think.controller.base {
 
 执行对应的事件，一个事件包含若干个 middleware，会按顺序执行这些 middleware。
 
-事件可以在配置`config/hook.js`里定义，也可以通过 think.hook 来注册。
+事件可以在配置 `src/common/config/hook.js` 里定义，也可以通过 think.hook 来注册。
 
 ```js
 export default class extends think.controller.base {

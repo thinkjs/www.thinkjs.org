@@ -1,12 +1,12 @@
 ## think
 
-`think`是一个全局对象，该对象里包含了大量有用的属性和方法。这些方法在应用的任何地方都可以直接使用，无需再 require。
+`think` 是一个全局对象，该对象里包含了大量有用的属性和方法。这些方法在应用的任何地方都可以直接使用，无需再 require。
 
 ### 属性
 
 #### think.startTime
 
-服务启动时间，是个`unix`时间戳。
+服务启动时间，是个 `unix` 时间戳。
 
 #### think.env
 
@@ -51,14 +51,14 @@ node www/index.js /home/index/test
 
 #### think.lang
 
-系统当前的语言，从环境变量中读取，在`windows`下可能为空。
+系统当前的语言，从环境变量中读取，在 `Windows` 下可能为空。
 
 #### think.mode
 
 项目当前的模式，框架支持3中项目模式：
 
 * `think.mode_mini` 单模块模式，整个项目只有一个模块
-* `think.mode_normal` 多模块模式，目录结构只有`Controller`，`View`，`Logic`等分模块
+* `think.mode_normal` 多模块模式，目录结构只有 `Controller`，`View`，`Logic` 等分模块
 * `think.mode_module` 多模块模式，严格按照模块来划分目录结构
 
 #### think.version
@@ -67,7 +67,7 @@ ThinkJS当前的版本
 
 #### think.module
 
-当前项目下的模块列表，如果项目模式是`think.mode_mini`，那么值为空数组。
+当前项目下的模块列表，如果项目模式是 `think.mode_mini`，那么值为空数组。
 
 #### think.THINK_PATH
 
@@ -75,19 +75,19 @@ ThinkJS代码的路径
 
 #### think.THINK_LIB_PATH
 
-ThinkJS代码`lib/`的具体路径
+ThinkJS代码 `lib/` 的具体路径
 
 #### think.ROOT_PATH
 
-项目的根目录，在`www/index.js`中定义
+项目的根目录，在 `www/index.js` 中定义
 
 #### think.APP_PATH
 
-项目的`app`目录，在`www/index.js`中定义
+项目的 `app` 目录，在 `www/index.js` 中定义
 
 #### think.RESOURCE_PATH
 
-项目的静态资源根目录，在`www/index.js`中定义
+项目的静态资源根目录，在 `www/index.js` 中定义
 
 
 
@@ -377,7 +377,7 @@ think.isNumberString("1.23"); //true
 * `obj` {Mixed} 要检测的对象
 * `return` {Boolean}
 
-检测是否是个 promise
+检测是否是个 Promise
 
 ```js
 think.isPromise(new Promise(function(){})); //true
@@ -408,7 +408,7 @@ think.isHttp(http); // true
 * `obj` {Mixed}
 * `return` {Boolean}
 
-判断是否是个阻止类型的 promise。通过 think.prevent() 会生成该 promise 。
+判断是否是个阻止类型的Ppromise。通过 think.prevent() 会生成该 Promise 。
 
 #### think.mkdir(p, mode)
 
@@ -478,7 +478,7 @@ think.md5('thinkjs');
 
 * `return` {Object} Deferred对象
 
-创建一个`Deferred`对象，`new Promise`的一种快捷方式。虽然不建议使用`Deferred`这种方式，但有时候不得不使用。如：`setTimeout`, `event`。
+创建一个 `Deferred` 对象，`new Promise` 的一种快捷方式。虽然不建议使用 `Deferred`这种方式，但有时候不得不使用。如：`setTimeout`, `event`。
 
 ```js
 //使用Deferred的方式
@@ -495,7 +495,7 @@ var fn = function(){
 }
 ```
 
-使用`Deferred`方式比直接使用`new Promise`的方法代码更加简洁。
+使用 `Deferred` 方式比直接使用 `new Promise` 的方法代码更加简洁。
 
 ```js
 //直接使用new Promise的方式
@@ -512,14 +512,14 @@ var fn = function(){
 }
 ```
 
-注： 异步`callback`的操作不要使用`Deferred`方式，可以用`think.promisify`方法快速把`callback`包装成`Promise`。
+注： 异步 `callback` 的操作不要使用 `Deferred` 方式，可以用 `think.promisify` 方法快速把 `callback` 包装成 `Promise`。
 
 #### think.promisify(fn, receiver)
 
 * `fn` {Function} 要转化的函数
 * `receiver` {Object} this指向
 
-将异步方法快速包装成Promise，异步方法必须符合最后一个参数为回调函数，且回调函数的第一个参数为`err`的原则。
+将异步方法快速包装成Promise，异步方法必须符合最后一个参数为回调函数，且回调函数的第一个参数为 `err`的原则。
 
 ```js
 var fs = require('fs');
@@ -546,7 +546,7 @@ getContent('/foo/bar/file.txt').then(function(content){
 * `err` {Error} Error对象
 * `return` {Promise} reject promise
 
-返回一个 reject promise，与`Promise.reject`不同的是，该方法会自动打印错误信息。避免需要调用 catch 方法手工打印错误信息。
+返回一个 reject promise，与 `Promise.reject`不同的是，该方法会自动打印错误信息。避免需要调用 catch 方法手工打印错误信息。
 
 ```js
 //使用Promise.reject
@@ -570,7 +570,7 @@ fn();
 
 #### think.co
 
-`co`模块的别名 <https://github.com/tj/co>
+`co` 模块的别名 <https://github.com/tj/co>
 
 #### think.lookClass(name, type, module, base)
 
@@ -618,11 +618,11 @@ let path = think.getPath('home', 'controller');
 
 * `file` {String} 要加载的文件
 
-安全的加载一个文件，如果文件不存在，则返回null，并打印错误信息。
+安全的加载一个文件，如果文件不存在，则返回 null，并打印错误信息。
 
 #### think.prevent()
 
-返回一个特殊的 reject promise 。该 promise 可以阻止后续的行为且不会报错。
+返回一个特殊的 reject promise 。该 Promise 可以阻止后续的行为且不会报错。
 
 #### think.log(msg, type, showTime)
 
@@ -666,7 +666,7 @@ think.log(function(colors){
 //writes '[WARNING] test'
 ```
 
-其中`colors`为 npm 模块 colors，<https://github.com/Marak/colors.js> 。
+其中 `colors` 为 npm 模块 colors，<https://github.com/Marak/colors.js> 。
 
 #### think.config(name, value, data)
 
@@ -700,27 +700,7 @@ let configs = think.getModuleConfig('admin');
 
 #### think.hook()
 
-注册、获取和执行 hook。
-
-系统默认的 hook 列表：
-
-```js
-export default {
-  form_parse: ['parse_json_payload'],
-  resource_check: ['resource'],
-  resource_output: ['output_resource'],
-  route_parse: ['rewrite_pathname', 'subdomain_deploy', 'route'],
-  app_begin: ['check_csrf', 'read_html_cache'],
-  view_init: [],
-  view_template: ['locate_template'],
-  view_parse: ['parse_template'],
-  view_filter: [],
-  view_end: ['write_html_cache'],
-  app_end: []
-};
-```
-
-项目中可以根据需要追加或者修改。
+注册、获取和执行 hook，项目中可以根据需要追加或者修改。
 
 ##### 获取事件对应的 middleware 列表
 
@@ -873,7 +853,7 @@ let instance = new Adapter(options);
 
 * `instance` {Object} 类的实例
 
-注册实例到 gc 队列中。instance 必须含有属性`gcType`和方法`gc`。
+注册实例到 gc 队列中。instance 必须含有属性 `gcType` 和方法 `gc`。
 
 像 cache, session 这些功能一般都是有过期时间，过期后需要要进行清除工作。框架提供了一套机制方便清除过期的文件等。
 
@@ -1093,7 +1073,7 @@ think.cache('name', null);
 * `key` {String} 要获取的 key
 * `data` {Array} 参数
 
-根据语言获取对应的值，当前语言存放在`think.lang`，可以在系统启动时指定。
+根据语言获取对应的值，当前语言通过 `think.lang` 方法来获取，可以在系统启动时指定。
 
 ```js
 think.locale('CONTROLLER_NOT_FOUND', 'test', '/index/test');

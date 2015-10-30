@@ -46,9 +46,9 @@ export default {
 
 ### 使用缓存
 
-可以通过 `think.cache` 方法对缓存进行增删改查操作，具体请见 [API -> think](./api_think.html#thinkcachename-value-options)。
+可以通过 `think.cache` 方法对缓存进行增删改查操作，具体请见 [API -> think](./api_think.html#toc-7d7)。
 
-如果当前使用场景在继承自 think.http.base 的类下，可以通过 `this.cache` 方法来操作缓存，具体请见 [API -> think.http.base](.//api_think_http_base.html#cachename-value-options)。
+如果当前使用场景在继承自 think.http.base 的类下，可以通过 `this.cache` 方法来操作缓存，具体请见 [API -> think.http.base](.//api_think_http_base.html#cache-name-value-options)。
 
 
 ### 扩展缓存
@@ -113,4 +113,4 @@ export default class extends think.cache.base {
 
 ### 使用第三方缓存 Adapter
 
-如何使用第三方的缓存 Adapter 请参见 [Adapter -> 介绍](./adapter_intro.html#使用第三方-adapter)。
+如何使用第三方的缓存 Adapter 请参见 [Adapter -> 介绍](./adapter_intro.html#toc-e7c)。

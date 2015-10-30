@@ -239,7 +239,7 @@ export default class extends think.controller.base {
 }
 ```
 
-也可以指定具体的模版文件进行渲染，关于 `display` 方法的详细使用请见 [这里](./api_controller.html#controllerdisplaytemplatefile)。
+也可以指定具体的模版文件进行渲染，关于 `display` 方法的详细使用请见 [这里](./api_controller.html#toc-6b2)。
 
 ### 获取渲染后的内容
 

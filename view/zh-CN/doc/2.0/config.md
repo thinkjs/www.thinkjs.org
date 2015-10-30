@@ -12,7 +12,7 @@ ThinkJS 默认支持 3 种项目环境，可以根据不同的环境进行配置
 * `testing` 测试环境
 * `production` 线上环境
 
-项目里也可以扩展其他的环境，当前使用哪种环境可以在 [入口文件](./app_structure.html#wwwindexjs) 中设置，设置 `env` 值即可。
+项目里也可以扩展其他的环境，当前使用哪种环境可以在 [入口文件](./app_structure.html#toc-f0b) 中设置，设置 `env` 值即可。
 
 ### 定义配置文件
 
@@ -108,7 +108,7 @@ let db = think.config('db'); //读取通用模块下的数据库配置
 let db1 = think.config('db', undefined, 'home'); //获取 home 模块下数据库配置
 ```
 
-`注：` 路由解析前，无法通过 `config` 方法或者 http 对象上的 `config` 方法来获取非通用模块下的配置，所以路由解析前就使用的配置需要定义在通用模块里。
+`注`：路由解析前，无法通过 `config` 方法或者 http 对象上的 `config` 方法来获取非通用模块下的配置，所以路由解析前就使用的配置需要定义在通用模块里。
 
 ### 系统默认配置
 
@@ -352,17 +352,20 @@ hook 配置，`config/hook.js`。
 
 ```js
 export default {
-  form_parse: ['parse_json_payload'],
-  resource_check: ['resource'],
-  resource_output: ['output_resource'],
+  request_begin: [],
+  payload_parse: ['parse_form_payload', 'parse_single_file_payload', 'parse_json_payload', 'parse_querystring_payload'],
+  payload_validate: ['validate_payload'],
+  resource: ['check_resource', 'output_resource'],
   route_parse: ['rewrite_pathname', 'subdomain_deploy', 'route'],
-  app_begin: ['check_csrf'],
-  view_init: [],
+  logic_before: ['check_csrf'],
+  logic_after: [],
+  controller_before: [],
+  controller_after: [],
+  view_before: [],
   view_template: ['locate_template'],
   view_parse: ['parse_template'],
-  view_filter: [],
-  view_end: ['write_html_cache'],
-  app_end: []
+  view_after: [],
+  response_end: []
 };
 ```
 

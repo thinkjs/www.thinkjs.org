@@ -39,7 +39,7 @@ export default {
 
 ### Action 处理
 
-通过上面配置事件到 Action 的映射后，就可以在对应的 Action 作相应的处理了。如：
+通过上面配置事件到 Action 的映射后，就可以在对应的 Action 作相应的处理。如：
 
 ```js
 export default class extends think.controller.base {

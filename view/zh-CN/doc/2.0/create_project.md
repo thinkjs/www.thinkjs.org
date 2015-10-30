@@ -22,7 +22,10 @@ npm install thinkjs -g --verbose
 npm install thinkjs -g --registry=https://registry.npm.taobao.org --verbose
 ```
 
+安装完成后，可以通过 `thinkjs --version` 或 `thinkjs -V` 命令查看安装的版本。
+
 `注`：如果之前安装过 ThinkJS 1.x 的版本，可能需要将之前的版本删除掉，可以通过 `npm uninstall -g thinkjs-cmd` 命令删除。
+
 
 ### 创建项目
 

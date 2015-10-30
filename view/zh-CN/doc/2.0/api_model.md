@@ -1,6 +1,6 @@
 ## model
 
-`think.model.base`继承自 [think.base](./api_think_base.html) 类。
+`think.model.base` 继承自 [think.base](./api_think_base.html) 类。
 
 ##### 使用 ES6 的语法继承该类
 
@@ -26,17 +26,17 @@ module.exports = think.model({
 
 #### model.pk
 
-数据表主键，默认为`id`。
+数据表主键，默认为 `id`。
 
 #### model.name
 
 模型名，默认从当前文件名中解析。
 
-当前文件路径为 for/bar/app/home/model/user.js，那么解析的模型名为`user`。
+当前文件路径为 for/bar/app/home/model/user.js，那么解析的模型名为 `user`。
 
 #### model.tablePrefix
 
-数据表名称前缀，默认为`think_`。
+数据表名称前缀，默认为 `think_`。
 
 #### model.tableName
 

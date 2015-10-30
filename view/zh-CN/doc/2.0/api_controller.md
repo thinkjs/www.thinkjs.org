@@ -22,6 +22,8 @@ module.exports = think.controller({
   }
 })
 ```
+
+
 ### 属性
 
 #### controller.http
@@ -404,7 +406,7 @@ export default class extends think.controller.base {
 
 * `templateFile` {String} 模版文件路径
 
-输出模版内容到浏览器端。查找模版文件策略和`controller.fetch`相同。
+输出模版内容到浏览器端。查找模版文件策略和 `controller.fetch` 相同。
 
 #### controller.jsonp(data)
 
@@ -518,7 +520,7 @@ http.success({name: 'thinkjs'});
 }
 ```
 
-这样客户端就可以根据`errno`是否为`0`为判断当前请求是否正常。
+这样客户端就可以根据 `errno` 是否为 `0` 为判断当前请求是否正常。
 
 #### controller.fail(errno, errmsg, data)
 
@@ -528,7 +530,7 @@ http.success({name: 'thinkjs'});
 
 格式化输出一个异常的数据，一般是操作失败后输出。
 
-`注`：字段名`errno`和`errmsg`可以在配置里进行修改。
+`注`：字段名 `errno` 和 `errmsg` 可以在配置里进行修改。
 
 ```js
 http.fail(100, 'fail')
@@ -542,7 +544,7 @@ http.fail(100, 'fail')
 
 这样客户端就可以拿到具体的错误号和错误信息，然后根据需要显示了。
 
-`注`：字段名`errno`和`errmsg`可以在配置里进行修改。
+`注`：字段名 `errno` 和 `errmsg` 可以在配置里进行修改。
 
 #### controller.sendTime(name)
 

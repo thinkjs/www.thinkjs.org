@@ -22,11 +22,11 @@ module.exports = think.controller('rest', {
 
 #### controller._isRest
 
-标识此 controller 对应的是 Rest 接口。如果在 `init` 方法里将该属性设置为`false`，那么该 controller 不再是一个 Rest 接口。
+标识此 controller 对应的是 Rest 接口。如果在 `init` 方法里将该属性设置为 `false`，那么该 controller 不再是一个 Rest 接口。
 
 #### controller._method
 
-获取 method 方式。默认从 http method 中获取，但有些客户端不支持发送 delete, put 之类的请求，所以可以设置为从 GET 里的一个参数获取。
+获取 method 方式。默认从 http method 中获取，但有些客户端不支持发送 DELETE, PUT 类型的请求，所以可以设置为从 GET 参数里获取。
 
 ```js
 export default class extends think.controller.rest {
@@ -56,7 +56,7 @@ export default class extends think.controller.rest {
 
 #### controller.__before()
 
-可以在魔术方法`__before`中进行字段过滤，分页，权限校验等功能。
+可以在魔术方法 `__before` 中进行字段过滤、分页、权限校验等功能。
 
 ```js
 export default class extends think.controller.rest{

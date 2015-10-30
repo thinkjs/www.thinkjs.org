@@ -1,12 +1,12 @@
 ## Template
 
-Template Adapter 用来实现支持多种类型的模版引擎，如：`ejs`，`swig`等。
+Template Adapter 用来实现支持多种类型的模版引擎，如：`ejs`，`swig` 等。
 
 ### 支持模版引擎类型
 
 * `base`
 * `ejs` ejs 模版引擎
-* `jade`
+* `jade` jade 模板引擎
 * `swig` 一种支持模版继承的模版引擎
 * `nunjucks` 一种类似 jinja2 的模版引擎，功能非常强大
 
@@ -61,4 +61,4 @@ export default class extends think.adapter.template {
 
 ### 使用第三方缓存 Adapter
 
-如何使用第三方的缓存 Adapter 请参见 [Adapter -> 介绍](./adapter_intro.html#使用第三方-adapter)。
+如何使用第三方的缓存 Adapter 请参见 [Adapter -> 介绍](./adapter_intro.html#toc-e7c)。
