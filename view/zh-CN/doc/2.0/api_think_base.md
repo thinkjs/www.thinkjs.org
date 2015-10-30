@@ -96,12 +96,12 @@ class a extends think.base {
 * `data` {Array} 传递的参数
 * `return` {Promise}
 
-调用一个方法，自动调用`__before`和`__after`魔术方法。不管方法本身是否返回`Promise`，该方法始终返回`Promise`。
+调用一个方法，自动调用 `__before` 和 `__after` 魔术方法。不管方法本身是否返回 `Promise`，该方法始终返回 `Promise`。
 
-方法本身支持是`Generator Function`和`async`。
+方法本身支持是 `*/yield` 和`async/await`。
 
 ```js
-//使用 async 和 await
+//使用 async/await
 class Cls extends think.base {
   async getValue(){
     let value = await this.getValue();
@@ -116,7 +116,7 @@ instance.invoke('getValue').then(data => {
 
 
 ```js
-//使用 * 和 yield
+//使用 */yield
 class Cls extends think.base {
   * getValue(){
     let value = yield this.getValue();

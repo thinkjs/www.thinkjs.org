@@ -356,7 +356,7 @@ export default {
   resource_check: ['resource'],
   resource_output: ['output_resource'],
   route_parse: ['rewrite_pathname', 'subdomain_deploy', 'route'],
-  app_begin: ['check_csrf', 'read_html_cache'],
+  app_begin: ['check_csrf'],
   view_init: [],
   view_template: ['locate_template'],
   view_parse: ['parse_template'],
@@ -366,35 +366,6 @@ export default {
 };
 ```
 
-#### html_cache
-
-页面静态化配置，`config/html_cache.js`。
-
-```js
-export default {
-  on: false,
-  type: 'file', //store type
-  timeout: 3600, //1 hour
-  rules: {},
-  callback: undefined,
-  file_ext: '.html'
-};
-```
-
-#### memcache
-
-memcache 配置，`config/memcache.js`。
-
-```js
-export default {
-  host: '127.0.0.1', //memcache host
-  port: 11211,
-  username: '', //
-  password: '',
-  timeout: 0, //缓存失效时间
-  log_connect: true
-};
-```
 
 #### post
 
@@ -425,6 +396,22 @@ export default {
   log_connect: true
 };
 ```
+
+#### memcache
+
+memcache 配置，`config/memcache.js`。
+
+```js
+export default {
+  host: '127.0.0.1', //memcache host
+  port: 11211,
+  username: '', //
+  password: '',
+  timeout: 0, //缓存失效时间
+  log_connect: true
+};
+```
+
 
 #### session
 

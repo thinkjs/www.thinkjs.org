@@ -55,22 +55,22 @@ export default class think.base {
 
 ### 使用 Babel 编译
 
-虽然现在的 Node.js 版本已经支持了很多 ES6 的特性，但这些特性现在还只是实现了，V8 里还没有对这些特性进行优化。如：Generator Function 等功能。
+虽然现在的 Node.js 版本已经支持了很多 ES6 的特性，但这些特性现在还只是实现了，V8 里还没有对这些特性进行优化。如：`*/yield` 等功能。
 
 所以建议使用 Babel 来编译，一方面可以使用 ES6 和 ES7 几乎所有的特性，另一方面编译后的性能也比默认支持的要高。
 
-### 使用 async、await 替代 Generator Function
+### 使用 async/await 替代 */yield
 
-Generator Function 是 ES6 里提出一种解决异步执行的方法，它只是一个过渡的方案，ES7 里便提出了 async 和 await 来代替它。
+`*/yield` 是 ES6 里提出一种解决异步执行的方法，它只是一个过渡的方案，ES7 里便提出了 `async/await` 来代替它。
 
-相对 async 和 await，Generator Function 有以下的缺陷：
+相对 `async/await`，`*/yield` 有以下的缺陷：
 
-1、Generator Function 调用后返回一个迭代器，需要借助第三方模块来执行。如：`co`
+1、`*/yield` 调用后返回一个迭代器，需要借助第三方模块来执行。如：`co`
 
-2、Generator Function 无法和 Arrow Function 一起使用。
+2、`*/yield` 无法和 Arrow Function 一起使用。
 
-3、Generator Function 调用另一个 Generator Function 时，需要使用 `yield *`，带来不便。
+3、`*/yield` 调用另一个 `*/yield` 时，需要使用 `yield *`，带来不便。
 
-4、目前 V8 对 Generator Function 还没有做优化，最好也通过 Babel 来编译。
+4、目前 V8 对 `*/yield` 还没有做优化，最好也通过 Babel 来编译。
 
-所以完全可以使用 ES7 里的 async 和 await 来代替 Generator Function，然后使用 Babel 编译来运行。
+所以完全可以使用 ES7 里的 `async/await` 来代替 `*/yield`，然后使用 Babel 编译来运行。

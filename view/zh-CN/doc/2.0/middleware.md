@@ -139,7 +139,7 @@ module.exports = think.middleware({
 })
 ```
 
-middleware 里会将 `http` 传递进去，可以通过 `this.http` 属性来获取。逻辑代码放在 `run` 方法执行，如果含有异步操作，需要返回一个 `Promise` 或者使用 Generator Function。
+middleware 里会将 `http` 传递进去，可以通过 `this.http` 属性来获取。逻辑代码放在 `run` 方法执行，如果含有异步操作，需要返回一个 `Promise` 或者使用 `*/yield`。
 
 #### function 方式
 

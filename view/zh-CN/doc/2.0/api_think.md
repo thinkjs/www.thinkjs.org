@@ -426,10 +426,10 @@ think.mkdir("home/welefne/a/b/c/d/e"); // 递归创建子目录
 #### think.rmdir(p, reserve)
 
 * `p` {String} 要删除的目录
-* `reserve` {Boolean} 是否保留该目录。如果为true，则只删除子目录
+* `reserve` {Boolean} 是否保留该目录。如果为 true，则只删除子目录
 * `return` {Promise}
 
-递归的删除目录，如果目录不存在则直接返回。返回是个Promise，后续操作要在`then`里执行
+递归的删除目录，如果目录不存在则直接返回。返回是个 Promise，后续操作要在 `then` 里执行
 
 ```js
 function rmTmp(){
@@ -439,7 +439,7 @@ function rmTmp(){
 }
 ```
 
-如果使用`Generator Function`，则可以使用`yield`
+如果使用 `Generator Function`，则可以使用 `yield`
 
 ```js
 function * rmTmp(){

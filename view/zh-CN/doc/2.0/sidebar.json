@@ -30,6 +30,7 @@
     },
     "扩展功能": {
       "ThinkJS命令": "thinkjs_command",
+      "静态资源访问": "resource",
       "Middleware": "middleware",
       "Service": "service",
       "Cookie": "cookie",

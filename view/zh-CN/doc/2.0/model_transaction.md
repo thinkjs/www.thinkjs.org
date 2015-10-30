@@ -70,7 +70,7 @@ export default class extends think.controller.base {
 }
 ```
 
-注：Arrow Function 无法和 Generator Function 一起写，所以上面为 `function *`。如果想使用 Arrow Function，可以使用 async，如： `async () => {}`。
+注：Arrow Function 无法和 `*/yield` 一起写，所以上面为 `function *`。如果想使用 Arrow Function，可以使用 async，如： `async () => {}`。
 
 ##### 使用动态创建类的方式
 
