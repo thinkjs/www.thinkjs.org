@@ -27,7 +27,14 @@ export default class extends base {
   demoAction(){
     this.assign('currentNav', 'demo');
     this.assign('title', this.locale('title-demo'));
-    this.assign('hasBootstrap', true);
+    //this.assign('hasBootstrap', true);
+    return this.display();
+  }
+
+  pluginAction(){
+    this.assign('currentNav', 'plugin');
+    this.assign('title', this.locale('title-plugin'));
+    //this.assign('hasBootstrap', true);
     return this.display();
   }
 

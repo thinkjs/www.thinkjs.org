@@ -32,14 +32,14 @@ export default {
   payload_validate: ['validate_payload'],
   resource: ['check_resource', 'output_resource'],
   route_parse: ['rewrite_pathname', 'subdomain_deploy', 'route'],
-  logic_before: ['read_html_cache', 'check_csrf'],
+  logic_before: ['check_csrf'],
   logic_after: [],
   controller_before: [],
   controller_after: [],
   view_before: [],
   view_template: ['locate_template'],
   view_parse: ['parse_template'],
-  view_after: ['write_html_cache'],
+  view_after: [],
   response_end: []
 };
 ```
@@ -238,4 +238,4 @@ think.middleware('parseXML', parseXML);
 
 ### 第三方 middleware 列表
 
-* [think-wechat](https://github.com/akira-cn/think-wechat) 微信公众平台接口
+第三方 middleware 列表请见 [插件 -> middleware](./plugin.html#middleware)。
