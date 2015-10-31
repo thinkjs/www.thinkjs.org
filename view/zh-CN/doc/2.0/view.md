@@ -27,7 +27,7 @@ export default {
 
 #### 修改连接符
 
-默认控制器和操作之间的连接符是 `_`，文件名类似为 `index_index.html`，如果想将控制器作为一层目录的话，可以将连接符修改为 `/`。
+默认控制器和操作之间的连接符是 `_`，文件名类似为 `index_index.html`，如果想将控制器作为一层目录的话，如：`index/index.html`，可以将连接符修改为 `/`。
 
 ```js
 export default {

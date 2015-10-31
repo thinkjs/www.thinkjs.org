@@ -1,8 +1,14 @@
 ## 配置
 
-ThinkJS 提供了灵活的配置，可以在不同模式下使用不同的配置，且这些配置在服务启动时就已经生效，后续逻辑处理中可以直接使用这些配置。
+ThinkJS 提供了灵活的配置，可以在不同的模块和不同的项目环境下使用不同的配置，且这些配置在服务启动时就已经生效。
 
 `注意：不可将一个 http 请求中的私有值设置到配置中，这将会被下一个 http 设置的值给冲掉。`
+
+### 项目模块
+
+ThinkJS 默认创建的项目是按模块来划分的，可以在每个模块下定义不同的配置。其中 `common` 模块下定义一些通用的配置，其他模块下配置会继承 `common` 下的配置。如：`home` 模块下的最终配置是将 `common` 和 `home` 模块下配置合并的结果。
+
+
 
 ### 项目环境
 
@@ -15,11 +21,6 @@ ThinkJS 默认支持 3 种项目环境，可以根据不同的环境进行配置
 项目里也可以扩展其他的环境，当前使用哪种环境可以在 [入口文件](./app_structure.html#toc-f0b) 中设置，设置 `env` 值即可。
 
 ### 定义配置文件
-
-项目里可以设置公共配置文件和模块下的配置文件：
-
-* 公共配置目录 `src/common/config`
-* 模块配置目录 `src/[module]/config`
 
 ##### config/config.js
 
@@ -36,7 +37,7 @@ export default {
 
 ##### config/[name].js
 
-存放具体功能的配置文件，如：`db.js` 为数据库配置，`redis` 为 redis 配置。
+存放具体某个独立功能的配置，如：`db.js` 为数据库配置，`redis` 为 redis 配置。
 
 ```js
 // db.js
@@ -52,11 +53,12 @@ export default {
 
 ##### config/env/[mode].js
 
-项目模式的配置，如：`env/development.js`，`env/testing.js`，`env/production.js`
+不同项目环境的差异化配置，如：`env/development.js`，`env/testing.js`，`env/production.js`
 
 ```js
-//env/development.js
+// config/env/development.js
 export default {
+  port: 7777,
   db: { //开发模式下数据库配置
     type: 'mysql',
     host: '127.0.0.1',
@@ -65,6 +67,8 @@ export default {
   }
 }
 ```
+
+`注`：不同项目环境差异化配置一般不是很多，所以放在一个文件中定义。这时候如果要修改一个独立功能的配置，就需要将独立功能对应的 key 带上。如：上述代码里的修改数据库配置需要将数据库对应的名称 `db` 带上。
 
 ##### config/locale/[lang].js
 
