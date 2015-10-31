@@ -4,7 +4,8 @@
       "创建项目": "create_project",
       "项目结构": "app_structure",
       "代码规范": "specification",
-      "升级指南": "upgrade"
+      "升级指南": "upgrade",
+      "常见问题": "question"
     },
     "进阶应用": {
       "模块": "module",

@@ -6,7 +6,6 @@ ThinkJS 官网源码
 
 ```
 git clone git@github.com:75team/www.thinkjs.org.git
-
 ```
 
 ## 安装依赖
