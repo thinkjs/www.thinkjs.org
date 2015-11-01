@@ -19,6 +19,7 @@ export default {
   file_depr: '_', //控制器和操作之间的连接符
   root_path: think.ROOT_PATH + '/view', //视图文件的根目录
   type: 'ejs', //模版引擎
+  prerender: undefined, //模板渲染前自定义处理逻辑
   options: {} //模版引擎需要的配置项
 };
 ```
@@ -186,7 +187,7 @@ This is the right side!
 </ul>
 ```
 
-具体使用文档请见 [这里](http://jinja.pocoo.org/docs/dev/)。
+具体使用文档请见 [这里](http://mozilla.github.io/nunjucks/)。
 
 #### jade
 
@@ -196,7 +197,22 @@ jade 模版使用方式请见 [这里](https://github.com/jadejs/jade)。
 
 swig 模版使用方式请见 [这里](http://paularmstrong.github.io/swig/)。
 
+<!--
+#### 添加过滤器等功能
 
+`swig`，`nunjucks` 等很多模板引擎都支持添加过滤器等功能，可以在模板配置文件 `src/common/config/view.js` 中添加 `prerender` 配置来完成。如：
+
+```js
+export default {
+  prerender: function(nunjucks, env){
+    //添加一个过滤器，这样可以在模板里使用了
+    env.addFilter('filter_foo', function(){
+      
+    })
+  }
+}
+```
+-->
 #### 扩展模版引擎
 
 模版引擎使用 Adapter 实现。如果项目里需要使用其他模版引擎，可以通过 Adapter 进行扩展，具体请见 [这里](./adapter_template.html)。
