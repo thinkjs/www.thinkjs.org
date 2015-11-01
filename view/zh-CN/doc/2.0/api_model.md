@@ -50,9 +50,9 @@ module.exports = think.model({
 
 数据表索引，默认自动从数据表分析。
 
-<!-- #### model.readonlyFields
+#### model.readonlyFields
 
-只读字段列表，数据更新时不会更新这些字段。 -->
+只读字段列表，数据更新时不会更新这些字段。
 
 #### model.config
 
@@ -222,7 +222,7 @@ export default class extends think.model.base {
 
 设置 where 查询条件。可以通过属性 `_logic` 设置逻辑，默认为 `AND`。可以通过属性 `_complex` 设置复合查询。
 
-`注：` 1、以下示例不适合 mongo model，mongo 中设置 where 条件请见 model.mongo 里的 where 条件设定。2、where 条件中的值需要在 Logic 里做数据校验，否则可能会有漏洞。
+`注`：1、以下示例不适合 mongo model，mongo 中设置 where 条件请见 model.mongo 里的 where 条件设定。2、where 条件中的值需要在 Logic 里做数据校验，否则可能会有漏洞。
 
 ##### 普通条件
 

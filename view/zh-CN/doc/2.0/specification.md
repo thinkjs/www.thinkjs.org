@@ -51,7 +51,7 @@ export default class think.base {
 }
 ```
 
-`注：` ThinkJS 里所有的类都会继承 `think.base` 基类。
+`注`：ThinkJS 里所有的类都会继承 `think.base` 基类。
 
 ### 使用 Babel 编译
 

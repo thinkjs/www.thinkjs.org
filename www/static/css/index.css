@@ -135,7 +135,7 @@ i.icon-fet8{ background-position:-70px -210px;}
 .plugin-list {font-size: 16px}
 .plugin-list ul{margin-left: 20px}
 .plugin-list ul li{list-style-type: disc;}
-.plugin-list ul li a{color: #337ab7;text-decoration: none;}
+.plugin-list ul li a{color: #337ab7;text-decoration: none;margin-right: 15px}
 
 .r-fixed{position: fixed;width: 48px;left: 50%;margin-left: 510px;bottom: 10px;}
 .r-fixed .pdf{display:block;width: 48px;height: 48px;background:#B6BCC1 url(../img/pdf.png) no-repeat center center;border-radius: 3px;}

@@ -72,7 +72,7 @@ export default {
 }
 ```
 
-`注：`建议使用追加的方式配置 middleware，系统的 middleware 名称可能在后续的版本中有所修改。
+`注`：建议使用追加的方式配置 middleware，系统的 middleware 名称可能在后续的版本中有所修改。
 
 ### 执行 hook
 

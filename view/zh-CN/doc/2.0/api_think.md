@@ -231,7 +231,7 @@ think.isFunction(new Function("")); //true
 think.isDate(new Date()); //true
 ```
 
-#### think.isRegexp(obj)
+#### think.isRegExp(obj)
 
 * `obj` {Mixed} 要检测的对象
 * `return` {Boolean}
@@ -239,8 +239,8 @@ think.isDate(new Date()); //true
 检测是否是正则
 
 ```js
-think.isRegexp(/\w+/); //true
-think.isRegexp(new RegExp("/\\w+/")); //true
+think.isRegExp(/\w+/); //true
+think.isRegExp(new RegExp("/\\w+/")); //true
 ```
 
 #### think.isError(obj)

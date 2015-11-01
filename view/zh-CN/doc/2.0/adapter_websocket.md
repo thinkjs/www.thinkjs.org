@@ -90,7 +90,7 @@ export default class extends think.controller.base {
 }
 ```
 
-`注：` broadcast 方法默认是給除去当前 socket 的所有 sockets 发送事件，如果想包含当前的 socket，可以设置第三个参数值为 `true`。
+`注`：broadcast 方法默认是給除去当前 socket 的所有 sockets 发送事件，如果想包含当前的 socket，可以设置第三个参数值为 `true`。
 
 ```js
 export default class extends think.controller.base {
@@ -133,7 +133,7 @@ export default {
 }
 ```
 
-`注：` 服务端修改了处理的路径后，客户端也要作对应的修改。
+`注`：服务端修改了处理的路径后，客户端也要作对应的修改。
 
 #### 设置 adapter
 
