@@ -6,5 +6,6 @@ export default {
   'title-plugin': '插件 - ThinkJS',
   'download-pdf': '下载 PDF 格式文档',
   'view-on-single-page': '单页显示所有文档',
-  'all-doc': '全部文档'
+  'all-doc': '全部文档',
+  'back2top': '返回顶部'
 }
