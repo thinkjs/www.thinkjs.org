@@ -20,6 +20,7 @@ ThinkJS 里通过 middleware 来处理这些逻辑，每个逻辑都是一个独
 * `view_before` 视图处理之前
 * `view_template` 视图文件处理
 * `view_parse` 视图解析
+* `view_filter` 视图内容过滤
 * `view_after` 视图处理之后
 * `response_end` 请求响应结束
 
@@ -39,6 +40,7 @@ export default {
   view_before: [],
   view_template: ['locate_template'],
   view_parse: ['parse_template'],
+  view_filter: [],
   view_after: [],
   response_end: []
 };

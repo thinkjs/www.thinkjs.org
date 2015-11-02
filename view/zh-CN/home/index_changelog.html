@@ -4,7 +4,30 @@
   <div class="wrap changelog">
       <h2 class="tith2">更新日志</h2>
         <div class="daily">
-          <ul>
+          <ul>  
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.0.5</strong>2015.11.02</span>
+                  <p>修复了 Logic 规则含有空格导致报错的问题</p>
+                  <p>优化了 Logic 规则校验失败后发送错误信息的数据结构</p>
+                  <p>创建项目时，将 bootstrap/hook.js 改名为 bootstrap/middleware.js</p>
+                  <p>创建项目时，添加文件 config/hook.js</p>
+                  <p>Babel 编译添加 --retain-lines 参数，保持编译后的文件行号和原始文件相同</p>
+                  <p>添加了查询条件里 MongoID 为字符串时自动转为 MongoID 对象的功能</p>
+                  <p>修复了新增文件没有自动更新的问题</p>
+                  <p>修复了 think.cache 指定类型失败的问题</p>
+                  <p>模型 update 方法增加了检验 where 条件的功能</p>
+                  <p>移除系统内置的 deny_ip middleware，独立为 think-ip-filter middleware</p>
+                  <p>模板渲染前添加 prerender 钩子的功能</p>
+                  <p>thinkjs 命令添加了创建 plugin 的功能</p>
+                  <p>修复了 producition 和 testing 项目环境下命令行执行不能自动结束的问题</p>
+                  <p>添加了 view_filter hook</p>
+                  <p>修复了 filter Session 偶尔报错的问题</p>
+                  <p>注：2.0 发布时遇到一些小问题，所以紧急发布了一些版本</p>
+                </div>
+              </li>
               <li>
                 <i class="circle"></i>
                 <div class="dailycont">

@@ -13,13 +13,13 @@ ThinkJS 需要 Node.js 的版本 `>=0.12.0`，如果版本小于这个版本，�
 通过下面的命令即可安装 ThinkJS：
 
 ```sh
-npm install thinkjs -g --verbose
+npm install thinkjs@2 -g --verbose
 ```
 
 如果安装很慢的话，可以尝试使用 [taobao](http://npm.taobao.org/) 的源进行安装。具体如下：
 
 ```sh
-npm install thinkjs -g --registry=https://registry.npm.taobao.org --verbose
+npm install thinkjs@2 -g --registry=https://registry.npm.taobao.org --verbose
 ```
 
 安装完成后，可以通过 `thinkjs --version` 或 `thinkjs -V` 命令查看安装的版本。

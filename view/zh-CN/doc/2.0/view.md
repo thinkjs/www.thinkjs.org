@@ -197,7 +197,7 @@ jade 模版使用方式请见 [这里](https://github.com/jadejs/jade)。
 
 swig 模版使用方式请见 [这里](http://paularmstrong.github.io/swig/)。
 
-<!--
+
 #### 添加过滤器等功能
 
 `swig`，`nunjucks` 等很多模板引擎都支持添加过滤器等功能，可以在模板配置文件 `src/common/config/view.js` 中添加 `prerender` 配置来完成。如：
@@ -212,7 +212,9 @@ export default {
   }
 }
 ```
--->
+
+`注`： 该功能是在版本 `2.0.5` 中新增的。
+
 #### 扩展模版引擎
 
 模版引擎使用 Adapter 实现。如果项目里需要使用其他模版引擎，可以通过 Adapter 进行扩展，具体请见 [这里](./adapter_template.html)。
