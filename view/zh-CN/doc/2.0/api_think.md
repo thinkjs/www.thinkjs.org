@@ -745,7 +745,7 @@ let result = think.hook('view_template', http, data);
 
 ```js
 //解析 XML 示例
-var ParseXML = think.middlearea({
+var ParseXML = think.middleware({
   run: function(){
     var http = this.http;
     var payload = http.payload; //payload为上传的post数据
@@ -767,7 +767,7 @@ let Cls1 = class extends think.middleware.base {
 
 ##### 注册 middleware
 
-middlearea 可以是个简单的 function，也可以是较为复杂的 class。
+middleware 可以是个简单的 function，也可以是较为复杂的 class。
 
 ```js
 //注册 middleware 为 function
@@ -779,7 +779,7 @@ think.middleware('parse_xml', http => {
 ```js
 //注册 middleware 为 class
 //会自动调用 run 执行
-let Cls = think.middlearea({
+let Cls = think.middleware({
   run: function(){
     let http = this.http;
 
@@ -791,13 +791,13 @@ think.middleware('parse_xml', Cls);
 ##### 获取 middleware
 
 ```js
-let middlearea = think.middleare('parse_xml');
+let middleware = think.middleware('parse_xml');
 ```
 
 ##### 执行 middleware
 
 ```js
-let result = think.middleare('parse_xml', http);
+let result = think.middleware('parse_xml', http);
 //result is a promise
 ```
 
