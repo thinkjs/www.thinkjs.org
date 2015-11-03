@@ -142,7 +142,7 @@ thinkjs controller home/user --rest;
 
 ### 添加 service
 
-可以在项目目录下通过 `thinkjs service [name]` 命令来添加 model。如：
+可以在项目目录下通过 `thinkjs service [name]` 命令来添加 service。如：
 
 ```sh
 thinkjs service github; #创建调用 github 接口的 service

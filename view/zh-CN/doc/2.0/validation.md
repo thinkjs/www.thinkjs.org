@@ -264,7 +264,7 @@ export default class extends think.logic.base {
 
 #### requiredWithoutAll
 
-当其他几项值都存在时，该项必填。
+当其他几项值都不存在时，该项必填。
 
 ```js
 export default class extends think.logic.base {
