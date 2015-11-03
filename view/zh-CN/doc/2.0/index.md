@@ -47,7 +47,7 @@ export default class extends think.controller.base {
 
 #### 支持丰富的数据库
 
-ThinkJS 支持 `mysql`, `mongodb`, `sqlite` 等常见的数据库，并且封装了很多操作数据库的接口，无需手动拼接 SQL 语句，还可以自动防止 SQL 注入等安全漏洞。同时支持事务、关联模型等高级功能。
+ThinkJS 支持 `mysql`，`mongodb`，`sqlite` 等常见的数据库，并且封装了很多操作数据库的接口，无需手动拼接 SQL 语句，还可以自动防止 SQL 注入等安全漏洞。同时支持事务、关联模型等高级功能。
 
 #### 代码自动更新
 
@@ -67,7 +67,7 @@ ThinkJS 含有 1500+ 的测试用例，代码覆盖率达到 95% ，每一次修
 
 #### 支持命令行调用执行定时任务
 
-ThinkJS 里的 `Action`除了可以响应用户的请求，同时支持在命令行下访问，借助这套机制就可以很方便的执行定时任务。
+ThinkJS 里的 `Action` 除了可以响应用户的请求，同时支持在命令行下访问，借助这套机制就可以很方便的执行定时任务。
 
 #### Hook 和 Middleware
 
