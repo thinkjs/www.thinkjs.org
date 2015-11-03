@@ -27,8 +27,8 @@
     "npm": "^3.3.8",
     "pangunode": "0.1.0",
     "superagent": "1.3.0",
-    "uslug": "1.0.3",
-    "thinkjs": "2.x.x"
+    "thinkjs": "2.x.x",
+    "babel": "5.8.23"
   },
   "repository": {
     "type": "git",
