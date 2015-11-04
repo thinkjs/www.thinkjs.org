@@ -9,7 +9,7 @@
 <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 <link rel="apple-touch-icon" href="/static/img/favicon.png">
 <meta name="keywords" content="ThinkJS, Node.js, io.js, MVC, Restful, Generator Function, ES6, ES7, Promise">
-<meta name="description" content="ThinkJS 是一款可以使用 ES6/7 特性开发项目的 Node.js 框架，使用 async/await 或者 */yield 彻底解决异步回调的问题。">
+<meta name="description" content="ThinkJS 2.0 had completelly been rewritten with brand-new ECMAScript 6/7 features. By using ES7's async/await or ES6's Generator Function features, ThinkJS 2.0 could thoroughly solve the asynchronous nesting problem within Node.js">
 <%lscookie='header'%>
 <link href="/static/css/reset.css" rel="stylesheet" data-ls="css_reset" />
 <link href="/static/module/highlight/styles/github-gist.css" rel="stylesheet" data-ls="css_github" >
@@ -24,12 +24,11 @@
         <div class="logo"><a href="/" title="ThinkJS"></a></div>
         <div class="headr">
             <ul class="nav">
-                <li><a href="/<%-lang%>/doc.html">文档</a></li>
+                <li><a href="/<%-lang%>/doc.html">Documentation</a></li>
                 <li class="firekylin"><a href="https://github.com/75team/firekylin" target="_blank">FireKylin</a></li>
-                <li <%if(currentNav === 'demo'){%>class="current"<%}%>><a href="/<%-lang%>/demo.html">示例</a></li>
-                <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/<%-lang%>/changelog.html">更新日志</a></li>
-                <li <%if(currentNav === 'plugin'){%>class="current"<%}%>><a href="/<%-lang%>/plugin.html">插件</a></li>
-                <li class="discuss"><a href="http://www.w3ctech.com/thinkjs" target="_blank">社区</a></li>          
+                <li <%if(currentNav === 'demo'){%>class="current"<%}%>><a href="/<%-lang%>/demo.html">Demo</a></li>
+                <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/<%-lang%>/changelog.html">ChangeLog</a></li>
+                <li <%if(currentNav === 'plugin'){%>class="current"<%}%>><a href="/<%-lang%>/plugin.html">Plugins</a></li>         
             </ul>
             <%if(hasVersion){%>
             <div class="version" id="version">
