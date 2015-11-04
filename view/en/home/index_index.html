@@ -1,0 +1,140 @@
+<%include inc/header.html %>
+<div class="banarea" style="background-image:url(./static/img/banbg.jpg)">
+  <div class="wrap">
+      <h1 class="slogan">The web framework  beyond your dreams</h1>
+      <h3 class="slogan-desc">use full ES6/7 features to develop web applications</h3>
+      <a href="/doc.html" class="btn-link">Getting Started</a>
+    </div>
+</div>
+<div class="banbot">
+  <div class="wrap">
+        <p>Check out the latest developments in the <a href="https://github.com/75team/thinkjs" class="blue">GitHub repo</a></p>
+        <div class="share">
+        
+<!--           <a target="_blank" href="https://github.com/75team/thinkjs">
+            <img height="20" src="https://img.shields.io/github/stars/75team/thinkjs.svg?style=social&label=Star" alt="github star">
+          </a>
+          <a target="_blank" href="http://badge.fury.io/js/thinkjs">
+            <img height="20" src="https://img.shields.io/npm/v/thinkjs.svg?style=flat-square" alt="npm version">
+          </a>
+          <a target="_blank" href="https://travis-ci.org/75team/thinkjs">
+            <img height="20" src="https://img.shields.io/travis/75team/thinkjs.svg?style=flat-square" alt="npm build">
+          </a>
+          <a target="_blank" href="https://coveralls.io/github/75team/thinkjs">
+            <img height="20" src="https://img.shields.io/coveralls/75team/thinkjs.svg?style=flat-square" alt="coverage">
+          </a> -->
+          <a target="_blank" href="https://github.com/75team/thinkjs">
+            <img height="20" src="/static/other/icon/star.svg" alt="github star">
+          </a>
+          <a target="_blank" href="https://github.com/75team/thinkjs">
+            <img height="20" src="/static/other/icon/version.svg" alt="npm version">
+          </a>
+          <a target="_blank" href="https://github.com/75team/thinkjs">
+            <img height="20" src="/static/other/icon/build.svg" alt="npm build">
+          </a>
+          <a target="_blank" href="https://github.com/75team/thinkjs">
+            <img height="20" src="/static/other/icon/coverage.svg" alt="coverage">
+          </a>
+        </div>
+    </div>
+</div>
+<div class="flinfo">  
+  <div class="wrap">
+      <div class="tit"><h3>使用 ES6/7 特性开发项目</h3></div>
+<!--     <p class="tips">借助 Babel 编译，可以大胆的在项目使用 ES6/7 语法。</p> -->
+        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">//user controller, home/controller/user.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">think</span>.<span class="hljs-title">controller</span>.<span class="hljs-title">base</span> </span>{
+  <span class="hljs-comment">//login action</span>
+  <span class="hljs-keyword">async</span> loginAction(){
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.isGet()){
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.display();
+    }
+    <span class="hljs-comment">//data is validated in logic</span>
+    <span class="hljs-keyword">let</span> data = <span class="hljs-keyword">this</span>.post();
+    <span class="hljs-keyword">let</span> md5 = think.md5(<span class="hljs-string">'think_'</span> + data.pwd);
+    <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.model(<span class="hljs-string">'user'</span>).where({name: data.name, pwd: md5}).find();
+    <span class="hljs-keyword">if</span>(think.isEmpty(result)){
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.fail(<span class="hljs-string">'login fail'</span>);
+    }
+    <span class="hljs-comment">//set userInfo to session</span>
+    <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.session(<span class="hljs-string">'userInfo'</span>, result);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.success();
+  }
+}
+</code></pre>
+    </div>
+</div>
+<div class="flfet"> 
+  <div class="wrap">
+      <div class="tit2"><h3>FEATURES</h3></div>
+<!--       <p class="tips">Make Async Easy Based On ES6</p> -->
+        <ul class="fetlist">
+          <li>
+              <i class="icon-fet1"></i>
+              <p><strong>支持 ES6/7 特性</strong>可以直接在项目里使用 ES6/7 (Generator Function, Class, Async & Await) 等特性，借助 Babel 编译，可稳定运行在 Node.js 环境上。</p>
+            </li>
+          <li>
+              <i class="icon-fet2"></i>
+              <p><strong>支持丰富的数据库</strong>支持 Mysql, Sqlite, Mongodb 等常见的数据库，提供了很多简单易用、高度封装的方法，自动防止 SQL 注入。</p>
+            </li>
+          <li>
+              <i class="icon-fet3"></i>
+              <p><strong>Hook & Middleware</strong>系统提供了大量的钩子和中间件，可以方便的对请求进行控制和修改。</p>
+            </li>
+          <li>
+              <i class="icon-fet4"></i>
+              <p><strong>REST API</strong>自动生成 REST API，而无需写任何的代码。也可以根据接口定制，隐藏部分数据和进行权限控制。</p>
+            </li>
+          <li>
+              <i class="icon-fet5"></i>
+              <p><strong>支持 WebSocket</strong>支持 socket.io，sockjs 等常见的 websocket 客户端，而服务端代码始终保持一致。</p>
+            </li>
+          <li>
+              <i class="icon-fet6"></i>
+              <p><strong>丰富的 Adapter</strong>快速切换 Cache, Store, Session, Template 等功能，而无需关心具体使用哪种方式。</p>
+            </li>
+          <li>
+              <i class="icon-fet7"></i>
+              <p><strong>自动更新</strong>开发模式下，文件修改后立即生效，无需重启 Node.js 服务。</p>
+            </li>
+          <li>
+              <i class="icon-fet8"></i>
+              <p><strong>命令行调用</strong>支持命令行方式调用 Action，方便执行定时任务。</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="fluser">  
+  <div class="wrap">
+        <ul class="userlist">
+          <li>
+              <p class="usertalk">ThinkJS 在易用性和创新方面是一个标杆。作为 Node.js 的新生应用框架，她代表着行业内的高水平。接下来希望她的社区能够繁荣起来，希望大家喜欢 ThinkJS 并且不断完善她。</p>
+                <div class="userinfo clearfix">
+                  <img src="/static/img/portrait_yueying.jpg" alt="月影" />
+                    <p>
+                      <strong>月影</strong>360 奇舞团负责人
+                    </p>
+                </div>
+            </li>
+          <li>
+              <p class="usertalk">ThinkJS 2.0 是一个颠覆式的版本，这个版本凝聚了作者的大量心血和社区的集体智慧，我们有理由相信她在性能、效率和扩展性上能够带给广大开发者带来更多的惊喜！</p>
+                <div class="userinfo clearfix">
+                  <img src="/static/img/portrait_lisongfeng.jpg" alt="李松峰" />
+                    <p>
+                      <strong>李松峰</strong>《JavaScript 高级程序设计》译者  
+                    </p>
+                </div>
+            </li>
+          <li>
+              <p class="usertalk">ThinkJS 最优秀的地方在于她可以快速上手，开发简单，功能强大，利于扩展！不管你是用她来开发项目还是学习 Node.js 都是非常好的选择！w3ctech 就是使用 ThinkJS 开发的。</p>
+                <div class="userinfo clearfix">
+                  <img src="/static/img/portrait_zhouyubo.jpg" alt="周裕波" />
+                    <p>
+                      <strong>周裕波</strong>w3ctech 发起人
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<%include inc/footer.html %>

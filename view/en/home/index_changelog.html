@@ -1,0 +1,336 @@
+<%include inc/header.html %>
+
+<div class="content">
+  <div class="wrap changelog">
+      <h2 class="tith2">更新日志</h2>
+        <div class="daily">
+          <ul>  
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.0.5</strong>2015.11.02</span>
+                  <p>修复了 Logic 规则含有空格导致报错的问题</p>
+                  <p>优化了 Logic 规则校验失败后发送错误信息的数据结构</p>
+                  <p>创建项目时，将 bootstrap/hook.js 改名为 bootstrap/middleware.js</p>
+                  <p>创建项目时，添加文件 config/hook.js</p>
+                  <p>Babel 编译添加 --retain-lines 参数，保持编译后的文件行号和原始文件相同</p>
+                  <p>添加了查询条件里 MongoID 为字符串时自动转为 MongoID 对象的功能</p>
+                  <p>修复了新增文件没有自动更新的问题</p>
+                  <p>修复了 think.cache 指定类型失败的问题</p>
+                  <p>模型 update 方法增加了检验 where 条件的功能</p>
+                  <p>移除系统内置的 deny_ip middleware，独立为 think-ip-filter middleware</p>
+                  <p>模板渲染前添加 prerender 钩子的功能</p>
+                  <p>thinkjs 命令添加了创建 plugin 的功能</p>
+                  <p>修复了 producition 和 testing 项目环境下命令行执行不能自动结束的问题</p>
+                  <p>添加了 view_filter hook</p>
+                  <p>修复了 file Session 偶尔报错的问题</p>
+                  <p>注：2.0 发布时遇到一些小问题，所以紧急发布了一些版本</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.0.0</strong>2015.10.30</span>
+                  <p>可以使用 ES6/7 全部特性来开发项目</p>
+                  <p>支持多种项目结构和多种项目环境</p>
+                  <p>支持丰富的数据库，如：Mysql，MongoDB，SQLite</p>
+                  <p>代码自动更新，无需重启 Node 服务</p>
+                  <p>支持多种 WebSocket 库，如：socket.io，sockjs</p>
+                  <p>支持 Memory，File，Db，Redis 等多种 Session</p>
+                  <p>支持 Memory，File，Redis，Memcache 等多种 Cache</p>
+                  <p>支持 ejs，jade，swig，numjucks 等多种模版引擎</p>
+                  <p>支持切面编程，支持 __before，__after 等魔术方法</p>
+                  <p>支持自定义多种错误页面，如：400，404，500，503</p>
+                  <p>支持命令行调用和执行定时任务</p>
+                  <p>丰富的 Hook 和 Middleware</p>
+                  <p>详细的日志，如：请求日志、错误日志、性能日志</p>
+                  <p>自动创建 REST API</p>
+                  <p>支持国际化和多主题</p>
+                  <p>丰富的测试用例，1500+ 测试用里，代码覆盖率 > 95%</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.2.10</strong>2015.09.17</span>
+                  <p>修复memcache中传输内容含有end导致截断的问题</p>
+                  <p>修复countSelect方法中使用alias导致sql报错的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.2.9</strong>2015.07.30</span>
+                  <p>修复windows下变成反斜杠导致url无法识别的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.2.8</strong>2015.07.29</span>
+                  <p>修复静态资源访问的漏洞</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.2.7</strong>2015.07.15</span>
+                  <p>修复memcache不能使用远程host的问题</p>
+                  <p>修复memcache部分方法参数错误的问题</p>
+                  <p>DbSession功能的字段key改为cookie，防止创建数据表报错的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.2.6</strong>2015.07.07</span>
+                  <p>jade模版增加自定义配置的功能</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.2.5</strong>2015.06.24</span>
+                  <p>修复websocket中传递的数据数字转为字符串的问题</p>
+                  <p>修复post值为null导致判断报错的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.2.4</strong>2015.05.29</span>
+                  <p>Controller不再强制改为首字母大写，后面都小写。 fix <a href="https://github.com/75team/thinkjs/issues/166">#166</a></p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.2.3</strong>2015.05.18</span>
+                  <p>修复redis设置超时无效的问题。thx @snadn</p>
+                  <p>修复debug模式下，App.sendError方法报错的问题。thx @Zongmin lei</p>
+                  <p>修复高级模型下数据表有下划线导致关联字段错误的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.2.2</strong>2015.04.29</span>
+                  <p>修复引用MongoDb首字母小写的问题, thx @denvey</p>
+                  <p>websocket添加timeout参数，默认为0（不自动断开）</p>
+                  <p>修复恶意文件上传引起Temp目录有文件的问题</p>
+                  <p>注：npm发布有问题，跳过1.2.1版本</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.2.0</strong>2015.04.21</span>
+                  <p>修复文件上传不支持multpile的情况</p>
+                  <p>添加自定义错误处理方式, thx @Rayi</p>
+                  <p>修复获取用户端ip含有::的情况</p>
+                  <p>添加redis session, thx @snadn</p>
+                  <p>添加对jSmart模版的支持, thx @snadn</p>
+                  <p>修复MongoDB里OverwriteModelError的错误, thx @denvey</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.1.10</strong>2015.04.14</span>
+                  <p>修复单元测试在Node版本>=0.12报错的问题</p>
+                  <p>Model里countSelect方法支持group和子查询</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.1.9</strong>2015.03.25</span>
+                  <p>修改Model的config默认值为{}, thx @Rayi</p>
+                  <p>修复<code>/resource/css</code>访问报错的问题</p>
+                  <p>依赖模块<code>websocket-driver</code>版本升级到0.5.3</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.1.8</strong>2015.03.13</span>
+                  <p>修复文件名大小写的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.1.7</strong>2015.03.13</span>
+                  <p>禁止ip访问支持从数据库里获取ip列表</p>
+                  <p>命令行模式下增加超时的机制，避免执行结束不掉的情况</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.1.6</strong>2015.01.19</span>
+                  <p>添加自动删除上传的文件功能，配置为：<code>post_file_autoremove</code>，默认开启。如果项目里要使用，需要移动到其他目录。</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.1.5</strong>2015.01.12</span>
+                  <p>对GET/POST提交的数据进行过滤，去除值为数组。<code>C('filter_data')</code>，默认开启。（注：该功能为安全过滤，强烈建议开启）</p>
+                  <p>对模型中的<code>addAll</code>方法添加数据自动校验的支持。</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.1.4</strong>2015.01.07</span>
+                  <p>由于npm发布的问题，版本从1.1.2跳到1.1.4。</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.1.2</strong>2015.01.06</span>
+                  <p>修复_404Action非第一次访问不能正常结束请求的问题。</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.1.1</strong>2014.12.24</span>
+                  <p>请求参数值为数组时，只取数组的第一个值。避免开发者在进行数据库查询时，操作不当导致有安全漏洞。</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.1.0</strong>2014.11.20</span>
+                  <p>将全局函数的实现代码移到<code>thinkjs-util</code>模块</p>
+                  <p>关系数据库增加对数据自动校验的支持，<a href="/doc/model.html#自动校验">文档</a></p>
+                  <p>添加对MongoDB的简单支持，<a href="/doc/model_mongo.html">文档</a></p>
+                  <p>启动服务时，添加对自定义端口的支持</p>
+                  <p>Controller里的download方法添加异常处理，thx <a href="https://github.com/75team/thinkjs/commit/2b3f01f22a8d2dd7d319e3b3ad8dbac763576a0c">@snadn</a></p>
+                  <p>debug模式下，清除缓存的时间间隔由100ms改为500ms</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.0.7</strong>2014.11.10</span>
+                  <p>修复命令行模式下不能关闭数据库连接的问题</p>
+                  <p>修复自定义数据库名不能生效的问题</p>
+                  <p>添加对swig模版的支持</p>
+                  <p>优化getCallController的性能</p>
+                  <p>将controller对象赋值到模版中</p>
+                  <p>可以直接将promise assign到模版中，具体见<a href="http://www.welefen.com/thinkjs-support-assign-promise-to-view.html">这里</a></p>
+                  <p>success方法添加自定义message的功能</p>
+                  <p>修复数据库查询缓存无法通过S函数读取的问题</p>
+                  <p>where条件添加ignore value的功能</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.0.6</strong>2014.11.03</span>
+                  <p>优化静态资源访问漏洞的修复方式</p>
+                  <p>修复了D()或者M()不带参数报错的问题</p>
+                  <p>修复了上传文件时，如果上传目录不存在报错的问题</p>
+                  <p>优化系统错误时，状态码可以配置</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.0.5</strong>2014.10.29</span>
+                  <p>静态资源访问漏洞修复方式在windows下有问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.0.4</strong>2014.10.29</span>
+                  <p>修复了静态资源访问漏洞，具体见<a href="http://www.w3ctech.com/topic/599">这里</a></p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.0.3</strong>2014.10.27</span>
+                  <p>修改Class函数的参数顺序，将形参superClass放在前面</p>
+                  <p>修复Controller里的action不存在，但有_call获取参数报错的问题</p>
+                  <p>修复Model where条件值为undefined被自动过滤掉的问题</p>
+                  <p>启动服务时，添加对绑定host的支持</p>
+                  <p>静态资源正则添加对robot.txt的支持</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.0.2</strong>2014.10.20</span>
+                  <p>将页面默认编码由utf8改为utf-8（修复ie部分版本下对utf8不能正常识别的问题）</p>
+                  <p>修复Model里含有alias导致show columns报错的问题</p>
+                  <p>增加对Model join方法里on含有表名的支持</p>
+                  <p>增加对Model join的table为SELECT语句的支持</p>
+                  <p>修复_404Action报错的问题</p>
+                  <p>增加文件上传路径配置post_file_upload_path，默认为App/Runtime/Temp目录</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.0.1</strong>2014.10.09</span>
+                  <p>去除Array.prototype.sum扩展</p>
+                  <p>修复Model query方法SELECT不是大写导致解析错误的问题</p>
+                  <p>修复FileSession rm的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>1.0.0</strong>2014.09.22</span>
+                  <p>ThinkJS震撼发布1.0版本，详情见 <a href="http://www.w3ctech.com/topic/265">这里</a></p>
+                </div>
+              </li>
+            </ul>
+        </div>
+        <div class="ploy">
+          <h4>ThinkJS 版本发布策略：</h4>
+            <p>1~2周 发布一个小版本，如：1.0.1 => 1.0.2（小功能增加，bug修复等）</p>
+            <p>1~3月 发布一个中版本，如：1.0.0 => 1.1.0（较大功能增加，部分模块重构等）</p>
+            <p>1~2年 发布一个大版本，如：1.0.0 => 2.0.0（框架整体设计、重构等）</p>
+            <p>以上情况会因为一些特殊情况进行调整。</p>
+        </div>
+    </div>
+</div>
+
+<%include inc/footer.html %>

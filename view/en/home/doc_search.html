@@ -1,0 +1,46 @@
+<%include inc/header.html %>
+  <link href="/static/module/highlight/styles/github-gist.css" rel="stylesheet">
+
+<div class="content doc-content">
+  <div class="wrap clearfix">
+      <div class="lbox">
+        <%for(var key in sidebar){%>
+        <dl>
+          <dt><%-key%></dt>
+            <dd>
+              <%for(var name in sidebar[key]){%>
+              <a href="/<%-lang%>/doc/<%-version%>/<%-sidebar[key][name]%>.html"><%-name%></a>
+              <%}%>
+            </dd>
+        </dl>
+        <%}%>
+      </div>
+        <div class="rbox">
+          <div class="clearfix">
+            
+            <div class="search">
+              <form method="get" action="/<%-lang%>/doc/<%-version%>/search">
+                  <input class="sea-txt" value="<%=keyword%>" required name="keyword" placeholder="keyword" />
+                  <input class="sea-btn" type="submit" value="" />
+              </form>
+            </div>
+          </div>
+            <div class="doc">
+                <%if(!keyword){%>
+                <h2 style="color:#555">请输入关键词进行搜索</h2>
+                <%}else if(think.isEmpty(searchResult)){%>
+                <h2 style="color:#555">未查询到相关内容</h2>
+                <%}else{%>
+                  <h2>搜索结果(<%-searchResult.length%>)</h2>
+                  <%searchResult.forEach(function(item){%>
+                  <h4><a target="_blank" href="/<%-lang%>/doc/<%-version%>/<%-item.filename.replace('.md', '')%>.html"><%-item.title%></a></h4>
+                  <%item.text.slice(0, 10).forEach(function(textItem){%>
+                  <p><%-textItem%></p>
+                  <%})%>
+                  <%})%>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</div>
+<%include inc/footer.html %>
