@@ -1,49 +1,49 @@
 ## think
 
-`think` 是一个全局对象，该对象里包含了大量有用的属性和方法。这些方法在应用的任何地方都可以直接使用，无需再 require。
+`think` is a global object  contains lots of useful methods and functions which can use without `require` in anywhere of your application.
 
-### 属性
+### Method
 
 #### think.startTime
 
-服务启动时间，是个 `unix` 时间戳。
+The start time of service, it’s a unix timestamp.
 
 #### think.env
 
-当前项目运行的环境，默认支持下面3个值，可以在项目启动时指定：
+The current environment of application, support three value below by default, you can set it when application start:
 
-* `development` 开发环境，会自动更新修改的文件
-* `testing` 测试环境
-* `production` 线上环境，代码上线时使用
+* `development` The development environment, application will automatically update itself with modified files.
+* `testing` The testing environment.
+* `production` The production environment, when application deploy online.
 
 #### think.dirname
 
-项目的文件夹名称，可以在项目启动时指定，默认值如下：
+The name of project directory, you can set it when application start, the default value is:
 
 ```js
 think.dirname = {
-  config: 'config', //配置文件目录
-  controller: 'controller', //控制器目录
-  model: 'model', //模型目录
-  adapter: 'adapter', //适配器目录
-  logic: 'logic', //逻辑目录
-  service: 'service', //服务目录
-  view: 'view', //视图目录
-  middleware: 'middleware', //中间件目录
-  runtime: 'runtime', //运行时目录
-  common: 'common', //通用目录
-  bootstrap: 'bootstrap', //启动目录 
-  locale: 'locale' //本土化目录
+  config: 'config', // The config file directory
+  controller: 'controller', // Directory of controller
+  model: 'model', // Directory of model
+  adapter: 'adapter', // Directory of adapter
+  logic: 'logic', // Directory of logic
+  service: 'service', // Directory of service
+  view: 'view', // Directory of view
+  middleware: 'middleware', // Directory of middleware
+  runtime: 'runtime', // Directory of runtime
+  common: 'common', // Directory of common functions
+  bootstrap: 'bootstrap', // the start directory of application 
+  locale: 'locale' // Directory of locale
 }
 ```
 
 #### think.port
 
-项目运行的端口，可以在项目启动时指定。如果指定，则忽略配置文件里的端口。
+The port of application runs, which can assign before application start, if assigned to some value, application will ignore the port value in the config file.
 
 #### think.cli
 
-是否是命令行模式在运行项目，默认为`false`。如果是命令行模式，则该值为传递的参数，可以通过下面的方式启动命令行模式。
+Whether application is run under command mode, false by default. if it is command mode, this variable return command arguments. You can use this way to start command mode:
 
 ```
 node www/index.js /home/index/test
@@ -51,43 +51,43 @@ node www/index.js /home/index/test
 
 #### think.lang
 
-系统当前的语言，从环境变量中读取，在 `Windows` 下可能为空。
+The current language  of system, it read from the environment, which maybe empty in windows system.
 
 #### think.mode
 
-项目当前的模式，框架支持3中项目模式：
+The current mode of application, framework support three mode in project:
 
-* `think.mode_mini` 单模块模式，整个项目只有一个模块
-* `think.mode_normal` 多模块模式，目录结构只有 `Controller`，`View`，`Logic` 等分模块
-* `think.mode_module` 多模块模式，严格按照模块来划分目录结构
+* `think.mode_mini` single module mode, all of project is one module.
+* `think.mode_normal` multiple modules mode, directory of project is separated to Controller, View, Logic and some other modules.
+* `think.mode_module` multiple modules mode, but more stringent separate project with modules than normal mode.
 
 #### think.version
 
-ThinkJS当前的版本
+The current version of ThinkJS.
 
 #### think.module
 
-当前项目下的模块列表，如果项目模式是 `think.mode_mini`，那么值为空数组。
+The list of modules of project, if current mode is `mode_mini`, this variable return a empty array.
 
 #### think.THINK_PATH
 
-ThinkJS代码的路径
+The path of ThinkJS code.
 
 #### think.THINK_LIB_PATH
 
-ThinkJS代码 `lib/` 的具体路径
+The path where `lib/` of ThinkJS is.
 
 #### think.ROOT_PATH
 
-项目的根目录，在 `www/index.js` 中定义
+The root path of project, which is defined in `www/index.js`
 
 #### think.APP_PATH
 
-项目的 `app` 目录，在 `www/index.js` 中定义
+The path of app directory, which is defined in `www/index.js`
 
 #### think.RESOURCE_PATH
 
-项目的静态资源根目录，在 `www/index.js` 中定义
+The path of static resource directory, which is defined in `www/index.js`
 
 
 
@@ -96,10 +96,10 @@ ThinkJS代码 `lib/` 的具体路径
 
 #### think.Class(methods, clean)
 
-动态的创建一个类，默认继承自 think.base 。 如果使用 ES6 特性进行开发的话，可以直接使用 ES6 里的 class 来创建类。
+This function will automatically create a class, which inherit from `think.base` by default. you can use `class` to create class in ES6 if project is using ES6.
 
 ```js
-//继承自 think.base
+// inherit from think.base
 var Cls1 = think.Class({
   getName: function(){
 
@@ -108,7 +108,7 @@ var Cls1 = think.Class({
 ```
 
 
-##### 不继承 think.base ##### 
+##### didnot inherit think.base ##### 
 
 ```js
 var Cls2 = think.Class({
@@ -119,10 +119,10 @@ var Cls2 = think.Class({
 ```
 
 
-##### 继承一个类
+##### Inherit from an other class
 
 ```js
-//继承自 Cls2
+// inherit from Cls2
 var Cls3 = think.Class(Cls2, {
   init: function(name){
     this.name = name;
@@ -134,22 +134,22 @@ var Cls3 = think.Class(Cls2, {
 ```
 
 
-##### 实例化类
+##### Instance a class
 
 ```js
-//获取类的实例，自动调用 init 方法
+// instance a class which will call `init` function automatically
 var instance = new Cls3('thinkjs');
 ```
 
 #### think.extend(target, source1, source2, ...)
 
-* `target` {Object} 目录对象
-* `source1`  {Mixed} 源对象1
-* `return`  {Object} 目录对象
+* `target` {Object} directory object
+* `source1`  {Mixed} source object
+* `return`  {Object} directory object
 
-将 source1, source2 等对象上的属性或方法复制到 target 对象上，类似于 jQuery 里的 $.extend 方法。
+It will copy methods or functions from source1, source2 and some other object to `target` object, it looks like `$.extend` in `jQuery`.
 
-默认为深度复制，可以将第一个参数传 `false` 进行浅度复制。  
+Deep copy by default, you can assign the first arugment to `false` if you want shallow copy.
 
 ```js
 think.extend({}, {name: 'foo'}, {value: 'bar'});
@@ -159,10 +159,10 @@ think.extend({}, {name: 'foo'}, {value: 'bar'});
 
 #### think.isBoolean(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测一个对象是否是布尔值。
+Check this object is Boolean type or not.
 
 ```js
 think.isBoolean(true); //true
@@ -173,10 +173,10 @@ think.isBoolean('string'); //false
 
 #### think.isNumber(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测一个对象是否是数字。
+Check this object is Number type or not.
 
 ```js
 think.isNumber(1); //true
@@ -185,10 +185,10 @@ think.isNumber(1.21); //true
 
 #### think.isObject(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是对象
+Check this object is object type or not.
 
 ```js
 think.isObject({}); //true
@@ -198,10 +198,10 @@ think.isObject(new Buffer('welefen')); //false
 
 #### think.isString(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是字符串
+Check this object is string type or not.
 
 ```js
 think.isString("xxx"); // true
