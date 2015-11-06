@@ -3,7 +3,6 @@ import path from 'path';
 
 import marked from "marked";
 import markToc from "marked-toc";
-import uslug from 'uslug';
 import highlight from 'highlight.js';
 
 
