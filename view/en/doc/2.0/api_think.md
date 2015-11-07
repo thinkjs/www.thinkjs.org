@@ -210,10 +210,10 @@ think.isString(new String("xxx")); //true
 
 #### think.isFunction(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是函数
+Check this object is function type or not.
 
 ```js
 think.isFunction(function(){}); //true
@@ -222,10 +222,10 @@ think.isFunction(new Function("")); //true
 
 #### think.isDate(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是日期对象
+Check this object is date type or not.
 
 ```js
 think.isDate(new Date()); //true
@@ -233,10 +233,10 @@ think.isDate(new Date()); //true
 
 #### think.isRegExp(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是正则
+Check this object is regular expression or not.
 
 ```js
 think.isRegExp(/\w+/); //true
@@ -245,10 +245,10 @@ think.isRegExp(new RegExp("/\\w+/")); //true
 
 #### think.isError(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是个错误
+Check whether this object is error type or not.
 
 ```js
 think.isError(new Error("xxx")); //true
@@ -256,13 +256,13 @@ think.isError(new Error("xxx")); //true
 
 #### think.isEmpty(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否为空
+Check this object is empty or not.
 
 ```js
-// 检测是否为空
+// check is empty or not
 think.isEmpty({}); //true
 think.isEmpty([]); //true
 think.isEmpty(""); //true
@@ -275,10 +275,10 @@ think.isEmpty(false); //true
 
 #### think.isArray(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是数组
+Check this object is array or not.
 
 ```js
 think.isArray([]); //true
@@ -289,10 +289,10 @@ think.isArray(new Array(10)); //true
 
 #### think.isIP4(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是 IP4
+Check this object is IP4 or not.
 
 ```js
 think.isIP4("10.0.0.1"); //true
@@ -302,10 +302,10 @@ think.isIP4("192.168.1.1"); //true
 
 #### think.isIP6(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是 IP6
+Check this object is IP6 or not.
 
 ```js
 think.isIP6("2031:0000:130f:0000:0000:09c0:876a:130b"); //true
@@ -314,10 +314,10 @@ think.isIP6("2031:0000:130f::09c0:876a:130b"); //true
 
 #### think.isIP(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是 IP
+Check this object is IP or not.
 
 ```js
 think.isIP("10.0.0.1"); //true
@@ -327,10 +327,10 @@ think.isIP("2031:0000:130f:0000:0000:09c0:876a:130b"); //true ip6
 
 #### think.isFile(file)
 
-* `file` {Mixed} 要检测的文件路径
+* `file` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是文件，如果在不存在则返回 false
+Check this object is IP or not, if file did't exist, return false.
 
 ```js
 think.isFile("/home/welefen/a.txt"); //true
@@ -339,10 +339,10 @@ think.isFile("/home/welefen/dirname"); //false
 
 #### think.isDir(dir)
 
-* `dir` {Mixed} 要检测的路径
+* `dir` {Mixed} the path to check
 * `return` {Boolean}
 
-检测是否是目录，如果不存在则返回 false
+Check this path is directory or not. if not, return false.
 
 ```js
 think.isDir("/home/welefen/dirname"); //true
@@ -350,10 +350,10 @@ think.isDir("/home/welefen/dirname"); //true
 
 #### think.isBuffer(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是 Buffer
+Check this object is buffer object or not.
 
 ```js
 think.isBuffer(new Buffer(20)); //true
@@ -361,10 +361,10 @@ think.isBuffer(new Buffer(20)); //true
 
 #### think.isNumberString(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-是否是字符串类型的数字
+Check this object is string type of number or not.
 
 ```js
 think.isNumberString(1); //true
@@ -374,10 +374,10 @@ think.isNumberString("1.23"); //true
 
 #### think.isPromise(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是个 Promise
+Check this object is promise object or not.
 
 ```js
 think.isPromise(new Promise(function(){})); //true
@@ -386,10 +386,10 @@ think.isPromise(getPromise()); //true
 
 #### think.isHttp(obj)
 
-* `obj` {Mixed} 要检测的对象
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-检测是否是包装的 http 对象
+Check this object is http object or not.
 
 ```js
 think.isHttp(http); // true
@@ -397,63 +397,63 @@ think.isHttp(http); // true
 
 #### think.isWritable(path)
 
-* `path` {String} 要写的目录
+* `path` {String} the path of directory or file
 * `return` {Boolean}
 
-判断文件或者目录是否可写，如果不存在则返回 false
+Check this file or directory can write or not. if not, return false.
 
 
 #### think.isPrevent(obj)
 
-* `obj` {Mixed}
+* `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-判断是否是个阻止类型的Ppromise。通过 think.prevent() 会生成该 Promise 。
+Check this object is prevent type of promise or not, through `think.prevent()` will generate this type of promise.
 
 #### think.mkdir(p, mode)
 
-* `p` {String} 要创建的目录
-* `mode` {Number} 要创建的目录权限，默认为 `0777`
+* `p` {String} the name of directory
+* `mode` {Number} the permission of directory , 0777 by default.
 
-递归的创建目录，如果目录已经存在，那么修改目录的权限。
+Function will create directory recursively, if directory is exist. this function will modify the permission of the directory.
 
 ```js
-// 假设 /home/welefen/a/b/ 不存在
+// if /home/welefen/a/b/ didn't exist
 think.mkdir("/home/welefen/a/b");
-think.mkdir("home/welefne/a/b/c/d/e"); // 递归创建子目录
+think.mkdir("home/welefne/a/b/c/d/e"); // create directory recursively
 ```
 
 #### think.rmdir(p, reserve)
 
-* `p` {String} 要删除的目录
-* `reserve` {Boolean} 是否保留该目录。如果为 true，则只删除子目录
+* `p` {String} the path of directory to delete.
+* `reserve` {Boolean} whether to keep this directory or not, if value is true, this function will only delete subdirectory.
 * `return` {Promise}
 
-递归的删除目录，如果目录不存在则直接返回。返回是个 Promise，后续操作要在 `then` 里执行
+Function will delete directory recursively, if directory is not exist, this function will return directly. or this function will return a promise object, then you can use its `then` to operate.
 
 ```js
 function rmTmp(){
   think.rmdir('/foo/bar').then(function(){
-    //后续其他操作
+    // some operation
   })
 }
 ```
 
-如果使用 `Generator Function`，则可以使用 `yield`
+if use `Generator Function`, you can use `yield`:
 
 ```js
 function * rmTmp(){
   yield think.rmdir('/foo/bar');
-  //后续其他操作
+  // some operation
 }
 ```
 
 #### think.chmod(p, mode)
 
-* `p` {String} 要修改的目录
-* `mode` {Number} 目录权限，默认为`0777`
+* `p` {String} the path of directory
+* `mode` {Number} the permission of directory , 0777 by default.
 
-修改目录权限，如果目录不存在则直接返回
+Change the permission of directory, if directory didn't exist, function will return null directly.
 
 ```js
 think.chmod("/home/welefen/a", 0777);
@@ -462,10 +462,10 @@ think.chmod("/home/welefen/a", 0777);
 
 #### think.md5(str)
 
-* `str` {String} 要计算md5值的字符串
-* `return` {String} md5值
+* `str` {String} the string which need to generate md5.
+* `return` {String} md5 value
 
-计算字符串的md5值
+Generate md5 value.
 
 ```js
 think.md5('thinkjs'); 
@@ -476,12 +476,12 @@ think.md5('thinkjs');
 
 #### think.defer()
 
-* `return` {Object} Deferred对象
+* `return` {Object} Deferred object
 
-创建一个 `Deferred` 对象，`new Promise` 的一种快捷方式。虽然不建议使用 `Deferred`这种方式，但有时候不得不使用。如：`setTimeout`, `event`。
+Create a `Deferred` object, which is a shortcut of `Promise`. Sometimes have to use this function with some operation like `setTimeout`, `event`, though this is not a recommend way.
 
 ```js
-//使用Deferred的方式
+// the way using Deferred
 var fn = function(){
   var deferred = think.defer();
   process.nextTick(function(){
@@ -495,10 +495,10 @@ var fn = function(){
 }
 ```
 
-使用 `Deferred` 方式比直接使用 `new Promise` 的方法代码更加简洁。
+The way using `Deferred` is much cleaner than the way using `new Promise`.
 
 ```js
-//直接使用new Promise的方式
+// the way using new Promise
 var fn = function(){
   return new Promise(function(resolve, reject){
     process.nextTick(function(){
@@ -512,27 +512,27 @@ var fn = function(){
 }
 ```
 
-注： 异步 `callback` 的操作不要使用 `Deferred` 方式，可以用 `think.promisify` 方法快速把 `callback` 包装成 `Promise`。
+Notice: asynchronous callback operations DONT use the `Deferred` way, instead of encapsulate `callback` to `Promise` with using `think.promisify`.
 
 #### think.promisify(fn, receiver)
 
-* `fn` {Function} 要转化的函数
-* `receiver` {Object} this指向
+* `fn` {Function} function which to be promisify
+* `receiver` {Object} where is `this` point to.
 
-将异步方法快速包装成Promise，异步方法必须符合最后一个参数为回调函数，且回调函数的第一个参数为 `err`的原则。
+Encapsulate asynchronous functions to Promise quickly, the last argument of asynchronous functions must be a callback, which has an error handler of first argument.
 
 ```js
 var fs = require('fs');
 
-//获取文件内容
+// function which to get file content 
 var getContent = function(filePath){
-  //将readFile方法包装成Promise
+  // encapsulate readFile to Promise
   var readFilePromise = think.promisify(fs.readFile, fs);
-  //读取文件内容
+  // read file content
   return readFilePromise(filePath, 'utf8');
 }
 
-//获取具体的文件内容
+// get file content
 getContent('/foo/bar/file.txt').then(function(content){
   console.log(content);
 }).catch(function(err){
@@ -543,71 +543,71 @@ getContent('/foo/bar/file.txt').then(function(content){
 
 #### think.reject(err)
 
-* `err` {Error} Error对象
+* `err` {Error} Error object
 * `return` {Promise} reject promise
 
-返回一个 reject promise，与 `Promise.reject`不同的是，该方法会自动打印错误信息。避免需要调用 catch 方法手工打印错误信息。
+Return a reject promise, and the difference between this and `Promise.reject` is this function will print error message automaticallly, which can avoid calling `catch` function to print error message by hand.
 
 ```js
-//使用Promise.reject
+// use Promise.reject
 var fn = function(){
   return Promise.reject(new Error('xxx'));
 }
-//需要手工调用catch方法打印错误信息
+//but need to print error massage with `catch` by hand.
 fn().catch(function(err){
   console.error(err.stack);
 })
 ``` 
 
 ```js
-//使用think.reject
+// use think.reject
 var fn = function(){
-  return think.reject(new Error('xxx'));
+  return think.reject(new Error("xxx"));
 }
-//会自动打印格式化后的错误信息
+// will print formatted error message automactically.
 fn();
 ```
 
 #### think.co
 
-`co` 模块的别名 <https://github.com/tj/co>
+The alias of modules is [co](https://github.com/tj/co)
 
 #### think.lookClass(name, type, module, base)
 
-* `name` {String} 类名
-* `type` {String} 类型 (controller | model | logic ...)
-* `module` {String} 模块名
-* `base` {String} 找不到时找对应的基类
+* `name` {String} class name
+* `type` {String} type (controller | model | logic ...)
+* `module` {String} module name
+* `base` {String} find base class if cannot find module
 
-根据类型，名称来查找类。如果找不到会到 common 模块下查找，如果还是找不到，则查找对应类型的基类。
+Find class with type or name of class. if cannot find module, program will find module in common module, if still cannot find module, program will the baseclass.
 
 ```js
-//查找 home 模块下 user controller
-//如果找不到，会找 common 模块下 user controller
-//如果还是找不到，会找 base controller
-think.lookClass('user', 'controller', 'home'); 
+// find user controller in home module 
+// if cannot find, will find in common module
+// if still cannot find, will find in base controller
+think.lookClass("user", "controller", "home"); 
 
-//查找 admin 模块下 user controller
-think.lookClass('admin/user', 'controller');
+// find user controller in admin module 
+think.lookClass("admin/user", "controller");
 ```
 
 #### think.getPath(module, type, prefix)
 
-* `module` {String} 模块名
-* `type` {String} 类型，如： controller, model, logic
-* `prefix` {String} 前缀
+* `module` {String} module name
+* `type` {String} type, like controller, model, logic
+* `prefix` {String} prefix
 
-根据当前项目类型获取对应类型的目录。
+Get the path of module based on current project mode.
 
 ```js
 let path = think.getPath('home', 'controller');
 ```
 
-假如当前项目的根目录是`/foo/bar`，那么获取到的目录为：
+If root path of current project is `/foo/bar`, then the return path is:
 
-* 项目模式`think.mode_mini` 下路径为 `/foo/bar/app/controller`
-* 项目模式`think.mode_normal` 下路径为 `/foo/bar/app/controller/home`
-* 项目模式`think.mode_module` 下路径为 `/foo/bar/app/home/controller`
+* project mode is `think.mode_mini` then the path is `/foo/bar/app/controller`
+* project mode is `think.mode_normal` then the path is `/foo/bar/app/controller/home`
+* project mode is `think.mode_module` then the path is `/foo/bar/app/home/controller`
 
 #### think.require(name, flag)
 
@@ -616,48 +616,48 @@ let path = think.getPath('home', 'controller');
 
 #### think.safeRequire(file)
 
-* `file` {String} 要加载的文件
+* `file` {String} the file to load
 
-安全的加载一个文件，如果文件不存在，则返回 null，并打印错误信息。
+To load a file safely, if file didn't exist, function will return null, and print error message at the same time.
 
 #### think.prevent()
 
-返回一个特殊的 reject promise 。该 Promise 可以阻止后续的行为且不会报错。
+return a special `reject promise`, this promise can stop follow-up work, and not report error.
 
 #### think.log(msg, type, showTime)
 
-* `msg` {String | Error} 信息
-* `type` {String} 类型
-* `showTime` {Number | Boolean} 是否显示时间
+* `msg` {String | Error} message
+* `type` {String} type
+* `showTime` {Number | Boolean} whether show time or not.
 
-打印日志，该方法打印出来的日志会有时间，类型等信息，方便查看和后续处理。
+Print logs, which contains time, type and some other information.
 
 ```js
 think.log('WebSocket Status: closed', 'THINK');
 //writes '[2015-09-23 17:43:00] [THINK] WebSocket Status: closed'
 ```
 
-##### 打印错误信息
+##### Print error message
 ```js
 think.log(new Error('error'), 'ERROR');
 //writes '[2015-09-23 17:50:17] [Error] Error: error'
 ```
 
-##### 显示执行时间
+##### Print execute time
 
 ```js
 think.log('/static/module/jquery/1.9.1/jquery.js', 'HTTP', startTime);
 //writes '[2015-09-23 17:52:13] [HTTP] /static/module/jquery/1.9.1/jquery.js 10ms'
 ```
 
-##### 不显示时间
+##### Don't show log time
 
 ```js
 think.log('/static/module/jquery/1.9.1/jquery.js', 'HTTP', null);
 //writes '[HTTP] /static/module/jquery/1.9.1/jquery.js'
 ```
 
-##### 自定义 ##### 
+##### Log by custom ##### 
 
 ```js
 think.log(function(colors){
@@ -666,40 +666,41 @@ think.log(function(colors){
 //writes '[WARNING] test'
 ```
 
-其中 `colors` 为 npm 模块 colors，<https://github.com/Marak/colors.js> 。
+By the way, `colors` is a [module](https://github.com/Marak/colors.js) named `colors` in npm modules.
 
 #### think.config(name, value, data)
 
-* `name` {String} 配置名称
-* `value` {Mixed} 配置值
-* `data` {Object} 配置对象
+* `name` {String} config name
+* `value` {Mixed} config value
+* `data` {Object} config object
 
-读取或者设置配置，可以指定总的配置对象。
+Read or setup config, it could be the global config object.
 
 ```js
-//获取配置
+// get the config
 let value = think.config('name');
-//获取 admin 模块下的配置
+// get config in admin module
 let value = think.config('name', undefined, 'admin');
 
-// 写入配置
+// write into config
 think.config('name', 'value');
 ```
 
 #### think.getModuleConfig(module)
 
-* `module` {String} 模块名称
+* `module` {String} module name
 * `return` {Object}
 
-获取模块的所有配置。该配置包含模块的配置，通用模块的配置，框架默认的配置。
+Get all config of module, which contains config of module, comon module and the framework default config.
 
 ```js
-//获取 admin 模块的所有配置
+// get all config of admin module
 let configs = think.getModuleConfig('admin');
 ```
 
 #### think.hook()
 
+Regu
 注册、获取和执行 hook，项目中可以根据需要追加或者修改。
 
 ##### 获取事件对应的 middleware 列表
