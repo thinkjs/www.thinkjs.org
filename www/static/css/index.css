@@ -137,6 +137,17 @@ i.icon-fet8{ background-position:-70px -210px;}
 .plugin-list ul li{list-style-type: disc;}
 .plugin-list ul li a{color: #337ab7;text-decoration: none;margin-right: 15px}
 
+.donate{color: #333;}
+.donate a{color: #337ab7;text-decoration: none;}
+.donate .wechat{width: 1000px;overflow: hidden;margin-bottom: 50px}
+.donate .wechat img{display: block;float:left;width: 300px;height: 322px;margin-bottom: 0px}
+.donate .wechat img:nth-child(3n+1){margin-right: 25px;}
+.donate .wechat img:nth-child(3n+2){margin-right: 25px;margin-left: 25px;}
+.donate .wechat img:nth-child(3n+3){margin-left: 25px;}
+.donate table{width: 100%;border-spacing:0;border-collapse:collapse;}
+.donate table th{vertical-align:bottom;border-bottom:2px solid #ddd;padding: 8px;line-height: 20px;}
+.donate table td{vertical-align:top;border-top:1px solid #ddd;padding: 8px;line-height: 20px;}
+
 .r-fixed{position: fixed;width: 48px;left: 50%;margin-left: 510px;bottom: 10px;}
 .r-fixed .pdf{margin-top:5px;display:block;width: 48px;height: 48px;background:rgba(0,0,0, 0.3) url(../img/pdf.png) no-repeat center center;border-radius: 3px;}
 .r-fixed .view-single{margin-top:5px;display:block;width: 48px;height: 48px;background:rgba(0,0,0, 0.3) url(../img/view-single.png) no-repeat center center;border-radius: 3px;}
@@ -153,7 +164,8 @@ i.icon-fet8{ background-position:-70px -210px;}
   .logo{margin: 10px auto;float: none}
   .headr{float:none;border-top: 1px solid #efefef;}
   .nav li.discuss,
-  .nav li.firekylin{display: none;}
+  .nav li.firekylin,
+  .nav li.donate{display: none;}
   .nav{;display: flex;justify-content:space-between;margin-right: 0}
   .nav li{float: none;flex: ;}
   .banimg{width: 90%;height: auto;margin: 0}
