@@ -26,6 +26,23 @@ npm install thinkjs@2 -g --registry=https://registry.npm.taobao.org --verbose
 
 `注`：如果之前安装过 ThinkJS 1.x 的版本，可能需要将之前的版本删除掉，可以通过 `npm uninstall -g thinkjs-cmd` 命令删除。
 
+### 更新 ThinkJS
+
+#### 更新全局的 ThinkJS
+
+执行下面的命令即可更新全局的 ThinkJS：
+
+```sh
+npm update -g thinkjs@2
+```
+
+#### 更新项目里的 ThinkJS
+
+在项目目录下，执行下面的命令即可更新当前项目的 ThinkJS：
+
+```sh
+npm update thinkjs@2
+```
 
 ### 创建项目
 
@@ -85,9 +102,11 @@ npm install --registry=https://registry.npm.taobao.org --verbose
 
 ### 编译项目
 
-如果创建项目时加上了 `--es6` 参数，代码需要编译后才能运行。那么需要先在项目下执行命令 `npm run watch-compile` ，这样文件有修改后就会自动编译了。
+~~如果创建项目时加上了 `--es6` 参数，代码需要编译后才能运行。那么需要先在项目下执行命令 `npm run watch-compile` ，这样文件有修改后就会自动编译了。~~
 
-执行命令后会挂起一个进程，注意不要结束这个进程，其他命令可以再新开一个标签页里执行。
+~~执行命令后会挂起一个进程，注意不要结束这个进程，其他命令可以再新开一个标签页里执行。~~
+
+`注`：`2.0.6` 版本开始内置了自动编译的功能，无需再执行该命令，直接启动服务即可。
 
 ### 启动项目
 

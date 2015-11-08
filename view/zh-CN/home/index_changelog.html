@@ -9,22 +9,45 @@
                 <i class="circle"></i>
                 <div class="dailycont">
                   <i class="arrowl"></i>
+                  <span><strong>2.0.6</strong>2015.11.08</span>
+                  <p>URL 解析后的 Action 支持含有 - 字符</p>
+                  <p>添加 think.mergeConfig 方法，自动合并 adapter 参数</p>
+                  <p>Cache，Session 等配置支持 adapter 额外配置</p>
+                  <p>添加 think.pallelLimit 方法，处理并发限制</p>
+                  <p>添加自动编译机制，去除 npm run watch-compile 命令</p>
+                  <p>增加检测部分配置只能设置在 common 模块下的功能</p>
+                  <p>配置支持 parser 方法，Redis、Memcache 支持分布式配置</p>
+                  <p>添加基类 think.adapter.base，所有 Adapter 都继承该类</p>
+                  <p>去除视图里的 options 配置，使用 adapter 配置替代</p>
+                  <p>修复基类文件修改导致父级没有自动更新的问题</p>
+                  <p>修复使用第三方 middleware 解析 payload 导致后续无法执行的问题</p>
+                  <p>修复文件名含有特殊字符但错误信息是不能含有大写字母的问题</p>
+                  <p>修复文件 Session 有时候报错的问题</p>
+                  <p>修复 URL 中含有中文字符导致资源不能访问的问题</p>
+                  <p>修复静态资源请求含有 Range 头信息没有正常处理的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
                   <span><strong>2.0.5</strong>2015.11.02</span>
-                  <p>修复了 Logic 规则含有空格导致报错的问题</p>
-                  <p>优化了 Logic 规则校验失败后发送错误信息的数据结构</p>
+                  
+                  <p>优化 Logic 规则校验失败后发送错误信息的数据结构</p>
                   <p>创建项目时，将 bootstrap/hook.js 改名为 bootstrap/middleware.js</p>
                   <p>创建项目时，添加文件 config/hook.js</p>
                   <p>Babel 编译添加 --retain-lines 参数，保持编译后的文件行号和原始文件相同</p>
-                  <p>添加了查询条件里 MongoID 为字符串时自动转为 MongoID 对象的功能</p>
-                  <p>修复了新增文件没有自动更新的问题</p>
-                  <p>修复了 think.cache 指定类型失败的问题</p>
+                  <p>添加查询条件里 MongoID 为字符串时自动转为 MongoID 对象的功能</p>
                   <p>模型 update 方法增加了检验 where 条件的功能</p>
                   <p>移除系统内置的 deny_ip middleware，独立为 think-ip-filter middleware</p>
                   <p>模板渲染前添加 prerender 钩子的功能</p>
                   <p>thinkjs 命令添加了创建 plugin 的功能</p>
-                  <p>修复了 producition 和 testing 项目环境下命令行执行不能自动结束的问题</p>
-                  <p>添加了 view_filter hook</p>
-                  <p>修复了 file Session 偶尔报错的问题</p>
+                  <p>添加 view_filter hook</p>
+                  <p>修复 Logic 规则含有空格导致报错的问题</p>
+                  <p>修复新增文件没有自动更新的问题</p>
+                  <p>修复 think.cache 指定类型失败的问题</p>
+                  <p>修复 file Session 偶尔报错的问题</p>
+                  <p>修复 producition 和 testing 项目环境下命令行执行不能自动结束的问题</p>
                   <p>注：2.0 发布时遇到一些小问题，所以紧急发布了一些版本</p>
                 </div>
               </li>

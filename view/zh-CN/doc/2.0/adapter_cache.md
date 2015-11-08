@@ -6,7 +6,7 @@
 
 系统默认支持的缓存类型如下：
 
-* `base` 内存缓存
+* `memory` 内存缓存
 * `file` 文件缓存
 * `memcache` Memcache 缓存
 * `redis` Redis 缓存
@@ -22,13 +22,24 @@
 ```js
 export default {
   type: 'file', //缓存类型
-  timeout: 6 * 3600, //失效时间，默认为 6 个小时
-  prefix: 'thinkjs_',
-  path: runtimePrefix + '/cache',
-  path_depth: 2,
-  file_ext: '.json'
+  timeout: 6 * 3600, //失效时间，单位：秒
+  adapter: { //不同 adapter 下的配置
+    file: {
+      path: think.getPath(undefined, think.dirname.runtime) + '/cache', //缓存文件的根目录
+      path_depth: 2, //缓存文件生成子目录的深度
+      file_ext: '.json' //缓存文件的扩展名
+    },
+    redis: {
+      prefix: 'thinkjs_'
+    },
+    memcache: {
+      prefix: 'thinkjs_'
+    }
+  }
 };
 ```
+
+`注`：`2.0.6` 版本开始添加了 adapter 配置。
 
 其中 `prefix` 在 `memcache` 和 `redis` 类型中使用，存储时会将缓存 key + prefix 作为新的 key 来存储，用于防止跟其他地方使用的缓存 key 冲突。如果不想设置 prefix，可以将 prefix 设置为空字符串，如：
 
@@ -38,11 +49,6 @@ export default {
 }
 ```
 
-其中 `path`，`path_depth` 和 `file_ext` 配置在 `file` 类型中使用：
-
-* `path` 缓存文件的根目录
-* `path_depth` 缓存文件生成子目录的深度
-* `file_ext` 缓存文件的扩展名
 
 ### 使用缓存
 

@@ -4,7 +4,7 @@
 
 ### 支持的 Session 类型
 
-* `base` 内存方式
+* `memory` 内存方式
 * `file` 文件类型
 * `db` 数据库类型
 * `redis` Redis 类型
@@ -40,14 +40,20 @@ Session 默认配置如下，可以在 `src/common/config/session.js` 中进行�
 export default {
   type: 'file',
   name: 'thinkjs', //对应 cookie 的名称
-  path: runtimePrefix + '/session',  // file 类型下缓存文件的目录
   secret: '', //Session 对应的 cookie 是否需要加密
   timeout: 24 * 3600, //过期时间，默认为一天
-  cookie: { //Session 对应的 cookie 配置项
+  cookie: { // cookie options
     length: 32
+  },
+  adapter: {
+    file: {
+      path: think.getPath('common', 'runtime') + '/session'
+    }
   }
 };
 ```
+
+`注`：`2.0.6` 版本开始添加了 adapter 配置。
 
 关于 Cookie 的配置请见 [配置](./config.html#cookie)。
 

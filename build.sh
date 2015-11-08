@@ -25,8 +25,8 @@ fi
 mkdir view_build;
 cp -r view/* view_build;
 
-node www/index.js home/generate/single;
-node www/index.js home/generate/html;
+node www/production.js home/generate/single;
+node www/production.js home/generate/html;
 
 
 #path=$(pwd);
@@ -62,7 +62,7 @@ cd ..
 scp -r output.tar.gz qiwoo@101.198.153.219:~;
 ssh qiwoo@101.198.153.219 "tar zxvfm ~/output.tar.gz -C /home/qiwoo/www/www.thinkjs.org;rm -rf ~/output.tar.gz;pm2 restart www.thinkjs.org";
 
-sleep 2;
+#sleep 2;
 
-wget https://www.thinkjs.org/doc.html;
-rm -rf doc.html*;
+#wget https://www.thinkjs.org/doc.html;
+#rm -rf doc.html*;

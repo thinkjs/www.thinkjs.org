@@ -42,7 +42,7 @@ let fn = () => {
   });
 };
 
-if(think.env === 'production'){
+if(think.env === 'production' && !think.cli){
   fn();
   let jobId = crontab.scheduleJob('0 */1 * * *', fn);
 }

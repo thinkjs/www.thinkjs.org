@@ -14,17 +14,22 @@
 
 ```js
 export default {
+  type: 'ejs', //模版引擎
   content_type: 'text/html', //输出模版时发送的 Content-Type
   file_ext: '.html', //文件的扩展名
   file_depr: '_', //控制器和操作之间的连接符
   root_path: think.ROOT_PATH + '/view', //视图文件的根目录
-  type: 'ejs', //模版引擎
   prerender: undefined, //模板渲染前自定义处理逻辑
-  options: {} //模版引擎需要的配置项
+  adapter: { //模版引擎需要的配置项
+    ejs: {}, //使用 ejs 模板引擎时额外配置
+    nunjucks: {} //使用 nunjucks 模板引擎时额外配置
+  } 
 };
 ```
 
-`注`：视图默认根目录在 `view/`。如果想每个模块有独立的视图目录，将配置 `root_path` 修改为空即可。
+`注`：`2.0.6` 版本开始去除了 `options` 配置项，使用 `adapter` 代替。
+
+视图默认根目录在 `view/`。如果想每个模块有独立的视图目录，将配置 `root_path` 修改为空即可。
 
 #### 修改连接符
 
