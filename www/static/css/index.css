@@ -164,10 +164,9 @@ i.icon-fet8{ background-position:-70px -210px;}
   .logo{margin: 10px auto;float: none}
   .headr{float:none;border-top: 1px solid #efefef;}
   .nav li.discuss,
-  .nav li.firekylin,
-  .nav li.donate{display: none;}
-  .nav{;display: flex;justify-content:space-between;margin-right: 0}
-  .nav li{float: none;flex: ;}
+  .nav li.firekylin{display: none;}
+  .nav{;display: flex;justify-content:center;align-items:center;;margin-right: 0}
+  .nav li{float: none;flex: 1;flex-grow: 1;margin: 0;text-align: center;}
   .banimg{width: 90%;height: auto;margin: 0}
   .banarea{height: auto;padding: 0;background-image: url(../img/banbg_640.jpg) !important;text-align: center;}
   .btn-link{width: 180px;height: 32px;font-size: 16px;line-height: 32px;margin-top: 40px;margin-bottom: 20px;}
@@ -202,6 +201,9 @@ i.icon-fet8{ background-position:-70px -210px;}
   .doc-content{padding: 0}
   .ploy h4{font-size: 16px}
   .ploy p{font-size: 14px;}
+  .donate{width: 92%}
+  .donate .wechat{width: 100%;text-align: center;}
+  .donate .wechat img{margin: 0 !important;padding: 10px 0;display: inline-block;float: none;}
 }
 
 @media screen and (max-width: 320px){
@@ -210,5 +212,6 @@ i.icon-fet8{ background-position:-70px -210px;}
   .ft-help dt{font-size: 14px}
   h2, .h2{font-size: 24px}
   h3, .h3{font-size: 22px;}
+  .nav li.donate{display: none;}
   .tith2{font-size: 24px;margin-top: 0;font-weight: normal;}
 }
