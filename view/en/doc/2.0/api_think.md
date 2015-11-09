@@ -1211,6 +1211,67 @@ export default class extends think.controller.base {
 }
 ```
 
+#### think.parallelLimit(dataList, callback, options)
+
+* `dataList` {Array} 要处理的数据列表
+* `callback` {Function} 处理函数，会将每条数据传递进去，需要返回 Promise
+* `options` {Object} 额外选项
+* `return` {Promise}
+
+`options` 包含一下选项：
+
+* `limit` {Number} 并发限制数，默认为 10 条
+* `ignoreError` {Boolean} 是否忽略错误，默认情况下一个错误后会停止后续执行
+
+并发限制处理方法。如：有 10000 条网络数据需要处理，如果同时处理会会网络 IO 错误，此时可以对并发处理进行限制。该方法在 `2.0.6` 版本中添加。
+
+##### 一个请求下多条数据同时处理场景
+
+```js
+import superagent from 'superagent';
+
+export default class extends think.controller.base {
+  async indexAction(){
+    let dataList = [...];
+    //result 为每条处理结果集合
+    //如果某些条数据处理异常，那么对应的数据为 undefined，处理时需要过滤下
+    let result = await think.parallelLimit(dataList, item => {
+      let url = item.url;
+      let req = superagent.get(url);
+      let fn = think.promisify(req.end, req); //将 end 方法包装成 Promise
+      return fn();
+    }, {
+      limit: 20, //一次执行 20 条
+      ignoreError: true
+    })
+  }
+}
+```
+
+##### 单条数据在多个请求下处理场景
+
+有些数据处理虽在一个情况下只用处理一次，但单次处理比较耗时，如果同时请求很多的话可能会导致报错。这个时候也要进行限制，如果当前同时处理数目较多，后续请求则进行等待。
+
+这个需求可以通过传入一个相同的 key 将任务分组，如：
+
+```js
+import gm from 'gm';
+
+export default class extends think.controller.base {
+  async indexAction(){
+    let result = await think.parallelLimit('clip_image', () => {
+      let imageFile = this.file('image').path;
+      let instance = gm(imageFile).resize(240, 240).noProfile();
+      let fn = think.promisify(instance.write, instance);
+      return fn('/path/to/save/image.png');
+    }, {
+      limit: 20 //一次执行 20 条
+    })
+  }
+}
+```
+
+
 ### 类
 
 #### think.base
