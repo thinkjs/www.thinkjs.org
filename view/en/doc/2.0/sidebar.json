@@ -1,8 +1,8 @@
 {
     "快速入门": {
-      "介绍": "index",
-      "创建项目": "create_project",
-      "项目结构": "app_structure",
+      "Introduction": "index",
+      "Create Project": "create_project",
+      "Project Structure": "app_structure",
       "代码规范": "specification",
       "升级指南": "upgrade",
       "常见问题": "question"
