@@ -700,10 +700,9 @@ let configs = think.getModuleConfig('admin');
 
 #### think.hook()
 
-Regu
-注册、获取和执行 hook，项目中可以根据需要追加或者修改。
+Register, get and execute hook, what can be appended or modified if need.
 
-##### 获取事件对应的 middleware 列表
+##### Get event's middleware list
 
 ```js
 think.hook('view_template');
@@ -711,27 +710,27 @@ think.hook('view_template');
 ['locate_template']
 ```
 
-##### 设置 hook
+##### Setup hook
 
 ```js
-//替换原有的 hook
+// replace ex-hook
 think.hook('view_template', ['locate_template1']);
 
-//将原有的之前追加
+// insert before old one
 think.hook('view_template', ['locate_template1'], 'prepend');
 
-//将原有的之后追加
+// insert after old one
 think.hook('view_template', ['locate_template1'], 'append');
 
 ```
 
-##### 删除 hook
+##### Delete hook
 
 ```js
 think.hook('view_template', null);
 ```
 
-##### 执行 hook
+##### Execute hook
 
 ```js
 let result = think.hook('view_template', http, data);
@@ -740,23 +739,23 @@ let result = think.hook('view_template', http, data);
 
 #### think.middleware()
 
-注册、创建、获取和执行 middleware。
+Register, create, get and execute middleware.
 
-##### 创建 middleware
+##### Create middleware
 
 ```js
-//解析 XML 示例
+// analyzing XML example
 var ParseXML = think.middleware({
   run: function(){
     var http = this.http;
-    var payload = http.payload; //payload为上传的post数据
-    var data = xmlParse.parse(payload); //使用一个xml解析，这里 xmlParse 是示例
-    http._post = data; //将解析后的数据赋值给 http._post，后续可以通过 http.post('xxx') 获取
+    var payload = http.payload; // payload is the upload post data
+    var data = xmlParse.parse(payload); // use a xml parser, this xmlParse here is an example
+    http._post = data; // assign parsed data to http._post, then can get data from http._post('xxx')
   }
 });
 ```
 
-使用 ES6 创建 middleware。
+Using ES6 to create middleware
 
 ```js
 let Cls1 = class extends think.middleware.base {
@@ -766,20 +765,20 @@ let Cls1 = class extends think.middleware.base {
 }
 ```
 
-##### 注册 middleware
+##### Register middleware
 
-middleware 可以是个简单的 function，也可以是较为复杂的 class。
+middleware can be sample function, or complex class.
 
 ```js
-//注册 middleware 为 function
+// register a functional middleware
 think.middleware('parse_xml', http => {
   
 })
 ```
 
 ```js
-//注册 middleware 为 class
-//会自动调用 run 执行
+// redister a class middleware
+// it will call run automatically
 let Cls = think.middleware({
   run: function(){
     let http = this.http;
@@ -789,13 +788,13 @@ let Cls = think.middleware({
 think.middleware('parse_xml', Cls);
 ```
 
-##### 获取 middleware
+##### Get middleware
 
 ```js
 let middleware = think.middleware('parse_xml');
 ```
 
-##### 执行 middleware
+##### Execute middleware
 
 ```js
 let result = think.middleware('parse_xml', http);
@@ -805,44 +804,44 @@ let result = think.middleware('parse_xml', http);
 
 #### think.adapter()
 
-创建、注册、获取和执行 adapter。
+Create, register, get and execute adapter.
 
-##### 创建 adapter
+##### Create adapter
 
 ```js
-//创建一个 adapter
+// create an adapter
 var Cls = think.adapter({
 
 });
 
-//创建一个 session adapter，继承自 session base 类
+// create a session adapter, which instance of session base class
 var Cls = think.adapter('session', 'base', {
   
 })
 ```
 
 ```js
-//使用 ES6 创建一个 session adapter
+// create a session adapter in ES6
 let Cls = class extends think.adapter.session {
 
 }
 ```
 
-##### 注册 adapter
+##### Register adapter
 
 ```js
-//注册一个 xxx 类型的 session adapter
+// register some type of session adapter
 think.adapter('session', 'xxx', Cls);
 ```
 
-##### 获取 adapter
+##### Get adapter
 
 ```js
-//获取 file 类型的 session adapter
+// get file type of session adapter
 let Cls = think.adapter('session', 'file');
 ```
 
-##### 执行 adapter
+##### Execute adapter
 
 ```js
 let Adapter = think.adapter('session', 'file');
@@ -852,11 +851,11 @@ let instance = new Adapter(options);
 
 #### think.gc(instance)
 
-* `instance` {Object} 类的实例
+* `instance` {Object} instance of object
 
-注册实例到 gc 队列中。instance 必须含有属性 `gcType` 和方法 `gc`。
+Register a instance object to garbage collection queue, the instance object must have `gcType` method and `gc` function.
 
-像 cache, session 这些功能一般都是有过期时间，过期后需要要进行清除工作。框架提供了一套机制方便清除过期的文件等。
+Something like cache or session which have expiration time, when after expire need to clean up.framewokr offered some handlers to clean expired file.
 
 ```js
 let Cls = class extends think.adapter.cache {
@@ -866,21 +865,21 @@ let Cls = class extends think.adapter.cache {
     think.gc(this);
   }
   gc(){
-    //寻找过期的内容并清除
+    // find expired content to clean.
   }
 }
 ```
 
 #### think.http(req, res)
 
-* `req` {Object} request 对象
-* `res` {Object} response 对象
+* `req` {Object} request object
+* `res` {Object} response object
 * `return` {Promise}
 
-根据 req 和 res 包装成 http 对象。req 和 res 可以自定义。
+Base on request and response packed into http object, by the way, req and res could be other obecjt by custom.
 
 ```js
-//根据一个 url 生成一个 http 对象，方便命令行下调用
+// based on an url object packed into a http object, which is useful to command mode calling.
 think.http('/index/test').then(http => {
   
 });
@@ -888,92 +887,92 @@ think.http('/index/test').then(http => {
 
 #### think.uuid(length)
 
-* `length` {Number} 生成字符串的长度，默认为 32
+* `length` {Number} the length of generate string, 32 by default
 
-生成一个随机字符串。
+Generate a random string.
 
 
 #### think.session(http)
 
-* `http` {Object} http对象
+* `http` {Object} http object
 
-生成 session，并写到 http 对象上。如果已经存在，则直接返回。
+Generate a session, and write it to http object, if exist, return directly.
 
 #### think.controller()
 
-创建、执行 controller
+Create and execute a controller
 
-##### 创建 controller
+##### Create controller
 
 ```js
-//创建 controller, 继承 think.controller.base
+// create controller, instance of think.controller.base
 let Cls = think.controller({
   
 })
-//创建 controller, 继承 think.controller.rest
+// create controller, instance of think.controller.rest
 let Cls = think.controller('rest', {
   
 })
 ```
 
 ```js
-//使用 ES6 创建 controller
+// create a controller by using ES6
 let Cls1 = class extends think.controller.base {
   
 }
 ```
 
-##### 实例化 controller
+##### Instance of controller
 
 ```js
-//实例化 home 模块下 user controller
+// instance of user controller belong to home module
 let instance = think.controller('user', http, 'home');
 ```
 
 
 #### think.logic()
 
-创建、执行 logic
+Create and execute logic
 
-##### 创建 logic
+##### Create logic
 
 ```js
-//创建 logic, 继承 think.logic.base
+// create logic, which instance of think.logic.base
 let Cls = think.logic({
   
 })
 ```
 
 ```js
-//使用 ES6 创建 logic
+// create logic by using ES6
 let Cls1 = class extends think.logic.base {
   
 }
 ```
 
-##### 实例化 logic
+##### Instance of logic
 
 ```js
-//实例化 home 模块下 user logic
+// instance of user logic which is belong to home 
 let instance = think.logic('user', http, 'home');
 ```
 
 
 #### think.model()
 
-创建或者获取 model。
+Create or get model。
 
-##### 创建 model
+##### Create model
 
 ```js
-//创建一个 model
+// Create a model
 let model = think.model({
   getList: function(){
 
   }
 });
 
-//ES6 里直接继承 think.model.base 类
+// in ES6 , instance of think.model.base class directly
 let model = class extends think.model.base {
   getList(){
 
@@ -981,13 +980,13 @@ let model = class extends think.model.base {
 }
 
 
-//创建一个 model 继承自 mongo model
+// create a model which instance of mongo model
 let model = think.model('mongo', {
   getList: function(){
 
   }
 });
-//ES6 里直接继承 think.model.mongo 类
+// in ES6, instance of think.model.mongo class directly
 let model = class extends think.model.mongo {
   getList(){
 
@@ -996,85 +995,85 @@ let model = class extends think.model.mongo {
 ```
 
 
-##### 获取 model 实例
+##### get the instance of model 
 
 ```js
 let configs = {
   host: '127.0.0.1',
   name: 'user'
 }
-//获取 home 模块下 user model
+// get user model which is belong to home module.
 let instance = think.model('user', configs, 'home');
 ```
 
 #### think.service()
 
-创建或者获取 service。
+Create or get service。
 
-##### 创建 service ##### 
+##### Create service ##### 
 
 ```js
-//创建一个 service 类
+// Create a service class
 let service = think.service({
   
 })
 
-//ES6 里直接继承 think.service.base 类
+// in ES6 , instance of think.service.base class directly
 let service = class extends think.service.base {
 
 }
 ```
 
-service 基类继承自 [think.base](./api_think_base.html)，所以可以用 think.base 里的方法。
+service base class based on [think.base](./api_think_base.html)，so can use functions in think.base.
 
-如果 serivce 不想写成类，那就没必要通过这种方法创建。
+if don't want to write serivce to class, so it's not necessary to create by using this way.
 
 
-##### 获取 service
+##### get service
 
 ```js
-//获取 home 模块下 post service，并传递参数 {} 
-//如果获取到的 service 是个类，则自动实例化
+// get post service which belong to home module, passed a `{}` 
+// if got service is a class, it will be instancing automatically
 think.service('post', {}, 'home');
 ```
 
 
 #### think.cache(name, value, options)
 
-* `name` {String} 缓存 key
-* `value` {Mixed} 缓存值
-* `options` {Object} 缓存选项
-* `return` {Promise} 操作都是返回 Promise
+* `name` {String} cache key
+* `value` {Mixed} cache value
+* `options` {Object} cache options
+* `return` {Promise} return a Promise
 
-获取、设置或者删除缓存， value 是 `undefined` 表示读取缓存。 value 是 `null` 时删除缓存。
+Get, setup or delete cache, if value assigned to `undefined` means read cache, if value assigned to `null` means delete cache.
+if value assigned to `Function` means read cache but when cannot got a result, this function will be calling, then return the function return value which has been setup to cache.
 
-value 为 `Function` 时表示获取缓存，如果获取不到，则调用该函数，然后将返回值设置到缓存中并返回。
 
 ```js
-//获取缓存
+// get cache
 think.cache('name').then(data => {});
 
-//指定缓存类型获取，从 redis 里获取缓存
+// setup the type of cache, read cache from redis for example
 think.cache('name', undefined, {type: 'redis'});
 
-//如果缓存 userList 不存在，则查询数据库，并将值设置到缓存中
+// if cache userList is not exist, then query the database, assign return value to cache
 think.cache('userList', () => {
   return think.model('user').select();
 });
 
-//设置缓存
+// setup cache
 think.cache('name', 'value');
 
-//删除缓存
+// delete cache
 think.cache('name', null);
 ```
 
 #### think.locale(key, ...data)
 
-* `key` {String} 要获取的 key
-* `data` {Array} 参数
+* `key` {String} the key which need to get
+* `data` {Array} arguments
 
-根据语言获取对应的值，当前语言通过 `think.lang` 方法来获取，可以在系统启动时指定。
+Get the corresponding value based on language, the current language can get from `think.lang`, which can setup when system start.
 
 ```js
 think.locale('CONTROLLER_NOT_FOUND', 'test', '/index/test');
@@ -1085,24 +1084,24 @@ think.locale('CONTROLLER_NOT_FOUND', 'test', '/index/test');
 
 #### think.validate()
 
-注册、获取或执行检测。
+Register, get or execute validation.
 
-##### 注册检测方法
+##### register validate function
 
 ```js
-//注册检测类型为 not_number
+// register the validate type is not_number
 think.validate('not_number', value => {
   return !(/^\d+$/.test(value));
 })
 ```
 
-##### 获取检测方法
+##### get validate function
 
 ```js
 let fn = think.validate('not_number');
 ```
 
-##### 检测数据
+##### validate data
 
 ```js
 let result = think.validate({
@@ -1117,7 +1116,7 @@ let result = think.validate({
     minLength: 6
   }
 });
-//如果 result 是 isEmpty，表示数据都正常
+// if result is isEmpty, it means result is expected.
 if(think.isEmpty(result)){
 
 }
@@ -1128,6 +1127,7 @@ if(think.isEmpty(result)){
 * `key` {String} 
 * `callback` {Function}
 
+Execute await, to avoid a long-running operation has been called many times, 
 执行等待，避免一个耗时的操作多次被执行。 callback 需要返回一个 promise 。
 
 如：用户访问时，要请求一个远程的接口数据。如果不处理，每个用户请求都会触发这个远程接口的访问，导致有很大的资源浪费。可以让这些用户公用一个远程接口的请求。
@@ -1151,60 +1151,61 @@ export default class extends think.controller.base {
 
 #### think.npm(pkg)
 
-* `pkg` {String} 模块名
+* `pkg` {String} module name
 
-加载模块。如果模块不存在，则自动安装。这样可以做到动态安装模块。
+Load module, if module not exist, module will been install automatically.
 
 ```js
-//如果mysql模块，则通过npm安装
+// if mysql module exist, project will install it with npm.
 let mysql = think.npm('mysql');
 ```
 
 ```js
-//指定版本加载一个模块
+// load a specify version of mysql
 let mysql = think.npm('mysql@2.0.0')
 ```
 
 #### think.error(err, addon)
 
-* `err` {Error | Promise | String} 错误信息
-* `addon` {Error | String} 追加的错误信息
+* `err` {Error | Promise | String} error information
+* `addon` {Error | String} addon error meesage.
 
-格式化错误信息，将部分系统的错误信息描述完整化。
+
+Formatting error message, make some system error message completely.
 
 ```js
 let error = think.error(new Error('xxx'));
 ```
 
-##### 捕获 promise 的错误信息
+##### Catch promise error message
 
 ```js
 let promise = Project.reject(new Error('xxx'));
 promise = think.error(promise)
 ```
 
-自动给 promise 追加 catch，捕获错误信息。
+Add catch for promise automatically, to catch error message.
 
 #### think.statusAction(status, http, log)
 
-* `status` {Number} 状态码
-* `http` {Object} 包装的http对象
-* `log` {Boolean} 是否打印错误信息
+* `status` {Number} status number
+* `http` {Object} contained http object
+* `log` {Boolean} whether log error message or not
 
-当系统出现异常时（系统错误，页面找不到，没权限等），显示对应的错误页面。
+When system is abnormal like system error, page not found, permission denied, then render the right page.
 
-创建项目时，会在 common 模块下生成文件 `src/common/controller/error.js`，专门用来处理错误情况。
+while creating project, it will generate file `src/common/controller/error.js` in common module, which is specially use for handle error state.
 
-默认支持的错误类型有：`400`, `403`, `404`, `500`, `503`。
+Default support types of error are: `400`, `403`, `404`, `500`, `503`.
 
-项目里可以根据需要修改错误页面或者扩展。
+According to the project's need, it can be modified like error page or extension.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
     if(xxxx){
       let error = new Error('not found');
-      //将错误信息写到 http 对象上，用于模版里显示
+      // assign error information to http object, to render with template
       this.http.error = error;
       return think.statusAction(404, this.http);
     }
@@ -1212,12 +1213,12 @@ export default class extends think.controller.base {
 }
 ```
 
-### 类
+### Class
 
 #### think.base
 
-think.base 详细介绍请见 [这里](./api_think_base.html)
+think.base: More information read [here](./api_think_base.html)
 
 #### think.http.base
 
-think.http.base 详细介绍请见 [这里](./api_think_http_base.html)
+think.http.base: More information read [here](./api_think_http_base.html)
