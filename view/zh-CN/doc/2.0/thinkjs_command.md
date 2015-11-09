@@ -15,6 +15,7 @@
     model <modelName>            add model
     middleware <middlewareName>  add middleware
     adapter <adapterName>        add adapter
+    plugin <pluginPath>          create ThinkJS plugin
 
   Options:
 
@@ -168,3 +169,14 @@ thinkjs adapter template/dot
 ```
 
 执行后会创建文件 `src/common/adapter/template/dot.js`，表示创建一个名为 dot 的模版类型 adapter。
+
+### 创建 plugin
+
+ThinkJS 支持 middleware 和 adapter 2 种插件，可以通过 `thinkjs plugin <pluginName>` 来初始化一个插件，然后进行开发。
+
+```sh
+thinkjs plugin think-template-dot
+```
+
+插件名称建议使用 `think-` 打头，这样发布到 npm 仓库后，方便其他用户搜索。
+
