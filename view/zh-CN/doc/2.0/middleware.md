@@ -240,4 +240,4 @@ think.middleware('parseXML', parseXML);
 
 ### 第三方 middleware 列表
 
-第三方 middleware 列表请见 [插件 -> middleware](./plugin.html#middleware)。
+第三方 middleware 列表请见 [插件 -> middleware](/plugin.html#middleware)。

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 //get support locales list
 let viewPath = think.ROOT_PATH + '/view';
@@ -36,4 +37,24 @@ think.middleware('replace_image', (http, content) => {
   }).replace(/https:\/\/p\.ssl\.qhimg\.com\/(\w+)\.(\w+)/g, (a, b) => {
     return `https://p.ssl.qhimg.com/${b}.webp`;
   });
+});
+/**
+ * log request
+ * @param  {[type]} http [description]
+ * @return {[type]}      [description]
+ */
+think.middleware('log_request', http => {
+  let fn = d => {
+    return ('0' + d).slice(-2);
+  };
+
+  let d = new Date();
+  let date = `${d.getFullYear()}-${fn(d.getMonth() + 1)}-${fn(d.getDate())}`;
+  let time = `${fn(d.getHours())}:${fn(d.getMinutes())}:${fn(d.getSeconds())}`;
+
+  let ip = http.ip();
+  let log = `[${date} ${time}] - ${ip} - "${http.url}" - "${http.userAgent()}"`;
+  let logPath = think.getPath('common', 'runtime') + '/log/' + date + '.log';
+  think.mkdir(path.dirname(logPath));
+  fs.appendFile(logPath, log + '\n', () => {});
 });

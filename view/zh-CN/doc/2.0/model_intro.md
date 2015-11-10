@@ -158,7 +158,7 @@ export default class extends think.controller.base {
 
 ##### 添加多条数据
 
-使用 `addMany` 方法可以添加一条数据，如：
+使用 `addMany` 方法可以添加多条数据，如：
 
 ```js
 export default class extends think.controller.base {
