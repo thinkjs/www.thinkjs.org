@@ -92,9 +92,9 @@ export default {
 ##### 循环
 
 ```text
-<%list.forEach(function(item)){%>
+<%list.forEach(function(item){%>
     <li><%=item.name%></li>
-<%}%>
+<%})%>
 ```
 
 ##### 过滤器
