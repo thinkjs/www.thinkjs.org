@@ -22,7 +22,7 @@ The framework defaults to support the following cache typies:
 
 If you use Memcache or redis, you need set configuration information. 
 
-See also [configuration of memcache](http://www.thinkjs.org) [configuration of redis](http://www.thinkjs.org)
+See also [configuration of memcache](./config.html#memcache) [configuration of redis](./config.html#redis)
 
 ## How to configurate cache
 
@@ -49,9 +49,9 @@ export default {
 
 ## How to use cache
 
-You can add, delete, update and search the cache by using method `think.cache`, see also [API -> think](http://www.thinkjs.org) for more details.
+You can add, delete, update and search the cache by using method `think.cache`, see also [API -> think](./api_think.html#toc-7d7) for more details.
 
-You can usemethod `this.cache` to operate cache, if your class is inherited from `think.http.base`, see also [API -> think.http.base](http://www.thinkjs.org) for more details.
+You can usemethod `this.cache` to operate cache, if your class is inherited from `think.http.base`, see also [API -> think.http.base](.//api_think_http_base.html#cache-name-value-options) for more details.
 
 ## How to extend cache
 
@@ -117,4 +117,4 @@ To know the implemation of cache in ThinkJS, please see also (https://github.com
 
 ## How to use third party cache Adapter
 
-To know how to use third party cache Adapter, please see also [Adapter -> 介绍](http://www.thinkjs.org)
+To know how to use third party cache Adapter, please see also [Adapter -> intro](./adapter_intro.html#toc-e7c)
