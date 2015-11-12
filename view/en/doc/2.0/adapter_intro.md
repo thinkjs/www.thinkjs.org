@@ -41,4 +41,4 @@ You can regist third part Adapters by using `think.adapter`， For example：
     let DotTemplate = require("think-template-dot");
 	think.adapter("template", "dot", DotTemplate);
 
-Then， the Adaptor files in `src/common/bootstrap/` can be loaded automatically when the service started.
+Then, the Adaptor files in `src/common/bootstrap/` can be loaded automatically when the service started.
