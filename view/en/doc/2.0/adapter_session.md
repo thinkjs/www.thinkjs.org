@@ -62,7 +62,7 @@ export default {
 };
 ```
 
-`Note`：The framework supports adaptor configurate from  version `2.0.6`.
+`Note`：The framework supports adaptor configuration from the version `2.0.6`.
 
 This [configuration](./config.html#cookie) is about Cookie.
 
