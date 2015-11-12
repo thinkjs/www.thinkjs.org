@@ -1,54 +1,54 @@
 ## Template
 
-Template Adapter 用来实现支持多种类型的模版引擎，如：`ejs`，`swig` 等。
+Adapter Template used to support a variety of types of template engines, such as: `ejs`, `swig`, etc.
 
-### 支持模版引擎类型
+### Supported Template Egines
 
 * `base`
-* `ejs` ejs 模版引擎
-* `jade` jade 模板引擎
-* `swig` 一种支持模版继承的模版引擎
-* `nunjucks` 一种类似 jinja2 的模版引擎，功能非常强大
+* `ejs` ejs template engine
+* `jade` jade template engine 
+* `swig` a template engine suports template inheritance
+* `nunjucks` a powerful template engine like jinja2 
 
-### 模版引擎配置
+### Template Engine Configuration
 
-模版引擎配置如下，可以在 `src/common/config/view.js` 中修改：
+To configuate template engine, you can edit `src/common/config/view.js`. Content may like following: 
 
 ```js
 export default {
   type: 'ejs',
-  options: { //具体模版引擎额外的配置
+  options: { // Additional configuration of the specific template engine
 
   }
 };
 ```
 
-### 使用模版引擎
+### Use Template Egines
 
-模版引擎会在视图里自动调用，默认情况不需要手工调用使用。如果在有些场景非要使用的话，可以通过下面的方式加载对应的模版引擎：
+The template egine can be loaded automatically, no need to load it manually. You can load your template using following code, when you want to load it by yourself indeed:
 
 ```js
 let EjsTemplate = think.adapter('template', 'ejs');
 let instance = new EjsTemplate(...args);
 ```
 
-### 扩展模版引擎类型
+### Extend template engine type
 
-可以通过下面的命令创建一个名为 `foo` Template 类：
+You can create an Template class named `foo` using the following command:
 
 ```js
 thinkjs adapter template/foo
 ```
 
-执行完成后，会创建文件 `src/common/adapter/template/foo.js`。扩展缓存类需要实现如下的方法：
+The command creates file `src/common/adapter/template/foo.js`.Then, you should implement the following methods:
 
 ```js
 export default class extends think.adapter.template {
   /**
    * get compiled content
-   * @params {String} templateFile 模版文件目录
-   * @params {Object} tVar 模版变量
-   * @params {Object} config 模版引擎配置
+   * @params {String} templateFile the template files directory
+   * @params {Object} tVar variables in template 
+   * @params {Object} config the configuration of template engine
    * @return {Promise} []
    */
   run(templateFile, tVar, config){
@@ -57,8 +57,8 @@ export default class extends think.adapter.template {
 }
 ```
 
-框架里的 Template 实现请见 <https://github.com/75team/thinkjs/tree/master/src/adapter/template>。
+To know the implement of Template in ThinkJS, please see also <https://github.com/75team/thinkjs/tree/master/src/adapter/template>。
 
-### 使用第三方缓存 Adapter
+### Use Third Part Template Adapter
 
-如何使用第三方的缓存 Adapter 请参见 [Adapter -> 介绍](./adapter_intro.html#toc-e7c)。
+To know how to use third part template adaptor, please see also[Adapter -> intro](./adapter_intro.html#toc-e7c).

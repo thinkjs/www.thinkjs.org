@@ -1,53 +1,53 @@
-## 模块
+## Module
 
-ThinkJS 创建项目时支持多种项目模式，默认创建的项目是按模块来划分的，并且自动添加了 `common` 和 `home` 2 个模块。每个模块有独立的配置、控制器、视图、模型等文件。
+ThinkJS could support a variety of program models when creating a project, the project which is created by default is divided by module, and add the `common` and `home` 2 modules automatically. Each module has a separate configuration, controller, view, model and other document.
 
-使用模块的方式划分项目，可以让项目结构更加清晰。如：一般一个博客系统可分为前后台 2 个模块。
+Dividing project using modularized program makes project structure much clearer. Such as: a blog system can be divided into front and back modules in general .
 
-### 模块列表
+### Module list
 
-进去 `src/` 目录就可以看到模块列表：
+Go into `src/` directory, you can see a list of modules:
 
 ```text
 drwxr-xr-x   5 welefen  staff  170 Aug 18 15:55 common/
 drwxr-xr-x   6 welefen  staff  204 Sep  8 19:14 home/
 ```
 
-### common 模块
+### Common module
 
-common 模块是个通用模块，该模块下存放一些通用的功能，如： 通用的配置，runtime 目录，启动文件，错误处理控制器等。
+`Common` module is a common module, stored some common features in this module, such as: general configuration, runtime directory, startup files, error handling controllers.
 
-`注`：该模块下的控制器不能响应用户的请求。
+`NOTE`: The controller under the module does not respond to the user's request.
 
-### 默认模块
+### Default module
 
-默认模块为 `home` 模块。当解析用户的请求找不到模块时会自动对应到 `home` 下。
+Default module is `home` module. It will automatically correspond to the `home` when parsing the user's request could not find the module. 
 
-可以通过配置 `default_module` 来修改默认模块，修改配置文件 `src/common/config/config.js`：
+`Default_module` can be configured to modify the default module, modify the configuration file `src/common/config/config.js`：
 
 ```js
-//将默认模块名改为 blog
+//The default module's name is changed to blog
 export default {
     default_module: 'blog'
 }
 ```
 
-### 添加模块
+### Add module
 
-添加模块直接通过 `thinkjs` 命令即可完成。
+Add module can be completed directly by `thinkjs` command.
 
-在当前项目目录下，执行 `thinkjs module xxx`，即可创建名为 `xxx` 的模块。
+In the current project directory, execute `thinkjs module xxx`, you can create a module named `xxx`.
 
-如果模块名已经存在，则无法创建。
+If the module's name already exists, you can not create it.
 
-### 禁用模块
+### Disable module
 
-ThinkJS 默认会自动查找和识别项目下的模块，并认为所有的模块都是可用的。
+ThinkJS will automatically find and identify module under the project and that all modules are available.
 
-如果想禁用部分模块，可以修改配置文件 `src/common/config/config.js`，添加下面的配置：
+If you want to disable some module, you can modify the configuration file `src/common/config/config.js`, add the following configuration:
 
 ```js
 export default {
-    deny_module_list: ['xxx'] //禁用 xxx 模块
+    deny_module_list: ['xxx'] //Disable xxx module
 }
 ```
