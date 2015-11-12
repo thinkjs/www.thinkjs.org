@@ -3,9 +3,9 @@
       "Introduction": "index",
       "Create Project": "create_project",
       "Project Structure": "app_structure",
-      "代码规范": "specification",
-      "升级指南": "upgrade",
-      "常见问题": "question"
+      "Specification": "specification",
+      "Update Guide": "upgrade",
+      "Q & A": "question"
     },
     "进阶应用": {
       "模块": "module",
