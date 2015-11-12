@@ -1,50 +1,44 @@
-## Adapter
+# Adapter #
 
-Adapter 是用来解决一类功能的多种实现，如：支持多种数据库，支持多种模版引擎等。系统默认支持的 Adapter 有：`Cache`，`Session`，`WebSocket`，`Db`，`Store`，`Template` 和 `Socket`。
+- Create an Adapter
+- Introduce an Adaper
+- Use third part Adapter
 
-### 创建 Adapter
+Adapters are sorts of implementations which implements a same kind of function. In ThinkJS , the framework provides these adapters by default. Such as Cache, Session, WebSocket, Db, Store, Template, Socket and so on.
 
-可以通过命令 `thinkjs adapter [type]/[name]` 来创建 Adapter，如：
+## Create An Adapter ##
 
-```sh
-thinkjs adapter template/dot
-```
+You can create an adapter with console conmmand like this:
 
-创建一个名为 `dot` 的 Template Adapter，创建的文件路径为 `src/common/adapter/template/dot.js`。文件内容类似如下：
+`thinkjs adapter template/dot`
 
-```js
-export default class extends think.adapter.template {
-  /**
-   * init
-   * @return {[]}         []
-   */
-  init(...args){
-    super.init(...args);
-  }
-}
-```
+It creates a Template Adapter named `dot` in `src/common/adapter/template/dot.js`. The code probably likes the following:
 
-如果创建的类型之前不存在，会自动创建一个 Base 类，其他类会继承该类。
+    export default class extends think.adapter.template {
+      /**
+      * init
+      * @return {[]}         []
+      */
+      init(...args){
+        super.init(...args);
+      } 
+    }
 
+The framework creates a `Base` class if the type you created doesn't exist,  then other classes inherit from the `Base` class.
 
-### 加载 Adapter
+## Introduce an Adaper ##
 
-可以通过 `think.adapter` 方法加载对应的 Adapter，如：
+You can introduce an Adapter by using `think.adapter`. For example:
 
-```js
-let Template = think.adapter('template', 'dot'); //加载名为 dot 的 Template Adapter
-let instance = new Template(...args); //实例化 Adapter
-```
+    let Template = think.adapter("template", "dot"); // introduce Template Adapter named dot
+	let instance = new Template(...args); // introduce an Adapter and instantiate it.
 
-### 使用第三方 Adapter
+## Use third part Adapter ##
+The framework searches Adapters from `src/common/adapter` and system path automatically, when it loads Adapters. You should regist third part Adapters if you need, otherwise the framework can't find them.
 
-加载 Adapter 时，系统会自动从 `src/common/adapter` 目录和系统目录查找对应的 Adapter，如果引入第三方的 Adapter，需要将 Adapter 注册进去，否则系统无法找到该 Adapter。
+You can regist third part Adapters by using `think.adapter`， For example：
 
-可以通过 `think.adapter` 方法注册第三方的 Adapter，如：
+    let DotTemplate = require("think-template-dot");
+	think.adapter("template", "dot", DotTemplate);
 
-```js
-let DotTemplate = require('think-template-dot');
-think.adapter('template', 'dot', DotTemplate);
-```
-
-将文件存放在 `src/common/bootstrap/` 目录下，这样服务启动时就会自动加载。
+Then， the Adaptor files in `src/common/bootstrap/` can be loaded automatically when the service started.
