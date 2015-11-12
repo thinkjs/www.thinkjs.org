@@ -1,32 +1,28 @@
-## 常见问题
+## Common question
 
-### 为什么推荐 ES6/7 语法开发项目
+### Why develop to ES6/7 grammer
 
-ES6/7 里提供了大量的新特性，这些特性会带来巨大的开发便利和效率上的提升。如：ES6 里的 `*/yield` 和 ES7 里的 `async/await` 特性解决异步回调的问题；箭头函数解决 `this` 作用域的问题；`class` 语法糖解决类继承的问题。
+It supports large of new feature to bring great convenience and efficiency while developing in ES6/7. For example, we use ES6 `*/yield` and ES7 `async/await` feature to resolve async callback hell problem. And use arrow function to resolve `this` scope problem. Or use `class` grammer to resolve class inherit problem.
 
-虽然现在 Node.js 环境还没有完全支持这些新的特性，但借助 Babel 编译，可以稳定运行在现在的 Node.js 环境中。所以我们尽可以享受这些新特性带来的便利。    
+Althought Node.js hasn't support all those feature, we can use them in Node.js stable environment in advance with the help of Babel. It's so good that enjoy convenience and efficiency because of new features.
 
-### 为什么执行 npm run watch-compile 后进程不结束
+### Why npm run watch-commpile can't stop process
 
-使用 `--es6` 模式创建的项目，代码必须编译后才能运行。系统提供了 `npm run watch-compile` 命令用来实时编译，即：文件修改后自动触发编译。这种方式下会守护这个进程，所以才会执行后才会看到进程一直不结束。
+Program which created with `--es6` command must be compiled before you run it. ThinkJS has `npm run watch-compile` command to real-time compile. This command will start a daemon and won't close itself after end. If you want run other command, you may open new tab or window.
 
-如果要执行其他命令，可以新开个窗口或标签页执行。
+### Do we need restart service when we modified in development 
 
-### 开发时，修改文件需要重启服务么？
+It must reastart to effective after modified because of Node.js mechanism by default. It's so inconvenience to us. New ThinkJS supports auto update file mechanism to effect modified without restart.
 
-默认情况下，由于 Node.js 的机制，文件修改必须重启才能生效。
+Auto update will consume performance, so this feature turns on only in `development`. Online we advise that use `pm2` module to manage project.
 
-这种方式下给开发带来了很大的不变，ThinkJS 提供了一种文件自动更新的机制，文件修改后可以立即生效，无需重启服务。
+### How to change view folder structure
 
-自动更新的机制会消耗一定的性能，所以默认只在 `development` 项目环境下开启。线上代码更新还是建议使用 `pm2` 模块来管理。
-
-### 怎么修改视图文件目录结构
-
-默认情况下，视图文件路径为 `view/[module]/[controller]_[action].html`。其中控制器和操作之间是用 `_` 来连接的，如果想将连接符修改为 `/`，可以修改配置文件 `src/common/config/view.js`：
+View file path is `view/[module]/[controller]_[action].html` by default. In this path controller and action was join by `_`. If you want change joiner to `/`, you can change configuration file `src/common/config/view.js` like this:
 
 ```js
 export default {
-  file_depr: '/', //将控制器和操作之间的连接符修改为 /
+  file_depr: '/', //change joiner to /
 }
 ```
 
