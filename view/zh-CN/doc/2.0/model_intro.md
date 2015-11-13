@@ -284,6 +284,21 @@ export default class extends think.controller.base {
 }
 ```
 
+### 修改主键
+
+模型默认的主键为 `id`，如果数据表里的 Primary Key 设置不是 id，那么需要在模型中设置主键。
+
+```js
+export default class extends think.model.base {
+  init(...args){
+    super.init(...args);
+    this.pk = 'user_id'; //将主键字段设置为 user_id
+  }
+}
+```
+
+`count`，`sum`，`min`，`max` 等很多查询操作都会用到主键，用到这些操作时需要修改主键。
+
 ### 查询缓存
 
 为了性能优化，项目中经常要对一些从数据库中查询的数据进行缓存。如果手工将查询的数据进行缓存，势必比较麻烦，模型中直接提供了 `cache` 方法来设置查询缓存。如：

@@ -32,3 +32,14 @@ export default {
 }
 ```
 
+### 如果开启多进程
+
+线上可以开启 cluster 功能达到利用多核 CPU 来提升性能，提高并发处理能力。
+
+可以在配置文件 `src/common/config/env/production.js` 中加入如下的配置：
+
+```js
+export default {
+  cluster_on: true //开启 cluster
+}
+```
