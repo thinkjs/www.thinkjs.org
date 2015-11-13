@@ -27,11 +27,11 @@
           </div>
             <div class="doc">
                 <%if(!keyword){%>
-                <h2 style="color:#555">请输入关键词进行搜索</h2>
+                <h2 style="color:#555">Missing keywords</h2>
                 <%}else if(think.isEmpty(searchResult)){%>
-                <h2 style="color:#555">未查询到相关内容</h2>
+                <h2 style="color:#555">No Result</h2>
                 <%}else{%>
-                  <h2>搜索结果(<%-searchResult.length%>)</h2>
+                  <h2>Search Result(<%-searchResult.length%>)</h2>
                   <%searchResult.forEach(function(item){%>
                   <h4><a target="_blank" href="/<%-lang%>/doc/<%-version%>/<%-item.filename.replace('.md', '')%>.html"><%-item.title%></a></h4>
                   <%item.text.slice(0, 10).forEach(function(textItem){%>
