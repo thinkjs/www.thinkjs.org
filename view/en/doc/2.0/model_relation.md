@@ -1,37 +1,53 @@
-## 关联模型
+## Relational Model
 
-数据库中表经常会跟其他数据表有关联，数据操作时需要连同关联的表一起操作。如：一个博客文章会有分类、标签、评论，以及属于哪个用户。
+- Supported Type
+- Create Relational Model
+- Set Relationship
+  - Data Format of Single Relational Model
+  - HAS_ONE
+  - BELONG_TO
+  - HAS_MANY
+  - MANY_TO_MANY
+  - Dead Cycle
+- Close Relationship Temporarily
+  - Close All
+  - Open Part
+  - Close Part
+  - Reopen All
+- mongo Relational Model
 
-ThinkJS 中支持关联模型，让处理这类操作非常简单。
+Table in database often related to other tables and need to be operated with related tables. For example, an article can have category, tag, comment and author.
 
-### 支持的类型
+ThinkJS supports relational model which can simple these operations.
 
-关联模型中支持常见的 4 类关联关系。如：
+### Supported Type
 
-* `think.model.HAS_ONE` 一对一模型
-* `think.model.BELONG_TO` 一对一属于
-* `think.model.HAS_MANY` 一对多
-* `think.model.MANY_TO_MANY` 多对多
+Relational model supports four usual relationship:
 
-### 创建关联模型
+- `think.model.HAS_ONE` one to one model
+- `think.model.BELONG_TO` one to one belong to
+- `think.model.HAS_MANY` one to many
+- `think.model.MANY_TO_MANY` many to many
 
-可以通过命令 `thinkjs model [name] --relation` 来创建关联模型。如：
+### Create Relational Model
 
-```sh
+Use `thinkjs model [name] --relation` to create relational model:
+
+```js
 thinkjs model home/post --relation
 ```
 
-会创建模型文件 `src/home/model/post.js`。
+This will create model file `src/home/model/post.js`.
 
-### 指定关联关系
+### Set Relationship
 
-可以通过 `relation` 属性来指定关联关系。如：
+Use `relation` property to set relationship:
 
 ```js
 export default class extends think.model.relation {
   init(...args){
     super.init(...args);
-    //通过 relation 属性指定关联关系，可以指定多个关联关系
+    //use relation property to set relationship, can set many relationships
     this.relation = {
       cate: {},
       comment: {} 
@@ -40,12 +56,12 @@ export default class extends think.model.relation {
 }
 ```
 
-也可以直接使用 ES7 里的语法直接定义 `relation` 属性。如：
+You can also use ES7 syntax to define `relation` property:
 
 ```js
 export default class extends think.model.relation {
 
-  //直接定义 relation 属性
+  //define relation property directly
   relation = {
     cate: {},
     comment: {} 
@@ -57,7 +73,7 @@ export default class extends think.model.relation {
 }
 ```
 
-#### 单个关系模型的数据格式
+#### Data Format of Single Relational Model
 
 ```js
 export default class extends think.model.relation {
@@ -66,38 +82,38 @@ export default class extends think.model.relation {
     this.relation = {
       cate: {
         type: think.model.MANY_TO_MANY, //relation type
-        model: '', //model name
-        name: 'profile', //data name
-        key: 'id', 
-        fKey: 'user_id', //forign key
-        field: 'id,name',
-        where: 'name=xx',
-        order: '',
-        limit: '',
-        rModel: '',
-        rfKey: ''
+        model: "", //model name
+        name: "profile", //data name
+        key: "id", 
+        fKey: "user_id", //forign key
+        field: "id,name",
+        where: "name=xx",
+        order: "",
+        limit: "",
+        rModel: "",
+        rfKey: ""
       },
     }
   }
 }
 ```
 
-各个字段含义如下：
+Each fields means:
 
-* `type` 关联关系类型
-* `model` 关联表的模型名，默认为配置的 key，这里为 `cate`
-* `name` 对应的数据字段名，默认为配置的 key，这里为 `cate`
-* `key` 当前模型的关联 key
-* `fKey` 关联表与只对应的 key
-* `field` 关联表查询时设置的 field，如果需要设置，必须包含 `fKey` 对应的值
-* `where` 关联表查询时设置的 where 条件
-* `order` 关联表查询时设置的 order
-* `limit` 关联表查询时设置的 limit
-* `page` 关联表查询时设置的 page
-* `rModel` 多对多下，对应的关联关系模型名
-* `rfKey` 多对多下，对应里的关系关系表对应的 key
+- `type` type of relation
+- `model` model name of relation table, default is key, here is `cate`
+- `name` data field name, default is key, here is `cate`
+- `key` related key of current model
+- `fKey` related key of related table
+- `field` field used to query related table, fKey must be included if you set this field
+- `where` where condition used to query related table
+- `order` order used to query related table
+- `limit` limit used to query related table
+- `page` page used to query related table
+- `rModel` related model name in many to many type
+- `rfKey` key in related table in many to many type
 
-如果只用设置关联类型，不用设置其他字段信息，可以通过下面简单的方式：
+If you just want to set related type without other fields, you can use this simple way:
 
 ```js
 export default class extends think.model.relation {
@@ -112,9 +128,9 @@ export default class extends think.model.relation {
 
 #### HAS_ONE
 
-一对一关联，表示当前表含有一个附属表。
+One to one relation, means current table has one additional table.
 
-假设当前表的模型名为 `user`，关联表的模型名为 `info`，那么配置中字段 `key` 的默认值为 `id`，字段 `fKey` 的默认值为 `user_id`。
+Suppose curret model name is `user` and related table model name is `info`, then `key` field in config default is `id`, `fKey` default is `user_id`.
 
 ```js
 export default class extends think.model.relation {
@@ -127,25 +143,25 @@ export default class extends think.model.relation {
 }
 ```
 
-执行查询操作时，可以得到类似如下的数据：
+Execute quering operation will get below data:
 
 ```js
 [
   {
     id: 1,
-    name: '111',
+    name: "111",
     info: { //关联表里的数据信息
       user_id: 1,
-      desc: 'info'
+      desc: "info"
     }
   }, ...]
 ```
 
 #### BELONG_TO
 
-一对一关联，属于某个关联表，和 HAS_ONE 是相反的关系。
+One to one relation, means belong to one table, reverse of HAS_ONE.
 
-假设当前模型名为 `info`，关联表的模型名为 `user`，那么配置字段 `key` 的默认值为 `user_id`，配置字段 `fKey` 的默认值为 `id`。
+Suppose current model name is `info`, related table model name is `user`, then `key` field in config default is `user_id` and `fKey` default is `id`.
 
 ```js
 export default class extends think.model.relation {
@@ -158,16 +174,16 @@ export default class extends think.model.relation {
 }
 ```
 
-执行查询操作时，可以得到类似下面的数据：
+Execute quering operation will get below data:
 
 ```js
 [
   {
     id: 1,
     user_id: 1,
-    desc: 'info',
+    desc: "info",
     user: {
-      name: 'thinkjs'
+      name: "thinkjs"
     }
   }, ...
 ]
@@ -175,12 +191,12 @@ export default class extends think.model.relation {
 
 #### HAS_MANY
 
-一对多的关系。
+One to many relation.
 
-加入当前模型名为 `post`，关联表的模型名为 `comment`，那么配置字段 `key` 默认值为 `id`，配置字段 `fKey` 默认值为 `post_id`。
+Suppose current model name is `post`, related table model name is `comment`, then `key` field in config default is `id` and `fKey` default is `post_id`.
 
 ```js
-'use strict';
+"use strict";
 /**
  * relation model
  */
@@ -197,26 +213,26 @@ export default class extends think.model.relation {
 }
 ```
 
-执行查询数据时，可以得到类似下面的数据：
+Execute quering operation will get below data:
 
 ```js
 [{
   id: 1,
-  title: 'first post',
-  content: 'content',
+  title: "first post",
+  content: "content",
   comment: [{
     id: 1,
     post_id: 1,
-    name: 'welefen',
-    content: 'first comment'
+    name: "welefen",
+    content: "first comment"
   }, ...]
 }, ...]
 ```
 
-如果关联表的数据需要分页查询，可以通过 `page` 参数进行，如：
+If data in related table needs pagination, use `page` parameter:
 
 ```js
-'use strict';
+"use strict";
 /**
  * relation model
  */
@@ -231,21 +247,21 @@ export default class extends think.model.relation {
     }
   }
   getList(page){
-    return this.setRelation('comment', {page: page}).select();
+    return this.setRelation("comment", {page: page}).select();
   }
 }
 ```
 
-除了用 `setRelation` 来合并参数外，可以将参数设置为函数，合并参数时会自动执行该函数。
+Besides using `setRelation`, you can also pass in a function, this function will be executed during paramater mergin.
 
 #### MANY_TO_MANY
 
-多对多关系。
+Many to many relation.
 
-假设当前模型名为 `post`，关联模型名为 `cate`，那么需要一个对应的关联关系表。配置字段 `rModel` 默认值为 `post_cate`，配置字段 `rfKey` 默认值为 `cate_id`。
+Suppose current model name is `post`, related table model name is `cate`, then we need a relationship table.`rModel` field in config default is `post_cate` and `rfKey` default is `cate_id`.
 
 ```js
-'use strict';
+"use strict";
 /**
  * relation model
  */
@@ -256,49 +272,33 @@ export default class extends think.model.relation {
     this.relation = {
       cate: {
         type: think.model.MANY_TO_MANY,
-        rModel: 'post_cate',
-        rfKey: 'cate_id'
+        rModel: "post_cate",
+        rfKey: "cate_id"
       }
     }
   }
 }
 ```
 
-查询出来的数据结构为：
+Quering results will be:
 
 ```js
 [{
   id: 1,
-  title: 'first post',
+  title: "first post",
   cate: [{
     id: 1,
-    name: 'cate1',
+    name: "cate1",
     post_id: 1
   }, ...]
 }, ...]
 ```
 
-#### 关联死循环
+#### Dead Cycle
 
-如果 2 个关联表，一个设置对方为 HAS_ONE，另一个设置对方为 BELONG_TO，这样在查询关联表的数据时会将当前表又查询了一遍，并且会再次查询关联表，最终导致死循环。
+Suppose we have two tables, one set the other as HAS_ONE and the other set this as BELONG_TO, this will cause cycle quering during quering and result to dead cycle.
 
-可以在配置里设置 `relation` 字段关闭关联表的关联查询功能，从而避免死循环。如：
-
-```js
-export default class extends think.model.relation {
-  init(..args){
-    super.init(...args);
-    this.relation = {
-      user: {
-        type: think.model.BELONG_TO,
-        relation: false //关联表 user 查询时关闭关联查询
-      }
-    }
-  }
-}
-```
-
-也可以设置只关闭当前模型的关联关系，如：
+You can set `relation` field in config to close related quering and prevent dead cycle:
 
 ```js
 export default class extends think.model.relation {
@@ -307,20 +307,36 @@ export default class extends think.model.relation {
     this.relation = {
       user: {
         type: think.model.BELONG_TO,
-        relation: 'info' //关联表 user 查询时关闭对 info 模型的关联关系
+        relation: false //close related quering when query user
       }
     }
   }
 }
 ```
 
-### 临时关闭关联关系
+You can also only close current model's relationship:
 
-设置关联关系后，查询等操作都会自动查询关联表的数据。如果某些情况下不需要查询关联表的数据，可以通过 `setRelation` 方法临时关闭关联关系查询。
+```js
+export default class extends think.model.relation {
+  init(..args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        relation: "info" //close info model's relationship whey query user
+      }
+    }
+  }
+}
+```
 
-#### 全部关闭
+### Close Relationship Temporarily
 
-通过 `setRelation(false)` 关闭所有的关联关系查询。
+After set relationship, operations like query will query related table automatically. If you don't want to query related table, just use `setRelation` method to close relationship temporarily.
+
+#### Close All
+
+Use `setRelation(false)` to close all relationship query.
 
 ```js
 export default class extends think.model.relation {
@@ -337,28 +353,9 @@ export default class extends think.model.relation {
 }
 ```
 
-#### 部分启用
+#### Open Part
 
-通过 `setRelation('comment')` 只查询 `comment` 的关联数据，不查询其他的关联关系数据。
-
-```js
-export default class extends think.model.relation {
-  init(...args){
-    super.init(...args);
-    this.relation = {
-      comment: think.model.HAS_MANY,
-      cate: think.model.MANY_TO_MANY
-    }
-  },
-  getList2(){
-    return this.setRelation('comment').select();
-  }
-}
-```
-
-#### 部分关闭
-
-通过 `setRelation('comment', false)` 关闭 `comment` 的关联关系数据查询。
+Use `setRelation('comment')` to query data from `comment`, other table won't be queied.
 
 ```js
 export default class extends think.model.relation {
@@ -370,14 +367,33 @@ export default class extends think.model.relation {
     }
   },
   getList2(){
-    return this.setRelation('comment', false).select();
+    return this.setRelation("comment").select();
   }
 }
 ```
 
-#### 重新全部启用
+#### Close Part
 
-通过 `setRelation(true)` 重新启用所有的关联关系数据查询。
+Use `setRelation('comment', false)` to close `comment` quering.
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      comment: think.model.HAS_MANY,
+      cate: think.model.MANY_TO_MANY
+    }
+  },
+  getList2(){
+    return this.setRelation("comment", false).select();
+  }
+}
+```
+
+#### Reopen All
+
+Use `setRelation(true)` to reopen all related quering.
 
 ```js
 export default class extends think.model.relation {
@@ -394,6 +410,8 @@ export default class extends think.model.relation {
 }
 ```
 
-### mongo 关联模型
+### mongo Relational Model
 
-该关联模型不操作不适合 mongo 模型，mongo 的关联模型请见 <https://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/>。
+This relational model doesn't work for mongo model, mongo relational model stays here [https://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/](https://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/).
+
+This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_relation.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_relation.md).

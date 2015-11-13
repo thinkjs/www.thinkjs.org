@@ -1,53 +1,67 @@
 ## MongoDB
 
-ThinkJS 支持使用 MongoDB 数据库，底层使用 [mongodb](https://www.npmjs.com/package/mongodb) 模块。
+- Config
+- Create Model
+- Model Inherit
+  - ES6 Syntax
+  - Dynamic Creation
+- CURD Operation
+- Create Index
+  - Single Field Index
+  - Unique Index
+  - Multiple Fields Index
+- Get Index
+- aggregate
+- MapReduce
 
-### 配置
+ThinkJS supports MongoDB database, underline model is [mongodb](https://www.npmjs.com/package/mongodb).
 
-使用 MongoDB 数据库，需要将模型中的配置 `type` 改为 `mongo`，修改配置文件 `src/common/config/db.js`：
+### Config
+
+Change `type` in model configuration to `mongo` to use MongoDB database:
 
 ```js
 export default {
-  type: 'mongo'
+  type: "mongo"
 }
 ```
 
-如果要在连接 MongoDB 服务的时候添加额外的参数，可以通过在 `options` 里追加，如：
+In order to add additional params when connecting MongoDB service, add them to `options`:
 
 ```js
 export default {
-  type: 'mongo',
+  type: "mongo",
   options: {
-    authSource: 'admin'
+    authSource: "admin"
   }
 }
 ```
 
-上面的配置后，连接 MongoDB 的 URL 变成类似于 `mongodb://127.0.0.1:27017/?authSource=admin`。
+Below will change connection URL to `mongodb://127.0.0.1:27017/?authSource=admin`.
 
-更多额外的配置请见 <http://mongodb.github.io/node-mongodb-native/2.0/reference/connecting/connection-settings/>。
+More additional options stay at [http://mongodb.github.io/node-mongodb-native/2.0/reference/connecting/connection-settings/](http://mongodb.github.io/node-mongodb-native/2.0/reference/connecting/connection-settings/).
 
-### 创建模型
+### Create Model
 
-可以通过命令 `thinkjs model [name] --mongo` 来创建模型，如：
+Use command `thinkjs model [name] --mongo` to create model:
 
 ```js
 thinkjs model user --mongo
 ```
 
-执行完成后，会创建文件 `src/common/model/user.js`。如果想创建在其他模块下，需要带上具体的模块名。如：
+After executing, `src/common/model/user.js` will be created. If you want to place it on other module, add the specific module name:
 
 ```js
 thinkjs model home/user --mongo
 ```
 
-会在 `home` 模块下创建模型文件，文件为 `src/home/model/user.js`。
+This will create model file on `home` module, file name is `src/home/model/user.js`.
 
-### 模型继承
+### Model Inherit
 
-模型需要继承 `think.model.mongo` 类，如果当前类不是继承该类，需要手动修改。
+Model has to inherit `think.model.mongo` class. If current class doesn't inherit to it, you have to modify it:
 
-#### ES6 语法
+#### ES6 Way
 
 ```js
 export default class extends think.model.mongo {
@@ -55,27 +69,27 @@ export default class extends think.model.mongo {
 }
 ```
 
-#### 动态创建类的方式
+#### Dynamic Create
 
 ```js
-module.exports = think.model('mongo', {
-  
+module.exports = think.model("mongo", {
+
 })
 ```
 
-### CURD 操作
+### CURD Operation
 
-CURD 操作和 Mysql 中接口相同，具体请见 [模型 -> 介绍](./model_intro.html#toc-d84)。
+CURD operation is same as Mysql, just read [Model -> Introduction](https://thinkjs.org/zh-CN/doc/2.0/model_intro.html#toc-d84).
 
-### 创建索引
+### Create Index
 
-mongo 模型可以配置索引，在增删改查操作之前模型会自动去创建索引，配置放在 `indexes` 属性里。如：
+mongo model can config index, model will create index automatically before CURD operation. Configurations are placed in `indexes` property:
 
 ```js
 export default class extends think.model.mongo {
   init(...args){
     super.init(...args);
-    //配置索引
+    //config index
     this.indexes = { 
 
     }
@@ -83,12 +97,13 @@ export default class extends think.model.mongo {
 }
 ```
 
-#### 单字段索引
+#### Single Index
+
 ```js
 export default class extends think.model.mongo {
   init(...args){
     super.init(...args);
-    //配置索引
+    //config index
     this.indexes = { 
       name: 1
     }
@@ -96,15 +111,15 @@ export default class extends think.model.mongo {
 }
 ```
 
-#### 唯一索引
+#### Unique Index
 
-通过 `$unique` 来指定为唯一索引，如：
+Use `$unique` to set unique index:
 
 ```js
 export default class extends think.model.mongo {
   init(...args){
     super.init(...args);
-    //配置索引
+    //config index
     this.indexes = { 
       name: {$unique: 1}
     }
@@ -112,15 +127,15 @@ export default class extends think.model.mongo {
 }
 ```
 
-#### 多字段索引
+#### Multiple Fields Index
 
-可以将多个字段联合索引，如：
+You can combine multiple fields to create index:
 
 ```js
 export default class extends think.model.mongo {
   init(...args){
     super.init(...args);
-    //配置索引
+    //config index
     this.indexes = { 
       email: 1
       test: {
@@ -133,14 +148,14 @@ export default class extends think.model.mongo {
 }
 ```
 
-### 获取索引
+### Get Index
 
-可以通过方法 `getIndexes` 获取创建的索引。如：
+Use `getIndexes` to get created indexes: 
 
 ```js
 export default class extends think.controller.base {
   async indexAction(){
-    let model = this.model('user');
+    let model = this.model("user");
     let indexes = await model.getIndexes();
   }
 }
@@ -148,24 +163,24 @@ export default class extends think.controller.base {
 
 ### aggregate
 
-可以通过 `aggregate` 方法进行混合操作。如：
+Use `aggregate` method to do aggregation:
 
 ```js
 export default class extends think.model.mongo {
   match(){
     return this.aggregate([
-      {$match: {status: 'A'}},
+      {$match: {status: "A"}},
       {$group: {_id: "$cust_id", total: {$sum: "$amount"}}}
     ]);
   }
 }
 ```
 
-具体请见 <https://docs.mongodb.org/manual/core/aggregation-introduction/>。
+Details stay at [https://docs.mongodb.org/manual/core/aggregation-introduction/](https://docs.mongodb.org/manual/core/aggregation-introduction/).
 
 ### MapReduce
 
-可以通过 `mapReduce` 方法进行 MapReduce 操作。如：
+Use `mapReduce` method to do MapReduce operation:
 
 ```js
 export default class extends think.model.mongo {
@@ -184,4 +199,6 @@ export default class extends think.model.mongo {
 }
 ```
 
-具体请见 <https://docs.mongodb.org/manual/core/aggregation-introduction/#map-reduce>。
+Details stay at [https://docs.mongodb.org/manual/core/aggregation-introduction/#map-reduce](https://docs.mongodb.org/manual/core/aggregation-introduction/#map-reduce).
+
+This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_mongodb.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_mongodb.md).
