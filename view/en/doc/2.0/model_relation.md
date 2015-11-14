@@ -1,21 +1,5 @@
 ## Relational Model
 
-- Supported Type
-- Create Relational Model
-- Set Relationship
-  - Data Format of Single Relational Model
-  - HAS_ONE
-  - BELONG_TO
-  - HAS_MANY
-  - MANY_TO_MANY
-  - Dead Cycle
-- Close Relationship Temporarily
-  - Close All
-  - Open Part
-  - Close Part
-  - Reopen All
-- mongo Relational Model
-
 Table in database often related to other tables and need to be operated with related tables. For example, an article can have category, tag, comment and author.
 
 ThinkJS supports relational model which can simple these operations.

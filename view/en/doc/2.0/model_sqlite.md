@@ -1,11 +1,5 @@
 ## SQLite
 
-- Config
-- Store Type
-  - Memory
-  - File
-- CURD Operation
-
 ThinkJS supports SQLite database, underline uses [sqlite3](https://www.npmjs.com/package/sqlite3) module.
 
 ### Config

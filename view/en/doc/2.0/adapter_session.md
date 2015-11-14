@@ -1,11 +1,5 @@
 ## Session
 
-- Supported session types
-- How to configurate session
-- How to read/write session
-- How to extend session
-- How to use third party Session Adapter
-
 Session is always needed to user login. ThinkJS default to support a variety of session adapter, Such as `file`, `db`, `redis` and so on.
 
 ### Supported session types

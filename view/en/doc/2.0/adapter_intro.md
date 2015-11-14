@@ -1,9 +1,5 @@
 ## Adapter
 
-- Create an Adapter
-- Introduce an Adaper
-- Use third part Adapter
-
 Adapters are sorts of implementations which implements a same kind of function. In ThinkJS , the framework provides these adapters by default. Such as Cache, Session, WebSocket, Db, Store, Template, Socket and so on.
 
 ### Create An Adapter 

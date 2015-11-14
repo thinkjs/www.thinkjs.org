@@ -1,19 +1,5 @@
 ## MongoDB
 
-- Config
-- Create Model
-- Model Inherit
-  - ES6 Syntax
-  - Dynamic Creation
-- CURD Operation
-- Create Index
-  - Single Field Index
-  - Unique Index
-  - Multiple Fields Index
-- Get Index
-- aggregate
-- MapReduce
-
 ThinkJS supports MongoDB database, underline model is [mongodb](https://www.npmjs.com/package/mongodb).
 
 ### Config

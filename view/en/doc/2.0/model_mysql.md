@@ -1,11 +1,5 @@
 ## Mysql
 
-- Connection Pool
-- socketPath
-- SSL options
-- Database Support Emoji
-- Error: Handshake inactivity timeout
-
 ThinkJS support Mysql well, the underline library is [https://www.npmjs.com/package/mysql](https://www.npmjs.com/package/mysql).
 
 ### Connection Pool

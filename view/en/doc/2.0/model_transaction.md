@@ -1,8 +1,5 @@
 ## Transaction
 
-- use transaction
-- transaction method
-
 Model supports transaction operation while the database you use supports that. 
 
 `InnoDB` and `BDB` engine of `Mysql` support transaction, if you need to use transaction in Mysql, must set the engine to InnoDB or BDB.

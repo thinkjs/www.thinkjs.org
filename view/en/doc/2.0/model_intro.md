@@ -1,17 +1,5 @@
 ## Model Introduction
 
-- Create Model
-- Config Model
-- Define Data Table
-- Model Instantiation
-- Chaining Invoke
-- CURD Operations
-  - Create Data
-  - Update Data
-  - Query Data
-  - Delete Data
-- Query Cache
-
 During project development, you always need to manipulate data table, such as CRUD operations. In order to facilite database manipulation, model is encapsoluted. A model maps to a table in databse.
 
 Currently support databases: `MySQL`, `MongoDB`, `SQLite`.

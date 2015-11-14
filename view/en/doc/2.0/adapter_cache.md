@@ -1,11 +1,5 @@
 ## Cache
 
-- Cache types
-- How to configurate cache
-- How to use cache
-- How to extend cache
-- How to use third party cache Adapter
-
 It is very helpful to use caches proper correctly in projects. So, ThinkJS provide a variety of caching methods,includes: Memory cache, file cache, Memcache and redis. 
 
 ### Cache types
