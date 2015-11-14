@@ -1,5 +1,5 @@
 {
-    "快速入门": {
+    "The Basics": {
       "Introduction": "index",
       "Create Project": "create_project",
       "Project Structure": "app_structure",
@@ -8,42 +8,42 @@
       "Q & A": "question"
     },
     "进阶应用": {
-      "模块": "module",
-      "控制器": "controller",
-      "视图": "view",
-      "配置": "config",
-      "路由": "route"
+      "Module": "module",
+      "Controller": "controller",
+      "View": "view",
+      "Config": "config",
+      "Route": "route"
     },
-    "模型": {
-      "介绍": "model_intro",
-      "事务": "model_transaction",
-      "关联模型": "model_relation",
+    "Model": {
+      "Introdution": "model_intro",
+      "Transaction": "model_transaction",
+      "Relation": "model_relation",
       "Mysql": "model_mysql",
       "MongoDB": "model_mongodb",
       "SQLite": "model_sqlite"
     },
     "Adapter": {
-      "介绍": "adapter_intro",
+      "Introdution": "adapter_intro",
       "Cache": "adapter_cache",
       "Session": "adapter_session",
       "WebSocket": "adapter_websocket",
       "Template": "adapter_template"
     },
     "扩展功能": {
-      "ThinkJS命令": "thinkjs_command",
-      "静态资源访问": "resource",
+      "Command": "thinkjs_command",
+      "Resource": "resource",
       "Middleware": "middleware",
       "Service": "service",
       "Cookie": "cookie",
-      "错误处理": "error_handle",
-      "错误信息": "error_message",
-      "数据校验": "validation",
-      "国际化": "i18n",
-      "路径常量": "path_cost",
+      "Error Handle": "error_handle",
+      "Error Message": "error_message",
+      "Validation": "validation",
+      "I18N": "i18n",
+      "Path Const": "path_cost",
       "REST API": "rest_api",
-      "定时任务": "crontab",
-      "线上部署": "deploy",
-      "推荐模块": "recommend_modules"
+      "Crontab": "crontab",
+      "Deploy": "deploy",
+      "Modules": "recommend_modules"
     },
     "API": {
       "think": "api_think",
