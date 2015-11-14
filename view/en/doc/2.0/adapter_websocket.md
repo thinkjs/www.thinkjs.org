@@ -1,50 +1,50 @@
 ## WebSocket
 
-项目里经常要要使用 WebSocket 来实现聊天等功能，ThinkJS 支持多种 WebSocket 库，如：`socket.io`，`sockjs` 等，并对这些库进行了一些简单的包装，让使用的接口一致。
+WebSocket is usually used to implement various functions such as chatroom. ThinkJS supports a lot of WebSocket libraries, for instance, `socket.io`，`sockjs` etc. More over, in order to make these engines become interface conformance, ThinkJS decorates them simply.
 
-### 开启 WebSocket
+### Open WebSocket
 
-WebSocket 功能默认是关闭的，项目如果需要开启，可以修改配置文件 `src/common/config/websocket.js`：
+WebSocket is closed by default. You can edit `src/common/config/websocket.js` to open it like this：
 
 ```js
 export default {
-  on: false, //是否开启 WebSocket
-  type: 'socket.io', //使用的 WebSocket 库类型，默认为 socket.io
-  allow_origin: '', //允许的 origin
-  adapter: undefined, // socket 存储的 adapter，socket.io 下使用
-  path: '', //url path for websocket
+  on: false, // whether open WebSocket
+  type: 'socket.io', // the WebSocket library name, defaults to socket.io
+  allow_origin: '', //  origin allowed
+  adapter: undefined, // store adapter for socket，used in socket.io
+  path: '', // url path for websocket
   messages: {
     // open: 'home/websocket/open',
   }
 };
 ```
 
-需要将配置 `on` 的值修改为 true，并重启 Node.js 服务。
+change the `on` field to `true`, and restart Node.js.
 
-### 事件到 Action 的映射
+### Event reflect to Action
 
-ThinkJS 里对 WebSocket 的包装遵循了 `socket.io` 的机制，服务端和客户端之间通过事件来交互，这样服务端需要将事件名映射到对应的 Action，才能响应具体的事件。配置在 `messages` 字段，具体如下：
+WebSocket ThinkJS obey to the `socket.io` mechanism. The server and client communicate each other through events. So the server need make a reflection from event to action in order to response correctly.The configuration is specified in `messages` field as following: 
 
 ```js
 export default {
   messages: {
-    open: 'home/socketio/open', // WebSocket 建立连接时处理的 Action
-    close: 'home/socketio/close', // WebSocket 关闭时处理的 Action
-    adduser: 'home/socketio/adduser', //adduser 事件处理的 Action
+    open: 'home/socketio/open', // works on Websocket connected.
+    close: 'home/socketio/close', // works on Websocket closed.
+    adduser: 'home/socketio/adduser', // works when adduser.
   }
 }
 ```
 
-其中 `open` 和 `close` 事件名固定，表示建立连接和断开连接的事件，其他事件均为自定义，项目里可以根据需要添加。
+The event name `open`, `close` are immutable, representing a connection or disconnection. Others can be custom, you can add according to your need.
 
-### Action 处理
+### Work In Action
 
-通过上面配置事件到 Action 的映射后，就可以在对应的 Action 作相应的处理。如：
+Then, you can work in action like following code after finished above configuration.
 
 ```js
 export default class extends think.controller.base {
   /**
-   * WebSocket 建立连接时处理
+   * works on Websocket connected
    * @param  {} self []
    * @return {}      []
    */
@@ -60,12 +60,12 @@ export default class extends think.controller.base {
 
 #### emit
 
-Action 里可以通过 `this.emit` 方法给当前 socket 发送事件，如：
+You can emit event to the current socket in Action through `this.emit`, like:
 
 ```js
 export default class extends think.controller.base {
   /**
-   * WebSocket 建立连接时处理
+   * works on Websocket connected
    * @param  {} self []
    * @return {}      []
    */
@@ -78,54 +78,52 @@ export default class extends think.controller.base {
 
 #### broadcast
 
-Action 里可以通过 `this.broadcast` 方法给所有的 socket 广播事件，如：
+You can broadcast event to all sockets in Action through method `this.broadcast`, like:
 
 ```js
 export default class extends think.controller.base {
   chatAction(self){
     var socket = self.http.socket;
-    //广播给除当前 socket 之外的所有 sockets
+    // broadcast to all sockets excepting the current.
     this.broadcast('new message', {msg: 'message', username: 'xxx'});
   }
 }
 ```
 
-`注`：broadcast 方法默认是給除去当前 socket 的所有 sockets 发送事件，如果想包含当前的 socket，可以设置第三个参数值为 `true`。
+`Note`: the broadcase method broadcast to all sockets except current. You can set the third parameter to `true` to include current one.
 
 ```js
 export default class extends think.controller.base {
   chatAction(self){
     var socket = self.http.socket;
-    //广播给所有的 sockets，包含当前的 socket
+    // broadcast to all sockets including the current. 
     this.broadcast('new message', {msg: 'message', username: 'xxx'}, true);
   }
 }
 ```
 
-#### socket 对象
+#### Socket Object
 
-Action 里可以通过 `this.http.socket` 拿到当前的 socket 对象。
+You can get socket object in Action through `this.http.socket`.
 
-#### 事件数据
+#### Event Data
 
-Action 里可以通过 `this.http.data` 拿到发送过来事件的数据。
-
-
+You can get the event data in Action through `this.http.data`.
 
 ### socket.io
 
-`socket.io` 对 WebSocket 前后端都有封装，使用起来非常方便。
+The `socket.io` library encapsulates socket both front end and back end, is very convenient to use.
 
 
-#### io 对象
+#### io Object
 
-在 Action 里可以通过 `this.http.io` 来获取 `io` 对象，该对象为 socket.io 的一个实例。
+You can get the `io` object in Action through `this.http.io`.It is an instance of `socket.io` 
 
-io 对象包含的方法请见 <http://socket.io/docs/server-api/#server()>。
+To know methods in io object, please see also <http://socket.io/docs/server-api/#server()>。
 
-#### 设置 path
+#### Set Path
 
-设置被 socket.io 处理的路径，默认为 `/socket.io`。如果需要修改，可以修改下面的配置：
+The socket.io process path is `/socket.io` by default.You can edit the folloing configuration if you need change.
 
 ```js
 export default {
@@ -133,11 +131,11 @@ export default {
 }
 ```
 
-`注`：服务端修改了处理的路径后，客户端也要作对应的修改。
+`Note`：After the server has modified the path, the client also should make the corresponding modification
 
-#### 设置 adapter
+#### Set Adapter
 
-使用多节点来部署 WebSocket 时，多节点之间可以借助 Redis 进行通信，这时可以设置 adapter 来实现。
+When using multi node to deploy WebSocket, multiple nodes can communicate with Redis. You can set up adapter to achieve.
 
 ```js
 import redis from 'socket.io-redis';
@@ -149,27 +147,27 @@ export default {
 }
 ```
 
-具体请见 <http://socket.io/docs/using-multiple-nodes/>。
+See also <http://socket.io/docs/using-multiple-nodes/> for more detail.
 
 #### socket.io client
 
-浏览器端需要引入 socket.io client，下载地址为：<http://socket.io/download/>。
+In Browser end, you should introduce socket.io client. The download path is：<http://socket.io/download/>。
 
 ```js
 var socket = io('http://localhost:8360');
-//发送事件
+// emit event
 socket.emit('name', 'data');
-//监听事件
+// listen event
 socket.on('name', function(data){
 
 })
 ```
 
-也可以直接引入一个 CDN 地址：<http://s4.qhimg.com/static/535dde855bc726e2/socket.io-1.2.0.js>。
+This CDN url is available：<http://s4.qhimg.com/static/535dde855bc726e2/socket.io-1.2.0.js>。
 
-#### 校验用户登录
+#### Check User Login
 
-WebSocket 建立连接时可以拿到 cookie，所以可以在 `open` 对应的 Action 里校验用户是否登录。如：
+Websocket get cookie when connected. So, you can check if the user is logined in the `open` Action. For example:
 
 ```js
 export default class extends think.controller.base {
@@ -182,15 +180,15 @@ export default class extends think.controller.base {
 }
 ```
 
-#### 聊天代码示例
+#### Code Sample: Chat
 
-聊天示例代码请见：<https://github.com/75team/thinkjs2-demos/tree/master/websocket-socket.io>。
+See also <https://github.com/75team/thinkjs2-demos/tree/master/websocket-socket.io> for more detailed chat code.
 
 ### SockJS
 
-#### 配置
+#### Configurate
 
-使用 SockJS 库，需要将配置里的 type 修改为 `sockjs`，如：
+You should edit the `type` field in the configuration to `sockjs`, like:
 
 ```js
 export default {
@@ -198,13 +196,14 @@ export default {
 }
 ```
 
-#### sockjs 对象
+#### Sockjs Object
 
-Action 里可以通过 `this.http.sockjs` 拿到 sockjs 对象，该对象为 SockJS 类的一个实例。
+You can get sockjs object through `this.http.sockjs` in Action. The object is an instance of SocketJS.
 
-#### 设置 path
 
-设置被 SockJS 处理的路径，默认为 `/sockjs`，可以通过下面的配置修改：
+#### Set path
+
+The SocketJS process path is `/sockjs` by default.You can edit the folloing configuration if you need change.
 
 ```js
 export default {
@@ -214,9 +213,9 @@ export default {
 
 #### SockJS client
 
-浏览器端需要引入 SockJS client，下载地址为：<https://github.com/sockjs/sockjs-client>。
+In Browser end, you should introduce SockJS client. The download path is：<https://github.com/sockjs/sockjs-client>。
 
-SockJS client 并没有做什么封装，所以需要额外做一层包装，变成事件的方式，以便跟包装后的服务端对应。包装方式参考如下：
+SockJS client does not do too much encapsulation, so you need encapsulate it by yourself, change it to the event way, in order to follow the server side. The encapsulate method is as follows:
 
 ```js
 SockJS.prototype.emit = function(event, data){
@@ -244,35 +243,35 @@ SockJS.prototype.onclose   = function()  {
 };
 ```
 
-通过上面的包装后就可以通过事件的方式来接收和发送消息了，如：
+After do above, we can receive and emit message, for example:
 
 ```js
-var socket = new SockJS('/sockjs'); //这里的路径必须和配置里相同，如果没有配置则为 /sockjs
-//监听事件
+var socket = new SockJS('/sockjs'); // this path must be same with configuration.Defaults to /sockjs
+// listen event
 socket.on('add user', function(data){
 
 });
-//发送事件
+// emit event
 socket.emit('new message', 'xxx');
 ```
 
-#### 校验用户登录
+#### Check User Login
 
-SockJS 为了安全，在建立连接时不提供相关的 cookie，所以无法通过 cookie 来校验用户是否登录。可以先在页面里输出一个 token，建立连接时将该 token 发送用来校验是否已经登录。具体请见：<https://github.com/sockjs/sockjs-node#authorisation>。
+For the safety reason, the SockJS doesn't supply cookie. So you can't check if the user is logined through cookie. You can output a token in your page, then send the token when connected to check.See also <https://github.com/sockjs/sockjs-node#authorisation> for more details.
 
-#### 聊天代码示例
+#### Code Sample: Chat
 
-聊天示例代码请见：<https://github.com/75team/thinkjs2-demos/tree/master/websocket-sockjs>。
+See also <https://github.com/75team/thinkjs2-demos/tree/master/websocket-sockjs>for more detailed chat code
 
-### nginx 反向代理
+### Nginx Reverse Proxy Setting
 
-nginx 从 `1.3.13` 版本开始支持反向代理 WebSocket 请求，如果在项目中使用，需要在 nginx 配置文件中添加如下的配置：
+From the `1.3.13` version, Nginx supports reverse proxy WebSocket request, if used in the project, you need to add the following configuration in the nginx configuration file:
 
 ```nginx
 proxy_set_header Upgrade $http_upgrade;
 proxy_set_header Connection "upgrade";
 ```
 
-`注`： 使用 `thinkjs` 命令创建项目时，会自动创建 nginx 配置文件，并且配置文件已经包含了上面 2 个配置，可以直接使用。
+`Note`： when using `thinkjs` command to create project, ThinkJS creats nginx configuration file ，including these two configuration fields. You can use it directly.
 
-nginx 代理 WebSocket 请求的文档请见 <http://nginx.org/en/docs/http/websocket.html>。
+Please visit <http://nginx.org/en/docs/http/websocket.html> to read the reverse proxy WebSocket request document.
