@@ -3,5 +3,6 @@ export default {
   'title-changelog': 'Changelog - ThinkJS',
   'title-plugin': 'plugins - ThinkJS',
   'title-donate': 'donate - ThinkJS',
+  'title-about': 'about - ThinkJS',
   'back2top': 'back to top'
 }

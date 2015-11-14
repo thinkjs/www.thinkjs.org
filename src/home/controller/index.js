@@ -49,4 +49,12 @@ export default class extends base {
     this.assign('title', this.locale('title-donate'));
     return this.display();
   }
+  /**
+   * about page
+   * @return {[type]} [description]
+   */
+  aboutAction(){
+    this.assign('title', this.locale('title-about'));
+    return this.display();
+  }
 }

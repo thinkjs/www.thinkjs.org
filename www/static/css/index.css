@@ -152,6 +152,8 @@ i.icon-fet8{ background-position:-70px -210px;}
 .donate table th{vertical-align:bottom;border-bottom:2px solid #ddd;padding: 8px;line-height: 20px;}
 .donate table td{vertical-align:top;border-top:1px solid #ddd;padding: 8px;line-height: 20px;}
 
+.about a{color: #337ab7;text-decoration: none;}
+
 .r-fixed{position: fixed;width: 48px;left: 50%;margin-left: 510px;bottom: 10px;}
 .r-fixed .pdf{margin-top:5px;display:block;width: 48px;height: 48px;background:rgba(0,0,0, 0.3) url(../img/pdf.png) no-repeat center center;border-radius: 3px;}
 .r-fixed .view-single{margin-top:5px;display:block;width: 48px;height: 48px;background:rgba(0,0,0, 0.3) url(../img/view-single.png) no-repeat center center;border-radius: 3px;}

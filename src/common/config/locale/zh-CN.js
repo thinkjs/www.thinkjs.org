@@ -5,6 +5,7 @@ export default {
   'title-demo': 'demo - ThinkJS',
   'title-plugin': '插件 - ThinkJS',
   'title-donate': '捐赠 - ThinkJS',
+  'title-about': '关于我们 - ThinkJS',
   'download-pdf': '下载 PDF 格式文档',
   'view-on-single-page': '单页显示所有文档',
   'all-doc': '全部文档',

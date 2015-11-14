@@ -1,8 +1,6 @@
 export default {
   port: 7777,
   //cluster_on: true,
-  
-  cache_markdown_content: true,
 
   locale: { //i18n
     name: 'think_locale',
@@ -14,7 +12,6 @@ export default {
     file_depr: '_',
     root_path: think.ROOT_PATH + '/view',
     theme: '',
-    type: 'ejs',
-    options: {}
+    type: 'ejs'
   }
 }
