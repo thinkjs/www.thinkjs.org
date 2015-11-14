@@ -1,43 +1,51 @@
 ## SQLite
 
-ThinkJS 中支持使用 SQLite 数据库，底层使用 [sqlite3](https://www.npmjs.com/package/sqlite3) 模块。
+- Config
+- Store Type
+  - Memory
+  - File
+- CURD Operation
 
-### 配置
+ThinkJS supports SQLite database, underline uses [sqlite3](https://www.npmjs.com/package/sqlite3) module.
 
-使用 SQLite，需要将模型中的配置 `type` 改为 `sqlite`，修改配置文件 `src/common/config/db.js`：
+### Config
 
-```js
-export default {
-  type: 'sqlite'
-}
-```
-
-### 存储方式
-
-SQLite 支持使用内存或者文件 2 种方式来存放数据，需要设置配置 `path`。
-
-#### 内存方式
+Change `type` property to `sqlite` to use SQLite. Modify `src/common/config/db.js`:
 
 ```js
 export default {
-  type: 'sqlite',
-  path: true, //使用内存来存储数据
+  type: "sqlite"
 }
 ```
 
-#### 文件方式
+### Store Type
 
-文件方式需要设置存储 SQLite 数据的目录，默认为 `src/common/runtime/sqlite`。
+SQLite supports store data in memory and file, you need to config `path`.
+
+#### Memory
 
 ```js
 export default {
-  type: 'sqlite',
-  path: '/path/to/store/sqlite' //设置存储数据文件的目录
+  type: "sqlite",
+  path: true, //use memory to store data
 }
 ```
 
-对应的数据表文件路径为 `path` + `/[name].sqlite`，默认情况下数据库 `demo` 对应的文件路径为 `src/common/runtime/sqlite/demo.sqlite`。
+#### File
 
-### CURD 操作
+Use file need to set the path of SQLite data, default is `src/common/runtime/sqlite`.
 
-CURD 操作和 Mysql 相同，具体请见 [模型 -> 介绍](./model_intro.html#toc-d84)。
+```js
+export default {
+  type: "sqlite",
+  path: "/path/to/store/sqlite" //use file to store data
+}
+```
+
+The path of data file is `path` + `/[name].sqlite`, default database `demo`'s file path is `src/common/runtime/sqlite/demo.sqlite`.
+
+### CURD Operation
+
+CURD operation is same as Mysql, just read [Model -> Introduction](https://thinkjs.org/zh-CN/doc/2.0/model_intro.html#toc-d84).
+
+This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_sqlite.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_sqlite.md).
