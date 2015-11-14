@@ -19,7 +19,6 @@ export default {
   file_ext: '.html', //文件的扩展名
   file_depr: '_', //控制器和操作之间的连接符
   root_path: think.ROOT_PATH + '/view', //视图文件的根目录
-  prerender: undefined, //模板渲染前自定义处理逻辑
   adapter: { //模版引擎需要的配置项
     ejs: {}, //使用 ejs 模板引擎时额外配置
     nunjucks: {} //使用 nunjucks 模板引擎时额外配置
@@ -52,7 +51,8 @@ export default {
       delimiter: '&' //将定界符修改为 <& 和 &>
     },
     nunjucks: {
-      trimBlocks: false //不转义
+      trimBlocks: false, //不转义
+      prerender: function(nunjucks, env){} //针对nunjucks模板的过滤器
     }
   }
 }
