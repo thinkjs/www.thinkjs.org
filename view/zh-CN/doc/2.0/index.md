@@ -142,4 +142,3 @@ sails 也是一个提供整套解决方案的 Node.js 框架，对数据库、RE
 * [ECMAScript 6 compatibility table](http://kangax.github.io/compat-table/es6/)
 * [ECMAScript 7 Features](https://github.com/hemanth/es7-features)
 * [ECMAScript 7 compatibility table](http://kangax.github.io/compat-table/es7/)
-

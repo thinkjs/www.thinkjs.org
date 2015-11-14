@@ -163,6 +163,7 @@ i.icon-fet8{ background-position:-70px -210px;}
 .r-fixed .view-single:hover,
 .r-fixed .back2top:hover{background-color: #23527c}
 
+.view-single-mobile{display: none}
 
 @media screen and (max-width: 640px){
   .header{height:auto;}
@@ -210,6 +211,7 @@ i.icon-fet8{ background-position:-70px -210px;}
   .donate{width: 92%}
   .donate .wechat{width: 100%;text-align: center;}
   .donate .wechat img{margin: 0 !important;padding: 10px 0;display: inline-block;float: none;}
+  .view-single-mobile{display: block;width: 220px;height: 40px;font-size: 16px;line-height: 40px;margin-top: 40px;margin-bottom: 20px;border-radius:24px; background:#008CF9;text-align: center;color: #fff;}
 }
 
 @media screen and (max-width: 320px){
