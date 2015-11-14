@@ -43,3 +43,13 @@ export default {
   cluster_on: true //开启 cluster
 }
 ```
+
+### 修改请求超时时间
+
+默认请求的超时时间是 120s，可以通过修改配置文件 `src/common/config/config.js` 里 `timeout` 配置值。
+
+```js
+export default {
+  timeout: 30, //将超时时间修改为 30s
+}
+```
