@@ -1,6 +1,7 @@
-## 项目结构
+## Project Structure
 
-通过 thinkjs 命令创建完项目后，项目目录结构类似如下：
+You get following document structure after creating project by using thinkjs:
+
 
 ```text
    |-- nginx.conf  
@@ -58,29 +59,26 @@
            `-- js
 ```
 
-`注`：指定不同的模式创建的项目目录机构可能有细微的差别，但总体是类似的。
+tips: There has little difference using unequal mode when you create project.
 
 ### nginx.conf
 
-nginx 的配置文件，建议线上使用 nginx 做反向代理。
+nginx's configuration file, we recommand get proxy by nginx.
 
 ### src
 
-源代码目录，使用 `--es6` 参数创建项目才有该目录。需要通过 `npm run watch-compile` 命令编译该目录下的文件到 `app/` 目录。
-
-如果没有使用 ES6 特性创建项目，则直接有 `app/` 目录。
+It's source folder, after using `--es6` can you see it.  We need run `npm run watch-compile` to compile file to folder `app/`.
 
 ### src/common
 
-通用模块目录，项目目录都是按模块来划分的，`common` 模块下存放一些通用的处理逻辑。
+Common module folder with common logic module.
 
 ### src/common/bootstrap
 
-项目启动目录，该目录下的文件会自动加载，无需手动 `require` 。
+File in this folder will autoload, it's project boot's index folder. You can put some global method or middleware into it.
 
-可以在这个目录下文件里定义一些全局函数、注册中间件等常用的功能。
+#### Global function
 
-##### 定义全局函数
 
 ```js
 // src/common/bootstrap/fn.js
@@ -89,9 +87,10 @@ global.formatDate = obj => {
 }
 ```
 
-这里定义了一个全局函数 `formatData`，那么项目里任何地方都可以直接使用该函数。
+You can run this method anywhere after defined here.
 
-##### 注册中间件
+#### Middleware
+
 
 ```js
 // src/common/bootstrap/middleware.js
@@ -100,15 +99,14 @@ think.middleware('replace_image', http => {
 });
 ```
 
-这里定义了一个中间件 `replace_image`，那么就可以在配置文件 `hook.js` 里将该中间件注册进去了。
+You can inject this middleware into configure file `hook.js`.
 
-`注`：bootstrap 只能放在 common 模块里。
+tips: bootstrap just stay in common module.
 
 ### src/common/config
 
-配置文件，这里放一些通用的配置。
+here you can set some common config file. router configure, hook configure and locale setting.
 
-其中：路由配置、hook 配置、本地化配置等必须放在这里。
 
 ```js
 'use strict';
@@ -122,19 +120,20 @@ export default {
 
 ### src/common/controller
 
-控制器，放一些通用的控制器。其中 `error.js` 里错误处理的不同行为，项目里可以根据需要进行修改。
+Controller folder to put all controller file. In this case `error.js`  is designed as handle different error behavior. It's also support custom by project.
 
 ### src/common/runtime
 
-项目运行时生成的一些目录，如：缓存文件目录，用户上传的文件临时存放的目录。
+Temp folder to store cache file and temp file upload folder.
 
 ### src/home
 
-`home` 模块，项目默认模块。可以在 `src/common/config/config.js` 中修改配置 `default_module` 来重新定义默认模块。
+`home` module is default module for your project. Now you can define your default module in `src/common/config/config.js`. 
+
 
 ### src/home/logic
 
-逻辑处理。每个操作执行前可以先进行逻辑校验，可以包含：参数是否合法、提交的数据是否正常、当前用户是否已经登录、当前用户是否有权限等。这样可以降低 `controller` 里的 `action` 的复杂度。
+It's logic handle method file. Every handle would run logic check before some hanlde button. It contains: parameters check, request data check, login check, auth check and so on. use this can decrease project's complexity.
 
 ```js
 'use strict';
@@ -156,7 +155,7 @@ export default class extends think.logic.base {
 
 ### src/home/controller
 
-控制器。一个 `url` 对应一个 `controller` 下的 `action`。
+Controller folder. every `url` has there own `action` in their `controller`.
 
 ```js
 'use strict';
@@ -177,21 +176,21 @@ export default class extends Base {
 
 ### src/home/model
 
-模型。数据库相关操作。
+Model to handle database.
 
 ### view
 
-视图目录，存放对应的模版文件。如果支持国际化和多主题，那么视图目录下需要有对应的子目录。
+view folder to store template file. You shoud have sub folder while you will add support to internationalization and multiple theme.
 
 ### www
 
-项目的可访问根目录，nginx 里的根目录会配置到此目录下。
+Project's root which we have access, nginx's configure root will set here.
 
 ### www/index.js
 
-开发模式下项目的入口文件，可以根据项目需要进行修改。`www/production.js` 为线上的入口文件。
+Project's root file in development, can modified in project.  `www/production.js` is root file in production environment.
 
-入口文件的代码类似如下，可以根据项目需要进行修改。
+following like this:
 
 ```js
 var thinkjs = require('thinkjs');
@@ -208,7 +207,6 @@ var instance = new thinkjs({
 
 instance.run();
 ```
-
 ### www/static
 
-存放一些静态资源文件。
+Save some static file.

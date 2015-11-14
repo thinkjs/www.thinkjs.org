@@ -1,64 +1,41 @@
-## 创建项目
+## Create project
 
-### 安装 Node.js
+### Install Node.js
 
-ThinkJS 是一款 Node.js 的 MVC 框架，所以安装 ThinkJS 之前，需要先安装 Node.js 环境，可以去 [官方](https://nodejs.org/) 下载最新的安装包进行安装，也可以通过其他一些渠道安装。
+ThinkJS is a Node.js MVC framework, it requires Node.js before you run it. You can install by go to https://nodejs.org to download lastest installation and other method.
 
-安装完成后，在命令行执行 `node -v`，如果能看到对应的版本号输出，则表示安装成功。
+After installation, you can type `node -v` in terminal. If it outputs version number, it installs success.
 
-ThinkJS 需要 Node.js 的版本 `>=0.12.0`，如果版本小于这个版本，需要升级 Node.js，否则无法启动服务。建议将 Node.js 版本升级到 `4.2.1` 或更高版本。
+ThinkJS needs `>=0.12.0` Node.js version, if your version lower than it, you need update your Node.js, or you can't start service. we recognize to update your Node.js version to `4.2.1`.
 
-### 安装 ThinkJS
+### Install ThinkJS
 
-通过下面的命令即可安装 ThinkJS：
+Install ThinkJS by following command:
 
 ```sh
 npm install thinkjs@2 -g --verbose
 ```
 
-如果安装很慢的话，可以尝试使用 [taobao](http://npm.taobao.org/) 的源进行安装。具体如下：
+After installation, run `thinjs --version` or `thinjs -V` to watch version.c
+
+Tips: If you installed ThinkJS 1.x before, you need remove it by `npm uninstall -g thinkjs-cmd` first of all.
+
+
+### Create project
+
+After ThinkJS installation, you can create project by following command:
 
 ```sh
-npm install thinkjs@2 -g --registry=https://registry.npm.taobao.org --verbose
+thinkjs new project_path; #project_path is the path you want store your project
 ```
 
-安装完成后，可以通过 `thinkjs --version` 或 `thinkjs -V` 命令查看安装的版本。
-
-`注`：如果之前安装过 ThinkJS 1.x 的版本，可能需要将之前的版本删除掉，可以通过 `npm uninstall -g thinkjs-cmd` 命令删除。
-
-### 更新 ThinkJS
-
-#### 更新全局的 ThinkJS
-
-执行下面的命令即可更新全局的 ThinkJS：
+if you want to use ES6 feature to develop, you can create ES6 mode project by following command:
 
 ```sh
-npm install -g thinkjs@2
+thinkjs new project_path --es6; #project_path is the path you want store your project
 ```
 
-#### 更新项目里的 ThinkJS
-
-在项目目录下，执行下面的命令即可更新当前项目的 ThinkJS：
-
-```sh
-npm install thinkjs@2
-```
-
-### 创建项目
-
-ThinkJS 安装完成后，就可以通过下面的命令创建项目:
-
-```sh
-thinkjs new project_path; #project_path为项目存放的目录
-```
-
-如果想用`ES6`特性来开发项目的话，可以创建一个`ES6`模式的项目，具体如下：
-
-```sh
-thinkjs new project_path --es6; #project_path为项目存放的目录
-```
-
-如果能看见类似下面的输出，表示项目创建成功了：
+If terminal returns output like following, it means you create project success:
 
 ```text
   create : demo/
@@ -90,27 +67,25 @@ thinkjs new project_path --es6; #project_path为项目存放的目录
   $ npm start
 ```
 
-关于创建项目命令的更多信息，请见 [扩展功能 -> ThinkJS 命令](./thinkjs_command.html)。
+You can go to [extension function -> ThinkJS command](./thinkjs_command.html) to know more about command of create project.
 
-### 安装依赖
+### Install dependencies
 
-项目安装后，进入项目目录，执行 `npm install` 安装依赖，可以使用 `taobao` 源进行安装。
+After project creaton, go to project directory and run `npm install` to install dependencies.
 
 ```sh
-npm install --registry=https://registry.npm.taobao.org --verbose
+npm install
 ```
 
-### 编译项目
+### Compile project
 
-~~如果创建项目时加上了 `--es6` 参数，代码需要编译后才能运行。那么需要先在项目下执行命令 `npm run watch-compile` ，这样文件有修改后就会自动编译了。~~
+if you use `--es6` in the creation command, your code must be compiled before running. Run `npm run watch-compile` command and then they will be automatic compiled after modifiled.
 
-~~执行命令后会挂起一个进程，注意不要结束这个进程，其他命令可以再新开一个标签页里执行。~~
+This command will run on terminal permanently, don't fish this command! You can task a new tab to do other things.
 
-`注`：`2.0.6` 版本开始内置了自动编译的功能，无需再执行该命令，直接启动服务即可。如果是老项目可以将 ThinkJS 升级到最新版本，然后在文件 `www/index.js` 加入代码 `instance.compile();` 即可（放在 `instance.run()` 之前）。
+### Start project
 
-### 启动项目
-
-在项目目录下执行命令 `npm start`，如果能看到类似下面的内容，表示服务启动成功。
+Run `npm start`, if terminal returns output like following, it means the service run success.
 
 ```text
 [2015-09-21 20:21:09] [THINK] Server running at http://127.0.0.1:8360/
@@ -121,8 +96,6 @@ npm install --registry=https://registry.npm.taobao.org --verbose
 [2015-09-21 20:21:09] [THINK] App Enviroment: development
 ```
 
-### 访问项目
+### Access project
 
-打开浏览器，访问`http://127.0.0.1:8360/`即可。
-
-如果是在远程机器，需要通过远程机器的 IP 访问，同时要保证 8360 端口可访问。
+Open your browser and go to `http://127.0.0.1:8360`, then you can see it. If you are in remote machine, you need visit by remote machine's IP and the sanme 8360 port.

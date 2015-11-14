@@ -1,59 +1,56 @@
-## 升级指南
+## Upgrade Guide
 
-2.0 在架构和特性上都完全进行了重写，是个颠覆式的版本，所以无法直接从 `1.x` 升级到 `2.0` 版本的。 
+You can't update your `1.x` version project to `2.x` directly because the new version is subversive that was rebuid from structure to feature.
 
-### 与 1.x 版本差异
+### Difference with old version 1.x
 
-#### 项目结构
+#### Project structure
 
-2.0 默认使用按模块进行项目结构划分的，与 1.x 在目录结构有一些差别。如果想 2.0 下使用类似 1.x 的项目结构，可以在创建项目的时候指定 `--mode=normal`。如：
+2.0 version makes up of module which is difference with 1.x version. If you want to use old version project structure in 2.0 version, you would specific `--mode=normal` like following:
 
 ```sh
 thinkjs new demo --mode=normal
 ```
+#### Filename sensitive
 
-#### 文件大小写
+The old version's filename type was camelcasing, such as `Controller/indexController.js`. 2.0 version was based on the community rule of Node.js that all filename path is lowercase and remove file type, such as `controller/index.js`. This new change make filename simple and easy to use in all platform os.
 
-1.x 里文件名使用驼峰的方式，如：`Controller/indexController.js`。2.0 里严格遵循 Node.js 社区的规范，文件路径使用小写的方式，并且文件名去除了类型，如：`controller/index.js`。
+#### Debug mode
 
-改变后文件名更加简洁，且不会出现有的系统下区分大小写的问题。
+You need start `debug` mode in development and stop it in production with 1.x version. It can make mermory leaks easily because most people often forget do it in production.
 
-#### debug 模式
+The `debug` mode was deprecated in 2.x version. The new version supports `development`, `testing` and `production` three mode. Every mode has their own folder, you can start your project with different environment by using different folder.
 
-1.x 下开发环境需要开启 `debug` 模式，线上需要关闭 debug 模式，但经常会出现线上开启了 debug 模式，导致出现内存泄漏等问题。
+#### C method
 
-2.0 废弃了 `debug` 模式，而是提供了 `development`，`testing` 和 `production` 3 种模式，分别在对应的环境下使用，创建项目时会创建对应的 3 个文件，这样在不同的环境下就可以使用不同的文件来启动项目了。
+There has `C` method to get your configure in 1.x version. But in new version it's deprecated, you need read your configure in different position by different method.
 
-#### C 函数
+you can use `config` method to get configuration where has `http` object such as Controller, Middleware, in other place you should use `think.config` method.
 
-1.x 里提供了 `C` 函数来读取配置，2.0 里废除了该函数，不同地方使用不同的方式来读取配置。
+#### D and M method
 
-Controller，Middleware 等含有 `http` 对象的地方使用 `config` 方法来读取配置，其他等地方需要使用 `think.config` 方法来读取配置。
+There has `D` and `M` method to instance your model in 1.x version. But in new version they are deprecated, you need instance your model in different position by different method.
 
-#### D 和 M 函数
+You can use `model` method to instance in Controller, Model, Moddleware and so on, in other place you should use `think.model` method.
 
-1.x 里提供了 `D` 和 `M` 函数来实例化模型，2.0 里废除了这 2 个函数，不同的地方使用不同的方式来实例化模型。
+#### Controll and Model method
 
-Controller，Model，Middleware 等地方使用 `model` 方法来实例化模型，其他等地方使用 `think.model` 方法来实例化模型。
+There has `Controller` method to create controller and `Model` to create model in 1.x version. But in new version they are deprecated and we support various way to instance class.
 
-#### Controller，Model 函数
+You can use `class extends think.model.base` to instance a model with ES6 grammer, with old grammer you should use `think.model` method. Instance controller is same as model.
 
-1.x 里提供了 `Controller` 来创建控制器类，`Model` 来创建模型类，2.0 里废除了这些函数。并提供了多种方式来创建类。
+#### Other global method
 
-ES6 直接使用 `class extends think.model.base` 来创建一个模型类，非 ES6 下可以通过 `think.model` 来创建一个模型类，创建控制器类类似。
+1.x version supports some common global method such as `md5`, `mkdir`. All that was moved to `think` object in 2.x version, you can use like `think.md5`, `think.mkdir`.
 
-#### 其他全局函数
+#### Auto run directory common/
 
-1.x 里直接提供了一些通用的全局函数，如：`md5`，`mkdir` 等，2.0 中将这些函数都移到了 `think` 对象上，如：`think.md5`，`think.mkdir`。
+2.x version change the folder's name from `common/` to `bootstrap/` which will auto run in program. And it's moved into `common` module like `src/common/bootstrap`.
 
-#### 自执行目录 common/
+#### Behavior and Driver
 
-1.x 下 `common/` 下的文件会启动被调用，2.0 中将该目录名为 `bootstrap`，并且要在 `common` 模块下，如：`src/common/bootstrap`。
+2.0 version change Behavior, Driver to middleware and adapter.
 
-#### Behavior 和 Driver
+#### Deploy online
 
-2.0 将 Behavior 改为了 middleware，Driver 改为了 adapter。
-
-#### 线上部署
-
-1.x 版本下提供了简单的脚本 `ctrl.sh` 来管理当前 Node.js 服务，2.0 里废弃了该文件，建议使用 `pm2` 来管理，并且提供了 pm2 的配置文件 `pm2.json`，线上通过 `pm2 start pm2.json` 即可启动服务。
+We apply a simple bash file named `ctrl.sh`  to manage your Node.js service. But we removed it and advise you take pm2 replace it. We apply a default pm2's config file named `pm2.json` that you can run `pm2 start pm2.json` to start service.
