@@ -1,8 +1,8 @@
 ## model
 
-`think.model.base` 继承自 [think.base](./api_think_base.html) 类。
+`think.model.base` instance of [think.base](./api_think_base.html) class.
 
-##### 使用 ES6 的语法继承该类
+##### instance of this class with ES6
 
 ```js
 export default class extends think.model.base {
@@ -12,7 +12,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 使用普通方式继承该类
+##### Using normal way to instance of this class
 
 ```js
 module.exports = think.model({
@@ -22,69 +22,69 @@ module.exports = think.model({
 })
 ```
 
-### 属性
+### Method
 
 #### model.pk
 
-数据表主键，默认为 `id`。
+The primary key of databse, defautl is `id`.
 
 #### model.name
 
-模型名，默认从当前文件名中解析。
+Model name, default is current file name.
 
-当前文件路径为 for/bar/app/home/model/user.js，那么解析的模型名为 `user`。
+Suppose current file path is for/bar/app/home/model/user.js, then the model name is `user`.
 
 #### model.tablePrefix
 
-数据表名称前缀，默认为 `think_`。
+The Prefiex of table in database, default is `think_`.
 
 #### model.tableName
 
-数据表名称，不包含前缀。默认等于模型名。
+The name of data table, not contains prefiex name, default equals to model name.
 
 #### model.fields
 
-数据表字段，默认自动从数据表分析。
+The fields of data table,  auto analyse the data table.
 
 #### model.indexes
 
-数据表索引，默认自动从数据表分析。
+The indexes of data table, auto analyse the data table.
 
 #### model.readonlyFields
 
-只读字段列表，数据更新时不会更新这些字段。
+The readonly fields list, when data updated, these fields will not been updated.
 
 #### model.config
 
-配置，实例化的时候指定。
+Config, specify when instancing.
 
 #### model._db
 
-连接数据库句柄。
+Handler of connect database.
 
 #### model._data
 
-操作的数据。
+Data of operation.
 
 #### model._options
 
-操作选项。
+Options of operation.
 
-### 方法
+### Function
 
 #### model.model(name, options, module)
 
-* `name` {String} 模型名称
-* `options` {Object} 配置项
-* `module` {String} 模块名
+* `name` {String} model name
+* `options` {Object} confing options
+* `module` {String} module name
 * `return` {Object}
 
-获取模型实例，可以跨模块获取。
+Get instance of model, it can read cross module.
 
 ```js
 export default class extends think.model.base {
   * getList(){
-    //获取 user 模型实例
+    // get instance of user model
     let instance = this.model('user');
     let list = yield instance.select();
     let ids = list.map(item => {
@@ -100,41 +100,41 @@ export default class extends think.model.base {
 
 * `return` {string}
 
-获取表名前缀。
+Get the prefix of table.
 
 #### model.getConfigKey()
 
 * `return` {String}
 
-获取配置对应的 key，缓存 db 句柄时使用。
+Get config key, use it when cache db handler.
 
 #### model.db()
 
 * `return` {Object}
 
-根据当前的配置获取 db 实例，如果已经存在则直接返回。
+Based on current config to get instance of db, if exist, return directly.
 
 #### model.getModelName()
 
-* `return` {String} 模型名称
+* `return` {String} model name
 
-如果已经配置则直接返回，否则解析当前的文件名。
+Return directly if configed, or parse current file name.
 
 #### model.getTableName()
 
-* `return` {String} 获取表名，包含表前缀
+* `return` {String} get table name, contains prefix
 
-获取表名，包含表前缀。
+Get table name, contains prefix.
 
 #### model.cache(key, timeout)
 
-* `key` {String}  缓存 key
-* `timeout` {Number} 缓存有效时间，单位为秒
+* `key` {String}  cache key
+* `timeout` {Number} cache expire time, the unit is seconds.
 * `return` {this}
 
-设置缓存选项。
+Set cache config.
 
-##### 设置缓存 key 和时间
+##### Set key and time of cache
 
 ```js
 export default class extends think.model.base {
@@ -144,7 +144,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 只设置缓存时间，缓存 key 自动生成
+##### Only set cache time, cache key auto generate
 
 ```js
 export default class extends think.model.base {
@@ -154,7 +154,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 设置更多的缓存信息 
+##### Set more cache information 
 
 ```js
 export default class extends think.model.base {
@@ -162,7 +162,7 @@ export default class extends think.model.base {
     return this.cache({
       key: 'getList',
       timeout: 1000,
-      type: 'file' //使用文件方式缓存
+      type: 'file' // use file cache
     }).where({id: {'>': 100}}).select();
   }
 }
@@ -170,29 +170,29 @@ export default class extends think.model.base {
 
 #### model.limit(offset, length)
 
-* `offset` {Number} 设置查询的起始位置 
-* `length` {Number} 设置查询的数据长度
+* `offset` {Number} set the start position of query 
+* `length` {Number} set the length of query
 * `return` {this}
 
-设置查询结果的限制条件。
+Set the limit of query result.
 
-##### 限制数据长度
+##### Set length of data
 
 ```js
 export default class extends think.model.base {
   getList(){
-    //查询20条数据
+    // query twenty data
     return this.limit(20).where({id: {'>': 100}}).select();
   }
 }
 ```
 
-##### 限制数据起始位置和长度
+##### Limit data start position and length
 
 ```js
 export default class extends think.model.base {
   getList(){
-    //从起始位置100开始查询20调数据
+    // start from position 100, query twenty data
     return this.limit(100, 20).where({id: {'>': 100}}).select();
   }
 }
@@ -200,16 +200,16 @@ export default class extends think.model.base {
 
 #### model.page(page, listRows)
 
-* `page` {Number} 当前页，从 1 开始
-* `listRows` {Number} 每页的条数
+* `page` {Number} current page, start with one
+* `listRows` {Number} number of per page
 * `return` {this}
 
-设置查询分页数据，自动转化为 `limit` 数据。
+Set query pagination data, convert to `limit` data automatically.
 
 ```js
 export default class extends think.model.base {
   getList(){
-    //查询第 2 页数据，每页 10 条数据
+    // query the second page data, ten data of per page.
     return this.page(2, 10).where({id: {'>': 100}}).select();
   }
 }
@@ -217,14 +217,14 @@ export default class extends think.model.base {
 
 #### model.where(where)
 
-* `where` {String | Object} where 条件
+* `where` {String | Object} where condition
 * `return` {this}
 
-设置 where 查询条件。可以通过属性 `_logic` 设置逻辑，默认为 `AND`。可以通过属性 `_complex` 设置复合查询。
+Set where query condition, it can set logic with method `_logic`, default is `AND`. Mulpty query with method `__complex`.
 
-`注`：1、以下示例不适合 mongo model，mongo 中设置 where 条件请见 model.mongo 里的 where 条件设定。2、where 条件中的值需要在 Logic 里做数据校验，否则可能会有漏洞。
+`Noatice`: 1. example below don't suit for mengo model.in mongo, seting where condition to seen in model.mongo. 2.where condition need to been validated in Logic, or maybe cause some bug.
 
-##### 普通条件
+##### Normal condition
 
 ```js
 export default class extends think.model.base {
@@ -247,7 +247,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### null 条件
+##### null condition
 
 ```js
 export default class extends think.model.base {
@@ -262,9 +262,9 @@ export default class extends think.model.base {
 }
 ```
 
-##### EXP 条件
+##### EXP condition
 
-ThinkJS 默认会对字段和值进行转义，防止安全漏洞。有时候一些特殊的情况不希望被转义，可以使用 EXP 的方式，如：
+ThinkJS will transfer field and value by default for security bugs. sometimes, if not want to transfer in some special case, you can use EXP way, like:
 
 ```js
 export default class extends think.model.base {
@@ -275,7 +275,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### LIKE 条件
+##### LIKE condition
 
 ```js
 export default class extends think.model.base {
@@ -287,17 +287,17 @@ export default class extends think.model.base {
     //SELECT * FROM `think_user` WHERE ( `title` LIKE '%welefen%' )
     return this.where({title: ['like', '%welefen%']}).select();
   }
-  //like 多个值
+  //like mult-value
   where3(){
     //SELECT * FROM `think_user` WHERE ( (`title` LIKE 'welefen' OR `title` LIKE 'suredy') )
     return this.where({title: ['like', ['welefen', 'suredy']]}).select();
   }
-  //多个字段或的关系 like 一个值
+  // muti-field or relation like one value
   where4(){
     //SELECT * FROM `think_user` WHERE ( (`title` LIKE '%welefen%') OR (`content` LIKE '%welefen%') )
     return this.where({'title|content': ['like', '%welefen%']}).select();
   }
-  //多个字段与的关系 Like 一个值
+  // muti-filed and relation like one value
   where5(){
     //SELECT * FROM `think_user` WHERE ( (`title` LIKE '%welefen%') AND (`content` LIKE '%welefen%') )
     return this.where({'title&content': ['like', '%welefen%']}).select();
@@ -306,7 +306,7 @@ export default class extends think.model.base {
 ```
 
 
-##### IN 条件
+##### IN condition
 
 ```js
 export default class extens think.model.base {
@@ -325,7 +325,7 @@ export default class extens think.model.base {
 }
 ```
 
-##### BETWEEN 查询
+##### BETWEEN query
 
 ```js
 export default class extens think.model.base {
@@ -340,7 +340,7 @@ export default class extens think.model.base {
 }
 ```
 
-##### 多字段查询
+##### muti-field query
 
 ```js
 export default class extends think.model.base {
@@ -348,12 +348,12 @@ export default class extends think.model.base {
     //SELECT * FROM `think_user` WHERE ( `id` = 10 ) AND ( `title` = 'www' )
     return this.where({id: 10, title: "www"}).select();
   }
-  //修改逻辑为 OR
+  // modify logic to OR
   where2(){
     //SELECT * FROM `think_user` WHERE ( `id` = 10 ) OR ( `title` = 'www' )
     return this.where({id: 10, title: "www", _logic: 'OR'}).select();
   }
-  //修改逻辑为 XOR
+  // modify logic to XOR
   where2(){
     //SELECT * FROM `think_user` WHERE ( `id` = 10 ) XOR ( `title` = 'www' )
     return this.where({id: 10, title: "www", _logic: 'XOR'}).select();
@@ -361,7 +361,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 多条件查询
+##### muti-condition query
 
 ```js
 export default class extends think.model.base {
@@ -369,7 +369,7 @@ export default class extends think.model.base {
     //SELECT * FROM `think_user` WHERE ( `id` > 10 AND `id` < 20 )
     return this.where({id: {'>': 10, '<': 20}}).select();
   }
-  //修改逻辑为 OR 
+  // modify logic to OR 
   where2(){
     //SELECT * FROM `think_user` WHERE ( `id` < 10 OR `id` > 20 )
     return this.where({id: {'<': 10, '>': 20, _logic: 'OR'}}).select()
@@ -377,7 +377,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 复合查询
+##### complex query
 
 ```js
 export default class extends think.model.base {
@@ -397,28 +397,28 @@ export default class extends think.model.base {
 
 #### model.field(field)
 
-* `field` {String | Array} 设置要查询的字段，可以是字符串，也可以是数组
+* `field` {String | Array} set query field, can be string or array
 * `return` {this}
 
-设置要查询的字段。
+Set query field.
 
-##### 字符串方式
+##### String way
 
 ```js
 export default class extends think.controller.base {
   async indexAction(){
     let model = this.model('user');
-    //设置要查询的字符串，字符串方式，多个用逗号隔开
+    // set string need to queyr, in string way, use comma to split
     let data = await model.field('name,title').select();
   }
 }
 ```
 
-##### 调用 SQL 函数
+##### Invoke SQL function
 
 ```js
 export default class extends think.controller.base {
-  //字段里调用 SQL 函数
+  // invoke sql function in field
   async listAction(){
     let model = this.model('user');
     let data = await model.field('id, INSTR(\'30,35,31,\',id + \',\') as d').select();
@@ -426,13 +426,13 @@ export default class extends think.controller.base {
 }
 ```
 
-##### 数组方式
+##### array way
 
 ```js
 export default class extends think.controller.base {
   async indexAction(){
     let model = this.model('user');
-    //设置要查询的字符串，数组方式
+    // set query string in array way
     let data = await model.field(['name','title']).select();
   }
 }
@@ -440,20 +440,20 @@ export default class extends think.controller.base {
 
 #### model.fieldReverse(field)
 
-* `field` {String | Array} 反选字段，即查询的时候不包含这些字段
+* `field` {String | Array} reverse field, means query except this field
 * `return` {this}
 
-设置反选字段，查询的时候会过滤这些字段，支持字符串和数组 2 种方式。
+Set reverse field, it will filter this filed when querying, it support string way and array way.
 
 #### model.table(table, hasPrefix)
 
-* `table` {String} 表名
-* `hasPrefix` {Boolean} 是否已经有了表前缀，如果 table 值含有空格，则不在添加表前缀
+* `table` {String} table way
+* `hasPrefix` {Boolean} whether tabel has prefix or not, if table value contains space, then don't add prefix.
 * `return` {this}
 
-设置表名，可以将一个 SQL 语句设置为表名。
+Set table name, which can named a SQL statement.
 
-##### 设置当前表名
+##### Set current table name
 
 ```js
 export default class extends think.model.base {
@@ -463,7 +463,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### SQL 语句作为表名
+##### SQL statement as table name
 
 ```js
 export default class extends think.model.base {
@@ -478,13 +478,13 @@ export default class extends think.model.base {
 
 #### model.union(union, all)
 
-* `union` {String | Object} 联合查询 SQL 或者表名
-* `all` {Boolean} 是否是 UNION ALL 方式
+* `union` {String | Object} union query SQL or table name
+* `all` {Boolean} Whether is UNION ALL way or not
 * `return` {this}
 
-联合查询。
+Union query.
 
-##### SQL 联合查询
+##### SQL union query联合查询
 
 ```js
 export default class extends think.model.base {
@@ -495,7 +495,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 表名联合查询
+##### union query table name
 
 ```js
 export default class extends think.model.base {
@@ -508,12 +508,12 @@ export default class extends think.model.base {
 
 #### model.join(join)
 
-* `join` {String | Object | Array} 要组合的查询语句，默认为 `LEFT JOIN`
+* `join` {String | Object | Array} conbine statement, default is `LEFT JOIN`
 * `return` {this}
 
-组合查询，支持字符串、数组和对象等多种方式。
+Conbine query, support string, array, object and so on.
 
-##### 字符串
+##### String
 
 ```js
 export default class extends think.model.base {
@@ -524,7 +524,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 数组
+##### Array
 
 ```js
 export default class extends think.model.base {
@@ -538,7 +538,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 对象：单个表
+##### Object: single table
 
 ```js
 export default class extends think.model.base {
@@ -546,15 +546,15 @@ export default class extends think.model.base {
     //SELECT * FROM `think_user` INNER JOIN `think_cate` AS c ON think_user.`cate_id`=c.`id`
     return this.join({
       table: 'cate', 
-      join: 'inner', //join 方式，有 left, right, inner 3 种方式
-      as: 'c', // 表别名
-      on: ['cate_id', 'id'] //ON 条件
+      join: 'inner', //join way, contains left, right, inner three ways
+      as: 'c', // table alias name
+      on: ['cate_id', 'id'] //ON condition
     }).select();
   }
 }
 ```
 
-##### 对象：多次 JOIN
+##### Object: multi-JOIN
 
 ```js
 export default class extends think.model.base {
@@ -576,7 +576,7 @@ export default class extends think.model.base {
 ```
 
 
-##### 对象：多个表
+##### Object: muti-table
 
 ```js
 export default class extends think.model.base {
@@ -600,7 +600,7 @@ export default class extends think.model.base {
     //SELECT * FROM think_user AS a LEFT JOIN `think_cate` AS c ON a.`id`=c.`id` LEFT JOIN `think_group_tag` AS d ON a.`id`=d.`group_id`
     return this.alias('a').join({
       cate: {
-        join: 'left', // 有 left,right,inner 3 个值
+        join: 'left', // has left,right,inner three values
         as: 'c',
         on: ['id', 'id']
       },
@@ -614,7 +614,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 对象：ON 条件含有多个字段
+##### Object: ON condition has muti-field
 
 ```js
 export default class extends think.model.base {
@@ -624,7 +624,7 @@ export default class extends think.model.base {
       cate: {on: 'id, id'},
       group_tag: {on: ['id', 'group_id']},
       tag: {
-        on: { // 多个字段的 ON
+        on: { // multi-field's ON
           id: 'id',
           title: 'name'
         }
@@ -634,7 +634,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 对象：table 值为 SQL 语句
+##### Object: table value is SQL statement
 
 ```js
 export default class extends think.model.base {
@@ -651,12 +651,12 @@ export default class extends think.model.base {
 
 #### model.order(order)
 
-* `order` {String | Array | Object} 排序方式
+* `order` {String | Array | Object} sort order
 * `return` {this}
 
-设置排序方式。
+Set sort order.
 
-##### 字符串
+##### String
 
 ```js
 export default class extends think.model.base {
@@ -673,7 +673,7 @@ export default class extends think.model.base {
 
 
 
-##### 数组
+##### Array
 
 ```js
 export default class extends think.model.base {
@@ -684,7 +684,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### 对象
+##### Object
 
 ```js
 export default class extends think.model.base {
@@ -701,10 +701,10 @@ export default class extends think.model.base {
 
 #### model.alias(tableAlias)
 
-* `tableAlias` {String} 表别名
+* `tableAlias` {String} table alias name
 * `return` {this}
 
-设置表别名。
+Set tabel alias name.
 
 ```js
 export default class extends think.model.base {
@@ -717,10 +717,10 @@ export default class extends think.model.base {
 
 #### model.having(having)
 
-* `having` {String} having 查询的字符串
+* `having` {String} query string with having
 * `return` {this}
 
-设置 having 查询。
+Set having query.
 
 ```js
 export default class extends think.model.base {
@@ -733,10 +733,10 @@ export default class extends think.model.base {
 
 #### model.group(group)
 
-* `group` {String} 分组查询的字段
+* `group` {String} group query field
 * `return` {this}
 
-设定分组查询。
+Set group query.
 
 ```js
 export default class extends think.model.base {
@@ -749,10 +749,10 @@ export default class extends think.model.base {
 
 #### model.distinct(distinct)
 
-* `distinct` {String} 去重的字段
+* `distinct` {String} distinct field
 * `return` {this}
 
-去重查询。
+Distinct field
 
 ```js
 export default class extends think.model.base {
@@ -765,74 +765,74 @@ export default class extends think.model.base {
 
 #### model.explain(explain)
 
-* `explain` {Boolean} 是否添加 explain 执行
+* `explain` {Boolean} Whether add explain execution or not
 * `return` {this}
 
-是否在 SQL 之前添加 explain 执行，用来查看 SQL 的性能。
+Whether add explain execution before SQL for performance of SQL or not.
 
 #### model.optionsFilter(options)
 
-操作选项过滤。
+Options for filter.
 
 #### model.dataFilter(data)
 
-* `data` {Object | Array} 要操作的数据
+* `data` {Object | Array} data to operate
 
-数据过滤。
+Filter data.
 
 #### model.beforeAdd(data)
 
-* `data` {Object} 要添加的数据
+* `data` {Object} data will add
 
-添加前置操作。
+Add before operate.
 
 #### model.afterAdd(data)
 
-* `data` {Object} 要添加的数据
+* `data` {Object} data will add
 
-添加后置操作。
+Add after data.
 
 #### model.afterDelete(data)
 
-删除后置操作。
+Delete after operation.
 
 #### model.beforeUpdate(data)
 
-* `data` {Object} 要更新的数据
+* `data` {Object} data will add
 
-更新前置操作。
+Update before operation.
 
 #### model.afterUpdate(data)
 
-* `data` {Object} 要更新的数据
+* `data` {Object} data will add
 
-更新后置操作。
+Update after operation.
 
 #### model.afterFind(data)
 
-* `data` {Object} 查询的单条数据
+* `data` {Object} single data to query
 * `return` {Object | Promise}
 
-`find` 查询后置操作。
+After `find` query operation.
 
 #### model.afterSelect(data)
 
-* `data` [Array] 查询的数据数据
+* `data` [Array] data to query
 * `return` {Array | Promise}
 
-`select` 查询后置操作。
+After `select` query operation.
 
 #### model.data(data)
 
 * `data` {Object}
 
-添加和更新操作时设置操作的数据。
+The data which to added and updated.
 
 #### model.options(options)
 
 * `options` {Object} 
 
-设置操作选项。如：
+Config operate options, like:
 
 ```js
 export default class extends think.model.base {
@@ -847,27 +847,27 @@ export default class extends think.model.base {
 
 #### model.close()
 
-关于数据库连接，一般情况下不要直接调用。
+About database connection, normally donot invoke directly.
 
 
 #### model.getTableFields(table)
 
-* `table` {String} 表名
+* `table` {String} table name
 * `return` {Promise}
 
-获取表的字段信息，自动从数据库中读取。
+Get table filed information, read from database directly.
 
 #### model.getLastSql()
 
 * `return` {String}
 
-获取最后执行的 SQL 语句。
+Get the last SQL statement.
 
 #### model.buildSql()
 
 * `return` {Promise}
 
-将当前的查询条件生成一个 SQL 语句。
+Make current query condition to generate a SQL statement.
 
 #### model.parseOptions(oriOpts, extraOptions)
 
@@ -875,115 +875,115 @@ export default class extends think.model.base {
 * `extraOptions` {Object}
 * `return` {Promise}
 
-根据已经设定的一些条件解析当前的操作选项。
+Options which are based on some conditions to parse current operation.
 
 #### model.getPk()
 
 * `return` {Promise}
 
-返回 `pk` 的值，返回一个 Promise。
+Return value of `pk`, returning is a Promise.
 
 #### model.parseType(field, value)
 
-* `field` {String} 数据表中的字段名称
+* `field` {String} the field name of data table
 * `value` {Mixed}
 * `return` {Mixed}
 
-根据数据表中的字段类型解析 value。
+Based on filed type of data table to pase value.
 
 #### model.parseData(data)
 
-* `data` {Object} 要解析的数据
+* `data` {Object} data to pase
 * `return` {Object}
 
-调用 `parseType` 方法解析数据。
+Invoke `paseType` to parse data.
 
 #### model.add(data, options, replace)
 
-* `data` {Object} 要添加的数据
-* `options` {Object} 操作选项
-* `replace` {Boolean} 是否是替换操作
-* `return` {Promise} 返回插入的 ID
+* `data` {Object} data to add
+* `options` {Object} operate options
+* `replace` {Boolean} whether is replace or not
+* `return` {Promise} return inserted ID
 
-添加一条数据。
+add one data.
 
 #### model.thenAdd(data, where)
 
-* `data` {Object} 要添加的数据
-* `where` {Object} where 条件
+* `data` {Object} data to add
+* `where` {Object} where condition
 * `return` {Promise}
 
-当 where 条件未命中到任何数据时才添加数据。
+When where condition didn't passed any data then to add data.
 
 #### model.addMany(dataList, options, replace)
 
-* `dataList` {Array} 要添加的数据列表
-* `options` {Object} 操作选项
-* `replace` {Boolean} 是否是替换操作
-* `return` {Promise} 返回插入的 ID
+* `dataList` {Array} data list to add
+* `options` {Object} operate options
+* `replace` {Boolean} is replace or not
+* `return` {Promise} return the inserted ID
 
-一次添加多条数据。
+Add many data in one time.
 
 #### model.delete(options)
 
-* `options` {Object} 操作选项
-* `return` {Promise} 返回影响的行数
+* `options` {Object} operate options
+* `return` {Promise} return affected row
 
-删除数据。
+Delete data.
 
 #### model.update(data, options)
 
-* `data` {Object} 要更新的数据
-* `options` {Object} 操作选项
-* `return` {Promise} 返回影响的行数
+* `data` {Object} data to update
+* `options` {Object} operate options
+* `return` {Promise} return affected rows
 
-更新数据。
+Updata data.
 
 #### updateMany(dataList, options)
 
-* `dataList` {Array} 要更新的数据列表
-* `options` {Object} 操作选项
+* `dataList` {Array} data to update
+* `options` {Object} operate options
 * `return` {Promise}
 
-更新多条数据，dataList 里必须包含主键的值，会自动设置为更新条件。
+Update multi-data, dataList must contains value of primay key, it will set to update condition automatically.
 
 #### model.increment(field, step)
 
-* `field` {String} 字段名
-* `step` {Number} 增加的值，默认为 1
+* `field` {String} field name
+* `step` {Number} add value, default is 1
 * `return` {Promise}
 
-字段值增加。
+Increase value of field.
 
 #### model.decrement(field, step)
 
-* `field` {String} 字段名
-* `step` {Number} 增加的值，默认为 1
+* `field` {String} field name
+* `step` {Number} decrease value, default is 1
 * `return` {Promise}
 
-字段值减少。
+Decrease value of field.
 
 #### model.find(options)
 
-* `options` {Object} 操作选项
-* `return` {Promise} 返回单条数据
+* `options` {Object} operate options
+* `return` {Promise} return one data
 
-查询单条数据，返回的数据类型为对象。如果未查询到相关数据，返回值为 `{}`。
+Query one data, type of data is object, if there is not result, return `{}`.
 
 #### model.select(options)
 
-* `options` {Object} 操作选项
-* `return` {Promise} 返回多条数据
+* `options` {Object} operate options
+* `return` {Promise} return multi-data
 
-查询单条数据，返回的数据类型为数组。如果未查询到相关数据，返回值为 `[]`。
+Query one data, type of data is array, if there is not result, return `[]`.
 
 #### model.countSelect(options, pageFlag)
 
-* `options` {Object} 操作选项
-* `pageFlag` {Boolean} 当页数不合法时处理，true 为修正到第一页，false 为修正到最后一页，默认不修正
+* `options` {Object} operate options
+* `pageFlag` {Boolean} if page number is illegal, true means changed to first page, false means changed to last page, default is no change.
 * `return` {Promise}
 
-分页查询，一般需要结合 `page` 方法一起使用。如：
+Page query, normally need to use with `page`, like:
 
 ```js
 export default class extends think.controller.base {
@@ -994,7 +994,7 @@ export default class extends think.controller.base {
 }
 ```
 
-返回值数据结构如下：
+returned data structure like this below:
 
 ```js
 {
@@ -1011,66 +1011,66 @@ export default class extends think.controller.base {
 
 #### model.getField(field, one)
 
-* `field` {String} 字段名，多个字段用逗号隔开
-* `one` {Boolean | Number} 获取的条数
+* `field` {String} field name, split with comma
+* `one` {Boolean | Number} the number of result
 * `return` {Promise}
 
-获取特定字段的值。
+Get value of specify field.
 
 #### model.count(field)
 
-* `field` {String} 字段名
-* `return` {Promise} 返回总条数
+* `field` {String} field name
+* `return` {Promise} return the number of fields
 
-获取总条数。
+Get the number of fields.
 
 #### model.sum(field)
 
-* `field` {String} 字段名
+* `field` {String} field name
 * `return` {Promise}
 
-对字段值进行求和。
+Get the sum of field value
 
 #### model.min(field)
 
-* `field` {String} 字段名
+* `field` {String} field name
 * `return` {Promise}
 
-求字段的最小值。
+Get the minimum of field
 
 #### model.max(field)
 
-* `field` {String} 字段名
+* `field` {String} field name
 * `return` {Promise}
 
-求字段的最大值。
+Get the maximum of field
 
 #### model.avg(field)
 
-* `field` {String} 字段名
+* `field` {String} field name
 * `return` {Promise}
 
-求字段的平均值。
+Get the avg of field
 
 #### model.query(...args)
 
 * `return` {Promise}
 
-指定 SQL 语句执行查询。
+Specify SQL statement to query.
 
 #### model.execute(...args)
 
 * `return` {Promise}
 
-执行 SQL 语句。
+Execute SQL statement.
 
 
 #### model.parseSql(sql, ...args)
 
-* `sql` {String} 要解析的 SQL 语句
+* `sql` {String} to parsed SQL statement
 * `return` {String}
 
-解析 SQL 语句，调用 `util.format` 方法解析 SQL 语句，并将 SQL 语句中的 `__TABLENAME__` 解析为对应的表名。
+Paser SQL statement, invoke `util.format` to parse SQL statement, and parse `__TABLENAME__` of SQL statement to tabel name.
 
 ```js
 export default class extends think.model.base {
@@ -1086,26 +1086,26 @@ export default class extends think.model.base {
 
 * `return` {Promise}
 
-开启事务。
+Start transaction.
 
 #### model.commit()
 
 * `return` {Promise}
 
-提交事务。
+Commit transaction.
 
 #### model.rollback()
 
 * `return` {Promise}
 
-回滚事务。
+rollback transaction.
 
 #### model.transaction(fn)
 
-* `fn` {Function} 要执行的函数
+* `fn` {Function} to executed function
 * `return` {Promise}
 
-使用事务来执行传递的函数，函数要返回 Promise。
+Use transaction to execute passed function, which must return Promise.
 
 ```js
 export default class extends think.model.base {

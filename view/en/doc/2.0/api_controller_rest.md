@@ -1,8 +1,8 @@
 ## rest controller
 
-`think.controller.rest` 继承自 [think.controller.base](./api_controller.html)，用来处理 Rest 接口。
+`think.controller.rest` instance of [think.controller.base](./api_controller.html), used for handle Rest api.
 
-##### 使用 ES6 的语法继承该类
+##### Instance of this class with ES6
 
 ```js
 export default class extends think.controller.rest {
@@ -10,7 +10,7 @@ export default class extends think.controller.rest {
 }
 ```
 
-##### 使用普通方式继承该类
+##### Using normal way to instance this class
 
 ```js
 module.exports = think.controller('rest', {
@@ -18,22 +18,22 @@ module.exports = think.controller('rest', {
 })
 ```
 
-### 属性
+### Method
 
 #### controller._isRest
 
-标识此 controller 对应的是 Rest 接口。如果在 `init` 方法里将该属性设置为 `false`，那么该 controller 不再是一个 Rest 接口。
+Identify this controller is Rest api. if in `init` function, it assigned to `false`, and this controller is not a Rest interface no more.
 
 #### controller._method
 
-获取 method 方式。默认从 http method 中获取，但有些客户端不支持发送 DELETE, PUT 类型的请求，所以可以设置为从 GET 参数里获取。
+The way to get method, by default read from http method, but some client don't support send some request type like DELETE, PUT, so it can set to get from GET parameter.
 
 ```js
 export default class extends think.controller.rest {
   init(http){
     super.init(http);
-    //设置 _method，表示从 GET 参数获取 _method 字段的值
-    //如果没有取到，则从 http method 中获取
+    // set _method, means get _method field value from GET parameters
+    // if is null, it will get from http method
     this._method = '_method';
   }
 }
@@ -41,27 +41,27 @@ export default class extends think.controller.rest {
 
 #### controller.resource
 
-当前 Rest 对应的 Resource 名称。
+The Resource name of current Rest
 
 #### controller.id
 
-资源 ID
+Resource ID
 
 #### controller.modelInstance
 
-资源对应 model 的实例。
+The instance model of resource.
 
 
-### 方法
+### Function
 
 #### controller.__before()
 
-可以在魔术方法 `__before` 中进行字段过滤、分页、权限校验等功能。
+It can do some operate like filter field, pagination, access control in magic function `__before`.
 
 ```js
 export default class extends think.controller.rest{
   __before(){
-    //过滤 password 字段
+    // filter password field
     this.modelInstance.field('password', true);
   }
 }
@@ -69,10 +69,10 @@ export default class extends think.controller.rest{
 
 #### controller.getAction()
 
-获取资源数据，如果有 id，拉取一条，否则拉取列表。
+Get resource data, if id exist, then get one, or get the list.
 
 ```js
-//方法实现，可以根据需要修改
+// function implementation, it can been modified if need.
 export default class extends think.controller.rest {
   * getAction(){
     let data;
@@ -89,10 +89,10 @@ export default class extends think.controller.rest {
 
 #### controller.postAction()
 
-添加数据
+Add data.
 
 ```js
-//方法实现，可以根据需要修改
+// function implementation, it can been modified if need.
 export default class extends think.controller.rest {
   * postAction(){
     let pk = yield this.modelInstance.getPk();
@@ -109,10 +109,10 @@ export default class extends think.controller.rest {
 
 #### controller.deleteAction()
 
-删除数据
+Delete data.
 
 ```js
-//方法实现，可以根据需要修改
+// function implementaion, it can been modified if need.
 export default class extends think.controller.rest {
   * deleteAction(){
     if (!this.id) {
@@ -127,10 +127,10 @@ export default class extends think.controller.rest {
 
 #### controller.putAction()
 
-更新数据
+Update data.
 
 ```js
-//方法实现，可以根据需要修改
+// function implementaion, it can been modified if need.
 export default class extends think.controller.rest {
   * putAction(){
     if (!this.id) {
@@ -150,7 +150,7 @@ export default class extends think.controller.rest {
 
 #### controller.__call()
 
-找不到方法时调用
+Invoked when cannot find function
 
 ```js
 export default class extends think.controller.rest {

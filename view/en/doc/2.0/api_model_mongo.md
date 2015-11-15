@@ -1,8 +1,8 @@
 ## MongoDB
 
-`think.model.mongo` 继承类 [think.model.base](./api_model.html)。
+`think.model.mongo` instance of [think.model.base](./api_model.html)。
 
-##### 使用 ES6 的语法继承该类
+##### Instance of this class with ES6
 
 ```js
 export default class extends think.model.mongo {
@@ -12,7 +12,7 @@ export default class extends think.model.mongo {
 }
 ```
 
-##### 使用普通方式继承该类
+##### Instance of this class with normal way
 
 ```js
 module.exports = think.model('mongo', {
@@ -22,17 +22,17 @@ module.exports = think.model('mongo', {
 })
 ```
 
-### 属性
+### Method
 
 #### model.indexes
 
-设置字段索引，数据操作之前会自动创建索引。
+Set indexes of field, before operate data it will set index automatically.
 
 ```js
 export default class extends think.model.mongo {
   init(...args){
     super.init(...args);
-    //配置索引
+    // set indexes
     this.indexes = { 
 
     }
@@ -40,12 +40,12 @@ export default class extends think.model.mongo {
 }
 ```
 
-##### 单字段索引
+##### Single field index
 ```js
 export default class extends think.model.mongo {
   init(...args){
     super.init(...args);
-    //配置索引
+    // set index
     this.indexes = { 
       name: 1
     }
@@ -53,15 +53,15 @@ export default class extends think.model.mongo {
 }
 ```
 
-##### 唯一索引
+##### Unique index
 
-通过 `$unique` 来指定为唯一索引，如：
+With `$unique` to set unique index, like:
 
 ```js
 export default class extends think.model.mongo {
   init(...args){
     super.init(...args);
-    //配置索引
+    // set index 
     this.indexes = { 
       name: {$unique: 1}
     }
@@ -69,15 +69,15 @@ export default class extends think.model.mongo {
 }
 ```
 
-##### 多字段索引
+##### Multi-field index
 
-可以将多个字段联合索引，如：
+Multi-field index, like:
 
 ```js
 export default class extends think.model.mongo {
   init(...args){
     super.init(...args);
-    //配置索引
+    // set index
     this.indexes = { 
       email: 1
       test: {
@@ -92,15 +92,15 @@ export default class extends think.model.mongo {
 
 #### model.pk
 
-主键名，默认为 `_id`，可以通过 `this.getPk` 方法获取。
+Primary key name, default is `_id`, get it with `this.getPk`.
 
-### 方法
+### Function
 
 #### model.where(where)
 
-mongo 模型中的 where 条件设置和关系数据库中不太一样。
+Where condition in mongo model is different from relational database.
 
-##### 等于判断
+##### equal condition
 
 ```js
 export default class extends think.model.mongo {
@@ -110,7 +110,7 @@ export default class extends think.model.mongo {
 }
 ```
 
-##### AND 条件
+##### AND condition
 
 ```js
 export default class extends think.model.mongo {
@@ -120,7 +120,7 @@ export default class extends think.model.mongo {
 }
 ```
 
-##### OR 条件
+##### OR condition
 
 ```js
 export default class extends think.model.mongo {
@@ -138,7 +138,7 @@ export default class extends think.model.mongo {
 }
 ```
 
-##### 内嵌文档
+##### Inserted document
 
 
 ```js
@@ -158,7 +158,7 @@ export default class extends think.model.mongo {
 }
 ```
 
-##### IN 条件
+##### IN condition
 
 ```js
 export default class extends think.model.mongo {
@@ -170,13 +170,13 @@ export default class extends think.model.mongo {
 
 ------
 
-更多文档请见 <https://docs.mongodb.org/manual/reference/operator/query/#query-selectors>。
+More details in <https://docs.mongodb.org/manual/reference/operator/query/#query-selectors>。
 
 #### model.collection()
 
 * `return` {Promise}
 
-获取操作当前表的句柄。
+Get handler which operate current table.
 
 ```js
 export default class extends think.model.mongo {
@@ -189,22 +189,22 @@ export default class extends think.model.mongo {
 
 #### model.aggregate(options)
 
-聚合查询。具体请见 <https://docs.mongodb.org/manual/core/aggregation-introduction/>。
+Aggregate query, more details in <https://docs.mongodb.org/manual/core/aggregation-introduction/>。
 
 #### model.mapReduce(map, reduce, out)
 
-mapReduce 操作，具体请见 <https://docs.mongodb.org/manual/core/map-reduce/>。
+mapReduce operate, more details in <https://docs.mongodb.org/manual/core/map-reduce/>。
 
 
 #### model.createIndex(indexes, options)
 
-* `indexes` {Object} 索引配置
+* `indexes` {Object} index options
 * `options` {Object}
 
-创建索引。
+Create indexes.
 
 #### model.getIndexes()
 
 * `return` {Promise}
 
-获取索引。
+Get indexes.
