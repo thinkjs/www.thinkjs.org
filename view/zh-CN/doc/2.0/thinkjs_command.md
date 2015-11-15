@@ -1,6 +1,6 @@
-## Thinkjs Command
+## thinkjs 命令
 
-After installing thinkjs module globally, there should be the thinkjs command in your system. Run the command `thinkjs -h` in your terminal to get more detailed introduction.
+以全局模式安装 thinkjs 模块后，系统下就会有 thinkjs 命令，在终端执行 `thinkjs -h` 可以看到详细介绍。
 
 ```text
   Usage: thinkjs [command] <options ...>
@@ -15,6 +15,7 @@ After installing thinkjs module globally, there should be the thinkjs command in
     model <modelName>            add model
     middleware <middlewareName>  add middleware
     adapter <adapterName>        add adapter
+    plugin <pluginPath>          create ThinkJS plugin
 
   Options:
 
@@ -27,155 +28,155 @@ After installing thinkjs module globally, there should be the thinkjs command in
     -m, --mode <mode>  project mode type(mini, normal, module), default is module, used in `new` command
 ```
 
-### Create Project
+### 创建项目
 
-You can create a project by the command `thinkjs new <projectPath>`. eg.
+创建项目可以通过 `thinkjs new <projectPath>` 来执行，如：
 
 ```sh
 thinkjs new thinkjs_demo;
 ```
 
-#### ES6 Mode
+#### ES6 方式
 
-If you want to create an ES6 mode project, `--es6` option is required. Thus, codes in the generated files are all ES6 syntax. eg.
+如果想创建 ES6 模式的项目，需要加上 `--es6` 参数，这样生成文件的里代码都是 ES6 语法的。如：
 
 ```sh
 thinkjs new thinkjs_demo --es6
 ```
 
-#### Set Project Mode
+#### 设置项目模式
 
-The default created project is divided by modules. If the project is small and you don't want to have it divided by modules,
-you can specify `--mode` option when creating project. eg.
+默认创建的项目是按模块来划分的。如果项目比较小，不想按模块来划分的话，可以创建项目时指定 `--mode` 参数。如：
 
 ```sh
 thinkjs new thinkjs_demo --mode=mini
 ```
 
-The following is the supported module list:
+支持的模式列表如下：
 
-* `mini`  single-module project, for a very simple project.
-* `normal` genneral project, which modules are divided according to the function.
-* `module` divided by modules, for large projects or the project strictly divided by modules.
+* `mini`  单模块项目，用于很简单的项目。
+* `normal` 普通项目，模块在功能下划分。
+* `module` 按模块划分，大型项目或者想严格按模块划分的项目。
 
-`Note`: After the project created, a hidden file named `.thinkjsrc` will be created in the project directory, which identifies some configuration of the current project. And it will affect subsequent creating files, so you need to put it into the version repository.
+`注`：创建项目后，会在项目下创建一个名为 `.thinkjsrc` 的隐藏文件，里面标识了当前项目的一些配置，该配置会影响后续创建文件，所以需要将该文件需要纳入到版本库中。
 
-### Add Module
+### 添加模块
 
-The module `common` and `home` will be automatically created when creating project. If you need to create other modules, you can execute the command `thinkjs module [name]` in the project directory. eg. 
+创建项目时会自动创建模块 `common` 和 `home`，如果还需要创建其他的模块，可以在项目目录下通过 `thinkjs module [name]` 命令来创建。如：
 
 ```sh
 thinkjs module admin
 ```
 
-After execution, there will create the directory `src/admin` and the corresponding files in that directory.
+执行完成后，会创建目录 `src/admin`，以及在该目录下创建对应的文件。
 
-### Add Middleware
+### 添加 middleware
 
-you can add middleware by the command `thinkjs middleware [name]` in the project directory. eg.
+可以在项目目录下通过 `thinkjs middleware [name]` 命令来添加 middleware。如：
 
 ```sh
 thinkjs middleware test;
 ```
 
-After execution, there will create the file `src/common/middleware/test.js`.
+执行完成后，会创建 `src/common/middleware/test.js` 文件。
 
-### Add Model
+### 添加 model
 
-You can add model by the command `thinkjs model [name]` in the project directory. eg.
+可以在项目目录下通过 `thinkjs model [name]` 命令来添加 model。如：
 
 ```sh
 thinkjs model user;
 ```
 
-After execution, there will create the file `src/common/model/user.js`.
+执行完成后，会创建 `src/common/model/user.js` 文件。
 
-This file is in the `common` module by default. If you want to create it in other modules, just specify the module. eg.
+默认会在 `common` 模块下创建，如果想在其他模块下创建，可以通过指定模块创建。如：
 
 ```sh
 thinkjs model home/user;
 ```
 
-Thus, it will create the file `src/home/model/user.js`.
+指定模块为 `home` 后，会创建 `src/home/model/user.js` 文件。
 
-##### Add Mongo Model
+##### 添加 Mongo Model
 
-By default, the model added is relational database model. If you want to create Mongo Model, specify `--mongo` option. eg.
+默认添加的 Model 是关系数据库的模型，如果想创建 Mongo Model，可以通过指定 `--mongo` 参数来添加。如：
 
 ```sh
 thinkjs model home/user --mongo
 ```
 
-##### Add Relation Model
+##### 添加 Relation Model
 
-Specify `--relation` option to create Relation Model. eg.
+添加关联模型可以通过指定 `--relation` 参数。如：
 
 ```sh
 thinkjs model home/user --relation
 ```
 
-### Add Controller
+### 添加 controller
 
-You can add controller by the command `thinkjs controller [name]` in the project directory. eg.
+可以在项目目录下通过 `thinkjs controller [name]` 命令来添加 controller。如：
 
 ```sh
 thinkjs controller user;
 ```
 
-After execution, there will create the file `src/common/controller/user.js`, and the file `src/common/logic/user.js` will be also created at the same.
+执行完成后，会创建 `src/common/controller/user.js` 文件，同时会创建 `src/common/logic/user.js` 文件。
 
-This created file is in the `common` module by default. If you want to create it in other modules, specify the module. eg.
+默认会在 `common` 模块下创建，如果想在其他模块下创建，可以通过指定模块创建。如：
 
 ```sh
 thinkjs controller home/user;
 ```
 
-Thus, the file `src/home/controller/user.js` will be created.
+指定模块为 `home` 后，会创建 `src/home/controller/user.js` 文件。
 
-##### Add Rest Controller
+##### 添加 Rest Controller
 
-If you want to privide Rest API, specify `--rest` option. eg.
+如果想提供 Rest API，可以带上 `--rest` 参数来创建。如：
 
 ```sh
 thinkjs controller home/user --rest;
 ```
 
 
-### Add service
+### 添加 service
 
-You can add service by the command `thinkjs service [name]` in the project directory. eg.
+可以在项目目录下通过 `thinkjs service [name]` 命令来添加 service。如：
 
 ```sh
-thinkjs service github; #create the service that calls github interface 
+thinkjs service github; #创建调用 github 接口的 service
 ```
 
-After execution, there will create the file `src/common/service/github.js`.
+执行完成后，会创建 `src/common/service/github.js` 文件。
 
-This created file is in the `common` module by default. If you want to create it in other modules, specify the module. eg.
+默认会在 `common` 模块下创建，如果想在其他模块下创建，可以通过指定模块创建。如：
 
 ```sh
 thinkjs service home/github;
 ```
 
-Thus, the file `src/home/service/github.js` will be created.
+指定模块为 `home` 后，会创建 `src/home/service/github.js` 文件。
 
-### Add adapter
 
-You can add adapter by the command `thinkjs adapter [type]/[name]` in the project directory. eg.
+### 添加 adapter
+
+可以通过 `thinkjs adapter [type]/[name]` 来创建 adapter。如：
 
 ```sh
 thinkjs adapter template/dot
 ```
 
-After execution, there will create the file `src/common/adapter/template/dot.js`, which means a template type adapter named dot.
+执行后会创建文件 `src/common/adapter/template/dot.js`，表示创建一个名为 dot 的模版类型 adapter。
 
+### 创建 plugin
 
-### Add Plugin
-
-Two kinds of plugins ThinkJS supported are middleware and adapter. You can initialize a plugin by command `thinkjs plugin <pluginName>`, and then to develop.
+ThinkJS 支持 middleware 和 adapter 2 种插件，可以通过 `thinkjs plugin <pluginName>` 来初始化一个插件，然后进行开发。
 
 ```sh
 thinkjs plugin think-template-dot
 ```
 
-Suggested that the plugin name could start with `think-`, so that it is convenient to search for other users after the plugin release to npm repository.
+插件名称建议使用 `think-` 打头，这样发布到 npm 仓库后，方便其他用户搜索。
+
