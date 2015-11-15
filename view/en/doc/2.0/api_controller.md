@@ -1,9 +1,9 @@
 ## controller
 
-`think.controller.base` 继承自 [think.http.base](./api_think_http_base.html) 类。项目里的控制器需要继承该类。
+`think.controller.base` instance of [think.http.base](./api_think_http_base.html) class, controllers in project need to instance of this class.
 
 
-##### 使用 ES6 的语法继承该类
+##### Instance this class with ES6
 
 ```js
 export default class extends think.controller.base {
@@ -13,7 +13,7 @@ export default class extends think.controller.base {
 }
 ```
 
-##### 使用普通方式继承该类 ##### 
+##### Normal way to instance this class ##### 
 
 ```js
 module.exports = think.controller({
@@ -24,19 +24,19 @@ module.exports = think.controller({
 ```
 
 
-### 属性
+### Method
 
 #### controller.http
 
-传递进来的 [http](./api_http.html) 对象。
+Passed [http](./api_http.html) object.
 
-### 方法
+### Function
 
 #### controller.ip()
 
 * `return` {String}
 
-获取当前请求用户的 ip，等同与 http.ip 方法。
+Get user ip of current request, it is equal to `http.ip`.
 
 ```js
 export default class extends think.controller.base {
@@ -50,7 +50,7 @@ export default class extends think.controller.base {
 
 * `return` {String}
 
-获取当前请求的类型，转化为小写。
+Get type of current request, and convert to lowercase.
 
 ```js
 export default class extends think.controller.base {
@@ -62,34 +62,34 @@ export default class extends think.controller.base {
 
 #### controller.isMethod(method)
 
-* `method` {String} 类型
+* `method` {String} method
 * `return` {Boolean}
 
-判断当前的请求类型是否是指定的类型。
+Judge type of current request is named types.
 
 #### controller.isGet()
 
 * `return` {Boolean}
 
-判断是否是 GET 请求。
+Judge is GET request or not.
 
 #### controller.isPost()
 
 * `return` {Boolean}
 
-判断是否是 POST 请求。
+Judge is POST request.
 
 #### controller.isAjax(method)
 
 * `method` {String}
 * `return` {Boolean}
 
-判断是否是 Ajax 请求。如果指定了 method，那么请求类型也要相同。
+Judge is Ajax request, if named method, then as same as the type of request.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //是ajax 且请求类型是 POST
+    // is ajax and request type is POST
     let isAjax = this.isAjax('post');
   }
 }
@@ -99,33 +99,33 @@ export default class extends think.controller.base {
 
 * `return` {Boolean}
 
-是否是 websocket 请求。
+Whether is websocket request or not.
 
 #### controller.isCli()
 
 * `return` {Boolean}
 
-是否是命令行下调用。
+Whether is run in command mode or not.
 
 #### controller.isJsonp(callback)
 
-* `callback` {String} callback 名称
+* `callback` {String} callback name
 * `return` {Boolean}
 
-是否是 jsonp 请求。
+Whether is jsonp request.
 
 #### controller.get(name)
 
-* `name` {String} 参数名
+* `name` {String} parameter name
 
-获取 GET 参数值。
+Get parameter of GET.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //获取一个参数值
+    // get a parameter
     let value = this.get('xxx');
-    //获取所有的参数值
+    // get all parameter
     let values = this.get();
   }
 }
@@ -133,16 +133,16 @@ export default class extends think.controller.base {
 
 #### controller.post(name)
 
-* `name` {String} 参数名
+* `name` {String} parameter name
 
-获取 POST 提交的参数。
+Get parameter of POST data.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //获取一个参数值
+    // get a value of parameter
     let value = this.post('xxx');
-    //获取所有的 POST 参数值
+    // get all parameter of POST
     let values = this.post();
   }
 }
@@ -150,80 +150,80 @@ export default class extends think.controller.base {
 
 #### controller.param(name)
 
-* `name` {String} 参数名
+* `name` {String} parameter name
 
-获取参数值，优先从 POST 里获取，如果取不到再从 GET 里获取。
+Get parameter value, first to read from POST, if return null, then get from GET.
 
 
 #### controller.file(name)
 
-* `name` {String} 上传文件对应的字段名
+* `name` {String} field name of upload file
 
-获取上传的文件，返回值是个对象，包含下面的属性：
+Get uploaded file, return value is a object, contains these method below:
 
 ```js
 {
-  fieldName: 'file', //表单字段名称
-  originalFilename: filename, //原始的文件名
-  path: filepath, //文件保存的临时路径，使用时需要将其移动到项目里的目录，否则请求结束时会被删除
-  size: 1000 //文件大小
+  fieldName: 'file', // field name
+  originalFilename: filename, // original file name
+  path: filepath, // path of temp store file, need to move this path when using, or exists until request ends.
+  size: 1000 // file size
 }
 ```
 
-如果文件不存在，那么值为一个空对象 `{}`。
+If file not exist, this returning is an empty object `{}`.
 
 #### controller.header(name, value)
 
-* `name` {String} header 名
-* `value` {String} header 值
+* `name` {String} header name
+* `value` {String} header value
 
-获取或者设置 header。
+Get or set header。
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    let accept = this.header('accept'); //获取 header
-    this.header('X-NAME', 'thinks'); //设置 header
+    let accept = this.header('accept'); // get header
+    this.header('X-NAME', 'thinks'); // set header
   }
 }
 ```
 
 #### controller.expires(time)
 
-* `time` {Number} 过期时间，单位为秒
+* `time` {Number} expires time, the unit is seconds
 
-强缓存，设置 `Cache-Control` 和 `Expires` 头信息。
+Strong cache, set `Cache-Control` and `Expires` header information.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    this.expires(86400); //设置过期时间为 1 天。
+    this.expires(86400); // set expire time to one day.
   }
 }
 ```
 
 #### controller.userAgent()
 
-获取 userAgent。
+Get userAgent。
 
 #### controller.referrer(onlyHost)
 
-* `referrer` {Boolean} 是否只需要 host
+* `referrer` {Boolean} whether only need host
 
-获取 referrer。
+Get referrer。
 
 #### controller.cookie(name, value, options)
 
-* `name` {String} cookie 名
-* `value` {String} cookie 值
+* `name` {String} cookie name
+* `value` {String} cookie value
 * `options` {Object}
 
-获取或者设置 cookie。
+Get or set cookie。
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //获取 cookie 值
+    // get value of cookie
     let value = this.cookie('think_name');
   }
 }
@@ -232,9 +232,9 @@ export default class extends think.controller.base {
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //设置 cookie 值
+    // get value of cookie
     this.cookie('think_name', value, {
-      timeout: 3600 * 24 * 7 //有效期为一周
+      timeout: 3600 * 24 * 7 // expires time is one week
     });
   }
 }
@@ -242,35 +242,35 @@ export default class extends think.controller.base {
 
 #### controller.session(name, value)
 
-* `name` {String} session 名
-* `value` {Mixed} session 值
+* `name` {String} session name
+* `value` {Mixed} session value
 * `return` {Promise}
 
-读取、设置和清除 session。
+Read, set and clean session。
 
-##### 读取 Session
+##### Read Session
 
 ```js
 export default class extends think.controller.base {
   * indexAction(){
-    //获取session
+    // read session
     let value = yield this.session('userInfo');
   }
 }
 ```
 
-##### 设置 Session
+##### set Session
 
 ```js
 export default class extends think.controller.base {
   * indexAction(){
-    //设置 session
+    //set session
     yield this.session('userInfo', data);
   }
 }
 ```
 
-##### 清除 Session
+##### Clean Session
 
 ```js
 export default class extends think.controller.base {
@@ -283,38 +283,38 @@ export default class extends think.controller.base {
 
 #### controller.lang(lang, asViewPath)
 
-* `lang` {String} 要设置的语言
-* `asViewPath` {Boolean} 是否在模版目录添加一层语言目录
+* `lang` {String} the setup of language
+* `asViewPath` {Boolean} whether add a directory layer for language template.
 
-读取或者设置语言。
+Read or set language.
 
 #### controller.locale(key)
 
 * `key` {String} 
 
-根据 language 获取对应的语言文本。
+Based on language to get the language version.
 
 
 #### controller.redirect(url, statusCode)
 
-* `url` {String} 要跳转的 url
-* `statusCode` {Number} 状态码，默认为 302
+* `url` {String} the url to jump
+* `statusCode` {Number} status code, default is 302
 
-页面跳转。
+Page jump.
 
 #### controller.assign(name, value)
 
-* `name` {String | Object} 变量名
-* `value` {Mixed} 变量值
+* `name` {String | Object} variable name
+* `value` {Mixed} variable value
 
-将变量赋值到模版中。
+Assign variable into template.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //单个赋值
+    // single assign
     this.assign('title', 'thinkjs');
-    //批量赋值
+    // multi-assign
     this.assign({
       name: 'xxx',
       desc: 'yyy'
@@ -325,15 +325,15 @@ export default class extends think.controller.base {
 
 #### controller.fetch(templateFile)
 
-* `templateFile` {String} 模版文件地址
+* `templateFile` {String} tempate file path
 * `return` {Promise}
 
-获取解析后的模版内容。
+Get the parsed template content.
 
-##### 直接获取 ##### 
+##### Get directly ##### 
 
 ```js
-// 假设文件路径为 /foo/bar/app/home/controller/index.js
+// suppose the file path is /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
   * indexAction(){
     // home/index_index.html
@@ -342,10 +342,10 @@ export default class extends think.controller.base {
 }
 ```
 
-##### 改变 action ##### 
+##### Change action ##### 
 
 ```js
-// 假设文件路径为 /foo/bar/app/home/controller/index.js
+// suppose file path is /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
   * indexAction(){
     // home/index_detail.html
@@ -354,10 +354,10 @@ export default class extends think.controller.base {
 }
 ```
 
-##### 改变 controller 和 action ##### 
+##### Change controller and action ##### 
 
 ```js
-// 假设文件路径为 /foo/bar/app/home/controller/index.js
+// suppose file path is /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
   * indexAction(){
     // home/user_detail.html
@@ -366,10 +366,10 @@ export default class extends think.controller.base {
 }
 ```
 
-##### 改变 module, controller 和 action ##### 
+##### Change module, controller 和 action ##### 
 
 ```js
-// 假设文件路径为 /foo/bar/app/home/controller/index.js
+// suppose file path is /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
   * indexAction(){
     // admin/user_detail.html
@@ -378,10 +378,10 @@ export default class extends think.controller.base {
 }
 ```
 
-##### 改变文件后缀名 ##### 
+##### Change file extension ##### 
 
 ```js
-// 假设文件路径为 /foo/bar/app/home/controller/index.js
+// suppose file path is /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
   * indexAction(){
     // home/index_detail.xml
@@ -390,10 +390,10 @@ export default class extends think.controller.base {
 }
 ```
 
-##### 获取绝对路径文件 ##### 
+##### Get absoulte file path ##### 
 
 ```js
-// 假设文件路径为 /foo/bar/app/home/controller/index.js
+// suppose file path is /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
   * indexAction(){
     // /home/xxx/aaa/bbb/c.html
@@ -404,15 +404,15 @@ export default class extends think.controller.base {
 
 #### controller.display(templateFile)
 
-* `templateFile` {String} 模版文件路径
+* `templateFile` {String} template file path
 
-输出模版内容到浏览器端。查找模版文件策略和 `controller.fetch` 相同。
+Output template content to browser side. strategy of finding template is the same as `controller.fetch`.
 
 #### controller.jsonp(data)
 
-* `data` {Mixed} 要输出的内容
+* `data` {Mixed} content to output
 
-jsonp 的方法输出内容，获取 callback 名称安全过滤后输出。
+Using the way of jsonp to output content, after getting callback's name and security filter then output.
 
 ```js
 export default class extends think.controller.base {
@@ -426,56 +426,56 @@ export default class extends think.controller.base {
 
 #### controller.json(data)
 
-* `data` {Mixed} 要输出的内容
+* `data` {Mixed} the output content
 
-json 的方式输出内容。
+Json way to output.
 
 #### controller.status(status)
 
-* `status` {Number} 状态码，默认为 404
+* `status` {Number} status code, default is 404
 
-设置状态码。
+Set status code.
 
 #### controller.deny(status)
 
-* `status` {String} 状态码，默认为 403
+* `status` {String} status code, default is 403
 
-拒绝当前请求。
+Deny current request.
 
 #### controller.write(data, encoding)
 
-* `data` {mixed} 要输出的内容
-* `encoding` {String} 编码
+* `data` {mixed} the output content
+* `encoding` {String} charset
 
-输出内容
+Output content.
 
 #### controller.end(data, encoding)
 
-* `data` {mixed} 要输出的内容
-* `encoding` {String} 编码
+* `data` {mixed} the output content
+* `encoding` {String} charset
 
-输出内容后结束当前请求。
+After output content, end current request.
 
 #### controller.type(type, charset)
 
 * `type` {String} Content-Type
-* `charset` {Boolean} 是否自动追加 charset
+* `charset` {Boolean} wheher append charset or not
 
-设置 Content-Type。
+Set Content-Type。
 
 #### controller.download(filePath, contentType, fileName)
 
-* `filePath` {String} 下载文件的具体路径
+* `filePath` {String} specified path of download file
 * `content-Type` {String} Content-Type
-* `fileName` {String} 报错的文件名
+* `fileName` {String} error file name
 
-下载文件。
+Download file.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
     let filePath = think.RESOUCE_PATH + '/a.txt';
-    //自动识别 Content-Type，保存的文件名为 a.txt
+    // auto identify Content-Type, save file to a.txt
     this.download(filePath);
   }
 }
@@ -485,7 +485,7 @@ export default class extends think.controller.base {
 export default class extends think.controller.base {
   indexAction(){
     let filePath = think.RESOUCE_PATH + '/a.log';
-    //自动识别 Content-Type，保存的文件名为 b.txt
+    // auto identify Content-Type, save file to b.txt
     this.download(filePath, 'b.txt');
   }
 }
@@ -495,7 +495,7 @@ export default class extends think.controller.base {
 export default class extends think.controller.base {
   indexAction(){
     let filePath = think.RESOUCE_PATH + '/a.log';
-    //指定 Content-Type 为 text/html，保存的文件名为 b.txt
+    // specify Content-Type to text/html, save file to b.txt
     this.download(filePath, 'text/html', 'b.txt');
   }
 }
@@ -503,10 +503,10 @@ export default class extends think.controller.base {
 
 #### controller.success(data, message)
 
-* `data` {Mixed} 要输出的数据
-* `message` {String} 追加的message
+* `data` {Mixed} the output data
+* `message` {String} appended message
 
-格式化输出一个正常的数据，一般是操作成功后输出。
+Output an normal formatted data, often after operate success.
 
 ```js
 http.success({name: 'thinkjs'});
@@ -520,17 +520,17 @@ http.success({name: 'thinkjs'});
 }
 ```
 
-这样客户端就可以根据 `errno` 是否为 `0` 为判断当前请求是否正常。
+Client can based on `error` is `0` or not to judge current request is success.
 
 #### controller.fail(errno, errmsg, data)
 
-* `errno` {Number} 错误号
-* `errmsg` {String} 错误信息
-* `data` {Mixed} 额外的数据
+* `errno` {Number} error number
+* `errmsg` {String} error message
+* `data` {Mixed} extra data
 
-格式化输出一个异常的数据，一般是操作失败后输出。
+Output an unusual formatted data, normally after operate failed.
 
-`注`：字段名 `errno` 和 `errmsg` 可以在配置里进行修改。
+`Notice`: field name `errno` and `errmsg` can been modified in config.
 
 ```js
 http.fail(100, 'fail')
@@ -542,12 +542,12 @@ http.fail(100, 'fail')
 }
 ```
 
-这样客户端就可以拿到具体的错误号和错误信息，然后根据需要显示了。
+In this way, client will get detail error number and error message, then show message according to the need.
 
-`注`：字段名 `errno` 和 `errmsg` 可以在配置里进行修改。
+`Notice`: filed name `errno` and `errmsg` can been modified in config.
 
 #### controller.sendTime(name)
 
 * `name` {String} header key
 
-发送请求的执行时间，使用 header 的方式发出。
+The execute time of send request, send with header.

@@ -1,13 +1,13 @@
 ## think.http.base
 
-`think.http.base` 继承自 [think.base](./api_think_base.html) 类，该类为含有 http 对象处理时的基类。middleware, controller, view 类都继承自该类。
+`think.http.base` instance of [think.base](./api_think_base.html), this class contains http object handler base class.some class such like middleware class, controller class, view class all instance of this class.
 
-##### 使用 ES6 语法继承该类
+##### Using ES6 to instnace of this class
 
 ```js
 export default class extends think.http.base {
   /**
-   * 初始化方法，实例化时自动被调用，不要写 constructor
+   * initial function, will automatically invoked while instacing, didn't need constructor.
    * @return {} 
    */
   init(){
@@ -16,7 +16,7 @@ export default class extends think.http.base {
 }
 ```
 
-##### 使用普通的方式继承该类
+##### Using normal way to instance this class
 
 ```js
 module.exports = think.Class(think.http.base, {
@@ -26,29 +26,29 @@ module.exports = think.Class(think.http.base, {
 });
 ```
 
-### 属性
+### Method
 
 #### http
 
-封装的 http 对象，包含的属性和方法请见 [API -> http](./api_http.html)。
+Packaged http object, contained methods and function to be seen in [API -> http](./api_http.html).
 
-### 方法
+### Function
 
 #### config(name, value)
 
-* `name` {String} 配置名称
-* `value` {Mixed} 配置值
+* `name` {String} config file
+* `value` {Mixed} config value
 
-读取或者设置配置，value 为 `undefined` 时为读取配置，否则为设置配置。
+Read or setup config, it is read config when value assigned to `undefined`, otherwise it is setup config.
 
-该方法不仅可以读取系统预设值的配置，也可以读取项目里定义的配置。
+This function can not only read system default config, but also read project config.
 
-`注`：不可将当前请求的用户信息作为配置来设置，会被其他用户给冲掉。
+`Notice`: Don't setup with request user's information, it will be covered by other user.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //获取配置值
+    // get config value
     let value = this.config('name');
   }
 }
@@ -56,29 +56,29 @@ export default class extends think.controller.base {
 
 #### action(controller, action)
 
-* `controller` {Object | String} controller实例
-* `action` {String} action名称
+* `controller` {Object | String} controller instance
+* `action` {String} action name
 * `return` {Promise} 
 
-调用 controller 下的 action，返回一个 Promise。自动调用 `__before` 和 `__after` 魔术方法。
+Invoke action in controller, return a Promise, invoke `__before` and `__after` automcatically.
 
-如果 controller 是字符串，则自动去寻找对应的 controller。
+If controller is a string, it will automactically to find this controller.
 
 ```js
-//调用当前模块下controller里的action
+// invoke action of current module's controller
 export default class extends think.controller.base {
   * indexAction(){
-    //调用user controller下的detail方法
-    let value = yield this.action('user', 'detail');
+    // invoke defail function in user controller
+        let value = yield this.action('user', 'detail');
   }
 }
 ```
 
 ```js
-//跨模块调用controller里的action
+// invoke action in cross module's controller
 export default class extends think.controller.base {
   * indexAction(){
-    //调用admin模块user controller下的detail方法
+    // invoke detail function of user controller in admin module
     let value = yield this.action('admin/user', 'detail');
   }
 }
@@ -86,27 +86,27 @@ export default class extends think.controller.base {
 
 #### cache(name, value, options)
 
-* `name` {String} 缓存名称
-* `value` {Mixed | Function} 缓存值
-* `options` {Object} 缓存配置，具体见缓存配置
+* `name` {String} cache name
+* `value` {Mixed | Function} cache value
+* `options` {Object} cache options, more informtion in cache config.
 
-读取或者设置缓存，`value` 为 `undefined` 时是读取缓存，否则为设置缓存。默认缓存类型为 `file`。
+Read or set cache, it is read cache when assign `value` to `undefined`, otherwise, it is setup cache. default type is `file`.
 
 ```js
 export default class extends think.controller.base {
   * indexAction(){
-    //获取缓存
+    // get cache
     let value = yield this.cache('name');
   }
 }
 ```
 
-当参数 `value` 为 function 时，表示获取缓存，如果缓存值不存在，则调用该 function，将返回值设置缓存并返回。这样避免在项目开发时要先判断缓存是否存在，然后再从相关地方读取值然后设置缓存的麻烦。
+When `value` is function, it means read cache, if cache's value didn't exist, it will invoke this function, and assign the returning value to cache and return the value.It is very useful to avoid a trouble which judge the cache is exist when developing project and then to read cache and set cache in other place.
 
 ```js
 export default class extends think.controller.base {
   * indexAction(){
-    //获取缓存，缓存不存在时自动调用 function，并设置缓存
+    // setup cache, when cache didn't exist, it invoke function automatically, and set cache at the same time
     let value = yield this.cache('name', () => {
       return this.model('user').select();
     });
@@ -114,12 +114,12 @@ export default class extends think.controller.base {
 }
 ```
 
-设置缓存并修改缓存类型：
+Setup cache and modify the type:
 
 ```js
 export default class extends think.controller.base {
   * indexAction(){
-    //设置缓存，缓存类型使用redis
+    // setup cache, cache type is redis
     yield this.cache('name', 'value', {
       type: 'redis'
     });
@@ -130,13 +130,13 @@ export default class extends think.controller.base {
 
 #### hook(event, data)
 
-* `event` {String} 事件名称
-* `data` {Mixed} 参数
+* `event` {String} event name
+* `data` {Mixed} argument
 * `return` {Promise}
 
-执行对应的事件，一个事件包含若干个 middleware，会按顺序执行这些 middleware。
+Execute hook event, a hook has some middleware, it will execute those middleware orderly.
 
-事件可以在配置 `src/common/config/hook.js` 里定义，也可以通过 think.hook 来注册。
+Hook event can be assigned in `src/common/config/hook.js`, also it can be registered with think.hook.
 
 ```js
 export default class extends think.controller.base {
@@ -148,22 +148,22 @@ export default class extends think.controller.base {
 
 #### model(name, options)
 
-* `name` {String} 模型名称
-* `options` {Object} 配置，具体见数据库配置
-* `return` {Object} model实例
+* `name` {String} model name
+* `options` {Object} options, more detail seen in database config
+* `return` {Object} model instance
 
-获取模型实例，默认获取当前模块下对应模型的实例，也可以跨模块获取模型的实例。
+Get the instance of model, which is instance of current module by default, it also can get instance of other module.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //获取当前模块下的 user model 的实例
+    // get instance of user model in current module
     let model = this.model('user');
-    //获取admin模块下 article model 的实例
+    // get instance of article model in admin module
     let model1 = this.model('admin/article');
-    //获取当前模块下的 test model 的实例，并且是 sqlite 的数据库
+    // get instance of test model in current module, and it is sqlite database
     let model2 = this.model('test', {
-      type: 'sqlite' //设置数据库类型为sqlite，更多参数见数据库配置
+      type: 'sqlite' // setup type of database to sqlite, more detail to see in database config
     })
   }
 }
@@ -172,17 +172,17 @@ export default class extends think.controller.base {
 
 #### controller(name)
 
-* `name` {String} controller名称
-* `return` {Object} controller实例
+* `name` {String} controller name
+* `return` {Object} controller instance
 
-获取 Controller 的实例，如果 Controller 找不到，则报错。
+Get the instance of Controller, if cannot find Controller, it will report errors.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //获取当前模块下 user controller 的实例
+    // get instance of user controller in current module
     let controller = this.controller('user');
-    //获取admin模块下 user controller 的实例
+    // get instance of user controller in admin module
     let controller1 = this.controller('admin/user');
   }
 }
@@ -191,19 +191,19 @@ export default class extends think.controller.base {
 
 #### service(name)
 
-* `name` {String} service 名称
+* `name` {String} service name
 * `return` {Class} 
 
-获取对应的 service。service 返回的可能是 class ，也可能直接是个对象，所以不会直接实例化。
+Get the service, it maybe return a class, or an object, so it will not instance automatically.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //获取对应的service
+    // get the service
     let service = this.service('user');
-    //获取service的实例
+    // get instance of service
     let instance = new service(...args);
-    //获取admin模块下的user service
+    // get user service in admin module
     let service1 = this.service('admin/user');
   }
 }

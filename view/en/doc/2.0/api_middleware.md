@@ -1,8 +1,8 @@
 ## middleware
 
-`think.middleware.base` 类继承自 [think.http.base](./api_think_http_base.html)。
+`think.middleware.base` instance of [think.http.base](./api_think_http_base.html)。
 
-##### ES6 方式
+##### ES6 way
 
 ```js
 export default class extends think.middleware.base {
@@ -12,7 +12,7 @@ export default class extends think.middleware.base {
 }
 ```
 
-##### 动态创建类的方式
+##### Create class dynamically
 
 ```js
 module.exports = think.middleware({
@@ -22,10 +22,10 @@ module.exports = think.middleware({
 })
 ```
 
-### 方法
+### Function
 
 #### middleare.run()
 
 * `return` {Promise}
 
-middleware 对外的方法入口，调用 middleware 时会自动调用该方法。
+middleware exported entrance, invoke this function when calling middleware.

@@ -1,8 +1,8 @@
 ## think.base
 
-`think.base`是基类，所有的类都会继承该类，该类提供了一些基本的方法。
+`think.base` is base class, all classes will instance it, it support some base functions.
 
-使用 ES6 语法继承该类：
+Instance of base class with ES6:
 
 ```js
 export default class extends think.base {
@@ -16,9 +16,9 @@ export default class extends think.base {
 }
 ```
 
-`注`： 使用 ES6 里的类时不要写 `constructor`，把初始化的一些操作放在 `init`方法里，该方法在类实例化时自动被调用，效果等同于 `constructor`。
+`Notice`： while using ES6, class donot write `constructor`, put some initial operations in function `init`, this function will been called automatically when class instancing, such like `construtor`.
 
-使用普通的方式继承该类：
+Use normal way to instance base class:
 
 ```js
 module.exports = think.Class(think.base, {
@@ -36,7 +36,7 @@ module.exports = think.Class(think.base, {
 
 * `args` {Array}
 
-初始化方法，这里可以进行一些赋值等操作。
+Initial function, which can do some assign and some other operations.
 
 ```js
 class a extends think.base {
@@ -47,21 +47,21 @@ class a extends think.base {
 }
 ```
 
-`注`：与 `1.x` 版本不同的是，`2.x` 版本 `init` 方法不再支持返回一个 `Promise`，一些通用操作放在 `__before` 魔术方法里进行。
+`Notice`：the different to `1.x` version, the `init` function of `2.x` did not return a `Promise`, some common operations are in `__before` magic functions.
 
 ### __before()
 
-前置魔术方法，可以将一些通用的行为放在这里进行，如：controller 里检测用户是否登录
+pre-magic function, you can put some common behavior here, such like: in controller, check use is login or not.
 
 ```js
 export default class think.controller.base {
   /**
-   * 前置魔术方法
+   * pre-magic function
    * @return {Promise} []
    */
   * __before(){
     let userInfo = yield this.session('userInfo');
-    //如果没有登录，则跳转到登录页面
+    // if not login yet, it will jump to login page.
     if(think.isEmpty(userInfo)){
       return this.redirect('/logic');
     }
@@ -72,16 +72,15 @@ export default class think.controller.base {
 
 ### __after()
 
-后置魔术方法，在方法执行完成后在执行。
+Post magic function, it will execute after function executed.
 
 ### filename()
 
-* `return` {String} 返回当前类文件的名称
+* `return` {String} return the current class file's name.
 
-获取当前类文件的名称，不包含文件具体路径和扩展名。
-
+Get the current class file's name, not contains detail of file path or file's extension.
 ```js
-//假设当前类文件具体路径为 /home/xxx/project/app/controller/user.js
+// suppose current class file path is /home/xxx/project/app/controller/user.js
 class a extends think.base {
   test(){
     var filename = this.filename();
@@ -93,16 +92,16 @@ class a extends think.base {
 
 ### invoke(method, ...data)
 
-* `method` {String} 要调用的方法名称
-* `data` {Array} 传递的参数
+* `method` {String} the function name to been invoked
+* `data` {Array} arguments
 * `return` {Promise}
 
-调用一个方法，自动调用 `__before` 和 `__after` 魔术方法。不管方法本身是否返回 `Promise`，该方法始终返回 `Promise`。
+To invoke a function, automatically invoke `__before` and `__after`.no matter function return `Pormise` or not, this function will return `Pormise`.
 
-方法本身支持是 `*/yield` 和`async/await`。
+This function support `*/yield` and `async/await`.
 
 ```js
-//使用 async/await
+//use async/await
 class Cls extends think.base {
   async getValue(){
     let value = await this.getValue();
@@ -117,7 +116,7 @@ instance.invoke('getValue').then(data => {
 
 
 ```js
-//使用 */yield
+//use */yield
 class Cls extends think.base {
   * getValue(){
     let value = yield this.getValue();
