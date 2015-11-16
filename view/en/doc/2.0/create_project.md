@@ -1,47 +1,41 @@
-## 创建项目
+## Create project
 
-### 安装 Node.js
+### Install Node.js
 
-ThinkJS 是一款 Node.js 的 MVC 框架，所以安装 ThinkJS 之前，需要先安装 Node.js 环境，可以去 [官方](https://nodejs.org/) 下载最新的安装包进行安装，也可以通过其他一些渠道安装。
+ThinkJS is a Node.js MVC framework, it requires Node.js before you run it. You can install by go to https://nodejs.org to download lastest installation and other method.
 
-安装完成后，在命令行执行 `node -v`，如果能看到对应的版本号输出，则表示安装成功。
+After installation, you can type `node -v` in terminal. If it outputs version number, it installs success.
 
-ThinkJS 需要 Node.js 的版本 `>=0.12.0`，如果版本小于这个版本，需要升级 Node.js，否则无法启动服务。建议将 Node.js 版本升级到 `4.2.1`。
+ThinkJS needs `>=0.12.0` Node.js version, if your version lower than it, you need update your Node.js, or you can't start service. we recognize to update your Node.js version to `4.2.1`.
 
-### 安装 ThinkJS
+### Install ThinkJS
 
-通过下面的命令即可安装 ThinkJS：
+Install ThinkJS by following command:
 
 ```sh
 npm install thinkjs@2 -g --verbose
 ```
 
-如果安装很慢的话，可以尝试使用 [taobao](http://npm.taobao.org/) 的源进行安装。具体如下：
+After installation, run `thinjs --version` or `thinjs -V` to watch version.c
+
+Tips: If you installed ThinkJS 1.x before, you need remove it by `npm uninstall -g thinkjs-cmd` first of all.
+
+
+### Create project
+
+After ThinkJS installation, you can create project by following command:
 
 ```sh
-npm install thinkjs@2 -g --registry=https://registry.npm.taobao.org --verbose
+thinkjs new project_path; #project_path is the path you want store your project
 ```
 
-安装完成后，可以通过 `thinkjs --version` 或 `thinkjs -V` 命令查看安装的版本。
-
-`注`：如果之前安装过 ThinkJS 1.x 的版本，可能需要将之前的版本删除掉，可以通过 `npm uninstall -g thinkjs-cmd` 命令删除。
-
-
-### 创建项目
-
-ThinkJS 安装完成后，就可以通过下面的命令创建项目:
+if you want to use ES6 feature to develop, you can create ES6 mode project by following command:
 
 ```sh
-thinkjs new project_path; #project_path为项目存放的目录
+thinkjs new project_path --es6; #project_path is the path you want store your project
 ```
 
-如果想用`ES6`特性来开发项目的话，可以创建一个`ES6`模式的项目，具体如下：
-
-```sh
-thinkjs new project_path --es6; #project_path为项目存放的目录
-```
-
-如果能看见类似下面的输出，表示项目创建成功了：
+If terminal returns output like following, it means you create project success:
 
 ```text
   create : demo/
