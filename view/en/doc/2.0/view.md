@@ -1,16 +1,16 @@
-## 视图
+## View
 
-视图即模版，默认的根目录为 `view/`。
+View is template, the default root directory is `view/`.
 
-### 视图文件
+### View files
 
-视图文件默认的规则为 `模块/控制器_操作.html`。
+The default rule of view file is `module/controller_operation.html`.
 
-假如 URL `home/article/detail` 解析后的模块是 `home`，控制器是 `article`，操作是 `detail`，那么对应的视图文件为 `home/article_detail.html`。
+If the module that URL `home/article/detail` parsed is `home`, the controller is `article`, the operation is `detail`, then the corresponding view file is `home/article_detail.html`.
 
-### 视图配置
+### View configuration
 
-视图默认配置如下，可以在配置文件 `src/common/config/view.js` 中修改：
+View default configuration is as follows, you can modify it in the configuration file `src/common/config/view.js` :
 
 ```js
 export default {
@@ -27,13 +27,13 @@ export default {
 };
 ```
 
-`注`：`2.0.6` 版本开始去除了 `options` 配置项，使用 `adapter` 代替。
+`Note`: Since `2.0.6` version, it removes `options` configuration item, and uses `adapter` to replace.
 
-视图默认根目录在 `view/`。如果想每个模块有独立的视图目录，将配置 `root_path` 修改为空即可。
+The default root directory of view is `view/`. If you want each module to own a separate view directory, configuration `root_path` need to be modified to be empty.
 
-#### 修改连接符
+#### Modify connector 
 
-默认控制器和操作之间的连接符是 `_`，文件名类似为 `index_index.html`，如果想将控制器作为一层目录的话，如：`index/index.html`，可以将连接符修改为 `/`。
+The connector between the default controller and operation is `_`, the file name is similar to `index_index.html`, if you want the controller to be as a layer directory, such as: `index/index.html`, you can modify the connector to be  `/`.
 
 ```js
 export default {
@@ -41,9 +41,9 @@ export default {
 }
 ```
 
-#### 修改模板引擎配置
+#### Modify the template engine configuration 
 
-如果想修改模板引擎的一些配置，如：修改 `ejs` 的定界符，那么可以修改配置 `options` 字段。如：
+If you want to modify some configuration of the template engine, you can modify the corresponding field of configuration. Such as:
 
 ```js
 export default {
@@ -53,15 +53,15 @@ export default {
 }
 ```
 
-### 模版引擎
+### Template engine 
 
-ThinkJS 默认支持的模版引擎有：`ejs`，`jade`，`swig` 和 `nunjucks`，默认模版引擎为 `ejs`，可以根据需要修改为其他的模版引擎。
+The default template engines which ThinkJS support are `ejs`, `jade`, `swig` and `nunjucks`, the default template engine is `ejs`, you can modify it to be other template engines based on need.
 
 #### ejs 
 
-##### 定界符
+##### Delimiter
 
-ejs 默认的定界符是 `<%` 和 `%>`。如果想修改定界符，可以通过配置里的 `options` 来修改，如：
+The default delimiters of ejs are `<%` and `%>`. If you want to change them, you can modify the `options` field of the configure , such as:
 
 ```js
 export default {
@@ -71,13 +71,13 @@ export default {
 }
 ```
 
-##### 变量输出
+##### Variable output 
 
-* 转义输出 `<%= data.name%>`
-* 不转义输出 `<%- data.name%>`
-* 注释 `<%# data.name%>`
+* Escape output `<%= data.name%>`
+* Not escape output `<%- data.name%>`
+* Note `<%# data.name%>`
 
-##### 条件判断
+##### conditional
 
 ```text
 <%if(data.name === '1'){%>
@@ -89,7 +89,7 @@ export default {
 <%}%>
 ```
 
-##### 循环
+##### loop
 
 ```text
 <%list.forEach(function(item)){%>
@@ -97,29 +97,29 @@ export default {
 <%}%>
 ```
 
-##### 过滤器
+##### filter
 
-新版的 `ejs` 已经不在支持过滤器的功能了，如果需要一些过滤功能，可以在 `src/common/bootstrap/` 里定义一些全局函数，模板里可以直接使用这些函数。
+The new version of `ejs` no longer support the filter function, and if you need some filter function, you can define some global function in `src/common/bootstrap/`, you can use these functions directly in the template.
 
-##### 引用文件
+##### Reference file
 
-ejs 不支持模版继承。但可以将公用的模版独立成一个文件，然后通过 `include` 来引入。
+ejs does not support template inheritance. But it can make a public template be independent into an file and then be introduced by `include`.
 
 ```text
 <%include inc/header.html%>
 ```
 
-`注`：ejs 模版使用的变量需要在控制器中赋值，否则会报错。
+`Note`: Variable that used by ejs template needs to be assigned in the controller, otherwise it will produce an error. 
 
-更多 ejs 使用文档请见 [这里](https://www.npmjs.com/package/ejs)。
+More ejs document please see [here](https://www.npmjs.com/package/ejs). 
 
 #### nunjucks
 
-nunjucks 是一款类似于 jinja2 的模版引擎，功能异常强大，复杂项目建议使用该模版引擎。
+Nunjucks is a template engine, similar to the jinja2, whose function is unusually powerful, it suggests you using the template engine in complex projects .
 
-##### 定界符
+##### delimiter
 
-块级定界符为 `{%` 和 `%}`，变量定界符为 `{{` 和 `}}`，注释定界符为 `<#` 和 `#>`。如：
+Block-level delimiters are `{%` and `%}`, variable delimiters are `{{` and `}}`, comment delimiters are `<#` and `#>`. Such as:
 
 ```html
 {{ username }}  
@@ -129,13 +129,13 @@ This is the default content
 {% endblock %}
 ```
 
-##### 变量输出
+##### Variable output
 
-可以通过 `{{ username }}` 来输出变量，默认输出的变量会自动转义，如果不想被转义，可以通过 `{{ username | safe }}` 来处理。
+You can use `{{username}}` to output variables, the default output variables will automatically be escaped, if don't want to be escaped, you can use `{{username | safe}}` to deal with.
 
-##### 模版继承
+##### Template inheritance
 
-父级模版：
+The parent template:
 
 ```html
 {% block header %}
@@ -153,7 +153,7 @@ This is the default content
 </section>
 ```
 
-子级模版：
+The child templates:
 
 ```html
 {% extends "parent.html" %}
@@ -167,7 +167,7 @@ This is the right side!
 {% endblock %}
 ```
 
-##### 条件判断
+##### conditional
 
 ```html
 {% if hungry %}
@@ -179,7 +179,7 @@ This is the right side!
 {% endif %}
 ```
 
-##### 循环
+##### loop
 
 ```html
 <h1>Posts</h1>
@@ -192,20 +192,19 @@ This is the right side!
 </ul>
 ```
 
-具体使用文档请见 [这里](http://mozilla.github.io/nunjucks/)。
+The specific use document please see [here](http://mozilla.github.io/nunjucks/).
 
 #### jade
 
-jade 模版使用方式请见 [这里](https://github.com/jadejs/jade)。
+jade template using way please see [here](https://github.com/jadejs/jade). 
 
 #### swig
 
-swig 模版使用方式请见 [这里](http://paularmstrong.github.io/swig/)。
+swig template using way please see [here](http://paularmstrong.github.io/swig/). 
 
+#### Add filters, and other functions
 
-#### 添加过滤器等功能
-
-`swig`，`nunjucks` 等很多模板引擎都支持添加过滤器等功能，可以在模板配置文件 `src/common/config/view.js` 中添加 `prerender` 配置来完成。如：
+`Swig`, `nunjucks` and many other template engines support adding filters, and other functions, it can be completed by finding the corresponding adapter in the template configuration file `src/common/config/view.js` and adding `prerender `configuration. Such as:
 
 ```js
 export default {
@@ -218,17 +217,17 @@ export default {
 }
 ```
 
-`注`： 该功能是在版本 `2.0.5` 中新增的。
+`Note`: this function is new in version `2.0.5`.
 
-#### 扩展模版引擎
+#### Extend the template engine
 
-模版引擎使用 Adapter 实现。如果项目里需要使用其他模版引擎，可以通过 Adapter 进行扩展，具体请见 [这里](./adapter_template.html)。
+Template engine is implemented by Adapter. If the project needs to use other template engines, it can be extended through Adapter, please see [here](./adapter_template.html).
 
-### 变量赋值
+### Variable assignment
 
-控制器中可以通过 `assign` 方法进行变量赋值。
+The controller can do variable assignment by the `assign` method.
 
-##### 赋值单个变量
+##### Assignment of single variable
 
 ```js
 export default class extends think.controlle.base {
@@ -238,7 +237,7 @@ export default class extends think.controlle.base {
 }
 ```
 
-##### 赋值多个变量
+##### Assignment of multiple variables
 
 ```js
 export default class extends think.controlle.base {
@@ -251,9 +250,9 @@ export default class extends think.controlle.base {
 }
 ```
 
-##### 获取赋值
+##### Get the assignment
 
-变量赋值后也可以通过 `assign` 来获取赋过的值。如：
+You can get assigned values by `assign` after variable assignment. Such as:
 
 ```js
 export default class extends think.controlle.base {
@@ -264,9 +263,9 @@ export default class extends think.controlle.base {
 }
 ```
 
-### 模版渲染
+### Template render
 
-可以通过 `display` 方法进行模版渲染。如果不传具体的模版文件路径，会自动查找。如：
+You can render the template by the `display` method. If you don't pass a specific template file path, it will automatically search. Such as:
 
 ```js
 export default class extends think.controller.base {
@@ -276,13 +275,13 @@ export default class extends think.controller.base {
 }
 ```
 
-也可以指定具体的模版文件进行渲染，关于 `display` 方法的详细使用请见 [这里](./api_controller.html#toc-6b2)。
+You could also specify a specific template files for rendering, about the `display` method using in detail please see [here](./api_controller.html#toc-6b2).
 
-### 获取渲染后的内容
+### Get content rendered
 
-如果有时候不想支持输出模版，而是想获取渲染后的模版内容，那么可以通过 `fetch` 方法来获取。
+If sometimes don't want to support the output template, but get content rendered, so it could be obtained by the `fetch` method.
 
-##### ES6 方式
+##### The way of ES6
 
 ```js
 export default class extends think.controller.base {
@@ -293,7 +292,7 @@ export default class extends think.controller.base {
 }
 ```
 
-##### 动态创建类的方式
+##### The way of dynamic creation
 
 ```js
 module.exports = think.controller({
@@ -305,35 +304,35 @@ module.exports = think.controller({
 })
 ```
 
-关于 `fetch` 方法的详细使用方式请见 [这里](api_controller.html#controllerfetchtemplatefile)。
+More details about the `fetch` method using way please see [here](api_controller.html#controllerfetchtemplatefile).
 
-### 国际化
+### Internationalization
 
-启动国际化后，视图路径会多一层国际化的目录。如：具体的视图路径变为 `view/zh-CN/home/index_index.html`，其中 `zh-CN` 为语言名。
+After starting the internationalization, the view path will has an extra layer of internationalization of directory. Such as: specific view path becomes into the `view/zh-CN/home/index_index.html`, and `zh-CN` is language.
 
-关于如果使用国际化请见 [扩展功能 -> 国际化](./i18n.html)。 
+About how to use internationalization, please see [extensions - > internationalization](./i18n.html).
 
-### 多主题
+### Multiple themes
 
-设置多主题后，视图路径会多一层多主题的目录。如：具体的视图路径变为 `view/default/home/index_index.html`，其中 `default` 为主题名称。
+After setting the multiple theme, view path will be much more than a layer theme directory. Such as: specific view path becomes into the `view/default/home/index_index.html`, the `default` is the theme name. 
 
-可以通过 `http.theme` 方法来设置当前的主题，设置主题一般是通过 middleware 来实现。
+You can set the current theme by `http.theme` method, setting the theme is usually done by middleware.
 
-关于 middleware 更多信息请见 [扩展功能 - Middleware](./middleware.html)。
+More information on middleware please see [extensions - middleware](./middleware.html).
 
-### 默认模版变量
+### The default template variables
 
-为了可以在模版里很方便的获取一些通用的变量，框架自动向模版里注册了 `http`, `controller`, `config` 等变量，这些变量可以在模版里直接使用。
+In order to get some common variables easily in the template, framework automatically registered `http`, `controller`, `config` and other variables in the template, and these variables can be used directly in the template.
 
-下面的代码示例都是基于 `ejs` 模版引擎的，其他的模版引擎下需要根据相应的语法进行修改。
+The following code example is based on `ejs` template engine, you need to modify it according to the corresponding syntax under the other template engines.
 
 #### http
 
-模版里可以直接使用 `http` 对象下的属性和方法。
+In the template, the properties and methods under `http` object can be used directly.
 
 #### controller
 
-模版里可以直接使用 `controller` 对象下的属性和方法。
+In the template, the properties and methods under `controller` object can be used directly.
 
 ```js
 export default class extends think.controller.base {
@@ -343,7 +342,7 @@ export default class extends think.controller.base {
 }
 ```
 
-Action 里给当前控制器添加了属性 `navType`，那么模版里就可以直接通过 `controller.navType` 来使用。
+Add property `navType` to the current controller in the Action, then the template can be used directly by the `controller.navType`.
 
 ```text
 <%if(controller.navType === 'home')%>
@@ -355,7 +354,7 @@ Action 里给当前控制器添加了属性 `navType`，那么模版里就可以
 
 #### config
 
-通过 `config` 对象可以在模版中直接对应的配置，如：
+It can be directly corresponding configuration in the template through the `config` object, such as:
 
 ```text
 <%if(config.name === 'text'){%>
@@ -364,12 +363,11 @@ Action 里给当前控制器添加了属性 `navType`，那么模版里就可以
 ```
 
 
-#### 国际化方法 _
+#### The internationalization way _
 
-在模版中可以直接通过 `_` 方法获取对应本地化的值，这些值在 `src/common/config/locales/[lang].js` 中定义。
+In the template, you can obtain the value of the corresponding localization by `_` directly, these values are defined in the `src/common/config/locales/[lang].js`.
 
 ```text
 <%= _('title')%>
 ```
-
-更多国际化相关的信息请见 [这里](./i18n.html)。
+More information on internationalization please see [here](./i18n.html).
