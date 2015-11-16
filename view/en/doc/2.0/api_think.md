@@ -92,7 +92,7 @@ The path of static resource directory, which is defined in `www/index.js`
 
 
 
-### 方法
+### Function
 
 #### think.Class(methods, clean)
 
