@@ -4,7 +4,7 @@ ThinkJS is a Node.js MVC framework develope by the feature of ES6/7。`async/awa
 
 It's a trend towards using the feature of ES6/7 building project with high effecient. Now the lastest version of Node.js has support the feature of ES6 more friendly, thought not all feature. [Babel](http://babeljs.io) can help us compile ES6 to ES5 code  to run.
 
-## Feature
+### Feature
 
 #### Using ES6/7 feature
 
@@ -128,7 +128,7 @@ Althought ThinkJS has many advantage, there also has little disadvantage like:
 - ThinkJS is a new framework without much support from community
 - ThinkJS lacks of huge project
 
-## ES6/7 reference documentation
+### ES6/7 reference documentation
 
 You can read more about ES6/7 features:
 
