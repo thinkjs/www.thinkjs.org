@@ -1,49 +1,51 @@
-## 静态资源访问
+## Static Resource Access
 
-项目开发时，一般都需要在模版里引用静态资源。
+We generally need to reference static resources in a template when developing project.
 
-使用 `thinkjs` 命令创建项目时，会自动创建 `www/static` 目录，该目录下专门用来存放 JS、CSS、图片等静态资源。
+When using the command `thinkjs` to create a project, it will automatically create the directory `www/static`, where specially stores JS, CSS, images and other static resources.
 
-### 访问静态资源
 
-静态资源放在 `www/static` 目录后，模版里就可以通过下面的方式引入静态资源。
+### Access Static Resource
 
-#### 模版里引用 JS 文件
+After putting the static resources in the directory `www/static`, you can reference them in a template by the following approaches.
+
+#### Reference JS file in template
 
 ```html
 <script src="/static/js/foo.js"></script>
 ```
 
-#### 模版里引用 CSS 文件
+#### Reference CSS file in template
 
 ```html
 <link href="/static/css/foo.css" rel="stylesheet" />
 ```
 
-#### 模版里引用图片文件
+#### Reference Image file in template
 
 ```html
 <img src="/static/img/foo.png" alt="" >
 ```
 
-### 静态资源访问配置
+### Static Resource Access Configuration
 
-对于一个请求是否是静态资源请求，是通过正则来判断的。默认配置如下：
+Judging whether the request is a static resource request, we use regular expression. The default configuration is as follows.
 
 ```js
 export default {
-  resource_on: true, //是否开启静态资源解析功能
-  resource_reg: /^(static\/|[^\/]+\.(?!js|html)\w+$)/, //判断为静态资源请求的正则
+  resource_on: true, //enable static resource resolution function
+  resource_reg: /^(static\/|[^\/]+\.(?!js|html)\w+$)/, //regular for judging static resource request
 }
 ```
 
-项目里可以根据需要在配置文件里 `src/common/config/config.js` 进行修改。
+You can modify the configuration file `src/common/config/config.js` according to your project requirements.
 
-### 线上关闭静态资源访问
 
-项目上线后，一般会使用 nginx 等 WEB 服务器做一层代理，这时候就可以将静态资源的请求直接让 nginx 来处理，项目里就可以关闭对静态资源请求的处理来提高性能。
+### Close Online Static Resource Access 
 
-可以在配置文件 `src/common/config/env/prodution.js` 里修改配置来关闭，如：
+After the project online, it generally uses nginx or other WEB server as a angent. At this time, you can let nginx to directly handle the static resource request. Thus, you could close the static resource resconfigolution access to improve performance.
+
+Set the option `resource_on` in the configuration file `src/common/config/env/prodution.js` to close it. eg.
 
 ```js
 export default {
