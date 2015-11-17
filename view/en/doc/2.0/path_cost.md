@@ -1,43 +1,43 @@
-## 路径常量
+## Path Const
 
-系统提供了很多常量供项目里使用，利用这些常量可以方便的访问对应的文件。
+System provides many consts for project, and you can use them to access corresponding files conveniently.
 
 ### think.ROOT_PATH
 
-项目的根目录。
+The root of project.
 
 ### think.RESOURCE_PATH
 
-静态资源根目录，路径为 `think.ROOT_PATH` + `/www/`。
+The root of static resources, path is `think.ROOT_PATH` + `/www/`.
 
 ### think.APP_PATH
 
-APP 代码目录，路径为 `think.ROOT_PATH` + `/app/`。
+The directory of APP code, path is `think.ROOT_PATH` + `/app/`.
 
 ### think.THINK_PATH
 
-ThinkJS 框架的根目录。
+The root directory of ThinkJS framework.
 
 ### think.THINK_LIB_PATH
 
-ThinkJS 框架 `lib` 目录。
+ThinkJS framework `lib` directory.
 
 ### think.getPath(module, type)
 
-对于 model，controller，view 等目录，由于每个模块下都有这些目录，所以无法给出一个固定的路径值。可以通过 `think.getPath` 来获取模块下的路径。
+For the model,controller,view directory and so on, because each module has these directories, so we can't give a fixed path value. You can get path value of module by `think.getPath`.
 
 ```js
-let path1 = think.getPath('common', 'model'); //获取 common 下 model 的目录
-let path2 = think.getPath('home', 'controller'); //获取 home 模块下 controller 的目录
+let path1 = think.getPath('common', 'model'); //get the directory of common module
+let path2 = think.getPath('home', 'controller'); //get the directory of home module
 ```
 
-### 自定义路径常量
+### User-defined Path Const
 
-除了通过系统给的属性或者方法来获取路径，还可以在项目里定义额外的路径常量。
+Besides the system properties and methods to get path, you can also define extra path const in project.
 
-##### 入口文件里定义
+##### Define in Entrance File
 
-项目的入口文件为 `src/index.js` 或者 `src/production.js` 等，可以在这些入口文件里定义一些路径常量。如：
+The entrance file of project is `src/index.js` or `src/production.js`, you can define path const in it. eg.
 
 ```js
 var thinkjs = require('thinkjs');
@@ -49,18 +49,18 @@ var instance = new thinkjs({
   APP_PATH: rootPath + '/app',
   ROOT_PATH: rootPath,
   RESOURCE_PATH: __dirname,
-  UPLOAD_PATH: __dirname + '/upload', // 定义文件上传的目录
+  UPLOAD_PATH: __dirname + '/upload', // define the directory of file uploading 
   env: 'development'
 });
 
 instance.run();
 ```
 
-##### 启动文件里定义
+##### Define in Startup File
 
-定义在 `src/common/bootstrap` 里的文件在项目启动时会自动加载，所以也可以在这些文件里定义路径常量。如：
+The files defined in `src/common/bootstrap` will be loaded automatically, so you can also define path const in this file. eg.
 
 ```js
 // src/common/bootstrap/common.js
-think.UPLOAD_PATH = think.RESOURCE_PATH + '/upload'; //定义文件上传的目录
+think.UPLOAD_PATH = think.RESOURCE_PATH + '/upload'; // define the directory of file uploading 
 ```
