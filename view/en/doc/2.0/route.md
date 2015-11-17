@@ -1,20 +1,20 @@
-## 路由
+## Route
 
-当用户访问一个 URL 时，最终执行哪个模块下哪个控制器的哪个操作，这是由路由来解析后决定的。
+When a user visit a URL, eventually performing which module which controller which operation is decided by route after parsing.
 
-ThinkJS 提供了一套灵活的路由机制，除了默认的解析外，还可以支持多种形式的自定义路由，让 URL 更加简单友好。
+ThinkJS provides a flexible route mechanism, in addition to the default resolution, it also support a variety forms of custom route, let the URL more simple and friendly.
 
-### URL 解析为 pathname
+### URL resolves to the pathname
 
-当用户访问服务时，服务端首先拿到的是一个完整的 URL，如：访问本页面，得到的 URL 为 `http://www.thinkjs.org/zh-CN/doc/2.0/route.html`。
+When a user accesses to the service, the server first of all, will get a full URL, such as: visit this page and the URL is  `http://www.thinkjs.org/zh-CN/doc/2.0/route.html`.
 
-将 URL 进行解析得到的 pathname 为 `/zh-CN/doc/2.0/route.html`。
+The pathname resolved by URL is `/zh-CN/doc/2.0/route.html`.
 
-### pathname 过滤
+### pathname filter
 
-有时候为了搜索引擎优化或者一些其他的原因， URL 上会多加一些东西。比如：当前页面是一个动态页面，但 URL 最后加了 `.html`，这样对搜索引擎更加友好。但这些在后续的路由解析中是无用的，需要去除。
+Sometimes in order to seo or some other reasons, the URL will be a few more things. For example, the current page is a dynamic page, but URL eventually adds `.html`, it’s more friendly to search engines. But these is useless in the subsequent route resolution, it needs to be removed.
 
-ThinkJS 里提供了下面的配置可以去除 `pathname` 的前缀和后缀内容：
+ThinkJS offer the following configuration, it can remove the prefix and postfix content of `pathname`:
 
 ```js
 export default {
@@ -23,17 +23,17 @@ export default {
 }
 ```
 
-上面配置可以在 `src/common/config/config.js` 中进行修改。
+Above configuration can be modified in the `src/common/config/config.js`.
 
-pathname 过滤时会自动去除左右的 `/`，该逻辑不受上面的配置影响。对 pathname 进行过滤后，拿到干净的 pathname 为 `zh-CN/doc/2.0/route`。
+The pathname will automatically remove `/` around when filtering, the logic is not affected by the configuration above. After filtering the pathname, the clean pathname you get is `zh-CN/doc/2.0/route`.
 
-`注`：如果访问的 URL 是 `http://www.thinkjs.org/`，那么最后拿到干净的 pathname 则为空字符串。
+`Note`: If you visit the URL, which is `http://www.thinkjs.org/`, then finally the clean pathname you get is an empty string.
 
-### 子域名部署
+### Subdomain deployment
 
-当项目比较复杂时，可能希望将不同的功能部署在不同的域名下，但代码还是在一个项目下。如：域名 `admin.example.com` 部署后台管理的功能，希望映射到 `admin` 模块下。
+When the project is complex, we may want to deploy different function under the different domain, but the code is still in a project. Such as: When the domain name `admin.exanple.com` deploys background management functions, we hope that it can map to the `admin` module.
 
-ThinkJS 提供了如下的配置可以进行子域名部署，该配置可以在 `config/config.js` 里设置：
+ThinkJS provides the following configuration that it can undertake subdomain deployment, the configuration can be set in the `config/config.js`:
 
 ```js
 export default {
@@ -44,34 +44,34 @@ export default {
 }
 ```
 
-假如过滤后的 pathname 为 `group/detail`，命中了 admin.example.com 这个子域名后，pathname 变为 `admin/group/detail`。
+If the pathname is `group/detail` after filtering , hit the subdomain admin.example.com, the pathname become to the `admin/group/detail`.
 
-### 路由识别
+### Routing identification
 
-#### 路由解析
+#### Routing resolves
 
-路由识别默认根据 `模块/控制器/操作/参数1/参数1值/参数2/参数2值` 来识别过滤后的 pathname，如：pathname 为 `admin/group/detail`，那么识别后的结果为：
+Routing identification identify the filtered pathname default according to the `module/controller/action/parameter1/parameter value of 1/parameter2/parameter value of 2`. Such as: the pathname is `admin/group/detail`, so the results of identification is:
 
-* module 为 `admin`
-* controller 为 `group`
-* action 为 `detail`，对应的方法名为 `detailAction`
+* module for `admin`
+* controller for `group`
+* action for `detail`,the corresponding method is called `detailAction`
 
-如果项目里并没有 `admin` 这个模块或者这个模块被禁用了，那么识别后的结果为：
+If the project does’t have `admin` or the module is disabled, then the results of identification is:
 
-* module 为默认模块 `home`
-* controller 为 `admin`
-* action 为 `group`，对应的方法名为 `groupAction`
-* 参数为 `{detail: ''}`
+* module for the default module `home`
+* controller for `admin`
+* action for `group`，the corresponding method is called `groupAction`
+* Parameters for `{detail: ''}`
 
-#### 大小写转化
+#### Transformation of case
 
-路由识别后，`module`、`controller` 和 `Action` 值都会自动转为小写。如果 Action 值里有 `_`，会作一些转化，如：假设识别后的 Controller 值为 `index`，Action 值为 `user_add`，那么对应的 Action 方法名为 `userAddAction`，但模版名还是 `index_user_add.html`。
+After route identification, `module`、`controller`、and the `Action` value will automatically convert to lowercase. If there are `_` in the Action value, it will do some transformation, such as: in the case that the value of Controller is `index` after identification, the Action value is `user_add`, then the corresponding Action method called `userAddAction`, but the template name is still `index_user_add. html`.
 
-### 路由默认值
+### The default Route
 
-当解析 pathname 没有对应的值时，此时便使用对应的默认值。其中 module 默认值为 `home`，controller 默认值为 `index`，action 默认值为 `index`。
+Once there is no corresponding value when parsing the pathname, then using the corresponding default value. And module default value is `home`, controller default value is `index`, action default value is `index`.
 
-这些值可以通过下面的配置进行修改，配置文件 `src/common/config/config.js`：
+These values can be modified through the following configuration, the configuration file `src/common/config/config.js`:
 
 ```js
 export default {
@@ -81,16 +81,15 @@ export default {
 }
 ```
 
-### 自定义路由
+### Custom route
 
-默认的路由虽然看起来清晰明了，解析起来也很简单，但看起来不够简洁。
+Although the default route looks clear, it's also simple to parse, but looks not enough concise.
 
-有时候需要更加简洁的路由，这时候就需要使用自定义路由解析了。如：文章的详细页面，默认路由可能是：`article/detail/id/10`，但我们想要的 URL 是 `article/10` 这种更简洁的方式。
+Sometimes we need more compact route, now we need to use a custom route to parse. Such as: the detail page of the article, the default route might be:  `article/detail/id/10`, but the URL we want is `article/10` this more concise way.
 
+##### Open the configuration
 
-##### 开启配置
-
-开启自定义路由，需要在 `src/common/config/config.js` 开启如下的配置：
+Open the custom route, we need to open the configuration as the following in `src/common/config/config.js`.
 
 ```js
 export default {
@@ -98,9 +97,9 @@ export default {
 }
 ```
 
-##### 路由规则
+##### Route rules
 
-开启自定义路由后，就可以通过路由规则来定义具体的路由了，路由配置文件为： `src/common/config/route.js`，格式如下：
+After opening the custom route, then we can define the exact route through route rules, route configuration file is: `src/common/config/route.js`, the format is as follows:
 
 ```js
 export default [
@@ -112,19 +111,19 @@ export default [
 ];
 ```
 
-`注`：自定义路由每一条规则都是一个数组。（至于为什么不用对象，是因为正则路由下，正则不能作为对象的 key 直接使用）
+`Note`: Each rule of custom route is an array.(The reason why we do not use object is that regular cannot be used as the object's key directly under the regular route. )
 
-##### 识别方式
+##### Identify ways
 
-自定义路由的匹配规则为：从前向后逐一匹配，如果命中到了该项规则，则不在向后匹配。
+The match rule of custom route is : matching one by one from the front to rear, if hit this rule, it will not match back.
 
 -------
 
-ThinkJS 支持 3 种类型的自定义路由，即：正则路由，规则路由和静态路由。 
+ThinkJS supports three types of custom route, they are : regular route, rules route and static route.
 
-#### 正则路由
+#### Regular route
 
-正则路由是采用正则表示式来定义路由的一种方式，依靠强大的正则表达式，能够定义非常灵活的路由规则。
+Regular route is a way that uses regular expressions to define the route, relying on the powerful regular expression, it can define very flexible route rules.
 
 ```js
 export default [
@@ -132,7 +131,7 @@ export default [
 ];
 ```
 
-上面的正则会匹配类似 `article/10` 这样的 pathname，识别后新的 pathname 为 `home/article/detail`，并且将捕获到的值赋值给参数 id ，这样在控制器里就可以通过 `this.get` 方法 来获取该值。
+The above regular will match pathname like `article/10`, the new pathname identified is `home/article/detail`, and it will assign the value captured to the parameter id, then can obtain the value through `this.get` method in the controller.
 
 ```js
 export default class extends think.controller.base {
@@ -142,7 +141,7 @@ export default class extends think.controller.base {
 }
 ```
 
-如果正则里含有多个子分组，那么可以通过 `:1`，`:2`，`:3` 来获取对应的值。
+If regular route contains multiple child groups, then can obtain the corresponding values by`:1`,`:2`,`:3` 
 
 ```js
 export default [
@@ -155,9 +154,9 @@ export default [
 ```
 
 
-#### 规则路由
+#### Rules route
 
-规则路由是一种字符串匹配方式，但支持含有一些动态的值。如：
+Rules route is a way of string matching, but supports some dynamic values. Such as:
 
 ```js
 export default [
@@ -165,7 +164,7 @@ export default [
 ]
 ```
 
-假如访问的 URL 为 `http://www.example.com/group/2015/10`，那么会命中该项规则，得到的 pathname 为 `home/group/list`，同时会添加 2 个参数 `year` 和 `month`，这2个参数可以在控制器里通过 `this.get` 方法来获取。
+If the URL we visit is `http://www.example.com/group/2015/10`, then it will hit the rule, the pathname we get is `home/group/list`, at the same time, it will add two parameters `year` and `month`, these two parameters can be gotten through `this.get` method in the controller.
 
 ```js
 export default class extends think.controller.base {
@@ -176,9 +175,9 @@ export default class extends think.controller.base {
 }
 ```
 
-#### 静态路由
+#### Static route
 
-静态路由是一种纯字符串的完全匹配方式，写法和识别都很简单，功能也相对要弱很多。
+Static route is a way of pure string exactly match, its writing and identification are very simple, of course the function is relatively weaker.
 
 ```js
 export default [
@@ -186,17 +185,18 @@ export default [
 ]
 ```
 
-假如访问的 URL 为 `http://www.example.com/list`，那么替换后的 pathname 为 `home/article/list`。
+If the URL we visit is `http://www.example.com/list`, then the pathname replaced is the home/article/list`.
 
-#### 优化路由性能
+#### To optimize the route performance
 
-上面已经说到，自定义路由是个数组，数组每一项是个具体的路由规则，匹配时是从前向后逐一进行匹配。如果这个路由表比较大的话，可能会有性能问题。
+Above has said that the custom route is an array, each item of the array is a specific route rule, 
+and it matches one by one from the front to rear when matching. If the route table is large, there may be a performance issue.
 
-为了避免有性能问题，ThinkJS 提供了一种更加高效的自定义路由方式，按模块来配置路由。使用这种方式，路由配置格式跟上面稍微有所不同。
+In order to avoid performance issues, ThinkJS provides a more efficient way of custom route, configuring route according to the module. Using this way, the route configuration format is slightly different from the above.
 
 ##### common/config/route.js
 
-使用这种方式后，通用模块里的路由配置不再配置具体的路由规则，而是配置哪些规则命中到哪个模块。如：
+After using this way, the route configuration in the general module configures specific route rules no longer, but configures which rules hit which module. Such as:
 
 ```js
 export default {
@@ -211,7 +211,7 @@ export default {
 
 ##### admin/config/route.js
 
-admin 模块配置 admin 下的具体路由规则。
+The admin module configures specific route rules under admin.
 
 ```js
 export default [
@@ -222,4 +222,4 @@ export default [
 
 ------
 
-假设访问的 URL 为 `http://www.example.com/admin/api`，那么解析后的 pathname 为 `admin/api`，匹配 `common` 里的规则时会命中 `admin` 模块，然后再对 `admin` 模块下的路由规则进行逐一匹配。通过这种方式后就可以大大减少路由规则匹配的数量，提供匹配效率。
+Assuming that the URL visit is `http://www.example.com/admin/api`, then the pathname parsed is `admin/api`,  it will hit the `admin` module when matching the rules in the `common`, and then match the route rules one by one under the `admin` module. In this way, it can greatly reduce the number of route rules need to match, providing matching efficiency.

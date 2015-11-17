@@ -1,30 +1,29 @@
-## 配置
+## configuration
 
-ThinkJS 提供了灵活的配置，可以在不同的模块和不同的项目环境下使用不同的配置，且这些配置在服务启动时就已经生效。
+ThinkJS provides a flexible configuration, it can use different configuration in different modules and project environments, and these configurations were effective when service is started.
 
-`注意：不可将一个 http 请求中的私有值设置到配置中，这将会被下一个 http 设置的值给冲掉。`
+`Note: Do not set the private value of an http request to the configuration, it will be bathed by 
+the setting values of the next http.`
 
-### 项目模块
+### The project module
 
-ThinkJS 默认创建的项目是按模块来划分的，可以在每个模块下定义不同的配置。其中 `common` 模块下定义一些通用的配置，其他模块下配置会继承 `common` 下的配置。如：`home` 模块下的最终配置是将 `common` 和 `home` 模块下配置合并的结果。
+The projects that created default by ThinkJS are divided according to the module, you can define different configuration under each module. Define some general configuration under `common` modules, other modules will inherit the configuration under the `common` configuration. Such as: the final configuration of home module is the result of the `common` and `home` module configuration under combined.
 
+### Project environment
 
+ThinkJS default support three kind of project environments, it can be configured according to the different environment, in order to meet the needs of the different situations of configuration.
 
-### 项目环境
+* `development` development
+* `testing` testing
+* `production` production
 
-ThinkJS 默认支持 3 种项目环境，可以根据不同的环境进行配置，以满足不同情况下的配置需要。
+It can also be extended to other environment in project, which kind of environment to use at present can be set in the [entrance file](./app_structure.html#toc-f0b), and set the `env` value.
 
-* `development` 开发环境
-* `testing` 测试环境
-* `production` 线上环境
-
-项目里也可以扩展其他的环境，当前使用哪种环境可以在 [入口文件](./app_structure.html#toc-f0b) 中设置，设置 `env` 值即可。
-
-### 定义配置文件
+### Define the configuration file
 
 ##### config/config.js
 
-存放一些基本的配置，如：
+For some basic configuration, such as:
 
 ```js
 export default {
@@ -37,7 +36,7 @@ export default {
 
 ##### config/[name].js
 
-存放具体某个独立功能的配置，如：`db.js` 为数据库配置，`redis` 为 redis 配置。
+For a specific independent function configuration, such as: `db.js` is the database configuration, `redis` is redis configuration.
 
 ```js
 // db.js
@@ -53,7 +52,7 @@ export default {
 
 ##### config/env/[mode].js
 
-不同项目环境的差异化配置，如：`env/development.js`，`env/testing.js`，`env/production.js`
+Differentiation configuration in different project environment, such as: `env/development.js`,`env/testing.js`,`env/production.js`.
 
 ```js
 // config/env/development.js
@@ -68,57 +67,57 @@ export default {
 }
 ```
 
-`注`：不同项目环境差异化配置一般不是很多，所以放在一个文件中定义。这时候如果要修改一个独立功能的配置，就需要将独立功能对应的 key 带上。如：上述代码里的修改数据库配置需要将数据库对应的名称 `db` 带上。
+`Note`: Difference configuration of different project environment generally is not a lot, so defined in a file. At this time, if you want to modify an independent function configuration, you need to add key corresponding to independent function. Such as: You need to add the the name of the `db` corresponding to the database when modify the database configuration of the above code.
 
 ##### config/locale/[lang].js
 
-国际化语言包配置，如： `locale/en.js`，`locale/zh-CN.js`。
+International language pack configuration, such as: `locale/en.js`,`locale/zh-CN.js`.
 
 --------
 
-配置格式采用 `key: value` 的形式，并且 `key` 不区分大小写。
+Configuration format uses the form of `key: value`, and the `key` is case-insensitive.
 
-### 加载配置文件
+### Load the configuration file
 
-框架支持多种级别的配置文件，会按以下顺序进行读取：
+Framework supports multiple levels of the configuration file, it reads in the following order:
 
-`框架默认的配置 -> 项目模式下框架配置 -> 项目公共配置 -> 项目模式下的公共配置 -> 模块下的配置`
+`Framework of the default configuration - > framework configuration under project mode - > project common configuration - > common configuration under project mode - > module configuration`
 
-### 配置读取
+### Read configuration
 
-#### 通过 config 方法获取
+#### Obtain through the config
 
-在 Controller，Logic，Middleware 等地方可以通过 `this.config` 来获取。如：
+Places such as the Controller, Logic, Middleware can be achieved by `this.config`. Such as:
 
 ```js
 let db = this.config('db'); //读取数据库的所有配置
-let host = this.config('db.host'); //读取数据库的 host 配置，等同于 db.host
+let host = this.config('db.host'); //读取数据库的 host 配置,等同于 db.host
 ```
 
-#### 通过 http 对象上的 config 方法获取
+#### Obtain through config method on http object
 
-http 对象也有 config 方法用来获取相关的配置，如：
+http objects also have the config method used to obtain the relevant configuration, such as:
 
 ```js
 let db = http.config('db');
 ```
 
-#### 其他地方配置读取
+#### Read configuration from other parts
 
-其他地方可以通过 `think.config` 来读取相关的配置：
+Other places can read the relevant configuration through `think.config`:
 
 ```js
 let db = think.config('db'); //读取通用模块下的数据库配置
 let db1 = think.config('db', undefined, 'home'); //获取 home 模块下数据库配置
 ```
 
-`注`：路由解析前，无法通过 `config` 方法或者 http 对象上的 `config` 方法来获取非通用模块下的配置，所以路由解析前就使用的配置需要定义在通用模块里。
+`Note`: Before parsing route, we can not get the general module configuration through the `config` method or `config` method on http object, so the configuration which is used before route parsing needs to be defined in the general module.
 
-### 系统默认配置
+### The default configuration
 
 #### env
 
-项目模式下的配置，`config/env/development.js`。
+Project configuration mode, the `config/env/development.js`.
 
 ```js
 export default {
@@ -133,11 +132,11 @@ export default {
 }
 ```
 
-`config/env/testing.js` 和 `config/env/produciton.js` 无默认配置。
+Th `config/env/testing.js` and `config/env/produciton.js` have no default configuration.
 
 #### locale
 
-国际化语言包配置，默认的配置如下：
+International language pack configuration, the default configuration is as follows:
 
 ```js
 // config/locale/en.js
@@ -229,24 +228,24 @@ export default {
 
 #### config
 
-基本配置，`config/config.js`。
+The basic configuration, `config/config.js`.
 
 ```js
 export default {
   port: 8360, //服务监听的端口
   host: '', //服务监听的 host
   encoding: 'utf-8', //项目编码
-  pathname_prefix: '',  //pathname 去除的前缀，路由解析中使用
-  pathname_suffix: '.html', //pathname 去除的后缀，路由解析中使用
+  pathname_prefix: '',  //pathname 去除的前缀,路由解析中使用
+  pathname_suffix: '.html', //pathname 去除的后缀,路由解析中使用
   proxy_on: false, //是否使用 nginx 等 web server 进行代理
   hook_on: true,  //是否开启 hook
   cluster_on: false, //是否开启 cluster
 
   service_on: true, //Service available
   timeout: 120, //120 seconds
-  auto_reload: false, //自动重新加载修改的文件，development 模式下使用
+  auto_reload: false, //自动重新加载修改的文件,development 模式下使用
 
-  resource_on: true, // 是否处理静态资源请求， porxy_on 开启下可以关闭该配置
+  resource_on: true, // 是否处理静态资源请求, porxy_on 开启下可以关闭该配置
   resource_reg: /^(static\/|[^\/]+\.(?!js|html)\w+$)/, //静态资源的正则
 
   route_on: true, //是否开启自定义路由
@@ -255,7 +254,7 @@ export default {
   log_request: false, //是否打印请求的日志
   
   create_server: undefined, //自定义启动服务
-  output_content: undefined, //自定义输出内容处理方式，可以进行 gzip 处理等
+  output_content: undefined, //自定义输出内容处理方式,可以进行 gzip 处理等
   deny_module_list: [], //禁用的模块列表
   default_module: 'home', //默认模块
   default_controller: 'index',  //默认的控制器
@@ -268,7 +267,7 @@ export default {
 
 #### cache
 
-缓存配置，`config/cache.js`。
+Cache configuration,`config/cache.js`.
 
 ```js
 export default {
@@ -283,7 +282,7 @@ export default {
 
 #### cookie
 
-cookie 配置，`config/cookie.js`。
+cookie configuration,`config/cookie.js`.
 
 ```js
 export default {
@@ -297,7 +296,7 @@ export default {
 
 #### db
 
-数据库配置，`config/db.js`。
+database configuration,`config/db.js`.
 
 ```js
 export default {
@@ -323,7 +322,7 @@ export default {
 
 #### error
 
-错误信息配置，`config/error.js`。
+The error information configuration,`config/error.js`.
 
 ```js
 export default {
@@ -335,13 +334,13 @@ export default {
 
 #### gc
 
-缓存、Session等垃圾处理配置，`config/gc.js`。
+The cache, the Session, and garbage disposal configuration,`config/gc.js`.
 
 ```js
 export default {
   on: true, //是否开启垃圾回收处理
-  interval: 3600, // 处理时间间隔，默认为一个小时
-  filter: function(){ //如果返回 true，则进行垃圾回收处理
+  interval: 3600, // 处理时间间隔,默认为一个小时
+  filter: function(){ //如果返回 true,则进行垃圾回收处理
     let hour = (new Date()).getHours();
     if(hour === 4){
       return true;
@@ -352,7 +351,7 @@ export default {
 
 #### hook
 
-hook 配置，`config/hook.js`。
+hook configuration,`config/hook.js`.
 
 ```js
 export default {
@@ -376,7 +375,7 @@ export default {
 
 #### post
 
-post 请求时的配置，`config/post.js`。
+the post request configuration, `config/post.js`.
 
 ```js
 export default {
@@ -392,7 +391,7 @@ export default {
 
 #### redis
 
-redis 配置，`config/redis.js`。
+redis configuration,`config/redis.js`.
 
 ```js
 export default {
@@ -406,7 +405,7 @@ export default {
 
 #### memcache
 
-memcache 配置，`config/memcache.js`。
+memcache configuration,`config/memcache.js`.
 
 ```js
 export default {
@@ -422,7 +421,7 @@ export default {
 
 #### session
 
-session 配置，`config/session.js`。
+session configuration,`config/session.js`.
 
 ```js
 export default {
@@ -440,7 +439,7 @@ export default {
 
 #### view
 
-视图配置，`config/view.js`。
+view configuration,`config/view.js`.
 
 ```js
 export default {
@@ -455,7 +454,7 @@ export default {
 
 #### websocket
 
-websocket 配置，`config/websocket.js`。
+websocket configuration,`config/websocket.js`.
 
 ```js
 export default {
@@ -472,9 +471,9 @@ export default {
 ```
 
 
-### 扩展配置
+### The extension configuration
 
-项目里可以根据需要扩展配置，扩展配置只需在 `src/common/config/` 建立对应的文件即可，如：
+Project can be extended the configuration according to the need, extending configuration only need to set up the correspond ding files in `src/common/config/`, such as:
 
 ```js
 // src/common/config/foo.js
@@ -483,4 +482,4 @@ export default {
 }
 ```
 
-这样就可以通过 `think.config('foo')` 来获取对应的配置了。 
+So you can obtain the corresponding configuration through `think.config('foo')`.
