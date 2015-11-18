@@ -45,6 +45,7 @@ cp www/*.ico output/www/;
 cp www/*.js output/www/;
 cp package.json output/;
 cp nginx.conf output/;
+cp pm2.json output/;
 cp -r www/static/module/thinkjs output/www/static/module/
 
 npm run compile;
@@ -60,7 +61,7 @@ cd ..
 
 
 scp -r output.tar.gz qiwoo@101.198.153.219:~;
-ssh qiwoo@101.198.153.219 "tar zxvfm ~/output.tar.gz -C /home/qiwoo/www/www.thinkjs.org;rm -rf ~/output.tar.gz;pm2 restart www.thinkjs.org";
+ssh qiwoo@101.198.153.219 "tar zxvfm ~/output.tar.gz -C /home/qiwoo/www/www.thinkjs.org;rm -rf ~/output.tar.gz;cd /home/qiwoo/www/www.thinkjs.org;pm2 startOrGracefulReload pm2.json";
 
 #sleep 2;
 
