@@ -132,7 +132,8 @@ i.icon-fet8{ background-position:-70px -210px;}
 .doc h5,.doc .h5{font-size: 16px}
 
 
-.demo-list{font-size: 16px;color: #333}
+.demo{color:#333;}
+.demo-list{font-size: 16px;}
 .demo-list ul{margin-left: 20px}
 .demo-list ul li{list-style-type: disc;}
 .demo-list ul li a{color: #337ab7;text-decoration: none;}
