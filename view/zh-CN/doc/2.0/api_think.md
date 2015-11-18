@@ -10,7 +10,7 @@
 
 #### think.env
 
-当前项目运行的环境，默认支持下面3个值，可以在项目启动时指定：
+当前项目运行的环境，默认支持下面 3 个值，可以在项目启动时指定：
 
 * `development` 开发环境，会自动更新修改的文件
 * `testing` 测试环境
@@ -43,7 +43,7 @@ think.dirname = {
 
 #### think.cli
 
-是否是命令行模式在运行项目，默认为`false`。如果是命令行模式，则该值为传递的参数，可以通过下面的方式启动命令行模式。
+是否是命令行模式在运行项目，默认为 `false`。如果是命令行模式，则该值为传递的参数，可以通过下面的方式启动命令行模式。
 
 ```
 node www/index.js /home/index/test
@@ -408,7 +408,7 @@ think.isHttp(http); // true
 * `obj` {Mixed}
 * `return` {Boolean}
 
-判断是否是个阻止类型的Ppromise。通过 think.prevent() 会生成该 Promise 。
+判断是否是个阻止类型的 Promise。通过 think.prevent() 会生成该 Promise 。
 
 #### think.mkdir(p, mode)
 
@@ -462,17 +462,28 @@ think.chmod("/home/welefen/a", 0777);
 
 #### think.md5(str)
 
-* `str` {String} 要计算md5值的字符串
-* `return` {String} md5值
+* `str` {String} 要计算的字符串
+* `return` {String} 返回字符串的 md5 值
 
-计算字符串的md5值
+计算字符串的 md5 值
 
 ```js
 think.md5('thinkjs'); 
-// returns
-7821eb623e0b1138a47db6a88c3f56bc
+// returns 7821eb623e0b1138a47db6a88c3f56bc
 ```
 
+
+#### think.camelCase(sr)
+
+* `str` {String} 要转换的字符串
+* `return` {String}
+
+转换为驼峰方式
+
+```js
+think.camelCase('a_bbb_ccc');
+//returns aBbbCcc
+```
 
 #### think.defer()
 
@@ -519,7 +530,7 @@ var fn = function(){
 * `fn` {Function} 要转化的函数
 * `receiver` {Object} this指向
 
-将异步方法快速包装成Promise，异步方法必须符合最后一个参数为回调函数，且回调函数的第一个参数为 `err`的原则。
+将异步方法快速包装成 Promise，异步方法必须符合最后一个参数为回调函数，且回调函数的第一个参数为 `err` 的原则。
 
 ```js
 var fs = require('fs');
@@ -960,7 +971,7 @@ let instance = think.logic('user', http, 'home');
 
 #### think.model()
 
-创建或者获取 model。
+创建或者获取 model
 
 ##### 创建 model
 
@@ -1008,7 +1019,7 @@ let instance = think.model('user', configs, 'home');
 
 #### think.service()
 
-创建或者获取 service。
+创建或者获取 service
 
 ##### 创建 service ##### 
 
@@ -1127,7 +1138,7 @@ if(think.isEmpty(result)){
 * `key` {String} 
 * `callback` {Function}
 
-执行等待，避免一个耗时的操作多次被执行。 callback 需要返回一个 promise 。
+执行等待，避免一个耗时的操作多次被执行。 callback 需要返回一个 Promise 。
 
 如：用户访问时，要请求一个远程的接口数据。如果不处理，每个用户请求都会触发这个远程接口的访问，导致有很大的资源浪费。可以让这些用户公用一个远程接口的请求。
 
