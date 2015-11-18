@@ -7,7 +7,7 @@
       "Update Guide": "upgrade",
       "Q & A": "question"
     },
-    "进阶应用": {
+    "Advance": {
       "Module": "module",
       "Controller": "controller",
       "View": "view",
@@ -29,7 +29,7 @@
       "WebSocket": "adapter_websocket",
       "Template": "adapter_template"
     },
-    "扩展功能": {
+    "More fetures": {
       "Command": "thinkjs_command",
       "Resource": "resource",
       "Middleware": "middleware",
