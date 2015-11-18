@@ -1,71 +1,71 @@
 ## REST API
 
-项目中，经常要提供一个 API 供第三方使用，一个通用的 API 设计规范就是使用 REST API。REST API 是使用 HTTP 中的请求类型来标识对资源的操作。如：
+In project, we often need to provide an API for third party to call. A common API design specification is using REST API, which uses HTTP request type to identify resource operation.
 
-* `GET` `/ticket` #获取ticket列表
-* `GET` `/ticket/12` #查看某个具体的ticket
-* `POST` `/ticket`  #新建一个ticket
-* `PUT` `/ticket/12` #更新ticket 12
-* `DELETE` `/ticket/12` #删除ticekt 12
+* `GET` `/ticket` # get ticket list
+* `GET` `/ticket/12` # view the specified ticket
+* `POST` `/ticket`  # new a ticket
+* `PUT` `/ticket/12` # update ticket 12
+* `DELETE` `/ticket/12` # delete ticket 12
 
-ThinkJS 中提供了很便捷的方式来创建 REST API，创建后无需额外的代码即可响应 REST API 的处理，同时也可以通过定制响应额外的需求。
+ThinkJS provides a very convenient way to create REST API. After created, it can response REST API process without writing any code, and it can also response additional demand by customization.
 
-### 创建 REST API
+### Create REST API
 
-通过 `thinkjs controller [name] --rest` 即可创建一个 REST API。如：
+Use `thinkjs controller [name] --rest` to create REST API. eg.
 
 ```js
 thinkjs controller home/ticket --rest
 ```
 
-上面的命令表示在 `home` 模块下创建了一个 `ticket` 的 Rest Controller，该 Controller 用来处理资源 `ticket` 的请求。
+The above command means that a Rest Controller named `ticket` is created in `home` module. And this Controller is used to handle the request of resource `ticket`.
 
-### 处理 REST API 请求
+### Process REST API Request
 
-Rest Controller 创建完成后，无需写任何的代码，即可完成对 REST API 的处理。资源名称和数据表名称是一一对应的，如：资源名为 `ticket`，那么对应的数据表为 `数据表前缀` + `ticket`。
+After Rest Controller created, you can complete REST API process without writing any code. Resource name and data table name is one-to-one. eg. resource name is `ticket`, then the data table name is `data table prefix` + `ticket`.
 
-### 请求类型
+### Request Type
 
-REST API 默认是从 HTTP METHOD 里获取当前的请求类型的，如：当前请求类型是 `DELETE`，表示对资源进行删除操作。
+REST API gets the current request type from HTTP METHOD by default. eg.the current request type is `DELETE`, which means to delete the resource.
 
-如果有些客户端不支持发送 `DELETE` 请求类型，那么可以通过属性 `_method` 指定一个参数用来接收请求类型。如：
+If some clients do not support sending `DELETE` request, you can set the property  `_method` to receive request type. eg.
 
 ```js
 export default class extends think.controller.rest {
   init(http){
     super.init(http);
-    this._method = '_method'; //指定请求类型从 GET 参数 _method 里获取
+    this._method = '_method'; //specify to get request type from _method in GET params
   }
 }
 ```
 
-### 字段过滤
+### Field Filter
 
-默认情况下，获取资源信息时，会将资源的所有字段都返回。有时候需要隐藏部分字段，可以通过在 `__before` 魔术方法里完成此类操作。
+By default, all fields of resource are all returned when accessing it. Sometimes we need to hide part of fields, and we can complete such operations in magic method `__before`.
 
 ```js
 export default class extends think.controller.rest {
   __before(){
-    this.modelInstance.fieldReverse('password,score'); //隐藏 password 和 score 字段
+    this.modelInstance.fieldReverse('password,score'); //hide password and score fields
   }
 }
 ```
 
-### 权限管理
+### Authority Management
 
-有些 REST API 需要进行权限验证，验证完成后才能获取对应的信息，可以通过在 `__before` 魔术方法里进行验证。
+Some REST API requires authentication. Only after passing the validation can it obtain the corresponding information. The validation can be carried out in the magic method `__before`.
 
 ```js
 export default class extends think.controller.rest {
   * __before(){
     let auth = yield this.checkAuth();
     if(!auth){
-      return this.fail('no permissions'); //没权限时直接返回
+      return this.fail('no permissions'); // return directly when no permission
     }
   }
 }
 ```
 
-### 更多定制
+### More Customization
 
-更多定制方式请参见 [API -> controller.rest](./api_controller_rest.html)。
+See [API -> controller.rest](./api_controller_rest.html) for more customization ways.
