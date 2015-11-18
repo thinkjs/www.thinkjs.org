@@ -1,51 +1,51 @@
-## 推荐模块
+## Recommend Modules
 
-### 网络请求
+### Network Request
 
 * superagent
 * request
 
-### 日志
+### Log
 
 * log4js
 
-### 日期处理
+### Date Process
 
 * moment
 
-### 编码转化
+### Code Transform
 
 * iconv-lite
 
-### 图像处理
+### Image Process
 
 * gm
 
-### 框架
+### Framework
 
 * thinkjs
 * express
 * koa
 * sails
 
-### 调试
+### Debug
 
 * node-inspector
 
-### 单元测试
+### Unit Test
 
 * mocha
 * istanbul
 * muk
 
-### 服务管理
+### Service Management
 
 * pm2
 
-### 邮件
+### Mail
 
 * nodemailer
 
-### 定时任务
+### Timed Task
 
 * node-crontab
