@@ -138,6 +138,7 @@ sails 也是一个提供整套解决方案的 Node.js 框架，对数据库、RE
 
 * [learn-es2015](http://babeljs.io/docs/learn-es2015/)
 * [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
+* [给 JavaScript 初心者的 ES2015 实战](http://gank.io/post/564151c1f1df1210001c9161)
 * [ECMAScript 6 Features](https://github.com/lukehoban/es6features)
 * [ECMAScript 6 compatibility table](http://kangax.github.io/compat-table/es6/)
 * [ECMAScript 7 Features](https://github.com/hemanth/es7-features)
