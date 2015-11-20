@@ -1,10 +1,10 @@
-## 线上部署
+## Online Deploy
 
-### 使用 pm2 管理服务
+### Use pm2 to Manage Service
 
-pm2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用。使用 pm2 需要以全局的方式安装，如： `sudo npm install -g pm2`。安装完成后，命令行下会有 pm2 命令。
+pm2 is a module to professionally manage Node.js service, it is highly recommanded to use it online. It needs to be installed globally. eg. `sudo npm install -g pm2`. After installation is complete, there will be pm2 commands in command line.
 
-创建项目时，会在项目目录下创建名为 `pm2.json` 的配置文件，内容类似如下：
+When creating project, the config file `pm2.json` will be created in the project directory. And it's content is roughly as follows.
 
 ```js
 {
@@ -23,17 +23,18 @@ pm2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用�
 }
 ```
 
-将 `cwd` 配置值改为线上真实的项目路径，然后在项目目录下使用下面的命令来启动/重启服务：
+Modify the `cwd` config value into the pratical project path, then use the following command to start/restart the service in the project directory.
+
 
 ```sh
 pm2 startOrGracefulReload pm2.json
 ```
 
-pm2 详细的配置请见 <http://pm2.keymetrics.io/docs/usage/application-declaration/>。
+See <http://pm2.keymetrics.io/docs/usage/application-declaration/> for the detailed config of pm2.
 
-### 使用 nginx 做反向代理
+### Use Nginx as a Reverse Proxy
 
-创建项目时，会在项目目录创建一个名为 `nginx.conf` 的 nginx 配置文件。配置文件内容类似如下：
+It will create a nginx config file named `nginx.conf` in the project directory when creating project, which content is roughly as follows.
 
 ```nginx
 server {
@@ -76,11 +77,11 @@ server {
 
 ```
 
-将 `server_name localhost` 里的 localhost 修改为对应的域名，将 `set $node_port 8360` 里的 8360 修改和项目里监听的端口一致。
+Modify the localhost in `server_name localhost` into the corresponding domain name. Modify the 8360 in `set $node_port 8360` into as the same as the listening one in the project.
 
-修改完成后，将该配置文件拷贝到 nginx 的配置文件目录中，然后通过 `nginx -s reload` 命令 reload 配置，这样就可以通过域名访问了。
+After the modification is complete, copy the cofing file to the config file directory of nginx, then reload the config by the command `nginx -s reload`. So you can access by the domain name.
 
-线上建议开启配置 `proxy_on`，这样就可以禁止直接通过 IP + 端口来访问。修改配置文件 `src/common/config/env/production.js`，如：
+It is recommended to open the config `proxy_on` online, so that you can forbid to access directly by IP + port. Modify the config file `src/common/config/env/production.js`, eg.
 
 ```js
 export default {
@@ -88,11 +89,11 @@ export default {
 }
 ```
 
-### 关闭静态资源处理的配置
+### The Config of Closing the Static Resource Process
 
-为了方便开发，ThinkJS 是支持处理静态资源请求的。但代码部署在线上时，是用 nginx 来处理静态资源请求的，这时可以关闭 ThinkJS 里处理静态资源请求的功能来提高性能。
+In order to develop conveniently, ThinkJS supports to process the static resource request. But when code is deployed online, it uses nginx to process the static resource request. By this time, you can close the function of process static resource request to improve performance.
 
-可以在配置文件 `src/common/config/env/production.js` 中加入如下的配置：
+Add the following configuration in the config file `src/common/config/env/production.js`.
 
 ```js
 export default {
@@ -100,11 +101,11 @@ export default {
 }
 ```
 
-### 使用 cluster
+### Use Cluster
 
-线上可以开启 cluster 功能达到利用多核 CPU 来提升性能，提高并发处理能力。
+Online enable cluster function to make the good use of advantage of multicore CPU to improve performance and concurrent processing capability. 
 
-可以在配置文件 `src/common/config/env/production.js` 中加入如下的配置：
+Add the following configuration in the config file `src/common/config/env/production.js`.
 
 ```js
 export default {
