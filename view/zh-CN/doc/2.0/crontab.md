@@ -93,3 +93,19 @@ let jobId = crontab.scheduleJob('0 */1 * * *', () => {
 ```
 
 将上面代码文件存放在 `src/common/bootstrap` 目录下，这样可以在服务启动时自动执行。
+
+如果希望在开发环境下能立即看下执行的效果，可以用类似下面的方式：
+
+```js
+import crontab from 'node-crontab';
+
+let fn = () => {
+  //定时任务具体逻辑
+}
+// 1 小时执行一次
+let jobId = crontab.scheduleJob('0 */1 * * *', fn);
+//开发环境下立即执行一次看效果
+if(think.env === 'development'){
+  fn();
+}
+```
