@@ -4,5 +4,6 @@ export default {
   'title-plugin': 'plugins - ThinkJS',
   'title-donate': 'donate - ThinkJS',
   'title-about': 'about - ThinkJS',
+  'title-spending': 'spending - ThinkJS',
   'back2top': 'back to top'
 }

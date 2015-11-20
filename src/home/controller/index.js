@@ -51,10 +51,18 @@ export default class extends base {
   }
   /**
    * about page
-   * @return {[type]} [description]
+   * @return {} []
    */
   aboutAction(){
     this.assign('title', this.locale('title-about'));
+    return this.display();
+  }
+  /**
+   * spending page
+   * @return {} 
+   */
+  spendingAction(){
+    this.assign('title', this.locale('title-spending'));
     return this.display();
   }
 }

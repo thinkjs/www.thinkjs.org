@@ -4,6 +4,7 @@ export default [
   [/^plugin/, 'index/plugin'],
   [/^donate/, 'index/donate'],
   [/^about/, 'index/about'],
+  [/^spending/, 'index/spending'],  
 
   [/^doc(?:\/([\d\.\x]+))?\/search$/i, "doc/search?version=:1"],
   [/^doc(?:\/([\d\.\x]+))?\/single$/i, "doc/single?version=:1"],
