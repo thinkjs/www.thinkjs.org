@@ -61,7 +61,7 @@ cd ..
 
 
 scp -r output.tar.gz qiwoo@101.198.153.219:~;
-ssh qiwoo@101.198.153.219 "tar zxvfm ~/output.tar.gz -C /home/qiwoo/www/www.thinkjs.org;rm -rf ~/output.tar.gz;cd /home/qiwoo/www/www.thinkjs.org;pm2 startOrGracefulReload pm2.json";
+ssh qiwoo@101.198.153.219 "tar zxvfm ~/output.tar.gz -C /home/qiwoo/www/www.thinkjs.org;rm -rf ~/output.tar.gz;cd /home/qiwoo/www/www.thinkjs.org;pm2 startOrReload pm2.json";
 
 #sleep 2;
 
