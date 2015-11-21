@@ -1,30 +1,31 @@
 ## Middleware
 
-当处理用户的请求时，需要经过很多处理，如：解析参数，判断是否静态资源访问，路由解析，页面静态化判断，执行操作，查找模版，渲染模版等。项目里根据需要可能还会增加其他的一些处理，如：判断 IP 是否在黑名单中，CSRF 检测等。
+When handling user requests, it needs to take a lot of processes, such as parsing params, determining whether a static resource access, route parse, page staticize judgment, executing operation, searching template, rendering template and so on. The project may also increase some other processes according to the requirements, like determining whether the IP in the blacklist, CSRF detection and so on.
 
-ThinkJS 里通过 middleware 来处理这些逻辑，每个逻辑都是一个独立的 middleware。在请求处理中埋很多 hook，每个 hook 串行执行一系列的 middleware，最终完成一个请求的逻辑处理。
+ThinkJS uses middleware to handle these logics, each logic is an independent middleware. Many hooks are buried in the request process, each hook executes a series of middleware serially. And finally, one request logic process is completed.
 
-### hook 列表
 
-框架里包含的 hook 列表如下：
+### Hook List
 
-* `request_begin` 请求开始
-* `payload_parse` 解析提交上来的数据
-* `payload_validate` 验证提交的数据
-* `resource` 静态资源请求处理
-* `route_parse` 路由解析
-* `logic_before` logic 处理之前
-* `logic_after` logic 处理之后
-* `controller_before` controller 处理之前
-* `controller_after` controller 处理之后
-* `view_before` 视图处理之前
-* `view_template` 视图文件处理
-* `view_parse` 视图解析
-* `view_filter` 视图内容过滤
-* `view_after` 视图处理之后
-* `response_end` 请求响应结束
+The framework contains the following hooks.
 
-每个 hook 里调用多个 middleware 来完成处理，具体包含的 middleware 如下：
+* `request_begin` request start
+* `payload_parse` parse the data submitted
+* `payload_validate` verify the data submitted
+* `resource` static resource request process
+* `route_parse` route parse
+* `logic_before` before logic process
+* `logic_after` after logic process
+* `controller_before` before controller process
+* `controller_after` after controller process
+* `view_before` before view process
+* `view_template` view process
+* `view_parse` view parse
+* `view_filter` view content filter
+* `view_after` after view process
+* `response_end` response end
+
+Each hook calls one or more middleware to complete processing. The included middlewares are the following.
 
 ```js
 export default {
@@ -46,65 +47,66 @@ export default {
 };
 ```
 
-### 配置 hook
+### Config Hook
 
-hook 默认执行的 middleware 往往不能满足项目的需求，可以通过配置修改 hook 对应要执行的 middleware 来完成，hook 的配置文件为 `src/common/config/hook.js`。
-
-```js
-export default {
-  payload_parse: ['parse_xml'], //解析 xml
-}
-```
-
-上面的配置会覆盖掉默认的配置值。如果在原有配置上增加的话，可以通过下面的方式：
-
-##### 在前面追加
+The middlewares executed default by hook usually can not meet the needs of the project. By this time, you can modify the middleware executed respondingly by hook. The config file of hook is `src/common/config/hook.js`.
 
 ```js
 export default {
-  payload_parse: ['prepend', 'parse_xml'], //在前面追加解析 xml
+  payload_parse: ['parse_xml'], // parse xml
 }
 ```
 
-##### 在后面追加
+The above config will override the default config. If you want to add them in the original config, you can use the following ways.
+
+
+##### Append in Front
 
 ```js
 export default {
-  payload_parse: ['append', 'parse_xml'], //在后面追加解析 xml
+  payload_parse: ['prepend', 'parse_xml'], //append parse xml in front
 }
 ```
 
-`注`：建议使用追加的方式配置 middleware，系统的 middleware 名称可能在后续的版本中有所修改。
-
-### 执行 hook
-
-可以通过 `think.hook` 方法执行一个对应的 hook，如：
+##### Append in End
 
 ```js
-await think.hook('payload_parse', http, data); //返回的是一个 Promise
+export default {
+  payload_parse: ['append', 'parse_xml'], //append parse xml in end
+}
 ```
 
-在含有 `http` 对象的类中可以直接使用 `this.hook` 来执行 hook，如：
+`Note`: It is recommended to use the way of append to config middleware, the name of system middleware may be modified in subsequent versions.
+
+### Execute Hook
+
+Use the method `think.hook` to execute the corresponding hook. eg.
+
+```js
+await think.hook('payload_parse', http, data); //return a Promise
+```
+
+Use `this.hook` to execute hook directly in the class containing `http` object. eg.
 
 ```js
 await this.hook('payload_parse', data);
 ```
 
-### 创建 middleware 
+### Create Middleware 
 
-ThinkJS 支持 2 种方式的 middleware，即：class 方式和 function 方式。可以根据 middleware 复杂度决定使用哪种方式。
+ThinkJS supports two modes of middleware, they are class mode and funcion mode. You can determine which mode to use depending on the complexity of middleware.
 
-#### class 方式
+#### Class Mode
 
-如果 middleware 需要执行的逻辑比较复杂，需要定义为 class 的方式。可以通过 `thinkjs` 命令来创建 middleware，在项目目录下执行如下的命令：
+If middleware needs to execute complex logic, you need to define it as class mode. Use the command `thinkjs` to create middleware, execute the following command in the project directory.
 
 ```sh
 thinkjs middleware xxx
 ```
 
-执行完成后，会看到对应的文件 `src/common/middleware/xxx.js`。
+After execution, you will see the corresponding file `src/common/middleware/xxx.js`.
 
-##### ES6 方式 ##### 
+##### ES6 Mode
 
 ```js
 'use strict';
@@ -122,7 +124,7 @@ export default class extends think.middleware.base {
 }
 ```
 
-##### 动态创建类的方式
+##### Dynamic Creation Class Mode
 
 ```js
 'use strict';
@@ -141,13 +143,15 @@ module.exports = think.middleware({
 })
 ```
 
-middleware 里会将 `http` 传递进去，可以通过 `this.http` 属性来获取。逻辑代码放在 `run` 方法执行，如果含有异步操作，需要返回一个 `Promise` 或者使用 `*/yield`。
+Middleware will pass `http` into it, you can use `this.http` to get. The logic codes are executed in the method `run`. If they contain asynchronous operation, you need to return a `Promise` or use `*/yield`.
 
-#### function 方式
 
-如果 middleware 要处理的逻辑比较简单，可以直接创建为函数的形式。这种 middleware 不建议创建成一个独立的文件，而是放在一起统一处理。
+#### Function Mode
 
-可以建立文件 `src/common/bootstrap/middleware.js`，该文件在服务启动时会自动被加载。可以在这个文件添加多个函数式的 middleware。如：
+If middleware needs to execute easy logic, you could define it as function mode. This middleware is not recommended to be created as a separate file, but to put together instead.
+
+You could create the file `src/common/bootstrap/middleware.js`, which will be loaded automatically when service starts. And you can add one or more function mode middleware in this file. eg.
+
 
 ```js
 think.middleware('parse_xml', http => {
@@ -158,9 +162,9 @@ think.middleware('parse_xml', http => {
 });
 ```
 
-函数式的 middleware 会将 `http` 对象作为一个参数传递进去，如果 middleware 里含有异步操作，需要返回一个 `Promise` 或者使用 Generator Function。
+Function mode middleware will pass `http` object as a param. If the middleware has asynchronous operation, it need to return a `Promise` or use Generator Function.
 
-以下是框架里解析 json payload 的实现：
+The following is the implementation of parsing json payload in framework.
 
 ```js
 think.middleware('parse_json_payload', http => {
@@ -176,13 +180,14 @@ think.middleware('parse_json_payload', http => {
 });
 ```
 
-### 解析后赋值
+### Set Value after Parsed
 
-有些 middleware 可能会解析相关的数据，然后希望重新赋值到 `http` 对象上，如：解析传递过来的 xml 数据，但后续希望可以通过 `http.get` 方法来获取。
+Some middleware may parse the corresponding datas, and want to reassign `http` object. Such as parse the xml data passed, but hope to use the method `http.get` to get later.
 
-* `http._get` 用来存放 GET 参数值，http.get(xxx) 从该对象获取数据
-* `http._post` 用来存放 POST 参数值，http.post(xxx) 从该对象获取数据
-* `http._file` 用来存放上传的文件值，http.file(xxx) 从该对象获取数据
+
+* `http._get` store the value of GET params, http.get(xxx) to get data from this object
+* `http._post` store the value of POST params, http.post(xxx) to get data from this object
+* `http._file` store the value of uploaded file, http.file(xxx) to get data from this object
 
 ```js
 think.middleware('parse_xml', http => {
@@ -190,18 +195,19 @@ think.middleware('parse_xml', http => {
     return;
   }
   return parseXML(http.payload).then(data => {
-    http._post = data; //将解析后的数据赋值给 http._post，后续可以通过 http.post 方法来获取
+    http._post = data; //assign the parsed data to http._post, use http.post to get value later
   });
 });
 ```
 
-关于 `http` 对象更多信息请见 [API -> http](./api_http.html)。
+See [API -> http](./api_http.html) for more information about `http`.
 
-### 阻止后续执行
 
-有些 middleware 执行到一定条件时，可能希望阻止后面的逻辑继续执行。如：IP 黑名单判断，如果命中了黑名单，那么直接拒绝当前请求，不再执行后续的逻辑。
+### Prevent the Subsequent Execution
 
-ThinkJS 提供了 `think.prevent` 方法用来阻止后续的逻辑执行执行，该方法是通过返回一个特定类型的 Reject Promise 来实现的。
+When executing the certain conditions, some middleware may want to prevent the subsequent logic to execute. such as IP blacklist judgement, if hit the blacklist, then directly refuse the current request and no longer execute the subsequent logic.
+
+ThinkJS provides the method `think.prevent` for preventing to execute the subsequent logic. This method returns a specific type of Reject Promise.
 
 ```js
 think.middleware('parse_xml', http => {
@@ -211,19 +217,20 @@ think.middleware('parse_xml', http => {
   var ip = http.ip();
   var blackIPs = ['123.456.789.100', ...];
   if(blackIPs.indexOf(ip) > -1){
-    http.end();//直接结束当前请求
-    return think.prevent(); //阻止后续的代码继续执行
+    http.end();// directly end the current request
+    return think.prevent(); // prevent the subsequent codes to execute
   }
 });
 ```
 
-除了使用 `think.prevent` 方法来阻止后续逻辑继续执行，也可以通过 `think.defer().promise` 返回一个 Pending Promise 来实现。
+In order to prevent the subsequent logic to execute, beside using the method `think.prevent`, you can also use `think.defer().promise` to return a Pending Promise.
 
-如果不想直接结束当前请求，而是返回一个错误页面，ThinkJS 提供了 `think.statusAction` 方法来实现，具体使用方式请见 [扩展功能 -> 错误处理](./error_handle.html)。
+If you don't want to end the current request directly, but return an error page instead, ThinkJS provides the method  `think.statusAction`. See [Extend Function -> Error Handle](./error_handle.html) for detailed usage.
 
-### 使用第三方 middleware
 
-在项目里使用第三方 middleware 可以通过 `think.middleware` 方法来实现，相关代码存放在 `src/common/bootstrap/middleware.js` 里。如：
+### Use Third-party Middleware
+
+In the project, you can use third-party middleware by the method `think.middleware`. The corresponding code is in `src/common/bootstrap/middleware.js`. eg.
 
 ```js
 var parseXML = require('think-parsexml');
@@ -231,13 +238,13 @@ var parseXML = require('think-parsexml');
 think.middleware('parseXML', parseXML);
 ```
 
-然后将 `parseXML` 配置到 hook 里即可。
-
+Then just put  `parseXML`  config into hook.
 
 -----
 
-项目里的一些通用 middleware 也推荐发布到 npm 仓库中，middleware 名称推荐使用 `think-xxx`。
+It is recommanded to release the common middlewares of project to npm repository. And the name of middleware is suggested to use `think-xxx`.
 
-### 第三方 middleware 列表
 
-第三方 middleware 列表请见 [插件 -> middleware](./plugin.html#middleware)。
+### Third-party Middleware List
+
+See [plugin -> middleware](/plugin.html#middleware) for the third-party middleware list.
