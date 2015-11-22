@@ -5,7 +5,6 @@ import marked from "marked";
 import markToc from "marked-toc";
 import highlight from 'highlight.js';
 
-
 export default class extends think.controller.base {
   /**
    * before magic method
