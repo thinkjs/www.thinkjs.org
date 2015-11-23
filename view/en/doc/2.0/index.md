@@ -1,6 +1,6 @@
 ## Introduction
 
-ThinkJS is a Node.js MVC framework develope by the feature of ES6/7。`async/await` feature in ES7 or `*/yield` feature in ES6 was used to resovle the proplem of async callback nesting hell. it make Node.js project development faster and efficient with absorbing lots of other framwork's design concepts and ideas around the world.
+ThinkJS is a Node.js MVC framework developed by the features of ES6/7。`async/await` feature in ES7 or `*/yield` feature in ES6 was used to resovle the proplem of async callback nesting hell. it make Node.js project development faster and efficient with absorbing lots of other framwork's design concepts and ideas around the world.
 
 It's a trend towards using the feature of ES6/7 building project with high effecient. Now the lastest version of Node.js has support the feature of ES6 more friendly, thought not all feature. [Babel](http://babeljs.io) can help us compile ES6 to ES5 code  to run.
 
