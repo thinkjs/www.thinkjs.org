@@ -92,7 +92,7 @@ module.exports = think.controller(Base, {
 
 借助 Babel 编译，还可以在控制器里使用 ES7 里的 `async/await`。
 
-##### ES6 方式
+##### ES7 方式
 
 ```js
 'use strict';
