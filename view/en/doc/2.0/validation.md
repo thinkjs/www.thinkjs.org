@@ -1,12 +1,13 @@
-## 数据校验
+## Data Validation
 
-当在 Action 里处理用户的请求时，经常要先获取用户提交过来的数据，然后对其校验，如果校验没问题后才能进行后续的操作。当参数校验完成后，有时候还要进行权限判断，等这些都判断无误后才能进行真正的逻辑处理。如果将这些代码都放在一个 Action 里，势必让 Action 的代码非常复杂且冗长。
+When handling user requests in Action, you often need to get the submitted datas firstly, and then validate them. Only passing the data validation can do the subsquent operation. After the param validation, sometimes, you also need to judge permission. After all of these are correct, it is time to do the real logic process. If these codes are all placed in one Action, it will must make the codes of Action very complex and redundant.
 
-为了解决这个问题， ThinkJS 在控制器前面增加了一层 `Logic`，Logic 里的 Action 和控制器里的 Action 一一对应，系统在调用控制器里的 Action 之前会自动调用 Logic 里的 Action。
+In order to solve this problem, ThinkJS add a layer of `Logic` before Controller. The Action in Logic and the Action in Controller are one-to-one correspondence. System will call the Action in Logic automatically before calling the Action in Controller. 
 
-### Logic 层
 
-Logic 目录在 `src/[module]/logic`，在通过命令 `thinkjs controller [name]` 创建 Controller 时会自动创建对应的 Logic。Logic 代码类似如下：
+### Logic Layer
+
+The directory of Logic is `src/[module]/logic`. When using command `thinkjs controller [name]` to create Controller, there will automatically create the corresponding Logic. The codes of the Logic are roughly like the followings.
 
 ```js
 'use strict';
@@ -26,11 +27,11 @@ export default class extends think.logic.base {
 }
 ```
 
-其中，Logic 里的 Action 和 Controller 里的 Action 一一对应。Logic 里也支持 `__before` 和 `__after` 等魔术方法。
+The Action in Logic and the Action in Controller are one-to-one correspondence. The Action in Logic also supports `__before` and `__after` and other magic methods.
 
-### 数据校验配置
+### Data Validation Config
 
-数据校验的配置如下：
+The config of data validation is as follows.
 
 ```js
 export default class extends think.logic.base {
@@ -43,43 +44,44 @@ export default class extends think.logic.base {
 }
 ```
 
-#### 配置格式
+#### Config Format
 
-配置格式为 `字段名` -> `配置`，每个字段的配置支持多个校验类型，校验类型之间用 `|` 隔开，校验类型和参数之间用 `:` 隔开，参数之间用 `,` 隔开来支持多个参数。
+The config format is `field name` -> `config`, each field config supports multiple validation types. The multiple validation types are separated by `|`, the validation type and param are separated by `:`, param and param are seperated by  `,`.
 
-#### 参数格式
+#### Param Format
 
-校验类型后面可以接参数，除了支持用逗号隔开的简单参数外，还可以支持 JSON 格式的复杂参数。如：
+Params could follow the end of validation type. Besides supporting the simply params separated by comma, it also supports the complex param in JSON format. eg.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      field1: "array|default:[1,2]", //参数为数组
-      field2: 'object|default:{\"name\":\"thinkjs\"}' //参数为对象
+      field1: "array|default:[1,2]", // param is array
+      field2: 'object|default:{\"name\":\"thinkjs\"}' //param is object
     }
   }
 }
 ```
 
-#### 支持的数据类型
+#### Supported Data Type
 
-支持的数据类型有：`boolean`、`string`、`int`、`float`、`array`、`object`，默认为 `string`。
+The supported data types include `boolean`,`string`,`int`,`float`,`array`,`object`. And the default type is `string`.
+ 
 
-#### 默认值
+#### Default Value
 
-使用 `default:value` 来定义字段的默认值，如果当前字段值为空，会将默认值覆盖过去，后续获取到的值为该默认值。
+Use `default:value` to define the default value of field. If the value of current field is empty, it will be overrided by the default one. What you get subsequently will be the default value.
 
-#### 获取数据的方式
+#### The Way to Get Data
 
-默认根据当前请求的类型来获取字段对应的值，如果当前请求类型是 GET，那么会通过 `this.get('version')` 来获取 `version` 字段的值。如果请求类型是 POST，那么会通过 `this.post` 来获取字段的值。
+By default, get the field value according to the current request type. If the type of current request is GET, use `this.get('version')` to get the value of `version` field. If the type of current request is POST, use `this.post` to get the field value.
 
-但有时候在 POST 类型下，可能会获取上传的文件或者获取 URL 上的参数，这时候就需要指定获取数据的方式了。支持的获取数据方式为 `get`，`post` 和 `file`。
+But sometimes in the POST type, you may want to get the params from uploaded file or URL. By this time, you need to specify the way to get data. The supported ways to get data are `get`,`post` and `file`.
 
 ```js
 export default class extends think.logic.base {
   /**
-   * 保存数据，POST 请求
+   * save data, POST request
    * @return {} []
    */
   saveAction(){
@@ -92,11 +94,12 @@ export default class extends think.logic.base {
 }
 ```
 
-上面示例指定了字段 `name` 通过 `post` 方法来获取值，字段 `image` 通过 `file` 方式来获取值，字段 `version` 通过 `get` 方式来获取值。
+The above demo specifys to use `post` method to get the value of the field `name`, use `file` method to get the value of the field `image`, use `get` method to get the value of the field `version`.
 
-#### 错误信息
 
-上面的配置只是指定了具体的校验规则，并没有指定校验出错后给出的错误信息。错误信息支持国际化，需要在配置文件 `src/common/config/locale/[lang].js` 中定义。如：
+#### Error Message
+
+The above config only sepcifys the certain validation rules but not the error message when validation failure. Error messages support internationalizaion, you need to define it in the config file `src/common/config/locale/[lang].js`. eg.
 
 ```js
 // src/common/config/locale/en.js
@@ -106,21 +109,22 @@ export default {
 }
 ```
 
-其中 key 为 `validate_` + `校验类型名称`，值里面支持 `{name}` 和 `{args}`  2个参数，分别代表字段名称和传递的参数。
+The key is `validate_` + `validation type name`. The value supports two params: `{name}` and `{args}`, which respectively indicate the field name and the passed param.
 
-如果想定义个特定字段某个错误类型的具体信息，可以通过在后面加上字段名。如：
+If you want to define the detailed message of a certain error type for a specific field, you could add a field name to the end. eg.
 
 ```js
 // src/common/config/locale/en.js
 export default {
   validate_required: '{name} can not be blank',
-  validate_required_email: 'email can not be blank', //指定字段 email 的 required 错误信息
+  validate_required_email: 'email can not be blank', //specify the error message of required for email field
 }
 ```
 
-### 数据校验方法
+### Data Validation Method
 
-配置好校验规则后，可以通过 `this.validate` 方法进行校验。如：
+After configing the validation rules, you can use the method `this.validate` to validate. eg.
+
 
 ```js
 export default class extends think.logic.base {
@@ -137,9 +141,9 @@ export default class extends think.logic.base {
 }
 ```
 
-如果返回值为 `false`，那么可以通过 `this.errors` 方法获取详细的错误信息。拿到错误信息后，可以通过 `this.fail` 方法把错误信息以 JSON 格式输出，也可以通过 `this.display` 方法输出一个页面。
+If the return value is `false`, you could use method `this.errors` to get the detailed error message. After getting the error message, you could use method  `this.fail` to output it in JSON format, or use method `this.display` to output a page.
 
-错误信息通过 `errors` 字段赋值到模版里，模版里通过下面的方式显示错误信息（以 ejs 模版为例）：
+In template, you can get the error message by `errors` field. The following is the way to show error message (taking ejs template as an example).
 
 ```html
 <%for(var field in errors){%>
@@ -147,9 +151,9 @@ export default class extends think.logic.base {
 <%}%>
 ```
 
-##### 自动校验
+##### Validate Automatically
 
-一般情况下，都是校验有问题后，输出一个 JSON 信息。如果每次都要在 Logic 的 Action 手动调用 `this.validate` 进行校验，势必比较麻烦。可以通过将校验规则赋值给 `this.rules` 属性进行自动校验。如：
+In generally, there will output a JSON message after validation failure. If `this.validate` needs to be called manually evertime to validate in Action of Logic, it must be inconvenient. You can validate automatically by assigning validation rules to `this.rules`. eg.
 
 ```js
 export default class extends think.logic.base {
@@ -162,19 +166,19 @@ export default class extends think.logic.base {
 }
 ```
 
-将校验规则赋值给 `this.rules` 属性后，会在这个 Action 执行完成后自动校验，如果有错误则直接输出 JSON 格式的错误信息。自动校验是通过魔术方法 `__after` 来完成的。
+After assigning validation rules to `this.rules`, the validation will be automatically done after Action execution. If there are errors, it will directly output error messages in JSON format. Automatical validation uses the magic method `__after` to complete.
 
-### 支持的校验类型
+### Supported Validation Type
 
 #### required
 
-必填项。
+Required item.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      name: 'required' //name 的值必填
+      name: 'required' //the value of name is required
     }
   }
 }
@@ -182,7 +186,7 @@ export default class extends think.logic.base {
 
 #### requiredIf
 
-当另一个项的值为某些值其中一项时，该项必填。如：
+When the value of the other certain item is one of the specified values, this item is required. eg.
 
 ```js
 export default class extends think.logic.base {
@@ -194,11 +198,12 @@ export default class extends think.logic.base {
 }
 ```
 
-当 `email` 的值为 `admin@example.com`，`admin1@example.com` 等其中一项时， `name` 的值必填。
+When the value of `email` is one of `admin@example.com` and `admin1@example.com`, the value of `name` is required.
+
 
 #### requiredNotIf
 
-当另一个项的值不在某些值中时，该项必填。如：
+When the value of the other certain item is not one of the specified values, this item is required. eg.
 
 ```js
 export default class extends think.logic.base {
@@ -210,12 +215,12 @@ export default class extends think.logic.base {
 }
 ```
 
-当 `email` 的值不为 `admin@example.com`，`admin1@example.com` 等其中一项时， `name` 的值必填。
+When the value of `email` is not one of `admin@example.com` or `admin1@example.com`, the value of `name` is required.
 
 
 #### requiredWith
 
-当其他几项有一项值存在时，该项必填。
+When one of the values of some other certain items does exist, this item is required. eg.
 
 ```js
 export default class extends think.logic.base {
@@ -227,11 +232,11 @@ export default class extends think.logic.base {
 }
 ```
 
-当 `email`, `title` 等项有一项值存在时，`name` 的值必填。
+When one of the values of `email` and `title` does exist, the value of `name` is required.
 
 #### requiredWithAll
 
-当其他几项值都存在时，该项必填。
+When all of the values of some other certain items do exist, this item is required. eg.
 
 ```js
 export default class extends think.logic.base {
@@ -243,11 +248,11 @@ export default class extends think.logic.base {
 }
 ```
 
-当 `email`, `title` 等项值都存在时，`name` 的值必填。
+When all of the values of `email` and `title` do exist, the value of `name` is required.
 
 #### requiredWithout
 
-当其他几项有一项值不存在时，该项必填。
+When one of the values of some other certain items does not exist, this item is required. eg.
 
 ```js
 export default class extends think.logic.base {
@@ -259,12 +264,11 @@ export default class extends think.logic.base {
 }
 ```
 
-当 `email`, `title` 等项其中有一项值不存在时，`name` 的值必填。
-
+When one of the values of `email` and `title` does not exist, the value of `name` is required.
 
 #### requiredWithoutAll
 
-当其他几项值都不存在时，该项必填。
+When all of the values of some other certain items do not exist, this item is required. eg.
 
 ```js
 export default class extends think.logic.base {
@@ -276,17 +280,17 @@ export default class extends think.logic.base {
 }
 ```
 
-当 `email`, `title` 等项值都不存在时，`name` 的值必填。
+When all of the values of `email` and `title` do not exist, the value of `name` is required.
 
 #### contains
 
-值需要包含某个特定的值。
+The value needs to contain the certain value.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      name: 'contains:thinkjs' //需要包含字符串 thinkjs。
+      name: 'contains:thinkjs' //need to contain string 'thinkjs'。
     }
   }
 }
@@ -294,7 +298,7 @@ export default class extends think.logic.base {
 
 #### equals
 
-和另一项的值相等。
+Be equal to the value of the other item.
 
 ```js
 export default class extends think.logic.base {
@@ -306,11 +310,11 @@ export default class extends think.logic.base {
 }
 ```
 
-`name` 的值需要和 `firstname` 的值相等。
+The value of `name` needs to be equal to the value of `firstname`.
 
 #### different
 
-和另一项的值不等。
+Be different to the value of the other item.
 
 ```js
 export default class extends think.logic.base {
@@ -322,18 +326,18 @@ export default class extends think.logic.base {
 }
 ```
 
-`name` 的值不能和 `firstname` 的值相等。
+The value of `name` can't to be equal to the value of `firstname`.
 
 #### before
 
-值需要在一个日期之后，默认为需要在当前日期之前。
+The value needs to be before a certain date. By default, it needs to be before the current date.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      start_time: 'before', //需要在当前日期之前。
-      start_time1: 'before:2015/10/12 10:10:10' //需要在 2015/10/12 10:10:10 之前。
+      start_time: 'before', //need to be before the current date
+      start_time1: 'before:2015/10/12 10:10:10' //need to be before 2015/10/12 10:10:10
     }
   }
 }
@@ -341,14 +345,14 @@ export default class extends think.logic.base {
 
 #### after
 
-值需要在一个日期之后，默认为需要在当前日期之后。
+The value needs to be after a certain date. By default, it needs to be after the current date.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      end_time: 'after', //需要在当前日期之后。
-      end_time1: 'after:2015/10/10' //需要在 2015/10/10 之后。
+      end_time: 'after', //need to be after the current date
+      end_time1: 'after:2015/10/10' //need to be after 2015/10/10
     }
   }
 }
@@ -356,7 +360,7 @@ export default class extends think.logic.base {
 
 #### alpha
 
-值只能是 [a-zA-Z] 组成。
+The value must only consist of [a-zA-Z].
 
 ```js
 export default class extends think.logic.base {
@@ -368,38 +372,38 @@ export default class extends think.logic.base {
 }
 ```
 
-`en_name` 的值只能是 [a-zA-Z] 组成。
+The value of `en_name` must only consist of [a-zA-Z].
 
 #### alphaDash
 
-值只能是 [a-zA-Z_] 组成。
+The value must only consist of [a-zA-Z_].
 
 #### alphaNumeric
 
-值只能是 [a-zA-Z0-9] 组成。
+The value must only consist of [a-zA-Z0-9].
 
 #### alphaNumericDash
 
-值只能是 [a-zA-Z0-9_] 组成。
+The value must only consist of [a-zA-Z0-9_].
 
 #### ascii
 
-值只能是 ascii 字符组成。
+The value must only consist of ascii.
 
 #### base64
 
-值必须是 base64 编码。
+The value must only consist of base64.
 
 #### byteLength
 
-字节长度需要在一个区间内。
+The length of bytes needs to be in a certain range.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      name: 'byteLength:10' //字节长度不能小于 10
-      name1: 'byteLength:10,100' //字节长度需要在 10 - 100 之间
+      name: 'byteLength:10' // the length of bytes can not less than 10
+      name1: 'byteLength:10,100' //the length of bytes must be in the range of 10 to 100
     }
   }
 }
@@ -407,29 +411,29 @@ export default class extends think.logic.base {
 
 #### creditcard
 
-需要是信用卡数字。
+The value needs to be a credit card number.
 
 #### currency
 
-需要是货币。
+The value needs to be a currency.
 
 #### date
 
-需要是个日期。
+The value needs to be a date.
 
 #### decimal
 
-需要是个小数。
+The value needs to be a decimal.
 
 #### divisibleBy
 
-需要被一个数整除。
+The value needs to be divisible by a number.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      count: 'divisibleBy:3' //可以被 3 整除
+      count: 'divisibleBy:3' //could to be divisible by 3
     }
   }
 }
@@ -437,23 +441,23 @@ export default class extends think.logic.base {
 
 #### email
 
-需要是个 email 格式。
+The value needs to be email format.
 
 #### fqdn
 
-需要是个合格的域名。
+The value needs to be a qualified domain name.
 
 #### float
 
-需要是个浮点数。
+The value needs to be a float.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      money: 'float' //需要是个浮点数
-      money1: 'float:3.2' //需要是个浮点数，且最小值为 3.2
-      money2: 'float:3.2,10.5' //需要是个浮点数，且最小值为 3.2，最大值为 10.5
+      money: 'float' //need to be a float
+      money1: 'float:3.2' //need to be a float, and the minimum is 3.2
+      money2: 'float:3.2,10.5' //need to be a float, and the minimum is 3.2, the maximum is 10.5
     }
   }
 }
@@ -461,53 +465,56 @@ export default class extends think.logic.base {
 
 #### fullWidth
 
-包含宽字节字符。
+The value needs contain full width char.
 
 #### halfWidth
 
-包含半字节字符。
+The value needs contain half width char.
 
 #### hexColor
 
-需要是个十六进制颜色值。
+The value needs to be a hex color value.
 
 #### hex
 
-需要是十六进制。
+The value needs to be hex.
 
 #### ip
 
-需要是 ip 格式。
+The value needs to be ip format.
 
 #### ip4
 
-需要是 ip4 格式。
+The value needs to be ip4 format.
 
 #### ip6
 
-需要是 ip6 格式。
+The value needs to be ip6 format.
 
 #### isbn
 
-需要是图书编码。
+The value needs to be a book serial number.
 
 #### isin
 
-需要是证券识别编码。
+The value needs to be ISIN (International Securities Identification Numbers).
+
 
 #### iso8601
 
-需要是 iso8601 日期格式。
+The value needs to be iso8601 date format.
+
 
 #### in
 
-在某些值中。
+The value needs to be in some certain values.
+
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      version: 'in:1.2,2.0' //需要是 1.2，2.0 其中一个
+      version: 'in:1.2,2.0' //need to be one of 1.2，2.0 
     }
   }
 }
@@ -515,13 +522,13 @@ export default class extends think.logic.base {
 
 #### noin
 
-不能在某些值中。
+The value needs to be not in some certain values.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      version: 'noin:1.2,2.0' //不能是 1.2，2.0 其中一个
+      version: 'noin:1.2,2.0' //need to be not in 1.2，2.0
     }
   }
 }
@@ -529,15 +536,15 @@ export default class extends think.logic.base {
 
 #### int
 
-需要是 int 型。
+The value needs to be int.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      value: 'int' //需要是 int 型
-      value1: 'int:1' //不能小于1
-      value2: 'int:10,100' //需要在 10 - 100 之间
+      value: 'int' //int
+      value1: 'int:1' //can not less than 1
+      value2: 'int:10,100' //need to be in the range of 10 to 100
     }
   }
 }
@@ -545,13 +552,13 @@ export default class extends think.logic.base {
 
 #### min
 
-不能小于某个值。
+The value can not less than the certain value.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      value: 'min:10' //不能小于10
+      value: 'min:10' //can not less than 10
     }
   }
 }
@@ -559,13 +566,13 @@ export default class extends think.logic.base {
 
 #### max
 
-不能大于某个值。
+The value can not great than the certain value.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      value: 'max:10' //不能大于10
+      value: 'max:10' //can not great than 10
     }
   }
 }
@@ -573,14 +580,14 @@ export default class extends think.logic.base {
 
 #### length
 
-长度需要在某个范围。
+The length needs to be in the certain range.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      name: 'length:10' //长度不能小于10
-      name1: 'length:10,100' //长度需要在 10 - 100 之间
+      name: 'length:10' //the length can not less than 10
+      name1: 'length:10,100' //the length need to be in the range of 10 to 100
     }
   }
 }
@@ -588,13 +595,13 @@ export default class extends think.logic.base {
 
 #### minLength
 
-长度不能小于最小长度。
+The length can not to be less than the min-length.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      name: 'minLength:10' //长度不能小于10
+      name: 'minLength:10' //the length can not to be less than 10
     }
   }
 }
@@ -602,13 +609,13 @@ export default class extends think.logic.base {
 
 #### maxLength
 
-长度不能大于最大长度。
+The length can not to be great than the max-length.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      name: 'maxLength:10' //长度不能大于10
+      name: 'maxLength:10' //the length can not to be great than 10
     }
   }
 }
@@ -616,21 +623,22 @@ export default class extends think.logic.base {
 
 #### lowercase
 
-需要都是小写字母。
+The value needs to be all lowercase.
 
 #### uppercase
 
-需要都是大小字母。
+The value needs to be all uppercase.
 
 #### mobile
 
-需要手机号。
+The value needs to be a mobile phone.
+
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      mobile: 'mobile:zh-CN' //必须为中国的手机号
+      mobile: 'mobile:zh-CN' //must be a chinese mobile phone
     }
   }
 }
@@ -638,77 +646,74 @@ export default class extends think.logic.base {
 
 #### mongoId
 
-是 MongoDB 的 ObjectID。
+The value is the ObjectID of MongoDB.
 
 #### multibyte
 
-包含多字节字符。
+Include multibyte char.
 
 #### url
 
-是个 url。
+The value is url.
 
 #### order
 
-数据库查询 order，如：name DESC。
+Database query order, like name DESC.
 
 #### field
 
-数据库查询的字段，如：name,title。
+Database query field, like name,title.
 
 #### image
 
-上传的文件是否是个图片。
+Whether the file uploaded is a pic 
 
 #### startWith
 
-以某些字符打头。
+The value starts with some certain chars. 
 
 #### endWith
 
-以某些字符结束。
+The value ends with some certain chars. 
 
 #### string
 
-值为字符串。
+The value is string.
 
 #### array
 
-值为数组。
+The value is array.
 
 #### boolean
 
-值为布尔类型。
+The value is boolean.
 
 #### object
 
-值为对象。
+The value is object.
 
-### 扩展校验类型
+### Extend Validation Type
 
-如果默认支持的校验类型不能满足需求，可以通过 `think.validate` 方法对校验类型进行扩展。如：
+If the default supported validation types can not meet the demand, you can use the method `think.validate` to extend the validation types. eg.
 
 ```js
 // src/common/bootstrap/validate.js
 think.validate('validate_name', (value, ...args) => {
-  //需要返回 true 或者 false
-  //true 表示校验成功，false 表示校验失败
+  //need to return true or false
+  //true-validate sucess, false-validate fail
 })
 ```
 
-上面注册了一个名为 `validate_name` 的校验类型，这样在 Logic 里就可以直接使用该校验类型了。
+The above registers a validation type named `validate_name`, thus, you can directly use this validation type in Logic.
 
-##### 参数解析
+##### Param Parse
 
-如果要解析后面的 `args`，如：该字段值跟其他字段值进行比较，这时拿到的参数是其他字段名称，但比较的时候肯定需要拿到这个字段值，所以需要将字段名称解析为对应的字段值。
-
-可以通过注册一个解析参数函数来完成。如：上面的校验类型名称为 `validate_name`，那么对应的解析参数的名称必须为 `_validate_name`，即：`_` + `校验类型`。
+If you want to parse `args`, you can register a function. eg. the name of the above validation type is `validate_name`, then the corresponding name of parse param is `_validate_name`, that is `_` + `validation type`.
 
 ```js
 think.validate('_validate_name', (args, data) => {
   let arg0 = args[0];
-  args[0] = data[arg0].value; //将第一个参数字段名称解析为对应的参数值
+  args[0] = data[arg0].value; //parse the first param field name to the corresponding param value
   return args;
 })
 ```
-
