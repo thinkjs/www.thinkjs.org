@@ -1,14 +1,14 @@
 ## Introduction
 
-ThinkJS is a Node.js MVC framework developed by the features of ES6/7。`async/await` feature in ES7 or `*/yield` feature in ES6 was used to resovle the proplem of async callback nesting hell. it make Node.js project development faster and efficient with absorbing lots of other framwork's design concepts and ideas around the world.
+ThinkJS is the first Node.js MVC framework that supporting use full ES6/7 features to develop Node.js application. By using `async/await` in ES7 or `*/yield` in ES6, ThinkJS totally resovled the hard problem of asynchronous callbacks nesting hell. It absorbs the design and ideas of lots of other framworks around the world, and makes develop Node.js projects faster and efficient than ever before.
 
-It's a trend towards using the feature of ES6/7 building project with high effecient. Now the lastest version of Node.js has support the feature of ES6 more friendly, thought not all feature. [Babel](http://babeljs.io) can help us compile ES6 to ES5 code  to run.
+Using ES6/7 features to build projects is very efficent, that must be the trend. The lastest version of Node.js has supported the features of ES6 more friendly, though not all features. At this time, [Babel](http://babeljs.io) can help us to compile ES6 code to ES5 code.
 
-### Feature
+### Features
 
-#### Using ES6/7 feature
+#### Using ES6/7 features
 
-Babel compile our code to ES5 so we don't worry about the browser compatibility. It's quick to resolve async callback problem by `async/await` or `*/yield` feature.
+Babel compile our code to ES5 so we don't need worry about the browser compatibility. So we can resolve the asynchronous callbacks problem by using `async/await` or `*/yield` features.
 
 
 ```js
@@ -36,7 +36,7 @@ export default class extends think.controller.base {
 }
 ```
 
-We use ES6 featuer like `class`, `export`, `let` and ES7 feature link `async` and `await` in this example. Database query and `Session` writing was all async action, but we write sync code to handle them with `async/await` feature. Last, it can run in Node.js environment stably after `Babel` compiling.
+Here, we've used ES6 features like `class`, `export`, `let` and ES7 features like `async/await` in this example. Database query and `Session` writing was all async action, but we write sync code to handle them with `async/await` feature. Last, it can run in Node.js environment stably after `Babel` compiling.
 
 #### Support multiple project structure and environment
 
