@@ -36,45 +36,45 @@ export default class extends think.controller.base {
 }
 ```
 
-Here, we've used ES6 features like `class`, `export`, `let` and ES7 features like `async/await` in this example. Database query and `Session` writing was all async action, but we write sync code to handle them with `async/await` feature. Last, it can run in Node.js environment stably after `Babel` compiling.
+We've used ES6 features like `class`, `export`, `let` and ES7 features like `async/await` in this example. Database queries and `Session` writing were all asynchronous actions, but here we are writing sync code to handle them with `async/await`. Last, it can run in Node.js environment stably after `Babel` compiling.
 
-#### Support multiple project structure and environment
+#### Supports variant project structures and environments
 
-ThinkJS is compatiable with multiple project structure like single module mode, normal mode and splitting module mode. It supports to develop various of complicated project.
+When using ThinkJS, you can apply single module mode, general mode or mutiple modules mode, and to develop projects with it's complexity range from very low to very high.
 
-Default there have 3 project environment: `development`, `testing` and `production`, you can use different configuration in different environment to support different demands. You can also custom and extend them in your project.
+By default, there are three kinds of project environments: `development`, `testing` and `production`, you can use different configuration in different environment to support different requests. You can also custom and extend them in your projects.
 
-#### Support abundant database type
+#### Supports abundant database type
 
-ThinkJS supports mosts database like `MySQL`, `MongoDB` and `SQLite`. It encapsulates many API about operation of the database, without having to manually stitching SQL statements. You can automatically prevent SQL injection and other vulnerabilities. It also supports transaction and association and other advanced features.
+ThinkJS supports `MySQL`, `MongoDB` and `SQLite`. It encapsulates many APIs of the database operations, without having to manually stitching SQL statements. You can automatically prevent SQL injection and other vulnerabilities. It also supports transaction and association and other advanced features.
 
-#### Atuomatic update
+#### Automatic updating
 
-ThinkJS has a mechanism to automatic update code after file modified without restart Node.js service and other third party module.
+ThinkJS has a mechanism that could automatically update codes after source files being modified without resort to restart Node.js server and other third party modules.
 
 #### Automatic REST API creation
 
-You can use `thinkjs` command to create REST API automaticly without writing any other code. you can easily add filter or auth check if you want.
+You can use `thinkjs` command to create REST API automatically without writing any extra code. Meanwhile, you can also easily add filter or auth check if you want.
 
-#### Support multiple WebSocket libray
+#### Supports multiple WebSocket libraries
 
-ThinkJS supports some common Websocket library like `socket.io` and `sockjs`. And it package those library to take same API into different library.
+ThinkJS supports some common WebSocket libraries like `socket.io` and `sockjs`, and packages them to provide the consistent APIs to developers.
 
-#### Lots of test case
+#### Plentiful test cases
 
-ThinkJS includes 1500+ test case which covering 95% code. Every change has its test case to protect framework function well.
+ThinkJS includes 1500+ test cases with the code coverage at 95%. Every change has its test case to insure the framework functions well.
 
-#### Support call command to run cron job
+#### Supports CLI to run cron job
 
-`Action` method can be responsed by user's request, it also support request in terminal. With this feature, we can excute cron job easily.
+`Action` in ThinkJS can both response to user request and the CLI invoke. With this feature, we can excute cron job more easily.
 
-#### Hook and Middleware
+#### Hooks and Middlewares
 
-ThinkJS support Hook and Middleware, they can handle request flexability.
+ThinkJS supports Hooks and Middlewares, they make the requests handling much more flexible.
 
 #### Detailed log
 
-ThinkJS internal has detailed log function, it can read log and track problem easily.
+ThinkJS builds-in the detailed log function, it makes us read log and track problems easily.
 
 #### HTTP request log
 ```
@@ -92,45 +92,44 @@ ThinkJS internal has detailed log function, it can read log and track problem ea
 
 ```
 [2015-10-12 14:15:32] [Error] Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'root3'@'localhost' (using password: YES)
-
 [2015-10-12 14:16:12] [Error] Error: Address already in use, port:8360. http://www.thinkjs.org/doc/error.html#EADDRINUSE
 ```
 
-#### Multiple router
+#### Configurable routers
 
-ThinkJS supports regex router, rule router, static router and other router, and it can be set by module. Those can make URL simply and high performance.
+The routers ThinkJS supported include regex router, rule router and static router, and router can be set based on modules. That's very helpful for us to make URLs more simple and reserve their high performance at the same time.
 
-#### Support international and custom theme
+#### Supports international and custom themes
 
-You can just use simple method to support i18n and custome theme method in ThinkJS.
+ThinkJS provides us very simple methods to implement i18n and custom themes.
 
 
-## Compare with other framework
+## Comparing with other frameworks
 
 #### Express/Koa
 
-express and koa are simple framework to support primary function, and high flexibility develop with much more third party plugin. But It increases project's complexity by using third party component, and the other hand we can't ensure all the third party plugin are safety and efficient.
+Express and koa are simple frameworks, they all only provide the very basic functions. So for developing complex projects, one must introduces the third party plugins. Though small cores often mean big flexibility, the introducing of other plugins would increases the project's complexity. Besides, no one can ensure all the third party plugins are safety and efficient.
 
-Koa replace async callback problem by using `*/yield` feature. But the newer `async/await` feature will replace `*/yield` at last.
+Koa solved asynchronous callbacks problem by using `*/yield` feature. But the newer `async/await` feature will replace `*/yield` at last. ThinkJS supports both features well.
 
-ThinkJS provides complete solutions, every function has strait test about performance and mermory leaks. And the important is we can use all ES6/7 feature in the project directly.
+On the other hand, ThinkJS choosed to provide the full set of solutions. But not only that, in ThinkJS, every function has been strictly tested for performance optimazition and prevent mermory leaks. And the important thing is that we can use all ES6/7 feature in the project directly.
 
-#### sails
+#### Sails
 
-sails , a Node.js framework, also provides complete solutions. It's convinient because of packaging many database, REST API and security hand.
+Sails is another Node.js framework that also provides complete solution. It's convinient because of the encapsulation of databases, REST APIs and security features.
 
-But sails still uses callbak style in async. It's too hard to develop, and can't use ES6/7 fetaure naturally in the project.
+But Sails still uses callbacks in asynchronous code. That's too hard to develop, and can't use ES6/7 fetaure naturally in the projects.
 
-#### Disadvantage
+#### Disadvantages
 
-Althought ThinkJS has many advantage, there also has little disadvantage like:
+Even though ThinkJS has many advantages, it has also a few disadvantages too, for example:
 
-- ThinkJS is a new framework without much support from community
-- ThinkJS lacks of huge project
+- ThinkJS is a relatively new framework, the community is not strong enough.
+- ThinkJS is short of large scale applications.
 
 ### ES6/7 reference documentation
 
-You can read more about ES6/7 features:
+You can read more about ES6/7 features here:
 
 * [learn-es2015](http://babeljs.io/docs/learn-es2015/)
 * [ECMAScript 6 Guide](http://es6.ruanyifeng.com/)
