@@ -1,22 +1,5 @@
 ## Cookie
 
-### 获取 cookie
-
-controller 或者 logic 中，可以通过 `this.cookie` 方法来获取。如：
-
-```js
-export default class extends think.controller.base {
-  indexAction(){
-    let cookie = this.cookie('theme'); //获取名为 theme 的 cookie
-  }
-}
-```
-
-http 对象里也提供了 `cookie` 方法来获取 cookie。如：
-
-```js
-let cookie = http.cookie('theme');
-```
 
 ### cookie 配置
 
@@ -39,6 +22,25 @@ export default {
   timeout: 7 * 24 * 3600  //将 cookie 有效时间设置为 7 天
 };
 ```
+
+### 获取 cookie
+
+controller 或者 logic 中，可以通过 `this.cookie` 方法来获取。如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let cookie = this.cookie('theme'); //获取名为 theme 的 cookie
+  }
+}
+```
+
+http 对象里也提供了 `cookie` 方法来获取 cookie。如：
+
+```js
+let cookie = http.cookie('theme');
+```
+
 
 
 ### 设置 cookie
@@ -71,4 +73,20 @@ export default class extends think.controller.base {
 }
 ```
 
+### 删除 cookie
 
+controller 或者 logic 中，可以通过 `this.cookie` 方法来删除。如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    this.cookie('theme', null); //删除名为 theme 的 cookie
+  }
+}
+```
+
+http 对象里也提供了 `cookie` 方法来删除 cookie。如：
+
+```js
+http.cookie('theme', null);
+```
