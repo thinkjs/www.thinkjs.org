@@ -53,7 +53,7 @@ cp -r app output/;
 cp -r ssl output/;
 
 cd output;
-#rm -rf www/static/other/icon/*
+rm -rf www/static/other/icon/*
 
 tar zcvf ../output.tar.gz *;
 cd ..
