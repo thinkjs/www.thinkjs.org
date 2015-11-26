@@ -187,7 +187,7 @@ Oure project's root which we have to access, nginx's configure root will be set 
 
 ### www/index.js
 
-Oure project's entry file in development mode, it can be modified as the project's need. When in production environment, the entry file will be `www/production.js`.
+Our project's entry file in development mode, it can be modified as the project's need. When in production environment, the entry file will be `www/production.js`.
 
 The content of index.js is something like this:
 
