@@ -189,7 +189,7 @@ export default class extends Base {
 
 ### www/development.js
 
-开发模式下项目的入口文件(1.x版本中是www/index.js)，可以根据项目需要进行修改。`www/production.js` 为线上的入口文件。
+开发模式下项目的入口文件，可以根据项目需要进行修改。`www/production.js` 为线上的入口文件。
 
 入口文件的代码类似如下，可以根据项目需要进行修改。
 
