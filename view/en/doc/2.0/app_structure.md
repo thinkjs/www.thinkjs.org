@@ -1,6 +1,6 @@
 ## Project Structure
 
-You get following document structure after creating project by using thinkjs:
+After creating ThinkJS project, you will get the directory structure something like the following:
 
 
 ```text
@@ -59,25 +59,25 @@ You get following document structure after creating project by using thinkjs:
            `-- js
 ```
 
-tips: There has little difference using unequal mode when you create project.
+tips: Different mode used when creating the project, may result in the slightly different structure.
 
 ### nginx.conf
 
-nginx's configuration file, we recommand get proxy by nginx.
+This is the nginx's configuration file. When deploy your project to the production environment, we recommend you using nginx as the reverse proxy.
 
 ### src
 
-It's source folder, after using `--es6` can you see it.  We need run `npm run watch-compile` to compile file to folder `app/`.
+`src` folder holds all of the source files, but you can only have it by using `--es6` option when create prjects. After start project, the source files in `src/` will be compiled automatically into the `app/` folder with same name.
 
 ### src/common
 
-Common module folder with common logic module.
+You should place the common module files into this folder, the so-called common files used to store the code logic that could be used all around the project.
 
 ### src/common/bootstrap
 
-File in this folder will autoload, it's project boot's index folder. You can put some global method or middleware into it.
+Files in this folder will be autoload when project bootstrapping, so you don't need to `require` them manually. You can define global functions, register middlewares by using this folder.
 
-#### Global function
+#### Defining global functions
 
 
 ```js
@@ -87,9 +87,9 @@ global.formatDate = obj => {
 }
 ```
 
-You can run this method anywhere after defined here.
+We defined a global function `formatDate` here, you can call it anywhere in the project after define it here.
 
-#### Middleware
+#### Register middlewares
 
 
 ```js
@@ -99,13 +99,13 @@ think.middleware('replace_image', http => {
 });
 ```
 
-You can inject this middleware into configure file `hook.js`.
+We defined a middleware `replace_image` here, then you can register it in the configure file `hook.js`.
 
-tips: bootstrap just stay in common module.
+tips: bootstrap can only stay in common module.
 
 ### src/common/config
 
-here you can set some common config file. router configure, hook configure and locale setting.
+You can place the common config files here. Bear in mind, the route.js, hook.js and locale.js must stay within this folder.
 
 
 ```js
@@ -120,20 +120,19 @@ export default {
 
 ### src/common/controller
 
-Controller folder to put all controller file. In this case `error.js`  is designed as handle different error behavior. It's also support custom by project.
+Within this folder, you should put the common controller files. For example, the `error.js` has designed some different error handling behaviors, you can modify it or add other controller according to the project requirements.
 
 ### src/common/runtime
 
-Temp folder to store cache file and temp file upload folder.
+This is a temp folder to store for example cache files, upload files and other files at the runtime.
 
 ### src/home
 
-`home` module is default module for your project. Now you can define your default module in `src/common/config/config.js`. 
-
+`home` module is a default module for your project. You can change your default module to other directory by add `default_module` option and assign a value to it in `src/common/config/config.js`. 
 
 ### src/home/logic
 
-It's logic handle method file. Every handle would run logic check before some hanlde button. It contains: parameters check, request data check, login check, auth check and so on. use this can decrease project's complexity.
+Before every operation execution, it is possible to validate something in advance here, so as to decrease the complexity of the actions in the controllers. For example, we can validate whether the parameters meet the requirements, the input data are acceptability, or current user have the access to do something.
 
 ```js
 'use strict';
@@ -155,7 +154,7 @@ export default class extends think.logic.base {
 
 ### src/home/controller
 
-Controller folder. every `url` has there own `action` in their `controller`.
+Controller folder. Each `url` has an matched `action` within the matched `controller`.
 
 ```js
 'use strict';
@@ -176,21 +175,21 @@ export default class extends Base {
 
 ### src/home/model
 
-Model to handle database.
+Models to handle database operations.
 
 ### view
 
-view folder to store template file. You shoud have sub folder while you will add support to internationalization and multiple theme.
+The `view` folder used to store template files. If you need support i18n or multiple themes, you should create the sub-folders respectively.
 
 ### www
 
-Project's root which we have access, nginx's configure root will set here.
+Our project's root which we have to access, nginx's configure root will be set here.
 
 ### www/index.js
 
-Project's root file in development, can modified in project.  `www/production.js` is root file in production environment.
+Our project's entry file in development mode, it can be modified as the project's need. When in production environment, the entry file will be `www/production.js`.
 
-following like this:
+The content of index.js is something like this:
 
 ```js
 var thinkjs = require('thinkjs');
@@ -209,4 +208,4 @@ instance.run();
 ```
 ### www/static
 
-Save some static file.
+Holding the static files.
