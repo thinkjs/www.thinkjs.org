@@ -18,7 +18,7 @@
 <%}%>
 <link href="/static/css/index.css" rel="stylesheet" data-ls="css_index" />
 </head>
-<body>
+<body class="en">
 <div class="header">
   <div class="wrap">
         <div class="logo"><a href="/" title="ThinkJS"></a></div>
@@ -28,7 +28,7 @@
                 <li class="firekylin"><a href="https://github.com/75team/firekylin" target="_blank">FireKylin</a></li>
                 <li <%if(currentNav === 'demo'){%>class="current"<%}%>><a href="/<%-lang%>/demo.html">Demo</a></li>
                 <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/<%-lang%>/changelog.html">ChangeLog</a></li>
-                <li <%if(currentNav === 'plugin'){%>class="current"<%}%>><a href="/<%-lang%>/plugin.html">Plugins</a></li>         
+                <li <%if(currentNav === 'plugin'){%>class="current"<%}%>><a href="/<%-lang%>/plugin.html">Plugin</a></li>         
             </ul>
             <%if(hasVersion){%>
             <div class="version" id="version">

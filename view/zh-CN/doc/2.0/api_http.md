@@ -282,6 +282,7 @@ http.lang(lang, true); //设置语言，并指定模版路径中添加一层语�
 ```js
 http.cookie('think_test'); //获取名为 think_test 的 cookie
 http.cookie('name', 'value'); //设置 cookie，如果头信息已经发送则设置无效
+http.cookie('name', null); //删除 cookie
 ```
 
 

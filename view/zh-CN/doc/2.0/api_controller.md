@@ -218,7 +218,7 @@ export default class extends think.controller.base {
 * `value` {String} cookie 值
 * `options` {Object}
 
-获取或者设置 cookie。
+获取、设置或者删除 cookie。
 
 ```js
 export default class extends think.controller.base {
@@ -240,6 +240,14 @@ export default class extends think.controller.base {
 }
 ```
 
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    //删除 cookie
+    this.cookie('think_name', null); 
+  }
+}
+```
 #### controller.session(name, value)
 
 * `name` {String} session 名

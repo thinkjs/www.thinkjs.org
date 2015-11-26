@@ -24,6 +24,29 @@ module.exports = think.model('mongo', {
 
 ### 属性
 
+#### model.fields
+
+设置字段，如：
+
+```js
+export default class extends think.model.mongo {
+  init(...args){
+    super.init(...args);
+    //设置字段
+    this.fields = {
+      name: {
+        type: 'string'
+      },
+      pwd: {
+        type: 'string'
+      }
+    }
+  }
+}
+```
+
+`注`：目前框架并不会对字段进行检查。
+
 #### model.indexes
 
 设置字段索引，数据操作之前会自动创建索引。
