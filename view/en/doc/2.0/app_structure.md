@@ -183,7 +183,7 @@ The `view` folder used to store template files. If you need support i18n or mult
 
 ### www
 
-Oure project's root which we have to access, nginx's configure root will be set here.
+Our project's root which we have to access, nginx's configure root will be set here.
 
 ### www/index.js
 
