@@ -136,6 +136,7 @@ sails 也是一个提供整套解决方案的 Node.js 框架，对数据库、RE
 
 关于 ES6/7 特性可以参考下面的文档：
 
+* [JavaScript Promise迷你书](http://liubin.github.io/promises-book/#ch2-promise-all)
 * [learn-es2015](http://babeljs.io/docs/learn-es2015/)
 * [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 * [给 JavaScript 初心者的 ES2015 实战](http://gank.io/post/564151c1f1df1210001c9161)
