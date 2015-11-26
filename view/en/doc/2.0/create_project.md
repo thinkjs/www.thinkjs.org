@@ -2,11 +2,11 @@
 
 ### Install Node.js
 
-ThinkJS is a Node.js MVC framework, it requires Node.js before you run it. You can install by go to https://nodejs.org to download lastest installation and other method.
+ThinkJS is a Node.js MVC framework, it requires Node.js before you run it. You can install Node.js by go to https://nodejs.org to download the lastest installation.
 
-After installation, you can type `node -v` in terminal. If it outputs version number, it installs success.
+After installation, type `node -v` in your terminal. If it outputs version number, it installs success.
 
-ThinkJS needs `>=0.12.0` Node.js version, if your version lower than it, you need update your Node.js, or you can't start service. we recognize to update your Node.js version to `4.2.1`.
+ThinkJS requires the version of Node.js `>=0.12.0`, if your version lower than it, you need update your Node.js, or you can't start the service. we recommend use Node.js `4.2.1`.
 
 ### Install ThinkJS
 
@@ -16,20 +16,33 @@ Install ThinkJS by following command:
 npm install thinkjs@2 -g --verbose
 ```
 
-After installation, run `thinjs --version` or `thinjs -V` to watch version.c
+After installation, run `thinjs --version` or `thinjs -V` to check version number.
 
-Tips: If you installed ThinkJS 1.x before, you need remove it by `npm uninstall -g thinkjs-cmd` first of all.
+Tips: If you have installed ThinkJS 1.x before, you need remove it by `npm uninstall -g thinkjs-cmd` first of all.
 
+### Update ThinkJS
+
+Update ThinkJS globally by run the following command:
+
+```sh
+npm install -g thinkjs@2
+```
+
+Update ThinkJS in you current project by run the following command:
+
+```sh
+npm install thinkjs@2
+```
 
 ### Create project
 
-After ThinkJS installation, you can create project by following command:
+After installation, you can create a new ThinkJS project by run the following command:
 
 ```sh
 thinkjs new project_path; #project_path is the path you want store your project
 ```
 
-if you want to use ES6 feature to develop, you can create ES6 mode project by following command:
+If you want to use ES6 features in your development process, you may want to create the ES6 mode project by following command:
 
 ```sh
 thinkjs new project_path --es6; #project_path is the path you want store your project
@@ -67,11 +80,11 @@ If terminal returns output like following, it means you create project success:
   $ npm start
 ```
 
-You can go to [extension function -> ThinkJS command](./thinkjs_command.html) to know more about command of create project.
+For more details aobut creating project, go to [extension function -> ThinkJS command](./thinkjs_command.html).
 
 ### Install dependencies
 
-After project creaton, go to project directory and run `npm install` to install dependencies.
+After project creation, go to the project directory and run `npm install` to install dependencies.
 
 ```sh
 npm install
@@ -79,9 +92,7 @@ npm install
 
 ### Compile project
 
-if you use `--es6` in the creation command, your code must be compiled before running. Run `npm run watch-compile` command and then they will be automatic compiled after modifiled.
-
-This command will run on terminal permanently, don't fish this command! You can task a new tab to do other things.
+Since v2.0.6, ThinkJS has built-in the automatical compiling feature, so you don't need run `npm run watch-compile` for real time compile anymore. What you only need to do, is just start your service by run `npm start`.
 
 ### Start project
 
@@ -98,4 +109,4 @@ Run `npm start`, if terminal returns output like following, it means the service
 
 ### Access project
 
-Open your browser and go to `http://127.0.0.1:8360`, then you can see it. If you are in remote machine, you need visit by remote machine's IP and the sanme 8360 port.
+Open your browser and go to `http://127.0.0.1:8360`. If you are in a remote machine, you must replace `127.0.0.1` with your remote machine's IP.
