@@ -187,7 +187,7 @@ export default class extends Base {
 
 项目的可访问根目录，nginx 里的根目录会配置到此目录下。
 
-### www/index.js
+### www/development.js
 
 开发模式下项目的入口文件，可以根据项目需要进行修改。`www/production.js` 为线上的入口文件。
 
@@ -205,6 +205,8 @@ var instance = new thinkjs({
   RESOURCE_PATH: __dirname,
   env: 'development'
 });
+
+instance.compile({retainLines: true, log: true});
 
 instance.run();
 ```
