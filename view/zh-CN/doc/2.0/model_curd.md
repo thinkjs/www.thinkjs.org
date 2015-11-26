@@ -195,7 +195,7 @@ export default class extends think.model.base {
 
 #### max
 
-可以通过 `max` 方法查询符合条件的最小值，如：
+可以通过 `max` 方法查询符合条件的最大值，如：
 
 ```js
 export default class extends think.model.base {
