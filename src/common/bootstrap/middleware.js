@@ -24,6 +24,13 @@ think.middleware('get_lang', http => {
     }
   }
   http.lang(lang, true);
+
+  //set lang cookie
+  let name = http.config('locale').cookie_name;
+  let value = http.cookie(name);
+  if(value !== lang){
+    http.cookie(name, lang);
+  }
 });
 
 

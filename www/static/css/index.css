@@ -167,7 +167,7 @@ i.icon-fet8{ background-position:-70px -210px;}
   .headr{float:none;border-top: 1px solid #efefef;}
   .nav li.discuss,
   .nav li.firekylin{display: none;}
-  .nav{;display: flex;justify-content:center;align-items:center;;margin-right: 0}
+  .nav{display: flex;justify-content:center;align-items:center;;margin-right: 0;width: 92%;margin: auto}
   .nav li{float: none;flex: 1;flex-grow: 1;margin: 0;text-align: center;}
   .banimg{width: 90%;height: auto;margin: 0}
   .banarea{height: auto;padding: 0;background-image: url(../img/banbg_640.jpg) !important;text-align: center;}
@@ -181,6 +181,7 @@ i.icon-fet8{ background-position:-70px -210px;}
   .flfet{padding: 35px 0}
   .flinfo pre{width: 100%;font-size: 12px;background: none;padding-left: 0;padding-top: 0;height: auto}
   .flinfo pre code{word-wrap:break-word;width: 92%;margin: auto;border-left: 1px solid #337ab7}
+  .flinfo h3{width: 92%;margin: auto;font-size: 20px;line-height: 24px;}
   .fluser{padding: 40px 0 0px 0;}
   .fetlist li{float: none;width: 90%;padding-left: 5%;height: auto;}
   .userlist li{float: none;width: 320px;margin:auto;margin-bottom: 40px;}
@@ -213,6 +214,8 @@ i.icon-fet8{ background-position:-70px -210px;}
   .r-fixed a.view-single{display: none;}
   .r-fixed .doc-dir{display: block;}
   .r-fixed .pdf{display: none;}
+  
+  .en .usertalk{padding-top: 25px;height: 165px;line-height: 22px;}
 }
 
 @media screen and (max-width: 320px){
