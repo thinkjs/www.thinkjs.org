@@ -167,8 +167,8 @@ i.icon-fet8{ background-position:-70px -210px;}
   .headr{float:none;border-top: 1px solid #efefef;}
   .nav li.discuss,
   .nav li.firekylin{display: none;}
-  .nav{display: flex;justify-content:center;align-items:center;;margin-right: 0;width: 92%;margin: auto}
-  .nav li{float: none;flex: 1;flex-grow: 1;margin: 0;text-align: center;}
+  .nav{display: flex;justify-content:center;align-items:center;;margin-right: 0;width: 96%;margin: auto}
+  .nav li{float:none;margin: 0;flex:auto;text-align: center;}
   .banimg{width: 90%;height: auto;margin: 0}
   .banarea{height: auto;padding: 0;background-image: url(../img/banbg_640.jpg) !important;text-align: center;}
   .btn-link{width: 180px;height: 32px;font-size: 16px;line-height: 32px;margin-top: 40px;margin-bottom: 20px;}
