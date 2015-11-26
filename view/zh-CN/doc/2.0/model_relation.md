@@ -396,4 +396,4 @@ export default class extends think.model.relation {
 
 ### mongo 关联模型
 
-该关联模型不操作不适合 mongo 模型，mongo 的关联模型请见 <https://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/>。
+该关联模型的操作不适合 mongo 模型，mongo 的关联模型请见 <https://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/>。
