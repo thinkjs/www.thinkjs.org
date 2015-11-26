@@ -48,7 +48,7 @@ module.exports = think.model({
 
 #### model.indexes
 
-数据表索引，默认自动从数据表分析。
+数据表索引，关系数据库会自动从数据表分析。
 
 #### model.readonlyFields
 
