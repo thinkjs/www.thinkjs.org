@@ -1,6 +1,7 @@
 export default {
   port: 7777,
   //cluster_on: true,
+  
 
   locale: { //i18n
     name: 'think_locale',

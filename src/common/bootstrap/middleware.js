@@ -29,7 +29,7 @@ think.middleware('get_lang', http => {
   let name = http.config('locale').cookie_name;
   let value = http.cookie(name);
   if(value !== lang){
-    http.cookie(name, lang);
+    http.cookie(name, lang, {timeout: 365 * 24 * 3600});
   }
 });
 

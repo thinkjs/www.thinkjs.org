@@ -9,6 +9,7 @@ import markToc from "marked-toc";
 
 import base from './base.js';
 
+
 export default class extends base {
   /**
    * get sidebar json
