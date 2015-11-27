@@ -9,6 +9,79 @@
                 <i class="circle"></i>
                 <div class="dailycont">
                   <i class="arrowl"></i>
+                  <span><strong>2.0.11</strong>2015.11.27</span>
+                  <p>去除获取配置时将配置名转为小写的逻辑</p>
+                  <p>修复关联模型保存时的错误</p>
+                  <p>修复 SQLite 在关联模型下没有 unique 字段导致报错的问题</p>
+                  <p>修复 countSelect 时设置缓存导致结果异常的问题</p>
+                  <p>修复数据校验内容为空校验逻辑的问题</p>
+                  <p>修复 Session 操作没有等待完成返回导致没有保存的问题</p>
+                  <p>修复 think.parallelLimit 方法单条数据操作可能导致内存泄露的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.0.10</strong>2015.11.20</span>
+                  <p>数据校验格式支持对象</p>
+                  <p>修复创建 controller 文件时在普通模式下文件内容报错的问题</p>
+                  <p>支持使用 thinkjs -v 显示版本号</p>
+                  <p>使用 think.co 替换 think.co.wrap</p>
+                  <p>通过 action 方法调用其他 action 时，自动修改 module/controller/action</p>
+                  <p>入口文件支持配置 retainsFile</p>
+                  <p>jade 模板在 production 环境下支持编译缓存</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.0.9</strong>2015.11.15</span>
+                  <p>修复路由更改不能自动更新的问题</p>
+                  <p>将 think.npm 安装路径更改到项目根目录下，并添加 --save 参数</p>
+                  <p>修复 count 为 0 调用 countSelect 方法报错的问题</p>
+                  <p>修复使用 db session 直接报错的问题</p>
+                  <p>修复 socket 启动很多连接的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.0.8</strong>2015.11.14</span>
+                  <p>修复模板文件修改后不能自动更新的问题</p>
+                  <p>修复创建项目时 package.json 依赖缺失的问题</p>
+                  <p>修复自动编译时获取项目模式错误的问题</p>
+                  <p>修复 nunjucks 模板引擎下设置模板根目录错误的问题</p>
+                  <p>修复使用 Babel 编译后在部分平台下调用 module._load 方法报错的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.0.7</strong>2015.11.13</span>
+                  <p>去除 view 配置 options 选项，使用 adapter 配置</p>
+                  <p>加载 bootstrap 下文件时，去除非 js 文件</p>
+                  <p>项目启动时增加是否安装依赖的检测</p>
+                  <p>去除静态资源请求的访问日志</p>
+                  <p>添加 think.camelCase 方法</p>
+                  <p>配置文件支持自定义解析，添加 think.parseConfig 方法</p>
+                  <p>当输出 Promise 时直接显示错误页面</p>
+                  <p>修复 Babel 编译偶尔报错的问题</p>
+                  <p>文件编译有错误时，访问 URL 直接显示编译错误信息</p>
+                  
+                  <p>文件编译时如果源文件已经删除，自动删除编译后的文件</p>
+                  <p>修复 mini 和 normal 模块下不能加载 bootstrap 文件的问题</p>
+                  <p>修复 file session 偶尔报错的问题</p>
+                  <p>修复基类文件修改，子类文件有的不能清除缓存的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
                   <span><strong>2.0.6</strong>2015.11.08</span>
                   <p>URL parsed Action name support '-' character</p>
                   <p>Add think.mergeConfig method, auto-merged adapter parameters</p>
