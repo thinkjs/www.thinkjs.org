@@ -4,7 +4,7 @@ ThinkJS website code
 
 ![www.thinkjs.org](http://p0.qhimg.com/d/inn/20b8a871/1.jpg)
 
-## Get code
+## Installation
 
 ```
 git clone git@github.com:75team/www.thinkjs.org.git
