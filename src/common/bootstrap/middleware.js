@@ -15,8 +15,14 @@ think.middleware('get_lang', http => {
   let supportLangs = think.config('locale.support');
   let lang = http.pathname.split('/')[0];
 
+  let cookieName = http.config('locale').cookie_name;
+  let cookieValue = http.cookie(cookieName);
+
   if(supportLangs.indexOf(lang) > -1){
     http.pathname = http.pathname.substr(lang.length + 1);
+    if(lang !== cookieValue){
+      http.cookie(cookieName, lang, {timeout: 365 * 24 * 3600});
+    }
   }else{
     lang = http.lang();
     if(supportLangs.indexOf(lang) === -1){
@@ -24,13 +30,6 @@ think.middleware('get_lang', http => {
     }
   }
   http.lang(lang, true);
-
-  //set lang cookie
-  let name = http.config('locale').cookie_name;
-  let value = http.cookie(name);
-  if(value !== lang){
-    http.cookie(name, lang, {timeout: 365 * 24 * 3600});
-  }
 });
 
 
