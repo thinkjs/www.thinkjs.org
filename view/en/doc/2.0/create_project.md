@@ -16,7 +16,7 @@ Install ThinkJS by following command:
 npm install thinkjs@2 -g --verbose
 ```
 
-After installation, run `thinjs --version` or `thinjs -V` to check version number.
+After installation, run `thinkjs --version` or `thinkjs -V` to check version number.
 
 Tips: If you have installed ThinkJS 1.x before, you need remove it by `npm uninstall -g thinkjs-cmd` first of all.
 
