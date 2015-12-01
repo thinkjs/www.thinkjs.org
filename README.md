@@ -1,33 +1,33 @@
 # www.thinkjs.org
 
-ThinkJS 官网源码
+ThinkJS website code
 
-## 下载代码
+![www.thinkjs.org](http://p0.qhimg.com/d/inn/20b8a871/1.jpg)
+
+## Get code
 
 ```
 git clone git@github.com:75team/www.thinkjs.org.git
 ```
 
-## 安装依赖
+## Install dependencies
 
 ```
 npm install
 ```
 
-## 编译
+## Compile
 
 ```
 npm run compile
 ```
 
-如果持续开发的话，执行 `npm run watch-compile`，这样文件修改后就会自动编译。
-
-## 启动服务
+## Start server
 
 ```
 npm start
 ```
 
-## 访问
+## How to visit
 
-使用浏览器打开 `http://127.0.0.1:7777/` 即可。
+Open url `http://127.0.0.1:7777/` in browser.
