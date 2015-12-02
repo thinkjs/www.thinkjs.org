@@ -1,6 +1,6 @@
 ## Project Structure
 
-You get following document structure after creating project by using thinkjs:
+You get following document structure after creating project by using ThinkJS:
 
 
 ```text
@@ -59,11 +59,11 @@ You get following document structure after creating project by using thinkjs:
            `-- js
 ```
 
-tips: There has little difference using unequal mode when you create project.
+Tips: There has little difference using unequal mode when you create project.
 
 ### nginx.conf
 
-nginx's configuration file, we recommand get proxy by nginx.
+nginx's configuration file, we recommend get proxy by nginx.
 
 ### src
 
@@ -75,7 +75,7 @@ Common module folder with common logic module.
 
 ### src/common/bootstrap
 
-File in this folder will autoload, it's project boot's index folder. You can put some global method or middleware into it.
+File in this folder will auto load, it's project boot's index folder. You can put some global method or middleware into it.
 
 #### Global function
 
@@ -101,7 +101,7 @@ think.middleware('replace_image', http => {
 
 You can inject this middleware into configure file `hook.js`.
 
-tips: bootstrap just stay in common module.
+Tips: bootstrap just stay in common module.
 
 ### src/common/config
 
@@ -133,7 +133,7 @@ Temp folder to store cache file and temp file upload folder.
 
 ### src/home/logic
 
-It's logic handle method file. Every handle would run logic check before some hanlde button. It contains: parameters check, request data check, login check, auth check and so on. use this can decrease project's complexity.
+It's logic handle method file. Every handle would run logic check before some handle button. It contains: parameters check, request data check, login check, auth check and so on. use this can decrease project's complexity.
 
 ```js
 'use strict';
@@ -180,7 +180,7 @@ Model to handle database.
 
 ### view
 
-view folder to store template file. You shoud have sub folder while you will add support to internationalization and multiple theme.
+view folder to store template file. You should have sub folder while you will add support to internationalization and multiple theme.
 
 ### www
 
