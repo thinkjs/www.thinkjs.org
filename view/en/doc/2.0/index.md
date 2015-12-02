@@ -1,14 +1,14 @@
 ## Introduction
 
-ThinkJS is a Node.js MVC framework develope by the feature of ES6/7。`async/await` feature in ES7 or `*/yield` feature in ES6 was used to resovle the proplem of async callback nesting hell. it make Node.js project development faster and efficient with absorbing lots of other framwork's design concepts and ideas around the world.
+ThinkJS is a Node.js MVC framework with new features of ES6/7. Such as `async/await` feature in ES7 or `*/yield` in ES6 can be used to resolve the problem of async callback nesting hell. ThinkJS makes Node.js project development faster and more efficient.
 
-It's a trend towards using the feature of ES6/7 building project with high effecient. Now the lastest version of Node.js has support the feature of ES6 more friendly, thought not all feature. [Babel](http://babeljs.io) can help us compile ES6 to ES5 code  to run.
+It's a trend towards using the feature of ES6/7 building project with high efficient. Now the latest version of Node.js supports the feature of ES6 more friendly, though not all feature. [Babel](http://babeljs.io) can help us compile ES6 to ES5 code to run.
 
 ## Feature
 
 #### Using ES6/7 feature
 
-Babel compile our code to ES5 so we don't worry about the browser compatibility. It's quick to resolve async callback problem by `async/await` or `*/yield` feature.
+Babel compiles our code to ES5 so we needn't worry about the browser compatibility. It's quick to resolve async callback problem by `async/await` or `*/yield` feature.
 
 
 ```js
@@ -29,24 +29,24 @@ export default class extends think.controller.base {
     if(think.isEmpty(result)){
       return this.fail('login fail');
     }
-    //write user info into session after reciving user infomation
+    //write user info into session after receiving user information
     await this.session('userInfo', result);
     return this.success();
   }
 }
 ```
 
-We use ES6 featuer like `class`, `export`, `let` and ES7 feature link `async` and `await` in this example. Database query and `Session` writing was all async action, but we write sync code to handle them with `async/await` feature. Last, it can run in Node.js environment stably after `Babel` compiling.
+We use ES6 feature like `class`, `export`, `let` and ES7 feature link `async` and `await` in this example. Database query and `Session` writing was all async action, but we write sync code to handle them with `async/await` feature. Last, it can run in Node.js environment stably after `Babel` compiling.
 
 #### Support multiple project structure and environment
 
-ThinkJS is compatiable with multiple project structure like single module mode, normal mode and splitting module mode. It supports to develop various of complicated project.
+ThinkJS is compatible with multiple project structure like single module mode, normal mode and splitting module mode. It supports to develop various of complicated project.
 
 Default there have 3 project environment: `development`, `testing` and `production`, you can use different configuration in different environment to support different demands. You can also custom and extend them in your project.
 
 #### Support abundant database type
 
-ThinkJS supports mosts database like `MySQL`, `MongoDB` and `SQLite`. It encapsulates many API about operation of the database, without having to manually stitching SQL statements. You can automatically prevent SQL injection and other vulnerabilities. It also supports transaction and association and other advanced features.
+ThinkJS supports most database like `MySQL`, `MongoDB` and `SQLite`. It encapsulates many API about operation of the database, without having to manually stitching SQL statements. You can automatically prevent SQL injection and other vulnerabilities. It also supports transaction and association and other advanced features.
 
 #### Atuomatic update
 
@@ -56,9 +56,9 @@ ThinkJS has a mechanism to automatic update code after file modified without res
 
 You can use `thinkjs` command to create REST API automaticly without writing any other code. you can easily add filter or auth check if you want.
 
-#### Support multiple WebSocket libray
+#### Support multiple WebSocket library
 
-ThinkJS supports some common Websocket library like `socket.io` and `sockjs`. And it package those library to take same API into different library.
+ThinkJS supports some common Websocket libraries like `socket.io` and `sockjs`. And it packages those library to take same API into different library.
 
 #### Lots of test case
 
@@ -66,11 +66,11 @@ ThinkJS includes 1500+ test case which covering 95% code. Every change has its t
 
 #### Support call command to run cron job
 
-`Action` method can be responsed by user's request, it also support request in terminal. With this feature, we can excute cron job easily.
+`Action` method can be response by user's request, it also support request in terminal. With this feature, we can execute cron job easily.
 
 #### Hook and Middleware
 
-ThinkJS support Hook and Middleware, they can handle request flexability.
+ThinkJS supports Hook and Middleware, they can handle request flexibility.
 
 #### Detailed log
 
@@ -113,13 +113,13 @@ express and koa are simple framework to support primary function, and high flexi
 
 Koa replace async callback problem by using `*/yield` feature. But the newer `async/await` feature will replace `*/yield` at last.
 
-ThinkJS provides complete solutions, every function has strait test about performance and mermory leaks. And the important is we can use all ES6/7 feature in the project directly.
+ThinkJS provides complete solutions, every function has strait test about performance and memory leaks. And the important is we can use all ES6/7 feature in the project directly.
 
 #### sails
 
-sails , a Node.js framework, also provides complete solutions. It's convinient because of packaging many database, REST API and security hand.
+sails , a Node.js framework, also provides complete solutions. It's convenient because of packaging many database, REST API and security hand.
 
-But sails still uses callbak style in async. It's too hard to develop, and can't use ES6/7 fetaure naturally in the project.
+But sails still uses callbak style in async. It's too hard to develop, and can't use ES6/7 feature naturally in the project.
 
 #### Disadvantage
 
@@ -133,7 +133,6 @@ Althought ThinkJS has many advantage, there also has little disadvantage like:
 You can read more about ES6/7 features:
 
 * [learn-es2015](http://babeljs.io/docs/learn-es2015/)
-* [ECMAScript 6 Guide](http://es6.ruanyifeng.com/)
 * [ECMAScript 6 Features](https://github.com/lukehoban/es6features)
 * [ECMAScript 6 compatibility table](http://kangax.github.io/compat-table/es6/)
 * [ECMAScript 7 Features](https://github.com/hemanth/es7-features)
