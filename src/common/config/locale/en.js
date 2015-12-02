@@ -1,5 +1,5 @@
 export default {
-  'title-home': 'ThinkJS - use full ES6/7 features to develop web applications',
+  'title-home': 'ThinkJS - use full ES6/7 features to develop Node.js applications',
   'title-changelog': 'Changelog - ThinkJS',
   'title-plugin': 'plugins - ThinkJS',
   'title-donate': 'donate - ThinkJS',

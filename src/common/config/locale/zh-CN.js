@@ -1,5 +1,5 @@
 export default {
-  'title-home': 'ThinkJS - use full ES6/7 features to develop web applications',
+  'title-home': 'ThinkJS - 使用 ES6/7 特性开发 Node.js 项目',
   'title-changelog': '更新日志 - ThinkJS',
   'title-doc-suffix': ' - ThinkJS %s 文档',
   'title-demo': 'demo - ThinkJS',
