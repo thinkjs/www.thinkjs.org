@@ -1,9 +1,14 @@
 export default {
   'title-home': 'ThinkJS - use full ES6/7 features to develop Node.js applications',
   'title-changelog': 'Changelog - ThinkJS',
-  'title-plugin': 'plugins - ThinkJS',
-  'title-donate': 'donate - ThinkJS',
-  'title-about': 'about - ThinkJS',
-  'title-spending': 'spending - ThinkJS',
-  'back2top': 'back to top'
+  'title-doc-suffix': ' - ThinkJS %s Documentation',
+  'title-demo': 'Demo - ThinkJS',
+  'title-plugin': 'Plugin - ThinkJS',
+  'title-donate': 'Donate - ThinkJS',
+  'title-about': 'About - ThinkJS',
+  'title-spending': 'Spending - ThinkJS',
+  'download-pdf': 'Download PDF',
+  'view-on-single-page': 'View on single page',
+  'all-doc': 'All documentation',
+  'back2top': 'Back to top'
 }
