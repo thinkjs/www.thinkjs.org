@@ -2,7 +2,7 @@
 
 ### Install Node.js
 
-ThinkJS is a Node.js MVC framework, it requires Node.js before you run it. You can install by go to https://nodejs.org to download lastest installation and other method.
+ThinkJS is a Node.js MVC framework, it requires Node.js before you run it. You can install by go to https://nodejs.org to download latest installation and other method.
 
 After installation, you can type `node -v` in terminal. If it outputs version number, it installs success.
 
@@ -16,7 +16,7 @@ Install ThinkJS by following command:
 npm install thinkjs@2 -g --verbose
 ```
 
-After installation, run `thinjs --version` or `thinjs -V` to watch version.c
+After installation, run `thinkjs --version` or `thinkjs -V` to watch version.
 
 Tips: If you installed ThinkJS 1.x before, you need remove it by `npm uninstall -g thinkjs-cmd` first of all.
 
@@ -71,7 +71,7 @@ You can go to [extension function -> ThinkJS command](./thinkjs_command.html) to
 
 ### Install dependencies
 
-After project creaton, go to project directory and run `npm install` to install dependencies.
+After project created, go to project directory and run `npm install` to install dependencies.
 
 ```sh
 npm install
@@ -79,9 +79,9 @@ npm install
 
 ### Compile project
 
-if you use `--es6` in the creation command, your code must be compiled before running. Run `npm run watch-compile` command and then they will be automatic compiled after modifiled.
+If you use `--es6` in the creation command, your code must be compiled before running. Run `npm run watch-compile` command and then they will be automatic compiled after modifiled.
 
-This command will run on terminal permanently, don't fish this command! You can task a new tab to do other things.
+This command will run on terminal permanently, don't finish this command! You can open a new tab to do other things.
 
 ### Start project
 
