@@ -1,27 +1,27 @@
 ## Specification
 
-### Lowercase file path
+###  File Path Must Be Lowercased
 
-You always deploy project in Linux system, although it's developed in Windows or Mac OSX.
+Generally, ThinkJS projects would be deployed in Linux environment, although they are developed in Windows or Mac OSX environment.
 
-It's case insensitive in Windows and Mac, but Linux is sensitive. So it's very easy to take problem in online.
+In Windows and Mac, file paths are not case-sensitive, but in Linux they are case-sensitive. This may result in errors after deployed projects online.
 
-To avoid this happened, it's a good advice that all file path defined with lowercase word. By the way, ThinkJS will scan your project file after service start successfully. If you has uppercase name it will return warning such as:
+To avoid this happen, it's recommended that all file paths use lowercase. This way, ThinkJS will scan your project paths after service started, and return warning messages like this if it found uppercase paths:
 
 ```text
 [2015-10-13 10:36:59] [WARNING] filepath `admin/controller/apiBase.js` has uppercases.
 ```
-### Indent with 2 spaces
+### Indent Two Spaces
 
-It often has complicated logic such as if-else or async action to add your code's indent in Node.js. It's advice to take 2 spaces as your indentation to prevent indentation too long.
+Sometimes, complicated logic will result in multi-levels indent in Node.js. We advice each line intent two spaces to prevent indent too deep.
 
-### Use ES6 grammar
+### Use ES6 Grammars
 
-ES6 has lots of new feature that can make our code simple and effective. It has support parts of ES6 feature in latest Node.js. You can use Babel compile your program to support all features.
+ES6 has lots of new features that can make our code simple and effective. Node.js has supported much of ES6 features in the latest version. You can use Babel compile your code to support all features.
 
-### Do not use constructor method
+### Do Not Use constructor Method
 
-If you use `class` to instance class in ES6, you can use `constructor` method to make something auto run when it's instanced. For example:
+If you use ES6's `class`, the `constructor` method can be used to make something auto run when it's instantiated. For example:
 
 ```js
 export default class think.base {
@@ -31,7 +31,9 @@ export default class think.base {
 }
 ```
 
-That means no `class` no `constructor`. ThinkJS take `init` method replace to `constructor`. It takes a promise that all it will be run no matter in `class` or dynamic create class.
+But if you are not using ES6's `class` grammar, you should not use `constructor` method.
+
+ThinkJS provide `init` method to replace `constructor`. It will called automatically whether you using `class` or not.
 
 ```js
 export default class think.base {
@@ -49,18 +51,20 @@ Tips: All ThinkJS class will extend the base class `think.base`.
 
 ### Compile by Babel
 
-Most but not all ES6 features was supported in latest Node.js, and there also has optimization in some feature. We advise you that compile your project with Babel. Babel can take almost all ES6+  features and higher performance after compiled to you.
+The latest version of Node.js has supported most of ES6 features, but some of these features (e.g. `*/yield`) have not optimized in V8. 
 
-### Replace */yield with async/await
+We advise you to compile your project code with Babel. Babel can identify almost all ES6 and ES7 grammar, and the performance of compiled code is higher than native-supporting.
 
-`*/yield` is ES6 feature to resolve async callback action, and ES7 replace it with `async/await`.
+### Replace `*/yield` with `async/await`
 
-Compare with `async/await`, there has 4 defects in `*/yield`:
+`*/yield` is an ES6 feature to resolve async callback issue, and ES7 replace it with `async/await`.
 
-1. `*/yield` will return a generator after called and will use third module such as `co` to run it.
+Compared to `async/await`, `*/yield` has four shortcomings:
+
+1. `*/yield` return a generator that need a third module such as `co` to run.
 
 2. `*/yield` can't use with `Arrow Function` together.
 
-3. when `*/yield` need call another `*/yield`, we need use `yield *` command
+3. When one `*/yield` need call another `*/yield`, we need use `yield *` command
 
-4. It has large optimization space to V8 engineer, so we would compil our code to Babel. With Babel, you can use ES7 `async/await` features replace to `*/yield`, and then compiled program.
+4. V8 has not made optimazition for `*/yield`, so we recommend you to use Babel. With Babel, you can use ES7 `async/await` to replace `*/yield`.

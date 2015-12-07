@@ -89,7 +89,7 @@ global.formatDate = obj => {
 
 We defined a global function `formatDate` here, you can call it anywhere in the project after define it here.
 
-#### Register middlewares
+#### Register Middlewares
 
 
 ```js

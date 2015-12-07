@@ -34,7 +34,7 @@ Update ThinkJS in you current project by run the following command:
 npm install thinkjs@2
 ```
 
-### Create project
+### Create Project
 
 After installation, you can create a new ThinkJS project by run the following command:
 
@@ -90,11 +90,11 @@ After project creation, go to the project directory and run `npm install` to ins
 npm install
 ```
 
-### Compile project
+### Compile Project
 
 Since v2.0.6, ThinkJS has built-in the automatical compiling feature, so you don't need run `npm run watch-compile` for real time compile anymore. What you only need to do, is just start your service by run `npm start`.
 
-### Start project
+### Start Project
 
 Run `npm start`, if terminal returns output like following, it means the service run success.
 
@@ -107,6 +107,6 @@ Run `npm start`, if terminal returns output like following, it means the service
 [2015-09-21 20:21:09] [THINK] App Enviroment: development
 ```
 
-### Access project
+### Access Project
 
 Open your browser and go to `http://127.0.0.1:8360`. If you are in a remote machine, you must replace `127.0.0.1` with your remote machine's IP.
