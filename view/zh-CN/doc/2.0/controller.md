@@ -138,7 +138,7 @@ ES6 里的 class 有 contructor 方法，但动态创建的类就没有该方法
 
 该方法在类实例化的时候自动调用，无需手工调用。
 
-##### ES6 方式**
+##### ES6 方式
 　
 ```js
 'use strict';
@@ -175,7 +175,7 @@ module.exports = think.controller(Base, {
 
 ThinkJS 支持前置操作，方法名为 `__before`，该方法会在具体的 Action 调用之前自动调用。如果前置操作里阻止了后续代码继续执行，则不会调用具体的 Action，这样可以提前结束请求。
 
-##### ES6 方式**
+##### ES6 方式
 　
 ```js
 'use strict';
