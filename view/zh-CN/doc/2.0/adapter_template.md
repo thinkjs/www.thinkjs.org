@@ -43,7 +43,7 @@ thinkjs adapter template/foo
 执行完成后，会创建文件 `src/common/adapter/template/foo.js`。扩展缓存类需要实现如下的方法：
 
 ```js
-export default class extends think.adapter.template {
+export default class extends think.adapter.base {
   /**
    * get compiled content
    * @params {String} templateFile 模版文件目录
