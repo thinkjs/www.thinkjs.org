@@ -1,29 +1,29 @@
 ## Module
 
-ThinkJS could support a variety of program models when creating a project, the project which is created by default is divided by module, and add the `common` and `home` 2 modules automatically. Each module has a separate configuration, controller, view, model and other document.
+ThinkJS supports a variety of programming modes when creating a project. By default, the new project is consist of modules, and has added the `common` and `home` modules automatically. Each module has itself a separate configuration, controller, view, model and other documents.
 
-Dividing project using modularized program makes project structure much clearer. Such as: a blog system can be divided into front and back modules in general .
+Modularization programming makes project structure much clearer. Such as a typical blog system can be divided into front and back modules in general.
 
-### Module list
+### Module List
 
-Go into `src/` directory, you can see a list of modules:
+Goes into `src/` directory, you can see a list of modules:
 
 ```text
 drwxr-xr-x   5 welefen  staff  170 Aug 18 15:55 common/
 drwxr-xr-x   6 welefen  staff  204 Sep  8 19:14 home/
 ```
 
-### Common module
+### Common Module
 
-`Common` module is a common module, stored some common features in this module, such as: general configuration, runtime directory, startup files, error handling controllers.
+`common` module is a universal module that will be commonly used by other modules of the project, it stored some common features, such as general configuration, runtime directory, startup files, error handling controllers.
 
-`NOTE`: The controller under the module does not respond to the user's request.
+`NOTE`: The controllers under the module does not respond to the user's request.
 
-### Default module
+### Default Module
 
-Default module is `home` module. It will automatically correspond to the `home` when parsing the user's request could not find the module. 
+Default module is the `home` module. Any requests that could not found corresponding module to process will be handed over to this module to process, so it is a catch all module. 
 
-`Default_module` can be configured to modify the default module, modify the configuration file `src/common/config/config.js`：
+If you want to modify the default module, open `src/common/config/config.js`, and modify the value of `default_module`：
 
 ```js
 //The default module's name is changed to blog
@@ -32,19 +32,19 @@ export default {
 }
 ```
 
-### Add module
+### Add Module
 
-Add module can be completed directly by `thinkjs` command.
+Add new module can be done by using `thinkjs` command.
 
-In the current project directory, execute `thinkjs module xxx`, you can create a module named `xxx`.
+In current project directory, execute `thinkjs module xxx`, you can create a module named `xxx`.
 
 If the module's name already exists, you can not create it.
 
-### Disable module
+### Disable Module
 
-ThinkJS will automatically find and identify module under the project and that all modules are available.
+ThinkJS will automatically find and identify modules under the project and assume that all modules are available.
 
-If you want to disable some module, you can modify the configuration file `src/common/config/config.js`, add the following configuration:
+If you want to disable some modules, you can modify the configuration file `src/common/config/config.js`, add the following configuration:
 
 ```js
 export default {

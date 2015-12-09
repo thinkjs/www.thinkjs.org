@@ -1,39 +1,39 @@
 ## View
 
-View is template, the default root directory is `view/`.
+View is template, its default root directory is `view/`.
 
-### View files
+### View Files
 
-The default rule of view file is `module/controller_operation.html`.
+The default naming rule of view file is `module/controller_operation.html`.
 
-If the module that URL `home/article/detail` parsed is `home`, the controller is `article`, the operation is `detail`, then the corresponding view file is `home/article_detail.html`.
+For URL `home/article/detail`, after parsed, the module is `home`, the controller is `article`, the operation is `detail`, then the corresponding view file is `home/article_detail.html`.
 
-### View configuration
+### View Configuration
 
-View default configuration is as follows, you can modify it in the configuration file `src/common/config/view.js` :
+Default view configuration is as follows, you can modify it in the configuration file `src/common/config/view.js` :
 
 ```js
 export default {
-  type: 'ejs', //模版引擎
-  content_type: 'text/html', //输出模版时发送的 Content-Type
-  file_ext: '.html', //文件的扩展名
-  file_depr: '_', //控制器和操作之间的连接符
-  root_path: think.ROOT_PATH + '/view', //视图文件的根目录
-  prerender: undefined, //模板渲染前自定义处理逻辑
-  adapter: { //模版引擎需要的配置项
-    ejs: {}, //使用 ejs 模板引擎时额外配置
-    nunjucks: {} //使用 nunjucks 模板引擎时额外配置
+  type: 'ejs', // template engine
+  content_type: 'text/html', // the Content-Type send with outputed template
+  file_ext: '.html', // the extension name
+  file_depr: '_', // the seperator between controller and action
+  root_path: think.ROOT_PATH + '/view', // the root directory of view files
+  prerender: undefined, // whether execution custom process logic before rendering template
+  adapter: { // the configuration options needed by template engine
+    ejs: {}, // the extra configuration options when using ejs as template engine
+    nunjucks: {} // the extra configuration options when using nunjucks as template engine
   } 
 };
 ```
 
-`Note`: Since `2.0.6` version, it removes `options` configuration item, and uses `adapter` to replace.
+`Note`: Since `2.0.6` version, `options` configuration item was removed, and `adapter` is the replacement.
 
-The default root directory of view is `view/`. If you want each module to own a separate view directory, configuration `root_path` need to be modified to be empty.
+The default root directory of view is `view/`. If you want each module to own a separate view directory, just reset `root_path` configuration to empty.
 
-#### Modify connector 
+#### Modifing Seperator 
 
-The connector between the default controller and operation is `_`, the file name is similar to `index_index.html`, if you want the controller to be as a layer directory, such as: `index/index.html`, you can modify the connector to be  `/`.
+The seperator between the default controller and operation is `_`, so the file name is similar to `index_index.html`. If you want the controller to be as a layer directory, such as: `index/index.html`, you can modify the seperator to `/`.
 
 ```js
 export default {
@@ -41,27 +41,27 @@ export default {
 }
 ```
 
-#### Modify the template engine configuration 
+#### Modify The Template Engine
 
-If you want to modify some configuration of the template engine, you can modify the corresponding field of configuration. Such as:
+If you want to modify some configurations of the template engines, you can modify the corresponding field of configuration. Such as:
 
 ```js
 export default {
-  options: {
-    delimiter: '&' //将定界符修改为 <& 和 &>
+  options: {    
+    delimiter: '&' // modify  as  <& and &>
   }
 }
 ```
 
-### Template engine 
+### Template Engine 
 
-The default template engines which ThinkJS support are `ejs`, `jade`, `swig` and `nunjucks`, the default template engine is `ejs`, you can modify it to be other template engines based on need.
+ThinkJS support `ejs`, `jade`, `swig` and `nunjucks` as template engine, and the default template engine is `ejs`, you can modify the default template engine based on need.
 
 #### ejs 
 
 ##### Delimiter
 
-The default delimiters of ejs are `<%` and `%>`. If you want to change them, you can modify the `options` field of the configure , such as:
+The default delimiters of ejs are `<%` and `%>`. If you want to change them, you can modify the `options` field of the configuration , such as:
 
 ```js
 export default {
@@ -71,13 +71,13 @@ export default {
 }
 ```
 
-##### Variable output 
+##### Variable Output 
 
 * Escape output `<%= data.name%>`
 * Not escape output `<%- data.name%>`
-* Note `<%# data.name%>`
+* Comment `<%# data.name%>`
 
-##### conditional
+##### Conditional
 
 ```text
 <%if(data.name === '1'){%>
@@ -89,7 +89,7 @@ export default {
 <%}%>
 ```
 
-##### loop
+##### Loop
 
 ```text
 <%list.forEach(function(item)){%>
@@ -97,13 +97,13 @@ export default {
 <%}%>
 ```
 
-##### filter
+##### Filter
 
-The new version of `ejs` no longer support the filter function, and if you need some filter function, you can define some global function in `src/common/bootstrap/`, you can use these functions directly in the template.
+The new version of `ejs` no longer support the filter function, and if you need some filter functions, you can define some global function in `src/common/bootstrap/`, then you can use these functions directly in the template.
 
-##### Reference file
+##### Reference File
 
-ejs does not support template inheritance. But it can make a public template be independent into an file and then be introduced by `include`.
+ejs does not support template inheritance. But it can make a public template as an independent file, and then introduce it using `include` directive, such as:
 
 ```text
 <%include inc/header.html%>
@@ -115,9 +115,9 @@ More ejs document please see [here](https://www.npmjs.com/package/ejs).
 
 #### nunjucks
 
-Nunjucks is a template engine, similar to the jinja2, whose function is unusually powerful, it suggests you using the template engine in complex projects .
+Nunjucks is a another template engine ThinkJS supported, it similar to the jinja2, whose functions is unusually powerful, if your project is complex, we suggest you use it.
 
-##### delimiter
+##### Delimiter
 
 Block-level delimiters are `{%` and `%}`, variable delimiters are `{{` and `}}`, comment delimiters are `<#` and `#>`. Such as:
 
@@ -129,11 +129,11 @@ This is the default content
 {% endblock %}
 ```
 
-##### Variable output
+##### Variable Output
 
-You can use `{{username}}` to output variables, the default output variables will automatically be escaped, if don't want to be escaped, you can use `{{username | safe}}` to deal with.
+You can use `{{username}}` to output variables, the default output variables will automatically be escaped, if you don't want to escape variables, use `{{username | safe}}` instead.
 
-##### Template inheritance
+##### Template Inheritance
 
 The parent template:
 
@@ -153,7 +153,7 @@ This is the default content
 </section>
 ```
 
-The child templates:
+The child template:
 
 ```html
 {% extends "parent.html" %}
@@ -167,7 +167,7 @@ This is the right side!
 {% endblock %}
 ```
 
-##### conditional
+##### Conditional
 
 ```html
 {% if hungry %}
@@ -179,7 +179,7 @@ This is the right side!
 {% endif %}
 ```
 
-##### loop
+##### Loop
 
 ```html
 <h1>Posts</h1>
@@ -192,24 +192,24 @@ This is the right side!
 </ul>
 ```
 
-The specific use document please see [here](http://mozilla.github.io/nunjucks/).
+For complete documentation please see [here](http://mozilla.github.io/nunjucks/).
 
 #### jade
 
-jade template using way please see [here](https://github.com/jadejs/jade). 
+The documentation of jade template can be found [here](https://github.com/jadejs/jade). 
 
 #### swig
 
-swig template using way please see [here](http://paularmstrong.github.io/swig/). 
+The documentation of swig template can be found [here](http://paularmstrong.github.io/swig/). 
 
-#### Add filters, and other functions
+#### Add Filters and Other Functions
 
-`Swig`, `nunjucks` and many other template engines support adding filters, and other functions, it can be completed by finding the corresponding adapter in the template configuration file `src/common/config/view.js` and adding `prerender `configuration. Such as:
+`Swig`, `nunjucks` and many other template engines support adding filters, and other functions, it can be done by finding the corresponding adapter in the template configuration file `src/common/config/view.js` and adding `prerender` configuration. Such as:
 
 ```js
 export default {
   prerender: function(nunjucks, env){
-    //添加一个过滤器，这样可以在模板里使用了
+    // add a filter, then you can use it in the template
     env.addFilter('filter_foo', function(){
       
     })
@@ -217,40 +217,40 @@ export default {
 }
 ```
 
-`Note`: this function is new in version `2.0.5`.
+`Note`: This function is introduced since ThinkJS `2.0.5`.
 
-#### Extend the template engine
+#### Extend The Template Engine
 
-Template engine is implemented by Adapter. If the project needs to use other template engines, it can be extended through Adapter, please see [here](./adapter_template.html).
+Template engine is implemented by Adapter. If your project needs to use other template engines, it can be extended through Adapter, more details please see [here](./adapter_template.html).
 
-### Variable assignment
+### Variable Assignment
 
-The controller can do variable assignment by the `assign` method.
+You can assigning value to template variable by using `assign` method in the controller.
 
-##### Assignment of single variable
+##### Assignment of Single Variable
 
 ```js
 export default class extends think.controlle.base {
   indexAction(){
-    this.assign('title', 'ThinkJS 官网');
+    this.assign('title', 'ThinkJS WebSite');
   }
 }
 ```
 
-##### Assignment of multiple variables
+##### Assignment of Multiple Variables
 
 ```js
 export default class extends think.controlle.base {
   indexAction(){
     this.assign({
-      title: 'ThinkJS 官网',
+      title: 'ThinkJS WebSite',
       author: 'thinkjs'
     });
   }
 }
 ```
 
-##### Get the assignment
+##### Get The Values
 
 You can get assigned values by `assign` after variable assignment. Such as:
 
@@ -263,25 +263,25 @@ export default class extends think.controlle.base {
 }
 ```
 
-### Template render
+### Template Rendering
 
-You can render the template by the `display` method. If you don't pass a specific template file path, it will automatically search. Such as:
+You can render the template by call the `display` method. If no specific template file path was passed, ThinkJS will search on for you automatically. Such as:
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    this.display();// render home/index_index.html
+    this.display(); // render home/index_index.html
   }
 }
 ```
 
-You could also specify a specific template files for rendering, about the `display` method using in detail please see [here](./api_controller.html#toc-6b2).
+You could also specify a specific template file for rendering, more about the `display` method's using please see [here](./api_controller.html#toc-6b2).
 
-### Get content rendered
+### Get Rendered Content
 
-If sometimes don't want to support the output template, but get content rendered, so it could be obtained by the `fetch` method.
+If you don't want to outputing template, and only want to get the rendered content, you can use the `fetch` method.
 
-##### The way of ES6
+##### The ES6 Way
 
 ```js
 export default class extends think.controller.base {
@@ -292,7 +292,7 @@ export default class extends think.controller.base {
 }
 ```
 
-##### The way of dynamic creation
+##### Dynamically Creation
 
 ```js
 module.exports = think.controller({
@@ -304,27 +304,27 @@ module.exports = think.controller({
 })
 ```
 
-More details about the `fetch` method using way please see [here](api_controller.html#controllerfetchtemplatefile).
+More details about the `fetch` method please see [here](api_controller.html#controllerfetchtemplatefile).
 
 ### Internationalization
 
-After starting the internationalization, the view path will has an extra layer of internationalization of directory. Such as: specific view path becomes into the `view/zh-CN/home/index_index.html`, and `zh-CN` is language.
+After starting the internationalization, the view path will has an extra layer of internationalization of directory. Such as specific view path becomes into the `view/zh-CN/home/index_index.html`, and `zh-CN` means language.
 
-About how to use internationalization, please see [extensions - > internationalization](./i18n.html).
+More about how to implementing internationalization, please see [extensions - > internationalization](./i18n.html).
 
-### Multiple themes
+### Multiple Themes
 
-After setting the multiple theme, view path will be much more than a layer theme directory. Such as: specific view path becomes into the `view/default/home/index_index.html`, the `default` is the theme name. 
+After setting the multiple theme, view path will be much more than a layer theme directory. Such as specific view path will becomes into the `view/default/home/index_index.html`, the `default` is the theme name. 
 
-You can set the current theme by `http.theme` method, setting the theme is usually done by middleware.
+You can set the current theme by `http.theme` method, setting theme is usually done by middleware.
 
 More information on middleware please see [extensions - middleware](./middleware.html).
 
-### The default template variables
+### Default Template Variables
 
-In order to get some common variables easily in the template, framework automatically registered `http`, `controller`, `config` and other variables in the template, and these variables can be used directly in the template.
+In order to get some common variables easily in the template, ThinkJS will automatically register `http`, `controller`, `config` and other variables in the template, and these variables can be read directly in the template.
 
-The following code example is based on `ejs` template engine, you need to modify it according to the corresponding syntax under the other template engines.
+The following code examples are based on `ejs`, if you are using other template engine, you need to modify it to use the correct syntax.
 
 #### http
 
@@ -342,7 +342,7 @@ export default class extends think.controller.base {
 }
 ```
 
-Add property `navType` to the current controller in the Action, then the template can be used directly by the `controller.navType`.
+Add property `navType` to the current controller in the Action, then you can use `controller.navType` in template directly.
 
 ```text
 <%if(controller.navType === 'home')%>
@@ -354,7 +354,7 @@ Add property `navType` to the current controller in the Action, then the templat
 
 #### config
 
-It can be directly corresponding configuration in the template through the `config` object, such as:
+You can get the configuration in the template through the `config` object, such as:
 
 ```text
 <%if(config.name === 'text'){%>
@@ -362,10 +362,9 @@ It can be directly corresponding configuration in the template through the `conf
 <%}%>
 ```
 
+#### Get Localization Using `_`
 
-#### The internationalization way _
-
-In the template, you can obtain the value of the corresponding localization by `_` directly, these values are defined in the `src/common/config/locales/[lang].js`.
+In templates, you can obtain the value of the corresponding localization by `_`, these values are defined in the `src/common/config/locales/[lang].js`.
 
 ```text
 <%= _('title')%>
