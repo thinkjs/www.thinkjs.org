@@ -1,10 +1,10 @@
 ## WebSocket
 
-WebSocket is usually used to implement various functions such as chatroom. ThinkJS supports a lot of WebSocket libraries, for instance, `socket.io`，`sockjs` etc. More over, in order to make these engines become interface conformance, ThinkJS decorates them simply.
+WebSocket is usually used to implement various functions such as chatroom. ThinkJS supports a lot of WebSocket libraries, for instance, `socket.io`，`sockjs` etc. Further more, by give a simple encapsulation to these libraries, ThinkJS provided us consistent interfaces.
 
 ### Open WebSocket
 
-WebSocket is closed by default. You can edit `src/common/config/websocket.js` to open it like this：
+WebSocket is closed by default. You can edit `src/common/config/websocket.js` to open it：
 
 ```js
 export default {
@@ -19,11 +19,11 @@ export default {
 };
 ```
 
-change the `on` field to `true`, and restart Node.js.
+Change the `on` field to `true`, and restart Node.js.
 
-### Event reflect to Action
+### Map Event to Action
 
-WebSocket ThinkJS obey to the `socket.io` mechanism. The server and client communicate each other through events. So the server need make a reflection from event to action in order to response correctly.The configuration is specified in `messages` field as following: 
+The encapsulation to WebSocket obeyed to the `socket.io` mechanism. The server and client communicate each other through events. So the server need map events to actions in order to response correctly.The configuration is specified in `messages` field as following: 
 
 ```js
 export default {
@@ -35,11 +35,11 @@ export default {
 }
 ```
 
-The event name `open`, `close` are immutable, representing a connection or disconnection. Others can be custom, you can add according to your need.
+The events name `open`, `close` are immutable, representing a connection or disconnection. Others can be custom, you can add according to your need.
 
-### Work In Action
+### Work With Action
 
-Then, you can work in action like following code after finished above configuration.
+Then, you can work with action like following code after finished above configuration.
 
 ```js
 export default class extends think.controller.base {
@@ -60,7 +60,7 @@ export default class extends think.controller.base {
 
 #### emit
 
-You can emit event to the current socket in Action through `this.emit`, like:
+You can emit event to the current socket in Action through `this.emit`:
 
 ```js
 export default class extends think.controller.base {
@@ -78,7 +78,7 @@ export default class extends think.controller.base {
 
 #### broadcast
 
-You can broadcast event to all sockets in Action through method `this.broadcast`, like:
+You can broadcast event to all sockets in Action through method `this.broadcast`:
 
 ```js
 export default class extends think.controller.base {
@@ -90,7 +90,7 @@ export default class extends think.controller.base {
 }
 ```
 
-`Note`: the broadcase method broadcast to all sockets except current. You can set the third parameter to `true` to include current one.
+`Note`: the broadcase method broadcast to all sockets except current one. You can set the third parameter to `true` to include current one.
 
 ```js
 export default class extends think.controller.base {
@@ -112,8 +112,7 @@ You can get the event data in Action through `this.http.data`.
 
 ### socket.io
 
-The `socket.io` library encapsulates socket both front end and back end, is very convenient to use.
-
+The `socket.io` library encapsulates socket both front end and back end, it is very convenient to use.
 
 #### io Object
 
@@ -123,7 +122,7 @@ To know methods in io object, please see also <http://socket.io/docs/server-api/
 
 #### Set Path
 
-The socket.io process path is `/socket.io` by default.You can edit the folloing configuration if you need change.
+The socket.io process path is `/socket.io` by default. You can edit the folloing configuration if you need.
 
 ```js
 export default {
@@ -135,7 +134,7 @@ export default {
 
 #### Set Adapter
 
-When using multi node to deploy WebSocket, multiple nodes can communicate with Redis. You can set up adapter to achieve.
+When using multiple nodes to deploy WebSocket, multiple nodes can communicate with Redis. You can get things done by set up adapter.
 
 ```js
 import redis from 'socket.io-redis';
@@ -149,9 +148,9 @@ export default {
 
 See also <http://socket.io/docs/using-multiple-nodes/> for more detail.
 
-#### socket.io client
+#### socket.io Client
 
-In Browser end, you should introduce socket.io client. The download path is：<http://socket.io/download/>。
+In browser end, you should introduce socket.io client. The download path is：<http://socket.io/download/>。
 
 ```js
 var socket = io('http://localhost:8360');
@@ -167,7 +166,7 @@ This CDN url is available：<http://s4.qhimg.com/static/535dde855bc726e2/socket.
 
 #### Check User Login
 
-Websocket get cookie when connected. So, you can check if the user is logined in the `open` Action. For example:
+Websocket can get cookie when connected. So, you can check if the user is logged in in the `open` Action. For example:
 
 ```js
 export default class extends think.controller.base {
@@ -186,9 +185,9 @@ See also <https://github.com/75team/thinkjs2-demos/tree/master/websocket-socket.
 
 ### SockJS
 
-#### Configurate
+#### Configuration
 
-You should edit the `type` field in the configuration to `sockjs`, like:
+You should edit the `type` field in the configuration to `sockjs`:
 
 ```js
 export default {
@@ -211,7 +210,7 @@ export default {
 }
 ```
 
-#### SockJS client
+#### SockJS Client
 
 In Browser end, you should introduce SockJS client. The download path is：<https://github.com/sockjs/sockjs-client>。
 

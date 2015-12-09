@@ -1,18 +1,15 @@
 ## Session
 
-Session is always needed to user login. ThinkJS default to support a variety of session adapter, Such as `file`, `db`, `redis` and so on.
+Session is always needed for user login. ThinkJS supports a variety of session adapters, Such as `file`, `db`, `redis` and so on.
 
-### Supported session types
+### Supported Session Types
 
-`memory`  session stored in Memory
+- `memory`  session stored in memory
+- `file`  session stored in file system
+- `db` session stored in database 
+- `redis` session stored in redis
 
-`file`  session stored in file system
-
-`db` session stored in database 
-
-`redis` session stored in redis
-
-##### db Session
+#### db Session
 
 You need create a table in your database except MongoDB, if you want to use db session. You can use the following SQL statement to create:
 
@@ -29,13 +26,13 @@ You need create a table in your database except MongoDB, if you want to use db s
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-The prefix `think_` is the same as the database settings.
+The `think_` should be replaced with the table prefix in database configuration.
 
-##### redis Session
+#### redis Session
 
 The redis session needs to configurate redis, see [confirguration](./config.html#redis) for more details.
 
-### How to configurate session
+### Configurate Session
 
 Session configuration is as follows, you can edit it in the file `src/common/config/session.js`:
 
@@ -60,11 +57,11 @@ export default {
 
 This [configuration](./config.html#cookie) is about Cookie.
 
-### How to read/write session
+### Read/Write Session
 
-Controller or Logic can read/write session like :
+Controller or Logic can read/write session.
 
-##### Read Session
+#### Read Session
 
 ```js
 export default class extends think.controller.base {
@@ -75,7 +72,7 @@ export default class extends think.controller.base {
 }
 ```  
 
-##### Set Session
+##### Write Session
 
 ```js
 export default class extends think.controller.base {
@@ -101,7 +98,7 @@ export default class extends think.controller.base {
 
 `http.session` method of http object can read and write Session. See also [API -> http](./api_http.html#toc-b20) for more details.
 
-### How to extend session
+### Extend Session
 
 You can create a Session Adapter by using the command: 
 
@@ -164,6 +161,6 @@ export default class extends think.adapter.session {
 
 To know the implement of Session in ThinkJS, please see also <https://github.com/75team/thinkjs/tree/master/src/adapter/session>. 
 
-##3 How to use third party session Adapter
+## Use Third Party Session Adapter
 
 To know how to use third party session Adapter, please see also [Adapter -> intro](./adapter_intro.html#toc-e7c)
