@@ -1,12 +1,12 @@
 ## Relational Model
 
-Table in database often related to other tables and need to be operated with related tables. For example, an article can have category, tag, comment and author.
+Tables in database often related to other tables and need to be operated with related tables together. For example, an article can have category, tag, comment and author, and these information often store in other related tables.
 
-ThinkJS supports relational model which can simple these operations.
+ThinkJS supports relational model which can simplify these operations.
 
 ### Supported Type
 
-Relational model supports four usual relationship:
+ThinkJS supports four relationships:
 
 - `think.model.HAS_ONE` one to one model
 - `think.model.BELONG_TO` one to one belong to
@@ -82,10 +82,10 @@ export default class extends think.model.relation {
 }
 ```
 
-Each fields means:
+Each field's means:
 
 - `type` type of relation
-- `model` model name of relation table, default is key, here is `cate`
+- `model` model name of relation table, default is `key`, here is `cate`
 - `name` data field name, default is key, here is `cate`
 - `key` related key of current model
 - `fKey` related key of related table
@@ -114,7 +114,7 @@ export default class extends think.model.relation {
 
 One to one relation, means current table has one additional table.
 
-Suppose curret model name is `user` and related table model name is `info`, then `key` field in config default is `id`, `fKey` default is `user_id`.
+Suppose curret model name is `user` and related table model name is `info`, then the default value of `key` field in configuration is `id`, and the default value of `fKey`  is `user_id`.
 
 ```js
 export default class extends think.model.relation {
@@ -134,7 +134,7 @@ Execute quering operation will get below data:
   {
     id: 1,
     name: "111",
-    info: { //关联表里的数据信息
+    info: { // data from related table
       user_id: 1,
       desc: "info"
     }
@@ -143,9 +143,9 @@ Execute quering operation will get below data:
 
 #### BELONG_TO
 
-One to one relation, means belong to one table, reverse of HAS_ONE.
+One to one relation, and one belong to another one, as opposed to HAS_ONE.
 
-Suppose current model name is `info`, related table model name is `user`, then `key` field in config default is `user_id` and `fKey` default is `id`.
+Suppose curret model name is `info` and related table model name is `user`, then the default value of `key` field in configuration is `user_id`, and the default value of `fKey`  is `id`.
 
 ```js
 export default class extends think.model.relation {
@@ -177,7 +177,7 @@ Execute quering operation will get below data:
 
 One to many relation.
 
-Suppose current model name is `post`, related table model name is `comment`, then `key` field in config default is `id` and `fKey` default is `post_id`.
+Suppose current model name is `post`, related table model name is `comment`, then the default value of `key` field in configuration is `id` and the default value of `fKey` is `post_id`.
 
 ```js
 "use strict";
@@ -242,7 +242,7 @@ Besides using `setRelation`, you can also pass in a function, this function will
 
 Many to many relation.
 
-Suppose current model name is `post`, related table model name is `cate`, then we need a relationship table.`rModel` field in config default is `post_cate` and `rfKey` default is `cate_id`.
+Suppose current model name is `post`, related table model name is `cate`, then we need a relationship table. The default value of `rModel` and `rfKey` fields in configuration are `post_cate` and `cate_id`.
 
 ```js
 "use strict";

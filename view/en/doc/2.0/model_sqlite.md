@@ -1,6 +1,6 @@
 ## SQLite
 
-ThinkJS supports SQLite database, underline uses [sqlite3](https://www.npmjs.com/package/sqlite3) module.
+ThinkJS supports SQLite database, underlying uses [sqlite3](https://www.npmjs.com/package/sqlite3) module.
 
 ### Config
 
@@ -14,14 +14,14 @@ export default {
 
 ### Store Type
 
-SQLite supports store data in memory and file, you need to config `path`.
+SQLite supports two ways to store data: memory and file, config `path` to `true` to use memory store:
 
 #### Memory
 
 ```js
 export default {
   type: "sqlite",
-  path: true, //use memory to store data
+  path: true, // use memory to store data
 }
 ```
 
@@ -38,8 +38,8 @@ export default {
 
 The path of data file is `path` + `/[name].sqlite`, default database `demo`'s file path is `src/common/runtime/sqlite/demo.sqlite`.
 
-### CURD Operation
+### CURD Operations
 
-CURD operation is same as Mysql, just read [Model -> Introduction](https://thinkjs.org/zh-CN/doc/2.0/model_intro.html#toc-d84).
+CURD operations are same as MySql, just read [Model -> Introduction](https://thinkjs.org/zh-CN/doc/2.0/model_intro.html#toc-d84).
 
 This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_sqlite.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_sqlite.md).

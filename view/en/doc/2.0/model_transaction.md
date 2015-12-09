@@ -1,6 +1,6 @@
 ## Transaction
 
-Model supports transaction operation while the database you use supports that. 
+Model supports transaction operation provided the database you are using supports transaction too. 
 
 `InnoDB` and `BDB` engine of `Mysql` support transaction, if you need to use transaction in Mysql, must set the engine to InnoDB or BDB.
 
@@ -11,8 +11,8 @@ Model supports transaction operation while the database you use supports that.
 Model provides `startTrans`, `commit` and `rollback` to operate transaction.
 
 - `startTrans` start a transaction
-- `commit` is used to commit transaction after your operations
-- `rollback` will roll back if operation has exception
+- `commit` is used for commit transaction after your operations
+- `rollback` is used for roll back if operation has exception
 
 #### ES6 Way
 
