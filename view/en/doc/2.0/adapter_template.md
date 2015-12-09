@@ -43,7 +43,7 @@ thinkjs adapter template/foo
 The command creates file `src/common/adapter/template/foo.js`.Then, you should implement the following methods:
 
 ```js
-export default class extends think.adapter.template {
+export default class extends think.adapter.base {
   /**
    * get compiled content
    * @params {String} templateFile the template files directory
