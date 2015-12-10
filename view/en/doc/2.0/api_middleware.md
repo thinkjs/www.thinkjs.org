@@ -1,8 +1,8 @@
 ## middleware
 
-`think.middleware.base` instance of [think.http.base](./api_think_http_base.html)。
+The `think.middleware.base` class inherit from [think.http.base](./api_think_http_base.html)。
 
-##### ES6 way
+### Inheritence with ES6:
 
 ```js
 export default class extends think.middleware.base {
@@ -12,7 +12,7 @@ export default class extends think.middleware.base {
 }
 ```
 
-##### Create class dynamically
+### Dynamic Creating Class
 
 ```js
 module.exports = think.middleware({
@@ -22,7 +22,7 @@ module.exports = think.middleware({
 })
 ```
 
-### Function
+### Methods
 
 #### middleare.run()
 

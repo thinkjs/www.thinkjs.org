@@ -11,15 +11,14 @@ http.createServer(function (request, response) {
 }).listen(8124);
 ```
 
-As the code above, when Node.js create service, it will pass request and respone to callback. for convenience to invoke, ThinkJS will package this two object to http object, and offer some useful functions.
+As the above code shows, when Node.js create service, it will pass request and respone to callback. For the convenience of invoke, ThinkJS packaged these two objects into its own http object, and offer some useful functions.
 
-http object will been passed between middleware, logic, controller and view.
+The `http` object will be passed to middleware, logic, controller and view.
+
+`Note`: http object is an instance of EventEmitter, so you register event listeners to it.
 
 
-`Notiace`: http object is an instance of EventEmitter, so it can been added event listener and executed.
-
-
-### Method
+### Properties
 
 #### http.req
 
@@ -101,7 +100,7 @@ The controller name of current request parsed.
 
 The action name of current request parsed.
 
-### Function
+### Methods
 
 #### http.config(name)
 
