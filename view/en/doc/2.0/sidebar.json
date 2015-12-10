@@ -16,6 +16,8 @@
     },
     "Model": {
       "Introdution": "model_intro",
+      "Database Config": "model_config",
+      "CURD Operations: "model_curd",      
       "Transaction": "model_transaction",
       "Relation": "model_relation",
       "Mysql": "model_mysql",
@@ -30,8 +32,8 @@
       "Template": "adapter_template"
     },
     "More fetures": {
-      "Command": "thinkjs_command",
-      "Resource": "resource",
+      "Commands": "thinkjs_command",
+      "Static Resources": "resource",
       "Middleware": "middleware",
       "Service": "service",
       "Cookie": "cookie",
@@ -43,7 +45,9 @@
       "REST API": "rest_api",
       "Crontab": "crontab",
       "Deploy": "deploy",
+      "Developing Plugins": "plugin",      
       "Modules": "recommend_modules"
+      "And More...": "more",            
     },
     "API": {
       "think": "api_think",
