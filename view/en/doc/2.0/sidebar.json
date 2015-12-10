@@ -46,8 +46,8 @@
       "Crontab": "crontab",
       "Deploy": "deploy",
       "Developing Plugins": "plugin",      
-      "Modules": "recommend_modules"
-      "And More...": "more",            
+      "Modules": "recommend_modules",
+      "And More...": "more"            
     },
     "API": {
       "think": "api_think",

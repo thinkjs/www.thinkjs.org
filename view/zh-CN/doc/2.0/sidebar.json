@@ -46,8 +46,8 @@
       "定时任务": "crontab",
       "线上部署": "deploy",
       "开发插件": "plugin",      
-      "推荐模块": "recommend_modules"
-      "更多功能": "more",      
+      "推荐模块": "recommend_modules",
+      "更多功能": "more"
     },
     "API": {
       "think": "api_think",
