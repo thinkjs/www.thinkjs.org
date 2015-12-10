@@ -1,6 +1,6 @@
 ## Thinkjs Command
 
-After installing thinkjs module globally, there should be the thinkjs command in your system. Run the command `thinkjs -h` in your terminal to get more detailed introduction.
+After installing thinkjs module globally, there should be the thinkjs commands in your system. Run the command `thinkjs -h` in your terminal to get more detailed introduction.
 
 ```text
   Usage: thinkjs [command] <options ...>
@@ -29,15 +29,15 @@ After installing thinkjs module globally, there should be the thinkjs command in
 
 ### Create Project
 
-You can create a project by the command `thinkjs new <projectPath>`. eg.
+You can create a project by run command `thinkjs new <projectPath>`:
 
 ```sh
 thinkjs new thinkjs_demo;
 ```
 
-#### ES6 Mode
+#### ES6 Way
 
-If you want to create an ES6 mode project, `--es6` option is required. Thus, codes in the generated files are all ES6 syntax. eg.
+If you want to create an ES6 mode project, `--es6` option is required. Thus, codes in the generated files are all in ES6 syntax.
 
 ```sh
 thinkjs new thinkjs_demo --es6
@@ -45,50 +45,49 @@ thinkjs new thinkjs_demo --es6
 
 #### Set Project Mode
 
-The default created project is divided by modules. If the project is small and you don't want to have it divided by modules,
-you can specify `--mode` option when creating project. eg.
+By default, new created project is divided by modules. If the project is small and you don't want to have it divided by modules, you can specify `--mode` option when creating project. eg.
 
 ```sh
 thinkjs new thinkjs_demo --mode=mini
 ```
 
-The following is the supported module list:
+The following is the supported modules list:
 
 * `mini`  single-module project, for a very simple project.
 * `normal` genneral project, which modules are divided according to the function.
 * `module` divided by modules, for large projects or the project strictly divided by modules.
 
-`Note`: After the project created, a hidden file named `.thinkjsrc` will be created in the project directory, which identifies some configuration of the current project. And this hidden file will affect subsequent creating files, so you need to put it into the version repository.
+`Note`: After the project created, a hidden file named `.thinkjsrc` will be created in the project directory, which contains some configuration of the current project. And this hidden file will affect subsequent creating files, so you need to put it into the version repository.
 
 ### Add Module
 
-The module `common` and `home` will be automatically created when creating project. If you need to create other module, you can execute the command `thinkjs module [name]` in the project directory. eg. 
+The module `common` and `home` will be automatically created when creating projects. If you need to create other modules, you can execute the command `thinkjs module [name]` in the project directory. eg. 
 
 ```sh
 thinkjs module admin
 ```
 
-After execution, there will create the directory `src/admin` and the corresponding files in it.
+After execution, the directory `src/admin` and the corresponding files in it will be created.
 
 ### Add Middleware
 
-You can add middleware by the command `thinkjs middleware [name]` in the project directory. eg.
+You can add middleware by run the command `thinkjs middleware [name]` in the project directory. eg.
 
 ```sh
 thinkjs middleware test;
 ```
 
-After execution, there will create the file `src/common/middleware/test.js`.
+Execute it will create the file `src/common/middleware/test.js`.
 
 ### Add Model
 
-You can add model by the command `thinkjs model [name]` in the project directory. eg.
+You can add model by run the command `thinkjs model [name]` in the project directory. eg.
 
 ```sh
 thinkjs model user;
 ```
 
-After execution, there will create the file `src/common/model/user.js`.
+Execute it will create the file `src/common/model/user.js`.
 
 This file is in the `common` module by default. If you want to create it in other module, just specify the module. eg.
 
@@ -116,7 +115,7 @@ thinkjs model home/user --relation
 
 ### Add Controller
 
-You can add controller by the command `thinkjs controller [name]` in the project directory. eg.
+You can add controller by run the command `thinkjs controller [name]` in the project directory. eg.
 
 ```sh
 thinkjs controller user;
@@ -178,4 +177,4 @@ Two kinds of plugins ThinkJS supported are middleware and adapter. You can initi
 thinkjs plugin think-template-dot
 ```
 
-Suggested that the name of plugin could start with `think-`, so that it's convenient to search for other users after the plugin release to npm repository.
+It suggested that the name of plugin could start with `think-`, so that it's convenient to search for other users after the plugin release to npm repository.

@@ -1,11 +1,11 @@
 ## Crontab
 
-When running online, the project could often to be timed to execute a function. By this time, you need to use crontab to handle. ThinkJS supports command line calls, combined with the system crontab function it can well support crontab.
+Online projects often need to be timed to execute certain function. By this time, you can use crontab. ThinkJS supports command line calls, combined with the system's crontab function, let you perfectly achieve this type of task.
 
 
 ### Command Line Execution
 
-Besides supporting URL access, ThinkJS also supports command line. The usage is as follows.
+Besides supporting URL access, ThinkJS also supports command line calls. The usage is as follows.
 
 ```sh
 node www/production.js home/index/index
@@ -13,9 +13,9 @@ node www/production.js home/index/index
 
 The above command means to execute indexAction of `index` Controller in `home` module.
 
-##### With Params
+##### Carry Params
 
-If you need to add some params, just put the corresponceing params in the end. like the following.
+If you need to add some params, just put the corresponding params at the end of the line:
 
 ```sh
 node www/production.js home/index/index?name=thinkjs
@@ -25,18 +25,18 @@ In Action, you can use method `this.get` to get param `name`.
 
 ##### Modify Request Method
 
-In command line executation, the default request type is GET. If you wand to modify it to other type, you can use the following way.
+In command line executation, the default request type is GET. If you wand to modify it to use other type, you can do it this way:
 
 ```sh
 node www/production.js url=home/index/index&method=post
 ```
 
-Thus, the request type is changed to post. But in this way, the value of params in url can not include & char (can use / to specify params, as above).
+Thus, the request type is changed to post. But in this way, the value of params in url can not includ "&" anymore (but you can use "/" to specify params, such as `node www/production.js url=home/index/index/foo/bar&method=post`).
 
 Besides modifying request type, you can also modify the following params.
 
-* `host` modify the request host, default value is 127.0.0.1
-* `ip` modify request ip, default value is 127.0.0.1
+* `host` modify the request host, default is 127.0.0.1
+* `ip` modify request ip, default is 127.0.0.1
 
 ##### Modify Header
 
@@ -71,7 +71,7 @@ cd project_path;
 node www/prodution.js home/index/index;
 ```
 
-Create the directory `crontab` in the project, and put the above executable script as a file in this directory.
+This would create the directory `crontab` in the project, and put the above executable script as a file in this directory.
 
 ### Timed Execution
 
@@ -93,4 +93,4 @@ let jobId = crontab.scheduleJob('0 */1 * * *', () => {
 });
 ```
 
-Put the above code file in direcotry `src/common/bootstrap`, thus it can be executed automatically when server startup.
+Put the above code file in direcotry `src/common/bootstrap`, so it can be executed automatically when server startup.

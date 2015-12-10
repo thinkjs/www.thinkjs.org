@@ -2,7 +2,7 @@
 
 ### Get Cookie
 
-In controller or logic, you can get cookie by the method `this.cookie`. eg.
+In controller or logic, you can get cookie by use `this.cookie`. eg.
 
 ```js
 export default class extends think.controller.base {
@@ -26,9 +26,9 @@ The cookie default config is as follows.
 export default {
   domain: '', 
   path: '/',
-  httponly: false, //whether http only
+  httponly: false, // whether http only
   secure: false,
-  timeout: 0  //valid time, 0-browser process, unit is second
+  timeout: 0  // valid time, 0-browser process, unit is second
 };
 ```
 
@@ -44,7 +44,7 @@ export default {
 
 ### Set Cookie
 
-In controller or logic, you can set cookie by the method `this.cookie`. eg.
+In controller or logic, you can set cookie by use `this.cookie`. eg.
 
 ```js
 export default class extends think.controller.base {

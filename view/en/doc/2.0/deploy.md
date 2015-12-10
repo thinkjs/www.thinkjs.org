@@ -1,8 +1,8 @@
 ## Online Deploy
 
-### Use pm2 to Manage Service
+### Use pm2 to Manage Services
 
-pm2 is a module to professionally manage Node.js service, it is highly recommanded to use it online. It needs to be installed globally. eg. `sudo npm install -g pm2`. After installation is complete, there will be pm2 commands in command line.
+pm2 is a Node.js module used for professionally manage Node.js services, it is highly recommanded to use it online. It needs to be installed globally. eg. `sudo npm install -g pm2`. After installation, the pm2 commands will be available in command line.
 
 When creating project, the config file `pm2.json` will be created in the project directory. And it's content is roughly as follows.
 
@@ -23,7 +23,7 @@ When creating project, the config file `pm2.json` will be created in the project
 }
 ```
 
-Modify the `cwd` config value into the pratical project path, then use the following command to start/restart the service in the project directory.
+Modify the `cwd` config value into the real project path, then use the following command to start/restart the service in the project directory.
 
 
 ```sh
@@ -32,9 +32,9 @@ pm2 startOrGracefulReload pm2.json
 
 See <http://pm2.keymetrics.io/docs/usage/application-declaration/> for the detailed config of pm2.
 
-### Use Nginx as a Reverse Proxy
+### Use Nginx As a Reverse Proxy
 
-It will create a nginx config file named `nginx.conf` in the project directory when creating project, which content is roughly as follows.
+A nginx config file named `nginx.conf` in the project directory will be created when creating project, which content is roughly as follows.
 
 ```nginx
 server {
@@ -77,9 +77,9 @@ server {
 
 ```
 
-Modify the localhost in `server_name localhost` into the corresponding domain name. Modify the 8360 in `set $node_port 8360` into as the same as the listening one in the project.
+Modify the localhost in `server_name localhost` into the corresponding domain name. Modify the 8360 in `set $node_port 8360` into the one your are using.
 
-After the modification is complete, copy the cofing file to the config file directory of nginx, then reload the config by the command `nginx -s reload`. So you can access by the domain name.
+After the modification is complete, copy the config file to the config file directory of nginx, then reload the config by the command `nginx -s reload`. So you can access the application through the domain name.
 
 It is recommended to open the config `proxy_on` online, so that you can forbid to access directly by IP + port. Modify the config file `src/common/config/env/production.js`, eg.
 
@@ -91,7 +91,7 @@ export default {
 
 ### The Config of Closing the Static Resource Process
 
-In order to develop conveniently, ThinkJS supports to process the static resource request. But when code is deployed online, it uses nginx to process the static resource request. By this time, you can close the function of process static resource request to improve performance.
+To facilitate the development, ThinkJS supports to process the static resource request. But when code is deployed online, it uses nginx to process the static resource request. By this time, you can close the function of process static resource request to improve performance.
 
 Add the following configuration in the config file `src/common/config/env/production.js`.
 
@@ -103,9 +103,9 @@ export default {
 
 ### Use Cluster
 
-Online enable cluster function to make the good use of advantage of multicore CPU to improve performance and concurrent processing capability. 
+Enable cluster function online could make the good use of multicore CPU to improve the performance and concurrent processing capability. 
 
-Add the following configuration in the config file `src/common/config/env/production.js`.
+You can add the following configuration in the config file `src/common/config/env/production.js`.
 
 ```js
 export default {

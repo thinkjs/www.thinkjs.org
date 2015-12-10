@@ -1,7 +1,6 @@
-## Error Handle
+## Error Handling
 
-The system will encounter all kinds of errors when handling user requests. Such as: system internal error, url not exist, permission denied, service unavailable and so on.
-In these cases, it needs to show the corresponding error page for users.
+The application will encounter all kinds of errors when handling user requests. Such as system internal error, url not exist, permission denied, service unavailable and so on. In these cases, it needs to show the corresponding error page for users.
 
 ### Error Page
 
@@ -82,7 +81,6 @@ Error request, like maliciously construct some illegal data access, url accessed
 
 The current access has no permission.
 
-
 #### 404
 
 The requested url is not found.
@@ -91,7 +89,6 @@ The requested url is not found.
 
 System internal happended error, which leads to the current request is unavailable.
  
-
 #### 503
 
 Service is unavailable until it is recovered.

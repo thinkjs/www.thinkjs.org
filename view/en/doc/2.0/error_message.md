@@ -2,25 +2,25 @@
 
 ### EPERM
 
-##### Operation not permitted
+##### Operation Not Permitted
 
 An attempt was made to perform an operation that requires appropriate privileges.
 
 ### ENOENT
 
-##### No such file or directory ##### 
+##### No Such File Or Directory
 
 Commonly raised by fs operations; a component of the specified pathname does not exist -- no entity (file or directory) could be found by the given path.
 
 ### EACCES
 
-#####  Permission denied
+#####  Permission Denied
 
 An attempt was made to access a file in a way forbidden by its file access permissions.
 
 ### EEXIST
 
-##### File exists
+##### File Exists
 
 An existing file was the target of an operation that required that the target not exist.
 

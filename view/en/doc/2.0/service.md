@@ -1,18 +1,18 @@
 ## Service
 
-Sometimes, project needs to call some third-party services like Github related interface. If codes in the controller directly call these interfaces, on the one hand it will lead to code complexity, on the other hand it could not do more code reuse.
+Some projects need to call some third-party services like Github related interfaces. If codes in the controller directly call these interfaces, on the one hand it will lead to code complexity, on the other hand it could not do more code reuse.
 
-For these cases, you can encapsulate service for controller to call.
+For these cases, you can encapsulate some services for controllers to call.
 
-### Create Service
+### Create Services
 
 Use the command `thinkjs service [name]` to create service. See [Extend functions -> ThinkJS Command -> Add Service](./thinkjs_command.html#add-service) for more detailed usage.
 
 The default generated service is a class. But some services only need to provide some static methods, at that time you could just change class to object.
 
-### Load Service
+### Load Services
 
-Use the command `think.service` to load service. eg.
+Use `think.service` to load services. eg.
 
 ```js
 export default class extends think.controller.base {
@@ -23,7 +23,7 @@ export default class extends think.controller.base {
 }
 ```
 
-If you want to load service across-module, use the following approaches.
+If you want to load service across-modules, use the following approaches.
 
 ```js
 export default class extends think.controller.base {

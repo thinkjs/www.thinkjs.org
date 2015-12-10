@@ -31,9 +31,9 @@ let path1 = think.getPath('common', 'model'); //get the directory of common modu
 let path2 = think.getPath('home', 'controller'); //get the directory of home module
 ```
 
-### User-defined Path Const
+### User-defined Path Consts
 
-Besides the system properties and methods to get path, you can also define extra path const in project.
+Besides the system properties and methods to get path, you can also define extra path consts in project.
 
 ##### Define in Entrance File
 

@@ -1,4 +1,4 @@
-## Recommend Modules
+## Recommended Modules
 
 ### Network Request
 
@@ -9,7 +9,7 @@
 
 * log4js
 
-### Date Process
+### Date Processing
 
 * moment
 
@@ -17,7 +17,7 @@
 
 * iconv-lite
 
-### Image Process
+### Image Processing
 
 * gm
 
@@ -32,7 +32,7 @@
 
 * node-inspector
 
-### Unit Test
+### Unit Testing
 
 * mocha
 * istanbul
@@ -42,7 +42,7 @@
 
 * pm2
 
-### Mail
+### Mailing
 
 * nodemailer
 
