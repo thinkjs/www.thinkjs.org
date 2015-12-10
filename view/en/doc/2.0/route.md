@@ -1,18 +1,18 @@
 ## Route
 
-When a user visit a URL, eventually performing which module which controller which operation is decided by route after parsing.
+When an user visit an URL, eventually which module, controller and operation will be performed is decided by the parsed route.
 
-ThinkJS provides a flexible route mechanism, in addition to the default resolution, it also support a variety forms of custom route, let the URL more simple and friendly.
+ThinkJS provides a flexible route mechanism, in addition to the default resolution, it also support a variety forms of custom route, let the URLs more simple and friendly.
 
-### URL resolves to the pathname
+### Resolving URL to pathname
 
-When a user accesses to the service, the server first of all, will get a full URL, such as: visit this page and the URL is  `http://www.thinkjs.org/zh-CN/doc/2.0/route.html`.
+When a user accesses to the service, the server first of all, will get a full URL, such as `http://www.thinkjs.org/zh-CN/doc/2.0/route.html`.
 
 The pathname resolved by URL is `/zh-CN/doc/2.0/route.html`.
 
-### pathname filter
+### pathname Filter
 
-Sometimes in order to seo or some other reasons, the URL will be a few more things. For example, the current page is a dynamic page, but URL eventually adds `.html`, it’s more friendly to search engines. But these is useless in the subsequent route resolution, it needs to be removed.
+Sometimes for the sake of SEO or other reasons, the URL will be added a few more things. Say the current page is a dynamic page, but the URL ended with suffix `.html` is more friendly to search engines. But the suffix is useless in the subsequent route resolution, it needs to be removed.
 
 ThinkJS offer the following configuration, it can remove the prefix and postfix content of `pathname`:
 
@@ -25,53 +25,53 @@ export default {
 
 Above configuration can be modified in the `src/common/config/config.js`.
 
-The pathname will automatically remove `/` around when filtering, the logic is not affected by the configuration above. After filtering the pathname, the clean pathname you get is `zh-CN/doc/2.0/route`.
+When filtering, the `/` before and after pathname will be removed, and this logic is not affected by the configuration above. After filtering the pathname, the clean pathname you get is `zh-CN/doc/2.0/route`.
 
-`Note`: If you visit the URL, which is `http://www.thinkjs.org/`, then finally the clean pathname you get is an empty string.
+`Note`: If the URL is `http://www.thinkjs.org/`, then the clean pathname you get is an empty string.
 
-### Subdomain deployment
+### Subdomain Deployment
 
-When the project is complex, we may want to deploy different function under the different domain, but the code is still in a project. Such as: When the domain name `admin.exanple.com` deploys background management functions, we hope that it can map to the `admin` module.
+For complex projects, we may want to deploy different function under the different domain, but the code is still in a single project. For example thought the domain name `admin.exanple.com` was deployed to host the administraion functions, we still hope that it can be mapped to the `admin` module.
 
 ThinkJS provides the following configuration that it can undertake subdomain deployment, the configuration can be set in the `config/config.js`:
 
 ```js
 export default {
   subdomain: {
-    admin: 'admin', //表示将 admin.example.com 映射到 admin 模块下
+    admin: 'admin', // means map admin.example.com to the admin module
     ...
   }
 }
 ```
 
-If the pathname is `group/detail` after filtering , hit the subdomain admin.example.com, the pathname become to the `admin/group/detail`.
+If the filtered pathname is `group/detail` ,and the ULR hit the subdomain admin.example.com, the pathname will become to `admin/group/detail` internally.
 
-### Routing identification
+### Routing Identification
 
-#### Routing resolves
+#### Routing Resolving
 
-Routing identification identify the filtered pathname default according to the `module/controller/action/parameter1/parameter value of 1/parameter2/parameter value of 2`. Such as: the pathname is `admin/group/detail`, so the results of identification is:
+By default, routing identification identify the filtered pathname according to the `module/controller/action/parameter1/value-of-parameter1/parameter2/value-of-parameter2`. For example ,if the pathname is `admin/group/detail`, the results of identification is:
 
-* module for `admin`
-* controller for `group`
-* action for `detail`,the corresponding method is called `detailAction`
+* module is `admin`
+* controller is `group`
+* action is `detail`, the corresponding method is `detailAction`
 
-If the project does’t have `admin` or the module is disabled, then the results of identification is:
+If the project does't have `admin` or the module is disabled, then the results of identification is:
 
-* module for the default module `home`
-* controller for `admin`
-* action for `group`，the corresponding method is called `groupAction`
-* Parameters for `{detail: ''}`
+* module is the default module `home`
+* controller is `admin`
+* action is `group`，the corresponding method is  `groupAction`
+* parameter is `{detail: ''}`
 
-#### Transformation of case
+#### Case Transformation
 
-After route identification, `module`、`controller`、and the `Action` value will automatically convert to lowercase. If there are `_` in the Action value, it will do some transformation, such as: in the case that the value of Controller is `index` after identification, the Action value is `user_add`, then the corresponding Action method called `userAddAction`, but the template name is still `index_user_add. html`.
+After route identification, `module`, `controller` and the `action` value will automatically convert to lowercase. If there are `_` in the Action value, it will do some transformation, for example the value of Controller is `index` after identification, the Action value is `user_add`, then the corresponding Action method called `userAddAction`, but the template name is still `index_user_add.html`.
 
-### The default Route
+### The Default Route
 
-Once there is no corresponding value when parsing the pathname, then using the corresponding default value. And module default value is `home`, controller default value is `index`, action default value is `index`.
+Once there is no corresponding value when parsing the pathname, the default values are used. The module's default value is `home`, the controller's default value is `index`, and the action's default value is `index`.
 
-These values can be modified through the following configuration, the configuration file `src/common/config/config.js`:
+These values can be modified through the following configuration, in the configuration file `src/common/config/config.js`:
 
 ```js
 export default {
@@ -81,15 +81,15 @@ export default {
 }
 ```
 
-### Custom route
+### Custom Route
 
 Although the default route looks clear, it's also simple to parse, but looks not enough concise.
 
-Sometimes we need more compact route, now we need to use a custom route to parse. Such as: the detail page of the article, the default route might be:  `article/detail/id/10`, but the URL we want is `article/10` this more concise way.
+Sometimes we need more compact routes scheme, in this case we need to use a custom route. Such as the detail page of an article, the default route might be `article/detail/id/10`, but the URL we wanted is `article/10`.
 
-##### Open the configuration
+##### Enable The Custom Configuration
 
-Open the custom route, we need to open the configuration as the following in `src/common/config/config.js`.
+To enable the custom route, open `src/common/config/config.js`, and set `route_on` as `true`.
 
 ```js
 export default {
@@ -97,33 +97,33 @@ export default {
 }
 ```
 
-##### Route rules
+##### Route Rules
 
-After opening the custom route, then we can define the exact route through route rules, route configuration file is: `src/common/config/route.js`, the format is as follows:
+After enabling the custom route, the next thing is to define the route rules in the route configuration file `src/common/config/route.js`, the format are as following:
 
 ```js
 export default [
-  ["规则1", "需要识别成的pathname"],
-  ["规则2", {
-    get: "get请求下需要识别成的pathname",
-    post: "post请求下需要识别成的pathname"
+  ["rule1", "the-pathname-you-wanted-to-be-identified-to"],
+  ["rule2", {
+    get: "the-pathname-you-wanted-to-be-identified-to-when-GET",
+    post: "the-pathname-you-wanted-to-be-identified-to-when-POST"
   }]
 ];
 ```
 
-`Note`: Each rule of custom route is an array.(The reason why we do not use object is that regular cannot be used as the object's key directly under the regular route. )
+`Note`: Each rule is an array.(The reason why we do not use object literal is regular expressions cannot be used as object's key. )
 
-##### Identify ways
+##### Identify Order
 
-The match rule of custom route is : matching one by one from the front to rear, if hit this rule, it will not match back.
+The match rule of custom route is : matching one by one from the front to end, if hit one rule, it will not match forward.
 
 -------
 
-ThinkJS supports three types of custom route, they are : regular route, rules route and static route.
+ThinkJS supports three types of custom route: regular route, rules route and static route.
 
-#### Regular route
+#### Regular Route
 
-Regular route is a way that uses regular expressions to define the route, relying on the powerful regular expression, it can define very flexible route rules.
+Regular route useing regular expressions to define routes, relying on the powerful regular expression, it can define very flexible route rules.
 
 ```js
 export default [
@@ -131,7 +131,7 @@ export default [
 ];
 ```
 
-The above regular will match pathname like `article/10`, the new pathname identified is `home/article/detail`, and it will assign the value captured to the parameter id, then can obtain the value through `this.get` method in the controller.
+The above regular expression will match pathname like `article/10`, the resolved pathname will be `home/article/detail`, and the value of parameter id then can obtain through `this.get` method in the controller.
 
 ```js
 export default class extends think.controller.base {
@@ -141,7 +141,7 @@ export default class extends think.controller.base {
 }
 ```
 
-If regular route contains multiple child groups, then can obtain the corresponding values by`:1`,`:2`,`:3` 
+If regular route contains multiple child catch groups, then can obtain the corresponding values by`:1`,`:2`,`:3`: 
 
 ```js
 export default [
@@ -154,7 +154,7 @@ export default [
 ```
 
 
-#### Rules route
+#### Rules Route
 
 Rules route is a way of string matching, but supports some dynamic values. Such as:
 
@@ -164,7 +164,7 @@ export default [
 ]
 ```
 
-If the URL we visit is `http://www.example.com/group/2015/10`, then it will hit the rule, the pathname we get is `home/group/list`, at the same time, it will add two parameters `year` and `month`, these two parameters can be gotten through `this.get` method in the controller.
+If URL is `http://www.example.com/group/2015/10`, then it will hit the rule, the pathname we get will be `home/group/list`, at the same time, it will add two parameters `year` and `month`, and they can be gotten through `this.get` method in the controller.
 
 ```js
 export default class extends think.controller.base {
@@ -175,7 +175,7 @@ export default class extends think.controller.base {
 }
 ```
 
-#### Static route
+#### Static Route
 
 Static route is a way of pure string exactly match, its writing and identification are very simple, of course the function is relatively weaker.
 
@@ -185,25 +185,25 @@ export default [
 ]
 ```
 
-If the URL we visit is `http://www.example.com/list`, then the pathname replaced is the home/article/list`.
+If the URL is `http://www.example.com/list`, then the pathname is replaced with `home/article/list`.
 
-#### To optimize the route performance
+#### Optimizing The Route Performance
 
 Above has said that the custom route is an array, each item of the array is a specific route rule, 
-and it matches one by one from the front to rear when matching. If the route table is large, there may be a performance issue.
+and it matches one by one from the front to end when matching. If the route table is large, there may be a performance issue.
 
-In order to avoid performance issues, ThinkJS provides a more efficient way of custom route, configuring route according to the module. Using this way, the route configuration format is slightly different from the above.
+In order to avoid performance issues, ThinkJS provides a more efficient way to custom route, configuring route according to the module. This way, the route configuration format is slightly different from the above.
 
 ##### common/config/route.js
 
-After using this way, the route configuration in the general module configures specific route rules no longer, but configures which rules hit which module. Such as:
+This time, the route configuration in general module no longer define specific route rules, but configures which rules hit which module. Such as:
 
 ```js
 export default {
   admin: { 
-    reg: /^admin/ //命中 admin 模块的正则
+    reg: /^admin/ // hit admin module
   },
-  home: { //默认走 home 模块
+  home: { // home module as default
     
   }
 }
@@ -211,7 +211,7 @@ export default {
 
 ##### admin/config/route.js
 
-The admin module configures specific route rules under admin.
+The admin module configures specific route rules belongs it.
 
 ```js
 export default [
@@ -222,4 +222,4 @@ export default [
 
 ------
 
-Assuming that the URL visit is `http://www.example.com/admin/api`, then the pathname parsed is `admin/api`,  it will hit the `admin` module when matching the rules in the `common`, and then match the route rules one by one under the `admin` module. In this way, it can greatly reduce the number of route rules need to match, providing matching efficiency.
+Assuming the URL is `http://www.example.com/admin/api`, then the parsed pathname is `admin/api`, it will hit the `admin` module when matching the rules in the `common`, and then match the route rules one by one under the `admin` module. This way, it can greatly reduce the number of route rules need to match every time, makes route more efficient.

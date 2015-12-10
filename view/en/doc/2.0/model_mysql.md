@@ -1,10 +1,10 @@
 ## Mysql
 
-ThinkJS support Mysql well, the underline library is [https://www.npmjs.com/package/mysql](https://www.npmjs.com/package/mysql).
+ThinkJS supports Mysql well, the underlying library is [https://www.npmjs.com/package/mysql](https://www.npmjs.com/package/mysql).
 
-### Connection Pool
+### Connections Pool
 
-Mysql default has only one connection, if you want to use many connections, you can use connection pool. Modify `src/common/config/db.js`, such as:
+Mysql default has only one connection, if you want to use multiple connections, you can use connections pool. Modify `src/common/config/db.js`, such as:
 
 ```js
 export default {
@@ -36,7 +36,7 @@ export default {
 
 ### Database Support Emoji
 
-The encoding of database usually is `utf8`, but it doesn't support emoji. If you want database to support emoji, need to set database encoding to `utf8mb4`.
+The encoding of database usually is `utf8`, but it doesn't support emoji. If you want database to support emoji, set database encoding to `utf8mb4`.
 
 Besides, you have to modify `encoding` in `src/common/config/db.js` to `utf8mb4`:
 

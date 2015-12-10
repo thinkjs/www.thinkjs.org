@@ -1,17 +1,16 @@
-## configuration
+## Configuration
 
-ThinkJS provides a flexible configuration, it can use different configuration in different modules and project environments, and these configurations were effective when service is started.
+ThinkJS provides a flexible configuration mechanism, it can use different configuration in different modules and project environments, and these configurations will take effective after service started.
 
-`Note: Do not set the private value of an http request to the configuration, it will be bathed by 
-the setting values of the next http.`
+`Note: Do not set the private value of an http request in the configuration, because other http setting may overriding these values.`
 
-### The project module
+### The Project Module
 
-The projects that created default by ThinkJS are divided according to the module, you can define different configuration under each module. Define some general configuration under `common` modules, other modules will inherit the configuration under the `common` configuration. Such as: the final configuration of home module is the result of the `common` and `home` module configuration under combined.
+The projects that created default by ThinkJS are divided according to the module, you can define different configuration under each module. General configuration can be defined under `common` modules, other modules will inherit the `common` configuration.
 
-### Project environment
+### Project Environment
 
-ThinkJS default support three kind of project environments, it can be configured according to the different environment, in order to meet the needs of the different situations of configuration.
+ThinkJS default support three kinds of project environments, it can be configured according to the different environment, in order to meet the needs of the different situations of configuration.
 
 * `development` development
 * `testing` testing
@@ -19,7 +18,7 @@ ThinkJS default support three kind of project environments, it can be configured
 
 It can also be extended to other environment in project, which kind of environment to use at present can be set in the [entrance file](./app_structure.html#toc-f0b), and set the `env` value.
 
-### Define the configuration file
+### Defining Configuration Files
 
 ##### config/config.js
 
@@ -36,7 +35,7 @@ export default {
 
 ##### config/[name].js
 
-For a specific independent function configuration, such as: `db.js` is the database configuration, `redis` is redis configuration.
+For a specific independent function configuration, such as `db.js` is the database configuration, `redis` is redis configuration.
 
 ```js
 // db.js
@@ -52,7 +51,7 @@ export default {
 
 ##### config/env/[mode].js
 
-Differentiation configuration in different project environment, such as: `env/development.js`,`env/testing.js`,`env/production.js`.
+Differentiation configuration in different project environment, such as `env/development.js`,`env/testing.js`,`env/production.js`.
 
 ```js
 // config/env/development.js
@@ -67,53 +66,53 @@ export default {
 }
 ```
 
-`Note`: Difference configuration of different project environment generally is not a lot, so defined in a file. At this time, if you want to modify an independent function configuration, you need to add key corresponding to independent function. Such as: You need to add the the name of the `db` corresponding to the database when modify the database configuration of the above code.
+`Note`: The differences of different environments generally is not too much, so we defined them in a single file. At this time, if you want to modify an independent function configuration, you need to add a key corresponding to the independent function. Such as you need to add the the name of the `db` corresponding to the database when modifing the database configuration, as shown above.
 
 ##### config/locale/[lang].js
 
-International language pack configuration, such as: `locale/en.js`,`locale/zh-CN.js`.
+International language pack configuration, such as `locale/en.js`,`locale/zh-CN.js`.
 
 --------
 
 Configuration format uses the form of `key: value`, and the `key` is case-insensitive.
 
-### Load the configuration file
+### Loading Configuration Files
 
-Framework supports multiple levels of the configuration file, it reads in the following order:
+ThinkJS supports multiple levels of the configuration file, it reads in the following order:
 
-`Framework of the default configuration - > framework configuration under project mode - > project common configuration - > common configuration under project mode - > module configuration`
+`default configuration of the framework - > framework configuration under project mode - > project common configuration - > common configuration under project mode - > module configuration`
 
-### Read configuration
+### Reading Configuration
 
-#### Obtain through the config
+#### Using config
 
-Places such as the Controller, Logic, Middleware can be achieved by `this.config`. Such as:
+In Controller, Logic, Middleware, you can using `this.config`. Such as:
 
 ```js
-let db = this.config('db'); //读取数据库的所有配置
-let host = this.config('db.host'); //读取数据库的 host 配置,等同于 db.host
+let db = this.config('db'); // reading all of the configurations about db
+let host = this.config('db.host'); // reading the host configuration about the host of db
 ```
 
-#### Obtain through config method on http object
+#### Using http.config
 
-http objects also have the config method used to obtain the relevant configuration, such as:
+`http` objects also have the `config` method used for obtain the relevant configuration, such as:
 
 ```js
 let db = http.config('db');
 ```
 
-#### Read configuration from other parts
+#### Reading Configuration From Other Places
 
-Other places can read the relevant configuration through `think.config`:
+In other places, we can read the relevant configuration through `think.config`:
 
 ```js
-let db = think.config('db'); //读取通用模块下的数据库配置
-let db1 = think.config('db', undefined, 'home'); //获取 home 模块下数据库配置
+let db = think.config('db'); // reading the configuration about db under the common configuration
+let db1 = think.config('db', undefined, 'home'); // get the da configuration under the home module
 ```
 
-`Note`: Before parsing route, we can not get the general module configuration through the `config` method or `config` method on http object, so the configuration which is used before route parsing needs to be defined in the general module.
+`Note`: Before parsing route, we can not get the general module configuration through the `config` method or `http.config` method, so the configuration which is used before route parsing must be defined in the general module.
 
-### The default configuration
+### The Default Configuration
 
 #### env
 
@@ -282,7 +281,7 @@ export default {
 
 #### cookie
 
-cookie configuration,`config/cookie.js`.
+Cookie configuration,`config/cookie.js`.
 
 ```js
 export default {
@@ -296,7 +295,7 @@ export default {
 
 #### db
 
-database configuration,`config/db.js`.
+Database configuration,`config/db.js`.
 
 ```js
 export default {
@@ -334,7 +333,7 @@ export default {
 
 #### gc
 
-The cache, the Session, and garbage disposal configuration,`config/gc.js`.
+The cache, the session, and garbage disposal configuration,`config/gc.js`.
 
 ```js
 export default {
@@ -351,7 +350,7 @@ export default {
 
 #### hook
 
-hook configuration,`config/hook.js`.
+Hook configuration,`config/hook.js`.
 
 ```js
 export default {
@@ -375,7 +374,7 @@ export default {
 
 #### post
 
-the post request configuration, `config/post.js`.
+The post request configuration, `config/post.js`.
 
 ```js
 export default {
@@ -421,7 +420,7 @@ export default {
 
 #### session
 
-session configuration,`config/session.js`.
+Session configuration,`config/session.js`.
 
 ```js
 export default {
@@ -439,7 +438,7 @@ export default {
 
 #### view
 
-view configuration,`config/view.js`.
+View configuration,`config/view.js`.
 
 ```js
 export default {
@@ -454,7 +453,7 @@ export default {
 
 #### websocket
 
-websocket configuration,`config/websocket.js`.
+Websocket configuration,`config/websocket.js`.
 
 ```js
 export default {
@@ -471,9 +470,9 @@ export default {
 ```
 
 
-### The extension configuration
+### The Extension Configuration
 
-Project can be extended the configuration according to the need, extending configuration only need to set up the correspond ding files in `src/common/config/`, such as:
+Projects configuration can be extended according to the need, extending configuration only need to set up the correspondding files in `src/common/config/`, such as:
 
 ```js
 // src/common/config/foo.js

@@ -1,6 +1,6 @@
 ## MongoDB
 
-ThinkJS supports MongoDB database, underline model is [mongodb](https://www.npmjs.com/package/mongodb).
+ThinkJS supports MongoDB database, underlying module is [mongodb](https://www.npmjs.com/package/mongodb).
 
 ### Config
 
@@ -23,9 +23,9 @@ export default {
 }
 ```
 
-Below will change connection URL to `mongodb://127.0.0.1:27017/?authSource=admin`.
+Based on this config, the connection URL will become to `mongodb://127.0.0.1:27017/?authSource=admin`.
 
-More additional options stay at [http://mongodb.github.io/node-mongodb-native/2.0/reference/connecting/connection-settings/](http://mongodb.github.io/node-mongodb-native/2.0/reference/connecting/connection-settings/).
+For more additional options, please read [http://mongodb.github.io/node-mongodb-native/2.0/reference/connecting/connection-settings/](http://mongodb.github.io/node-mongodb-native/2.0/reference/connecting/connection-settings/).
 
 ### Create Model
 
@@ -35,17 +35,17 @@ Use command `thinkjs model [name] --mongo` to create model:
 thinkjs model user --mongo
 ```
 
-After executing, `src/common/model/user.js` will be created. If you want to place it on other module, add the specific module name:
+After executing, `src/common/model/user.js` will be created. If you want to place it within other module, add the specific module name:
 
 ```js
 thinkjs model home/user --mongo
 ```
 
-This will create model file on `home` module, file name is `src/home/model/user.js`.
+This will create model file within `home` module, file name is `src/home/model/user.js`.
 
-### Model Inherit
+### Model Inheritence
 
-Model has to inherit `think.model.mongo` class. If current class doesn't inherit to it, you have to modify it:
+Model has to inherit `think.model.mongo` class. If current class doesn't inherit it, you have to modify it:
 
 #### ES6 Way
 
@@ -55,7 +55,7 @@ export default class extends think.model.mongo {
 }
 ```
 
-#### Dynamic Create
+#### Dynamically Creating
 
 ```js
 module.exports = think.model("mongo", {
@@ -63,13 +63,13 @@ module.exports = think.model("mongo", {
 })
 ```
 
-### CURD Operation
+### CURD Operations
 
-CURD operation is same as Mysql, just read [Model -> Introduction](https://thinkjs.org/zh-CN/doc/2.0/model_intro.html#toc-d84).
+CURD operations are same as Mysql, just read [Model -> Introduction](https://thinkjs.org/zh-CN/doc/2.0/model_intro.html#toc-d84).
 
 ### Create Index
 
-mongo model can config index, model will create index automatically before CURD operation. Configurations are placed in `indexes` property:
+mongo model can config index, model will create index automatically before CURD operations. Configurations are placed in `indexes` property:
 
 ```js
 export default class extends think.model.mongo {
@@ -166,7 +166,7 @@ Details stay at [https://docs.mongodb.org/manual/core/aggregation-introduction/]
 
 ### MapReduce
 
-Use `mapReduce` method to do MapReduce operation:
+Use `mapReduce` method to do MapReduce operations:
 
 ```js
 export default class extends think.model.mongo {

@@ -2,20 +2,18 @@
 
 It is very helpful to use caches proper correctly in projects. So, ThinkJS provide a variety of caching methods,includes: Memory cache, file cache, Memcache and redis. 
 
-### Cache types
+### Cache Types
 
-The framework defaults to support the following cache typies:
+ThinkJS supports the following cache types:
 
 * `memory`  Cache stored in Memory
 * `file`  Cache stored in file system
 * `memcache` Cache stored in memcache
 * `redis` Cache stored in redis
 
-If you use Memcache or redis, you need set configuration information. 
+If you use Memcache or redis, you need set configuration information. See also [configuration of memcache](./config.html#memcache) [configuration of redis](./config.html#redis)
 
-See also [configuration of memcache](./config.html#memcache) [configuration of redis](./config.html#redis)
-
-### How to configurate cache
+### Configurate Cache
 
 The default cache configuration likes following. You can edit `src/common/config/cache.js` to change the configration.
 
@@ -39,9 +37,9 @@ export default {
 };
 ```
 
-`Note`：The framework supports adaptor configuration from the version `2.0.6`.
+`Note`：ThinkJS supports adaptor configuration from the version `2.0.6`.
 
-In memcache or redis cache type, the `prefix` field is used. In this case, ThinkJS uses key + prefix as the storage key to prevent the conflict with other projects. If you don't want to set prefix, you can set it to empty string, like:
+In memcache or redis cache type, the `prefix` field is used. In this case, ThinkJS uses key + prefix as the storage key to prevent the conflict with other projects. If you don't want to set prefix, you can set it to empty string, like this:
 
 ```js
 export default {
@@ -49,13 +47,13 @@ export default {
 }
 ```
 
-### How to use cache
+### Use Cache
 
 You can add, delete, update and search the cache by using method `think.cache`, see also [API -> think](./api_think.html#toc-7d7) for more details.
 
 You can usemethod `this.cache` to operate cache, if your class is inherited from `think.http.base`, see also [API -> think.http.base](.//api_think_http_base.html#cache-name-value-options) for more details.
 
-### How to extend cache
+### Extend Cache
 
 You can create a cache class named `foo` by using following command:
 
@@ -63,7 +61,7 @@ You can create a cache class named `foo` by using following command:
 thinkjs adapter cache/foo
 ```
 
-After the completion of the excuting, ThinkJS will create the file `src/common/adapter/cache/foo.js`. Then you need implement these following methods to extend cache class:
+After the completion of the excuting, ThinkJS will create the file `src/common/adapter/cache/foo.js`. Then you need to implement the following methods to extend cache class:
 
 ```js
 export default class extends think.cache.base {
@@ -115,6 +113,6 @@ export default class extends think.cache.base {
 
 To know the implemation of cache in ThinkJS, please see also (https://github.com/75team/thinkjs/tree/master/src/adapter/cache)
 
-### How to use third party cache Adapter
+### Use Third Party Cache Adapter
 
 To know how to use third party cache Adapter, please see also [Adapter -> intro](./adapter_intro.html#toc-e7c)

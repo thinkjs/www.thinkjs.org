@@ -1,11 +1,10 @@
 ## Controller
 
-The controller is a collection of operations, which responds to users’ the same type of request.
+Controller is a collection of same type operations, they respond to same type user requests.
 
-### The definition of controller
+### The Definition of Controller
 
-Creating a file `src/home/controller/article.js`, means that there’s a controller called `article` in the `home` module, 
-and the file is similar to the following:
+Creating a file `src/home/controller/article.js`, means that there’s a controller called `article` in the `home` module, and the content of each controller is similar to the following:
 
 ```js
 'use strict';
@@ -24,7 +23,7 @@ export default class extends Base {
 }
 ```
 
-If you do not use ES6 syntax, then the file is similar to the following:
+If you do not use ES6 syntax, then the content is similar to the following:
 
 ```js
 'use strict';
@@ -43,13 +42,13 @@ module.exports = think.controller(Base, {
 });
 ```
 
-NOTE: The `Base` word above represents the definition of a base class, other classes inherit the base class, so that you can do some general thing in the base class.
+NOTE: The `Base` above represents the definition of a base class, other classes inherit it, so that you can do some general thing in it.
 
-### Use generator function
+### Use Generator Function
 
-You can easily use the Generator Function to handle asynchronous nesting problems in the `controller`.
+You can easily use the generator function to handle asynchronous nesting problems in the `controller`.
 
-##### The way of ES6 
+##### The ES6 Way
 
 ```js
 'use strict';
@@ -69,7 +68,7 @@ export default class extends Base {
 }
 ```
 
-##### The way of creating a class
+##### Dynamically Create Classes
 
 ```js
 'use strict';
@@ -89,11 +88,11 @@ module.exports = think.controller(Base, {
 });
 ```
 
-### Use async/await
+### Use `async/await`
 
-With the Babel compilation, you can also `use async/await` in the ES7 in the controller.
+With the Babel compilation, you can also use ES7's `async/await`.
 
-##### The way of ES6
+##### The ES6 Way
 
 ```js
 'use strict';
@@ -113,7 +112,7 @@ export default class extends Base {
 }
 ```
 
-##### The way of dynamic creation
+##### Dynamic Creation
 
 ```js
 'use strict';
@@ -133,13 +132,13 @@ module.exports = think.controller(Base, {
 });
 ```
 
-### init method
+### init Method
 
-The class in ES6 has a constructor method, but the class dynamically created does not, in order to perform the initialization unified approach, the method is unifiedly defined as `init`.
+The class in ES6 has a constructor method, but the classes that dynamically created do not, in order to perform the initialization uniformly, ThinkJS redefined it as `init`.
 
-This method is automatically called when the class is instantiated, without manually call.
+This method is automatically called when the class is instantiated, without manually call needed.
 
-##### The way of ES6 **
+##### The ES6 Way
 　
 ```js
 'use strict';
@@ -154,7 +153,7 @@ export default class extends Base {
 }
 ```
 
-##### The way of dynamic creation
+##### Dynamically Create Classes
 
 ```js
 'use strict';
@@ -169,12 +168,13 @@ module.exports = think.controller(Base, {
 });
 ```
 
-when using the init method, you need to call the init method in the super-class and make the `http` parameters passed in.
+When using `init` method, don't forget to call call super-class's `init` method and make sure pass the `http` in.
+
 ### Pre-Operation __before
 
-ThinkJS support pre-operation, the method called `__before`, it will be automatically called before a specific Action calls. If the pre-operation prevents subsequent code continuing to execute, it does not call specific Action, so you can end request in advance.
+ThinkJS supports pre-operation with the method called `__before`, it will be automatically called before a specific Action execution. If the pre-operation prevents subsequent code continuing to execute, it does not call the specific Action, so you can end request in advance.
 
-##### The way of ES6**
+##### The ES6 Way
 　
 ```js
 'use strict';
@@ -195,7 +195,7 @@ export default class extends Base {
 
 ### Action
 
-A action represents an operation to be performed. Such as: if url is `/home/article/detail`, parsed modules is `/home`, controller for the `article`, Action for the `detail`, so the Action to be executed is the `detailAction` method in the file `src/home/controller/aritcle`.
+A action represents an operation to be performed for response to an user request. Such as if URL is `/home/article/detail`, the module is `/home`, the controller is `article`,and the Action is `detail`, so the Action to be executed is the `detailAction` method in the file `src/home/controller/aritcle`.
 
 ```js
 'use strict';
@@ -213,15 +213,15 @@ export default class extends Base {
 }
 ```
 
-If Action value parsed contains `_` , it will automatically do the conversion, the specific strategies of conversion, see [Routing -> case](./route.html).
+If Action name parsed contains `_` , it will automatically do the conversion, for the details of specific strategies of the conversion, see [Routing -> case](./route.html).
 
 ### Post-Operation __after
 
-ThinkJS support post-operation called `__after`, it will be executed after a specific Action calls. If a specific Action prevents subsequent code continuing to execute, the post-operation is not invoked.
+ThinkJS supports post-operation called `__after`, it will be executed after a specific Action execution. If a specific Action prevents subsequent code continuing to execute, the post-operation will not be invoked.
 
 ### No-operation __call
 
-When the controller which is parsed by url exists, but the Action does not exist, it will attempt to call the `__call` magic method of the controller. The method which does not exist can be unifiedly treated.
+If one controller is found to exist after parsed URL, but the Action does not exist, it will attempt to call the `__call` magic method of the controller. This way, we can unifiedly treated the missing Actions.
 
 ```js
 'use strict';
@@ -238,23 +238,23 @@ export default class extends Base {
 }
 ```
 
-### Error handling
+### Error Handling
 
-When the url does not exist or the present user has no permission and there are other unusual request, it will be called error handling. ThinkJS itself built a detailed error handling mechanism, see specific [extensions -> error] (./error_handle.html).
+If URL does not exist, the current user has no permission to do some operations or there are other unusual requests, it will enter the error handling process. ThinkJS itself built a complete error handling mechanism, for details see[extensions -> error] (./error_handle.html).
 
-### Data validation
+### Data Validation
 
-Before using the user-submitted data in the controller, it need to verify the legitimacy of data. In order to reduce the logic complexity of the controller, ThinkJS provides a layer of Logic designed to handle data validation and permission validation and other related operations.
+Before using the user-submitted data in the controller, it needed to verify its legitimacy. In order to reduce the logic complexity, ThinkJS provides a logic layer that designed to handle data and permission validation and other related operations.
 
-For more information, please see [Extended Functions -> Data validation](./validation.html).
+For more information, please see [Extended Functions -> Data Validation](./validation.html).
 
-### Variable assignment and template rendering
+### Variable Assignment and Template Rendering
 
-The controller can do variable assignment and template rendering through `assign` and `display` method, specific information can be found [here](./view.html).
+Controller can do variable assignment and template rendering through `assign` and `display` method, specific information can be found [here](./view.html).
 
-### Model instantiation
+### Model Instantiation
 
-In the controller, you can quickly get an instance of a model by `this.model` method.
+In controllers, you can quickly get an instance of a model by call `this.model` method.
 
 ```js
 export default class extends think.controller.base {
@@ -265,13 +265,13 @@ export default class extends think.controller.base {
 }
 ```
 
-More usage of `model` method can be found [API -> think.http.base](./api_think_http_base.html#toc-e2b).
+More usage of `model` method can be found at [API -> think.http.base](./api_think_http_base.html#toc-e2b).
 
-### http object
+### http Object
 
-When the controller is instantiated, the `http` will be passed in. The `http` is a object that ThinkJS repack for the `req` and `res`, rather than built in Node.js.
+When a controller is instantiated, the `http` will be passed in. The `http` is a object that ThinkJS repacked for the `req` and `res`, it is not built in Node.js.
 
-If you want to get the object from Action, it can be obtained by `this.http`.
+In Action, it can be obtained by `this.http`.
 
 ```js
 'use strict';
@@ -285,22 +285,22 @@ export default class extends Base {
 }
 ```
 
-Things about the properties and methods of `http` object can be found at [API -> http](./api_http.html).
+Details about the properties and methods of `http` object can be found at [API -> http](./api_http.html).
 
 ### REST API
 
-Sometimes, the project has to provide some `REST` interfaces for third party to use, these interfaces are nothing less than the CRUD operations.
+Sometimes, the project has to provide some `REST` interfaces for third party to use, these interfaces are nothing more than the CRUD operations.
 
-If writing these operations by hand is very trouble, ThinkJS provides a REST Controller, that will automatically contains generic CRUD operations. If these actions do not satisfy demand, but also can be customized. Specifically, [see here](./rest_api.html).
+If you feel writing these operations by hand is very trouble, ThinkJS provides a REST Controller, that will automatically contains generic CRUD operations. If these actions do not satisfy your demand, it can also be customized. Specifically, [see here](./rest_api.html).
 
-### this the scoping issue
+### The this Scoping Issue
 
-There often are many asynchronous operation in Node.js, and the common approach is to use a callback function or `Promise`. These treatments will increase a level of scope, making it impossible to use `this` directly in the callback function, the simple approach is to define a variable at the top, this will be assigned to this variable, and then use this variable in the callback function. Such as:
+There are often many asynchronous operations in Node.js development, and the common approach is to use a callback function or `Promise`. These treatments will increase a level of scope, making it impossible to use `this` directly in the callback function, the simple approach to solve it is to define a variable at the top, `this` will be assigned to the variable, and then use the variable in the callback function. Such as:
 
 ```js
 module.exports = think.controller({
   indexAction: function(){
-    var self = this; //这里将 this 赋值给变量 self，然后在后面的回调函数里都使用 self
+    var self = this; // assign the reference of this to self
     this.model('user').find().then(function(data){
       return self.model('article').where({user_id: data.id}).select();
     }).then(function(data){
@@ -310,11 +310,11 @@ module.exports = think.controller({
 })
 ```
 
-If user must manually write `var self = this` in each Action, it’s certainly very trouble. To solve this problem, ThinkJS provides a parameter directly in Action, which is equivalent to `var self = this`, as follows:
+Writing `var self = this` in each Action must be very trouble. To solve this problem, ThinkJS provides a parameter directly in Action, which is equivalent to `var self = this`, as follows:
 
 ```js
 module.exports = think.controller({
-  //参数 self 等同于 var self = this
+  // here, self is equivalent to var self = this
   indexAction: function(self){
     this.model('user').find().then(function(data){
       return self.model('article').where({user_id: data.id}).select();
@@ -324,9 +324,10 @@ module.exports = think.controller({
   }
 })
 ```
-Of course, a better solution is recommended to use the Generator Function and Arrow Function of ES6, so you can solve the problem of `this` scope thoroughly.
+Of course, the recommended and better solution is to use the Generator Function and Arrow Function of ES6.
 
 ##### Use Generator Function
+
 ```js
 export default class extends think.controller.base {
   * indexAction(){
@@ -354,9 +355,9 @@ module.exports = think.controller({
 
 ### Output JSON
 
-Projects often provide some interfaces, which generally output data in JSON format, and there will be a flag to indicate that the current interface is normal or not. If an exception occurs, the corresponding error message needs to be output together with the interface. The controller provides the `this.success` and `this.fail` such methods to output interface data.
+Many projects need provide interfaces that output data in JSON format, and there also must be a flag to indicate whether the interface is normal or not. If an exception occurs, the corresponding error message needs to be output together. The controller provides the `this.success` and `this.fail` methods to output interface data.
 
-#### Output normal JSON
+#### Output Normal JSON
 
 The normal interface data can be output through `this.success` method, such as:
 
@@ -369,9 +370,9 @@ export default class extends think.controller.base {
 }
 ```
 
-The output is `{errno: 0, errmsg: "", data: {"name": "thinkjs"}}`, the client can determine whether there is an exception with the current interface through `errno` is 0 or not.
+In this example, the output is `{errno: 0, errmsg: "", data: {"name": "thinkjs"}}`, the client can determine whether there is an exception with the current interface through `errno` is 0 or not.
 
-#### Output JSON contained the error message
+#### Output JSON Contained the Error Message
 
 Interface data contained error messages may output by the `this.fail` method, such as:
 
@@ -383,13 +384,13 @@ export default class extends think.controller.base {
 }
 ```
 
-The output is `{errno: 1000, errmsg: "connect error"}`, the client determines `errno` is greater than zero, then know there are exceptions with the current interface, and to get specific error information through `errmsg`.
+In this example, the output is `{errno: 1000, errmsg: "connect error"}`. When clients found `errno` is greater than zero, then it know there are exceptions with the current interface, so it can in turn to get specific error information through `errmsg`.
 
-##### Configure error number and error message
+##### Configure Error Number and Error Message
 
-If every place which need to output error data must specify error number and error message, it is bound to be very trouble, the better way is configurate the error code and error information in same place , then as long as specify error number when outputting, error information based on the error number will automatically read.
+It's recommended to configurate the error numbers and error messages in one place , then as long as specify error number when outputting, error information based on the error number will be automatically read out.
 
-Error message supports internationalization, so the configuration is in the file `src/common/config/locale/[lang].js`. Such as:
+Error messages support internationalization, and the configuration is in the file `src/common/config/locale/[lang].js`. Such as:
 
 ```js
 export default {
@@ -397,13 +398,13 @@ export default {
 }
 ```
 
-By the above configuration, it will automatically read the corresponding error message when performing `this.fail (10001)`.
+Whit the above configuration, performing `this.fail(10001)` will automatically get corresponding error message, "get data error" in this case.
 
-##### Friendly error number
+##### Friendly Error Number
 
-Although it can output the correct error number and error message when performing the `this.fail (10001)` in the program, but we can not intuitively see what the error message of error number corresponding is.
+Although it can output the correct error number and error message when performing the `this.fail (10001)`, but we can not intuitively see what error message corresponding it.
 
-Then you can configure the key to uppercase string, the value is the error number and error message. Such as:
+We recommend you to configure the keys using uppercase strings, and the value is an array with the error number and error message as its elements. Such as:
 
 ```js
 export default {
@@ -411,11 +412,11 @@ export default {
 }
 ```
 
-When running `this.file ('GETDATA ERROR')`, it will automatically take the corresponding error number and error messages.
+This way, when you calling `this.fail('GETDATA ERROR')`, you will automatically get the corresponding error number and error message.
 
-#### Format configuration
+#### Format Configuration
 
-The key of the default error number is `errno`, error information is `errmsg`. If the demand is not satisfied, then you can modify the configuration file `src/common/config/error.js`.
+The keys of the default error number and error message are `errno` and `errmsg` respectively. If needed, you can modify the configuration file `src/common/config/error.js` to reset them.
 
 ```js
 export default {
@@ -425,9 +426,9 @@ export default {
 ```
 
 
-#### Output the JSON that does not contain the error message
+#### Output The JSON That Does Not Contain The Error Message
 
-If you don’t want the output data in JSON contained `errno` and `errmsg`, you can output JSON by `this.json` method. Such as:
+If you don’t want the outputed JSON data contained `errno` and `errmsg`, you can output JSON by `this.json` method. Such as:
 
 ```js
 export default class extends think.controller.base {
@@ -437,9 +438,9 @@ export default class extends think.controller.base {
 }
 ```
 
-### Common functions
+### Common Functions
 
-#### Get GET parameters
+#### Get GET Parameters
 
 You can obtain GET parameters through the `get` method, such as:
 
@@ -447,14 +448,14 @@ You can obtain GET parameters through the `get` method, such as:
 export default class extends think.controller.base {
   indexAction(){
     let name = this.get('name');
-    let allParams = this.get(); //获取所有 GET 参数
+    let allParams = this.get(); // obtain all GET parameters
   }
 }
 ```
 
-If the parameter does not exist, then the value is an empty string.
+If the parameter does not exist, the value will be an empty string.
 
-#### Get POST parameters
+#### Get POST Parameters
 
 You can obtain POST parameters through the `post` method, such as:
 
@@ -462,22 +463,22 @@ You can obtain POST parameters through the `post` method, such as:
 export default class extends think.controller.base {
   indexAction(){
     let name = this.post('name');
-    let allParams = this.post(); //获取所有 POST 参数
+    let allParams = this.post(); // obtain all POST parameters
   }
 }
 ```
 
-If the parameter does not exist, then the value is an empty string.
+If the parameter does not exist, then the value will be an empty string.
 
-#### Get upload file 
+#### Get Uploaded Files 
 
-You can obtain the file by `file` methods, such as:
+You can obtain the uploaded files by using `file` methods, such as:
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
     let file = this.file('image');
-    let allFiles = this.file(); //获取所有上传的文件
+    let allFiles = this.file(); // obtain all uploaded files
   }
 }
 ```
@@ -486,41 +487,41 @@ The return value is an object that contains the following attributes:
 
 ```js
 {
-  fieldName: 'file', //表单字段名称
-  originalFilename: filename, //原始的文件名
-  path: filepath, //文件保存的临时路径，使用时需要将其移动到项目里的目录，否则请求结束时会被删除
-  size: 1000 //文件大小
+  fieldName: 'file', // form field's name
+  originalFilename: filename, // original file's name
+  path: filepath, // file's temporary path, the file will be deleted when request end 
+  size: 1000 // file size
 }
 ```
 
-If the file does not exist, then the value is an empty object `{}`.
+If the file does not exist, then the value will be an empty object `{}`.
 
-#### JSONP format data output
+#### JSONP Format Data Output
 
-You can output data in JSON format by `this.jsonp` method, the name of the callback request parameter defaults to `callback`. If you need to modify the name of the request parameter , it can be accomplished by modifying the configuration `callback_name`.
+You can output data in JSONP format by `this.jsonp` method, the name of the callback request parameter defaults to `callback`. If you need to modify its name, you can modifying the configuration `callback_name`.
 
-#### More methods
+#### More Methods
 
-* `isGet()` Is it currently a GET request or not 
-* `isPost()` Is it currently a POST request or not
-* `isAjax()` Is it  a AJAX request or not 
-* `ip()` Get requesting user’s ip
-* `redirect(url)` Jump to a url
+* `isGet()` Used for check is it currently a GET request
+* `isPost()` Used for check is it currently a POST request
+* `isAjax()` Used for check is it currently a AJAX request
+* `ip()` Used for get requesting user's ip
+* `redirect(url)` Used for jump to an URL
 * `write(data)` Output data, automatically call JSON.stringify 
 * `end(data)` End the current HTTP request
-* `json(data)` Output the JSON data, automatically send JSON related the content-type
-* `jsonp(data)` Output the json data, the request parameter name defaults to the `callback`
-* `success(data)` Output normal JSON data, data format for `{errno: 0, errmsg: "", data: data}`
-* `fail(errno, errmsg, data)` Output error JSON data, data format for `{errno: errno_value, errmsg: string, data: data}`
-* `download(file)` download file
-* `assign(name, value)` Set the template variables 
+* `json(data)` Output JSON data, automatically send content-type Headers that related to JSON
+* `jsonp(data)` Output JSONP data, the request parameter name defaults to the `callback`
+* `success(data)` Output success JSON data with error info, such as `{errno: 0, errmsg: "", data: data}`
+* `fail(errno, errmsg, data)` Output error JSON data with error info, such as `{errno: errno_value, errmsg: string, data: data}`
+* `download(file)` Used for download a file
+* `assign(name, value)` Set a variable so that we can use it in the template
 * `display()` Output a template
-* `fetch()` Apply colours to a drawing template and access to content
+* `fetch()` Rendering the template and get the result
 * `cookie(name, value)` Get or set the cookie
 * `session(name, value)` Get or set the session
 * `header(name, value)` Get or set the header 
-* `action(name, data)` Call other Controller method, across modules 
-* `model(name, options)` Obtain a model instance
+* `action(name, data)` Call other Controller's method, included those in other modules
+* `model(name, options)` Initiated a model instance
 
 A complete list of methods please see [API -> Controller](./api_controller.html)。
 

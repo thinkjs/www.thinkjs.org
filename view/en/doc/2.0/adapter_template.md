@@ -1,10 +1,10 @@
 ## Template
 
-Adapter Template used to support a variety of types of template engines, such as: `ejs`, `swig`, etc.
+Template Adapter used to support a variety of types of template engines, such as `ejs`, `swig`, etc.
 
-### Supported Template Egines
+### Supported Template Engines
 
-* `base`
+* `base` 
 * `ejs` ejs template engine
 * `jade` jade template engine 
 * `swig` a template engine suports template inheritance
@@ -12,7 +12,7 @@ Adapter Template used to support a variety of types of template engines, such as
 
 ### Template Engine Configuration
 
-To configuate template engine, you can edit `src/common/config/view.js`. Content may like following: 
+To configuate template engine, edit `src/common/config/view.js`: 
 
 ```js
 export default {
@@ -23,16 +23,16 @@ export default {
 };
 ```
 
-### Use Template Egines
+### Use Template Engines
 
-The template egine can be loaded automatically, no need to load it manually. You can load your template using following code, when you want to load it by yourself indeed:
+The template engine can be loaded automatically in the View. If you want to specify a template engine, then do it this way: 
 
 ```js
 let EjsTemplate = think.adapter('template', 'ejs');
 let instance = new EjsTemplate(...args);
 ```
 
-### Extend template engine type
+### Extend Template Engine Type
 
 You can create an Template class named `foo` using the following command:
 
