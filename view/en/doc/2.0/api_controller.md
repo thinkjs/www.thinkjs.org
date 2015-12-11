@@ -1,9 +1,9 @@
 ## controller
 
-`think.controller.base` instance of [think.http.base](./api_think_http_base.html) class, controllers in project need to instance of this class.
+The `think.controller.base` class inherit from [think.http.base](./api_think_http_base.html) class, controllers in project need to inherit it.
 
 
-##### Instance this class with ES6
+### Inheritence with ES6:
 
 ```js
 export default class extends think.controller.base {
@@ -13,7 +13,7 @@ export default class extends think.controller.base {
 }
 ```
 
-##### Normal way to instance this class ##### 
+### Inheritence With Normal Way
 
 ```js
 module.exports = think.controller({
@@ -24,13 +24,13 @@ module.exports = think.controller({
 ```
 
 
-### Method
+### Property
 
 #### controller.http
 
 Passed [http](./api_http.html) object.
 
-### Function
+### Methods
 
 #### controller.ip()
 

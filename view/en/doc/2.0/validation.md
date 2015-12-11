@@ -1,6 +1,6 @@
 ## Data Validation
 
-When handling user requests in Action, you often need to get the submitted datas firstly, and then validate them. Only passing the data validation can do the subsquent operation. After the param validation, sometimes, you also need to judge permission. After all of these are correct, it is time to do the real logic process. If these codes are all placed in one Action, it will must make the codes of Action very complex and redundant.
+When handling user requests in Action, you often need to get the submitted datas firstly, and then validate them. Only passing the data validation can do the subsquent operations. After the param validation, sometimes, you also need to judge permission. After all of these are correct, it is time to do the real logic process. If these codes are all placed in one Action, it will must make the codes of Action very complex and redundant.
 
 In order to solve this problem, ThinkJS add a layer of `Logic` before Controller. The Action in Logic and the Action in Controller are one-to-one correspondence. System will call the Action in Logic automatically before calling the Action in Controller. 
 
@@ -56,8 +56,8 @@ Params could follow the end of validation type. Besides supporting the simply pa
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      field1: "array|default:[1,2]", // param is array
-      field2: 'object|default:{\"name\":\"thinkjs\"}' //param is object
+      field1: "array|default:[1,2]", // param is an array
+      field2: 'object|default:{\"name\":\"thinkjs\"}' //param is an object
     }
   }
 }
@@ -99,7 +99,7 @@ The above demo specifys to use `post` method to get the value of the field `name
 
 #### Error Message
 
-The above config only sepcifys the certain validation rules but not the error message when validation failure. Error messages support internationalizaion, you need to define it in the config file `src/common/config/locale/[lang].js`. eg.
+The above config only specify the certain validation rules but not the error message when validation failure. Error messages support internationalizaion, you need to define it in the config file `src/common/config/locale/[lang].js`. eg.
 
 ```js
 // src/common/config/locale/en.js
@@ -153,7 +153,7 @@ In template, you can get the error message by `errors` field. The following is t
 
 ##### Validate Automatically
 
-In generally, there will output a JSON message after validation failure. If `this.validate` needs to be called manually evertime to validate in Action of Logic, it must be inconvenient. You can validate automatically by assigning validation rules to `this.rules`. eg.
+In generally, there will output a JSON message after validation failure. If `this.validate` needs to be called manually evertime to validate in Action of Logic, it must be inconvenient. You can make the validation automatically by assigning validation rules to `this.rules`. eg.
 
 ```js
 export default class extends think.logic.base {
@@ -172,7 +172,7 @@ After assigning validation rules to `this.rules`, the validation will be automat
 
 #### required
 
-Required item.
+Required Item.
 
 ```js
 export default class extends think.logic.base {

@@ -2,83 +2,84 @@
 
 ### EPERM
 
-##### Operation not permitted
+##### Operation Not Permitted
 
-An attempt was made to perform an operation that requires appropriate privileges.
+尝试执行某些需要特殊权限的操作。
 
 ### ENOENT
 
-##### No such file or directory ##### 
+##### No Such File Or Directory
 
-Commonly raised by fs operations; a component of the specified pathname does not exist -- no entity (file or directory) could be found by the given path.
+通常由文件系统操作引起，比如路径中某个组件指定的路径或文件并不存在。
 
 ### EACCES
 
-#####  Permission denied
+#####  Permission Denied
 
-An attempt was made to access a file in a way forbidden by its file access permissions.
+拒绝访问。
 
 ### EEXIST
 
-##### File exists
+##### File Exists
 
-An existing file was the target of an operation that required that the target not exist.
+要求目标不存在的操作遇到了目标存在的情况。
 
 ### ENOTDIR
 
-#####  Not a directory
+#####  Not a Directory
 
-A component of the given pathname existed, but was not a directory as expected. Commonly raised by fs.readdir.
+给定的路径存在，但不是想要的文件夹。通常由`fs.readdir`引起。
 
 ### EISDIR
 
-##### Is a directory ##### 
+##### Is a Directory
 
-An operation expected a file, but the given pathname was a directory.
+操作的目标是文件，但给定的却是文件夹。
 
 ### EMFILE
 
-##### Too many open files in system ##### 
+##### Too Many Open Files In System
 
-Maximum number of file descriptors allowable on the system has been reached, and requests for another descriptor cannot be fulfilled until at least one has been closed.
+系统打开的文件数量已经达到上限，至少关闭一个才能打开请求的文件。
 
-Commonly encountered when opening many files at once in parallel, especially on systems (in particular, OS X) where there is a low file descriptor limit for processes. To remedy a low limit, run ulimit -n 2048 in the same sh that will run the Node.js process.
+通常不允许过多文件同时打开的系统（如OS X）中出现，要提高限制，可以在运行Node.js进程的同一个sh中运行`ulimit -n 2048`。
 
 ### EPIPE
 
-##### Broken pipe
+##### Broken Pipe
 
-A write on a pipe, socket, or FIFO for which there is no process to read the data. Commonly encountered at the net and http layers, indicative that the remote side of the stream being written to has been closed.
+对管道、套按字或FIFO只有写而没有读。通常在`net`或`http`层出现，意味着正向其中写入数据的远程服务已关闭。
 
 ### EADDRINUSE
 
-##### Address already in use
+##### Address Already In Use
 
-An attempt to bind a server (net, http, or https) to a local address failed due to another server on the local system already occupying that address.
+尝试把服务器绑定到一个本地地址，但该地址已经被占用。
 
 ### ECONNRESET
 
-##### Connection reset by peer ##### 
+##### Connection Reset By Peer
 
-A connection was forcibly closed by a peer. This normally results from a loss of the connection on the remote socket due to a timeout or reboot. Commonly encountered via the http and net modules.
+连接被对端强制关闭。通常在远程套接字通信中由于对端超时或重启而丢失连接时导致。常见于`http`和`net`模块。
 
 ### ECONNREFUSED
 
-##### Connection refused ##### 
+##### Connection Refused
 
-No connection could be made because the target machine actively refused it. This usually results from trying to connect to a service that is inactive on the foreign host.
+目标机器频繁拒绝导致无法建立连接。通常在尝试连接外部非活动主机时发生。
 
 ### ENOTEMPTY
 
-##### Directory not empty
+##### Directory Not Empty
 
-A directory with entries was the target of an operation that requires an empty directory -- usually fs.unlink.
+操作目标是空文件夹，但当前文件夹非空，常见于调用`fs.unlink`。
+
 
 ### ETIMEDOUT
 
-##### Operation timed out
+##### Operation Timed Out
 
-A connect or send request failed because the connected party did not properly respond after a period of time. Usually encountered by http or net -- often a sign that a connected socket was not .end()'d appropriately.
+目标超过既定时间未响应造成连接或请求失败。通常在`http`或`net`中出现，一般表明连接的套接字没有适当`.end()`。
 
 
 

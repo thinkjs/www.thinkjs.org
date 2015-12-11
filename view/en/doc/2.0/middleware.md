@@ -1,13 +1,13 @@
 ## Middleware
 
-When handling user requests, it needs to take a lot of processes, such as parsing params, determining whether a static resource access, route parse, page staticize judgment, executing operation, searching template, rendering template and so on. The project may also increase some other processes according to the requirements, like determining whether the IP in the blacklist, CSRF detection and so on.
+Handling user requests needs to take a lot of processes, such as parsing parameters, determining whether it is a static resource access or not, route parsing, page staticize judgment, executing actions, searching templates, rendering templates and so on. The project may also increase some other processes according to the requirements, like determining whether the IP is in the blacklist, CSRF detection and so on.
 
-ThinkJS uses middleware to handle these logics, each logic is an independent middleware. Many hooks are buried in the request process, each hook executes a series of middleware serially. And finally, one request logic process is completed.
+ThinkJS uses middlewares to handle these logics, each logic is an independent middleware. Many hooks are buried in the request process, each hook executes a series of middleware serially. And finally, one request logic process is completed.
 
 
 ### Hook List
 
-The framework contains the following hooks.
+ThinkJS contains the following hooks.
 
 * `request_begin` request start
 * `payload_parse` parse the data submitted
@@ -25,7 +25,7 @@ The framework contains the following hooks.
 * `view_after` after view process
 * `response_end` response end
 
-Each hook calls one or more middleware to complete processing. The included middlewares are the following.
+Each hook calls one or more middleware to complete processing. The included middlewares are as the following:
 
 ```js
 export default {
@@ -49,7 +49,7 @@ export default {
 
 ### Config Hook
 
-The middlewares executed default by hook usually can not meet the needs of the project. By this time, you can modify the middleware executed respondingly by hook. The config file of hook is `src/common/config/hook.js`.
+The middlewares executed default by hook usually can not meet the needs of the project. By this time, you can modify the middleware corresponding to the hook. The config file of hook is `src/common/config/hook.js`.
 
 ```js
 export default {
@@ -92,7 +92,7 @@ Use `this.hook` to execute hook directly in the class containing `http` object. 
 await this.hook('payload_parse', data);
 ```
 
-### Create Middleware 
+### Create Middlewares 
 
 ThinkJS supports two modes of middleware, they are class mode and funcion mode. You can determine which mode to use depending on the complexity of middleware.
 
@@ -143,12 +143,12 @@ module.exports = think.middleware({
 })
 ```
 
-Middleware will pass `http` into it, you can use `this.http` to get. The logic codes are executed in the method `run`. If they contain asynchronous operation, you need to return a `Promise` or use `*/yield`.
+Middlewares will be passed in `http`, you can use `this.http` to get it. The logic codes are executed in the method `run`. If they contain asynchronous operation, you need to return a `Promise` or use `*/yield`.
 
 
 #### Function Mode
 
-If middleware needs to execute easy logic, you could define it as function mode. This middleware is not recommended to be created as a separate file, but to put together instead.
+If middlewares need to execute simple logic, you could define it as function mode. This middleware is not recommended to be created as a separate file, but to put together instead.
 
 You could create the file `src/common/bootstrap/middleware.js`, which will be loaded automatically when service starts. And you can add one or more function mode middleware in this file. eg.
 
@@ -162,7 +162,7 @@ think.middleware('parse_xml', http => {
 });
 ```
 
-Function mode middleware will pass `http` object as a param. If the middleware has asynchronous operation, it need to return a `Promise` or use Generator Function.
+Function mode middlewares will be passed `http` object as a param. If the middleware has asynchronous operation, it need to return a `Promise` or use Generator Function.
 
 The following is the implementation of parsing json payload in framework.
 
@@ -180,9 +180,9 @@ think.middleware('parse_json_payload', http => {
 });
 ```
 
-### Set Value after Parsed
+### Set Value After Parsed
 
-Some middleware may parse the corresponding datas, and want to reassign `http` object. Such as parse the xml data passed, but hope to use the method `http.get` to get later.
+Some middlewares may parse the corresponding datas, and want to reassign `http` object. Such as parse the xml data passed, but hope to use the method `http.get` to get later.
 
 
 * `http._get` store the value of GET params, http.get(xxx) to get data from this object
@@ -205,9 +205,9 @@ See [API -> http](./api_http.html) for more information about `http`.
 
 ### Prevent the Subsequent Execution
 
-When executing the certain conditions, some middleware may want to prevent the subsequent logic to execute. such as IP blacklist judgement, if hit the blacklist, then directly refuse the current request and no longer execute the subsequent logic.
+When executing the certain conditions, some middlewares may want to prevent the subsequent logic to execute. such as IP blacklist judgement, if hit the blacklist, then directly refuse the current request and no longer execute the subsequent logic.
 
-ThinkJS provides the method `think.prevent` for preventing to execute the subsequent logic. This method returns a specific type of Reject Promise.
+ThinkJS provides the method `think.prevent` for preventing the subsequent logic to execute. This method returns a specific type of Reject Promise.
 
 ```js
 think.middleware('parse_xml', http => {
@@ -228,9 +228,9 @@ In order to prevent the subsequent logic to execute, beside using the method `th
 If you don't want to end the current request directly, but return an error page instead, ThinkJS provides the method  `think.statusAction`. See [Extend Function -> Error Handle](./error_handle.html) for detailed usage.
 
 
-### Use Third-party Middleware
+### Use Third-Party Middlewares
 
-In the project, you can use third-party middleware by the method `think.middleware`. The corresponding code is in `src/common/bootstrap/middleware.js`. eg.
+You can use third-party middlewares by use `think.middleware`. The corresponding code is in `src/common/bootstrap/middleware.js`. eg.
 
 ```js
 var parseXML = require('think-parsexml');

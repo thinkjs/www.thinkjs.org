@@ -1,8 +1,8 @@
 ## model
 
-`think.model.base` instance of [think.base](./api_think_base.html) class.
+The `think.model.base` class inherit from [think.base](./api_think_base.html) class.
 
-##### instance of this class with ES6
+##### Inheritence with ES6:
 
 ```js
 export default class extends think.model.base {
@@ -12,7 +12,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### Using normal way to instance of this class
+##### Inheritence With Normal Way
 
 ```js
 module.exports = think.model({
@@ -22,7 +22,7 @@ module.exports = think.model({
 })
 ```
 
-### Method
+### Properties
 
 #### model.pk
 
@@ -70,7 +70,7 @@ Data of operation.
 
 Options of operation.
 
-### Function
+### Methods
 
 #### model.model(name, options, module)
 

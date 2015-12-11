@@ -1,8 +1,8 @@
 ## rest controller
 
-`think.controller.rest` instance of [think.controller.base](./api_controller.html), used for handle Rest api.
+The `think.controller.rest` class inherit from [think.controller.base](./api_controller.html), used for handle Rest API.
 
-##### Instance of this class with ES6
+##### Inheritence with ES6:
 
 ```js
 export default class extends think.controller.rest {
@@ -10,7 +10,7 @@ export default class extends think.controller.rest {
 }
 ```
 
-##### Using normal way to instance this class
+##### Inheritence With Normal Way
 
 ```js
 module.exports = think.controller('rest', {
@@ -18,7 +18,7 @@ module.exports = think.controller('rest', {
 })
 ```
 
-### Method
+### Properties
 
 #### controller._isRest
 
@@ -52,7 +52,7 @@ Resource ID
 The instance model of resource.
 
 
-### Function
+### Methods
 
 #### controller.__before()
 

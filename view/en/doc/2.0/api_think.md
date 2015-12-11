@@ -1,16 +1,16 @@
 ## think
 
-`think` is a global object  contains lots of useful methods and functions which can use without `require` in anywhere of your application.
+`think` is a global object that contains lots of useful methods and functions which can use anywhere of your application without `require`.
 
-### Method
+### Properties
 
 #### think.startTime
 
-The start time of service, it’s a unix timestamp.
+The start time of service, a unix timestamp.
 
 #### think.env
 
-The current environment of application, support three value below by default, you can set it when application start:
+The current environment of application, it may be one of the three possable values, you can set it when application start:
 
 * `development` The development environment, application will automatically update itself with modified files.
 * `testing` The testing environment.
@@ -43,7 +43,7 @@ The port of application runs, which can assign before application start, if assi
 
 #### think.cli
 
-Whether application is run under command mode, false by default. if it is command mode, this variable return command arguments. You can use this way to start command mode:
+Whether application is run under command line mode, false by default. if it is under command line mode, this variable return command arguments. You start command line mode by run:
 
 ```
 node www/index.js /home/index/test
@@ -51,7 +51,7 @@ node www/index.js /home/index/test
 
 #### think.lang
 
-The current language  of system, it read from the environment, which maybe empty in windows system.
+The current language of system, it read from the environment, which maybe empty in windows system.
 
 #### think.mode
 
@@ -67,7 +67,7 @@ The current version of ThinkJS.
 
 #### think.module
 
-The list of modules of project, if current mode is `mode_mini`, this variable return a empty array.
+The list of modules of project, if current mode is `mode_mini`, this variable is an empty array.
 
 #### think.THINK_PATH
 
@@ -92,11 +92,11 @@ The path of static resource directory, which is defined in `www/index.js`
 
 
 
-### Function
+### Methods
 
 #### think.Class(methods, clean)
 
-This function will automatically create a class, which inherit from `think.base` by default. you can use `class` to create class in ES6 if project is using ES6.
+Create a class dynamically, which inherit from `think.base` by default. you can use `class` to create class in ES6 if project is using ES6.
 
 ```js
 // inherit from think.base
@@ -108,7 +108,7 @@ var Cls1 = think.Class({
 ```
 
 
-##### didnot inherit think.base ##### 
+##### Did Not Inherit think.base
 
 ```js
 var Cls2 = think.Class({
@@ -119,7 +119,7 @@ var Cls2 = think.Class({
 ```
 
 
-##### Inherit from an other class
+##### Inherit Other classes
 
 ```js
 // inherit from Cls2
@@ -134,10 +134,10 @@ var Cls3 = think.Class(Cls2, {
 ```
 
 
-##### Instance a class
+##### Instantiate a Class
 
 ```js
-// instance a class which will call `init` function automatically
+// instantiate a class which will call `init` function automatically
 var instance = new Cls3('thinkjs');
 ```
 
@@ -147,7 +147,7 @@ var instance = new Cls3('thinkjs');
 * `source1`  {Mixed} source object
 * `return`  {Object} directory object
 
-It will copy methods or functions from source1, source2 and some other object to `target` object, it looks like `$.extend` in `jQuery`.
+It will copy methods or functions from source1, source2 and some other object to `target` object, it is similar to the `$.extend` in `jQuery`.
 
 Deep copy by default, you can assign the first arugment to `false` if you want shallow copy.
 
@@ -162,7 +162,7 @@ think.extend({}, {name: 'foo'}, {value: 'bar'});
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is Boolean type or not.
+Check whether this object is Boolean type or not.
 
 ```js
 think.isBoolean(true); //true
@@ -176,7 +176,7 @@ think.isBoolean('string'); //false
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is Number type or not.
+Check whether this object is Number type or not.
 
 ```js
 think.isNumber(1); //true
@@ -188,7 +188,7 @@ think.isNumber(1.21); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is object type or not.
+Check whether this object is object type or not.
 
 ```js
 think.isObject({}); //true
@@ -201,7 +201,7 @@ think.isObject(new Buffer('welefen')); //false
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is string type or not.
+Check whether this object is string type or not.
 
 ```js
 think.isString("xxx"); // true
@@ -213,7 +213,7 @@ think.isString(new String("xxx")); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is function type or not.
+Check whether this object is function type or not.
 
 ```js
 think.isFunction(function(){}); //true
@@ -225,7 +225,7 @@ think.isFunction(new Function("")); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is date type or not.
+Check whether this object is date type or not.
 
 ```js
 think.isDate(new Date()); //true
@@ -236,7 +236,7 @@ think.isDate(new Date()); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is regular expression or not.
+Check whether this object is regular expression or not.
 
 ```js
 think.isRegExp(/\w+/); //true
@@ -248,7 +248,7 @@ think.isRegExp(new RegExp("/\\w+/")); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check whether this object is error type or not.
+Check whether whether this object is error type or not.
 
 ```js
 think.isError(new Error("xxx")); //true
@@ -259,7 +259,7 @@ think.isError(new Error("xxx")); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is empty or not.
+Check whether this object is empty or not.
 
 ```js
 // check is empty or not
@@ -278,7 +278,7 @@ think.isEmpty(false); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is array or not.
+Check whether this object is array or not.
 
 ```js
 think.isArray([]); //true
@@ -292,7 +292,7 @@ think.isArray(new Array(10)); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is IP4 or not.
+Check whether this object is IP4 or not.
 
 ```js
 think.isIP4("10.0.0.1"); //true
@@ -305,7 +305,7 @@ think.isIP4("192.168.1.1"); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is IP6 or not.
+Check whether this object is IP6 or not.
 
 ```js
 think.isIP6("2031:0000:130f:0000:0000:09c0:876a:130b"); //true
@@ -317,7 +317,7 @@ think.isIP6("2031:0000:130f::09c0:876a:130b"); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is IP or not.
+Check whether this object is IP or not.
 
 ```js
 think.isIP("10.0.0.1"); //true
@@ -330,7 +330,7 @@ think.isIP("2031:0000:130f:0000:0000:09c0:876a:130b"); //true ip6
 * `file` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is IP or not, if file did't exist, return false.
+Check whether this object is IP or not, if file did't exist, return false.
 
 ```js
 think.isFile("/home/welefen/a.txt"); //true
@@ -342,7 +342,7 @@ think.isFile("/home/welefen/dirname"); //false
 * `dir` {Mixed} the path to check
 * `return` {Boolean}
 
-Check this path is directory or not. if not, return false.
+Check whether this path is directory or not. if not, return false.
 
 ```js
 think.isDir("/home/welefen/dirname"); //true
@@ -353,7 +353,7 @@ think.isDir("/home/welefen/dirname"); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is buffer object or not.
+Check whether this object is buffer object or not.
 
 ```js
 think.isBuffer(new Buffer(20)); //true
@@ -364,7 +364,7 @@ think.isBuffer(new Buffer(20)); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is string type of number or not.
+Check whether this object is string type of number or not.
 
 ```js
 think.isNumberString(1); //true
@@ -377,7 +377,7 @@ think.isNumberString("1.23"); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is promise object or not.
+Check whether this object is promise object or not.
 
 ```js
 think.isPromise(new Promise(function(){})); //true
@@ -389,7 +389,7 @@ think.isPromise(getPromise()); //true
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is http object or not.
+Check whether this object is http object or not.
 
 ```js
 think.isHttp(http); // true
@@ -400,7 +400,7 @@ think.isHttp(http); // true
 * `path` {String} the path of directory or file
 * `return` {Boolean}
 
-Check this file or directory can write or not. if not, return false.
+Check whether this file or directory can write or not. if not, return false.
 
 
 #### think.isPrevent(obj)
@@ -408,7 +408,7 @@ Check this file or directory can write or not. if not, return false.
 * `obj` {Mixed} object which need to check
 * `return` {Boolean}
 
-Check this object is prevent type of promise or not, through `think.prevent()` will generate this type of promise.
+Check whether this object is prevent type of promise or not, through `think.prevent()` will generate this type of promise.
 
 #### think.mkdir(p, mode)
 
@@ -755,7 +755,7 @@ var ParseXML = think.middleware({
 });
 ```
 
-Using ES6 to create middleware
+##### Using ES6 to create middleware
 
 ```js
 let Cls1 = class extends think.middleware.base {
@@ -1045,7 +1045,7 @@ think.service('post', {}, 'home');
 * `options` {Object} cache options
 * `return` {Promise} return a Promise
 
-Get, setup or delete cache, if value assigned to `undefined` means read cache, if value assigned to `null` means delete cache.
+Get, setup or delete cache, value is `undefined` means read cache, value is `null` means delete cache.
 if value assigned to `Function` means read cache but when cannot got a result, this function will be calling, then return the function return value which has been setup to cache.
 
 
@@ -1128,9 +1128,9 @@ if(think.isEmpty(result)){
 * `callback` {Function}
 
 Execute await, to avoid a long-running operation has been called many times, 
-执行等待，避免一个耗时的操作多次被执行。 callback 需要返回一个 promise 。
 
-如：用户访问时，要请求一个远程的接口数据。如果不处理，每个用户请求都会触发这个远程接口的访问，导致有很大的资源浪费。可以让这些用户公用一个远程接口的请求。
+For example, one user request that get data from a remote interface can not be processed in time will result in a large number of similar requests, it's a wasting of resources. So these users can share a common request to the remote interface.
+
 
 ```js
 

@@ -1,8 +1,8 @@
 ## MongoDB
 
-`think.model.mongo` instance of [think.model.base](./api_model.html)。
+The `think.model.mongo` class inherit from [think.model.base](./api_model.html)。
 
-##### Instance of this class with ES6
+### Inheritence with ES6:6
 
 ```js
 export default class extends think.model.mongo {
@@ -12,7 +12,7 @@ export default class extends think.model.mongo {
 }
 ```
 
-##### Instance of this class with normal way
+### Inheritence With Normal Way
 
 ```js
 module.exports = think.model('mongo', {

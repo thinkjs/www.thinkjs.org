@@ -1,51 +1,51 @@
-## Static Resource Access
+## Static Resources Access
 
-We generally need to reference static resources in a template when developing project.
+We generally need to reference static resources in a template when developing projects.
 
 When using the command `thinkjs` to create a project, it will automatically create the directory `www/static`, where specially stores JS, CSS, images and other static resources.
 
 
-### Access Static Resource
+### Access Static Resources
 
-After putting the static resources in the directory `www/static`, you can reference them in a template by the following approaches.
+After putting the static resources in `www/static`, you can reference them in a template by the following approaches.
 
-#### Reference JS file in template
+#### Reference JS files in template
 
 ```html
 <script src="/static/js/foo.js"></script>
 ```
 
-#### Reference CSS file in template
+#### Reference CSS files in template
 
 ```html
 <link href="/static/css/foo.css" rel="stylesheet" />
 ```
 
-#### Reference Image file in template
+#### Reference Image files in template
 
 ```html
 <img src="/static/img/foo.png" alt="" >
 ```
 
-### Static Resource Access Configuration
+### Static Resources Access Configuration
 
 Judging whether the request is a static resource request, we use regular expression. The default configuration is as follows.
 
 ```js
 export default {
-  resource_on: true, //enable static resource resolution function
-  resource_reg: /^(static\/|[^\/]+\.(?!js|html)\w+$)/, //regular for judging static resource request
+  resource_on: true, // enable static resources resolution function
+  resource_reg: /^(static\/|[^\/]+\.(?!js|html)\w+$)/, // regular expression for judging static resource request
 }
 ```
 
 You can modify the configuration file `src/common/config/config.js` according to your project requirements.
 
 
-### Close Online Static Resource Access 
+### Close Online Static Resources Access 
 
-After the project online, it generally uses nginx or other WEB server as a angent. At this time, you can let nginx to directly handle the static resource request. Thus, you could close the static resource resconfigolution access to improve performance.
+After the project is online, it generally uses nginx or other WEB server as a angent. At this time, you can let nginx to directly handle the static resource requests. Thus, you could close the static resources access to improve performance.
 
-Set the option `resource_on` in the configuration file `src/common/config/env/prodution.js` to close it. eg.
+Set the option `resource_on` to `false` in the configuration file `src/common/config/env/prodution.js` to close it. eg.
 
 ```js
 export default {

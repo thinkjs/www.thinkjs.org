@@ -30,7 +30,7 @@ Action 里就可以通过 `this.get` 方法来获取参数 `name` 了。
 node www/production.js url=home/index/index&method=post
 ```
 
-这样就把请求类型改为了 post。但这种方式下，参数 url 的值里就不能包含 & 字符了（可以通过上面 / 的方式指定参数）。
+这样就把请求类型改为了 post。但这种方式下，参数 url 的值里就不能包含 & 字符了（可以通过 / 的方式指定参数，如`node www/production.js url=home/index/index/foo/bar&method=post`）。
 
 除了修改请求类型，还可以修改下面的参数：
 

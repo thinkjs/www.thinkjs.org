@@ -1,8 +1,8 @@
 ## think.http.base
 
-`think.http.base` instance of [think.base](./api_think_base.html), this class contains http object handler base class.some class such like middleware class, controller class, view class all instance of this class.
+The `think.http.base` class inherit from [think.base](./api_think_base.html), it is the base class that contains all of the operations related to http. Middleware, controller and view class are all inherit from this class.
 
-##### Using ES6 to instnace of this class
+##### Inheritence with ES6:
 
 ```js
 export default class extends think.http.base {
@@ -16,7 +16,7 @@ export default class extends think.http.base {
 }
 ```
 
-##### Using normal way to instance this class
+##### Inheritence With Normal Way
 
 ```js
 module.exports = think.Class(think.http.base, {
@@ -26,13 +26,13 @@ module.exports = think.Class(think.http.base, {
 });
 ```
 
-### Method
+### Property
 
 #### http
 
 Packaged http object, contained methods and function to be seen in [API -> http](./api_http.html).
 
-### Function
+### Methods
 
 #### config(name, value)
 

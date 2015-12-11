@@ -1,8 +1,8 @@
 ## think.base
 
-`think.base` is base class, all classes will instance it, it support some base functions.
+`think.base` is the base class, all classes will inherit it, it supports some basic functions.
 
-Instance of base class with ES6:
+Inherit Base Class with ES6:
 
 ```js
 export default class extends think.base {
@@ -16,9 +16,9 @@ export default class extends think.base {
 }
 ```
 
-`Notice`： while using ES6, class donot write `constructor`, put some initial operations in function `init`, this function will been called automatically when class instancing, such like `construtor`.
+`Notice`： while using ES6, don't write the `constructor`, instead puting some initial operations in the function `init`, this function will be called automatically when class instancing, the effect is equivalent to use `construtor`.
 
-Use normal way to instance base class:
+Inherit Base Class Use Normal Way:
 
 ```js
 module.exports = think.Class(think.base, {
@@ -36,7 +36,7 @@ module.exports = think.Class(think.base, {
 
 * `args` {Array}
 
-Initial function, which can do some assign and some other operations.
+Initialization function, which can do some assign and other operations.
 
 ```js
 class a extends think.base {
@@ -47,11 +47,11 @@ class a extends think.base {
 }
 ```
 
-`Notice`：the different to `1.x` version, the `init` function of `2.x` did not return a `Promise`, some common operations are in `__before` magic functions.
+`Notice`：Different from version `1.x`, the `init` function of `2.x` did not return a `Promise`, some common operations are in `__before` magic functions.
 
 ### __before()
 
-pre-magic function, you can put some common behavior here, such like: in controller, check use is login or not.
+Pre-magic function, you can put some common behavior here, such as check wheter user is login or not in controller.
 
 ```js
 export default class think.controller.base {
@@ -72,13 +72,14 @@ export default class think.controller.base {
 
 ### __after()
 
-Post magic function, it will execute after function executed.
+Post-magic function, it will execute after function executed.
 
 ### filename()
 
 * `return` {String} return the current class file's name.
 
 Get the current class file's name, not contains detail of file path or file's extension.
+
 ```js
 // suppose current class file path is /home/xxx/project/app/controller/user.js
 class a extends think.base {
@@ -96,9 +97,9 @@ class a extends think.base {
 * `data` {Array} arguments
 * `return` {Promise}
 
-To invoke a function, automatically invoke `__before` and `__after`.no matter function return `Pormise` or not, this function will return `Pormise`.
+To invoke a function, automatically invoke `__before` and `__after` no matter whether the function return `Pormise` or not, this function will return `Pormise`.
 
-This function support `*/yield` and `async/await`.
+This function supports `*/yield` and `async/await`.
 
 ```js
 //use async/await

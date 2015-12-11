@@ -1,16 +1,16 @@
-## REST API
+## REST APIs
 
-In project, we often need to provide an API for third party to call. A common API design specification is using REST API, which uses HTTP request type to identify resource operation.
+In projects, we often need to provide APIs for third party to call. A common API design specification is using REST API, which uses HTTP request type to identify resource operation.
 
 * `GET` `/ticket` # get ticket list
-* `GET` `/ticket/12` # view the specified ticket
+* `GET` `/ticket/12` # view the specific ticket
 * `POST` `/ticket`  # new a ticket
 * `PUT` `/ticket/12` # update ticket 12
 * `DELETE` `/ticket/12` # delete ticket 12
 
 ThinkJS provides a very convenient way to create REST API. After created, it can response REST API process without writing any code, and it can also response additional demand by customization.
 
-### Create REST API
+### Create REST APIs
 
 Use `thinkjs controller [name] --rest` to create REST API. eg.
 
@@ -18,11 +18,11 @@ Use `thinkjs controller [name] --rest` to create REST API. eg.
 thinkjs controller home/ticket --rest
 ```
 
-The above command means that a Rest Controller named `ticket` is created in `home` module. And this Controller is used to handle the request of resource `ticket`.
+The above command means that a Rest Controller named `ticket` is created in `home` module. And this Controller is used to handle the request for resource `ticket`.
 
-### Process REST API Request
+### Process REST API Requests
 
-After Rest Controller created, you can complete REST API process without writing any code. Resource name and data table name is one-to-one. eg. resource name is `ticket`, then the data table name is `data table prefix` + `ticket`.
+After Rest Controller created, you can complete REST API process without writing any code. Resource name and data table name is one-to-one. eg. resource name is `ticket`, then the data table name is `data-table-prefix` + `ticket`.
 
 ### Request Type
 
@@ -53,7 +53,7 @@ export default class extends think.controller.rest {
 
 ### Authority Management
 
-Some REST API requires authentication. Only after passing the validation can it obtain the corresponding information. The validation can be carried out in the magic method `__before`.
+Some REST APIs require authentication. Only after passing the validation can it obtain the corresponding information. The validation can be carried out in the magic method `__before`.
 
 ```js
 export default class extends think.controller.rest {
