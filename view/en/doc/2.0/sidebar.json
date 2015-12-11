@@ -17,7 +17,7 @@
     "Model": {
       "Introdution": "model_intro",
       "Database Config": "model_config",
-      "CURD Operations: "model_curd",      
+      "CURD Operations": "model_curd",      
       "Transaction": "model_transaction",
       "Relation": "model_relation",
       "Mysql": "model_mysql",
@@ -47,7 +47,7 @@
       "Deploy": "deploy",
       "Developing Plugins": "plugin",      
       "Modules": "recommend_modules",
-      "And More...": "more"            
+      "More Features": "more"            
     },
     "API": {
       "think": "api_think",
