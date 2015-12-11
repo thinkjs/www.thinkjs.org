@@ -1,13 +1,13 @@
 {
-    "The Basics": {
+    "Getting Started": {
       "Introduction": "index",
       "Create Project": "create_project",
       "Project Structure": "app_structure",
       "Specification": "specification",
-      "Update Guide": "upgrade",
+      "Upgrade Guide": "upgrade",
       "Q & A": "question"
     },
-    "Advance": {
+    "Advanced Application": {
       "Module": "module",
       "Controller": "controller",
       "View": "view",
@@ -17,10 +17,10 @@
     "Model": {
       "Introdution": "model_intro",
       "Database Config": "model_config",
-      "CURD Operations: "model_curd",      
+      "CURD Operations": "model_curd",      
       "Transaction": "model_transaction",
       "Relation": "model_relation",
-      "Mysql": "model_mysql",
+      "MySQL": "model_mysql",
       "MongoDB": "model_mongodb",
       "SQLite": "model_sqlite"
     },
@@ -31,14 +31,14 @@
       "WebSocket": "adapter_websocket",
       "Template": "adapter_template"
     },
-    "More fetures": {
-      "Commands": "thinkjs_command",
-      "Static Resources": "resource",
-      "Middleware": "middleware",
+    "More Features": {
+      "Command": "thinkjs_command",
+      "Static Resource": "resource",
+      "MiddleWare": "middleware",
       "Service": "service",
       "Cookie": "cookie",
-      "Error Handle": "error_handle",
-      "Error Message": "error_message",
+      "Error Handling": "error_handle",
+      "Error Messages": "error_message",
       "Validation": "validation",
       "I18N": "i18n",
       "Path Const": "path_cost",
