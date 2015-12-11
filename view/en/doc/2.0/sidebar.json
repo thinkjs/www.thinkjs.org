@@ -47,7 +47,7 @@
       "Deploy": "deploy",
       "Developing Plugins": "plugin",      
       "Modules": "recommend_modules",
-      "And More...": "more"            
+      "More Features": "more"            
     },
     "API": {
       "think": "api_think",

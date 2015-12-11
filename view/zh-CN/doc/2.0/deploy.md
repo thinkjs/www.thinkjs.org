@@ -1,5 +1,11 @@
 ## 线上部署
 
+### 代码编译
+
+开发环境下，代码会自动编译、自动更新，但这种机制时间长了会有一定的内存泄露，所以线上不可使用这种方式。
+
+需要在代码上线前执行 `npm run compile` 命令，将 `src/` 目录编译到 `app/` 目录。
+
 ### 使用 pm2 管理服务
 
 pm2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用。使用 pm2 需要以全局的方式安装，如： `sudo npm install -g pm2`。安装完成后，命令行下会有 pm2 命令。
@@ -26,10 +32,14 @@ pm2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用�
 将 `cwd` 配置值改为线上真实的项目路径，然后在项目目录下使用下面的命令来启动/重启服务：
 
 ```sh
-pm2 startOrGracefulReload pm2.json
+pm2 startOrReload pm2.json
 ```
 
 pm2 详细的配置请见 <http://pm2.keymetrics.io/docs/usage/application-declaration/>。
+
+-----
+
+`注`：如果线上不使用 pm2 来管理 Node.js 服务的话，启动服务需要使用命令 `node www/production.js`。
 
 ### 使用 nginx 做反向代理
 
