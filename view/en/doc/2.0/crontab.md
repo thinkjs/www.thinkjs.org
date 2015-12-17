@@ -68,7 +68,7 @@ You can create a simple executable script to call command line to execute. eg.
 
 ```sh
 cd project_path; 
-node www/prodution.js home/index/index;
+node www/production.js home/index/index;
 ```
 
 This would create the directory `crontab` in the project, and put the above executable script as a file in this directory.
