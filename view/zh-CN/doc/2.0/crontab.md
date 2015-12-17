@@ -67,7 +67,7 @@ export default class extends think.controller.base {
 
 ```sh
 cd project_path; 
-node www/prodution.js home/index/index;
+node www/production.js home/index/index;
 ```
 
 在项目目录下创建目录 `crontab`，将上面执行脚本存为一个文件放在该目录下。
