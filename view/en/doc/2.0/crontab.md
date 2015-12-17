@@ -66,7 +66,7 @@ export default class extends think.controller.base {
 可以创建一个简单的执行脚本来调用命令行执行，如：
 
 ```sh
-cd project_path; 
+cd project_path;  
 node www/production.js home/index/index;
 ```
 
