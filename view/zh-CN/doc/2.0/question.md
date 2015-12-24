@@ -99,3 +99,41 @@ export default class extends think.controller.base {
   }
 }
 ```
+
+### PREVENT_NEXT_PROCESS
+
+在调用有些方法后（如：success）后会发现有个 message 为 `PREVENT_NEXT_PROCESS` 的错误。这个错误是 ThinkJS 为了阻止后续执行添加的，如果要在 `catch` 里判断是否是该错误，可以通过 `think.isPrevent` 方法来判断。如：
+
+```js
+module.exports = think.controller({
+  indexAction(self){
+    return self.getData().then(function(data){
+      return self.success(data);
+    }).catch(function(err){
+      //忽略 PREVENT_NEXT_PROCESS 错误
+      if(think.isPrevent(err)){
+        return;
+      }
+      console.log(err.stack);
+    })
+  }
+})
+```
+
+另一种处理方式：对于 `success` 之类的方法前面不要添加 `return`，这样 `catch` 里就不会有此类的错误了。
+
+### 并行处理
+
+使用 `async/await` 来处理异步时，是串行执行的。但很多场景下我们需要并行处理，这样可以大大提高执行效率，此时可以结合 `Promise.all` 来处理。
+
+```js
+export default class extends think.controller.base {
+  async indexAction(){
+    let p1 = this.getServiceData1();
+    let p2 = this.getAPIData2();
+    let [p1Data, p2Data] = await Promise.all([p1, p2]);
+  }
+}
+```
+
+上面的代码 `p1` 和 `p2` 是并行处理的，然后用 `Promise.all` 来获取 2 个数据。这样一方面代码是同步书写的，同时又不失并行处理的性能。
