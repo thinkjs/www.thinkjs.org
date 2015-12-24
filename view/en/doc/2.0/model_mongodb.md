@@ -12,13 +12,20 @@ export default {
 }
 ```
 
+### Config options
+
 In order to add additional params when connecting MongoDB service, add them to `options`:
 
 ```js
 export default {
   type: "mongo",
-  options: {
-    authSource: "admin"
+  adapter: {
+    mongo: {
+      options: {
+        authSource: 'admin',
+        replicaSet: 'xxx'
+      }
+    }
   }
 }
 ```

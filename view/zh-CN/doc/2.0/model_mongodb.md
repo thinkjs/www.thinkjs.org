@@ -12,13 +12,20 @@ export default {
 }
 ```
 
+#### 配置选项
+
 如果要在连接 MongoDB 服务的时候添加额外的参数，可以通过在 `options` 里追加，如：
 
 ```js
 export default {
   type: 'mongo',
-  options: {
-    authSource: 'admin'
+  adapter: {
+    mongo: {
+      options: {
+        authSource: 'admin',
+        replicaSet: 'xxx'
+      }
+    }
   }
 }
 ```
