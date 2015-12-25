@@ -12,6 +12,22 @@ export default {
 }
 ```
 
+#### 多 HOST
+
+可以将配置里的 `host` 字段设置为数据支持多 host 的功能，如：
+
+```js
+export default {
+  type: 'mongo',
+  adapter: {
+    mongo: {
+      host: ['10.0.0.1', '10.0.0.2'],
+      port: ['1234', '5678']
+    }
+  }
+}
+```
+
 #### 配置选项
 
 如果要在连接 MongoDB 服务的时候添加额外的参数，可以通过在 `options` 里追加，如：
@@ -30,7 +46,7 @@ export default {
 }
 ```
 
-上面的配置后，连接 MongoDB 的 URL 变成类似于 `mongodb://127.0.0.1:27017/?authSource=admin`。
+上面的配置后，连接 MongoDB 的 URL 变成类似于 `mongodb://127.0.0.1:27017/?authSource=admin&replicaSet=xxx`。
 
 更多额外的配置请见 <http://mongodb.github.io/node-mongodb-native/2.0/reference/connecting/connection-settings/>。
 
