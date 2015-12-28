@@ -30,6 +30,8 @@ let fn = () => {
       let content = fs.readFileSync(bakFilePath, 'utf8').trim();
       if(content.indexOf('<svg xmlns') === 0){
         fs.renameSync(bakFilePath, filePath);
+        console.log('sync ' + type + ' success');
+        console.log(bakFilePath, filePath);
       }else{
         fs.unlinkSync(bakFilePath);
       }

@@ -63,8 +63,8 @@ cd ..
 scp -r output.tar.gz qiwoo@101.198.153.219:~;
 ssh qiwoo@101.198.153.219 "tar zxvfm ~/output.tar.gz -C /home/qiwoo/www/www.thinkjs.org;mv output.tar.gz thinkjs.tar.gz;cd /home/qiwoo/www/www.thinkjs.org;pm2 startOrReload pm2.json";
 
-#proxychains4 scp -p 8360 -r output.tar.gz welefen@ueapp.com:~;
-#proxychains4 ssh -p 8360 welefen@ueapp.com "tar zxvfm ~/output.tar.gz -C /home/welefen/www/www.thinkjs.org;rm -rf ~/output.tar.gz;cd /home/welefen/www/www.thinkjs.org;pm2 startOrReload pm2.json";
+scp -r output.tar.gz welefen@ueapp.com:~;
+ssh welefen@ueapp.com "tar zxvfm ~/output.tar.gz -C /home/welefen/www/www.thinkjs.org;rm -rf ~/output.tar.gz;cd /home/welefen/www/www.thinkjs.org;pm2 startOrReload pm2.json";
 
 #sleep 2;
 
