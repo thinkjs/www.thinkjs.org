@@ -475,7 +475,7 @@ json 的方式输出内容。
 
 * `filePath` {String} 下载文件的具体路径
 * `content-Type` {String} Content-Type
-* `fileName` {String} 报错的文件名
+* `fileName` {String} 保存的文件名
 
 下载文件。
 
