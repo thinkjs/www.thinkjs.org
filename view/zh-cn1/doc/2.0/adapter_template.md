@@ -59,6 +59,6 @@ export default class extends think.adapter.base {
 
 框架里的 Template 实现请见 <https://github.com/75team/thinkjs/tree/master/src/adapter/template>。
 
-### 使用第三方缓存 Adapter
+### 使用第三方模版 Adapter
 
-如何使用第三方的缓存 Adapter 请参见 [Adapter -> 介绍](./adapter_intro.html#toc-e7c)。
+如何使用第三方的模版 Adapter 请参见 [Adapter -> 介绍](./adapter_intro.html#toc-e7c)。
