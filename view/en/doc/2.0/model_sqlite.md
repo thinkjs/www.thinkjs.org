@@ -40,6 +40,6 @@ The path of data file is `path` + `/[name].sqlite`, default database `demo`'s fi
 
 ### CURD Operations
 
-CURD operations are same as MySql, just read [Model -> Introduction](https://thinkjs.org/zh-CN/doc/2.0/model_intro.html#toc-d84).
+CURD operations are same as MySql, just read [Model -> Introduction](https://thinkjs.org/zh-cn/doc/2.0/model_intro.html#toc-d84).
 
-This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_sqlite.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_sqlite.md).
+This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_sqlite.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_sqlite.md).

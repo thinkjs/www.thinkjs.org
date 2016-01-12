@@ -4,7 +4,66 @@
   <div class="wrap page-con">
       <h2 class="tith2">更新日志</h2>
         <div class="daily">
-          <ul>  
+          <ul>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.1.0</strong>2016.01.14</span>
+                  <p>支持 TypeScript，详情见<a href="">这里</a></p>
+                  <p>性能提升 90%，优于 Koa，express 等框架，性能测试见<a href="">这里</a></p>
+                  <p>Controller 支持子目录的形式</p>
+                  <p>支持 PostgreSQL 数据库</p>
+                  <p>Model schema 支持默认值</p>
+                  <p>Hook 里的 middleware 返回 null 可以阻止后续的 middleware 执行</p>
+                  <p>http 和 controller 添加 display 的别名方法 render</p>
+                  <p>添加串行执行方法 think.waterfall</p>
+                  <p>Validate 支持正则</p>
+                  <p>fetch 支持传数据</p>
+                  <p>Logic 支持判断请求类型</p>
+                  <p>定时任务里支持直接调用 action</p>
+                  
+                  <p>Babel 升级到 6</p>
+                  <p>国际化语言对大小写不再敏感</p>
+                  <p>将获取模板文件内容改为异步</p>
+                  <p>http 对象不在继承自 EventEmitter 类</p>
+                  <p>去除 think.mode_mini 模式，controller 支持子目录</p>
+                  <p>数据库配置 name 改为 database</p>
+                  <p>修改现在的 fields 为 schema</p>
+                  <p>数据库配置 pwd 改为 password</p>
+                  
+
+                  <p>优化 http 对象生成方式，不用每次都复制</p>
+                  <p>过滤 .svn, .git 等隐藏类型的文件</p>
+                  <p>将文件 bin/index.js 移动为 src/command.js</p>
+                  <p>runtime 目录移动到项目根目录下，添加 think.RUNTIME_PATH 路径常量</p>
+                  <p>adapter type 增加自动转为小写的功能，并给出提示</p>
+                  <p>增加 thinkData，用于缓存系统常用数据</p>
+                  <p>合并 think.locale 和 controller.locale 方法</p>
+
+
+                  <p>修复 nunjucks 模板继承文件找不到的问题</p>
+                  <p>修复 pathname 里含有转义的 / 导致识别错误的问题</p>
+                  <p>修复 http.file 方法返回的数据遭到修改导致源数据也修改的问题</p>
+                  <p>修复路径中 / 在 windows 下需要替换为 \\ 的问题</p>
+                  <p>修复 nunjucks 下模板文件在不在根目录导致报错的问题</p>
+                  <p>修复 production 环境下，页面上可能输出敏感数据的问题</p>
+                  <p>修复 development 模式下，JSON 数据解析失败后没有报错信息不好定位的问题</p>
+                  <p>修复 view root_path 修改后，创建模块时视图路径没更新的问题</p>
+                  <p>修复 required|int 规则校验不正确的问题</p>
+                  <p>修复 redis cache 解析配置的问题</p>
+                  <p>修复 REST API 不支持 logic 的问题</p>
+                  <p>修复 count 方法如果传入字段名是关键字会出错的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.0.16</strong>2016.01.08</span>
+                  <p>think.parseConfig 方法支持 context</p>
+                </div>
+              </li>  
               <li>
                 <i class="circle"></i>
                 <div class="dailycont">

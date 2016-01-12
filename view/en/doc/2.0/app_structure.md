@@ -19,7 +19,7 @@ After creating ThinkJS project, you will get the directory structure something l
    |   |   |   |-- hook.js 
    |   |   |   |-- locale 
    |   |   |   |   |-- en.js
-   |   |   |   |   `-- zh-CN.js
+   |   |   |   |   `-- zh-cn.js
    |   |   |   `-- route.js 
    |   |   |-- controller 
    |   |   |    `-- error.js
@@ -33,7 +33,7 @@ After creating ThinkJS project, you will get the directory structure something l
    |       |   `-- doc.js
    |       `-- model
    |-- view
-   |   `-- zh-CN
+   |   `-- zh-cn
    |       |-- common
    |       |   |-- error_400.html
    |       |   |-- error_403.html

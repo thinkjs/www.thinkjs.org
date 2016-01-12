@@ -108,4 +108,4 @@ export default {
 
 The `options` of `parser` contains the SQL sentences that need to execute next, thus parser can return corresponding database configuration conveniently.
 
-This doc stays at：[https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_config.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_config.md).
+This doc stays at：[https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_config.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_config.md).

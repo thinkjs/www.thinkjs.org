@@ -6,9 +6,9 @@ ThinkJS provides a flexible route mechanism, in addition to the default resoluti
 
 ### Resolving URL to pathname
 
-When a user accesses to the service, the server first of all, will get a full URL, such as `http://www.thinkjs.org/zh-CN/doc/2.0/route.html`.
+When a user accesses to the service, the server first of all, will get a full URL, such as `http://www.thinkjs.org/zh-cn/doc/2.0/route.html`.
 
-The pathname resolved by URL is `/zh-CN/doc/2.0/route.html`.
+The pathname resolved by URL is `/zh-cn/doc/2.0/route.html`.
 
 ### pathname Filter
 
@@ -25,7 +25,7 @@ export default {
 
 Above configuration can be modified in the `src/common/config/config.js`.
 
-When filtering, the `/` before and after pathname will be removed, and this logic is not affected by the configuration above. After filtering the pathname, the clean pathname you get is `zh-CN/doc/2.0/route`.
+When filtering, the `/` before and after pathname will be removed, and this logic is not affected by the configuration above. After filtering the pathname, the clean pathname you get is `zh-cn/doc/2.0/route`.
 
 `Note`: If the URL is `http://www.thinkjs.org/`, then the clean pathname you get is an empty string.
 

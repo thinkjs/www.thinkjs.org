@@ -80,7 +80,7 @@ ThinkJS 内置了详细的日志功能，可以很方便的查看各种日志，
 ##### HTTP 请求日志
 ```
 [2015-10-12 14:10:03] [HTTP] GET /favicon.ico 200 5ms
-[2015-10-12 14:10:11] [HTTP] GET /zh-CN/doc.html 200 11ms
+[2015-10-12 14:10:11] [HTTP] GET /zh-cn/doc.html 200 11ms
 [2015-10-12 14:10:11] [HTTP] GET /static/css/reset.css 200 3ms
 ```
 

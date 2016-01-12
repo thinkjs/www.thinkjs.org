@@ -18,7 +18,7 @@
    |   |   |   |-- hook.js 
    |   |   |   |-- locale 
    |   |   |   |   |-- en.js
-   |   |   |   |   `-- zh-CN.js
+   |   |   |   |   `-- zh-cn.js
    |   |   |   `-- route.js 
    |   |   |-- controller 
    |   |   |    `-- error.js
@@ -32,7 +32,7 @@
    |       |   `-- doc.js
    |       `-- model
    |-- view
-   |   `-- zh-CN
+   |   `-- zh-cn
    |       |-- common
    |       |   |-- error_400.html
    |       |   |-- error_403.html

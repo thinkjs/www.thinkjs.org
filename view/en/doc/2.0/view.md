@@ -308,7 +308,7 @@ More details about the `fetch` method please see [here](api_controller.html#cont
 
 ### Internationalization
 
-After starting the internationalization, the view path will has an extra layer of internationalization of directory. Such as specific view path becomes into the `view/zh-CN/home/index_index.html`, and `zh-CN` means language.
+After starting the internationalization, the view path will has an extra layer of internationalization of directory. Such as specific view path becomes into the `view/zh-cn/home/index_index.html`, and `zh-cn` means language.
 
 More about how to implementing internationalization, please see [extensions - > internationalization](./i18n.html).
 

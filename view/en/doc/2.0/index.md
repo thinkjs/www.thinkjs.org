@@ -79,7 +79,7 @@ ThinkJS builds-in the detailed log function, it makes us read log and track prob
 #### HTTP request log
 ```
 [2015-10-12 14:10:03] [HTTP] GET /favicon.ico 200 5ms
-[2015-10-12 14:10:11] [HTTP] GET /zh-CN/doc.html 200 11ms
+[2015-10-12 14:10:11] [HTTP] GET /zh-cn/doc.html 200 11ms
 [2015-10-12 14:10:11] [HTTP] GET /static/css/reset.css 200 3ms
 ```
 #### Socket connection log

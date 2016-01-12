@@ -630,7 +630,7 @@ export default class extends think.logic.base {
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      mobile: 'mobile:zh-CN' //必须为中国的手机号
+      mobile: 'mobile:zh-cn' //必须为中国的手机号
     }
   }
 }

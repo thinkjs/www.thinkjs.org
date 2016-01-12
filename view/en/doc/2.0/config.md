@@ -70,7 +70,7 @@ export default {
 
 ##### config/locale/[lang].js
 
-International language pack configuration, such as `locale/en.js`,`locale/zh-CN.js`.
+International language pack configuration, such as `locale/en.js`,`locale/zh-cn.js`.
 
 --------
 

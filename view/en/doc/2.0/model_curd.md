@@ -269,4 +269,4 @@ export default class extends think.controller.base {
 
 More operations in model can be found at [API -> model](TODO).
 
-This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_intro.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-CN/doc/2.0/model_intro.md).
+This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_intro.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_intro.md).

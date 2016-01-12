@@ -72,7 +72,7 @@ export default {
 
 ##### config/locale/[lang].js
 
-国际化语言包配置，如： `locale/en.js`，`locale/zh-CN.js`。
+国际化语言包配置，如： `locale/en.js`，`locale/zh-cn.js`。
 
 --------
 

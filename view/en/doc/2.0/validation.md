@@ -638,7 +638,7 @@ The value needs to be a mobile phone.
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      mobile: 'mobile:zh-CN' //must be a chinese mobile phone
+      mobile: 'mobile:zh-cn' //must be a chinese mobile phone
     }
   }
 }

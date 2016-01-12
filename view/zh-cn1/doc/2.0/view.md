@@ -320,7 +320,7 @@ module.exports = think.controller({
 
 ### 国际化
 
-启动国际化后，视图路径会多一层国际化的目录。如：具体的视图路径变为 `view/zh-CN/home/index_index.html`，其中 `zh-CN` 为语言名。
+启动国际化后，视图路径会多一层国际化的目录。如：具体的视图路径变为 `view/zh-cn/home/index_index.html`，其中 `zh-cn` 为语言名。
 
 关于如果使用国际化请见 [扩展功能 -> 国际化](./i18n.html)。 
 

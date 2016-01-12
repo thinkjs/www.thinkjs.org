@@ -6,9 +6,9 @@ ThinkJS 提供了一套灵活的路由机制，除了默认的解析外，还可
 
 ### URL 解析为 pathname
 
-当用户访问服务时，服务端首先拿到的是一个完整的 URL，如：访问本页面，得到的 URL 为 `http://www.thinkjs.org/zh-CN/doc/2.0/route.html`。
+当用户访问服务时，服务端首先拿到的是一个完整的 URL，如：访问本页面，得到的 URL 为 `http://www.thinkjs.org/zh-cn/doc/2.0/route.html`。
 
-将 URL 进行解析得到的 pathname 为 `/zh-CN/doc/2.0/route.html`。
+将 URL 进行解析得到的 pathname 为 `/zh-cn/doc/2.0/route.html`。
 
 ### pathname 过滤
 
@@ -25,7 +25,7 @@ export default {
 
 上面配置可以在 `src/common/config/config.js` 中进行修改。
 
-pathname 过滤时会自动去除左右的 `/`，该逻辑不受上面的配置影响。对 pathname 进行过滤后，拿到干净的 pathname 为 `zh-CN/doc/2.0/route`。
+pathname 过滤时会自动去除左右的 `/`，该逻辑不受上面的配置影响。对 pathname 进行过滤后，拿到干净的 pathname 为 `zh-cn/doc/2.0/route`。
 
 `注`：如果访问的 URL 是 `http://www.thinkjs.org/`，那么最后拿到干净的 pathname 则为空字符串。
 
