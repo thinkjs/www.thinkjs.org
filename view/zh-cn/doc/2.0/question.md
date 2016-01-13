@@ -137,3 +137,18 @@ export default class extends think.controller.base {
 ```
 
 上面的代码 `p1` 和 `p2` 是并行处理的，然后用 `Promise.all` 来获取 2 个数据。这样一方面代码是同步书写的，同时又不失并行处理的性能。
+
+### 如何输出图片
+
+项目中有时候要输出图片等类型的数据，可以通过下面的方式进行：
+
+```js
+export default class extends think.controller.base {
+  imageAction(){
+    //图片 buffer 数据，读取本地文件或者从远程获取
+    let imageBuffer = new Buffer();
+    this.type('image/png');
+    this.end(imageBuffer);
+  }
+}
+```
