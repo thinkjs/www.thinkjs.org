@@ -163,7 +163,7 @@ This is the default content
 子级模版：
 
 ```html
-{% extends "parent.html" %}
+{% extends "./parent.html" %}
 
 {% block left %}
 This is the left side!
@@ -173,6 +173,8 @@ This is the left side!
 This is the right side!
 {% endblock %}
 ```
+
+`注`：nunjucks 默认设置了 root_path，所以模板继承时需要使用相对路径。
 
 ##### 条件判断
 

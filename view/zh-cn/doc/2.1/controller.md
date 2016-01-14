@@ -46,8 +46,7 @@ module.exports = think.controller(Base, {
 
 ### 多级控制器
 
-
-
+对于很复杂的项目，一层控制器有时候不能满足需求。这个时候可以创建多级控制器，如：`src/home/controller/group/article.js`，这时解析到的控制器为二级，具体为 `group/article`。
 
 ### 使用 Generator Function
 

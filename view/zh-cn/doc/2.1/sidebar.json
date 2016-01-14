@@ -20,7 +20,7 @@
       "CRUD 操作": "model_crud",
       "事务": "model_transaction",
       "关联模型": "model_relation",
-      "Mysql": "model_mysql",
+      "MySQL": "model_mysql",
       "MongoDB": "model_mongodb",
       "SQLite": "model_sqlite",
       "PostgreSQL": "model_postgre"
@@ -32,13 +32,19 @@
       "WebSocket": "adapter_websocket",
       "Template": "adapter_template"
     },
+    "Middleware": {
+      "介绍": "middleware",
+      "CSRF": "csrf",
+      "子域名部署": "subdomain",
+      "禁止端口访问": "force_proxy"
+    },
     "扩展功能": {
       "TypeScript": "typescript",
       "Logic": "logic",
       "Service": "service",
       "Cookie": "cookie",
       "REST API": "rest_api",
-      "Middleware": "middleware",
+      "Babel": "babel",
       "ThinkJS 命令": "thinkjs_command",
       "静态资源访问": "resource",
       "错误处理": "error_handle",

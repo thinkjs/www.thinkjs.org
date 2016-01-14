@@ -31,20 +31,7 @@ pathname 过滤时会自动去除左右的 `/`，该逻辑不受上面的配置�
 
 ### 子域名部署
 
-当项目比较复杂时，可能希望将不同的功能部署在不同的域名下，但代码还是在一个项目下。如：域名 `admin.example.com` 部署后台管理的功能，希望映射到 `admin` 模块下。
-
-ThinkJS 提供了如下的配置可以进行子域名部署，该配置可以在 `config/config.js` 里设置：
-
-```js
-export default {
-  subdomain: {
-    admin: 'admin', //表示将 admin.example.com 映射到 admin 模块下
-    ...
-  }
-}
-```
-
-假如过滤后的 pathname 为 `group/detail`，命中了 admin.example.com 这个子域名后，pathname 变为 `admin/group/detail`。
+子域名部署请见[Middleware -> 子域名部署](./subdomain.html)。 
 
 ### 路由识别
 
@@ -62,6 +49,8 @@ export default {
 * controller 为 `admin`
 * action 为 `group`，对应的方法名为 `groupAction`
 * 参数为 `{detail: ''}`
+
+如果有多级控制器，那么会进行多级控制器的识别，然后才是 action 的识别。
 
 #### 大小写转化
 

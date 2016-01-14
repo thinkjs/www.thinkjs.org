@@ -32,8 +32,8 @@ export default {
   payload_parse: ['parse_form_payload', 'parse_single_file_payload', 'parse_json_payload', 'parse_querystring_payload'],
   payload_validate: ['validate_payload'],
   resource: ['check_resource', 'output_resource'],
-  route_parse: ['rewrite_pathname', 'subdomain_deploy', 'parse_route'],
-  logic_before: ['check_csrf'],
+  route_parse: ['rewrite_pathname', 'parse_route'],
+  logic_before: [],
   logic_after: [],
   controller_before: [],
   controller_after: [],
@@ -58,7 +58,9 @@ export default {
 
 上面的配置会覆盖掉默认的配置值。如果在原有配置上增加的话，可以通过下面的方式：
 
-##### 在前面追加
+#### 在前面追加
+
+可以通过配置 `prepend` 让 middleware 作为前置追加：
 
 ```js
 export default {
@@ -66,7 +68,9 @@ export default {
 }
 ```
 
-##### 在后面追加
+#### 在后面追加
+
+可以通过配置 `append` 让 middleware 作为后置追加：
 
 ```js
 export default {

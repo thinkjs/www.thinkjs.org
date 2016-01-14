@@ -174,3 +174,12 @@ export default {
 ```
 
 详细的数据库配置请见[这里](./config.html#db)。
+
+### nunjucks 模板继承路径怎么写
+
+使用 nunjucks 的模板继承时，由于设置了 root_path，所以路径需要使用相对路径。如：
+
+```html
+{% extends "./parent.html" %}  //表示同级别目录下的 parent.html 文件
+{% extends "../layout.html" %} //表示父级别下的 layout.html 文件
+```

@@ -121,3 +121,5 @@ export default {
   cluster_on: true
 }
 ```
+
+`注`：如果使用 PM2 来部署，并且开启了 cluster 模式，那么就无需在开启 ThinkJS 里的 cluster。

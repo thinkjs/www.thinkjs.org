@@ -29,6 +29,10 @@ TypeScript 项目的文件后缀是 `.ts`。如果手工建立一些文件，后
 第三方类库的描述文件列表可以从 <https://github.com/DefinitelyTyped/DefinitelyTyped> 找到，基本覆盖了一些比较热门的类库。
 
 
+### TypeScript 编译
+
+由于 TypeScript 的编译功能有很多缺陷，所以现在的方案是通过 TypeScript 将 `.ts` 代码编译为 ES6 代码，然后使用 Babel 6 编译为 ES5 代码。
+
 ### 已有项目升级为 TypeScript 项目
 
 对于已有用 ES6/7 特性开发的项目可以很方便的升级为 TypeScript 项目，具体如下：
