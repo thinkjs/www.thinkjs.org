@@ -90,12 +90,21 @@ instance.compile({
 
 将 `src/` 目录下所有的 `.js` 文件修改为 `.ts` 文件。
 
+#### 添加 bin/compile.js 文件
+
+下载文件 <https://github.com/75team/thinkjs/blob/master/template/bin/compile.ts>，保存为 `bin/compile.js`。
+
+#### 修改 compile 命令
+
+将 `package.json` 里原有的 compile 命令修改为 `node bin/compile.js`。
+
 #### 项目文件里添加描述文件
 
-在 `src/` 目录下所有文件内容顶部加上如下的代码：
+在 `src/` 目录下所有文件内容顶部加上如下的代码，要注意相对路径是否正确：
 
 ```js
 /// <reference path="../../../typings/thinkjs/think.d.ts" />
 ```
 
 全部修改后，执行 `npm start` 就可以启动服务了。
+

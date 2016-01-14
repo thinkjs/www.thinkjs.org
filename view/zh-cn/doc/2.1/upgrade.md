@@ -31,6 +31,11 @@ ThinkJS 2.0 是基于 Babel 5 编译的，2.1 版本将依赖的 Babel 升级到
 
 修改完成后，执行 `npm install` 安装对应的依赖，删除 `app/` 目录，执行 `npm start` 启动项目。
 
+#### 修改 compile 命令
+
+将 `package.json` 里原有的 compile 命令修改为 `babel --presets es2015-loose,stage-1 --plugins transform-runtime src/ --out-dir app/ --retain-lines`。
+
+
 ### 项目升级为 TypeScript
 
 项目升级为 TypeScript 请见[这里](./typescript.html#toc-600)。
