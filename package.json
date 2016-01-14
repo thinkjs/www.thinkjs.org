@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node www/index.js",
-    "compile": "babel --presets es2015-loose,stage-1 --plugins transform-runtime src/ --out-dir app/ --retain-lines",
+    "compile": "babel --presets es2015-loose,stage-1 --plugins transform-runtime src/ --out-dir app/",
     "watch-compile": "npm run compile -- --watch",
     "watch": "npm run watch-compile"
   },

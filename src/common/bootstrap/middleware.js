@@ -24,7 +24,7 @@ think.middleware('get_lang', http => {
       http.cookie(cookieName, lang, {timeout: 365 * 24 * 3600});
     }
   }else{
-    lang = http.lang();
+    lang = http.lang().toLowerCase();
     if(supportLangs.indexOf(lang) === -1){
       lang = http.config('locale.default');
     }

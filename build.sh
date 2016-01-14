@@ -25,9 +25,10 @@ fi
 mkdir view_build;
 cp -r view/* view_build;
 
+
+
 node www/production.js home/generate/single;
 node www/production.js home/generate/html;
-
 
 #path=$(pwd);
 /usr/local/bin/php $STC_PATH/index.php ${path} test $1;

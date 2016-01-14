@@ -16,7 +16,7 @@ export default class extends base {
    * @return {} []
    */
   getSideBar(){
-    let lang = this.http.lang();
+    let lang = this.http.lang().toLowerCase();
     let version = this.get('version');
     let key = `sidebar_${lang}_${version}`;
     let data = thinkCache(thinkCache.APP, key);
@@ -55,7 +55,7 @@ export default class extends base {
    */
   async getDoc(){
     let doc = this.get('doc');
-    let lang = this.http.lang();
+    let lang = this.http.lang().toLowerCase();
     let version = this.get('version');
 
     let markedContent;
@@ -68,7 +68,7 @@ export default class extends base {
       if(doc === 'single'){
         filePath = `${think.RESOURCE_PATH}/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
         if(think.isFile(!filePath)){
-          filePath = this.generateSingleDoc(this.http.lang(), this.get('version'));
+          filePath = this.generateSingleDoc(this.http.lang().toLowerCase(), this.get('version'));
         }
       }
       if(!think.isFile(filePath)){
@@ -125,7 +125,7 @@ export default class extends base {
    * @return {}         []
    */
   async getSearchResult(keyword){
-    let lang = this.http.lang();
+    let lang = this.http.lang().toLowerCase();
     let version = this.get('version');
 
     let cmd = `grep '${keyword}' -ri *.md`;

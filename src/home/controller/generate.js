@@ -36,7 +36,7 @@ export default class extends base {
       let htmlPath = filePath.replace('.md', '.html');
       let content = this.markdownToHtml(filePath);
       fs.writeFileSync(htmlPath, content);
-      fs.unlinkSync(filePath);
+      //fs.unlinkSync(filePath);
     });
   }
   /**
