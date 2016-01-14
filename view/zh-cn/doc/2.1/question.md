@@ -152,3 +152,25 @@ export default class extends think.controller.base {
   }
 }
 ```
+
+### 如何在不同的环境下使用不同的配置
+
+我们经常在不同的环境下使用不同的配置，如：开发环境和线上环境使用不同的数据库配置。这时可以通过 `src/common/config/env/[env].js` 来配置，`[env]` 默认有 `development`，`testing` 和 `production` 3 个值，分别对应开发环境、测试环境和线上环境。这时可以在对应的配置文件设定配置来用在不同的环境下。
+
+如：配置线上环境下的数据库，那么可以在 `src/common/config/env/production.js` 中配置：
+
+```js
+export default {
+  db: { //这里要有一级 db
+    type: 'mysql',
+    adapter: {
+      mysql: {
+        host: '',
+        port: ''
+      }
+    }
+  }
+}
+```
+
+详细的数据库配置请见[这里](./config.html#db)。

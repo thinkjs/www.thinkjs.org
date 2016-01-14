@@ -43,10 +43,6 @@ export default {
 // db.js
 export default {
   type: 'mysql',
-  host: '127.0.0.1',
-  port: '',
-  name: '',
-  user: '',
   ...
 };
 ```
@@ -61,8 +57,12 @@ export default {
   port: 7777,
   db: { //开发模式下数据库配置
     type: 'mysql',
-    host: '127.0.0.1',
-    port: '',
+    adapter: {
+      mysql: {
+        host: '127.0.0.1',
+        port: '',
+      }
+    }
     ...
   }
 }
@@ -302,20 +302,19 @@ export default {
 ```js
 export default {
   type: 'mysql', //数据库类型
-  host: '127.0.0.1', //数据库 host
-  port: '', //端口
-  name: '', //数据库名称
-  user: '', //账号
-  pwd: '', //密码
-  prefix: 'think_', //数据表前缀
-  encoding: 'utf8', //数据库编码
-  nums_per_page: 10, //一页默认条数
   log_sql: true, //是否记录 sql 语句
   log_connect: true, // 是否记录连接数据库的信息
-  cache: { // 查询数据缓存配置
-    on: true,
-    type: '',
-    timeout: 3600
+  adapter: {
+    mysql: {
+      host: '127.0.0.1', //数据库 host
+      port: '', //端口
+      name: '', //数据库名称
+      user: '', //账号
+      pwd: '', //密码
+      prefix: 'think_', //数据表前缀
+      encoding: 'utf8', //数据库编码
+      nums_per_page: 10, //一页默认条数
+    }
   }
 };
 ```
@@ -360,14 +359,15 @@ export default {
   payload_parse: ['parse_form_payload', 'parse_single_file_payload', 'parse_json_payload', 'parse_querystring_payload'],
   payload_validate: ['validate_payload'],
   resource: ['check_resource', 'output_resource'],
-  route_parse: ['rewrite_pathname', 'subdomain_deploy', 'route'],
-  logic_before: ['check_csrf'],
+  route_parse: ['rewrite_pathname', 'parse_route'],
+  logic_before: [],
   logic_after: [],
   controller_before: [],
   controller_after: [],
   view_before: [],
   view_template: ['locate_template'],
   view_parse: ['parse_template'],
+  view_filter: [],
   view_after: [],
   response_end: []
 };

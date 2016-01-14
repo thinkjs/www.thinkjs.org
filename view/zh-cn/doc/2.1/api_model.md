@@ -850,12 +850,16 @@ export default class extends think.model.base {
 关于数据库连接，一般情况下不要直接调用。
 
 
-#### model.getTableFields(table)
+#### model.getSchema(table)
 
 * `table` {String} 表名
 * `return` {Promise}
 
 获取表的字段信息，自动从数据库中读取。
+
+#### model.getTableFields(table)
+
+`已废弃`，使用 model.getSchema 方法替代。
 
 #### model.getLastSql()
 

@@ -44,6 +44,11 @@ module.exports = think.controller(Base, {
 
 注：上面的 `Base` 表示定义一个基类，其他的类都继承该基类，这样就可以在基类里做一些通用的处理。
 
+### 多级控制器
+
+
+
+
 ### 使用 Generator Function
 
 控制器里可以很方便的使用 Generator Function 来处理异步嵌套的问题。
@@ -247,7 +252,7 @@ export default class extends Base {
 
 控制器里在使用用户提交的数据之前，需要对数据合法性进行校验。为了降低控制器里的逻辑复杂度，ThinkJS 提供了一层 Logic 专门用来处理数据校验和权限校验等相关操作。
 
-详细信息请见 [扩展功能 -> Logic -> 数据校验](./logic.html)。
+详细信息请见 [扩展功能 -> Logic -> 数据校验](./logic.html#toc-920)。
 
 
 ### 变量赋值和模版渲染
