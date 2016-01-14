@@ -52,7 +52,7 @@ instance.compile({
 ```
 {
   "dependencies": {
-    "thinkjs": "2.1x",
+    "thinkjs": "2.1.x",
     "babel-runtime": "6.x.x"
   },
   "devDependencies": {
