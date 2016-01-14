@@ -33,6 +33,8 @@ TypeScript 项目的文件后缀是 `.ts`。如果手工建立一些文件，后
 
 由于 TypeScript 的编译功能有很多缺陷，所以现在的方案是通过 TypeScript 将 `.ts` 代码编译为 ES6 代码，然后使用 Babel 6 编译为 ES5 代码。
 
+如果发现 TypeScript 有问题，可以给 TypeScript 提 issue，帮助完善，地址为：<https://github.com/Microsoft/TypeScript>。
+
 ### 已有项目升级为 TypeScript 项目
 
 对于已有用 ES6/7 特性开发的项目可以很方便的升级为 TypeScript 项目，具体如下：
