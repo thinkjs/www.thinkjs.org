@@ -34,7 +34,7 @@ You can open `src/common/config/env/production.js`, and add the following option
 
 ```js
 export default {
-  cluster_on: true //开启 cluster
+  cluster_on: true //turn on cluster
 }
 ```
 ### How To Modify Request Timeout
