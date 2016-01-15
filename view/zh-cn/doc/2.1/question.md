@@ -183,3 +183,19 @@ export default {
 {% extends "./parent.html" %}  //表示同级别目录下的 parent.html 文件
 {% extends "../layout.html" %} //表示父级别下的 layout.html 文件
 ```
+
+### Action 只允许命令行调用
+
+默认情况下，Action 既可以用户访问，也可以命令行调用。但有些 Action 我们希望只在命令行下调用，这时可以通过 `isCli` 来判断。如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    //禁止 URL 访问该 Action
+    if(!this.isCli()){
+      this.fail('only invoked in cli mode');
+    }
+    ...
+  }
+}
+```
