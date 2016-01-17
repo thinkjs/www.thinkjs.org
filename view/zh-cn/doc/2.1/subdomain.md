@@ -8,7 +8,7 @@
 
 ```js
 export default {
-  route_parse: ['prepend', 'subdomain_deploy']
+  route_parse: ['prepend', 'subdomain']
 }
 ```
 
