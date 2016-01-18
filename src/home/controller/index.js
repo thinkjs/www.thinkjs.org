@@ -12,7 +12,11 @@ export default class extends base {
   }
   testAction(){
     let lang = this.lang();
-    this.success(lang)
+    let data = {
+      lang: lang,
+      cookie: this.http.req.headers.cookie
+    }
+    this.success(data)
   }
   /**
    * changelog page
