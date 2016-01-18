@@ -7,7 +7,7 @@
       "Upgrade Guide": "upgrade",
       "Q & A": "question"
     },
-    "Advanced Application": {
+    "Advanced": {
       "Module": "module",
       "Controller": "controller",
       "View": "view",
@@ -17,12 +17,13 @@
     "Model": {
       "Introdution": "model_intro",
       "Database Config": "model_config",
-      "CURD Operations": "model_curd",      
+      "CRUD Operations": "model_crud",      
       "Transaction": "model_transaction",
       "Relation": "model_relation",
       "MySQL": "model_mysql",
       "MongoDB": "model_mongodb",
-      "SQLite": "model_sqlite"
+      "SQLite": "model_sqlite",
+      "PostgreSQL": "model_postgre"
     },
     "Adapter": {
       "Introdution": "adapter_intro",
@@ -31,15 +32,22 @@
       "WebSocket": "adapter_websocket",
       "Template": "adapter_template"
     },
+    "Middleware": {
+      "Introdution": "middleware",
+      "CSRF": "csrf",
+      "Subdomain": "subdomain",
+      "Proxy": "force_proxy"
+    },
     "More Features": {
+      "TypeScript": "typescript",
+      "Logic": "logic",
       "Command": "thinkjs_command",
       "Static Resource": "resource",
-      "MiddleWare": "middleware",
       "Service": "service",
       "Cookie": "cookie",
+      "Babel": "babel",
       "Error Handling": "error_handle",
       "Error Messages": "error_message",
-      "Validation": "validation",
       "I18N": "i18n",
       "Path Const": "path_cost",
       "REST API": "rest_api",

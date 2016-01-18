@@ -1,4 +1,4 @@
-## Data Validation
+## Logic
 
 When handling user requests in Action, you often need to get the submitted datas firstly, and then validate them. Only passing the data validation can do the subsquent operations. After the param validation, sometimes, you also need to judge permission. After all of these are correct, it is time to do the real logic process. If these codes are all placed in one Action, it will must make the codes of Action very complex and redundant.
 
@@ -29,6 +29,22 @@ export default class extends think.logic.base {
 
 The Action in Logic and the Action in Controller are one-to-one correspondence. The Action in Logic also supports `__before` and `__after` and other magic methods.
 
+### 请求类型校验配置
+
+对应一个特定的 Action，有时候只需要一种或者二三种请求类型，需要将其他类型的请求给拒绝掉。可以通过配置特定的请求类型来完成校验。
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    this.allowMethods = 'post'; //只允许 POST 请求类型
+  }
+  testAction(){
+    this.allowMethods = 'get,post'; //只允许 GET 和 POST 请求类型
+  }
+}
+```
+
+
 ### Data Validation Config
 
 The config of data validation is as follows.
@@ -43,6 +59,7 @@ export default class extends think.logic.base {
   }
 }
 ```
+
 
 #### Config Format
 
@@ -62,6 +79,20 @@ export default class extends think.logic.base {
   }
 }
 ```
+
+除了配置为字符串，也可以配置对象的方式，如：
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    let rules = {
+      field1: {required: true, array: true, default: [1, 2]}, //参数为数组
+      field2: {object: true, default: {name: "thinkjs"}} //参数为对象
+    }
+  }
+}
+```
+
 
 #### Supported Data Type
 
@@ -691,6 +722,23 @@ The value is boolean.
 #### object
 
 The value is object.
+
+#### regexp
+
+RegExp, such as:
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    this.rules = {
+      number: {
+        required: true,
+        regexp: /^\d{6}$/
+      }
+    }
+  }
+}
+```
 
 ### Extend Validation Type
 

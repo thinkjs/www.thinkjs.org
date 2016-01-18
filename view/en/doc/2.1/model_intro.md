@@ -22,6 +22,63 @@ thinkjs model home/user
 
 `Note:` Model file is not required, you don't need to create it when there is no custom method, in this case the instance of base class will be used.
 
+
+### 模型属性
+
+#### model.pk
+
+主键 key，默认为 `id`。MongoDB 下为 `_id`。
+
+#### model.schema
+
+数据表字段定义，默认会从数据库种读取，读到的信息类似如下：
+
+```js
+{
+  id: {
+    name: 'id',
+    type: 'int', //类型
+    required: true, //是否必填
+    primary: true, //是否是主键
+    unique: true, //是否唯一
+    auto_increment: true //是否自增
+  }
+}
+```
+
+可以在模型添加额外的属性，如：默认值和是否只读，如：
+
+```js
+export default class extends think.model.base {
+  /**
+   * 数据表字段定义
+   * @type {Object}
+   */
+  schema = {
+    view_nums: { //阅读数
+      default: 0  //默认为 0
+    },
+    fullname: { //全名
+      default: () => { //first_name 和 last_name 的组合
+        return this.first_name + this.last_name;
+      }
+    }
+    create_time: { //创建时间
+      default: () => { //获取当前时间
+        return moment().format('YYYY-MM-DD HH:mm:ss')
+      },
+      readonly: true //只读，添加后不可修改
+    }
+  }
+}
+```
+
+`default` 只在添加时有效，`readonly` 只在更新时有效。
+
+-----
+
+更多属性请见 [API -> Model](./api_model.html)。
+
 ### Model Instantiation
 
 Model instantiation is different depend on use cases. If current class has `model` method, it will be used directly to instantiate:

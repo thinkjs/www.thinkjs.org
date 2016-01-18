@@ -714,6 +714,23 @@ export default class extends think.logic.base {
 
 值为对象。
 
+#### regexp
+
+正则，如：
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+    this.rules = {
+      number: {
+        required: true,
+        regexp: /^\d{6}$/
+      }
+    }
+  }
+}
+```
+
 ### 扩展校验类型
 
 如果默认支持的校验类型不能满足需求，可以通过 `think.validate` 方法对校验类型进行扩展。如：

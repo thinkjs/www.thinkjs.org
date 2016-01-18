@@ -41,11 +41,15 @@ For a specific independent function configuration, such as `db.js` is the databa
 // db.js
 export default {
   type: 'mysql',
-  host: '127.0.0.1',
-  port: '',
-  name: '',
-  user: '',
-  ...
+  adapter: {
+    mysql: {
+      host: '127.0.0.1',
+      port: '',
+      database: '',
+      user: '',
+      ...
+    }
+  }
 };
 ```
 
@@ -57,11 +61,17 @@ Differentiation configuration in different project environment, such as `env/dev
 // config/env/development.js
 export default {
   port: 7777,
-  db: { //开发模式下数据库配置
+  db: { 
     type: 'mysql',
-    host: '127.0.0.1',
-    port: '',
-    ...
+    adapter: {
+      mysql: {
+        host: '127.0.0.1',
+        port: '',
+        database: '',
+        user: '',
+        ...
+      }
+    }
   }
 }
 ```
@@ -231,36 +241,34 @@ The basic configuration, `config/config.js`.
 
 ```js
 export default {
-  port: 8360, //服务监听的端口
-  host: '', //服务监听的 host
-  encoding: 'utf-8', //项目编码
-  pathname_prefix: '',  //pathname 去除的前缀,路由解析中使用
-  pathname_suffix: '.html', //pathname 去除的后缀,路由解析中使用
-  proxy_on: false, //是否使用 nginx 等 web server 进行代理
-  hook_on: true,  //是否开启 hook
-  cluster_on: false, //是否开启 cluster
+  port: 8360, //server listen port
+  host: '', //server listen host
+  encoding: 'utf-8', //encoding
+  pathname_prefix: '',  //
+  pathname_suffix: '.html', //
 
-  service_on: true, //Service available
+  hook_on: true,  //turn on hook
+  cluster_on: false, //turn on cluster
+
   timeout: 120, //120 seconds
-  auto_reload: false, //自动重新加载修改的文件,development 模式下使用
+  auto_reload: false, //auto reload file changes
 
-  resource_on: true, // 是否处理静态资源请求, porxy_on 开启下可以关闭该配置
-  resource_reg: /^(static\/|[^\/]+\.(?!js|html)\w+$)/, //静态资源的正则
+  resource_on: true, // turn on resource
+  resource_reg: /^(static\/|[^\/]+\.(?!js|html)\w+$)/, //
 
-  route_on: true, //是否开启自定义路由
+  route_on: true, //turn on route
 
-  log_pid: false, //是否记录服务的 pid
-  log_request: false, //是否打印请求的日志
+  log_pid: false, //log process id
+  log_request: false, //log http request
   
-  create_server: undefined, //自定义启动服务
-  output_content: undefined, //自定义输出内容处理方式,可以进行 gzip 处理等
-  deny_module_list: [], //禁用的模块列表
-  default_module: 'home', //默认模块
-  default_controller: 'index',  //默认的控制器
-  default_action: 'index', //默认的 Action
-  callback_name: 'callback', //jsonp 请求的 callback 名称
-  json_content_type: 'application/json', //json 输出时设置的 Content-Type
-  subdomain: {} //子域名部署配置
+  create_server: undefined, //create server
+  output_content: undefined, //output content function
+  deny_module_list: [], //deny module list
+  default_module: 'home', //default module
+  default_controller: 'index',  //default controller
+  default_action: 'index', //default action
+  callback_name: 'callback', //callback on for jsonp request
+  json_content_type: 'application/json', //content-type for output json data
 }
 ```
 
@@ -270,12 +278,18 @@ Cache configuration,`config/cache.js`.
 
 ```js
 export default {
-  type: 'file', //缓存方式
-  prefix: 'thinkjs_', //缓存名称前缀
-  timeout: 6 * 3600, //6 hours
-  path: runtimePrefix + '/cache', //文件缓存模式下缓存内容存放的目录
-  path_depth: 2, //子目录深度
-  file_ext: '.json' //缓存文件的扩展名
+  type: 'file', //cache type
+  timeout: 6 * 3600,
+  adapter: {
+    file: {
+      path: think.RUNTIME_PATH + '/cache',
+      path_depth: 2, 
+      file_ext: '.json'
+    },
+    redis: {
+      prefix: 'thinkjs_', //cache key prefix
+    }
+  }
 };
 ```
 
@@ -287,9 +301,9 @@ Cookie configuration,`config/cookie.js`.
 export default {
   domain: '', // cookie domain
   path: '/', // cookie path
-  httponly: false, //是否 httponly
-  secure: false, //是否在 https 下使用
-  timeout: 0 //cookie 有效时间
+  httponly: false, //httponly
+  secure: false, //secure
+  timeout: 0 //cookie time
 };
 ```
 
@@ -299,21 +313,20 @@ Database configuration,`config/db.js`.
 
 ```js
 export default {
-  type: 'mysql', //数据库类型
-  host: '127.0.0.1', //数据库 host
-  port: '', //端口
-  name: '', //数据库名称
-  user: '', //账号
-  pwd: '', //密码
-  prefix: 'think_', //数据表前缀
-  encoding: 'utf8', //数据库编码
-  nums_per_page: 10, //一页默认条数
-  log_sql: true, //是否记录 sql 语句
-  log_connect: true, // 是否记录连接数据库的信息
-  cache: { // 查询数据缓存配置
-    on: true,
-    type: '',
-    timeout: 3600
+  type: 'mysql', //database type
+  log_sql: true, //log sql
+  log_connect: true, // log database connection
+  adapter: {
+    mysql: {
+      host: '127.0.0.1', //host
+      port: '', //port
+      database: '', //database name
+      user: '', //database account
+      password: '', //database account password
+      prefix: 'think_', //table prefix
+      encoding: 'utf8', //table encoding
+      nums_per_page: 10, //nums per page
+    }
   }
 };
 ```
@@ -337,9 +350,9 @@ The cache, the session, and garbage disposal configuration,`config/gc.js`.
 
 ```js
 export default {
-  on: true, //是否开启垃圾回收处理
-  interval: 3600, // 处理时间间隔,默认为一个小时
-  filter: function(){ //如果返回 true,则进行垃圾回收处理
+  on: true, //turn on gc
+  interval: 3600, // gc interval
+  filter: function(){ //
     let hour = (new Date()).getHours();
     if(hour === 4){
       return true;
@@ -358,14 +371,15 @@ export default {
   payload_parse: ['parse_form_payload', 'parse_single_file_payload', 'parse_json_payload', 'parse_querystring_payload'],
   payload_validate: ['validate_payload'],
   resource: ['check_resource', 'output_resource'],
-  route_parse: ['rewrite_pathname', 'subdomain_deploy', 'route'],
-  logic_before: ['check_csrf'],
+  route_parse: ['rewrite_pathname', 'parse_route'],
+  logic_before: [],
   logic_after: [],
   controller_before: [],
   controller_after: [],
   view_before: [],
   view_template: ['locate_template'],
   view_parse: ['parse_template'],
+  view_filter: [],
   view_after: [],
   response_end: []
 };
@@ -383,7 +397,7 @@ export default {
   max_fields: 100, 
   max_fields_size: 2 * 1024 * 1024, //2M,
   ajax_filename_header: 'x-filename',
-  file_upload_path: runtimePrefix + '/upload',
+  file_upload_path: think.RUNTIME_PATH + '/upload',
   file_auto_remove: true
 };
 ```
@@ -412,7 +426,7 @@ export default {
   port: 11211,
   username: '', //
   password: '',
-  timeout: 0, //缓存失效时间
+  timeout: 0, //cache timeout
   log_connect: true
 };
 ```
@@ -426,7 +440,7 @@ Session configuration,`config/session.js`.
 export default {
   name: 'thinkjs',
   type: 'file',
-  path: runtimePrefix + '/session',
+  path: think.RUNTIME_PATH + '/session',
   secret: '',
   auth_key: 'think_auth_list',
   timeout: 24 * 3600,
@@ -442,12 +456,16 @@ View configuration,`config/view.js`.
 
 ```js
 export default {
+  type: 'ejs',
   content_type: 'text/html',
   file_ext: '.html',
   file_depr: '_',
   root_path: '',
-  type: 'ejs',
-  options: {}
+  adapter: {
+    ejs: {
+
+    }
+  }
 };
 ```
 
@@ -457,8 +475,8 @@ Websocket configuration,`config/websocket.js`.
 
 ```js
 export default {
-  on: false, //是否开启 websocket
-  type: 'think', //websocket 使用的库
+  on: false, //use websocket
+  type: 'socket.io', //websocket type
   allow_origin: '',
   sub_protocal: '',
   adapter: undefined,

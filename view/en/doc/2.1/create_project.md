@@ -45,7 +45,7 @@ thinkjs new project_path; #project_path is the path you want store your project
 If you want to use ES6 features in your development process, you may want to create the ES6 mode project by following command:
 
 ```sh
-thinkjs new project_path --es6; #project_path is the path you want store your project
+thinkjs new project_path --es; #project_path is the path you want store your project
 ```
 
 If terminal returns output like following, it means you create project success:

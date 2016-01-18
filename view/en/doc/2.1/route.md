@@ -223,3 +223,9 @@ export default [
 ------
 
 Assuming the URL is `http://www.example.com/admin/api`, then the parsed pathname is `admin/api`, it will hit the `admin` module when matching the rules in the `common`, and then match the route rules one by one under the `admin` module. This way, it can greatly reduce the number of route rules need to match every time, makes route more efficient.
+
+### 自定义首页路由
+
+首页默认执行的是 index controller 里的 indexAction。有些项目里希望对首页路由自定义，但配置 `['', 'index/list']` 并不管用。
+
+ThinkJS 为了性能上的考虑不支持对首页进行自定义路由，因为更多情况下首页是不用自定义的，并且访问的量比较大。如果支持自定义，每次都要把自定义路由过一遍，比较费性能。

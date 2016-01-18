@@ -274,3 +274,11 @@ proxy_set_header Connection "upgrade";
 `Note`： when using `thinkjs` command to create project, ThinkJS creats nginx configuration file ，including these two configuration fields. You can use it directly.
 
 Please visit <http://nginx.org/en/docs/http/websocket.html> to read the reverse proxy WebSocket request document.
+
+### 获取当前所有的 WebSocket 连接对象
+
+可以通过 `thinkCache(thinkCache.WEBSOCKET)` 来获取所有的 WebSocket 连接对象，数组格式。
+
+### 如何实现私聊
+
+ThinkJS 目前还没有私聊的机制，项目里可以通过获取所有的 WebSocket 连接然后找到对应的连接进行。

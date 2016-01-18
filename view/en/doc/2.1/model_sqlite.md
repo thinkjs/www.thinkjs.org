@@ -21,7 +21,11 @@ SQLite supports two ways to store data: memory and file, config `path` to `true`
 ```js
 export default {
   type: "sqlite",
-  path: true, // use memory to store data
+  adapter: {
+    sqlite: {
+      path: true, // use memory to store data
+    }
+  }
 }
 ```
 
@@ -32,7 +36,11 @@ Use file need to set the path of SQLite data, default is `src/common/runtime/sql
 ```js
 export default {
   type: "sqlite",
-  path: "/path/to/store/sqlite" //use file to store data
+  adapter: {
+    sqlite: {
+      path: "/path/to/store/sqlite" //use file to store data
+    }
+  }
 }
 ```
 

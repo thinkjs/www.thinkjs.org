@@ -44,6 +44,11 @@ module.exports = think.controller(Base, {
 
 NOTE: The `Base` above represents the definition of a base class, other classes inherit it, so that you can do some general thing in it.
 
+### 多级控制器
+
+对于很复杂的项目，一层控制器有时候不能满足需求。这个时候可以创建多级控制器，如：`src/home/controller/group/article.js`，这时解析到的控制器为二级，具体为 `group/article`，Logic 和 View 的目录与此相同。
+
+
 ### Use Generator Function
 
 You can easily use the generator function to handle asynchronous nesting problems in the `controller`.
@@ -88,7 +93,7 @@ module.exports = think.controller(Base, {
 });
 ```
 
-### Use `async/await`
+### Use async/await
 
 With the Babel compilation, you can also use ES7's `async/await`.
 

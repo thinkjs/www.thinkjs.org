@@ -52,10 +52,10 @@ ThinkJS 安装完成后，就可以通过下面的命令创建项目:
 thinkjs new project_path; #project_path为项目存放的目录
 ```
 
-如果想用`ES6`特性来开发项目的话，可以创建一个`ES6`模式的项目，具体如下：
+如果想用 `ES6` 特性来开发项目的话，可以创建一个 `ES6` 模式的项目，具体如下：
 
 ```sh
-thinkjs new project_path --es6; #project_path为项目存放的目录
+thinkjs new project_path --es; #project_path为项目存放的目录
 ```
 
 如果能看见类似下面的输出，表示项目创建成功了：

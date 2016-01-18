@@ -89,7 +89,7 @@ Besides combining crontab with command line, you can also use `node-crontab` mod
 import crontab from 'node-crontab';
 // execute once per 1 hour
 let jobId = crontab.scheduleJob('0 */1 * * *', () => {
-  
+  think.http('/home/image/spider', true); //visit /home/image/spier
 });
 ```
 

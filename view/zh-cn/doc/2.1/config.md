@@ -238,11 +238,9 @@ export default {
   encoding: 'utf-8', //项目编码
   pathname_prefix: '',  //pathname 去除的前缀，路由解析中使用
   pathname_suffix: '.html', //pathname 去除的后缀，路由解析中使用
-  proxy_on: false, //是否使用 nginx 等 web server 进行代理
   hook_on: true,  //是否开启 hook
   cluster_on: false, //是否开启 cluster
 
-  service_on: true, //Service available
   timeout: 120, //120 seconds
   auto_reload: false, //自动重新加载修改的文件，development 模式下使用
 
@@ -262,7 +260,6 @@ export default {
   default_action: 'index', //默认的 Action
   callback_name: 'callback', //jsonp 请求的 callback 名称
   json_content_type: 'application/json', //json 输出时设置的 Content-Type
-  subdomain: {} //子域名部署配置
 }
 ```
 
@@ -273,11 +270,17 @@ export default {
 ```js
 export default {
   type: 'file', //缓存方式
-  prefix: 'thinkjs_', //缓存名称前缀
-  timeout: 6 * 3600, //6 hours
-  path: runtimePrefix + '/cache', //文件缓存模式下缓存内容存放的目录
-  path_depth: 2, //子目录深度
-  file_ext: '.json' //缓存文件的扩展名
+  adapter: {
+    file: {
+      timeout: 6 * 3600, //6 hours
+      path: think.RUNTIME_PATH + '/cache', //文件缓存模式下缓存内容存放的目录
+      path_depth: 2, //子目录深度
+      file_ext: '.json' //缓存文件的扩展名
+    },
+    redis: {
+      prefix: 'thinkjs_', //缓存名称前缀
+    }
+  }
 };
 ```
 
@@ -308,9 +311,9 @@ export default {
     mysql: {
       host: '127.0.0.1', //数据库 host
       port: '', //端口
-      name: '', //数据库名称
+      database: '', //数据库名称
       user: '', //账号
-      pwd: '', //密码
+      password: '', //密码
       prefix: 'think_', //数据表前缀
       encoding: 'utf8', //数据库编码
       nums_per_page: 10, //一页默认条数
@@ -385,7 +388,7 @@ export default {
   max_fields: 100, 
   max_fields_size: 2 * 1024 * 1024, //2M,
   ajax_filename_header: 'x-filename',
-  file_upload_path: runtimePrefix + '/upload',
+  file_upload_path: think.RUNTIME_PATH + '/upload',
   file_auto_remove: true
 };
 ```
@@ -428,7 +431,7 @@ session 配置，`config/session.js`。
 export default {
   name: 'thinkjs',
   type: 'file',
-  path: runtimePrefix + '/session',
+  path: think.RUNTIME_PATH + '/session',
   secret: '',
   auth_key: 'think_auth_list',
   timeout: 24 * 3600,
@@ -449,7 +452,11 @@ export default {
   file_depr: '_',
   root_path: '',
   type: 'ejs',
-  options: {}
+  adapter: {
+    ejs: {
+      
+    }
+  }
 };
 ```
 

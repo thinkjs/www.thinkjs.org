@@ -1,4 +1,4 @@
-## CURD Operations
+## CRUD Operations
 
 ## Create Data
 

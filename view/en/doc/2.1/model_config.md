@@ -5,22 +5,24 @@
 Here is the model configuration, you can modify it in `src/common/config/db.js`:
 
 ```
+```js
 export default {
-  type: "mysql", //database type
-  host: "127.0.0.1", //database host
-  port: "", //database port, default is 3306
-  name: "", //database name
-  user: "", //account
-  pwd: "",  //password
-  prefix: "think_", //database prefix. Blank means no prefix
-  encoding: "utf8", //database encoding
-  nums_per_page: 10, //number per page
-  log_sql: true, //whether log sql commands executed
-  log_connect: true, //whether log database connect information
-  cache: { //database query cache configuration
-    on: true,
-    type: "",
-    timeout: 3600
+  type: 'mysql',
+  log_sql: true,
+  log_connect: true,
+  adapter: {
+    mysql: {
+      host: '127.0.0.1',
+      port: '',
+      database: '', //database name
+      user: '', //database account
+      password: '', //database account password
+      prefix: 'think_',
+      encoding: 'utf8'
+    },
+    mongo: {
+
+    }
   }
 };
 ```
