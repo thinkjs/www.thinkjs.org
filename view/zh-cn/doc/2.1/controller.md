@@ -46,51 +46,8 @@ module.exports = think.controller(Base, {
 
 ### 多级控制器
 
-对于很复杂的项目，一层控制器有时候不能满足需求。这个时候可以创建多级控制器，如：`src/home/controller/group/article.js`，这时解析到的控制器为二级，具体为 `group/article`。
+对于很复杂的项目，一层控制器有时候不能满足需求。这个时候可以创建多级控制器，如：`src/home/controller/group/article.js`，这时解析到的控制器为二级，具体为 `group/article`，Logic 和 View 的目录与此相同。
 
-### 使用 Generator Function
-
-控制器里可以很方便的使用 Generator Function 来处理异步嵌套的问题。
-
-##### ES6 方式
-
-```js
-'use strict';
-
-import Base from './base.js';
-
-export default class extends Base {
-  /**
-   * index action
-   * @return {Promise} []
-   */
-  * indexAction(){
-    let model = this.model('user');
-    let data = yield model.select();
-    return this.success(data);
-  }
-}
-```
-
-##### 动态创建类的方式
-
-```js
-'use strict';
-
-var Base = require('./base.js');
-
-module.exports = think.controller(Base, {
-  /**
-   * index action
-   * @return {Promise} []
-   */
-  indexAction: function *(){
-    var model = this.model('user');
-    var data = yield model.select();
-    return this.success(data);
-  }
-});
-```
 
 ### 使用 async/await
 

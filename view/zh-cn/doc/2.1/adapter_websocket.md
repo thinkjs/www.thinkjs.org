@@ -276,3 +276,11 @@ proxy_set_header Connection "upgrade";
 `注`： 使用 `thinkjs` 命令创建项目时，会自动创建 nginx 配置文件，并且配置文件已经包含了上面 2 个配置，可以直接使用。
 
 nginx 代理 WebSocket 请求的文档请见 <http://nginx.org/en/docs/http/websocket.html>。
+
+### 获取当前所有的 WebSocket 连接对象
+
+可以通过 `thinkCache(thinkCache.WEBSOCKET)` 来获取所有的 WebSocket 连接对象，数组格式。
+
+### 如何实现私聊
+
+ThinkJS 目前还没有私聊的机制，项目里可以通过获取所有的 WebSocket 连接然后找到对应的连接进行。

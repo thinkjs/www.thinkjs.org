@@ -17,8 +17,10 @@ Template Adapter 用来实现支持多种类型的模版引擎，如：`ejs`，`
 ```js
 export default {
   type: 'ejs',
-  options: { //具体模版引擎额外的配置
+  adapter: { 
+    ejs: { //额外的配置
 
+    }
   }
 };
 ```
