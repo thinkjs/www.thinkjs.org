@@ -8,8 +8,11 @@ export default class extends base {
    * @return {} []
    */
   indexAction(){
-    //this.expires(86400);
     return this.display();
+  }
+  testAction(){
+    let lang = this.lang();
+    this.success(lang)
   }
   /**
    * changelog page
@@ -45,6 +48,7 @@ export default class extends base {
    * @return {[type]} [description]
    */
   donateAction(){
+    this.lang('zh-cn', true);
     this.assign('currentNav', 'donate');
     this.assign('title', this.locale('title-donate'));
     return this.display();
@@ -54,6 +58,7 @@ export default class extends base {
    * @return {} []
    */
   aboutAction(){
+    this.lang('zh-cn', true);
     this.assign('title', this.locale('title-about'));
     return this.display();
   }
@@ -62,6 +67,7 @@ export default class extends base {
    * @return {} 
    */
   spendingAction(){
+    this.lang('zh-cn', true);
     this.assign('title', this.locale('title-spending'));
     return this.display();
   }
