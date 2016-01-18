@@ -212,3 +212,9 @@ export default [
 ------
 
 假设访问的 URL 为 `http://www.example.com/admin/api`，那么解析后的 pathname 为 `admin/api`，匹配 `common` 里的规则时会命中 `admin` 模块，然后再对 `admin` 模块下的路由规则进行逐一匹配。通过这种方式后就可以大大减少路由规则匹配的数量，提供匹配效率。
+
+### 自定义首页路由
+
+首页默认执行的是 index controller 里的 indexAction。有些项目里希望对首页路由自定义，但配置 `['', 'index/list']` 并不管用。
+
+ThinkJS 为了性能上的考虑不支持对首页进行自定义路由，因为更多情况下首页是不用自定义的，并且访问的量比较大。如果支持自定义，每次都要把自定义路由过一遍，比较费性能。

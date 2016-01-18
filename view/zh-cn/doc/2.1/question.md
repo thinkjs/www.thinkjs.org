@@ -24,7 +24,7 @@ export default {
 }
 ```
 
-### 如何开启多进程
+### 如何开启 cluster
 
 线上可以开启 cluster 功能达到利用多核 CPU 来提升性能，提高并发处理能力。
 
@@ -35,6 +35,8 @@ export default {
   cluster_on: true //开启 cluster
 }
 ```
+
+`注`：如果使用 PM2 管理服务且开启了 cluster，那么 ThinkJS 里就无需再开启 cluster 了。
 
 ### 修改请求超时时间
 
@@ -184,7 +186,7 @@ export default {
 {% extends "../layout.html" %} //表示父级别下的 layout.html 文件
 ```
 
-### Action 只允许命令行调用
+### 如何让 Action 只允许命令行调用
 
 默认情况下，Action 既可以用户访问，也可以命令行调用。但有些 Action 我们希望只在命令行下调用，这时可以通过 `isCli` 来判断。如：
 
@@ -193,9 +195,69 @@ export default class extends think.controller.base {
   indexAction(){
     //禁止 URL 访问该 Action
     if(!this.isCli()){
-      this.fail('only invoked in cli mode');
+      this.fail('only allow invoked in cli mode');
     }
     ...
+  }
+}
+```
+
+### 如何跨模块调用
+
+当项目比较复杂时，会有一些夸模块调用的需求。
+
+#### 调用 controller
+
+可以通过 `this.controller` 方法传递第二个参数模块名达到调用其他模块下 controller 的功能，如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    //获取 admin 模块下 user controller 的实例
+    let controllerInstance = this.controller('user', 'admin');
+    //获取 controller 的实例下就可以调用下面的方法了
+    let bar = controllerInstance.foo();
+  }
+  index2Action(){
+    //也可以通过这种更简洁的方式获取
+    let controllerInstance = this.controller('admin/user');
+    let bar = controllerInstance.foo();
+  }
+}
+```
+
+#### 调用 action
+
+可以通过 `this.action` 方法调用其他模块里 controller 下的 action 方法，如：
+
+```js
+export default class extends think.controller.base {
+  async indexAction(){
+    //获取 admin 模块下 user controller 的实例
+    let controllerInstance = this.controller('user', 'admin');
+    //调用 controller 里的 test action，会自动调用 __before 和 __after 魔术方法
+    let data = await this.action(controllerInstance, 'test')
+  }
+  async index2Action(){
+    //也可以通过字符串来指定 controller，这样会自动找对应的 controller
+    let data = await this.action('admin/user', 'test')
+  }
+}
+```
+
+`注`：action 调用返回的始终为 Promise，调用 action 时不会调用对应的 logic。
+
+#### 调用 model
+
+可以通过 `this.model` 方法获取其他模块下的 model 实例，如：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    //获取 admin 模块下的 user model 实例
+    let modelInstance1 = this.model('user', {}, 'admin');
+    //也可以通过这种更简洁的方式
+    let modelInstance2 = this.model('admin/user');
   }
 }
 ```

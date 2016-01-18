@@ -91,6 +91,10 @@ class a extends think.base {
 ```
 
 
+### parseModuleFromPath()
+
+从当前类所在的 `filepath` 解析出所在对应的模块。
+
 ### invoke(method, ...data)
 
 * `method` {String} 要调用的方法名称

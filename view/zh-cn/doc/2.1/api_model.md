@@ -42,17 +42,13 @@ module.exports = think.model({
 
 数据表名称，不包含前缀。默认等于模型名。
 
-#### model.fields
+#### model.schema
 
-数据表字段，默认自动从数据表分析。
+数据表字段，关系型数据库默认自动从数据表分析。
 
 #### model.indexes
 
 数据表索引，关系数据库会自动从数据表分析。
-
-#### model.readonlyFields
-
-只读字段列表，数据更新时不会更新这些字段。
 
 #### model.config
 

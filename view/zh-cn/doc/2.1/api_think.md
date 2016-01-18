@@ -30,7 +30,6 @@ think.dirname = {
   service: 'service', //服务目录
   view: 'view', //视图目录
   middleware: 'middleware', //中间件目录
-  runtime: 'runtime', //运行时目录
   common: 'common', //通用目录
   bootstrap: 'bootstrap', //启动目录 
   locale: 'locale' //本土化目录
@@ -40,6 +39,14 @@ think.dirname = {
 #### think.port
 
 项目运行的端口，可以在项目启动时指定。如果指定，则忽略配置文件里的端口。
+
+#### think.sep
+
+目录分隔符，等同于 `path.sep`。
+
+#### think.isMaster
+
+是否是 master 进程。
 
 #### think.cli
 
@@ -89,8 +96,9 @@ ThinkJS代码 `lib/` 的具体路径
 
 项目的静态资源根目录，在 `www/index.js` 中定义
 
+#### think.RUNTIME_PATH
 
-
+Runtime 目录，默认为当前项目下的 `runtime/` 目录。
 
 ### 方法
 
@@ -902,6 +910,47 @@ think.http('/index/test').then(http => {
 
 生成一个随机字符串。
 
+#### think.parseConfig(...args)
+
+解析配置里的 `adapter` 和 `parser`，如：
+
+```js
+let config = think.parseConfig({prefix: 'think_'}, {
+  type: 'mysql',
+  adapter: {
+    mysql: {
+      prefix: 'test_',
+      host: ['10.0.0.1', '10.0.0.2'],
+      parser: options => {
+        return {
+          host: '10.0.0.1'
+        }
+      }
+    }
+  }
+});
+// config value is {prefix: 'test_', host: '10.0.0.1'}
+```
+
+如果只想解析 `adapter`，而不解析 `parser`，可以通过传递第一个参数为 `true`，如：
+
+```js
+let config = think.parseConfig(true, {prefix: 'think_'}, {
+  type: 'mysql',
+  adapter: {
+    mysql: {
+      prefix: 'test_',
+      host: ['10.0.0.1', '10.0.0.2'],
+      parser: options => {
+        return {
+          host: '10.0.0.1'
+        }
+      }
+    }
+  }
+});
+// config value is {prefix: 'test_', ['10.0.0.1', '10.0.0.2'], parser: function(){...}}
+```
 
 #### think.session(http)
 
