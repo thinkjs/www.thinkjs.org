@@ -8,7 +8,12 @@ ThinkJS 支持 `PostgreSQL`，底层使用 [pq](https://www.npmjs.com/package/pg
 
 ```js
 export default {
-  type: 'postgre'
+  type: 'postgre',
+  adapter: {
+    postgre: {
+        
+    }
+  }
 }
 ```
 
