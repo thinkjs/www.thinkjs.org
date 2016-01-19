@@ -35,7 +35,7 @@ export default class extends think.model.relation {
     this.relation = {
       cate: {},
       comment: {} 
-    }
+    };
   }
 }
 ```
@@ -49,7 +49,7 @@ export default class extends think.model.relation {
   relation = {
     cate: {},
     comment: {} 
-  }
+  };
 
   init(...args){
     super.init(...args);
@@ -77,7 +77,7 @@ export default class extends think.model.relation {
         rModel: '',
         rfKey: ''
       },
-    }
+    };
   }
 }
 ```
@@ -105,7 +105,7 @@ export default class extends think.model.relation {
     super.init(...args);
     this.relation = {
       cate: think.model.MANY_TO_MANY
-    }
+    };
   }
 }
 ```
@@ -122,7 +122,7 @@ export default class extends think.model.relation {
     super.init(...args);
     this.relation = {
       info: think.model.HAS_ONE
-    }
+    };
   }
 }
 ```
@@ -153,7 +153,7 @@ export default class extends think.model.relation {
     super.init(...args);
     this.relation = {
       user: think.model.BELONG_TO
-    }
+    };
   }
 }
 ```
@@ -192,7 +192,7 @@ export default class extends think.model.relation {
       comment: {
         type: think.model.HAS_MANY
       }
-    }
+    };
   }
 }
 ```
@@ -228,7 +228,7 @@ export default class extends think.model.relation {
       comment: {
         type: think.model.HAS_MANY
       }
-    }
+    };
   }
   getList(page){
     return this.setRelation('comment', {page: page}).select();
@@ -259,7 +259,7 @@ export default class extends think.model.relation {
         rModel: 'post_cate',
         rfKey: 'cate_id'
       }
-    }
+    };
   }
 }
 ```
@@ -293,7 +293,7 @@ export default class extends think.model.relation {
         type: think.model.BELONG_TO,
         relation: false //关联表 user 查询时关闭关联查询
       }
-    }
+    };
   }
 }
 ```
@@ -309,7 +309,7 @@ export default class extends think.model.relation {
         type: think.model.BELONG_TO,
         relation: 'info' //关联表 user 查询时关闭对 info 模型的关联关系
       }
-    }
+    };
   }
 }
 ```
@@ -329,7 +329,7 @@ export default class extends think.model.relation {
     this.relation = {
       comment: think.model.HAS_MANY,
       cate: think.model.MANY_TO_MANY
-    }
+    };
   },
   getList(){
     return this.setRelation(false).select();
@@ -348,7 +348,7 @@ export default class extends think.model.relation {
     this.relation = {
       comment: think.model.HAS_MANY,
       cate: think.model.MANY_TO_MANY
-    }
+    };
   },
   getList2(){
     return this.setRelation('comment').select();
@@ -367,7 +367,7 @@ export default class extends think.model.relation {
     this.relation = {
       comment: think.model.HAS_MANY,
       cate: think.model.MANY_TO_MANY
-    }
+    };
   },
   getList2(){
     return this.setRelation('comment', false).select();
@@ -386,7 +386,7 @@ export default class extends think.model.relation {
     this.relation = {
       comment: think.model.HAS_MANY,
       cate: think.model.MANY_TO_MANY
-    }
+    };
   },
   getList2(){
     return this.setRelation(true).select();
