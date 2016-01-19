@@ -1,5 +1,5 @@
 /* common set */
-.wrap {width: 1000px;margin: 0 auto;position: relative;}
+.wrap {width: 1100px;margin: 0 auto;position: relative;}
 /*icon*/
 .arrowd,.arrowl,.circle{ position:absolute;right:10px;top:15px;width:13px; height:6px; line-height:0; font-size:0; background:url(../img/icon-a.png) no-repeat 0 0; vertical-align:middle;}
 .versel .arrowd{ background-position:0 -16px;}
@@ -26,7 +26,7 @@ a.versel{ position:relative; display:inline-block;width:65px; height:38px; line-
 /* footer */
 .footer{overflow:hidden;background-color:#223343;}
 .ft-help{ overflow:hidden;*zoom:1;padding:50px 0 30px;}
-.ft-help dl{ float:left; width:120px; margin:0 30px 0 40px;} 
+.ft-help dl{ float:left; width:145px; margin:0 30px 0 40px;} 
 .ft-help dt{color:#8899aa; font-size:18px;}
 .ft-help a{ display:block; line-height:26px;  color:#556677; font-size:14px;}
 .ft-copy{ padding:20px 0;border-top:1px solid #345; font-size:14px; color:#556677; text-align:center;}
@@ -91,13 +91,13 @@ i.icon-fet8{ background-position:-70px -210px;}
 .ploy h4{ margin-bottom:10px; font-size:18px;}
 .ploy p{ font-size:14px; line-height:26px;}
 /*file*/
-.lbox{float: left; width: 199px; padding-right:20px; border-right:1px solid #e8e8e8;}
-.rbox{float: left; width: 800px; padding-left:40px; margin-left:-1px; border-left:1px solid #e8e8e8;}
+.lbox{float: left; width: 169px; padding-right:20px; border-right:1px solid #e8e8e8;}
+.rbox{float: left; width: 930px; padding-left:40px; margin-left:-1px; border-left:1px solid #e8e8e8;}
 .lbox dl{margin-bottom:8px; padding-bottom:8px; }
 .lbox dl:after{height:20px;content: '';display: block;}
 .lbox dt{ margin-bottom:8px; color:#555; font-size:18px; font-weight:normal; padding-bottom:10px; border-bottom:1px dashed #eee;}
 .lbox dd a{ display:block; line-height:26px;font-size: 16px;}
-.search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:760px;}
+.search{ position:relative; height:40px; border:1px solid #c8c8d5; border-radius:5px;width:890px;}
 .sea-txt{ background-color:transparent; width:93%; padding:8px; margin:1px 0 0 1px;border:none;outline: none;}
 .sea-btn{ position:absolute;right:0;top:0; width:40px; height:40px; border:none; background:url(../img/sea.png) no-repeat 7px 6px;} 
 .search:hover{ border-color:#428bca;}
@@ -108,13 +108,13 @@ i.icon-fet8{ background-position:-70px -210px;}
 .nav > li > a:hover, .nav > li > a:focus{background-color: #fff !important;}
 .blue{ color:#337ab7;}
 
-.toc{margin-top: 20px;margin-bottom: 50px;}
-.doc{margin-top: 60px;font-size: 16px;line-height: 1.6}
+.toc{margin-top: -50px;margin-left:10px;margin-bottom: 50px;float: right;font-size: 14px;padding: 10px; border:1px solid #efefef;max-width: 300px;min-width: 240px;position: relative;z-index: 100}
+.doc{margin-top: 30px;font-size: 16px;line-height: 1.6}
 .doc ul{margin-left: 20px;}
 .doc li{list-style-type: disc;}
 .doc pre{background: #fff !important;}
-.doc h1, .doc .h1, .doc h2, .doc .h2, .doc h3, .doc .h3{margin-top: 30px;margin-bottom: 20px}
-.doc h4, .doc .h4, .doc h5, .doc .h5, .doc h6, .doc .h6{margin-top: 20px;margin-bottom: 15px}
+.doc h1, .doc .h1, .doc h2, .doc .h2, .doc h3, .doc .h3{margin-top: 30px;margin-bottom: 20px;font-weight: normal;}
+.doc h4, .doc .h4, .doc h5, .doc .h5, .doc h6, .doc .h6{margin-top: 20px;margin-bottom: 15px; font-weight: normal;}
 .doc pre {border: none;padding: 10px 0;border-left: 1px solid #337ab7;padding-left: 10px;border-radius: 0;font-size: 14px;}
 .doc pre code{padding: 0 !important;}
 
@@ -149,7 +149,7 @@ i.icon-fet8{ background-position:-70px -210px;}
 .page-con table td{vertical-align:top;border-top:1px solid #ddd;padding: 8px;line-height: 20px;}
 .page-con img.cup{width:495px;height:451px;}
 
-.r-fixed{position: fixed;width: 48px;left: 50%;margin-left: 510px;bottom: 10px;}
+.r-fixed{position: fixed;width: 48px;left: 50%;margin-left: 548px;bottom: 10px;}
 .r-fixed .pdf{margin-top:5px;display:block;width: 48px;height: 48px;background:rgba(0,0,0, 0.3) url(../img/pdf.png) no-repeat center center;border-radius: 3px;}
 .r-fixed .view-single{margin-top:5px;display:block;width: 48px;height: 48px;background:rgba(0,0,0, 0.3) url(../img/view-single.png) no-repeat center center;border-radius: 3px;}
 .r-fixed .back2top{display:block;width: 48px;height: 48px;background:rgba(0,0,0, 0.3) url(../img/top.png) no-repeat center center;border-radius: 3px;}
