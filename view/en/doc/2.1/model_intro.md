@@ -22,62 +22,60 @@ thinkjs model home/user
 
 `Note:` Model file is not required, you don't need to create it when there is no custom method, in this case the instance of base class will be used.
 
-
-### 模型属性
+### Model property
 
 #### model.pk
 
-主键 key，默认为 `id`。MongoDB 下为 `_id`。
+Default primary key is `id`, and `_id` in MongoDB.
 
 #### model.schema
 
-数据表字段定义，默认会从数据库种读取，读到的信息类似如下：
+Tabel field definition, you can get it from database, and return result like this:
 
 ```js
 {
   id: {
     name: 'id',
-    type: 'int', //类型
-    required: true, //是否必填
-    primary: true, //是否是主键
-    unique: true, //是否唯一
-    auto_increment: true //是否自增
+    type: 'int', //type
+    required: true, //required
+    primary: true, //primary key
+    unique: true, //uniqueness
+    auto_increment: true //autoincrement
   }
 }
 ```
 
-可以在模型添加额外的属性，如：默认值和是否只读，如：
+We can set other property in the model such as default value and does it read only:
 
 ```js
 export default class extends think.model.base {
   /**
-   * 数据表字段定义
+   * Table field definition
    * @type {Object}
    */
   schema = {
-    view_nums: { //阅读数
-      default: 0  //默认为 0
+    view_nums: { //read count
+      default: 0  //default is 0
     },
-    fullname: { //全名
-      default: () => { //first_name 和 last_name 的组合
+    fullname: { //fullname
+      default: () => { //combination of first_name and last_name
         return this.first_name + this.last_name;
       }
     }
-    create_time: { //创建时间
-      default: () => { //获取当前时间
+    create_time: { //create time
+      default: () => { //time right now
         return moment().format('YYYY-MM-DD HH:mm:ss')
       },
-      readonly: true //只读，添加后不可修改
+      readonly: true //read only, you can't change after push.
     }
   }
 }
 ```
-
-`default` 只在添加时有效，`readonly` 只在更新时有效。
+`default` is used in add, and `readonly` is used in updating.
 
 -----
 
-更多属性请见 [API -> Model](./api_model.html)。
+You can see [API -> Model](./api_model.html) to get more knowledge。
 
 ### Model Instantiation
 
