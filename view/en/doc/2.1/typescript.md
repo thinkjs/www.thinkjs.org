@@ -1,47 +1,46 @@
 ## TypeScript
 
-[TypeScript](http://www.typescriptlang.org/) 是一种由微软开发的自由和开源的编程语言。它是 JavaScript 的一个超集，向这个语言添加了可选的静态类型，在大型项目里非常有用。
+[TypeScript](http://www.typescriptlang.org/) is an free and open source programming language designed by Microsoft. TypeScript is a typed superset of JavaScript that it has some useful function in large project such as optional static type.
 
-ThinkJS 2.1 开始支持了创建 TypeScript 类型的项目，并且开发时会自动编译、自动更新，无需手工编译等复杂的操作。
+ThinkJS 2.1 has support TypeScript, we can auto compile and update in our project.
 
-### 创建 TypeScript 项目
+### Create TypeScript project
 
-可以通过指定 `--ts` 参数来创建 TypeScript 项目：
+We can create typescript project by using `--ts`:
 
 ```sh
 thinkjs new thinkjs_demo --ts
 ```
 
-TypeScript 项目的文件后缀是 `.ts`。如果手工建立一些文件，后缀名也要是 `.ts`，否则调用 `tsc` 编译时会报错。
+TypeScript's file extension is `.ts`. If you want to create typescript file manually, it should be `.ts` too, other wise it will catch error in `tsc` compile.
 
-### .d.ts 文件
+### .d.ts file
 
-`.d.ts` 文件为第三方类库的描述文件。创建项目时，会创建文件 `typings/thinkjs/think.d.ts`，该文件为 ThinkJS 的描述文件。项目里的文件可以通过下面的方式引入这个描述文件：
+`.d.ts` files are the description file of third party library. When we create our project, file named `typings/thinkjs/think.d.ts` will be created to describe ThinkJS. You can load this description file by following:
 
 ```js
 /// <reference path="../../../typings/thinkjs/think.d.ts" />
 ```
 
-该代码必须放在文件的最前面，同时保持相对路径正确。如果文件有 `use strict` 也要放在这个后面，否则不会识别。
+This code will set on the front of file, and the path must be correct. If your file has `use strict`, this code should set after `use strict`.
 
-如果项目里还引入了其他第三方库，那么就需要安装对应的描述文件。可以通过 [tsd](http://definitelytyped.org/tsd/) 工具来安装。
+If you depend on other third party library in your project, you should have their own description file. You can install by  [tsd](http://definitelytyped.org/tsd/).
 
-第三方类库的描述文件列表可以从 <https://github.com/DefinitelyTyped/DefinitelyTyped> 找到，基本覆盖了一些比较热门的类库。
+You can find description file of some third party library in <https://github.com/DefinitelyTyped/DefinitelyTyped>.
 
+### TypeScript compile
 
-### TypeScript 编译
+Because of some fault when compiling TypeScript, you can compile TypeScript `.ts` file to ES6, then compile to ES5 using Babel 6.
 
-由于 TypeScript 的编译功能有很多缺陷，所以现在的方案是通过 TypeScript 将 `.ts` 代码编译为 ES6 代码，然后使用 Babel 6 编译为 ES5 代码。
+If you find any problem about TypeScript, you can open issue to TypeScript on <https://github.com/Microsoft/TypeScript>。
 
-如果发现 TypeScript 有问题，可以给 TypeScript 提 issue，帮助完善，地址为：<https://github.com/Microsoft/TypeScript>。
+### Change exist project to TypeScript
 
-### 已有项目升级为 TypeScript 项目
+ThinkJS also support change exist project to TypeScript:
 
-对于已有用 ES6/7 特性开发的项目可以很方便的升级为 TypeScript 项目，具体如下：
+#### Change index file
 
-#### 修改入口文件
-
-修改入口文件 `www/development.js`，将之前 `compile` 相关的代码改为：
+Change index file `www/development.js` with following:
 
 ```js
 //compile src/ to app/
@@ -51,9 +50,9 @@ instance.compile({
 });
 ```
 
-#### 修改 package.json
+#### Modify package.json
 
-修改配置文件 `package.json`，删除之前 `Babel` 和 `ThinkJS` 相关模块的依赖，添加如下的依赖：
+Clear all dependencies about `Babel` and `ThinkJS` and append following dependencies:
 
 ```
 {
@@ -72,13 +71,13 @@ instance.compile({
 }
 ```
 
-如果 `dependencies` 和 `devDependencies` 里已经有一些项目里要用的模块依赖，需要合并在一起。
+If there has some used module in `dependencies` and `devDependencies`, they should be merged together.
 
-修改完成后，执行 `npm install` 安装对应的依赖。
+Then run `npm install` to install all dependencies.
 
-#### 修改 .thinkjsrc
+#### Modify .thinkjsrc
 
-修改项目配置文件 `.thinkjsrc`，修改为类似如下的配置：
+Change project config file `.thinkjsrc` to following:
 
 ```json
 {
@@ -88,29 +87,28 @@ instance.compile({
 }
 ```
 
-#### 下载 think.d.ts 描述文件
+#### Download `think.d.ts` description file
 
-下载文件 <https://github.com/75team/thinkjs/blob/master/template/think.d.ts>，保存为 `typings/thinkjs/think.d.ts`。
+Download file <https://github.com/75team/thinkjs/blob/master/template/think.d.ts> and save as `typings/thinkjs/think.d.ts`。
 
-#### 修改文件后缀
+#### Modify file extension
 
-将 `src/` 目录下所有的 `.js` 文件修改为 `.ts` 文件。
+Modify all `.js` files in `src` to `.ts`.
 
-#### 添加 bin/compile.js 文件
+#### Add `bin/compile.js` file
 
-下载文件 <https://github.com/75team/thinkjs/blob/master/template/bin/compile.ts>，保存为 `bin/compile.js`。
+Download file <https://github.com/75team/thinkjs/blob/master/template/bin/compile.ts> and save as `bin/compile.js`。
 
-#### 修改 compile 命令
+#### Modify compile command
 
-将 `package.json` 里原有的 compile 命令修改为 `node bin/compile.js`。
+Change compile command in `package.json` to `node bin/compile.js`.
 
-#### 项目文件里添加描述文件
+#### Add description file in project description
 
-在 `src/` 目录下所有文件内容顶部加上如下的代码，要注意相对路径是否正确：
+All files in `src/` must add following code in top, releative path should be correct:
 
 ```js
 /// <reference path="../../../typings/thinkjs/think.d.ts" />
 ```
 
-全部修改后，执行 `npm start` 就可以启动服务了。
-
+You shoud run `npm start` to start service after all modify.
