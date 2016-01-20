@@ -36,7 +36,7 @@ export default class extends think.controller.base {
 }
 ```
 
-上面的代码我们使用了 ES6 里的 `class`, `export`, `let` 以及 ES7 里的 `async` 和 `await` 等特性，虽然查询数据库和写入 `Session` 都是异步操作，但借助 `async/await`，代码都是同步书写的。最后使用 `Babel` 进行编译，就可以稳定运行在 Node.js 的环境中了。
+上面的代码我们使用了 ES6 里的 `class`, `export`, `let` 以及 ES7 里的 `async/await` 等特性，虽然查询数据库和写入 `Session` 都是异步操作，但借助 `async/await`，代码都是同步书写的。最后使用 `Babel` 进行编译，就可以稳定运行在 Node.js 的环境中了。
 
 #### 支持多种项目结构和多种项目环境
 
