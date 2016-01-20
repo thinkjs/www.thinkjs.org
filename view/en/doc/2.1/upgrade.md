@@ -1,20 +1,20 @@
-## 升级指南
+## Upgrade guide
 
-本文档为 2.0 到 2.1 的升级指南，1.x 到 2.0 升级指南请见[这里](/doc/2.0/upgrade.html)。 
+It's a tutorial of how to update from 2.0 to 2.1, watch [here](/doc/2.0/upgrade.html) if you want to update from 1.x to 2.0.
 
-2.1 版本兼容 2.0 版本，只是添加了很多功能和微调了一些东西，具体的修改列表请见 [ChangeLog](/changelog.html)。
+The version 2.1 is compatible with 2.0 version. New version append more functions and change something lightly, you can watch [ChangeLog](/changelog.html) to know what has changed.
 
-### 2.0 升级到 2.1
+### Update from 2.0 to 2.1
 
-#### 升级依赖的 ThinkJS 版本
+#### Update ThinkJS dependency version
 
-将 `package.json` 里依赖的 ThinkJS 版本修改为 `2.1.x`。
+Change Thinkjs's version to `2.1.x` in package.json.
 
-#### Babel 升级到 6
+#### Update Babel to version 6
 
-ThinkJS 2.0 是基于 Babel 5 编译的，2.1 版本将依赖的 Babel 升级到 6，所以需要修改 Babel 相关的依赖。
+ThinkJS is compiled base on Babel 5, and it's update to 6 in the ThinkJS 2.1, so we need to modify Babel's version.
 
-可以删除 `package.json` 里相关的 Babel 依赖，并添加如下的依赖：
+You can clear all dependencies about Babel in `package.json`, and append follow dependencies:
 
 ```js
   "dependencies": {
@@ -29,14 +29,13 @@ ThinkJS 2.0 是基于 Babel 5 编译的，2.1 版本将依赖的 Babel 升级到
   }
 ```
 
-修改完成后，执行 `npm install` 安装对应的依赖，删除 `app/` 目录，执行 `npm start` 启动项目。
+Then you should run `npm install` to install new dependencies. Delete `app/` folder and run `npm start` to start project.
 
-#### 修改 compile 命令
+#### Change compile command
 
-将 `package.json` 里原有的 compile 命令修改为 `babel --presets es2015-loose,stage-1 --plugins transform-runtime src/ --out-dir app/ --retain-lines`。
+change compile command in `package.json` to `babel --presets es2015-loose,stage-1 --plugins transform-runtime src/ --out-dir app/ --retain-lines`。
 
 
-### 项目升级为 TypeScript
+### Change to TypeScript in project
 
-项目升级为 TypeScript 请见[这里](./typescript.html#toc-600)。
-
+You can see [here](./typescript.html#toc-600) to study how to change to typescript in your project.
