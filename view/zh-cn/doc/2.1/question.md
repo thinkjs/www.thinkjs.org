@@ -261,3 +261,45 @@ export default class extends think.controller.base {
   }
 }
 ```
+
+### 如何请求其他接口数据
+
+在项目中，经常要请求其他接口的数据。这时候可以用内置的 `http` 模块来操作，但 `http` 模块提供的接口比较基础，写起来比较麻烦。推荐大家用基于 `http` 模块封装的 `request` 模块或者 `superagent` 模块。如：
+
+```js
+import request from 'request';
+//获取 API 接口数据
+let getApiData = () => {
+  let deferred = think.defer();
+  request.get({
+    url: 'http://www.example.com/api/user',
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) Chrome/47.0.2526.111 Safari/537.36'
+    }
+  }, (err, response, body) => {
+    if(err){
+      deferred.reject(err);
+    }else{
+      deferred.resolve(body);
+    }
+  });
+}
+```
+
+但这么写需要创建一个 deferred 对象，然后在回调函数里去根据 err 进行 resolve 或者 reject，写起来有些麻烦。ThinkJS 里提供了 `think.promisify` 方法来快速处理这一问题。
+
+```js
+import request from 'request';
+//获取 API 接口数据
+let getApiData = () => {
+  let fn = think.promisify(request.get);
+  return fn({
+    url: 'http://www.example.com/api/user',
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) Chrome/47.0.2526.111 Safari/537.36'
+    }
+  });
+}
+```
+
+
