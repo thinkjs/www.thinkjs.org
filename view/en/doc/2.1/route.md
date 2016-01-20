@@ -18,7 +18,7 @@ ThinkJS offer the following configuration, it can remove the prefix and postfix 
 
 ```js
 export default {
-  pathname_prefix: '', 
+  pathname_prefix: '',
   pathname_suffix: '.html',
 }
 ```
@@ -76,7 +76,7 @@ These values can be modified through the following configuration, in the configu
 ```js
 export default {
   default_module: 'home',
-  default_controller: 'index', 
+  default_controller: 'index',
   default_action: 'index',
 }
 ```
@@ -141,7 +141,7 @@ export default class extends think.controller.base {
 }
 ```
 
-If regular route contains multiple child catch groups, then can obtain the corresponding values by`:1`,`:2`,`:3`: 
+If regular route contains multiple child catch groups, then can obtain the corresponding values by`:1`,`:2`,`:3`:
 
 ```js
 export default [
@@ -189,7 +189,7 @@ If the URL is `http://www.example.com/list`, then the pathname is replaced with 
 
 #### Optimizing The Route Performance
 
-Above has said that the custom route is an array, each item of the array is a specific route rule, 
+Above has said that the custom route is an array, each item of the array is a specific route rule,
 and it matches one by one from the front to end when matching. If the route table is large, there may be a performance issue.
 
 In order to avoid performance issues, ThinkJS provides a more efficient way to custom route, configuring route according to the module. This way, the route configuration format is slightly different from the above.
@@ -200,11 +200,11 @@ This time, the route configuration in general module no longer define specific r
 
 ```js
 export default {
-  admin: { 
+  admin: {
     reg: /^admin/ // hit admin module
   },
   home: { // home module as default
-    
+
   }
 }
 ```
@@ -224,8 +224,9 @@ export default [
 
 Assuming the URL is `http://www.example.com/admin/api`, then the parsed pathname is `admin/api`, it will hit the `admin` module when matching the rules in the `common`, and then match the route rules one by one under the `admin` module. This way, it can greatly reduce the number of route rules need to match every time, makes route more efficient.
 
-### 自定义首页路由
+### Custom home router
 
-首页默认执行的是 index controller 里的 indexAction。有些项目里希望对首页路由自定义，但配置 `['', 'index/list']` 并不管用。
+Default the indexAction of index controller is excuted in index home. If you want custom home router in your project, and it doesn't work by writing `['', 'index/list']`。
 
-ThinkJS 为了性能上的考虑不支持对首页进行自定义路由，因为更多情况下首页是不用自定义的，并且访问的量比较大。如果支持自定义，每次都要把自定义路由过一遍，比较费性能。
+ThinkJS
+We don't support custom index home router. Because there has many users that they won't modify router. If we change to support it, we should run all custom router. That's waste performance.

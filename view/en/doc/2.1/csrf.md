@@ -1,10 +1,10 @@
 ## CSRF
 
-ThinkJS 提供了 CSRF 处理的 middleware，但默认并没有开启。
+ThinkJS provides a middleware to handle CSRF. It's off in the default configure.
 
-### 开启 CSRF
+### CSRF On
 
-配置 hook 文件 `src/common/config/hook.js`，添加如下的配置：
+Modify `src/common/config/hook.js` like this:
 
 ```js
 export default {
@@ -12,15 +12,15 @@ export default {
 }
 ```
 
-### 配置
+### Configure
 
-CSRF 默认的配置如下，可以在配置文件 `src/common/config/csrf.js` 中修改：
+The default configure of CSRF is linke following, you can modify thme in `src/common/config/csrf.js`:
 
 ```js
 export default {
-  session_name: '__CSRF__', // Token 值存在 session 的名字
-  form_name: '__CSRF__', // CSRF 字段名字，从该字段获取值校验
-  errno: 400, //错误号
-  errmsg: 'token error' // 错误信息
+  session_name: '__CSRF__', // Token value saved in session
+  form_name: '__CSRF__', // CSRF key name, we can get value by this key and check the value
+  errno: 400, //error number
+  errmsg: 'token error' // error message
 };
 ```
