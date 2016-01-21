@@ -275,10 +275,10 @@ proxy_set_header Connection "upgrade";
 
 Please visit <http://nginx.org/en/docs/http/websocket.html> to read the reverse proxy WebSocket request document.
 
-### 获取当前所有的 WebSocket 连接对象
+### How to get current WebSocket connecting object
 
-可以通过 `thinkCache(thinkCache.WEBSOCKET)` 来获取所有的 WebSocket 连接对象，数组格式。
+You can get all WebSocket connecting objects with an array by using `thinkCache(thinkCache.WEBSOCKET)`.
 
-### 如何实现私聊
+### How to achieve private chat
 
-ThinkJS 目前还没有私聊的机制，项目里可以通过获取所有的 WebSocket 连接然后找到对应的连接进行。
+ThinkJS has no private chat yet, you can find and chat with corresponding connection by getting all WebSocket connections.
