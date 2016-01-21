@@ -1,17 +1,17 @@
-## 禁止端口访问
+## Ban port access
 
 
-### 介绍
+### Description
 
-代码上线后一般会用 nginx 做一层反向代理，这时用户的请求会落到 nginx 上，然后通过 nginx 转发到 Node.js 服务上，这样可以很方便的做负载均衡。
+Your online program often has reverse proxy by using nginx. User's request will accroding nginx to Node.js. It will be easy to load balance by using reverse proxy.
 
-通过 nginx 代理后就不希望用户直接访问到 Node.js 服务了，一种方案时让 Node.js 启动的端口只允许内部访问，外部无法直接访问到。另一种方案是在应用层判断。
+After you has nginx reverse proxy to node.js service, you usually want to ban request directly from port. You can set all port request directly just be allowed in host. The other solution is taking a judge in application level.
 
-ThinkJS 提供禁止端口访问的 Middleware，这样如果不方便直接在机器上配置禁止端口访问的话，就可以使用该 Middleware 来禁止。
+ThinkJS provides middleware to ban port access. If it's trouble to ban port access in host directly, you can take replace of Middleware to do it.
 
-### middleware 配置
+### middleware configuration
 
-修改 hook 配置文件 `src/common/config/hook.js`，添加如下的配置：
+Modify `src/common/config/hook.js` linke following:
 
 ```js
 export default {
@@ -19,7 +19,7 @@ export default {
 }
 ```
 
-然后在配置文件 `src/common/config/env/producition.js` 里配置：
+Then modify `src/common/config/env/production.js`:
 
 ```js
 export default {
@@ -27,13 +27,13 @@ export default {
 }
 ```
 
-这样只在线上环境开启了禁止端口访问的功能，开发环境不受影响。
+This will only ban port access in production environment and there no effect in development environment.
 
-### 只监听内网 host
+### Listen local port only
 
-Node.js 启动服务时默认监听的端口是 `0.0.0.0`，这样服务既可以内网访问，也可以外网访问。可以将 host 设置为 `127.0.0.1` 限制为内网访问。
+Default host what Node.js listen when start service is `0.0.0.0`. It allows request both local and outgoing. You can change it to `127.0.0.1` to allow local request only.
 
-可以通过修改配置为 `src/common/config/config.js` 来完成，如：
+You can modify `src/common/config/config.js` as following:
 
 ```js
 export default {
