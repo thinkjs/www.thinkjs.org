@@ -38,12 +38,11 @@ export default class extends think.controller.base {
 
 We've used ES6 features like `class`, `export`, `let` and ES7 features like `async/await` in this example. Database queries and `Session` writing were all asynchronous actions, but here we are writing sync code to handle them with `async/await`. Last, it can run in Node.js environment stably after `Babel` compiling.
 
-#### 支持 TypeScript
+#### TypeScript
 
-[TypeScript](http://www.typescriptlang.org/) 是一种由微软开发的自由和开源的编程语言。它是 JavaScript 的一个超集，向这个语言添加了可选的静态类型，在大型项目里非常有用。
+[TypeScript](http://www.typescriptlang.org/) is an free and open source programming language designed by Microsoft. TypeScript is a typed superset of JavaScript that it has some useful function in large project such as optional static type.
 
-ThinkJS 2.1 开始支持了创建 TypeScript 类型的项目，并且开发时会自动编译、自动更新，无需手工编译等复杂的操作。具体请见[这里](./typescript.html)。
-
+ThinkJS 2.1 has support TypeScript, we can auto compile and update in our project. You can know more from [here](./typescript.html)。
 
 #### Supports variant project structures and environments
 
@@ -134,17 +133,17 @@ Even though ThinkJS has many advantages, it has also a few disadvantages too, fo
 - ThinkJS is a relatively new framework, the community is not strong enough.
 - ThinkJS is short of large scale applications.
 
-#### 性能对比
+#### Performance comparsion
 
-评价一个框架是否出色，一方面看支持的功能，另一方面也要看性能。虽然 ThinkJS 更适合大型项目，功能和复杂度远远超过 Express 和 Koa，但性能上并不比 Express 和 Koa 逊色多少，具体的测试数据请见下图。
+Evaluate whether a good framework, on the one hand to see the support of the function, it also depends on the performance. Although ThinkJS more suits for large projects, functions and complexity far exceeds Express and Koa, but the performance is not much less than the Express and Koa.
 
 <img src="https://p.ssl.qhimg.com/t018bc14974bff742de.jpg" alt="" style="max-width:100%">
 
-`注`：以上数据使用分布式压力测试系统测试。
+`tips`: The above data using distributed stress testing system to test.
 
-从上图中测试数据可以看到，虽然 ThinkJS 比 Express 和 Koa 性能要差一些，但差别并不大。ThinkJS 和 Sails.js 都更符合大型项目，但 ThinkJS 的性能要比 Sails.js 高很多。
+All we can see is that there has just little distance in ThinkJS and Express, Koa. ThinkJS and Sails.js both suits large projects, but ThinkJS has higher performance than Sails.js.
 
-具体测试代码请见：<https://github.com/thinkjs-team/thinkjs-performance-test>，可以下载代码在本机测试，如果使用 `ab` 测试工具，请注意该工具在 Mac 系统下很不稳定，多次测试结果会相差很大。
+You can go <https://github.com/thinkjs-team/thinkjs-performance-test> to clone all testing code and run in local. If you use `ab` testing tool, you shoud know it is instability on Mac.
 
 ### ES6/7 reference documentation
 
