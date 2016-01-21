@@ -44,10 +44,9 @@ module.exports = think.controller(Base, {
 
 NOTE: The `Base` above represents the definition of a base class, other classes inherit it, so that you can do some general thing in it.
 
-### 多级控制器
+### Multistage controller
 
-对于很复杂的项目，一层控制器有时候不能满足需求。这个时候可以创建多级控制器，如：`src/home/controller/group/article.js`，这时解析到的控制器为二级，具体为 `group/article`，Logic 和 View 的目录与此相同。
-
+For complicated project, one level controller can't work well. Right now you can create multiple level controller, such as file `src/home/controller/group/article.js` points to second level controller `group/article`. The same as Logic and View.
 
 ### Use Generator Function
 
