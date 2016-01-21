@@ -1,10 +1,10 @@
 ## PostgreSQL
 
-ThinkJS 支持 `PostgreSQL`，底层使用 [pq](https://www.npmjs.com/package/pg) 模块。
+ThinkJS support `PostgreSQL` by using [pq](https://www.npmjs.com/package/pg) module.
 
-### 配置
+### Configuration
 
-使用 PostgreSQL，需要将模型中的配置 `type` 改为 `postgre`，修改配置文件 `src/common/config/db.js`：
+If you want to use PostgreSQL, you should change modle `type` to `postgre` by modify `src/common/config/db.js`:
 
 ```js
 export default {
@@ -17,6 +17,6 @@ export default {
 }
 ```
 
-### CRUD 操作
+### CURD handler
 
-CRUD 操作和 Mysql 相同，具体请见 [模型 -> 介绍](./model_intro.html#toc-d84)。
+PostgreSQL has same API with MySQL, you can know more in [Model -> Description](./model_intro.html#toc-d84)。
