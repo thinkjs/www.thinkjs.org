@@ -29,17 +29,17 @@ export default class extends think.logic.base {
 
 The Action in Logic and the Action in Controller are one-to-one correspondence. The Action in Logic also supports `__before` and `__after` and other magic methods.
 
-### 请求类型校验配置
+### Request type validation 
 
-对应一个特定的 Action，有时候只需要一种或者二三种请求类型，需要将其他类型的请求给拒绝掉。可以通过配置特定的请求类型来完成校验。
+Only one or two and three request type will be used in one specific Action. You can config some specific request type to validate them.
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
-    this.allowMethods = 'post'; //只允许 POST 请求类型
+    this.allowMethods = 'post'; //allow post request only
   }
   testAction(){
-    this.allowMethods = 'get,post'; //只允许 GET 和 POST 请求类型
+    this.allowMethods = 'get,post'; //allow get and post request only
   }
 }
 ```
@@ -80,14 +80,14 @@ export default class extends think.logic.base {
 }
 ```
 
-除了配置为字符串，也可以配置对象的方式，如：
+ThinkJS also allow you config it with object like:
 
 ```js
 export default class extends think.logic.base {
   indexAction(){
     let rules = {
-      field1: {required: true, array: true, default: [1, 2]}, //参数为数组
-      field2: {object: true, default: {name: "thinkjs"}} //参数为对象
+      field1: {required: true, array: true, default: [1, 2]}, //parameter is array
+      field2: {object: true, default: {name: "thinkjs"}} //parameter is object
     }
   }
 }
