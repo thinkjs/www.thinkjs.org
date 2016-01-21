@@ -46,9 +46,9 @@ export default {
   timeout: 30, // Change timeout to 30 seconds
 }
 ```
-### 如何捕获异常
+### How to catch exception
 
-JS 本身是无法通过 try/catch 来捕获异步异常的，但使用 async/await 后则可以通过 try/catch 来捕获异常，如：
+JS can't using `try/catch` to catch exception originally, but after using `async/await` you can use it:
 
 ```js
 export default class extends think.controller.base {
@@ -58,25 +58,25 @@ export default class extends think.controller.base {
       await this.getFromAPI2();
       await this.getFromAPI3();
     }catch(err){
-      //通过 err.message 拿到具体的错误信息
+      //err.message is error message
       return this.fail(err.message);
     }
   }
 }
 ```
 
-上面的方式虽然可以通过 try/catch 来捕获异常，但在 catch 里并不知道异常是哪个触发的。
+Although you can using `try/catch` to catch exception, you can't know what code made this exception.
 
-实际项目中，经常要根据不同的错误返回不同的错误信息给用户，这时用整体的 try/catch 就不太方便了。
+It's not convenient to use `try/catch` integrally because you ofen give error message to user by different error.
 
-此时可以通过单个异步接口返回特定值来判断，如：
+you can judge by result return in single async request:
 
 ```js
 export default class extends think.controller.base {
   async indexAction(){
-    //忽略该接口的错误（该接口的错误不重要，可以忽略）
+    //ignore this error 
     await this.getFromAPI1().catch(() => {});
-    //异常时返回特定值 false 来判断
+    //Judge by exception returning specific value like false
     let result = await this.getFromAPI2().catch(() => false);
     if(result === false){
       return this.fail('API2 ERROR');
@@ -85,16 +85,16 @@ export default class extends think.controller.base {
 }
 ```
 
-如上面代码所述，通过返回特定值判断就可以方便的知道是哪个异步接口发生了错误，这样就可以针对不同的错误返回不同的错误信息。
+You can return specific value to know what exactly code make exception easily, and can return different error message by different error.
 
-### 如何忽略异常
+### How to ignore exception
 
-使用 async/await 时，如果 Promise 返回了一个 rejected Promise，那么会抛出异常。如果这个异常不重要需要忽略的话，可以通过 catch 方法返回一个 resolve Promise 来完成。如：
+If Promise return rejected Promise by using `async/await`, it will throw exception. If this exception is not import and can be ignored, you can add catch function and return a resolve Promise:
 
 ```js
 export default class extends think.controller.base {
   async indexAction(){
-    //通过在 catch 里返回 undefined 来忽略异常
+    //catch function returns undefined to ignore exception
     await this.getAPI().catch(() => {});
   }
 }
@@ -102,7 +102,7 @@ export default class extends think.controller.base {
 
 ### PREVENT_NEXT_PROCESS
 
-在调用有些方法后（如：success）后会发现有个 message 为 `PREVENT_NEXT_PROCESS` 的错误。这个错误是 ThinkJS 为了阻止后续执行添加的，如果要在 `catch` 里判断是否是该错误，可以通过 `think.isPrevent` 方法来判断。如：
+After call some function such as success you will find there has a message named `PREVENT_NEXT_PROCESS` error in console. This error is to prevent continue function adding in new ThinkJS. If you want to decide whether error is `PREVENT_NEXT_PROCESS`, you can use `think.isPrevent`:
 
 ```js
 module.exports = think.controller({
@@ -110,7 +110,7 @@ module.exports = think.controller({
     return self.getData().then(function(data){
       return self.success(data);
     }).catch(function(err){
-      //忽略 PREVENT_NEXT_PROCESS 错误
+      //ignore PREVENT_NEXT_PROCESS error
       if(think.isPrevent(err)){
         return;
       }
@@ -120,11 +120,11 @@ module.exports = think.controller({
 })
 ```
 
-另一种处理方式：对于 `success` 之类的方法前面不要添加 `return`，这样 `catch` 里就不会有此类的错误了。
+Other handle type: don't use `return` before function like `success`, then there has no this type error in `catch`.
 
-### 并行处理
+### parallel processing
 
-使用 `async/await` 来处理异步时，是串行执行的。但很多场景下我们需要并行处理，这样可以大大提高执行效率，此时可以结合 `Promise.all` 来处理。
+While using `sync/await`, your code is excuted serially. But mostly you want to excute parallely to have higher execution efficiency. You can use `Promise.all` to implement it.
 
 ```js
 export default class extends think.controller.base {
@@ -136,16 +136,16 @@ export default class extends think.controller.base {
 }
 ```
 
-上面的代码 `p1` 和 `p2` 是并行处理的，然后用 `Promise.all` 来获取 2 个数据。这样一方面代码是同步书写的，同时又不失并行处理的性能。
+`p1` and `p2` are parallel process and then get both data by using `Promise.all`.
 
-### 如何输出图片
+### How to output image
 
-项目中有时候要输出图片等类型的数据，可以通过下面的方式进行：
+If your project need to output data like image and other type, you can using following type:
 
 ```js
 export default class extends think.controller.base {
   imageAction(){
-    //图片 buffer 数据，读取本地文件或者从远程获取
+    //image buffer data, you can read from local or distance
     let imageBuffer = new Buffer();
     this.type('image/png');
     this.end(imageBuffer);
@@ -153,15 +153,15 @@ export default class extends think.controller.base {
 }
 ```
 
-### 如何在不同的环境下使用不同的配置
+### How to use different configuration in different environment
 
-我们经常在不同的环境下使用不同的配置，如：开发环境和线上环境使用不同的数据库配置。这时可以通过 `src/common/config/env/[env].js` 来配置，`[env]` 默认有 `development`，`testing` 和 `production` 3 个值，分别对应开发环境、测试环境和线上环境。这时可以在对应的配置文件设定配置来用在不同的环境下。
+You usually use different configuration in different environment, such as: development environment and production environment will use different database configuration. You can modify `src/common/config/env/[env].js` to implement this function. Default `[env]` has `development`, `testing` and `production`.
 
-如：配置线上环境下的数据库，那么可以在 `src/common/config/env/production.js` 中配置：
+If you want to config production environment database, you can modify `src/common/config/env/production.js`:
 
 ```js
 export default {
-  db: { //这里要有一级 db
+  db: { //there has one level named db
     type: 'mysql',
     adapter: {
       mysql: {
@@ -173,25 +173,25 @@ export default {
 }
 ```
 
-详细的数据库配置请见[这里](./config.html#db)。
+You can know more configuration in [here](./config.html#db)。
 
-### nunjucks 模板继承路径怎么写
+### How to extend template in nunjucks
 
-使用 nunjucks 的模板继承时，由于设置了 root_path，所以路径需要使用相对路径。如：
+Because of `root_path` setting in nunjucks, you should using relative path when you want to extend template:
 
 ```html
-{% extends "./parent.html" %}  //表示同级别目录下的 parent.html 文件
-{% extends "../layout.html" %} //表示父级别下的 layout.html 文件
+{% extends "./parent.html" %}  //same level parent.html file
+{% extends "../layout.html" %} //parent level layout.html file
 ```
 
-### 如何让 Action 只允许命令行调用
+### How to allow Action call in cli only
 
-默认情况下，Action 既可以用户访问，也可以命令行调用。但有些 Action 我们希望只在命令行下调用，这时可以通过 `isCli` 来判断。如：
+Action can be excuted by user request or cli call. You can use `isCli` to judge when you want to allow Action call in cli only:
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //禁止 URL 访问该 Action
+    //ban URL request this Action
     if(!this.isCli()){
       this.fail('only allow invoked in cli mode');
     }
@@ -200,61 +200,61 @@ export default class extends think.controller.base {
 }
 ```
 
-### 如何跨模块调用
+### How to call controller/action/model across module
 
-当项目比较复杂时，会有一些夸模块调用的需求。
+You may have some requests about calling function across module when your project is complicated.
 
-#### 调用 controller
+#### How to call controller
 
-可以通过 `this.controller` 方法传递第二个参数模块名达到调用其他模块下 controller 的功能，如：
+You can call controller in other module by using `this.controller` and pass second parameter to it:
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //获取 admin 模块下 user controller 的实例
+    //get user controller instance in admin module
     let controllerInstance = this.controller('user', 'admin');
-    //获取 controller 的实例下就可以调用下面的方法了
+    //then you can use user controller function after getting instance
     let bar = controllerInstance.foo();
   }
   index2Action(){
-    //也可以通过这种更简洁的方式获取
+    // or use this simple way
     let controllerInstance = this.controller('admin/user');
     let bar = controllerInstance.foo();
   }
 }
 ```
 
-#### 调用 action
+#### How to call action
 
-可以通过 `this.action` 方法调用其他模块里 controller 下的 action 方法，如：
+You can call action in other module by using `this.action`:
 
 ```js
 export default class extends think.controller.base {
   async indexAction(){
-    //获取 admin 模块下 user controller 的实例
+    //get user controller instance in admin module
     let controllerInstance = this.controller('user', 'admin');
-    //调用 controller 里的 test action，会自动调用 __before 和 __after 魔术方法
+    //call test action in controller, it will also call `__before` and `__after` magic function automatically.
     let data = await this.action(controllerInstance, 'test')
   }
   async index2Action(){
-    //也可以通过字符串来指定 controller，这样会自动找对应的 controller
+    //you can also assign controller by string
     let data = await this.action('admin/user', 'test')
   }
 }
 ```
 
-`注`：action 调用返回的始终为 Promise，调用 action 时不会调用对应的 logic。
+`tip`: all action will return an Promise object, and it won't call logic when you call action alone.
 
-#### 调用 model
+#### How to call model
 
-可以通过 `this.model` 方法获取其他模块下的 model 实例，如：
+You can call model in other module by using `this.model`:
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //获取 admin 模块下的 user model 实例
+    //get user model instance in admin module
     let modelInstance1 = this.model('user', {}, 'admin');
-    //也可以通过这种更简洁的方式
+    // or use this simple type
     let modelInstance2 = this.model('admin/user');
   }
 }
