@@ -137,7 +137,8 @@ Even though ThinkJS has many advantages, it has also a few disadvantages too, fo
 
 Evaluate whether a good framework, on the one hand to see the support of the function, it also depends on the performance. Although ThinkJS more suits for large projects, functions and complexity far exceeds Express and Koa, but the performance is not much less than the Express and Koa.
 
-<img src="https://p.ssl.qhimg.com/t018bc14974bff742de.jpg" alt="" style="max-width:100%">
+<img src="https://p.ssl.qhimg.com/t01897b6d34f6e0ea31.png" alt="thinkjs-performance" style="max-width:100%">
+
 
 `tips`: The above data using distributed stress testing system to test.
 

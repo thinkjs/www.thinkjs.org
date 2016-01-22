@@ -141,9 +141,10 @@ sails 也是一个提供整套解决方案的 Node.js 框架，对数据库、RE
 
 评价一个框架是否出色，一方面看支持的功能，另一方面也要看性能。虽然 ThinkJS 更适合大型项目，功能和复杂度远远超过 Express 和 Koa，但性能上并不比 Express 和 Koa 逊色多少，具体的测试数据请见下图。
 
-<img src="https://p.ssl.qhimg.com/t018bc14974bff742de.jpg" alt="" style="max-width:100%">
+<img src="https://p.ssl.qhimg.com/t018bc14974bff742de.jpg" alt="ThinkJS 性能测试" style="max-width:100%">
 
 `注`：以上数据使用分布式压力测试系统测试。
+
 
 从上图中测试数据可以看到，虽然 ThinkJS 比 Express 和 Koa 性能要差一些，但差别并不大。ThinkJS 和 Sails.js 都更符合大型项目，但 ThinkJS 的性能要比 Sails.js 高很多。
 
