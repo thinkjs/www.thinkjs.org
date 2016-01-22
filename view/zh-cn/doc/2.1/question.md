@@ -204,7 +204,7 @@ export default class extends think.controller.base {
 
 ### 如何跨模块调用
 
-当项目比较复杂时，会有一些夸模块调用的需求。
+当项目比较复杂时，会有一些跨模块调用的需求。
 
 #### 调用 controller
 

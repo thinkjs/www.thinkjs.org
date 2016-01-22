@@ -75,4 +75,13 @@ export default class extends base {
     this.assign('title', this.locale('title-spending'));
     return this.display();
   }
+  /**
+   * event
+   * @return {} 
+   */
+  eventAction(){
+    this.lang('zh-cn', true);
+    this.assign('title', this.locale('title-event'));
+    return this.display();
+  }
 }

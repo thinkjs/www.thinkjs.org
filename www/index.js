@@ -14,4 +14,4 @@ instance.compile({
   log: true
 });
 
-instance.run();
+instance.run(true);

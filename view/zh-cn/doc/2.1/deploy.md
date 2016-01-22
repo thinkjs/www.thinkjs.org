@@ -4,11 +4,11 @@
 
 开发环境下，代码会自动编译、自动更新，但这种机制时间长了会有一定的内存泄露，所以线上不可使用这种方式。
 
-需要在代码上线前执行 `npm run compile` 命令，将 `src/` 目录编译到 `app/` 目录。
+需要在代码上线前执行 `npm run compile` 命令，将 `src/` 目录编译到 `app/` 目录，然后将 `app/` 目录下的文件上线。
 
-### 使用 pm2 管理服务
+### 使用 PM2 管理服务
 
-pm2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用。使用 pm2 需要以全局的方式安装，如： `sudo npm install -g pm2`。安装完成后，命令行下会有 pm2 命令。
+PM2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用。使用 PM2 需要以全局的方式安装，如： `sudo npm install -g pm2`。安装完成后，命令行下会有 pm2 命令。
 
 创建项目时，会在项目目录下创建名为 `pm2.json` 的配置文件，内容类似如下：
 
@@ -35,11 +35,13 @@ pm2 是一款专业管理 Node.js 服务的模块，非常建议在线上使用�
 pm2 startOrReload pm2.json
 ```
 
-pm2 详细的配置请见 <http://pm2.keymetrics.io/docs/usage/application-declaration/>。
+如果进程重启之前想进行一些操作，如：保存一些临时数据，那么可以使用 `GracefulReload`，具体请见：http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/#graceful-reload。
+
+PM2 详细的配置请见 <http://pm2.keymetrics.io/docs/usage/application-declaration/>。
 
 -----
 
-`注`：如果线上不使用 pm2 来管理 Node.js 服务的话，启动服务需要使用命令 `node www/production.js`。
+`注`：如果线上不使用 PM2 来管理 Node.js 服务的话，启动服务需要使用命令 `node www/production.js`。
 
 ### 使用 nginx 做反向代理
 

@@ -7,6 +7,7 @@ export default {
   'title-donate': 'Donate - ThinkJS',
   'title-about': 'About - ThinkJS',
   'title-spending': 'Spending - ThinkJS',
+  'title-event': 'Events - ThinkJS',
   'download-pdf': 'Download PDF',
   'view-on-single-page': 'View on single page',
   'all-doc': 'All documentation',
