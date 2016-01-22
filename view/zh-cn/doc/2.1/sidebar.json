@@ -53,6 +53,7 @@
       "路径常量": "path_cost",
       "定时任务": "crontab",
       "线上部署": "deploy",
+      "单元测试": "unit_test",
       "开发插件": "plugin",  
       "推荐模块": "recommend_modules",
       "更多功能": "more"

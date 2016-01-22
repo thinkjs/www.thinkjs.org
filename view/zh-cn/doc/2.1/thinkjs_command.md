@@ -23,6 +23,7 @@
     -V, --version      output the version number
     -e, --es6          use es6 for project, used in `new` command
     -t, --ts           use TypeScript for project, used in `new` command
+    -T, --test         add test dirs when create project, used in `new` command
     -r, --rest         create rest controller, used in `controller` command
     -M, --mongo        create mongo model, used in `model` command
     -R, --relation     create relation model, used in `model` command

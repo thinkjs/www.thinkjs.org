@@ -74,7 +74,11 @@ export default class extends think.model.base {
 }
 ```
 
-`default` 只在添加时有效，`readonly` 只在更新时有效。
+`default` 默认只在添加数据时有效。如果希望在更新数据时也有效，需要添加属性 `update: true`，该属性在 2.1.4 版本中开始支持。
+
+`readonly` 只在更新时有效。
+
+`注`：如果设置了 `readonly`，那么会忽略 `update` 属性。
 
 -----
 
