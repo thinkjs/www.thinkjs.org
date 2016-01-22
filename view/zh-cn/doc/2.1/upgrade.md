@@ -36,6 +36,22 @@ ThinkJS 2.0 是基于 Babel 5 编译的，2.1 版本将依赖的 Babel 升级到
 将 `package.json` 里原有的 compile 命令修改为 `babel --presets es2015-loose,stage-1 --plugins transform-runtime src/ --out-dir app/ --retain-lines`。
 
 
+#### 添加 RUNTIME_PATH
+
+修改 `www/development.js`，`www/testing.js` 和 `www/production.js` 3 个文件，在实例化的时候添加 `RUNTIME_PATH` 的定义，如：
+
+```js
+var instance = new thinkjs({
+  APP_PATH: rootPath + path.sep + 'app',
+  RUNTIME_PATH: rootPath + path.sep + 'runtime', //添加 RUNTIME_PATH 路径的定义
+  ROOT_PATH: rootPath,
+  RESOURCE_PATH: __dirname,
+  env: 'development'
+});
+```
+
+其中 `RUNTIME_PATH: rootPath + path.sep + "runtime"` 即为需要添加的代码。
+
 ### 项目升级为 TypeScript
 
 项目升级为 TypeScript 请见[这里](./typescript.html#toc-600)。
