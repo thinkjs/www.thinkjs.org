@@ -1,6 +1,6 @@
 ## PostgreSQL
 
-ThinkJS support `PostgreSQL` by using [pq](https://www.npmjs.com/package/pg) module.
+ThinkJS supports `PostgreSQL` by using [pq](https://www.npmjs.com/package/pg) module in underlayer.
 
 ### Configuration
 
@@ -19,4 +19,4 @@ export default {
 
 ### CURD handler
 
-PostgreSQL has same API with MySQL, you can know more in [Model -> Description](./model_intro.html#toc-d84)。
+PostgreSQL has same APIs with MySQL, you can know more in [Model -> Description](./model_intro.html#toc-d84)。

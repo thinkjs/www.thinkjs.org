@@ -1,8 +1,8 @@
 ## CSRF
 
-ThinkJS provides a middleware to handle CSRF. It's off in the default configure.
+ThinkJS provides a middleware to handle CSRF, but it's off by default.
 
-### CSRF On
+### Turn CSRF On
 
 Modify `src/common/config/hook.js` like this:
 
@@ -14,7 +14,7 @@ export default {
 
 ### Configure
 
-The default configure of CSRF is linke following, you can modify thme in `src/common/config/csrf.js`:
+The default configure of CSRF is as following, you can modify them in `src/common/config/csrf.js`:
 
 ```js
 export default {

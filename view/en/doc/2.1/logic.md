@@ -29,9 +29,9 @@ export default class extends think.logic.base {
 
 The Action in Logic and the Action in Controller are one-to-one correspondence. The Action in Logic also supports `__before` and `__after` and other magic methods.
 
-### Request type validation 
+### Request Type Validation 
 
-Only one or two and three request type will be used in one specific Action. You can config some specific request type to validate them.
+Only a couple of request types will be used in one specific Action. You can config some specific request types to validate them.
 
 ```js
 export default class extends think.logic.base {
@@ -39,7 +39,7 @@ export default class extends think.logic.base {
     this.allowMethods = 'post'; //allow post request only
   }
   testAction(){
-    this.allowMethods = 'get,post'; //allow get and post request only
+    this.allowMethods = 'get,post'; //allow get and post requests only
   }
 }
 ```
@@ -67,7 +67,7 @@ The config format is `field name` -> `config`, each field config supports multip
 
 #### Param Format
 
-Params could follow the end of validation type. Besides supporting the simply params separated by comma, it also supports the complex param in JSON format. eg.
+Params could follow the end of validation type. Besides supporting simply string params separated by commas, it also supports the complex param in JSON format.
 
 ```js
 export default class extends think.logic.base {

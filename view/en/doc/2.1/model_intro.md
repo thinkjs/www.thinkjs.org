@@ -22,7 +22,7 @@ thinkjs model home/user
 
 `Note:` Model file is not required, you don't need to create it when there is no custom method, in this case the instance of base class will be used.
 
-### Model property
+### Model Properties
 
 #### model.pk
 
@@ -30,27 +30,27 @@ Default primary key is `id`, and `_id` in MongoDB.
 
 #### model.schema
 
-Tabel field definition, you can get it from database, and return result like this:
+The table fields definition, will be readed from database by default, and the result like this:
 
 ```js
 {
   id: {
     name: 'id',
     type: 'int', //type
-    required: true, //required
-    primary: true, //primary key
-    unique: true, //uniqueness
-    auto_increment: true //autoincrement
+    required: true, //is it required
+    primary: true, //is it primary
+    unique: true, //is it unique
+    auto_increment: true //is it autoincrement?
   }
 }
 ```
 
-We can set other property in the model such as default value and does it read only:
+Additional properties can be added in the model, such as default value and does it read only:
 
 ```js
 export default class extends think.model.base {
   /**
-   * Table field definition
+   * Table fields definition
    * @type {Object}
    */
   schema = {
@@ -63,19 +63,19 @@ export default class extends think.model.base {
       }
     }
     create_time: { //create time
-      default: () => { //time right now
+      default: () => { //get current time
         return moment().format('YYYY-MM-DD HH:mm:ss')
       },
-      readonly: true //read only, you can't change after push.
+      readonly: true //read only, you can't change it after added
     }
   }
 }
 ```
-`default` is used in add, and `readonly` is used in updating.
+`default` is only valid in adding, and `readonly` is only valid in updating.
 
 -----
 
-You can see [API -> Model](./api_model.html) to get more knowledge。
+You can see [API -> Model](./api_model.html) to get more details.
 
 ### Model Instantiation
 
