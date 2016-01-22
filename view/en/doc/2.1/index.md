@@ -38,11 +38,11 @@ export default class extends think.controller.base {
 
 We've used ES6 features like `class`, `export`, `let` and ES7 features like `async/await` in this example. Database queries and `Session` writing were all asynchronous actions, but here we are writing sync code to handle them with `async/await`. Last, it can run in Node.js environment stably after `Babel` compiling.
 
-#### TypeScript
+#### Supports TypeScript
 
 [TypeScript](http://www.typescriptlang.org/) is an free and open source programming language designed by Microsoft. TypeScript is a typed superset of JavaScript that it has some useful function in large project such as optional static type.
 
-ThinkJS 2.1 has support TypeScript, we can auto compile and update in our project. You can know more from [here](./typescript.html)。
+ThinkJS 2.1 has supported TypeScript, the code will be auto compiled and updated during the develop process. You can know more from [here](./typescript.html)。
 
 #### Supports variant project structures and environments
 
@@ -50,15 +50,15 @@ When using ThinkJS, you can apply single module mode, general mode or mutiple mo
 
 By default, there are three kinds of project environments: `development`, `testing` and `production`, you can use different configuration in different environment to support different requests. You can also custom and extend them in your projects.
 
-#### Supports abundant database type
+#### Supports Abundant Database Type
 
 ThinkJS supports `MySQL`, `MongoDB` and `SQLite`. It encapsulates many APIs of the database operations, without having to manually stitching SQL statements. You can automatically prevent SQL injection and other vulnerabilities. It also supports transaction and association and other advanced features.
 
-#### Automatic updating
+#### Automatic Updating
 
 ThinkJS has a mechanism that could automatically update codes after source files being modified without resort to restart Node.js server and other third party modules.
 
-#### Automatic REST API creation
+#### Automatic REST API Creation
 
 You can use `thinkjs` command to create REST API automatically without writing any extra code. Meanwhile, you can also easily add filter or auth check if you want.
 
@@ -66,7 +66,7 @@ You can use `thinkjs` command to create REST API automatically without writing a
 
 ThinkJS supports some common WebSocket libraries like `socket.io` and `sockjs`, and packages them to provide the consistent APIs to developers.
 
-#### Plentiful test cases
+#### Plentiful Test Cases
 
 ThinkJS includes 1500+ test cases with the code coverage at 95%. Every change has its test case to insure the framework functions well.
 
@@ -101,7 +101,7 @@ ThinkJS builds-in the detailed log function, it makes us read log and track prob
 [2015-10-12 14:16:12] [Error] Error: Address already in use, port:8360. http://www.thinkjs.org/doc/error.html#EADDRINUSE
 ```
 
-#### Configurable routers
+#### Configurable Routers
 
 The routers ThinkJS supported include regex router, rule router and static router, and router can be set based on modules. That's very helpful for us to make URLs more simple and reserve their high performance at the same time.
 
@@ -110,7 +110,7 @@ The routers ThinkJS supported include regex router, rule router and static route
 ThinkJS provides us very simple methods to implement i18n and custom themes.
 
 
-## Comparing with other frameworks
+## Comparing With Other Frameworks
 
 #### Express/Koa
 
@@ -133,18 +133,18 @@ Even though ThinkJS has many advantages, it has also a few disadvantages too, fo
 - ThinkJS is a relatively new framework, the community is not strong enough.
 - ThinkJS is short of large scale applications.
 
-#### Performance comparsion
+#### Performance Comparsion
 
-Evaluate whether a good framework, on the one hand to see the support of the function, it also depends on the performance. Although ThinkJS more suits for large projects, functions and complexity far exceeds Express and Koa, but the performance is not much less than the Express and Koa.
+To evaluate whether a framework is good or not, the features it provided and the performance it could reach are qually important. Although ThinkJS more suits for large projects, features and complexity far exceeds Express and Koa, but its performance is not much less than them.
 
 <img src="https://p.ssl.qhimg.com/t01897b6d34f6e0ea31.png" alt="thinkjs-performance" style="max-width:100%">
 
 
 `tips`: The above data using distributed stress testing system to test.
 
-All we can see is that there has just little distance in ThinkJS and Express, Koa. ThinkJS and Sails.js both suits large projects, but ThinkJS has higher performance than Sails.js.
+All we can see is that there has just little distance between ThinkJS and Express/Koa. ThinkJS and Sails.js both more suit for large projects, but ThinkJS has higher performance than Sails.js.
 
-You can go <https://github.com/thinkjs-team/thinkjs-performance-test> to clone all testing code and run in local. If you use `ab` testing tool, you shoud know it is instability on Mac.
+You can go <https://github.com/thinkjs-team/thinkjs-performance-test> to clone all testing code and run it locally. If you use `ab` testing tool, note that it is instability on Mac.
 
 ### ES6/7 reference documentation
 

@@ -44,9 +44,9 @@ module.exports = think.controller(Base, {
 
 NOTE: The `Base` above represents the definition of a base class, other classes inherit it, so that you can do some general thing in it.
 
-### Multistage controller
+### Multi-levels Controller
 
-For complicated project, one level controller can't work well. Right now you can create multiple level controller, such as file `src/home/controller/group/article.js` points to second level controller `group/article`. The same as Logic and View.
+For complicated projects, only have one level controller may not work well. Right now you can create multiple levels controller, the file `src/home/controller/group/article.js` for example will points to the second level controller `group/article`. Logic and View are the same.
 
 ### Use Generator Function
 

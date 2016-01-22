@@ -46,9 +46,9 @@ export default {
   timeout: 30, // Change timeout to 30 seconds
 }
 ```
-### How to catch exception
+### How To Catch Exception
 
-JS can't using `try/catch` to catch exception originally, but after using `async/await` you can use it:
+Using JS's `try/catch` can't catching exceptions come out of asynchronous code, but after using `async/await` you can use it:
 
 ```js
 export default class extends think.controller.base {
@@ -65,18 +65,18 @@ export default class extends think.controller.base {
 }
 ```
 
-Although you can using `try/catch` to catch exception, you can't know what code made this exception.
+Although you can catch the exception, but you can't know which code has triggered it.
 
-It's not convenient to use `try/catch` integrally because you ofen give error message to user by different error.
+In practice, this is not convenient because you ofen need to give error messages to users based on the errors.
 
-you can judge by result return in single async request:
+At this time, you can check the specific error through single async request:
 
 ```js
 export default class extends think.controller.base {
   async indexAction(){
     //ignore this error 
     await this.getFromAPI1().catch(() => {});
-    //Judge by exception returning specific value like false
+    //return false when exception occurs
     let result = await this.getFromAPI2().catch(() => false);
     if(result === false){
       return this.fail('API2 ERROR');
@@ -85,16 +85,16 @@ export default class extends think.controller.base {
 }
 ```
 
-You can return specific value to know what exactly code make exception easily, and can return different error message by different error.
+By returning different values for each exception, you can then return different error messages to users.
 
-### How to ignore exception
+### Ignore Exception
 
-If Promise return rejected Promise by using `async/await`, it will throw exception. If this exception is not import and can be ignored, you can add catch function and return a resolve Promise:
+When using `async/await`, if Promise returned a rejected Promise, an exception will be throwed. If it is not important and you want to ignore it, you can make the catch method to return a resolve Promise:
 
 ```js
 export default class extends think.controller.base {
   async indexAction(){
-    //catch function returns undefined to ignore exception
+    //returns undefined mean this exception will be ignore
     await this.getAPI().catch(() => {});
   }
 }
@@ -102,7 +102,7 @@ export default class extends think.controller.base {
 
 ### PREVENT_NEXT_PROCESS
 
-After call some function such as success you will find there has a message named `PREVENT_NEXT_PROCESS` error in console. This error is to prevent continue function adding in new ThinkJS. If you want to decide whether error is `PREVENT_NEXT_PROCESS`, you can use `think.isPrevent`:
+After calling some methods such as `success`, you may find an error message named `PREVENT_NEXT_PROCESS` in console. This error is introduced by ThinkJS to prevent from the running of subsequent processes. If you want to check `PREVENT_NEXT_PROCESS` in catch method, you can use `think.isPrevent`:
 
 ```js
 module.exports = think.controller({
@@ -120,11 +120,12 @@ module.exports = think.controller({
 })
 ```
 
-Other handle type: don't use `return` before function like `success`, then there has no this type error in `catch`.
+Another handling method: don't use `return` before methond such as `success`, then there has no this error in `catch`.
 
-### parallel processing
+### Parallel Processing
 
-While using `sync/await`, your code is excuted serially. But mostly you want to excute parallely to have higher execution efficiency. You can use `Promise.all` to implement it.
+
+While using `sync/await`, your code is excuted serially. But mostly you want to excute parallely to have higher execution efficiency. For this, you can use `Promise.all` to implement it.
 
 ```js
 export default class extends think.controller.base {
@@ -136,16 +137,16 @@ export default class extends think.controller.base {
 }
 ```
 
-`p1` and `p2` are parallel process and then get both data by using `Promise.all`.
+`p1` and `p2` are processed parallelly and then get both data by using `Promise.all`.
 
-### How to output image
+### Output Images
 
-If your project need to output data like image and other type, you can using following type:
+If your projects need to output data like images and other file types, you can do it as following:
 
 ```js
 export default class extends think.controller.base {
   imageAction(){
-    //image buffer data, you can read from local or distance
+    //image buffer data, you can read it locally or remotely
     let imageBuffer = new Buffer();
     this.type('image/png');
     this.end(imageBuffer);
@@ -153,9 +154,9 @@ export default class extends think.controller.base {
 }
 ```
 
-### How to use different configuration in different environment
+### Using Different Configuration In Different Environments
 
-You usually use different configuration in different environment, such as: development environment and production environment will use different database configuration. You can modify `src/common/config/env/[env].js` to implement this function. Default `[env]` has `development`, `testing` and `production`.
+Environments varies, the configuration may be vary too. For example, development environment and production environments should use different database configurations. You can modify `src/common/config/env/[env].js` to implement this. The option `[env]` has three default values: `development`, `testing` and `production`.
 
 If you want to config production environment database, you can modify `src/common/config/env/production.js`:
 
@@ -173,9 +174,9 @@ export default {
 }
 ```
 
-You can know more configuration in [here](./config.html#db)。
+You can know more about configuration in [here](./config.html#db)。
 
-### How to extend template in nunjucks
+### To Extend Template In nunjucks
 
 Because of `root_path` setting in nunjucks, you should using relative path when you want to extend template:
 
@@ -184,9 +185,9 @@ Because of `root_path` setting in nunjucks, you should using relative path when 
 {% extends "../layout.html" %} //parent level layout.html file
 ```
 
-### How to allow Action call in cli only
+### To Allow Action Calls Only In CLI
 
-Action can be excuted by user request or cli call. You can use `isCli` to judge when you want to allow Action call in cli only:
+Action can be excuted by user requests or CLI calls. You can use `isCli` to judge when you want to allow Action call in CLI only:
 
 ```js
 export default class extends think.controller.base {
@@ -200,13 +201,13 @@ export default class extends think.controller.base {
 }
 ```
 
-### How to call controller/action/model across module
+### Invokes Controller/Action/Model Across Modules
 
-You may have some requests about calling function across module when your project is complicated.
+You may have some requests about calling function across modules when your projects is complicated.
 
-#### How to call controller
+#### Call Controllers
 
-You can call controller in other module by using `this.controller` and pass second parameter to it:
+You can call controller in other modules by using `this.controller` and pass the second parameter in:
 
 ```js
 export default class extends think.controller.base {
@@ -224,9 +225,9 @@ export default class extends think.controller.base {
 }
 ```
 
-#### How to call action
+#### Call Actions
 
-You can call action in other module by using `this.action`:
+You can call actions in other modules by using `this.action`:
 
 ```js
 export default class extends think.controller.base {
@@ -243,11 +244,11 @@ export default class extends think.controller.base {
 }
 ```
 
-`tip`: all action will return an Promise object, and it won't call logic when you call action alone.
+`tip`: All actions will return Promise object, and it won't call logic when you call action alone.
 
-#### How to call model
+#### Call Models
 
-You can call model in other module by using `this.model`:
+You can call models in other modules by using `this.model`:
 
 ```js
 export default class extends think.controller.base {

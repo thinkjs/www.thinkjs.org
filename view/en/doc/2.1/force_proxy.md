@@ -1,17 +1,17 @@
-## Ban port access
+## Ban Port Access
 
 
 ### Description
 
-Your online program often has reverse proxy by using nginx. User's request will accroding nginx to Node.js. It will be easy to load balance by using reverse proxy.
+Online applications usually have Nginx as the reverse proxy. Nginx will redirect user requests to Node.js. Have reverse proxy will be easy to do load balance.
 
-After you has nginx reverse proxy to node.js service, you usually want to ban request directly from port. You can set all port request directly just be allowed in host. The other solution is taking a judge in application level.
+Once you have the reverse proxy, you usually want to ban the requests that directly accessed to the Node.js's port. At this time, you can set the Node.js port could only be accessed internally, or you must taking a judge in application level.
 
 ThinkJS provides middleware to ban port access. If it's trouble to ban port access in host directly, you can take replace of Middleware to do it.
 
-### middleware configuration
+### Middleware Configuration
 
-Modify `src/common/config/hook.js` linke following:
+Modify `src/common/config/hook.js` as following:
 
 ```js
 export default {
@@ -27,11 +27,11 @@ export default {
 }
 ```
 
-This will only ban port access in production environment and there no effect in development environment.
+This will only ban port access in production environment and there is no effect in development environment.
 
-### Listen local port only
+### Listen Local Port Only
 
-Default host what Node.js listen when start service is `0.0.0.0`. It allows request both local and outgoing. You can change it to `127.0.0.1` to allow local request only.
+The default host Node.js listening when it starts service is `0.0.0.0`. It allows requests both coming from interior and outside. You can change it to `127.0.0.1` to allow local requests only.
 
 You can modify `src/common/config/config.js` as following:
 

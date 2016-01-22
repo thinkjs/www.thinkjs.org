@@ -277,8 +277,8 @@ Please visit <http://nginx.org/en/docs/http/websocket.html> to read the reverse 
 
 ### How to get current WebSocket connecting object
 
-You can get all WebSocket connecting objects with an array by using `thinkCache(thinkCache.WEBSOCKET)`.
+You can get an array of WebSocket connecting objects by using `thinkCache(thinkCache.WEBSOCKET)`.
 
 ### How to achieve private chat
 
-ThinkJS has no private chat yet, you can find and chat with corresponding connection by getting all WebSocket connections.
+ThinkJS has not supported private chat yet, you can implement it by first find all of the WebSocket connections, and then match the corresponding connections.
