@@ -60,7 +60,7 @@ think.middleware('log_request', http => {
 
   let ip = http.ip();
   let log = `[${date} ${time}] - ${ip} - "${http.url}" - "${http.userAgent()}"`;
-  let logPath = think.getPath('common', 'runtime') + '/log/' + date + '.log';
+  let logPath = think.RUNTIME_PATH + '/log/' + date + '.log';
   think.mkdir(path.dirname(logPath));
   fs.appendFile(logPath, log + '\n', () => {});
 });
