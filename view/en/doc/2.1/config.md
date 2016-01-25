@@ -43,10 +43,10 @@ export default {
   type: 'mysql',
   adapter: {
     mysql: {
-      host: '127.0.0.1',
-      port: '',
-      database: '',
-      user: '',
+      host: '127.0.0.1', // database host
+      port: '', // datagbase port
+      database: '', // database name
+      user: '', // user name
       ...
     }
   }
@@ -241,22 +241,22 @@ The basic configuration, `config/config.js`.
 
 ```js
 export default {
-  port: 8360, //server listen port
-  host: '', //server listen host
-  encoding: 'utf-8', //encoding
-  pathname_prefix: '',  //
-  pathname_suffix: '.html', //
+  port: 8360, // the port server is listening
+  host: '', // host
+  encoding: 'utf-8', // encoding
+  pathname_prefix: '',  // the prefix that will be remove when parsing routers
+  pathname_suffix: '.html', // the suffix that will be remove when parsing routers
 
-  hook_on: true,  //turn on hook
-  cluster_on: false, //turn on cluster
+  hook_on: true,  // turns hook on
+  cluster_on: false, //turns cluster on
 
   timeout: 120, //120 seconds
-  auto_reload: false, //auto reload file changes
+  auto_reload: false, //auto reload the changed files
 
-  resource_on: true, // turn on resource
+  resource_on: true, // turns resource on
   resource_reg: /^(static\/|[^\/]+\.(?!js|html)\w+$)/, //
 
-  route_on: true, //turn on route
+  route_on: true, //turns routing on
 
   log_pid: false, //log process id
   log_request: false, //log http request
@@ -267,7 +267,7 @@ export default {
   default_module: 'home', //default module
   default_controller: 'index',  //default controller
   default_action: 'index', //default action
-  callback_name: 'callback', //callback on for jsonp request
+  callback_name: 'callback', //callback name for JSONP request
   json_content_type: 'application/json', //content-type for output json data
 }
 ```
@@ -282,9 +282,9 @@ export default {
   timeout: 6 * 3600,
   adapter: {
     file: {
-      path: think.RUNTIME_PATH + '/cache',
-      path_depth: 2, 
-      file_ext: '.json'
+      path: think.RUNTIME_PATH + '/cache', // the folder to store the caching content in file caching type
+      path_depth: 2, // the levels of subfolders
+      file_ext: '.json' // the suffix of the caching files
     },
     redis: {
       prefix: 'thinkjs_', //cache key prefix
@@ -318,8 +318,8 @@ export default {
   log_connect: true, // log database connection
   adapter: {
     mysql: {
-      host: '127.0.0.1', //host
-      port: '', //port
+      host: '127.0.0.1', //database host
+      port: '', //database port
       database: '', //database name
       user: '', //database account
       password: '', //database account password
@@ -439,7 +439,7 @@ Session configuration,`config/session.js`.
 ```js
 export default {
   name: 'thinkjs',
-  type: 'file',
+  type: 'file', // caching type
   path: think.RUNTIME_PATH + '/session',
   secret: '',
   auth_key: 'think_auth_list',

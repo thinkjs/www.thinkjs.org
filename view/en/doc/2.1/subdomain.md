@@ -1,6 +1,6 @@
-## Deploy in subdomain
+## Subdomains Deploy
 
-When your project become complicated, you may want to take different module to different domain in one project. For example, url `admin.example.com` is admin dashboard by `admin` module. ThinkJS provide subdomain middleware to handle this demand.
+When your projects become complicated, you may want to deploy different modules to different domains, but their code is still placed in one project folder. For example, the URL `admin.example.com` is deployed with admin dashboard function, and that's mappped to the `admin` module. ThinkJS provides subdomain middleware to handle this demand.
 
 ### Configuration
 
@@ -12,7 +12,7 @@ export default {
 }
 ```
 
-Then add configuration about deploying in subdomain in `config/config.js`:
+Then add the configuration about subdomains deploy in `config/config.js`:
 
 ```js
 export default {
@@ -23,4 +23,4 @@ export default {
 }
 ```
 
-Assume original pathname is `group/detail`, if your domain host is `admin.example.com`, the pathname received in ThinkJS will change to `admin/group/detail`。
+If original pathname is `group/detail`, if your domain host is `admin.example.com`, the pathname received in ThinkJS will change to `admin/group/detail`。

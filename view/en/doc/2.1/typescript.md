@@ -1,46 +1,46 @@
 ## TypeScript
 
-[TypeScript](http://www.typescriptlang.org/) is an free and open source programming language designed by Microsoft. TypeScript is a typed superset of JavaScript that it has some useful function in large project such as optional static type.
+[TypeScript](http://www.typescriptlang.org/) is a free and open source programming language designed by Microsoft. TypeScript is a typed superset of JavaScript that it has some useful function in large project such as optional static type.
 
-ThinkJS 2.1 has support TypeScript, we can auto compile and update in our project.
+ThinkJS 2.1 has support TypeScript, you can auto-compile and auto-update in your projects.
 
-### Create TypeScript project
+### Create TypeScript Projects
 
-We can create typescript project by using `--ts`:
+We can create Typescript projects by using `--ts`:
 
 ```sh
 thinkjs new thinkjs_demo --ts
 ```
 
-TypeScript's file extension is `.ts`. If you want to create typescript file manually, it should be `.ts` too, other wise it will catch error in `tsc` compile.
+TypeScript's file extension is `.ts`. If you want to create Typescript file manually, the postfix should be `.ts` too, or it will trigger error when calling `tsc` to compile.
 
 ### .d.ts file
 
-`.d.ts` files are the description file of third party library. When we create our project, file named `typings/thinkjs/think.d.ts` will be created to describe ThinkJS. You can load this description file by following:
+`.d.ts` files are the description file of third party libraries. When we create our projects, the file named `typings/thinkjs/think.d.ts` will be created as ThinkJS's description file. You can include this description file in your project files as the following:
 
 ```js
 /// <reference path="../../../typings/thinkjs/think.d.ts" />
 ```
 
-This code will set on the front of file, and the path must be correct. If your file has `use strict`, this code should set after `use strict`.
+This code must be placed on the first line in the file, and the path must be correct. If your file has `use strict`, this code should set after `use strict`.
 
-If you depend on other third party library in your project, you should have their own description file. You can install by  [tsd](http://definitelytyped.org/tsd/).
+If your projects rely on other third party libraries, you should install their description files respectively. You can finish installation by use the [tsd](http://definitelytyped.org/tsd/).
 
-You can find description file of some third party library in <https://github.com/DefinitelyTyped/DefinitelyTyped>.
+You can find description file of some third party libraries in <https://github.com/DefinitelyTyped/DefinitelyTyped>.
 
-### TypeScript compile
+### TypeScript Compiling
 
-Because of some fault when compiling TypeScript, you can compile TypeScript `.ts` file to ES6, then compile to ES5 using Babel 6.
+Because of there are some faults in compiling TypeScript, we have chosen to compile TypeScript `.ts` files to ES6 code first, then we compile the ES6 code to ES5 code using Babel 6.
 
-If you find any problem about TypeScript, you can open issue to TypeScript on <https://github.com/Microsoft/TypeScript>。
+If you find any problem about TypeScript, you can open an issue on <https://github.com/Microsoft/TypeScript>。
 
-### Change exist project to TypeScript
+### Change Existing Projects To Using TypeScript
 
-ThinkJS also support change exist project to TypeScript:
+For projects that have used the ES6/7 features, ThinkJS could also supports to update them to use TypeScript.
 
-#### Change index file
+#### Change Entry File
 
-Change index file `www/development.js` with following:
+Change entry file `www/development.js` as following:
 
 ```js
 //compile src/ to app/
@@ -52,7 +52,7 @@ instance.compile({
 
 #### Modify package.json
 
-Clear all dependencies about `Babel` and `ThinkJS` and append following dependencies:
+Clear all dependencies related to `Babel` and `ThinkJS` and append following dependencies:
 
 ```
 {
@@ -71,13 +71,13 @@ Clear all dependencies about `Babel` and `ThinkJS` and append following dependen
 }
 ```
 
-If there has some used module in `dependencies` and `devDependencies`, they should be merged together.
+If some modules in `dependencies` and `devDependencies` have been used, they should be merged together.
 
-Then run `npm install` to install all dependencies.
+After modifying, run `npm install` to install all dependencies.
 
 #### Modify .thinkjsrc
 
-Change project config file `.thinkjsrc` to following:
+Change project's configration file `.thinkjsrc` to:
 
 ```json
 {
@@ -87,28 +87,28 @@ Change project config file `.thinkjsrc` to following:
 }
 ```
 
-#### Download `think.d.ts` description file
+#### Downloading `think.d.ts` Description File
 
-Download file <https://github.com/75team/thinkjs/blob/master/template/think.d.ts> and save as `typings/thinkjs/think.d.ts`。
+Downloads file <https://github.com/75team/thinkjs/blob/master/template/think.d.ts> and save it as `typings/thinkjs/think.d.ts`。
 
-#### Modify file extension
+#### Modify File Extension
 
-Modify all `.js` files in `src` to `.ts`.
+Modify all `.js` files in `src` to `.ts` files.
 
-#### Add `bin/compile.js` file
+#### Add `bin/compile.js` File
 
-Download file <https://github.com/75team/thinkjs/blob/master/template/bin/compile.ts> and save as `bin/compile.js`。
+Downloads file <https://github.com/75team/thinkjs/blob/master/template/bin/compile.ts> and save it as `bin/compile.js`。
 
-#### Modify compile command
+#### Modify Compiling Command
 
-Change compile command in `package.json` to `node bin/compile.js`.
+Change compiling command in `package.json` to `node bin/compile.js`.
 
-#### Add description file in project description
+#### Add Description File In Project's Discription File
 
-All files in `src/` must add following code in top, releative path should be correct:
+All files in `src/` must add the following code in its first line, releative path should be correct:
 
 ```js
 /// <reference path="../../../typings/thinkjs/think.d.ts" />
 ```
 
-You shoud run `npm start` to start service after all modify.
+Run `npm start` to start service after finished all modifying.
