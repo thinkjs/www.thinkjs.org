@@ -740,7 +740,7 @@ export default class extends think.logic.base {
 }
 ```
 
-### Extend Validation Type
+### Extending Validation Types
 
 If the default supported validation types can not meet the demand, you can use the method `think.validate` to extend the validation types. eg.
 

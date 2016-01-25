@@ -42,13 +42,13 @@ After installation, you can create a new ThinkJS project by run the following co
 thinkjs new project_path; #project_path is the path you want store your project
 ```
 
-If you want to use ES6 features in your development process, you may want to create the ES6 mode project by following command:
+If you want to use ES6 features in the development, you may want to create the ES6 mode project by use following command:
 
 ```sh
 thinkjs new project_path --es; #project_path is the path you want store your project
 ```
 
-If terminal returns output like following, it means you create project success:
+If the output is like the following, that means you have created the project successfully:
 
 ```text
   create : demo/

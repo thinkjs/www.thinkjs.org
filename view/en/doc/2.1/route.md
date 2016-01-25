@@ -224,9 +224,11 @@ export default [
 
 Assuming the URL is `http://www.example.com/admin/api`, then the parsed pathname is `admin/api`, it will hit the `admin` module when matching the rules in the `common`, and then match the route rules one by one under the `admin` module. This way, it can greatly reduce the number of route rules need to match every time, makes route more efficient.
 
-### Custom home router
+### Custom Home Page Router
 
-Default the indexAction of index controller is excuted in index home. If you want custom home router in your project, and it doesn't work by writing `['', 'index/list']`。
+By default, home page router execute the indexAction of index controller. If you want custom home router in your projects, you will find it doesn't work by writing `['', 'index/list']`.
 
-ThinkJS
-We don't support custom index home router. Because there has many users that they won't modify router. If we change to support it, we should run all custom router. That's waste performance.
+
+In consideration of performance, ThinkJS don't support customizing of home router. Because of the traffic of Home page are usually large, and there are less chances to modify the configuration of its router. If we support the customizing of Home page router, we would run through all the customized routers for every request to home page,that will be a huge wasting on performance.
+
+s
