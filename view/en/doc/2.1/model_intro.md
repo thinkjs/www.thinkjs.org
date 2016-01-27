@@ -58,7 +58,7 @@ export default class extends think.model.base {
       default: 0  //default is 0
     },
     fullname: { //fullname
-      default: () => { //combination of first_name and last_name
+      default: function() { //combination of first_name and last_name, can not use arrows function
         return this.first_name + this.last_name;
       }
     }

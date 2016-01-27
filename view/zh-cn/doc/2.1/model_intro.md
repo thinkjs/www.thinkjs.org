@@ -60,7 +60,7 @@ export default class extends think.model.base {
       default: 0  //默认为 0
     },
     fullname: { //全名
-      default: () => { //first_name 和 last_name 的组合
+      default: function() { //first_name 和 last_name 的组合，这里不能用 Arrows Function
         return this.first_name + this.last_name;
       }
     }
