@@ -68,10 +68,6 @@ Host of current request, not contain host port.
 
 Payload data of current request, it has data only if the request is submit type.
 
-#### http._payloadParsed
-
-Means this payload of current request has parsed or not.
-
 #### http._get
 
 Store GET arguments.
@@ -101,6 +97,12 @@ The controller name of current request parsed.
 The action name of current request parsed.
 
 ### Methods
+
+#### http.getPayload()
+
+* `return` {Promise} payload data
+
+Get payload data.
 
 #### http.config(name)
 

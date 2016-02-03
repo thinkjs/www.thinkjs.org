@@ -748,9 +748,10 @@ Register, create, get and execute middleware.
 var ParseXML = think.middleware({
   run: function(){
     var http = this.http;
-    var payload = http.payload; // payload is the upload post data
-    var data = xmlParse.parse(payload); // use a xml parser, this xmlParse here is an example
-    http._post = data; // assign parsed data to http._post, then can get data from http._post('xxx')
+    return http.getPayload().then(function(payload){
+      var data = xmlParse.parse(payload); // use a xml parser, this xmlParse here is an example
+      http._post = data; // assign parsed data to http._post, then can get data from http._post('xxx')
+    });
   }
 });
 ```

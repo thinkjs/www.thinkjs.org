@@ -69,9 +69,7 @@ http 对象会在 middleware, logic, controller, view 中传递。
 
 当前请求的 payload 数据，提交型的请求才含有该值。
 
-#### http._payloadParsed
-
-表示当前请求的 payload 数据是否已经解析。
+`注`：该属性后续会废弃，建议使用 `http.getPayload` 方法。
 
 #### http._get
 
@@ -102,6 +100,12 @@ http 对象会在 middleware, logic, controller, view 中传递。
 当前请求解析后对应的操作名。
 
 ### 方法
+
+#### http.getPayload()
+
+* `return` {Promise} payload 内容
+
+获取 payload。
 
 #### http.config(name)
 

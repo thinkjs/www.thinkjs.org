@@ -154,8 +154,9 @@ middleware 里会将 `http` 传递进去，可以通过 `this.http` 属性来获
 可以建立文件 `src/common/bootstrap/middleware.js`，该文件在服务启动时会自动被加载。可以在这个文件添加多个函数式的 middleware。如：
 
 ```js
-think.middleware('parse_xml', http => {
-  if (!http.payload) {
+think.middleware('parse_xml', async http => {
+  let payload = await http.getPayload();
+  if (!payload) {
     return;
   }
   ...
@@ -189,11 +190,12 @@ think.middleware('parse_json_payload', http => {
 * `http._file` 用来存放上传的文件值，http.file(xxx) 从该对象获取数据
 
 ```js
-think.middleware('parse_xml', http => {
-  if (!http.payload) {
+think.middleware('parse_xml', async http => {
+  let payload = await http.getPayload();
+  if (!payload) {
     return;
   }
-  return parseXML(http.payload).then(data => {
+  return parseXML(payload).then(data => {
     http._post = data; //将解析后的数据赋值给 http._post，后续可以通过 http.post 方法来获取
   });
 });
@@ -208,8 +210,9 @@ think.middleware('parse_xml', http => {
 ThinkJS 提供了 `think.prevent` 方法用来阻止后续的逻辑执行执行，该方法是通过返回一个特定类型的 Reject Promise 来实现的。
 
 ```js
-think.middleware('parse_xml', http => {
-  if (!http.payload) {
+think.middleware('parse_xml', async http => {
+  let payload = await http.getPayload();
+  if (!payload) {
     return;
   }
   var ip = http.ip();

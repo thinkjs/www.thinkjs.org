@@ -767,9 +767,10 @@ let result = think.hook('view_template', http, data);
 var ParseXML = think.middleware({
   run: function(){
     var http = this.http;
-    var payload = http.payload; //payload为上传的post数据
-    var data = xmlParse.parse(payload); //使用一个xml解析，这里 xmlParse 是示例
-    http._post = data; //将解析后的数据赋值给 http._post，后续可以通过 http.post('xxx') 获取
+    return http.getPayload().then(function(payload){
+      var data = xmlParse.parse(payload); //使用一个xml解析，这里 xmlParse 是示例
+      http._post = data; //将解析后的数据赋值给 http._post，后续可以通过 http.post('xxx') 获取 
+    });
   }
 });
 ```

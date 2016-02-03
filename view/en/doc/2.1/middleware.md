@@ -154,8 +154,9 @@ You could create the file `src/common/bootstrap/middleware.js`, which will be lo
 
 
 ```js
-think.middleware('parse_xml', http => {
-  if (!http.payload) {
+think.middleware('parse_xml', async http => {
+  let payload = await http.getPayload();
+  if (!payload) {
     return;
   }
   ...
@@ -190,11 +191,12 @@ Some middlewares may parse the corresponding datas, and want to reassign `http` 
 * `http._file` store the value of uploaded file, http.file(xxx) to get data from this object
 
 ```js
-think.middleware('parse_xml', http => {
-  if (!http.payload) {
+think.middleware('parse_xml', async http => {
+  let payload = await http.getPayload();
+  if (!payload) {
     return;
   }
-  return parseXML(http.payload).then(data => {
+  return parseXML(payload).then(data => {
     http._post = data; //assign the parsed data to http._post, use http.post to get value later
   });
 });
@@ -210,8 +212,9 @@ When executing the certain conditions, some middlewares may want to prevent the 
 ThinkJS provides the method `think.prevent` for preventing the subsequent logic to execute. This method returns a specific type of Reject Promise.
 
 ```js
-think.middleware('parse_xml', http => {
-  if (!http.payload) {
+think.middleware('parse_xml', async http => {
+  let payload = await http.getPayload();
+  if (!payload) {
     return;
   }
   var ip = http.ip();
