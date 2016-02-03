@@ -152,7 +152,7 @@ http.isAjax('GET'); // judge request is ajax request and is GET type or not
 * `name` {String} callback parameter name, default is callback
 * `return` {Boolean}
 
-Return current request is jsonp requst or not.
+Return current request is jsonp request or not.
 
 ```js
 //url is  /index/test?callback=testxxx
