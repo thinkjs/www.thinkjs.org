@@ -345,6 +345,14 @@ think.isFile("/home/welefen/a.txt"); //true
 think.isFile("/home/welefen/dirname"); //false
 ```
 
+
+#### think.isFileAsync(file)
+
+* `file` {Mixed} 要检测的文件路径
+* `return` {Boolean}
+
+异步检测是否是文件，返回一个 Promise。该方法在 `2.1.5` 版本中添加。
+
 #### think.isDir(dir)
 
 * `dir` {Mixed} 要检测的路径
@@ -355,6 +363,27 @@ think.isFile("/home/welefen/dirname"); //false
 ```js
 think.isDir("/home/welefen/dirname"); //true
 ```
+
+#### think.isDirAsync(dir)
+
+* `dir` {Mixed} 要检测的路径
+* `return` {Boolean}
+
+异步检测是否是目录，返回 Promise。该方法在 `2.1.5` 版本中添加。
+
+#### think.datetime(date)
+
+* `date` {Date} 
+* `return` {String}
+
+返回一个格式化的日期，格式为：`YYYY-MM-DD HH:ii:ss`，如：
+
+```js
+let str = think.datetime();
+//str is 2016-02-01 10:00:00
+```
+
+该方法在 `2.1.5` 版本中添加。
 
 #### think.isBuffer(obj)
 
