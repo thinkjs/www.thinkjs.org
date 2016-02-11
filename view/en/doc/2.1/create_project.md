@@ -80,7 +80,7 @@ If the output is like the following, that means you have created the project suc
   $ npm start
 ```
 
-For more details aobut creating project, go to [extension function -> ThinkJS command](./thinkjs_command.html).
+For more details about creating project, go to [extension function -> ThinkJS command](./thinkjs_command.html).
 
 ### Install dependencies
 
