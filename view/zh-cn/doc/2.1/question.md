@@ -268,7 +268,7 @@ export default class extends think.controller.base {
 
 ```js
 import request from 'request';
-//获取 API 接口数据
+/* 获取 API 接口数据 */
 let getApiData = () => {
   let deferred = think.defer();
   request.get({
@@ -290,7 +290,7 @@ let getApiData = () => {
 
 ```js
 import request from 'request';
-//获取 API 接口数据
+/* 获取 API 接口数据 */
 let getApiData = () => {
   let fn = think.promisify(request.get);
   return fn({
@@ -302,4 +302,6 @@ let getApiData = () => {
 }
 ```
 
+### 开发环境好的，线上部署 502
 
+有时候开发环境下是好的，到线上使用 pm2 和 nginx 部署时，访问出现 502 的情况，这个情况一般为 node 服务没有正常启动导致的。可以通过 `pm2 logs` 看对应的错误信息来分析排查，也可以先关闭服务，手动通过 `node www/production.js` 启动服务，然后访问看具体的错误信息。
