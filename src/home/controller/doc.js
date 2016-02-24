@@ -146,7 +146,9 @@ export default class extends base {
         data[filename] = {filename: filename, text: []};
       }
       let text = item.substr(pos + 1);
-      text = this.escapeHtml(text).replace(new RegExp(keyword, 'ig'), `<span style="color:#c7254e">${keyword}</span>`);
+      text = this.escapeHtml(text).replace(new RegExp(keyword, 'ig'), a => {
+        return `<span style="color:#c7254e">${a}</span>`;
+      });
       data[filename].text.push(text);
     });
     data = Object.keys(data).map(item => {
