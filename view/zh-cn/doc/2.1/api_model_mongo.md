@@ -24,7 +24,7 @@ module.exports = think.model('mongo', {
 
 ### 属性
 
-#### model.fields
+#### model.schema
 
 设置字段，如：
 
@@ -33,7 +33,7 @@ export default class extends think.model.mongo {
   init(...args){
     super.init(...args);
     //设置字段
-    this.fields = {
+    this.schema = {
       name: {
         type: 'string'
       },
