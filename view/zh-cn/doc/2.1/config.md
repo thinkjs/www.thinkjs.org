@@ -249,7 +249,7 @@ export default {
 
   route_on: true, //是否开启自定义路由
 
-  log_pid: false, //是否记录服务的 pid
+  log_error: true, //是否打印错误日志
   log_request: false, //是否打印请求的日志
   
   create_server: undefined, //自定义启动服务

@@ -258,7 +258,7 @@ export default {
 
   route_on: true, //turns routing on
 
-  log_pid: false, //log process id
+  log_error: true, //log error
   log_request: false, //log http request
   
   create_server: undefined, //create server
