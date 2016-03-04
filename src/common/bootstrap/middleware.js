@@ -50,17 +50,18 @@ think.middleware('replace_image', (http, content) => {
  * @return {[type]}      [description]
  */
 think.middleware('log_request', http => {
-  let fn = d => {
-    return ('0' + d).slice(-2);
-  };
-
-  let d = new Date();
-  let date = `${d.getFullYear()}-${fn(d.getMonth() + 1)}-${fn(d.getDate())}`;
-  let time = `${fn(d.getHours())}:${fn(d.getMinutes())}:${fn(d.getSeconds())}`;
+  let userAgent = http.userAgent();
+  let blackList = ['http://', 'https://', 'jiankongbao', 'yunjiankong'];
+  let flag = blackList.some(item => {
+    return userAgent.indexOf(item) > -1;
+  });
+  if(flag){
+    return;
+  }
 
   let ip = http.ip();
-  let log = `[${date} ${time}] - ${ip} - "${http.url}" - "${http.userAgent()}"`;
-  let logPath = think.RUNTIME_PATH + '/log/' + date + '.log';
+  let log = `[${think.datetime()}] - ${ip} - "${http.url}" - "${userAgent}"`;
+  let logPath = think.RUNTIME_PATH + '/log/' + think.datetime(new Date, 'YYYY-MM-DD') + '.log';
   think.mkdir(path.dirname(logPath));
   fs.appendFile(logPath, log + '\n', () => {});
 });
