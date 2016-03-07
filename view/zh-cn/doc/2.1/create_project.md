@@ -44,7 +44,7 @@ npm install -g thinkjs@2
 npm install thinkjs@2
 ```
 
-### 创建项目
+### 使用命令创建项目
 
 ThinkJS 安装完成后，就可以通过下面的命令创建项目:
 

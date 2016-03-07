@@ -4,13 +4,13 @@ ThinkJS supports `PostgreSQL` by using [pq](https://www.npmjs.com/package/pg) mo
 
 ### Configuration
 
-If you want to use PostgreSQL, you should change modle `type` to `postgre` by modify `src/common/config/db.js`:
+If you want to use PostgreSQL, you should change modle `type` to `postgresql` by modify `src/common/config/db.js`:
 
 ```js
 export default {
-  type: 'postgre',
+  type: 'postgresql',
   adapter: {
-    postgre: {
+    postgresql: {
         
     }
   }

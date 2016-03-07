@@ -98,6 +98,12 @@ export default class extends base {
   async indexAction(){
     //this.expires(86400);
     
+    //redirect index doc, avoid relative path in doc
+    let doc = this.get('doc');
+    if(!doc){
+      return this.redirect('/doc/index.html');
+    }
+    
     this.assign('currentNav', 'doc');
     this.assign('hasBootstrap', true);
     this.assign('hasVersion', true);

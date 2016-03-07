@@ -4,13 +4,13 @@ ThinkJS 支持 `PostgreSQL`，底层使用 [pq](https://www.npmjs.com/package/pg
 
 ### 配置
 
-使用 PostgreSQL，需要将模型中的配置 `type` 改为 `postgre`，修改配置文件 `src/common/config/db.js`：
+使用 PostgreSQL，需要将模型中的配置 `type` 改为 `postgresql`，修改配置文件 `src/common/config/db.js`：
 
 ```js
 export default {
-  type: 'postgre',
+  type: 'postgresql',
   adapter: {
-    postgre: {
+    postgresql: {
         
     }
   }

@@ -8,7 +8,6 @@ export default class extends think.logic.base {
    */
   indexAction(){
     this.rules = {
-      doc: "string|default:index",
       version: this.version
     }
   }

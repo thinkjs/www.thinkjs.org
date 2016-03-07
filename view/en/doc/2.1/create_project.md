@@ -34,7 +34,7 @@ Update ThinkJS in you current project by run the following command:
 npm install thinkjs@2
 ```
 
-### Create Project
+### User thinkjs command to create Project
 
 After installation, you can create a new ThinkJS project by run the following command:
 
