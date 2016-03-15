@@ -305,3 +305,40 @@ let getApiData = () => {
 ### 开发环境好的，线上部署 502
 
 有时候开发环境下是好的，到线上使用 pm2 和 nginx 部署时，访问出现 502 的情况，这个情况一般为 node 服务没有正常启动导致的。可以通过 `pm2 logs` 看对应的错误信息来分析排查，也可以先关闭服务，手动通过 `node www/production.js` 启动服务，然后访问看具体的错误信息。
+
+### 设置跨域头信息
+
+高级浏览器支持通过设置头信息达到跨域请求，ThinkJS 里可以通过下面的方式来设置：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let method = this.http.method.toLowerCase();
+    if(method === 'options'){
+      this.header('Access-Control-Allow-Origin', '*');
+      this.header('Access-Control-Allow-Headers', 'x-requested-with');
+      this.header('Access-Control-Request-Method', 'GET,POST,PUT,DELETE');
+      this.end();
+    }
+  }
+}
+```
+
+更多头信息设置请见 <https://www.w3.org/TR/cors>。
+
+如果是在 REST API，那么可以放在 __call 方法里判断，如：
+
+```js
+export default class extends think.controller.base {
+  __call(){
+    let method = this.http.method.toLowerCase();
+    if(method === 'options'){
+      this.header('Access-Control-Allow-Origin', '*');
+      this.header('Access-Control-Allow-Headers', 'x-requested-with');
+      this.header('Access-Control-Request-Method', 'GET,POST,PUT,DELETE');
+      this.end();
+    }
+    return super.__call();
+  }
+}
+```
