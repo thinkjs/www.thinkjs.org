@@ -1,6 +1,6 @@
 ## PostgreSQL
 
-ThinkJS supports `PostgreSQL` by using [pq](https://www.npmjs.com/package/pg) module in underlayer.
+ThinkJS supports `PostgreSQL` by using [pg](https://www.npmjs.com/package/pg) module in underlayer.
 
 ### Configuration
 

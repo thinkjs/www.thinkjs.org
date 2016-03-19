@@ -1,6 +1,6 @@
 ## PostgreSQL
 
-ThinkJS 支持 `PostgreSQL`，底层使用 [pq](https://www.npmjs.com/package/pg) 模块。
+ThinkJS 支持 `PostgreSQL`，底层使用 [pg](https://www.npmjs.com/package/pg) 模块。
 
 ### 配置
 
