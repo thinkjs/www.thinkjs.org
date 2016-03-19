@@ -30,7 +30,8 @@ return array (
 	'MOD_JS_TPL_REPLACE' => false,  //前端模版替换
 	'MOD_EXTERNAL_TO_INLINE' => false,  //外链资源编译为内联资源
 	'MOD_STRING_REPLACE' => false,  //代码替换功能
-	'MOD_INLINE_TO_LS' => true,
+	'MOD_INLINE_TO_LS2' => true,
+	'LS_APP_ID' => 'd0ac6c56',
 	'TUCHUANG_CDN_MULTI_DOMAIN' => array(4),
 	'MODULE_FILE_EXT' => array('md', 'pdf'),
 	'MOD_STATIC_VERSION' => 1  //静态文件版本号，1或者true为query,2为新文件模式

@@ -1,49 +1,53 @@
 {
-    "快速入门": {
-      "介绍": "index",
-      "创建项目": "create_project",
-      "项目结构": "app_structure",
-      "代码规范": "specification",
-      "升级指南": "upgrade",
-      "常见问题": "question"
+    "Getting Started": {
+      "Introduction": "index",
+      "Create Project": "create_project",
+      "Project Structure": "app_structure",
+      "Specification": "specification",
+      "Upgrade Guide": "upgrade",
+      "Q & A": "question"
     },
-    "进阶应用": {
-      "模块": "module",
-      "控制器": "controller",
-      "视图": "view",
-      "配置": "config",
-      "路由": "route"
+    "Advanced Application": {
+      "Module": "module",
+      "Controller": "controller",
+      "View": "view",
+      "Config": "config",
+      "Route": "route"
     },
-    "模型": {
-      "介绍": "model_intro",
-      "事务": "model_transaction",
-      "关联模型": "model_relation",
-      "Mysql": "model_mysql",
+    "Model": {
+      "Introdution": "model_intro",
+      "Database Config": "model_config",
+      "CURD Operations": "model_curd",      
+      "Transaction": "model_transaction",
+      "Relation": "model_relation",
+      "MySQL": "model_mysql",
       "MongoDB": "model_mongodb",
       "SQLite": "model_sqlite"
     },
     "Adapter": {
-      "介绍": "adapter_intro",
+      "Introdution": "adapter_intro",
       "Cache": "adapter_cache",
       "Session": "adapter_session",
       "WebSocket": "adapter_websocket",
       "Template": "adapter_template"
     },
-    "扩展功能": {
-      "ThinkJS命令": "thinkjs_command",
-      "静态资源访问": "resource",
-      "Middleware": "middleware",
+    "More Features": {
+      "Command": "thinkjs_command",
+      "Static Resource": "resource",
+      "MiddleWare": "middleware",
       "Service": "service",
       "Cookie": "cookie",
-      "错误处理": "error_handle",
-      "错误信息": "error_message",
-      "数据校验": "validation",
-      "国际化": "i18n",
-      "路径常量": "path_cost",
+      "Error Handling": "error_handle",
+      "Error Messages": "error_message",
+      "Validation": "validation",
+      "I18N": "i18n",
+      "Path Const": "path_cost",
       "REST API": "rest_api",
-      "定时任务": "crontab",
-      "线上部署": "deploy",
-      "推荐模块": "recommend_modules"
+      "Crontab": "crontab",
+      "Deploy": "deploy",
+      "Developing Plugins": "plugin",      
+      "Modules": "recommend_modules",
+      "More Features": "more"            
     },
     "API": {
       "think": "api_think",

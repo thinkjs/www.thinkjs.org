@@ -1,0 +1,57 @@
+<%include inc/header.html %>
+
+<div class="content doc-content">
+  <div class="wrap clearfix">
+      <div class="lbox doc-sidebar" id="directoryList">
+        <%for(var key in sidebar){%>
+        <dl>
+          <dt><%-key%></dt>
+            <dd>
+              <%for(var name in sidebar[key]){%>
+              <a href="/<%-lang%>/doc/<%-version%>/<%-sidebar[key][name]%>.html"><%-name%></a>
+              <%}%>
+            </dd>
+        </dl>
+        <%}%>
+      </div>
+        <div class="rbox">
+          <div class="clearfix">
+
+            <div class="search">
+              <form method="get" action="/<%-lang%>/doc/<%-version%>/search">
+                  <input class="sea-txt" value="" required name="keyword" />
+                  <input class="sea-btn" type="submit" value="" />
+              </form>
+            </div>
+            
+          </div>
+            <div class="doc">
+                <%-markedContent%>
+            </div>
+            <%if(doc !== 'single'){%>
+            <div style="margin-top:40px;" class="doc-address">
+              文档地址：<a href="https://github.com/75team/www.thinkjs.org/tree/master/view/<%-lang%>/doc/<%-version%>/<%-doc%>.md" target="_blank">https://github.com/75team/www.thinkjs.org/tree/master/view/<%-lang%>/doc/<%-version%>/<%-doc%>.md</a>
+            </div>
+            <%}%>
+        </div>
+        <!-- <a class="view-single-mobile" href="/doc/2.0/single.html">浏览所有文档</a> -->
+        <div class="r-fixed">
+          <a class="back2top" title="<%-_('back2top')%>" href="#"></a>
+          <a class="pdf" title="<%-_('download-pdf')%>" target="_blank" href="/static/module/thinkjs/thinkjs_<%-lang%>_<%-version%>.pdf"></a>
+          <a class="view-single" title="<%-_('view-on-single-page')%>" href="/<%-lang%>/doc/<%-version%>/single.html"></a>
+          <a class="doc-dir" id="docDirectiry" title="<%-_('view-on-single-page')%>"></a>
+        </div>
+    </div>
+</div>
+<%include inc/footer.html %>
+<script>
+(function(){
+  var docDirectiry = document.getElementById('docDirectiry');
+  var directoryList = document.getElementById('directoryList');
+  var isShow = false;
+  docDirectiry.addEventListener('touchstart', function(){
+    directoryList.style.display = isShow ? 'none' : 'block';
+    isShow = !isShow;
+  })
+}());
+</script>

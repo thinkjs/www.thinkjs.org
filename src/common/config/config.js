@@ -1,10 +1,12 @@
 export default {
   port: 7777,
   //cluster_on: true,
+  
 
   locale: { //i18n
     name: 'think_locale',
-    default: 'zh-CN'
+    // default: 'zh-CN'
+    default: 'en'
   },
   view: {
     content_type: 'text/html',

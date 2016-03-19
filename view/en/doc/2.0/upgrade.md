@@ -1,59 +1,56 @@
-## 升级指南
+## Upgrade Guide
 
-2.0 在架构和特性上都完全进行了重写，是个颠覆式的版本，所以无法直接从 `1.x` 升级到 `2.0` 版本的。 
+You can't update `1.x` version of your ThinkJS project to `2.x` directly.
 
-### 与 1.x 版本差异
+### Difference with Version 1.x
 
-#### 项目结构
+#### Project Structure
 
-2.0 默认使用按模块进行项目结构划分的，与 1.x 在目录结构有一些差别。如果想 2.0 下使用类似 1.x 的项目结构，可以在创建项目的时候指定 `--mode=normal`。如：
+Version 2.0 makes up of modules by default which is difference with version 1.x. If you want to use the structure of version 1.x in version 2.0, you should specify `--mode=normal` like following:
 
 ```sh
 thinkjs new demo --mode=normal
 ```
+#### Filenames Case Sensitivity
 
-#### 文件大小写
+In old versions, the filenames was camel-cased, and include file-type, such as `Controller/indexController.js`. Version 2.0 was build strictly based on the rule of Node.js community that all filenames and paths are lower-case and cut out file-type, so you can see such as `controller/index.js`. This new change makes filenames simple and easy to use in all platform.
 
-1.x 里文件名使用驼峰的方式，如：`Controller/indexController.js`。2.0 里严格遵循 Node.js 社区的规范，文件路径使用小写的方式，并且文件名去除了类型，如：`controller/index.js`。
+#### Debug Mode
 
-改变后文件名更加简洁，且不会出现有的系统下区分大小写的问题。
+With version 1.x, you need start `debug` mode in development environment and stop it in production environment. This can result in memory leaks because most people often forget do it in deploy process.
 
-#### debug 模式
+The `debug` mode was deprecated in version 2.x. The new version supports three modes: `development`, `testing` and `production`. Each mode has their own folder, you can start your project with different environment by using different folder.
 
-1.x 下开发环境需要开启 `debug` 模式，线上需要关闭 debug 模式，但经常会出现线上开启了 debug 模式，导致出现内存泄漏等问题。
+#### C Method
 
-2.0 废弃了 `debug` 模式，而是提供了 `development`，`testing` 和 `production` 3 种模式，分别在对应的环境下使用，创建项目时会创建对应的 3 个文件，这样在不同的环境下就可以使用不同的文件来启动项目了。
+The `C` method that used to get your configuration infomation in version 1.x was deprecated in version 2.0. In vesion 2.0, you read configuration infomation that in different places by using different methods.
 
-#### C 函数
+In places that can acess `http` object such as Controller, Middleware, you can use `config` method to get configuration information, in other places you should use `think.config` method.
 
-1.x 里提供了 `C` 函数来读取配置，2.0 里废除了该函数，不同地方使用不同的方式来读取配置。
+#### D and M Methods
 
-Controller，Middleware 等含有 `http` 对象的地方使用 `config` 方法来读取配置，其他等地方需要使用 `think.config` 方法来读取配置。
+There were `D` and `M` methods to instantiate your model in verion 1.x. But in version 2.0 they are deprecated, you need instantiate your model in different places by using different methods.
 
-#### D 和 M 函数
+In Controller, Model, Middleware, you can use `model` method for instantiating. In other places you should use `think.model` method.
 
-1.x 里提供了 `D` 和 `M` 函数来实例化模型，2.0 里废除了这 2 个函数，不同的地方使用不同的方式来实例化模型。
+#### Control and Model Methods
 
-Controller，Model，Middleware 等地方使用 `model` 方法来实例化模型，其他等地方使用 `think.model` 方法来实例化模型。
+There were `Controller` and `Model` methods could be used to create controllers and models in version 1.x. But in this new version, they both are deprecated. Instead of using these methods, we support various ways to instantiate classes.
 
-#### Controller，Model 函数
+You can use ES6 grammar `class extends think.model.base` to instantiate a model, and to instantiate a controller is same.
 
-1.x 里提供了 `Controller` 来创建控制器类，`Model` 来创建模型类，2.0 里废除了这些函数。并提供了多种方式来创建类。
+#### Other Global Methods
 
-ES6 直接使用 `class extends think.model.base` 来创建一个模型类，非 ES6 下可以通过 `think.model` 来创建一个模型类，创建控制器类类似。
+Version 1.x supports some common global methods such as `md5`, `mkdir`. All that was moved to `think` object since verion 2.0, so you can use `think.md5`, `think.mkdir` correspondingly.
 
-#### 其他全局函数
+#### Auto Run Directory `common/`
 
-1.x 里直接提供了一些通用的全局函数，如：`md5`，`mkdir` 等，2.0 中将这些函数都移到了 `think` 对象上，如：`think.md5`，`think.mkdir`。
+In version 1.x, there is a directory `common/`, the files within it will be auto called. In version 2.x, that directory has renamed to `bootstrap/`, and must be placed in the `common` module directory, like `src/common/bootstrap`.
 
-#### 自执行目录 common/
+#### Behavior and Driver
 
-1.x 下 `common/` 下的文件会启动被调用，2.0 中将该目录名为 `bootstrap`，并且要在 `common` 模块下，如：`src/common/bootstrap`。
+Version 2.0 changed Behavior and Driver to middleware and adapter.
 
-#### Behavior 和 Driver
+#### Deploy Online
 
-2.0 将 Behavior 改为了 middleware，Driver 改为了 adapter。
-
-#### 线上部署
-
-1.x 版本下提供了简单的脚本 `ctrl.sh` 来管理当前 Node.js 服务，2.0 里废弃了该文件，建议使用 `pm2` 来管理，并且提供了 pm2 的配置文件 `pm2.json`，线上通过 `pm2 start pm2.json` 即可启动服务。
+Version 1.0 provided a simple bash file named `ctrl.sh` for us to manage the Node.js services. But with version 2.0, we removed it and advice you take pm2 to replace it. We provide a default pm2's config file named `pm2.json`, so you can run `pm2 start pm2.json` to start service.

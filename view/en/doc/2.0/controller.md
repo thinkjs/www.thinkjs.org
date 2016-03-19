@@ -1,10 +1,10 @@
-## 控制器
+## Controller
 
-控制器是一类操作的集合，用来响应用户同一类的请求。
+Controller is a collection of same type operations, they respond to same type user requests.
 
-### 定义控制器
+### The Definition of Controller
 
-创建文件 `src/home/controller/article.js`，表示 `home` 模块下有名为 `article` 控制器，文件内容类似如下：
+Creating a file `src/home/controller/article.js`, means that there’s a controller called `article` in the `home` module, and the content of each controller is similar to the following:
 
 ```js
 'use strict';
@@ -23,7 +23,7 @@ export default class extends Base {
 }
 ```
 
-如果不想使用 ES6 语法，那么文件内容类似如下：
+If you do not use ES6 syntax, then the content is similar to the following:
 
 ```js
 'use strict';
@@ -42,13 +42,13 @@ module.exports = think.controller(Base, {
 });
 ```
 
-注：上面的 `Base` 表示定义一个基类，其他的类都继承该基类，这样就可以在基类里做一些通用的处理。
+NOTE: The `Base` above represents the definition of a base class, other classes inherit it, so that you can do some general thing in it.
 
-### 使用 Generator Function
+### Use Generator Function
 
-控制器里可以很方便的使用 Generator Function 来处理异步嵌套的问题。
+You can easily use the generator function to handle asynchronous nesting problems in the `controller`.
 
-##### ES6 方式
+##### The ES6 Way
 
 ```js
 'use strict';
@@ -68,7 +68,7 @@ export default class extends Base {
 }
 ```
 
-##### 动态创建类的方式
+##### Dynamically Create Classes
 
 ```js
 'use strict';
@@ -88,11 +88,11 @@ module.exports = think.controller(Base, {
 });
 ```
 
-### 使用 async/await
+### Use `async/await`
 
-借助 Babel 编译，还可以在控制器里使用 ES7 里的 `async/await`。
+With the Babel compilation, you can also use ES7's `async/await`.
 
-##### ES6 方式
+##### The ES6 Way
 
 ```js
 'use strict';
@@ -112,7 +112,7 @@ export default class extends Base {
 }
 ```
 
-##### 动态创建类的方式
+##### Dynamic Creation
 
 ```js
 'use strict';
@@ -132,13 +132,13 @@ module.exports = think.controller(Base, {
 });
 ```
 
-### init 方法
+### init Method
 
-ES6 里的 class 有 contructor 方法，但动态创建的类就没有该方法了，为了统一初始化执行的方法，将该方法统一定义为 `init`。
+The class in ES6 has a constructor method, but the classes that dynamically created do not, in order to perform the initialization uniformly, ThinkJS redefined it as `init`.
 
-该方法在类实例化的时候自动调用，无需手工调用。
+This method is automatically called when the class is instantiated, without manually call needed.
 
-##### ES6 方式**
+##### The ES6 Way
 　
 ```js
 'use strict';
@@ -147,13 +147,13 @@ import Base from './base.js';
 
 export default class extends Base {
   init(http){
-    super.init(http); //调用父类的init方法  
+    super.init(http); //call super-class's `init` method
     ...
   }
 }
 ```
 
-##### 动态创建类方式
+##### Dynamically Create Classes
 
 ```js
 'use strict';
@@ -162,20 +162,19 @@ var Base = require('./base.js');
 
 module.exports = think.controller(Base, {
   init: function(http){
-    this.super('init', http); //调用父类的init方法
+    this.super('init', http); //call super-class's `init` method
     ...
   }
 });
 ```
 
-`init` 方法里需要调用父类的 init 方法，并将参数 `http` 传递进去。
+When using `init` method, don't forget to call call super-class's `init` method and make sure pass the `http` in.
 
+### Pre-Operation __before
 
-### 前置操作 __before
+ThinkJS supports pre-operation with the method called `__before`, it will be automatically called before a specific Action execution. If the pre-operation prevents subsequent code continuing to execute, it does not call the specific Action, so you can end request in advance.
 
-ThinkJS 支持前置操作，方法名为 `__before`，该方法会在具体的 Action 调用之前自动调用。如果前置操作里阻止了后续代码继续执行，则不会调用具体的 Action，这样可以提前结束请求。
-
-##### ES6 方式**
+##### The ES6 Way
 　
 ```js
 'use strict';
@@ -184,7 +183,7 @@ import Base from './base.js';
 
 export default class extends Base {
   /**
-   * 前置方法
+   * Pre-Operation
    * @return {Promise} []
    */
   __before(){
@@ -196,7 +195,7 @@ export default class extends Base {
 
 ### Action
 
-一个 Action 代表一个要执行的操作。如： url 为 `/home/article/detail`，解析后的模块为 `/home`，控制器为 `article`， Action 为 `detail`，那么执行的 Action 就是文件 `src/home/controller/aritcle` 里的 `detailAction` 方法。
+A action represents an operation to be performed for response to an user request. Such as if URL is `/home/article/detail`, the module is `/home`, the controller is `article`,and the Action is `detail`, so the Action to be executed is the `detailAction` method in the file `src/home/controller/aritcle`.
 
 ```js
 'use strict';
@@ -205,7 +204,7 @@ import Base from './base.js';
 
 export default class extends Base {
   /**
-   * 获取详细信息
+   * obtain detailed information
    * @return {Promise} []
    */
   detailAction(self){
@@ -214,15 +213,15 @@ export default class extends Base {
 }
 ```
 
-如果解析后的 Action 值里含有 `_`，会自动做转化，具体的转化策略见 [路由 -> 大小写转化](./route.html)。
+If Action name parsed contains `_` , it will automatically do the conversion, for the details of specific strategies of the conversion, see [Routing -> case](./route.html).
 
-### 后置操作 __after
+### Post-Operation __after
 
-ThinkJS 支持后置操作，方法名为 `__after`，该方法会在具体的 Action 调用之后执行。如果具体的 Action 里阻止了后续的代码继续执行，则后置操作不会调用。
+ThinkJS supports post-operation called `__after`, it will be executed after a specific Action execution. If a specific Action prevents subsequent code continuing to execute, the post-operation will not be invoked.
 
-### 空操作 __call
+### No-operation __call
 
-当解析后的 url 对应的控制器存在，但 Action 不存在时，会试图调用控制器下的魔术方法 `__call`。这里可以对不存在的方法进行统一处理。
+If one controller is found to exist after parsed URL, but the Action does not exist, it will attempt to call the `__call` magic method of the controller. This way, we can unifiedly treated the missing Actions.
 
 ```js
 'use strict';
@@ -239,41 +238,40 @@ export default class extends Base {
 }
 ```
 
-### 错误处理
+### Error Handling
 
-当 url 不存在或者当前用户没权限等一些异常请求时，这时候会调用错误处理。 ThinkJS 内置了一套详细的错误处理机制，具体请见 [扩展功能 -> 错误处理](./error_handle.html)。
+If URL does not exist, the current user has no permission to do some operations or there are other unusual requests, it will enter the error handling process. ThinkJS itself built a complete error handling mechanism, for details see[extensions -> error] (./error_handle.html).
 
-### 数据校验
+### Data Validation
 
-控制器里在使用用户提交的数据之前，需要对数据合法性进行校验。为了降低控制器里的逻辑复杂度，ThinkJS 提供了一层 Logic 专门用来处理数据校验和权限校验等相关操作。
+Before using the user-submitted data in the controller, it needed to verify its legitimacy. In order to reduce the logic complexity, ThinkJS provides a logic layer that designed to handle data and permission validation and other related operations.
 
-详细信息请见 [扩展功能 -> 数据校验](./validation.html)。
+For more information, please see [Extended Functions -> Data Validation](./validation.html).
 
+### Variable Assignment and Template Rendering
 
-### 变量赋值和模版渲染
+Controller can do variable assignment and template rendering through `assign` and `display` method, specific information can be found [here](./view.html).
 
-控制器里可以通过 `assign` 和 `display` 方法进行变量赋值和模版渲染，具体信息请见 [这里](./view.html)。
+### Model Instantiation
 
-### 模型实例化
-
-在控制器中可以通过 `this.model` 方法快速获得一个模型的实例。
+In controllers, you can quickly get an instance of a model by call `this.model` method.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    let model = this.model('user'); //实例化模型 user
+    let model = this.model('user'); //instantiate mode `user`
     ...
   }
 }
 ```
 
-model 方法更多使用方式请见 [API -> think.http.base](./api_think_http_base.html#toc-e2b)。
+More usage of `model` method can be found at [API -> think.http.base](./api_think_http_base.html#toc-e2b).
 
-### http 对象
+### http Object
 
-控制器在实例化时，会将 `http` 传递进去。该 `http` 对象是 ThinkJS 对 `req` 和 `res` 重新包装的一个对象，而非 Node.js 内置的 http 对象。
+When a controller is instantiated, the `http` will be passed in. The `http` is a object that ThinkJS repacked for the `req` and `res`, it is not built in Node.js.
 
-Action 里如果想获取该对象，可以通过 `this.http` 来获取。
+In Action, it can be obtained by `this.http`.
 
 ```js
 'use strict';
@@ -287,22 +285,22 @@ export default class extends Base {
 }
 ```
 
-关于 `http` 对象包含的属性和方法请见 [API -> http](./api_http.html)。
+Details about the properties and methods of `http` object can be found at [API -> http](./api_http.html).
 
 ### REST API
 
-有时候，项目里需要提供一些 REST 接口给第三方使用，这些接口无外乎就是增删改查等操作。
+Sometimes, the project has to provide some `REST` interfaces for third party to use, these interfaces are nothing more than the CRUD operations.
 
-如果手工去书写这些操作则比较麻烦，ThinkJS 提供了 REST Controller，该控制器会自动含有通用的增删改查等操作。如果这些操作不满足需求，也可以进行定制。具体请见 [这里](./rest_api.html)。
+If you feel writing these operations by hand is very trouble, ThinkJS provides a REST Controller, that will automatically contains generic CRUD operations. If these actions do not satisfy your demand, it can also be customized. Specifically, [see here](./rest_api.html).
 
-### this 作用域的问题
+### The this Scoping Issue
 
-Node.js 里经常有很多异步操作，而异步操作常见的处理方式是使用回调函数或者 Promise。这些处理方式都会增加一层作用域，导致在回调函数内无法直接使用 `this`，简单的处理办法是在顶部定义一个变量，将 `this` 赋值给这个变量，然后在回调函数内使用这个变量。如：
+There are often many asynchronous operations in Node.js development, and the common approach is to use a callback function or `Promise`. These treatments will increase a level of scope, making it impossible to use `this` directly in the callback function, the simple approach to solve it is to define a variable at the top, `this` will be assigned to the variable, and then use the variable in the callback function. Such as:
 
 ```js
 module.exports = think.controller({
   indexAction: function(){
-    var self = this; //这里将 this 赋值给变量 self，然后在后面的回调函数里都使用 self
+    var self = this; // assign the reference of this to self
     this.model('user').find().then(function(data){
       return self.model('article').where({user_id: data.id}).select();
     }).then(function(data){
@@ -312,11 +310,11 @@ module.exports = think.controller({
 })
 ```
 
-如果每个 Action 里都要使用者手工写一个 `var self = this`，势必比较麻烦。为了解决这个问题，ThinkJS 在 Action 里直接提供了一个参数，这个参数等同于 `var self = this`，具体如下：
+Writing `var self = this` in each Action must be very trouble. To solve this problem, ThinkJS provides a parameter directly in Action, which is equivalent to `var self = this`, as follows:
 
 ```js
 module.exports = think.controller({
-  //参数 self 等同于 var self = this
+  // here, self is equivalent to var self = this
   indexAction: function(self){
     this.model('user').find().then(function(data){
       return self.model('article').where({user_id: data.id}).select();
@@ -326,10 +324,10 @@ module.exports = think.controller({
   }
 })
 ```
+Of course, the recommended and better solution is to use the Generator Function and Arrow Function of ES6.
 
-当然更好的解决办法是推荐使用 ES6 里的 Generator Function 和 Arrow Function，这样就可以彻底解决 this 作用域的问题。
+##### Use Generator Function
 
-##### 使用 Generator Function
 ```js
 export default class extends think.controller.base {
   * indexAction(){
@@ -341,7 +339,7 @@ export default class extends think.controller.base {
 ```
 
 
-##### 使用 Arrow Function
+##### Use Arrow Function
 
 ```js
 module.exports = think.controller({
@@ -355,13 +353,13 @@ module.exports = think.controller({
 })
 ```
 
-### JSON 输出
+### Output JSON
 
-项目中经常要提供一些接口，这些接口一般都是直接输出 JSON 格式的数据，并且会有标识表明当前接口是否正常。如果发生异常，需要将对应的错误信息随着接口一起输出。控制器里提供了 `this.success` 和 `this.fail` 方法来输出这样的接口数据。
+Many projects need provide interfaces that output data in JSON format, and there also must be a flag to indicate whether the interface is normal or not. If an exception occurs, the corresponding error message needs to be output together. The controller provides the `this.success` and `this.fail` methods to output interface data.
 
-#### 输出正常的 JSON
+#### Output Normal JSON
 
-可以通过 `this.success` 方法输出正常的接口数据，如：
+The normal interface data can be output through `this.success` method, such as:
 
 ```js
 export default class extends think.controller.base {
@@ -372,12 +370,11 @@ export default class extends think.controller.base {
 }
 ```
 
-输出结果为 `{errno: 0, errmsg: "", data: {"name": "thinkjs"}}`，客户端可以通过 `errno` 是否为 0 来判断当前接口是否有异常。
+In this example, the output is `{errno: 0, errmsg: "", data: {"name": "thinkjs"}}`, the client can determine whether there is an exception with the current interface through `errno` is 0 or not.
 
+#### Output JSON Contained the Error Message
 
-#### 输出含有错误信息的 JSON
-
-可以通过 `this.fail` 方法输出含有错误信息的接口数据，如：
+Interface data contained error messages may output by the `this.fail` method, such as:
 
 ```js
 export default class extends think.controller.base {
@@ -387,13 +384,13 @@ export default class extends think.controller.base {
 }
 ```
 
-输出结果为 `{errno: 1000, errmsg: "connect error"}`，客户端判断 `errno` 大于 0，就知道当前接口有异常，并且通过 `errmsg` 拿到具体的错误信息。
+In this example, the output is `{errno: 1000, errmsg: "connect error"}`. When clients found `errno` is greater than zero, then it know there are exceptions with the current interface, so it can in turn to get specific error information through `errmsg`.
 
-##### 配置错误号和错误信息
+##### Configure Error Number and Error Message
 
-如果每个地方输出错误的时候都要指定错误号和错误信息势必比较麻烦，比较好的方式是把错误号和错误信息在一个地方配置，然后输出的时候只要指定错误号，错误信息根据错误号自动读取。
+It's recommended to configurate the error numbers and error messages in one place , then as long as specify error number when outputting, error information based on the error number will be automatically read out.
 
-错误信息支持国际化，所以配置放在 `src/common/config/locale/[lang].js` 文件中。如：
+Error messages support internationalization, and the configuration is in the file `src/common/config/locale/[lang].js`. Such as:
 
 ```js
 export default {
@@ -401,13 +398,13 @@ export default {
 }
 ```
 
-通过上面的配置后，执行 `this.fail(10001)` 时会自动读取到对应的错误信息。
+Whit the above configuration, performing `this.fail(10001)` will automatically get corresponding error message, "get data error" in this case.
 
-##### 友好的错误号
+##### Friendly Error Number
 
-在程序里执行 `this.fail(10001)` 虽然能输出正确的错误号和错误信息，但人不能直观的看出来错误号对应的错误信息是什么。
+Although it can output the correct error number and error message when performing the `this.fail (10001)`, but we can not intuitively see what error message corresponding it.
 
-这时可以将 key 配置为大写字符串，值为错误号和错误信息。如:
+We recommend you to configure the keys using uppercase strings, and the value is an array with the error number and error message as its elements. Such as:
 
 ```js
 export default {
@@ -415,11 +412,11 @@ export default {
 }
 ```
 
-执行 `this.fail('GET_DATA_ERROR')` 时也会自动取到对应的错误号和错误信息。
+This way, when you calling `this.fail('GETDATA ERROR')`, you will automatically get the corresponding error number and error message.
 
-#### 格式配置
+#### Format Configuration
 
-默认输出的错误号的 key 为 `errno`，错误信息的 key 为 `errmsg`。如果不满足需求的话，可以修改配置文件 `src/common/config/error.js`。
+The keys of the default error number and error message are `errno` and `errmsg` respectively. If needed, you can modify the configuration file `src/common/config/error.js` to reset them.
 
 ```js
 export default {
@@ -429,9 +426,9 @@ export default {
 ```
 
 
-#### 输出不包含错误信息的 JSON
+#### Output The JSON That Does Not Contain The Error Message
 
-如果输出的 JSON 数据里不想包含 `errno` 和 `errmsg` 的话，可以通过 `this.json` 方法输出 JSON。如：
+If you don’t want the outputed JSON data contained `errno` and `errmsg`, you can output JSON by `this.json` method. Such as:
 
 ```js
 export default class extends think.controller.base {
@@ -441,91 +438,91 @@ export default class extends think.controller.base {
 }
 ```
 
-### 常用功能
+### Common Functions
 
-#### 获取 GET 参数
+#### Get GET Parameters
 
-可以通过 `get` 方法获取 GET 参数，如：
+You can obtain GET parameters through the `get` method, such as:
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
     let name = this.get('name');
-    let allParams = this.get(); //获取所有 GET 参数
+    let allParams = this.get(); // obtain all GET parameters
   }
 }
 ```
 
-如果参数不存在，那么值为空字符串。
+If the parameter does not exist, the value will be an empty string.
 
-#### 获取 POST 参数
+#### Get POST Parameters
 
-可以通过 `post` 方法获取 POST 参数，如：
+You can obtain POST parameters through the `post` method, such as:
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
     let name = this.post('name');
-    let allParams = this.post(); //获取所有 POST 参数
+    let allParams = this.post(); // obtain all POST parameters
   }
 }
 ```
 
-如果参数不存在，那么值为空字符串。
+If the parameter does not exist, then the value will be an empty string.
 
-#### 获取上传的文件
+#### Get Uploaded Files 
 
-可以通过 `file` 方法获取上传的文件，如：
+You can obtain the uploaded files by using `file` methods, such as:
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
     let file = this.file('image');
-    let allFiles = this.file(); //获取所有上传的文件
+    let allFiles = this.file(); // obtain all uploaded files
   }
 }
 ```
 
-返回值是个对象，包含下面的属性：
+The return value is an object that contains the following attributes:
 
 ```js
 {
-  fieldName: 'file', //表单字段名称
-  originalFilename: filename, //原始的文件名
-  path: filepath, //文件保存的临时路径，使用时需要将其移动到项目里的目录，否则请求结束时会被删除
-  size: 1000 //文件大小
+  fieldName: 'file', // form field's name
+  originalFilename: filename, // original file's name
+  path: filepath, // file's temporary path, the file will be deleted when request end 
+  size: 1000 // file size
 }
 ```
 
-如果文件不存在，那么值为一个空对象 `{}`。
+If the file does not exist, then the value will be an empty object `{}`.
 
-#### JSONP 格式数据输出
+#### JSONP Format Data Output
 
-可以通过 `this.jsonp` 方法输出 JSONP 格式的数据，callback 的请求参数名默认为 `callback`。如果需要修改请求参数名，可以通过修改配置 `callback_name` 来完成。
+You can output data in JSONP format by `this.jsonp` method, the name of the callback request parameter defaults to `callback`. If you need to modify its name, you can modifying the configuration `callback_name`.
 
-#### 更多方法
+#### More Methods
 
-* `isGet()` 当前是否是 GET 请求
-* `isPost()` 当前是否是 POST 请求
-* `isAjax()` 是否是 AJAX 请求
-* `ip()` 获取请求用户的 ip
-* `redirect(url)` 跳转到一个 url
-* `write(data)` 输出数据，会自动调用 JSON.stringify
-* `end(data)` 结束当前的 http 请求
-* `json(data)` 输出 JSON 数据，自动发送 JSON 相关的 Content-Type
-* `jsonp(data)` 输出 JSONP 数据，请求参数名默认为 `callback`
-* `success(data)` 输出一个正常的 JSON 数据，数据格式为 `{errno: 0, errmsg: "", data: data}`
-* `fail(errno, errmsg, data)` 输出一个错误的 JSON 数据，数据格式为 `{errno: errno_value, errmsg: string, data: data}`
-* `download(file)` 下载文件
-* `assign(name, value)` 设置模版变量
-* `display()` 输出一个模版
-* `fetch()` 渲染模版并获取内容
-* `cookie(name, value)` 获取或者设置 cookie
-* `session(name, value)` 获取或者设置 session
-* `header(name, value)` 获取或者设置 header
-* `action(name, data)` 调用其他 Controller 的方法，可以跨模块
-* `model(name, options)` 获取模型实例
+* `isGet()` Used for check is it currently a GET request
+* `isPost()` Used for check is it currently a POST request
+* `isAjax()` Used for check is it currently a AJAX request
+* `ip()` Used for get requesting user's ip
+* `redirect(url)` Used for jump to an URL
+* `write(data)` Output data, automatically call JSON.stringify 
+* `end(data)` End the current HTTP request
+* `json(data)` Output JSON data, automatically send content-type Headers that related to JSON
+* `jsonp(data)` Output JSONP data, the request parameter name defaults to the `callback`
+* `success(data)` Output success JSON data with error info, such as `{errno: 0, errmsg: "", data: data}`
+* `fail(errno, errmsg, data)` Output error JSON data with error info, such as `{errno: errno_value, errmsg: string, data: data}`
+* `download(file)` Used for download a file
+* `assign(name, value)` Set a variable so that we can use it in the template
+* `display()` Output a template
+* `fetch()` Rendering the template and get the result
+* `cookie(name, value)` Get or set the cookie
+* `session(name, value)` Get or set the session
+* `header(name, value)` Get or set the header 
+* `action(name, data)` Call other Controller's method, included those in other modules
+* `model(name, options)` Initiated a model instance
 
-完整方法列表请见 [API -> Controller](./api_controller.html)。
+A complete list of methods please see [API -> Controller](./api_controller.html)。
 
 

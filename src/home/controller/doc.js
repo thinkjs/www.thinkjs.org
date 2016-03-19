@@ -9,13 +9,14 @@ import markToc from "marked-toc";
 
 import base from './base.js';
 
+
 export default class extends base {
   /**
    * get sidebar json
    * @return {} []
    */
   getSideBar(){
-    let lang = this.http.lang();
+    let lang = this.http.lang().toLowerCase();
     let version = this.get('version');
     let key = `sidebar_${lang}_${version}`;
     let data = thinkCache(thinkCache.APP, key);
@@ -54,7 +55,7 @@ export default class extends base {
    */
   async getDoc(){
     let doc = this.get('doc');
-    let lang = this.http.lang();
+    let lang = this.http.lang().toLowerCase();
     let version = this.get('version');
 
     let markedContent;
@@ -67,7 +68,7 @@ export default class extends base {
       if(doc === 'single'){
         filePath = `${think.RESOURCE_PATH}/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
         if(think.isFile(!filePath)){
-          filePath = this.generateSingleDoc(this.http.lang(), this.get('version'));
+          filePath = this.generateSingleDoc(this.http.lang().toLowerCase(), this.get('version'));
         }
       }
       if(!think.isFile(filePath)){
@@ -97,6 +98,12 @@ export default class extends base {
   async indexAction(){
     //this.expires(86400);
     
+    //redirect index doc, avoid relative path in doc
+    let doc = this.get('doc');
+    if(!doc){
+      return this.redirect('/doc/index.html');
+    }
+    
     this.assign('currentNav', 'doc');
     this.assign('hasBootstrap', true);
     this.assign('hasVersion', true);
@@ -124,7 +131,7 @@ export default class extends base {
    * @return {}         []
    */
   async getSearchResult(keyword){
-    let lang = this.http.lang();
+    let lang = this.http.lang().toLowerCase();
     let version = this.get('version');
 
     let cmd = `grep '${keyword}' -ri *.md`;
@@ -145,7 +152,9 @@ export default class extends base {
         data[filename] = {filename: filename, text: []};
       }
       let text = item.substr(pos + 1);
-      text = this.escapeHtml(text).replace(new RegExp(keyword, 'ig'), `<span style="color:#c7254e">${keyword}</span>`);
+      text = this.escapeHtml(text).replace(new RegExp(keyword, 'ig'), a => {
+        return `<span style="color:#c7254e">${a}</span>`;
+      });
       data[filename].text.push(text);
     });
     data = Object.keys(data).map(item => {

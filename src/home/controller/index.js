@@ -8,8 +8,15 @@ export default class extends base {
    * @return {} []
    */
   indexAction(){
-    //this.expires(86400);
     return this.display();
+  }
+  testAction(){
+    let lang = this.lang();
+    let data = {
+      lang: lang,
+      cookie: this.http.req.headers.cookie
+    }
+    this.success(data)
   }
   /**
    * changelog page
@@ -45,16 +52,36 @@ export default class extends base {
    * @return {[type]} [description]
    */
   donateAction(){
+    this.lang('zh-cn', true);
     this.assign('currentNav', 'donate');
     this.assign('title', this.locale('title-donate'));
     return this.display();
   }
   /**
    * about page
-   * @return {[type]} [description]
+   * @return {} []
    */
   aboutAction(){
+    this.lang('zh-cn', true);
     this.assign('title', this.locale('title-about'));
+    return this.display();
+  }
+  /**
+   * spending page
+   * @return {} 
+   */
+  spendingAction(){
+    this.lang('zh-cn', true);
+    this.assign('title', this.locale('title-spending'));
+    return this.display();
+  }
+  /**
+   * event
+   * @return {} 
+   */
+  eventAction(){
+    this.lang('zh-cn', true);
+    this.assign('title', this.locale('title-event'));
     return this.display();
   }
 }

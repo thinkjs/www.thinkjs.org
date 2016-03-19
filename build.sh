@@ -25,9 +25,10 @@ fi
 mkdir view_build;
 cp -r view/* view_build;
 
+
+
 node www/production.js home/generate/single;
 node www/production.js home/generate/html;
-
 
 #path=$(pwd);
 /usr/local/bin/php $STC_PATH/index.php ${path} test $1;
@@ -45,6 +46,7 @@ cp www/*.ico output/www/;
 cp www/*.js output/www/;
 cp package.json output/;
 cp nginx.conf output/;
+#cp pm2.json output/;
 cp -r www/static/module/thinkjs output/www/static/module/
 
 npm run compile;
@@ -60,7 +62,10 @@ cd ..
 
 
 scp -r output.tar.gz qiwoo@101.198.153.219:~;
-ssh qiwoo@101.198.153.219 "tar zxvfm ~/output.tar.gz -C /home/qiwoo/www/www.thinkjs.org;rm -rf ~/output.tar.gz;pm2 restart www.thinkjs.org";
+ssh qiwoo@101.198.153.219 "tar zxvfm ~/output.tar.gz -C /home/qiwoo/www/www.thinkjs.org;mv output.tar.gz thinkjs.tar.gz;cd /home/qiwoo/www/www.thinkjs.org;pm2 startOrReload pm2.json";
+
+scp -r output.tar.gz welefen@ueapp.com:~;
+ssh welefen@ueapp.com "tar zxvfm ~/output.tar.gz -C /home/welefen/www/www.thinkjs.org;rm -rf ~/output.tar.gz;cd /home/welefen/www/www.thinkjs.org;pm2 startOrReload pm2.json";
 
 #sleep 2;
 

@@ -1,58 +1,59 @@
-## 定时任务
+## Crontab
 
-项目在线上运行时，经常要定时去执行某个功能，这时候就需要使用定时任务来处理了。ThinkJS 支持命令行方式调用，结合系统的 crontab 功能可以很好的支持定时任务。
+Online projects often need to be timed to execute certain function. By this time, you can use crontab. ThinkJS supports command line calls, combined with the system's crontab function, let you perfectly achieve this type of task.
 
-### 命令行执行
 
-ThinkJS 除了支持通过 URL 访问来执行外，还可以通过命令行的方式调用执行。使用方式如下：
+### Command Line Execution
+
+Besides supporting URL access, ThinkJS also supports command line calls. The usage is as follows.
 
 ```sh
 node www/production.js home/index/index
 ```
 
-上面的命令表示执行 `home` 模块下 `index` Controller 里的 indexAction。
+The above command means to execute indexAction of `index` Controller in `home` module.
 
-##### 携带参数
+##### Carry Params
 
-如果需要加参数，只要在后面加上对应的参数即可：
+If you need to add some params, just put the corresponding params at the end of the line:
 
 ```sh
 node www/production.js home/index/index?name=thinkjs
 ```
 
-Action 里就可以通过 `this.get` 方法来获取参数 `name` 了。
+In Action, you can use method `this.get` to get param `name`.
 
-##### 修改请求方法
+##### Modify Request Method
 
-命令行执行默认的请求类型是 GET，如果想改为其他的类型，可以用下面的方法：
+In command line executation, the default request type is GET. If you wand to modify it to use other type, you can do it this way:
 
 ```sh
 node www/production.js url=home/index/index&method=post
 ```
 
-这样就把请求类型改为了 post。但这种方式下，参数 url 的值里就不能包含 & 字符了（可以通过上面 / 的方式指定参数）。
+Thus, the request type is changed to post. But in this way, the value of params in url can not includ "&" anymore (but you can use "/" to specify params, such as `node www/production.js url=home/index/index/foo/bar&method=post`).
 
-除了修改请求类型，还可以修改下面的参数：
+Besides modifying request type, you can also modify the following params.
 
-* `host` 修改请求的 host 默认为 127.0.0.1
-* `ip` 修改请求的 ip 默认为 127.0.0.1
+* `host` modify the request host, default is 127.0.0.1
+* `ip` modify request ip, default is 127.0.0.1
 
-##### 修改 header
+##### Modify Header
 
-有时候如果想修改更多的 headers，可以传一个完整的 json 数据，如：
+Sometimes, if you want to modify more headers, you can pass a complete json. eg.
 
 ```sh
 node www/production.js {"url":"/index/index","ip":"127.0.0.1","method":"POST","headers":{"xxx":"yyyy"}}
 ```
 
-##### 禁止 URL 访问
+##### Forbid URL Access
 
-默认情况下，命令行执行的 Action 通过 URL 也可以访问到。如果禁止 URL 访问到该 Action，可以通过 `think.cli` 来判断。如：
+By default, you can access Action that is executed in command line by URL. If forbid URL to access to the Action, you can use `think.cli` to judge. eg.
 
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    //禁止 URL 访问该 Action
+    // forbid URL access to the Action
     if(!think.cli){
       this.fail('only invoked in cli mode');
     }
@@ -61,35 +62,35 @@ export default class extends think.controller.base {
 }
 ```
 
-### 执行脚本
+### Executable Script
 
-可以创建一个简单的执行脚本来调用命令行执行，如：
+You can create a simple executable script to call command line to execute. eg.
 
 ```sh
 cd project_path; 
-node www/prodution.js home/index/index;
+node www/production.js home/index/index;
 ```
 
-在项目目录下创建目录 `crontab`，将上面执行脚本存为一个文件放在该目录下。
+This would create the directory `crontab` in the project, and put the above executable script as a file in this directory.
 
-### 定时执行
+### Timed Execution
 
-借助系统里的 crontab 可以做到定时执行，通过命令 `crontab -e` 来编辑定时任务，如：
+Using system crontab can do timed executaion. Use command `crontab -e` to edit crontab. eg.
 
 ```sh
-0 */1 * * * /bin/sh project_path/crontab/a.sh # 1 小时执行一次
+0 */1 * * * /bin/sh project_path/crontab/a.sh # execute once per 1 hour
 ```
 
-### 使用 node-crontab 模块执行定时任务
+### Use node-crontab Module to Execute Crontab
 
-除了使用 crontab 和命令行联合执行定时任务外，也可以使用 `node-crontab` 模块执行定时任务。如：
+Besides combining crontab with command line, you can also use `node-crontab` module to execute crontab. eg.
 
 ```js
 import crontab from 'node-crontab';
-// 1 小时执行一次
+// execute once per 1 hour
 let jobId = crontab.scheduleJob('0 */1 * * *', () => {
   
 });
 ```
 
-将上面代码文件存放在 `src/common/bootstrap` 目录下，这样可以在服务启动时自动执行。
+Put the above code file in direcotry `src/common/bootstrap`, so it can be executed automatically when server startup.

@@ -34,3 +34,5 @@ www/static/other/icon/*.bak
 ssl/
 
 www/static/module/thinkjs/*.md
+
+view_build/

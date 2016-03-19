@@ -1,6 +1,6 @@
 ## http
 
-这里的 http 对象并不是 Node.js 里的 http 模块，而是对 request 和 response 对象包装后一个新的对象。
+This http object is not the one in Node.js, it is a new object which packaged with request object and response object.
 
 ```js
 var http = require('http');
@@ -11,147 +11,146 @@ http.createServer(function (request, response) {
 }).listen(8124);
 ```
 
-如上面的代码所示，Node.js 创建服务时，会传递 request 和 response 2个对象给回调函数。为了后续调用方便， ThinkJS 对这2个对象进行了包装，包装成了 http 对象，并且提供很多有用的方法。
+As the above code shows, when Node.js create service, it will pass request and respone to callback. For the convenience of invoke, ThinkJS packaged these two objects into its own http object, and offer some useful functions.
 
-http 对象会在 middleware, logic, controller, view 中传递。
+The `http` object will be passed to middleware, logic, controller and view.
+
+`Note`: http object is an instance of EventEmitter, so you register event listeners to it.
 
 
-`注`：http 对象是 EventEmitter 的一个实例，所以可以对其进行事件监听和执行。
-
-
-### 属性
+### Properties
 
 #### http.req
 
-系统原生的 request 对象
+System native request object.
 
 #### http.res
 
-系统原生的 response 对象
+System native response object.
 
 #### http.startTime
 
-请求的开始时间，是个`unix`时间戳。
+A start time of request, it is a `unix` timestamp.
 
 #### http.url
 
-当前请求的 url 。
+Url of urrent request.
 
 #### http.version
 
-当前请求的 http 版本。
+Http version of current request.
 
 #### http.method
 
-当前请求的类型。
+Type of current request.
 
 #### http.headers
 
-当前请求的所有头信息。
+Header informations of current request.
 
 #### http.pathname
 
-当前请求的 pathname，路由识别会依赖该值，会在后续的处理中对其进行改变。所以在 action 拿到值可能跟初始解析出来的值不一致。
+Pathname of current request, router depended on it's value and will change it in some operations. so the return value of action maybe different from the initial value.
 
 #### http.query
 
-当前请求的所有 query 数据。
+Query data of current request.
 
 #### http.host
 
-当前请求的 host， 包含端口。
+Host of current request, contain host port.
 
 #### http.hostname
 
-当前请求的 hostname，不包含端口。
+Host of current request, not contain host port.
 
 #### http.payload
 
-当前请求的 payload 数据，提交型的请求才含有该值。
+Payload data of current request, it has data only if the request is submit type.
 
 #### http._payloadParsed
 
-表示当前请求的 payload 数据是否已经解析。
+Means this payload of current request has parsed or not.
 
 #### http._get
 
-存放 GET 参数值。
+Store GET arguments.
 
 #### http._post
 
-存放 POST 参数值
+Store POST arguments.
 
 #### http._file
 
-存放上传的文件数据
+Store upload file data.
 
 #### http._cookie
 
-存放 cookie 数据。
+Store cookie data.
 
 #### http.module
 
-当前请求解析后对应的模块名。
+The module name of current request parsed.
 
 #### http.controller
 
-当前请求解析后对应的控制器名。
+The controller name of current request parsed.
 
 #### http.action
 
-当前请求解析后对应的操作名。
+The action name of current request parsed.
 
-### 方法
+### Methods
 
 #### http.config(name)
 
-* `name` {String} 参数名
-* `return` {Mixed} 返回对应的参数值
+* `name` {String} config name
+* `return` {Mixed} return config value
 
-获取当前请求下对应的参数值。
+Get the argument of current request config.
 
 #### http.referrer()
 
-* `return` {String} 请求的 referrer
+* `return` {String} referrer of request
 
-返回当前请求的 referrer。
+Return the referrer of current request.
 
 #### http.userAgent()
 
-* `return` {String} 请求的 userAgent
+* `return` {String} userAgent of request
 
-返回当前请求的 userAgent。
+Return the userAgent of current request.
 
 #### http.isGet()
 
 * `return` {Boolean}
 
-返回当前请求是否是 GET 请求。
+Return current request is GET request or not.
 
 #### http.isPost()
 
 * `return` {Boolean}
 
-返回当前请求是否是 POST 请求。
+Return current request is POST request or not.
 
 #### http.isAjax(method)
 
-* `method` {String} 请求类型
+* `method` {String} type of request
 * `return` {Boolean}
 
-返回当前请求是否是 Ajax 请求。
+Return current request is Ajax request or not.
 
 ```js
-http.isAjax(); //判断是否是Ajax请求
-http.isAjax('GET'); //判断是否是Ajax请求，且请求类型是GET
+http.isAjax(); // judge request is ajax request or not
+http.isAjax('GET'); // judge request is ajax request and is GET type or not
 ```
 
 #### http.isJsonp(name)
 
-* `name` {String} callback 参数名称，默认为 callback
+* `name` {String} callback parameter name, default is callback
 * `return` {Boolean}
 
-返回当前请求是否是 jsonp 请求。
+Return current request is jsonp requst or not.
 
 ```js
 //url is  /index/test?callback=testxxx
@@ -162,10 +161,10 @@ http.isJsonp('cb'); //false
 
 #### http.get(name, value)
 
-* `name` {String} 参数名称
-* `value` {Mixed} 参数值
+* `name` {String} parameter name
+* `value` {Mixed} parameter value
 
-获取或者设置 GET 参数值。可以通过该方法设置 GET 参数值，方便后续的逻辑里获取。
+Get or set GET parameter, it can be used to set GET argument for somewhere can get it.
 
 ```js
 // url is /index/test?name=thinkjs
@@ -177,135 +176,135 @@ http.get('name'); // returns 'other value'
 
 #### http.post(name, value)
 
-* `name` {String} 参数名称
-* `value` {Mixed} 参数值
+* `name` {String} parameter name
+* `value` {Mixed} parameter value
 
-获取或者设置 POST 值。可以通过该方法设置 POST 值，方便后续的逻辑里获取。
+Get or set POST parameter, it can be used to set POST argument for somewhere can get it.
 
 ```js
-http.post('email'); //获取提交的email
+http.post('email'); // get the submited email
 ```
 
 #### http.param(name)
 
-* `name` {String} 参数名称
+* `name` {String} parameter name
 * `return` {Mixed}
 
-获取参数值，优先从 POST 里获取，如果值为空，则从 URL 参数里获取。
+Get parameter value, firstly to get from POST, if return null, it will get the value from URL parameter.
 
 
 #### http.file(name)
 
-* `name` {String} 文件对应的字段名称
+* `name` {String} field name
 * `return` {Object} 
 
-获取上传的文件。
+Get the uploaded file.
 
 ```js
 http.file('image');
 //returns 
 {
-  fieldName: 'image', //表单里的字段名
-  originalFilename: filename, //原始文件名
-  path: filepath, //文件临时存放的路径
-  size: size //文件大小
+  fieldName: 'image', // the filed name in form
+  originalFilename: filename, // origin file name
+  path: filepath, // the temp path of store files
+  size: size // file size
 }
 ```
 
 #### http.header(name, value)
 
-* `name` {String} header 名称
-* `value` {String} header 值
+* `name` {String} header name
+* `value` {String} header value
 
-获取或者设置 header 信息。
+Get or set header information.
 
 ```js
-http.header('accept'); //获取accept
-http.header('X-NAME', 'thinkjs'); //设置header
+http.header('accept'); // get accept
+http.header('X-NAME', 'thinkjs'); // set header
 ```
 
 #### http.expires(time)
 
-* `time` {Number} 过期时间，单位为秒
+* `time` {Number} expire time, unit is second.
 
-强缓存，设置 `Cache-Control` 和 `Expires` 头信息。
+Strange cache, set `Cache-Control` and `Expries` header inforamtion.
 
 ```js
-http.header(86400); //设置过期时间为 1 天。
+http.header(86400); // set expire time is one day.
 ```
 
 #### http.status(status)
 
-设置状态码。如果头信息已经发送，则无法设置状态码。
+set status code, if header has sent, it cannot set status code.
 
 ```js
-http.status(400); //设置状态码为400
+http.status(400); // set status code to 400
 ```
 
 #### http.ip()
 
-获取用户的 ip 。如果使用了代理，获取的值可能不准。
+Get user's ip, it will been incorrect if user used proxy.
 
 #### http.lang(lang, asViewPath)
 
-* `lang` {String} 要设置的语言
-* `asViewPath` {Boolean} 是否添加一层模版语言目录
+* `lang` {String} the setup of language.
+* `asViewPath` {Boolean} whether add a directory layer for language template.
 
-获取或者设置国际化的语言，可以支持模版路径要多一层语言的目录。
+Get or set global language, it support more directory layer for language template.
 
-##### 获取语言
+##### Get language
 
 ```js
 let lang = http.lang();
 ```
 
-获取语言的循序为 `http._lang` -> `从 cookie 中获取` -> `从 header 中获取`，如果需要从 url 中解析语言，可以获取后通过 `http.lang(lang)` 方法设置到属性 `http._lang` 中。
+The order to get language is `http._lang` -> `get from cookie` -> `get from header`, if need to parse language from url, you can set `http._lang` with `http.lang(lang)` after get url.
 
-##### 设置语言
+##### set language
 
 ```js
 let lang = getFromUrl();
-http.lang(lang, true); //设置语言，并指定模版路径中添加一层语言目录
+http.lang(lang, true); // set language, and set a directory layer for language template.
 ```
 
 #### http.theme(theme)
 
-获取或者设置主题，设置后模版路径要多一层主题的目录。
+Get or set theme, after setting, it will generate a lay for theme.
 
 #### http.cookie(name, value)
 
-* `name` {String} cookie 名称
-* `value` {String} cookie 值
+* `name` {String} cookie name
+* `value` {String} cookie value
 
-读取或者设置 cookie 值。
+Read or set cookie.
 
 ```js
-http.cookie('think_test'); //获取名为 think_test 的 cookie
-http.cookie('name', 'value'); //设置 cookie，如果头信息已经发送则设置无效
+http.cookie('think_test'); // get cookie named think_test
+http.cookie('name', 'value'); // get cookie, invalid if header has sent.
 ```
 
 
 #### http.session(name, value)
 
-* `name` {String} session 名
-* `value` {Mixed} session 值
+* `name` {String} session name
+* `value` {Mixed} session value
 * `return` {Promise}
 
-读取、设置和清除 session。
+Read, set and clean session.
 
-##### 读取 Session
+##### Read Session
 
 ```js
 let value = yield http.session('userInfo');
 ```
 
-##### 设置 Session
+##### set Session
 
 ```js
 yield http.session('userInfo', data);
 ```
 
-##### 清除 Session
+##### clean Session
 
 ```js
 yield http.session();
@@ -313,48 +312,48 @@ yield http.session();
 
 #### http.redirect(url, status)
 
-* `url` {String} 要跳转的 url
-* `status` {Number} 状态码， 301 或者 302，默认为302
+* `url` {String} the url will jump
+* `status` {Number} status code, 301 or 302, default is 302.
 
-页面跳转。
+Jump page.
 
 ```js
-http.redirect('/login'); //跳转到登录页面
+http.redirect('/login'); // jump to login page.
 ```
 
 #### http.type(contentType, encoding)
 
-* `contentType` {String} 要设置的 contentType
-* `encoding` {String} 要设置的编码
+* `contentType` {String} contentType which need to modify
+* `encoding` {String} encode to set
 
-获取或者设置 Content-Type。
+Read or set Content-Type.
 
 ```js
-http.type(); //获取Content-Type
-http.type('text/html'); //设置Content-Type，会自动加上charset
-http.type('audio/mpeg', false); //设置Content-Type，不追加charset
+http.type(); // get Content-Type
+http.type('text/html'); // get Content-Type, it will add charset automatically
+http.type('audio/mpeg', false); // set Content-Type, not add charset
 ```
 
 #### http.write(content, encoding)
 
-* `content` {Mixed} 要输出的内容
-* `encoding` {String} 编码
+* `content` {Mixed} the content to write
+* `encoding` {String} charset
 
-输出内容，要调用 http.end 才能结束当前请求。
+Write content, end request only invoke http.end.
 
 #### http.end(content, encoding)
 
-* `content` {Mixed} 要输出的内容
-* `encoding` {String} 编码
+* `content` {Mixed} the content to write
+* `encoding` {String} charset
 
-输出内容并结束当前请求。
+Write content and stop current request.
 
 #### http.success(data, message)
 
-* `data` {Mixed} 要输出的数据
-* `message` {String} 追加的message
+* `data` {Mixed} the content to write
+* `message` {String} added message
 
-格式化输出一个正常的数据，一般是操作成功后输出。
+Response a format normal data , always after operate success.
 
 ```js
 http.success({name: 'thinkjs'});
@@ -368,17 +367,17 @@ http.success({name: 'thinkjs'});
 }
 ```
 
-这样客户端就可以根据 `errno` 是否为 `0` 为判断当前请求是否正常。
+Client can based on `error` is `0` or not to judge current request is success.
 
 #### http.fail(errno, errmsg, data)
 
-* `errno` {Number} 错误号
-* `errmsg` {String} 错误信息
-* `data` {Mixed} 额外的数据
+* `errno` {Number} error number
+* `errmsg` {String} error message
+* `data` {Mixed} extra data
 
-格式化输出一个异常的数据，一般是操作失败后输出。
+Output an unusual formatted data, normally after operate failed.
 
-`注`：字段名 `errno` 和 `errmsg` 可以在配置里进行修改。
+`Notice`: field name `errno` and `errmsg` can been modified in config.
 
 ```js
 http.fail(100, 'fail')
@@ -390,13 +389,13 @@ http.fail(100, 'fail')
 }
 ```
 
-这样客户端就可以拿到具体的错误号和错误信息，然后根据需要显示了。
+In this way, client will get detail error number and error message, then show message according to the need.
 
-`注`：字段名 `errno` 和 `errmsg` 可以在配置里进行修改。
+`Notice`: filed name `errno` and `errmsg` can been modified in config.
 
 #### http.json(data)
 
 * `data` {Object}
 
-json 方式输出数据，会设置 Content-Type 为 `application/json`，该值对应的配置为`json_content_type`。
+Output data in json way, it will set Content-Type to `application/json`, its config is `json_content_type`.
 
