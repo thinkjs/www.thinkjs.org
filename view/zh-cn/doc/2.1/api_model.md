@@ -975,7 +975,7 @@ export default class extends think.model.base {
 * `options` {Object} 操作选项
 * `return` {Promise} 返回多条数据
 
-查询单条数据，返回的数据类型为数组。如果未查询到相关数据，返回值为 `[]`。
+查询多条数据，返回的数据类型为数组。如果未查询到相关数据，返回值为 `[]`。
 
 #### model.countSelect(options, pageFlag)
 
