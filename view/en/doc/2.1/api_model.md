@@ -975,7 +975,7 @@ Query one data, type of data is object, if there is not result, return `{}`.
 * `options` {Object} operate options
 * `return` {Promise} return multi-data
 
-Query one data, type of data is array, if there is not result, return `[]`.
+Query many data, type of data is array, if there is not result, return `[]`.
 
 #### model.countSelect(options, pageFlag)
 
