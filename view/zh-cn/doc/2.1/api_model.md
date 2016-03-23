@@ -931,6 +931,14 @@ export default class extends think.model.base {
 
 删除数据。
 
+删除 id 为 7 的数据。
+
+```js
+model.delete({
+  where: {id: 7}
+});
+```
+
 #### model.update(data, options)
 
 * `data` {Object} 要更新的数据
