@@ -131,6 +131,7 @@ i.icon-fet8{ background-position:-70px -210px;}
 .doc h4:hover a.anchor,
 .doc h5:hover a.anchor{display: block;}
 .doc h5,.doc .h5{font-size: 16px}
+.doc img{max-width: 100%}
 
 
 .page-con{color:#333;}

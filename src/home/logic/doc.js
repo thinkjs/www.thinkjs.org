@@ -1,6 +1,6 @@
 export default class extends think.logic.base {
 
-  version = "string|in:1.2,2.0,2.1|default:2.1";
+  version = "string|in:1.2,2.0,2.1,2.2|default:2.2";
 
   /**
    * doc logic
