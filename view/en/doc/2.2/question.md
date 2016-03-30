@@ -8,7 +8,17 @@ Although Node.js hasn't support all of those features, we can use them in Node.j
 
 ### Why Run `npm run watch-compile` Can't Stop the Process
 
-Version 2.0.6 has removed this command, beacause this version has supported auto-compile featrue, so all you need to do is to start the service by run `npm start`.
+Version 2.0.6 has removed this command, beacause this version has supported auto-compile feature, so all you need to do is to start the service by run `npm start`.
+
+### How to change server port
+
+By default, Node.js server port is `8360`, you can change it in file `src/common/config/config.js`.
+
+```js
+export default {
+  port: 1234 //Change server port to 1234
+}
+```
 
 ### Do We Need Restart Service After We Modified Something
 
