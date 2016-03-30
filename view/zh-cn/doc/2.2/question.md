@@ -362,3 +362,18 @@ export default class extends think.controller.base {
 解决方案也很简单，找个目录创建一个模式一样的项目，然后把 `.thinkjsrc` 文件拷贝到当前项目下即可。
 
 `注`：`.thinkjsrc` 文件需要纳入到项目版本管理中，不然后续会持续出现这个问题。
+
+### 编译时，如何追加 presets 和 plugins
+
+使用 Babel 编译时，内置使用的 presets 为 `es2015-loose,stage-1`，plugins 为 `transform-runtime`。如果内置的不满足项目的需求，可以修改 `www/development.js` 来追加，如：
+
+```js
+//compile src/ to app/
+instance.compile({
+  log: true,
+  presets: ['stage-0'], //添加 stage-0 presets
+  plugins: ['transform-decorators-legacy']
+});
+```
+
+添加对应的 presets 和 plugins 后，需要在项目安装对应的依赖才可运行。
