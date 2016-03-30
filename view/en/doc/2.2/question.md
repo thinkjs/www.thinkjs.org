@@ -271,13 +271,13 @@ export default class extends think.controller.base {
 }
 ```
 
-### 如何请求其他接口数据
+### How to request other api's data
 
-在项目中，经常要请求其他接口的数据。这时候可以用内置的 `http` 模块来操作，但 `http` 模块提供的接口比较基础，写起来比较麻烦。推荐大家用基于 `http` 模块封装的 `request` 模块或者 `superagent` 模块。如：
+It's common to request other api's data in our project. Of couse you can use `http` module to implement it. But `http` module only provides some basic function. We recommend to use `request` module or `superagent` module:
 
 ```js
 import request from 'request';
-/* 获取 API 接口数据 */
+/* Get API DATA */
 let getApiData = () => {
   let deferred = think.defer();
   request.get({
@@ -294,8 +294,8 @@ let getApiData = () => {
   });
 }
 ```
+To convert it to promise style, you should create an deferred object to resolve or reject in callback function. ThinkJS provides `think.promisify` function to convert function to promise quickly.
 
-但这么写需要创建一个 deferred 对象，然后在回调函数里去根据 err 进行 resolve 或者 reject，写起来有些麻烦。ThinkJS 里提供了 `think.promisify` 方法来快速处理这一问题。
 
 ```js
 import request from 'request';
@@ -311,13 +311,13 @@ let getApiData = () => {
 }
 ```
 
-### 开发环境好的，线上部署 502
+### Normal in development environment and 502 error in production environment
 
-有时候开发环境下是好的，到线上使用 pm2 和 nginx 部署时，访问出现 502 的情况，这个情况一般为 node 服务没有正常启动导致的。可以通过 `pm2 logs` 看对应的错误信息来分析排查，也可以先关闭服务，手动通过 `node www/production.js` 启动服务，然后访问看具体的错误信息。
+Sometimes it's normal in development, but it comes 502 error in production by using pm2 and nginx. Think error is caused by abnormal with starting node service. You can see error info to check by `pm2 logs` command. Or you can close service and start service handly by `node www/production.js`, then watch error info.
 
-### 设置跨域头信息
+### CORS setting
 
-高级浏览器支持通过设置头信息达到跨域请求，ThinkJS 里可以通过下面的方式来设置：
+Morden browsers support cors by setting some request header. ThinkJS can setting quickly like following:
 
 ```js
 export default class extends think.controller.base {
@@ -332,10 +332,9 @@ export default class extends think.controller.base {
   }
 }
 ```
+More CORS info can watch <https://www.w3.org/TR/cors>. 
 
-更多头信息设置请见 <https://www.w3.org/TR/cors>。
-
-如果是在 REST API，那么可以放在 __call 方法里判断，如：
+If your project is REST API, you can add these codes in `__call` method.
 
 ```js
 export default class extends think.controller.base {
@@ -354,10 +353,10 @@ export default class extends think.controller.base {
 
 ### current path is not thinkjs project.
 
-使用 thinkjs 命令创建一些 adapter 或者 model 之类时，有时候会报 `current path is not thinkjs project` 的错误。
+When you use thinkjs command to create adapter or model, cli will return error like `current path is not thinkjs project` sometime.
 
-这是因为在用 `thinkjs new project` 来创建项目时，会在项目下创建一个名为 `.thinkjsrc` 的文件，这个文件里有对项目的一些描述。后续创建 adapter 等功能时需要读取这个文件，如果这个文件丢失，那么就会报 `current path is not thinkjs project` 错误。
+When we use `thinkjs new project` command to create project, it will auto create a file named `.thinkjsrc` to store some description for this project. And creating adapter and model are depends on this file. If you miss this file, ThinkJS will return `current path is not thinkjs project` error.
 
-解决方案也很简单，找个目录创建一个模式一样的项目，然后把 `.thinkjsrc` 文件拷贝到当前项目下即可。
+To resolve this problem, you can copy `.thinkjsrc` file from anohter same project.
 
-`注`：`.thinkjsrc` 文件需要纳入到项目版本管理中，不然后续会持续出现这个问题。
+`tip`：`.thinkjsrc` file needs version control or will display this error someday.
