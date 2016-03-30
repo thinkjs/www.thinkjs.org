@@ -260,3 +260,94 @@ export default class extends think.controller.base {
   }
 }
 ```
+
+### 如何请求其他接口数据
+
+在项目中，经常要请求其他接口的数据。这时候可以用内置的 `http` 模块来操作，但 `http` 模块提供的接口比较基础，写起来比较麻烦。推荐大家用基于 `http` 模块封装的 `request` 模块或者 `superagent` 模块。如：
+
+```js
+import request from 'request';
+/* 获取 API 接口数据 */
+let getApiData = () => {
+  let deferred = think.defer();
+  request.get({
+    url: 'http://www.example.com/api/user',
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) Chrome/47.0.2526.111 Safari/537.36'
+    }
+  }, (err, response, body) => {
+    if(err){
+      deferred.reject(err);
+    }else{
+      deferred.resolve(body);
+    }
+  });
+}
+```
+
+但这么写需要创建一个 deferred 对象，然后在回调函数里去根据 err 进行 resolve 或者 reject，写起来有些麻烦。ThinkJS 里提供了 `think.promisify` 方法来快速处理这一问题。
+
+```js
+import request from 'request';
+/* 获取 API 接口数据 */
+let getApiData = () => {
+  let fn = think.promisify(request.get);
+  return fn({
+    url: 'http://www.example.com/api/user',
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) Chrome/47.0.2526.111 Safari/537.36'
+    }
+  });
+}
+```
+
+### 开发环境好的，线上部署 502
+
+有时候开发环境下是好的，到线上使用 pm2 和 nginx 部署时，访问出现 502 的情况，这个情况一般为 node 服务没有正常启动导致的。可以通过 `pm2 logs` 看对应的错误信息来分析排查，也可以先关闭服务，手动通过 `node www/production.js` 启动服务，然后访问看具体的错误信息。
+
+### 设置跨域头信息
+
+高级浏览器支持通过设置头信息达到跨域请求，ThinkJS 里可以通过下面的方式来设置：
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let method = this.http.method.toLowerCase();
+    if(method === 'options'){
+      this.header('Access-Control-Allow-Origin', '*');
+      this.header('Access-Control-Allow-Headers', 'x-requested-with');
+      this.header('Access-Control-Request-Method', 'GET,POST,PUT,DELETE');
+      this.end();
+    }
+  }
+}
+```
+
+更多头信息设置请见 <https://www.w3.org/TR/cors>。
+
+如果是在 REST API，那么可以放在 __call 方法里判断，如：
+
+```js
+export default class extends think.controller.base {
+  __call(){
+    let method = this.http.method.toLowerCase();
+    if(method === 'options'){
+      this.header('Access-Control-Allow-Origin', '*');
+      this.header('Access-Control-Allow-Headers', 'x-requested-with');
+      this.header('Access-Control-Request-Method', 'GET,POST,PUT,DELETE');
+      this.end();
+    }
+    return super.__call();
+  }
+}
+```
+
+### current path is not thinkjs project.
+
+使用 thinkjs 命令创建一些 adapter 或者 model 之类时，有时候会报 `current path is not thinkjs project` 的错误。
+
+这是因为在用 `thinkjs new project` 来创建项目时，会在项目下创建一个名为 `.thinkjsrc` 的文件，这个文件里有对项目的一些描述。后续创建 adapter 等功能时需要读取这个文件，如果这个文件丢失，那么就会报 `current path is not thinkjs project` 错误。
+
+解决方案也很简单，找个目录创建一个模式一样的项目，然后把 `.thinkjsrc` 文件拷贝到当前项目下即可。
+
+`注`：`.thinkjsrc` 文件需要纳入到项目版本管理中，不然后续会持续出现这个问题。
