@@ -124,7 +124,7 @@ On the other hand, ThinkJS choosed to provide the full set of solutions. But not
 
 Sails is another Node.js framework that also provides complete solution. It's convinient because of the encapsulation of databases, REST APIs and security features.
 
-But Sails still uses callbacks in asynchronous code. That's too hard to develop, and can't use ES6/7 fetaure naturally in the projects.
+But Sails still uses callbacks in asynchronous code. That's too hard to develop, and can't use ES6/7 features naturally in the projects.
 
 #### Disadvantages
 
