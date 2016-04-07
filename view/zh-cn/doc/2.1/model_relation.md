@@ -330,7 +330,7 @@ export default class extends think.model.relation {
       comment: think.model.HAS_MANY,
       cate: think.model.MANY_TO_MANY
     };
-  },
+  }
   getList(){
     return this.setRelation(false).select();
   }
@@ -349,7 +349,7 @@ export default class extends think.model.relation {
       comment: think.model.HAS_MANY,
       cate: think.model.MANY_TO_MANY
     };
-  },
+  }
   getList2(){
     return this.setRelation('comment').select();
   }
@@ -368,7 +368,7 @@ export default class extends think.model.relation {
       comment: think.model.HAS_MANY,
       cate: think.model.MANY_TO_MANY
     };
-  },
+  }
   getList2(){
     return this.setRelation('comment', false).select();
   }
@@ -387,7 +387,7 @@ export default class extends think.model.relation {
       comment: think.model.HAS_MANY,
       cate: think.model.MANY_TO_MANY
     };
-  },
+  }
   getList2(){
     return this.setRelation(true).select();
   }
