@@ -77,7 +77,7 @@ ThinkJS 从 2.2.0 版本开始支持断点调试源代码，同时如果运行�
 
 #### 配置 WebStorm
 
-将新建的 ThinkJS 2015+ 项目导入到 WebStorm 中，然后在首选项的 JavaScript 版本设置为 ESMASCRIPT 6。如：
+将新建的 ThinkJS 2015+ 项目导入到 WebStorm 中，然后在首选项的 JavaScript 版本设置为 ECMASCRIPT 6。如：
 
 ![alt](https://p.ssl.qhimg.com/t010eeba6c72bdffcf6.png)
 
