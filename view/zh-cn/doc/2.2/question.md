@@ -377,3 +377,30 @@ instance.compile({
 ```
 
 添加对应的 presets 和 plugins 后，需要在项目安装对应的依赖才可运行。
+
+### 如何自定义创建服务
+
+ThinkJS 默认会创建一个 HTTP 服务，如果不能满足项目的需求的话，可以自定义创建服务。
+
+可以通过修改 `src/common/config/config.js` 文件，添加配置 `create_server` 来自定义服务，如：
+
+```js
+import http from 'http';
+export default {
+  create_server: (callback, port, host, app) => {
+    let server = http.createServer(callback);
+    server.listen(port, host);
+    return server;
+  }
+}
+```
+
+其中形参 `callback` 为：
+
+```js
+let callback = (req, res) => {
+  think.http(req, res).then(http => {
+    new this(http).run();
+  });
+};
+```
