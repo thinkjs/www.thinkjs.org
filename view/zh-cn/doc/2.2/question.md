@@ -404,3 +404,37 @@ let callback = (req, res) => {
   });
 };
 ```
+
+### 用户登录后才能访问
+
+项目开发中，经常会有某些功能需要用户登录后才能访问，如：后台管理。对于此类需要可以放在一个通用的逻辑处理里，建议放在 base controller 里的 __before 进行处理。
+
+```js
+/* base controller */
+export default class extends think.controller.base {
+  async __before(){
+    //部分 action 下不检查
+    let blankActions = ['login'];
+    if(blankActions.indexOf(this.http.action)){
+      return;
+    }
+    let userInfo = await this.session('userInfo');
+    //判断 session 里的 userInfo
+    if(think.isEmpty(userInfo)){
+      return this.redirect('/user/login');
+    }
+  }
+}
+```
+
+其他 controller 文件继承 base controller，如：
+
+```js
+import Base from './base';
+
+export default class extends Base {
+
+}
+```
+
+这样继承了 Base 的 controller 都会校验用户信息了。
