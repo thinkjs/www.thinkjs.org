@@ -2,6 +2,8 @@
 
 ThinkJS 支持使用 MongoDB 数据库，底层使用 [mongodb](https://www.npmjs.com/package/mongodb) 模块。
 
+如果想在项目中使用 Mongoose 来代替默认的 Mongo 模型，可以参见： http://welefen.com/post/use-mongoose-in-thinkjs.html
+
 ### 配置
 
 使用 MongoDB 数据库，需要将模型中的配置 `type` 改为 `mongo`，修改配置文件 `src/common/config/db.js`：
