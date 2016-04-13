@@ -10,14 +10,6 @@ export default class extends base {
   indexAction(){
     return this.display();
   }
-  testAction(){
-    let lang = this.lang();
-    let data = {
-      lang: lang,
-      cookie: this.http.req.headers.cookie
-    }
-    this.success(data)
-  }
   /**
    * changelog page
    * @return {} []
