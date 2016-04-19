@@ -55,9 +55,8 @@ The current language of system, it read from the environment, which maybe empty 
 
 #### think.mode
 
-The current mode of application, framework support three mode in project:
+The current mode of application, framework support two mode in project:
 
-* `think.mode_mini` single module mode, all of project is one module.
 * `think.mode_normal` multiple modules mode, directory of project is separated to Controller, View, Logic and some other modules.
 * `think.mode_module` multiple modules mode, but more stringent separate project with modules than normal mode.
 

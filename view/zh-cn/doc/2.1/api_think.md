@@ -62,9 +62,8 @@ node www/index.js /home/index/test
 
 #### think.mode
 
-项目当前的模式，框架支持3中项目模式：
+项目当前的模式，框架支持 2 中项目模式：
 
-* `think.mode_mini` 单模块模式，整个项目只有一个模块
 * `think.mode_normal` 多模块模式，目录结构只有 `Controller`，`View`，`Logic` 等分模块
 * `think.mode_module` 多模块模式，严格按照模块来划分目录结构
 
