@@ -91,5 +91,3 @@ module.exports = think.controller({
 ```
 
 Transaction accepts a callback function which contains real operation logic and need to return.
-
-This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_transaction.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_transaction.md).

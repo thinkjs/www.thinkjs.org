@@ -17,6 +17,6 @@ export default {
 }
 ```
 
-### CURD handler
+### CRUD handler
 
 PostgreSQL has same APIs with MySQL, you can know more in [Model -> Description](./model_intro.html#toc-d84)。

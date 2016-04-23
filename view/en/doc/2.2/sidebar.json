@@ -16,7 +16,7 @@
       "Route": "route"
     },
     "Model": {
-      "Introdution": "model_intro",
+      "Introduction": "model_intro",
       "Database Config": "model_config",
       "CRUD Operations": "model_crud",      
       "Transaction": "model_transaction",
@@ -27,14 +27,14 @@
       "PostgreSQL": "model_postgre"
     },
     "Adapter": {
-      "Introdution": "adapter_intro",
+      "Introduction": "adapter_intro",
       "Cache": "adapter_cache",
       "Session": "adapter_session",
       "WebSocket": "adapter_websocket",
       "Template": "adapter_template"
     },
     "Middleware": {
-      "Introdution": "middleware",
+      "Introduction": "middleware",
       "CSRF": "csrf",
       "Subdomain": "subdomain",
       "Proxy": "force_proxy"
