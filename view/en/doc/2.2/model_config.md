@@ -1,11 +1,10 @@
 ## Config Database
 
-## Config Database
+### Config Database
 
 Here is the model configuration, you can modify it in `src/common/config/db.js`:
 
 ```
-```js
 export default {
   type: 'mysql',
   log_sql: true,
@@ -29,7 +28,7 @@ export default {
 
 You can use different configuration in different module, just config src/[module]/config/db.js.
 
-## Define Data Table
+#### Define Data Table
 
 By default, model name maps to table name. If your table's prefix is `think_`, `user` model will map to table `think_user` and `user_group` model will map to table `think_user_group`.
 
@@ -38,7 +37,7 @@ You can modify these by config the following two properties:
 - `tablePrefix` table prefix
 - `tableName` table name without prefix
 
-### ES6 Way
+#### ES6 Way
 
 ```
 export default class extends think.model.base {
@@ -50,7 +49,7 @@ export default class extends think.model.base {
 }
 ```
 
-### Dynamic Class Creation
+#### Dynamic Class Creation
 
 ```
 module.exports = think.model({
@@ -62,9 +61,9 @@ module.exports = think.model({
 })
 ```
 
-## Modify Primary Key
+#### Modify Primary Key
 
-Model fault primary key is `id`, if it is not the primary key seting in data table, you need to reset it:
+Model default primary key is `id`, if it is not the primary key seting in data table, you need to reset it:
 
 ```
 export default class extends think.model.base {
@@ -77,7 +76,7 @@ export default class extends think.model.base {
 
 Operations like `count`, `sum`, `min` and `max` all will use primary key, when you need these operations, please reset the primary key.
 
-## Distributed Database
+### Distributed Database
 
 In large-scale systems, there are often multiple databases to seperate the reading and writing operations. ThinkJS supports custom parsing through parser, you can modify it in `src/common/config/db.js`：
 
@@ -109,5 +108,3 @@ export default {
 ```
 
 The `options` of `parser` contains the SQL sentences that need to execute next, thus parser can return corresponding database configuration conveniently.
-
-This doc stays at：[https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_config.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_config.md).
