@@ -66,7 +66,7 @@ The current version of ThinkJS.
 
 #### think.module
 
-The list of modules of project, if current mode is `mode_mini`, this variable is an empty array.
+The list of modules of project.
 
 #### think.THINK_PATH
 
@@ -604,7 +604,6 @@ let path = think.getPath('home', 'controller');
 
 If root path of current project is `/foo/bar`, then the return path is:
 
-* project mode is `think.mode_mini` then the path is `/foo/bar/app/controller`
 * project mode is `think.mode_normal` then the path is `/foo/bar/app/controller/home`
 * project mode is `think.mode_module` then the path is `/foo/bar/app/home/controller`
 

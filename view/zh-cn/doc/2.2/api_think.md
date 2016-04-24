@@ -73,7 +73,7 @@ ThinkJS当前的版本
 
 #### think.module
 
-当前项目下的模块列表，如果项目模式是 `think.mode_mini`，那么值为空数组。
+当前项目下的模块列表。
 
 #### think.THINK_PATH
 
@@ -652,7 +652,6 @@ let path = think.getPath('home', 'controller');
 
 假如当前项目的根目录是`/foo/bar`，那么获取到的目录为：
 
-* 项目模式`think.mode_mini` 下路径为 `/foo/bar/app/controller`
 * 项目模式`think.mode_normal` 下路径为 `/foo/bar/app/controller/home`
 * 项目模式`think.mode_module` 下路径为 `/foo/bar/app/home/controller`
 
