@@ -1,6 +1,6 @@
 ## Model Introduction
 
-During project development, you always need to manipulate data tables, thus involes CRUD operations. The model is just an incapsolation in order to facilite database manipulation. A model maps to a data table in database.
+During project development, you always need to manipulate data tables, thus involes CRUD operations. The model is just an incapsulation in order to facilitate database manipulation. A model maps to a data table in database.
 
 ThinkJS currently supports MySQL, MongoDB and SQLite.
 
@@ -101,7 +101,7 @@ You need to pass in configuration when using `think.model`.
 
 ### Chaining Invoke
 
-Model provides many chaining invoke methods(like jQuery does) which can facilite data manipulation. Chaining invoke is implemented by returnning `this`:
+Model provides many chaining invoke methods(like jQuery does) which can facilitate data manipulation. Chaining invoke is implemented by returnning `this`:
 
 ```js
 export default class extends think.model.base {

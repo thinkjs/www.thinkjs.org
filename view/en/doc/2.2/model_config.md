@@ -63,7 +63,7 @@ module.exports = think.model({
 
 #### Modify Primary Key
 
-Model default primary key is `id`, if it is not the primary key seting in data table, you need to reset it:
+Model default primary key is `id`, if it is not the primary key setting in data table, you need to reset it:
 
 ```
 export default class extends think.model.base {

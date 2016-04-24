@@ -126,7 +126,7 @@ If there doesn't exist the data you need, return value is blank array `[]`. You 
 
 #### Result Pagination
 
-It's common to show paginated data in page. You need to query the total counts first, then calculate the number of pagination. Model provides `countSelect` method to facilite this operation, it can query total counts automatically.
+It's common to show paginated data in page. You need to query the total counts first, then calculate the number of pagination. Model provides `countSelect` method to facilitate this operation, it can query total counts automatically.
 
 ```js
 export default class extends think.controller.base {
