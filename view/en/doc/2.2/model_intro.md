@@ -133,6 +133,3 @@ Model supports chaining invoke the following methods:
 - `union`, querying union support
 - `distinct`, querying distinct support
 - `cache`, query cache
-
-
-This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_intro.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_intro.md).

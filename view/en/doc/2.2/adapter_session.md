@@ -161,6 +161,6 @@ export default class extends think.adapter.session {
 
 To know the implement of Session in ThinkJS, please see also <https://github.com/75team/thinkjs/tree/master/src/adapter/session>. 
 
-## Use Third Party Session Adapter
+### Use Third Party Session Adapter
 
 To know how to use third party session Adapter, please see also [Adapter -> intro](./adapter_intro.html#toc-e7c)

@@ -70,5 +70,3 @@ at Timer.listOnTimeout [as ontimeout] (timers.js:112:15)
 ```
 
 To solve this, just update Node.js to the latest version.
-
-This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_mysql.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_mysql.md).

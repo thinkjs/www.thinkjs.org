@@ -43,7 +43,7 @@ You can modify the configuration file `src/common/config/config.js` according to
 
 ### Close Online Static Resources Access 
 
-After the project is online, it generally uses nginx or other WEB server as a angent. At this time, you can let nginx to directly handle the static resource requests. Thus, you could close the static resources access to improve performance.
+After the project is online, it generally uses nginx or other WEB server as an agent. At this time, you can let nginx to directly handle the static resource requests. Thus, you could close the static resources access to improve performance.
 
 Set the option `resource_on` to `false` in the configuration file `src/common/config/env/prodution.js` to close it. eg.
 

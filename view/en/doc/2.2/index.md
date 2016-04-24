@@ -110,7 +110,7 @@ The routers ThinkJS supported include regex router, rule router and static route
 ThinkJS provides us very simple methods to implement i18n and custom themes.
 
 
-## Comparing With Other Frameworks
+### Comparing With Other Frameworks
 
 #### Express/Koa
 

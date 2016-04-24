@@ -1,8 +1,8 @@
 ## CRUD Operations
 
-## Create Data
+### Create Data
 
-### add
+#### add
 
 Use `add` method to add a new record, return value is the id of inserted record:
 
@@ -15,7 +15,7 @@ export default class extends think.controller.base {
 }
 ```
 
-### addMany
+#### addMany
 
 Use `addMany` create many records:
 
@@ -31,7 +31,7 @@ export default class extends think.controller.base {
 }
 ```
 
-### thenAdd
+#### thenAdd
 
 We often need to prevent a field from duplication when designing database. So it's common to query whether data exists before inserting and just insert if it doesn't exist.
 
@@ -48,10 +48,10 @@ export default class extends think.controller.base {
 }
 ```
 
-## Update Data
+### Update Data
 
 
-### update
+#### update
 
 Use `update` method to update data, return value is the influenced records:
 
@@ -64,7 +64,7 @@ export default class extends think.controlle.base {
 }
 ```
 
-### increment
+#### increment
 
 Use `increment` method to increase one field's value:
 
@@ -76,7 +76,7 @@ export default class extends think.model.base {
 }
 ```
 
-### decrement
+#### decrement
 
 Use `decrement` method to decrease one field's value:
 
@@ -88,11 +88,11 @@ export default class extends think.model.base {
 }
 ```
 
-## Query Data
+### Query Data
 
 Model provides many ways to query data, you can: query one line data, query multiple lines data, read the field value, read max value, read results count and so on.
 
-### Query One Line Data
+#### Query One Line Data
 
 Use `find` to query one line data, return value is the object:
 
@@ -108,7 +108,7 @@ export default class extends think.controller.base {
 
 If there doesn't exist the data you need, return value is blank object `{}`. You can use `think.isEmpty` to check whether it is blank.
 
-### Query Multiple Lines Data
+#### Query Multiple Lines Data
 
 Use `select` query many lines data, return value is results:
 
@@ -124,7 +124,7 @@ export default class extends think.controller.base {
 
 If there doesn't exist the data you need, return value is blank array `[]`. You can use `think.isEmpty` to check whether it is blank.
 
-### Result Pagination
+#### Result Pagination
 
 It's common to show paginated data in page. You need to query the total counts first, then calculate the number of pagination. Model provides `countSelect` method to facilite this operation, it can query total counts automatically.
 
@@ -156,7 +156,7 @@ If current page number exceeds page range, you can fix it through parameters. `t
 
 If total count cannot be queried, you can pass it as a parameter like `countSelect(1000)`, means total count is 1000.
 
-### count
+#### count
 
 Use `count` method to query total number of records that match the conditions:
 
@@ -169,7 +169,7 @@ export default class extends think.model.base {
 }
 ```
 
-### sum
+#### sum
 
 Use `sum` method to compute the sum of values of the same fields that match the conditions:
 
@@ -182,7 +182,7 @@ export default class extends think.model.base {
 }
 ```
 
-### max
+#### max
 
 Use `max` to find the largest value of the selected column:
 
@@ -195,7 +195,7 @@ export default class extends think.model.base {
 }
 ```
 
-### min
+#### min
 
 Use `min` to find the smallest value of the selected column:
 
@@ -234,7 +234,7 @@ export default class extends think.model.base {
 }
 ```
 
-##### Cache Configuration
+#### Cache Configuration
 
 Config cache in model configuration's `cache` field:
 
@@ -253,7 +253,7 @@ export default {
 - `timeout` default expire time
 
 
-## Delete Data
+### Delete Data
 
 Use `delete` method to remove data, return the count of influenced row:
 
@@ -268,5 +268,3 @@ export default class extends think.controller.base {
 
 
 More operations in model can be found at [API -> model](TODO).
-
-This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_intro.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_intro.md).

@@ -70,13 +70,13 @@ module.exports = think.model("mongo", {
 })
 ```
 
-### CURD Operations
+### CRUD Operations
 
-CURD operations are same as Mysql, just read [Model -> Introduction](https://thinkjs.org/zh-cn/doc/2.0/model_intro.html#toc-d84).
+CRUD operations are same as Mysql, just read [Model -> Introduction](model_intro.html#toc-d84).
 
 ### Create Index
 
-mongo model can config index, model will create index automatically before CURD operations. Configurations are placed in `indexes` property:
+mongo model can config index, model will create index automatically before CRUD operations. Configurations are placed in `indexes` property:
 
 ```js
 export default class extends think.model.mongo {
@@ -193,5 +193,3 @@ export default class extends think.model.mongo {
 ```
 
 Details stay at [https://docs.mongodb.org/manual/core/aggregation-introduction/#map-reduce](https://docs.mongodb.org/manual/core/aggregation-introduction/#map-reduce).
-
-This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_mongodb.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_mongodb.md).

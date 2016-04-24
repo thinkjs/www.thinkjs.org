@@ -397,5 +397,3 @@ export default class extends think.model.relation {
 ### mongo Relational Model
 
 This relational model doesn't work for mongo model, mongo relational model stays here [https://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/](https://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/).
-
-This doc stays at [https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_relation.md](https://github.com/75team/www.thinkjs.org/tree/master/view/zh-cn/doc/2.0/model_relation.md).
