@@ -36,3 +36,6 @@ ssl/
 www/static/module/thinkjs/*.md
 
 view_build/
+
+# webstorm project directory
+.idea
