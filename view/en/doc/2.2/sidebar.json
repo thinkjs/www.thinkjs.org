@@ -50,7 +50,7 @@
       "Error Handling": "error_handle",
       "Error Messages": "error_message",
       "I18N": "i18n",
-      "Path Const": "path_cost",
+      "Path Const": "path_const",
       "REST API": "rest_api",
       "Crontab": "crontab",
       "Deploy": "deploy",
