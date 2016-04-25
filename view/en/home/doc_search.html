@@ -1,46 +1,42 @@
-<%include inc/header.html %>
-  <link href="/static/module/highlight/styles/github-gist.css" rel="stylesheet">
+{% extends "./layout.html" %}
 
-<div class="content doc-content">
-  <div class="wrap clearfix">
-      <div class="lbox">
-        <%for(var key in sidebar){%>
-        <dl>
-          <dt><%-key%></dt>
-            <dd>
-              <%for(var name in sidebar[key]){%>
-              <a href="/<%-lang%>/doc/<%-version%>/<%-sidebar[key][name]%>.html"><%-name%></a>
-              <%}%>
-            </dd>
-        </dl>
-        <%}%>
-      </div>
-        <div class="rbox">
-          <div class="clearfix">
-            
-            <div class="search">
-              <form method="get" action="/<%-lang%>/doc/<%-version%>/search">
-                  <input class="sea-txt" value="<%=keyword%>" required name="keyword" placeholder="keyword" />
-                  <input class="sea-btn" type="submit" value="" />
-              </form>
-            </div>
-          </div>
-            <div class="doc">
-                <%if(!keyword){%>
-                <h2 style="color:#555">Missing keywords</h2>
-                <%}else if(think.isEmpty(searchResult)){%>
-                <h2 style="color:#555">No Result</h2>
-                <%}else{%>
-                  <h2>Search Result(<%-searchResult.length%>)</h2>
-                  <%searchResult.forEach(function(item){%>
-                  <h4><a target="_blank" href="/<%-lang%>/doc/<%-version%>/<%-item.filename.replace('.md', '')%>.html"><%-item.title%></a></h4>
-                  <%item.text.slice(0, 10).forEach(function(textItem){%>
-                  <p><%-textItem%></p>
-                  <%})%>
-                  <%})%>
-                <%}%>
-            </div>
-        </div>
+{% block content %}
+
+<div class="container">
+
+  <div class="content doc-content">
+    {#
+    <div class="lbox">
+      {% for key, s in sidebar %}
+      <dl>
+        <dt>{{key}}</dt>
+        <dd>
+          {% for k, name in s %}
+          <a href="/{{lang}}/doc/{{version}}/{{name}}.html">{{ name }}</a>
+          {% endfor %}
+        </dd>
+      </dl>
+      {% endfor %}
     </div>
+    #}
+
+    {% if not keyword %}
+    <h2 style="color:#555">Missing keywords</h2>
+    {% elif searchResult.length == 0 %}
+    <h2 style="color:#555">No Result</h2>
+    <a href="javascript:history.back()">back to the previous page</a>
+    {% else %}
+    <h2>Search Result({{ searchResult.length }})</h2>
+    {% for item in searchResult %}
+    <h4>
+      <a target="_blank" href="/{{lang}}/doc/{{version}}/{{ item.filename.replace('.md', '') }}.html">{{ item.title|safe }}</a>
+    </h4>
+    {% for textItem in item.text.slice(0, 10) %}
+    <p>{{ textItem|safe }}</p>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+  </div>
 </div>
-<%include inc/footer.html %>
+
+{% endblock %}

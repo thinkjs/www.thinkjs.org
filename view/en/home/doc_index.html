@@ -1,56 +1,121 @@
-<%include inc/header.html %>
+{% extends "./layout.html" %}
 
-<div class="content doc-content">
-  <div class="wrap clearfix">
-      <div class="lbox doc-sidebar" id="directoryList">
-        <%for(var key in sidebar){%>
-        <dl>
-          <dt><%-key%></dt>
-            <dd>
-              <%for(var name in sidebar[key]){%>
-              <a href="/<%-lang%>/doc/<%-version%>/<%-sidebar[key][name]%>.html"><%-name%></a>
-              <%}%>
-            </dd>
-        </dl>
-        <%}%>
-      </div>
-        <div class="rbox">
-          <div class="clearfix">
+{% block content %}
 
-            <div class="search">
-              <form method="get" action="/<%-lang%>/doc/<%-version%>/search">
-                  <input class="sea-txt" value="" required name="keyword" />
-                  <input class="sea-btn" type="submit" value="" />
-              </form>
-            </div>
-            
-          </div>
-            <div class="doc">
-                <%-markedContent%>
-            </div>
-            <%if(doc !== 'single'){%>
-            <div style="margin-top:40px;" class="doc-address">
-              Documentation Links：<a href="https://github.com/75team/www.thinkjs.org/tree/master/view/<%-lang%>/doc/<%-version%>/<%-doc%>.md" target="_blank">https://github.com/75team/www.thinkjs.org/tree/master/view/<%-lang%>/doc/<%-version%>/<%-doc%>.md</a>
-            </div>
-            <%}%>
-        </div>
-        <div class="r-fixed">
-          <a class="back2top" title="<%-_('back2top')%>" href="#"></a>
-          <a class="pdf" title="<%-_('download-pdf')%>" target="_blank" href="/static/module/thinkjs/thinkjs_<%-lang%>_<%-version%>.pdf"></a>
-          <a class="view-single" title="<%-_('view-on-single-page')%>" href="/<%-lang%>/doc/<%-version%>/single.html"></a>
-          <a class="doc-dir" id="docDirectiry" title="<%-_('view-on-single-page')%>"></a>
-        </div>
+<div class="container">
+  <div class="row doc-content">
+    <div class="col-md-2 col-sm-12 hidden-xs hidden-sm left-nav" id="directoryList">
+      <nav class="hidden-print">
+        <ul class="nav bs-docs-sidenav">
+
+          {% for key, value in sidebar %}
+          <li class=""><strong>{{key}}</strong>
+            <ul class="list-unstyled">
+              {% for name, value2 in value %}
+              <li><a href="/{{lang}}/doc/{{version}}/{{value2}}.html">{{name}}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
     </div>
+    <div class="col-md-7 col-sm-12">
+      {{markedContent|safe}}
+
+      {% if doc != 'single' %}
+      <div class="doc-address">
+        <h4>extra links</h4>
+        <ul>
+          <li>
+            <a class="back2top" title="{{ _('back2top') }}" href="#">{{ _('back2top') }}</a>
+          </li>
+          <li>
+            <a href="https://github.com/75team/www.thinkjs.org/tree/master/view/{{lang}}/doc/{{version}}/{{doc}}.md" target="_blank">Documentation Links</a>
+          </li>
+          <li>
+            <a class="pdf" title="{{ _('download-pdf') }}" target="_blank" href="/static/module/thinkjs/thinkjs_{{ lang }}_{{ version }}.pdf">{{ _('download-pdf') }}</a>
+          </li>
+          <li>
+            <a class="view-single" title="{{ _('view-on-single-page') }}" href="/{{ lang }}/doc/{{ version }}/single.html">{{ _('view-on-single-page') }}</a>
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+    <div class="col-sm-3 right-nav">
+      <div class="version-wrapper">
+        {% if hasVersion %}
+        <div class="dropdown hidden-sm hidden-xs">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            version {{ version }}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            {% for i in ['2.2', '2.1', '2.0', '1.2'] %}
+            <li>
+              {% if version != i %}
+              <a href="/{{ lang }}/doc/{{ i }}/index.html">{{ i }}</a>
+              {% else %}
+              <a>{{ i }}</a>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+      <nav id="myNav" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+        {{tocContent|safe}}
+      </nav>
+    </div>
+  </div>
+
+  <div class="r-fixed hidden-lg hidden-md">
+    <a class="back2top" title="{{ _('back2top') }}" href="#"></a>
+    <a class="doc-dir" id="docDirectory" title="{{ _('view-on-single-page') }}"></a>
+  </div>
 </div>
-<%include inc/footer.html %>
+
+{% endblock %}
+
+{% block script %}
+
+{{super()}}
+
 <script>
-(function(){
-  var docDirectiry = document.getElementById('docDirectiry');
-  var directoryList = document.getElementById('directoryList');
-  var isShow = false;
-  docDirectiry.addEventListener('touchstart', function(){
-    directoryList.style.display = isShow ? 'none' : 'block';
-    isShow = !isShow;
+  $(function () {
+    var $nav = $('#myNav');
+    var $docDirectory = $('#docDirectory');
+    var $directoryList = $('#directoryList');
+
+    var isShow = false;
+    $docDirectory.click(function () {
+      if (isShow)
+        $directoryList[0].setAttribute('style', 'display: none !important');
+      else {
+        $(document).scrollTop(80);
+        $directoryList[0].setAttribute('style', 'display: block !important');
+      }
+      isShow = !isShow;
+    });
+
+    $nav.affix({
+      offset: {top: 100}
+    });
+    var scroller = function () {
+      var h = $(document).height();
+      var t = $(document).scrollTop();
+      var height = $(window).height();
+      if (h > t + height + 239)
+        $nav.css({bottom: 30 + 'px'});
+      else
+        $nav.css({bottom: 269 + 'px'});
+    };
+    $(window).scroll(scroller);
+    scroller();
+
   })
-}());
 </script>
+
+{% endblock %}

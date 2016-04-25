@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--!
+
+ _______ _     _       _        _  _____
+|__   __| |   (_)     | |      | |/ ____|
+   | |  | |__  _ _ __ | | __   | | (___
+   | |  | '_ \| | '_ \| |/ /   | |\___ \
+   | |  | | | | | | | |   < |__| |____) |
+   |_|  |_| |_|_|_| |_|_|\_\____/|_____/
+
+-->
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ThinkJS - use full ES6/7 features to develop Node.js applications, support TypeScript</title>
+  <meta name="renderer" content="webkit">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="referrer" content="always">
+  <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+  <meta name="keywords" content="ThinkJS, Node.js, io.js, MVC, Restful, Generator Function, ES6, ES7, Promise">
+  <meta name="description" content="ThinkJS 2.0 had completelly been rewritten with brand-new ECMAScript 6/7 features. By using ES7's async/await or ES6's Generator Function features, ThinkJS 2.0 could thoroughly solve the asynchronous nesting problem within Node.js">
+  <link rel="apple-touch-icon" href="/static/img/favicon.png?v=1">
+  <link rel="SHORTCUT ICON" href="/static/img/favicon.png?v=1"/>
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,200' rel='stylesheet' type='text/css'>
+  <link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+  <link href="/static/module/highlight/styles/zenburn.css" rel="stylesheet" data-ls="css_github">
+  <link href="/static/module/bootstrap/css/bootstrap.css" rel="stylesheet" data-ls="css_bootstrap"/>
+  <link href="/static/css/docs.css" rel="stylesheet" data-ls="css_index"/>
+  <link href="/static/css/index.css" rel="stylesheet" data-ls="css_index"/>
+</head>
+<body class="en" data-spy="scroll" data-target="#myNav">
+
+
+<nav class="navbar navbar-default navbar-inverse">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">ThinkJS <img src="/static/img/logo_brand.png" class="brand-image" width="16">
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li {% if currentNav==
+            'doc' %} class="active"{% endif %}><a href="/{{ lang }}/doc/index.html">文档
+            <span class="sr-only">(current)</span></a></li>
+            <li {% if currentNav==
+            'demo' %} class="active"{% endif %}><a href="/{{ lang }}/demo.html">示例/教程</a></li>
+            <li {% if currentNav==
+            'changelog' %} class="active"{% endif %}><a href="/{{ lang }}/changelog.html#">更新日志</a></li>
+            <li {% if(currentNav==
+            'plugin') %}class="current"{% endif %}><a href="/{{ lang }}/plugin.html">插件</a></li>
+            <li class="discuss"><a href="http://wenda.thinkjs.org/" target="_blank">社区</a></li>
+          </ul>
+          <form class="navbar-form navbar-right" role="search" action="/{{ lang }}/doc/{{version}}/search">
+            <div class="form-group">
+              <input type="text" name="keyword" value="{{keyword}}" class="form-control" placeholder="Search Documents">
+            </div>
+            <button type="submit" class="btn btn-default">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+{% block content %}
+{% endblock %}
+
+<footer>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-6">
+        <h4 style="margin-top:0; margin-bottom: 20px;">ThinkJS
+          <img src="/static/img/logo_brand.png" class="brand-image" width="24" style="margin-left: 7px;"></h4>
+        <p>
+          友情链接 -
+          <a href="http://www.75team.com/" target="_blank">奇舞团博客</a>
+          <a href="http://www.w3ctech.com/" target="_blank">w3ctech</a>
+          <a href="http://welefen.com/" target="_blank">welefen</a>
+        </p>
+
+        <p>
+          其他项目 -
+          <a href="http://melonh.com/nova/" target="_blank">Nova</a>
+          <a href="http://www.75team.com/weekly/" target="_blank">奇舞周刊</a>
+          <a href="https://github.com/75team/firekylin" target="_blank">FireKylin</a>
+        </p>
+
+        <p>
+          切换语言 -
+          <a href="/zh-cn">简体中文</a>
+          <a href="/en">English</a>
+        </p>
+
+        <p>
+          参与项目 -
+          <a href="https://github.com/75team/thinkjs">GitHub 源码</a>
+          <a href="https://github.com/75team/thinkjs/issues">问题反馈</a>
+          <a href="https://github.com/75team/thinkjs/graphs/contributors">贡献者名单</a>
+        </p>
+
+        <p>
+          联系我们 -
+          <a href="/about.html">关于我们</a>
+          <a href="/event.html">大事记</a>
+          <a href="/donate.html">捐赠</a>
+          <a>QQ群: 339337680</a>
+        </p>
+      </div>
+
+
+      <div class="col-sm-6">
+        <p>@2013 - {{ currentYear }} ThinkJS Team</p>
+
+        <div style="font-size: 150%">
+          <a href="https://github.com/75team/thinkjs"><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/welefen"><i class="fa fa-twitter"></i></a>
+          <a href="https://www.facebook.com/welefen"><i class="fa fa-facebook"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% block script %}
+<script src="/static/module/jquery/1.9.1/jquery.js"></script>
+<script src="/static/module/bootstrap/js/bootstrap.js"></script>
+{% endblock %}
+
+</body>
+</html>

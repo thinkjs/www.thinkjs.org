@@ -14,6 +14,6 @@ export default {
     file_depr: '_',
     root_path: think.ROOT_PATH + '/view',
     theme: '',
-    type: 'ejs'
+    type: 'nunjucks'
   }
 }

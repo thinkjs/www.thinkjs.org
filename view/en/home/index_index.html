@@ -1,140 +1,139 @@
-<%include inc/header.html %>
-<div class="banarea" style="background-image:url(./static/img/banbg.jpg)">
-  <div class="wrap">
-      <h1 class="slogan">The Web framework beyond your dreams</h1>
-      <h3 class="slogan-desc">Use the full ES6/7 features to develop Node.js applications</h3>
-      <a href="/doc.html" class="btn-link">Getting Started</a>
-    </div>
+{% extends "./layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron masthead"">
+  <div class="container home_page_banner">
+    <h1>ThinkJS</h1>
+    <p>The Web framework beyond your dreams<br>
+      <small></small>
+    </p>
+
+    <ul class="masthead-links">
+      <li>
+        <a href="https://github.com/75team/thinkjs">GitHub Project</a>
+      </li>
+      <li>
+        Version {{ version }}
+      </li>
+    </ul>
+  </div>
 </div>
-<div class="banbot">
-  <div class="wrap">
-        <p>Check out the latest developments in the <a href="https://github.com/75team/thinkjs" class="blue">GitHub repo</a></p>
-        <div class="share">
-        
-<!--           <a target="_blank" href="https://github.com/75team/thinkjs">
-            <img height="20" src="https://img.shields.io/github/stars/75team/thinkjs.svg?style=social&label=Star" alt="github star">
-          </a>
-          <a target="_blank" href="http://badge.fury.io/js/thinkjs">
-            <img height="20" src="https://img.shields.io/npm/v/thinkjs.svg?style=flat-square" alt="npm version">
-          </a>
-          <a target="_blank" href="https://travis-ci.org/75team/thinkjs">
-            <img height="20" src="https://img.shields.io/travis/75team/thinkjs.svg?style=flat-square" alt="npm build">
-          </a>
-          <a target="_blank" href="https://coveralls.io/github/75team/thinkjs">
-            <img height="20" src="https://img.shields.io/coveralls/75team/thinkjs.svg?style=flat-square" alt="coverage">
-          </a> -->
-          <a target="_blank" href="https://github.com/75team/thinkjs">
-            <img height="20" src="/static/other/icon/star.svg" alt="github star">
-          </a>
-          <a target="_blank" href="https://github.com/75team/thinkjs">
-            <img height="20" src="/static/other/icon/version.svg" alt="npm version">
-          </a>
-          <a target="_blank" href="https://github.com/75team/thinkjs">
-            <img height="20" src="/static/other/icon/build.svg" alt="npm build">
-          </a>
-          <a target="_blank" href="https://github.com/75team/thinkjs">
-            <img height="20" src="/static/other/icon/coverage.svg" alt="coverage">
-          </a>
-        </div>
-    </div>
+
+<div class="bs-docs-social">
+  <div class="container">
+    <ul class="bs-docs-social-buttons">
+      <li>
+        <a target="_blank" href="https://github.com/75team/thinkjs">
+          <img height="20" src="/static/other/icon/star.svg" alt="github star">
+        </a>
+      </li>
+      <li>
+        <a target="_blank" href="https://github.com/75team/thinkjs">
+          <img height="20" src="/static/other/icon/version.svg" alt="npm version">
+        </a>
+      </li>
+      <li class="follow-btn">
+        <a target="_blank" href="https://github.com/75team/thinkjs">
+          <img height="20" src="/static/other/icon/build.svg" alt="npm build">
+        </a>
+      </li>
+      <li class="tweet-btn">
+        <a target="_blank" href="https://github.com/75team/thinkjs">
+          <img height="20" src="/static/other/icon/coverage.svg" alt="coverage">
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
-<div class="flinfo">  
-  <div class="wrap">
-      <div class="tit"><h3>Use ES6/7 features to develop Node.js applications</h3></div>
-<!--     <p class="tips">借助 Babel 编译，可以大胆的在项目使用 ES6/7 语法。</p> -->
-        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">//user controller, home/controller/user.js</span>
+
+<div class="container">
+  <div class="flinfo">
+    <div class="wrap">
+
+      <div class="section-title-wrapper">
+        <h3>Use the full ES6/7 features to develop Nodejs applications</h3>
+      </div>
+      <div class="doc-content">
+<pre><code class="lang-js hljs javascript"><span class="hljs-comment">//user controller, home/controller/user.js</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">think</span>.<span class="hljs-title">controller</span>.<span class="hljs-title">base</span> </span>{
   <span class="hljs-comment">//login action</span>
-  <span class="hljs-keyword">async</span> loginAction(){
-    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.isGet()){
+  <span class="hljs-keyword">async</span> loginAction() {
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.isGet()) {
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.display();
     }
     <span class="hljs-comment">//data is validated in logic</span>
     <span class="hljs-keyword">let</span> data = <span class="hljs-keyword">this</span>.post();
     <span class="hljs-keyword">let</span> md5 = think.md5(<span class="hljs-string">'think_'</span> + data.pwd);
     <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.model(<span class="hljs-string">'user'</span>).where({name: data.name, pwd: md5}).find();
-    <span class="hljs-keyword">if</span>(think.isEmpty(result)){
+    <span class="hljs-keyword">if</span>(think.isEmpty(result)) {
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.fail(<span class="hljs-string">'login fail'</span>);
     }
     <span class="hljs-comment">//set userInfo to session</span>
     <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.session(<span class="hljs-string">'userInfo'</span>, result);
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.success();
+    }
   }
 }
 </code></pre>
+      </div>
     </div>
-</div>
-<div class="flfet"> 
-  <div class="wrap">
-      <div class="tit2"><h3>FEATURES</h3></div>
-<!--       <p class="tips">Make Async Easy Based On ES6</p> -->
-        <ul class="fetlist">
-          <li>
-              <i class="icon-fet1"></i>
-              <p><strong>Supports ES6/7 features</strong>Writing code with full ES6/7 features (Generator Function, Class, Async & Await etc.), and the Babel-compiled code will run on Node.js runtime stably.</p>
-            </li>
-          <li>
-              <i class="icon-fet2"></i>
-              <p><strong>Rich database support</strong>Supports Mysql, Sqlite, Mongodb with highly encapsulated and easy to use methods, in which SQL injection filters are also implemented.</p>
-            </li>
-          <li>
-              <i class="icon-fet3"></i>
-              <p><strong>Hook & Middleware</strong>Rich hooks and middlewares are provided for conduct the user requests.</p>
-            </li>
-          <li>
-              <i class="icon-fet4"></i>
-              <p><strong>REST API</strong>Auto-generate REST API, no need extra coding. Data level authorization controlling that make you can allow or disallow data access to certain user</p>
-            </li>
-          <li>
-              <i class="icon-fet5"></i>
-              <p><strong>Supports WebSocket</strong>Only need write one set of code to support common WebSocket clients like socket.io and sockjs.</p>
-            </li>
-          <li>
-              <i class="icon-fet6"></i>
-              <p><strong>Rich Adaptors</strong>Easy switching between Cache, Store, Session and Template, to change your application's behavior without concerning with what's behind it.</p>
-            </li>
-          <li>
-              <i class="icon-fet7"></i>
-              <p><strong>Hot Module Replacement(HMR)</strong>In development mode, HMR monitors file changes and replaces them in the active runtime, no need to restart Node.js.</p>
-            </li>
-          <li>
-              <i class="icon-fet8"></i>
-              <p><strong>Common Line Interface</strong>Supports invoke Action in CLI, easier to execute timed task.</p>
-          </li>
-        </ul>
+    <div class="get-started-wrapper">
+      <a class="btn btn-large btn-success" href="/doc.html" property="dc:title">Get Started Now!</a>
     </div>
-</div>
-<div class="fluser">  
-  <div class="wrap">
-        <ul class="userlist">
-          <li>
-              <p class="usertalk">ThinkJS has established the benchmark of usability and innovativeness, it represents high level standard among Node frameworks. I wish everyone contribute to it and to build up a prosperous community together.</p>
-                <div class="userinfo clearfix">
-                  <img src="/static/img/portrait_yueying.jpg" alt="月影" />
-                    <p>
-                      <strong>Ying Yue</strong>Leader of 75team, the biggest front-end team of QIHOO 360(NYSE)
-                    </p>
-                </div>
-            </li>
-          <li>
-              <p class="usertalk">ThinkJS 2.0 is disruptive innovation, it condenses the author's painstaking efforts, we belive it's performance, productivity and extensibility will bring the developers more surprise and shock!</p>
-                <div class="userinfo clearfix">
-                  <img src="/static/img/portrait_lisongfeng.jpg" alt="李松峰" />
-                    <p>
-                      <strong>Songfeng Li</strong>Translator of the Chinese-Edition of <i>Prefessional JavaScript for Web Developers</i>
-                    </p>
-                </div>
-            </li>
-          <li>
-              <p class="usertalk">The best part of ThinkJS is it has a smooth learning curve and easy to use! It is a good choice whether you use it on project or learning Node.js! w3ctech is developed use ThinkJS.</p>
-                <div class="userinfo clearfix">
-                  <img src="/static/img/portrait_zhouyubo.jpg" alt="周裕波" />
-                    <p>
-                      <strong>Yubo Zhou</strong>Co-founder of w3ctech, the biggest front-end developers community in China
-                    </p>
-                </div>
-            </li>
-        </ul>
+  </div>
+
+
+  <div class="fetlist">
+    <div class="section-title-wrapper">
+      <h3>Features</h3>
     </div>
+    <div class="row">
+      {% for f in features.slice(0, 4) %}
+      <div class="col-sm-3">
+        <i class="icon-fet{{loop.index}}"></i>
+        <h5 class="upper">{{f.title}}</h5>
+        <p>
+          {{f.content}}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      {% for f in features.slice(4, 8) %}
+      <div class="col-sm-3">
+        <i class="icon-fet{{loop.index + 4}}"></i>
+        <h5 class="upper">{{f.title}}</h5>
+        <p>
+          {{f.content}}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="fluser">
+    <div class="section-title-wrapper">
+      <h3>Testimonials</h3>
+    </div>
+
+    <ul class="media-list">
+      {% for t in testimonials %}
+      <li class="media">
+        <a class="pull-left" href="#">
+          <img class="media-object" src="{{t.image}}" alt="">
+        </a>
+        <div class="media-body">
+          <div class="clearfix">
+            <strong>{{t.name}}</strong>
+            <span class="media-notice">{{t.desc|safe}}</span>
+          </div>
+          {{t.content}}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
-<%include inc/footer.html %>
+
+{% endblock %}

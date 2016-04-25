@@ -43,11 +43,11 @@ export default class extends base {
         return content;
       }
     }
-    let markedContent = this.markdownToHtml(filePath);
+    let [markedContent, tocContent] = this.markdownToHtml(filePath);
     if(cache){
       thinkCache('markdown-doc', filePath, markedContent);
     }
-    return markedContent;
+    return [markedContent, tocContent];
   }
   /**
    * get doc content
@@ -58,7 +58,7 @@ export default class extends base {
     let lang = this.http.lang().toLowerCase();
     let version = this.get('version');
 
-    let markedContent;
+    let markedContent, tocContent;
     let filePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/${doc}.md`;
     let htmlPath = filePath.replace('.md', '.html');
 
@@ -74,7 +74,7 @@ export default class extends base {
       if(!think.isFile(filePath)){
         return Promise.reject(new Error(`/doc/${doc}.html is not exist`));
       }
-      markedContent = this.getMarkedContent(filePath);
+      [markedContent, tocContent] = this.getMarkedContent(filePath);
     }
 
     if(doc === 'single'){
@@ -89,6 +89,7 @@ export default class extends base {
     
 
     this.assign('markedContent', markedContent);
+    this.assign('tocContent', tocContent);
     this.assign('doc', doc);
   }
   /**
@@ -138,7 +139,7 @@ export default class extends base {
     let fn = think.promisify(child_process.exec, child_process);
     let options = {
       cwd: think.ROOT_PATH + `/view/${lang}/doc/${version}/`
-    }
+    };
     //ignore command error
     let result = await fn(cmd, options).catch(err => '');
 
@@ -153,7 +154,7 @@ export default class extends base {
       }
       let text = item.substr(pos + 1);
       text = this.escapeHtml(text).replace(new RegExp(keyword, 'ig'), a => {
-        return `<span style="color:#c7254e">${a}</span>`;
+        return `<span style="font-weight: bold; color:#c7254e">${a}</span>`;
       });
       data[filename].text.push(text);
     });
@@ -201,7 +202,7 @@ export default class extends base {
     if(!keyword){
       return this.display();
     }
-    
+
     let result = await this.getSearchResult(keyword);
     this.assign('searchResult', result);
     this.display();

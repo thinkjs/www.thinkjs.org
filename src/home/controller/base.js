@@ -14,9 +14,11 @@ export default class extends think.controller.base {
     this.assign({
       title: this.locale('title-home'),
       currentNav: '',
-      hasBootstrap: false,
       hasVersion: false,
-      lang: this.http.lang()
+      lang: this.http.lang(),
+      keyword: this.get('keyword'),
+      version: this.get('version'),
+      currentYear: new Date().getFullYear()
     });
   }
   /**
@@ -40,16 +42,13 @@ export default class extends think.controller.base {
 
     let tocContent = marked(markToc(content)).replace(/<a\s+href="#([^\"]+)">([^<>]+)<\/a>/g, (a, b, c) => {
       return `<a href="#${this.generateTocName(c)}">${c}</a>`;
-    });
+    }).replace(/<ul>/g, '<ul class="nav">')
 
     let markedContent = marked(content).replace(/<h(\d)[^<>]*>(.*?)<\/h\1>/g, (a, b, c) => {
       if(b == 2){
         return `<h${b} id="${this.generateTocName(c)}">${c}</h${b}>`;
       }
       return `<h${b} id="${this.generateTocName(c)}"><a class="anchor" href="#${this.generateTocName(c)}"></a>${c}</h${b}>`;
-    });
-    markedContent = markedContent.replace(/<h(\d)[^<>]*>([^<>]+)<\/h\1>/, (a, b, c) => {
-      return `${a}<div class="toc">${tocContent}</div>`;
     });
 
     let highlightContent = markedContent.replace(/<pre><code\s*(?:class="lang-(\w+)")?>([\s\S]+?)<\/code><\/pre>/mg, (a, language, text) => {
@@ -58,7 +57,7 @@ export default class extends think.controller.base {
       return `<pre><code class="hljs lang-${result.language}">${result.value}</code></pre>`;
     });
 
-    return highlightContent;
+    return [highlightContent, tocContent];
   }
 
   /**

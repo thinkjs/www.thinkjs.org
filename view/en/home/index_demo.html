@@ -1,17 +1,54 @@
-<%include inc/header.html %>
-<div class="content">
-  <div class="wrap page-con">
-      <h2 class="tith2">Demo</h2>
+{% extends "./layout.html" %}
 
-      <h3 class="tith3">Source Code</h3>
+{% block content %}
+
+<div class="container">
+
+  <div class="content">
+    <div class="wrap page-con">
+
+      <h2 class="tith2">Plugin &amp; Demo</h2>
+
+      <h3>Plugins</h3>
+
+      <p>ThinkJS 2.0 provides two types of plugin, Middleware and Adapter.</p>
+
+      <h4 class="tith3" id="middleware">Middleware</h4>
       <div class="list">
         <ul>
-          <li><a href="https://github.com/75team/firekylin">Firekylin</a> - A Simple &amp; Fast Node Bloging Platform Base On ThinkJS 2.0 & ReactJS & ES6/7</li>
-          <li><a href="https://github.com/75team/www.thinkjs.org">www.thinkjs.org</a> - ThinkJS website code</li>
-          <li><a href="https://github.com/thinkjs-team/cicada">cicada</a> - Favorite article collections based on Node.js & ThinkJS</li>
+          <li><a href="https://github.com/akira-cn/think-wechat">think-wechat</a> 微信公众平台接口</li>
+          <li><a href="https://github.com/welefen/think-ip-filter">think-ip-filter</a> IP 访问控制器，支持白名单和黑名单，支持动态获取配置</li>
+          <li><a href="https://github.com/welefen/think-html-cache">think-html-cache</a> HTML 页面静态化，支持多种静态化存储方式</li>
+          <li>
+            <a href="https://github.com/qgy18/think-debug-toolbar">think-debug-toolbar</a> - 页面调试助手，效果见<a href="http://i.imgur.com/kV5OC1S.png" target="_blank">截图</a>
+          </li>
         </ul>
       </div>
-      <h3 class="tith3">Demo</h3>
+      <h4 class="tith3" id="adapter">Adapter</h4>
+
+      <div class="list">
+        <ul>
+          <li>
+            <a href="https://github.com/thinkjs-team/think-template-handlebars">think-template-handlebars</a> 视图使用 Handlebars 模板引擎
+          </li>
+        </ul>
+      </div>
+
+      <h3 class="tith2">Demo</h3>
+
+      <h4 class="tith3">Source Code</h4>
+      <div class="list">
+        <ul>
+          <li>
+            <a href="https://github.com/75team/firekylin">Firekylin</a> - A Simple &amp; Fast Node Bloging Platform Base On ThinkJS 2.0 & ReactJS & ES6/7
+          </li>
+          <li><a href="https://github.com/75team/www.thinkjs.org">www.thinkjs.org</a> - ThinkJS website code</li>
+          <li>
+            <a href="https://github.com/thinkjs-team/cicada">cicada</a> - Favorite article collections based on Node.js & ThinkJS
+          </li>
+        </ul>
+      </div>
+      <h4 class="tith3">Application</h4>
       <div class="list">
         <ul>
           <li><a href="https://github.com/75team/thinkjs2-demos/tree/master/file-upload">File upload</a></li>
@@ -19,10 +56,14 @@
           <li><a href="https://github.com/75team/thinkjs2-demos/tree/master/model-mysql">Mysql operations</a></li>
           <li><a href="https://github.com/75team/thinkjs2-demos/tree/master/model-relation">Relation models</a></li>
           <li><a href="https://github.com/75team/thinkjs2-demos/tree/master/model-mongo">MongoDB operations</a></li>
-          <li><a href="https://github.com/75team/thinkjs2-demos/tree/master/websocket-socket.io">Chat with socket.io</a></li>
+          <li><a href="https://github.com/75team/thinkjs2-demos/tree/master/websocket-socket.io">Chat with socket.io</a>
+          </li>
           <li><a href="https://github.com/75team/thinkjs2-demos/tree/master/websocket-sockjs">Chat with SockJS</a></li>
         </ul>
       </div>
+    </div>
   </div>
+
 </div>
-<%include inc/footer.html %>
+
+{% endblock %}
