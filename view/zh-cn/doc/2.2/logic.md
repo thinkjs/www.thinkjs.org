@@ -356,7 +356,7 @@ export default class extends think.logic.base {
 
 #### before
 
-值需要在一个日期之后，默认为需要在当前日期之前。
+值需要在一个日期之前，默认为需要在当前日期之前。
 
 ```js
 export default class extends think.logic.base {
@@ -650,7 +650,7 @@ export default class extends think.logic.base {
 
 #### uppercase
 
-需要都是大小字母。
+需要都是大写字母。
 
 #### mobile
 
