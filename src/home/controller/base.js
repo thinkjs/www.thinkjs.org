@@ -29,7 +29,7 @@ export default class extends think.controller.base {
     if(/^[\w\-]+$/.test(name)){
       return name;
     }
-    return `toc-${think.md5(name).slice(0, 8)}`;
+    return `toc-${think.md5(name).slice(0, 3)}`;
   }
   /**
    * markdown to html
