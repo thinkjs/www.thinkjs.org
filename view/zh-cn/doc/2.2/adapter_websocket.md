@@ -128,8 +128,14 @@ io 对象包含的方法请见 <http://socket.io/docs/server-api/#server()>。
 设置被 socket.io 处理的路径，默认为 `/socket.io`。如果需要修改，可以修改下面的配置：
 
 ```js
+/* src/common/config/websocket.js */
 export default {
-  path: '/other_path'
+  type: 'socket.io',
+  adapter: {
+    'socket.io': {
+      path: '/other_path'
+    }
+  }
 }
 ```
 
@@ -140,14 +146,21 @@ export default {
 使用多节点来部署 WebSocket 时，多节点之间可以借助 Redis 进行通信，这时可以设置 adapter 来实现。
 
 ```js
-import redis from 'socket.io-redis';
+/* src/common/config/websocket.js */
 
+import redis from 'socket.io-redis';
 export default {
-  adapter: function(){
-    return redis({ host: 'localhost', port: 6379 });
+  type: 'socket.io',
+  adapter: {
+    'socket.io': {
+      adp: function(){
+        return redis({ host: 'localhost', port: 6379 });
+      }
+    }
   }
 }
 ```
+
 
 具体请见 <http://socket.io/docs/using-multiple-nodes/>。
 

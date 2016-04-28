@@ -125,8 +125,14 @@ To know methods in io object, please see also <http://socket.io/docs/server-api/
 The socket.io process path is `/socket.io` by default. You can edit the folloing configuration if you need.
 
 ```js
+/* src/common/config/websocket.js */
 export default {
-  path: '/other_path'
+  type: 'socket.io',
+  adapter: {
+    'socket.io': {
+      path: '/other_path'
+    }
+  }
 }
 ```
 
@@ -137,11 +143,17 @@ export default {
 When using multiple nodes to deploy WebSocket, multiple nodes can communicate with Redis. You can get things done by set up adapter.
 
 ```js
-import redis from 'socket.io-redis';
+/* src/common/config/websocket.js */
 
+import redis from 'socket.io-redis';
 export default {
-  adapter: function(){
-    return redis({ host: 'localhost', port: 6379 });
+  type: 'socket.io',
+  adapter: {
+    'socket.io': {
+      adp: function(){
+        return redis({ host: 'localhost', port: 6379 });
+      }
+    }
   }
 }
 ```
