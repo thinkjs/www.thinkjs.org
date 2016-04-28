@@ -438,3 +438,7 @@ export default class extends Base {
 ```
 
 这样继承了 Base 的 controller 都会校验用户信息了。
+
+### TypeError: Unkown charset 'utf8mb4'
+
+升级到 2.2.2 版本后，如果数据库的编码之前填的是 utf8mb4，那么会报一个 `TypeError: Unkown charset 'utf8mb4'` 的错误。这是因为 2.2.2 版本将依赖的 mysql 库改为了 node-mysql2（该模块性能是 node-mysql 的 2 倍 ），这个模块不支持 utf8mb4 简写，所以需要将配置文件里的数据库编码改为 `UTF8MB4_GENERAL_CI`，具体支持的编码列表见：https://github.com/sidorares/node-mysql2/blob/master/lib/constants/charsets.js
