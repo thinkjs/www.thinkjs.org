@@ -92,13 +92,7 @@ server {
 
 修改完成后，将该配置文件拷贝到 nginx 的配置文件目录中，然后通过 `nginx -s reload` 命令 reload 配置，这样就可以通过域名访问了。
 
-线上建议开启配置 `proxy_on`，这样就可以禁止直接通过 IP + 端口来访问。修改配置文件 `src/common/config/env/production.js`，如：
-
-```js
-export default {
-  proxy_on: true
-}
-```
+线上建议开启配置 `proxy_on`，具体请见[禁止端口访问](./force_proxy.html)。
 
 ### 关闭静态资源处理的配置
 

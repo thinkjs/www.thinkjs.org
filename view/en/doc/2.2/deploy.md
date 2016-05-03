@@ -81,13 +81,7 @@ Modify the localhost in `server_name localhost` into the corresponding domain na
 
 After the modification is complete, copy the config file to the config file directory of nginx, then reload the config by the command `nginx -s reload`. So you can access the application through the domain name.
 
-It is recommended to open the config `proxy_on` online, so that you can forbid to access directly by IP + port. Modify the config file `src/common/config/env/production.js`, eg.
-
-```js
-export default {
-  proxy_on: true
-}
-```
+It is recommended to open the config `proxy_on` online, see [Proxy](./force_proxy.html).
 
 ### The Config of Closing the Static Resource Process
 
