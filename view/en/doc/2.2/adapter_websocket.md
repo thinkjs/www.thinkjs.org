@@ -11,7 +11,7 @@ export default {
   on: false, // whether open WebSocket
   type: 'socket.io', // the WebSocket library name, defaults to socket.io
   allow_origin: '', //  origin allowed
-  adapter: undefined, // store adapter for socket，used in socket.io
+  adp: undefined, // store adapter for socket，used in socket.io
   path: '', // url path for websocket
   messages: {
     // open: 'home/websocket/open',
