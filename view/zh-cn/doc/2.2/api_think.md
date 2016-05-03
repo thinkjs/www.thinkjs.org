@@ -370,9 +370,10 @@ think.isDir("/home/welefen/dirname"); //true
 
 异步检测是否是目录，返回 Promise。该方法在 `2.1.5` 版本中添加。
 
-#### think.datetime(date)
+#### think.datetime(date, format)
 
 * `date` {Date} 
+* `format` {String} 日期格式，默认为 YYYY-MM-DD HH:ii:ss
 * `return` {String}
 
 返回一个格式化的日期，格式为：`YYYY-MM-DD HH:ii:ss`，如：
@@ -380,6 +381,9 @@ think.isDir("/home/welefen/dirname"); //true
 ```js
 let str = think.datetime();
 //str is 2016-02-01 10:00:00
+//
+let str1 = think.datetime(new Date, 'YYYY-MM-DD');
+// str1 is 2016-02-01
 ```
 
 该方法在 `2.1.5` 版本中添加。

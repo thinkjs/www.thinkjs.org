@@ -479,7 +479,7 @@ export default {
   type: 'socket.io', //websocket type
   allow_origin: '',
   sub_protocal: '',
-  adapter: undefined,
+  adp: undefined,
   path: '', //url path for websocket
   messages: {
     // open: 'home/websocket/open',

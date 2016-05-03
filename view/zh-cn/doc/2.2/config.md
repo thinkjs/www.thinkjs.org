@@ -470,7 +470,7 @@ export default {
   type: 'think', //websocket 使用的库
   allow_origin: '',
   sub_protocal: '',
-  adapter: undefined,
+  adp: undefined,
   path: '', //url path for websocket
   messages: {
     // open: 'home/websocket/open',
