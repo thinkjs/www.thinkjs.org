@@ -236,7 +236,7 @@ export default class extends think.model.base {
 
 #### Cache Configuration
 
-Config cache in model configuration's `cache` field:
+Config cache in model configuration's `cache` field (config file is src/common/config/db.js):
 
 ```js
 export default {

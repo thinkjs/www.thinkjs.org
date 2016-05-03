@@ -248,7 +248,7 @@ export default class extends think.model.base {
 
 ##### 缓存配置
 
-缓存配置为模型配置中的 `cache` 字段，如：
+缓存配置为模型配置中的 `cache` 字段（ 配置文件在 src/common/config/db.js），如：
 
 ```js
 export default {
