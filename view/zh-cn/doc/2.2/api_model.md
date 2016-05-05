@@ -211,6 +211,17 @@ export default class extends think.model.base {
 }
 ```
 
+也可以直接设置一个参数为数组，关联模型等情况下可能会有用。如：
+
+```js
+export default class extends think.model.base {
+  getList(){
+    //查询第 2 页数据，每页 10 条数据
+    return this.page([2, 10]).where({id: {'>': 100}}).select();
+  }
+}
+```
+
 #### model.where(where)
 
 * `where` {String | Object} where 条件
