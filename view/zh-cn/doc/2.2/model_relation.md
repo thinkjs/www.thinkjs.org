@@ -394,6 +394,231 @@ export default class extends think.model.relation {
 }
 ```
 
+### 设置查询条件
+
+#### field
+
+设置 field 可以控制查询关联表时数据字段，这样可以减少查询的数据量，提高查询查询效率。默认情况会查询所有数据。
+
+如果设置了查询的字段，那么必须包含关联字段，否则查询出来的数据无法和之前的数据关联。
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        field: 'id,name,email' //必须要包含关联字段 id
+      }
+    };
+  }
+}
+```
+
+如果某些情况下必须动态的设置的话，可以将 field 设置为一个函数，执行函数时返回对应的字段。如：
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        field: model => {
+          return model._relationField;
+        }
+      }
+    };
+  }
+  selectData(relationfield){
+    //将要查询的关联字段设置到一个私有属性中，便于动态设置 field 里获取
+    this._relationField = relationfield;
+    return this.select();
+  }
+}
+```
+
+形参 `model` 指向当前模型类。
+
+#### where
+
+设置 where 可以控制查询关联表时的查询条件，如：
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        where: {
+          grade: 1 //只查询关联表里 grade = 1 的数据
+        }
+      }
+    };
+  }
+}
+```
+
+也可以动态的设置 where 条件，如：
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        where: model => {
+          return model._relationWhere;
+        }
+      }
+    };
+  }
+  selectData(relationWhere){
+    this._relationWhere = relationWhere;
+    return this.select();
+  }
+}
+```
+
+形参 `model` 指向当前模型类。
+
+#### page
+
+可以通过设置 page 进行分页查询，page 参数会被解析为 limit 数据。
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        page: [1, 15] //第一页，每页 15 条
+      }
+    };
+  }
+}
+```
+
+也可以动态设置分页，如：
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        page: model => {
+          return model._relationPage;
+        }
+      }
+    };
+  }
+  selectData(page){
+    this._relationPage = [page, 15];
+    return this.select();
+  }
+}
+```
+
+形参 `model` 指向当前模型类。
+
+#### limit
+
+可以通过 limit 设置查询的条数，如：
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        limit: [10] //限制 10 条
+      }
+    };
+  }
+}
+```
+
+也可以动态设置 limit，如：
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        limit: model => {
+          return model._relationLimit;
+        }
+      }
+    };
+  }
+  selectData(){
+    this._relationLimit = [1, 15];
+    return this.select();
+  }
+}
+```
+
+形参 `model` 指向当前模型类。
+
+注： 如果设置 `page`，那么 `limit` 会被忽略，因为 `page` 会转为 `limit`。
+
+#### order
+
+通过 order 可以设置关联表的查询排序方式，如：
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        order: 'level DESC'
+      }
+    };
+  }
+}
+```
+
+也可以动态的设置 order，如：
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      user: {
+        type: think.model.BELONG_TO,
+        order: model => {
+          return model._relationOrder;
+        }
+      }
+    };
+  }
+  selectData(){
+    this._relationOrder= 'level DESC';
+    return this.select();
+  }
+}
+```
+
+形参 `model` 指向当前模型类。
+
+### 注意事项
+
+#### 关联字段的数据类型要一致
+
+比如：数据表里的字段 `id` 的类型为 `int`，那么关联表里的关联字段 `user_id` 也必须为 `int` 相关的类型，否则无法匹配数据。这是因为匹配的时候使用绝对等于进行判断的。
+
 ### mongo 关联模型
 
 该关联模型的操作不适合 mongo 模型，mongo 的关联模型请见 <https://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/>。

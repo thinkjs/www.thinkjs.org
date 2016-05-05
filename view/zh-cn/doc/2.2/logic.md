@@ -198,7 +198,7 @@ export default class extends think.logic.base {
 
 #### required
 
-必填项。
+必填项。对于布尔值 false，数字 0，空字符串，空数组，空对象等值用 required 校验时都不能通过。
 
 ```js
 export default class extends think.logic.base {

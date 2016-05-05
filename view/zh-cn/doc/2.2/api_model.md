@@ -194,6 +194,18 @@ export default class extends think.model.base {
 }
 ```
 
+也可以直接传入一个数组，如：
+
+```js
+export default class extends think.model.base {
+  getList(){
+    //从起始位置100开始查询20调数据
+    return this.limit([100, 20]).where({id: {'>': 100}}).select();
+  }
+}
+```
+
+
 #### model.page(page, listRows)
 
 * `page` {Number} 当前页，从 1 开始
