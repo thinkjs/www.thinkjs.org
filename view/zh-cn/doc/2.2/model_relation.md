@@ -613,6 +613,8 @@ export default class extends think.model.relation {
 
 形参 `model` 指向当前模型类。
 
+`注`：动态配置值从 `2.2.3` 版本开始支持。
+
 ### 注意事项
 
 #### 关联字段的数据类型要一致

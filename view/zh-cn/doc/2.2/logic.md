@@ -124,6 +124,31 @@ export default class extends think.logic.base {
 
 上面示例指定了字段 `name` 通过 `post` 方法来获取值，字段 `image` 通过 `file` 方式来获取值，字段 `version` 通过 `get` 方式来获取值。
 
+#### 手动设置数据值
+
+如果有时候不能自动获取值的话（如：从 header 里取值），那么可以手动获取值后配置进去。如：
+
+```js
+export default class extends think.logic.base {
+  /**
+   * 保存数据，POST 请求
+   * @return {} []
+   */
+  saveAction(){
+    let rules = {
+      name: {
+        required: true,
+        value: this.header('x-name') //从 header 中获取值
+      }
+    }
+  }
+}
+```
+
+手动获取并设置值的时候只能通过对象的方式设置规则。
+
+`注`：该方式从 `2.2.3` 版本开始支持。
+
 #### 错误信息
 
 上面的配置只是指定了具体的校验规则，并没有指定校验出错后给出的错误信息。错误信息支持国际化，需要在配置文件 `src/common/config/locale/[lang].js` 中定义。如：
