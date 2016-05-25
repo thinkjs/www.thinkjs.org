@@ -433,7 +433,6 @@ export default {
   type: 'file',
   path: think.RUNTIME_PATH + '/session',
   secret: '',
-  auth_key: 'think_auth_list',
   timeout: 24 * 3600,
   cookie: { // cookie options
     length: 32
