@@ -1,5 +1,4 @@
 #!/bin/sh
-#STC_PATH="/home/q/php/STC"
 STC_PATH="/Users/welefen/Develop/git/stc/src"
 path=`dirname $0`;
 first=${path:0:1};
