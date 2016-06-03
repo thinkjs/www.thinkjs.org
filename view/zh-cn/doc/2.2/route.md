@@ -197,6 +197,25 @@ export default {
   }
 }
 ```
+> 
+注: 此方式如果需要多个路由规则匹配同一个模块，只需要修改正则即可，对象的属性必须是`reg: your reg`格式且只有一条.
+example:
+```
+export default {
+  admin: {
+    reg: /^(account|admin) // account和admin 都命中admin模块
+  }
+}
+```
+错误的写法 example:
+```
+export default {
+  admin: {
+    account: /^account/,
+    admin  : /^admin/
+  }
+}
+```
 
 ##### admin/config/route.js
 
