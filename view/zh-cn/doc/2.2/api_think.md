@@ -373,10 +373,10 @@ think.isDir("/home/welefen/dirname"); //true
 #### think.datetime(date, format)
 
 * `date` {Date} 
-* `format` {String} 日期格式，默认为 YYYY-MM-DD HH:ii:ss
+* `format` {String} 日期格式，默认为 YYYY-MM-DD HH:mm:ss
 * `return` {String}
 
-返回一个格式化的日期，格式为：`YYYY-MM-DD HH:ii:ss`，如：
+返回一个格式化的日期，格式为：`YYYY-MM-DD HH:mm:ss`，如：
 
 ```js
 let str = think.datetime();
