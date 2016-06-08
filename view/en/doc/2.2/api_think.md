@@ -326,15 +326,22 @@ think.isIP("2031:0000:130f:0000:0000:09c0:876a:130b"); //true ip6
 
 #### think.isFile(file)
 
-* `file` {Mixed} object which need to check
+* `file` {Mixed} the path to check
 * `return` {Boolean}
 
-Check whether this object is IP or not, if file did't exist, return false.
+Check whether the path is file or not, if file did't exist, return false.
 
 ```js
 think.isFile("/home/welefen/a.txt"); //true
 think.isFile("/home/welefen/dirname"); //false
 ```
+
+#### think.isFileAsync(file)
+
+* `file` {Mixed} the path to check
+* `return` {Promise}
+
+Async check whether the path is file or not, return a Promise object. You can use this function after version 2.1.5.
 
 #### think.isDir(dir)
 
@@ -346,6 +353,31 @@ Check whether this path is directory or not. if not, return false.
 ```js
 think.isDir("/home/welefen/dirname"); //true
 ```
+
+#### think.isDirAsync(dir)
+
+* `dir` {Mixed} the path to check
+* `return` {Promise}
+
+Async check whether the path is directory or not, return a Promise object. You can use this function after version 2.1.5.
+
+#### think.datetime(date, format)
+
+* `date` {Date} 
+* `format` {String} date format string, default is YYYY-MM-DD HH:mm:ss
+* `return` {String}
+
+return a formatted date string by format parameter, format string should be like `YYYY-MM-DD HH:mm:ss`:
+
+```js
+let str = think.datetime();
+//str is 2016-02-01 10:00:00
+//
+let str1 = think.datetime(new Date, 'YYYY-MM-DD');
+// str1 is 2016-02-01
+```
+
+You can use this function after version 2.1.5.
 
 #### think.isBuffer(obj)
 
