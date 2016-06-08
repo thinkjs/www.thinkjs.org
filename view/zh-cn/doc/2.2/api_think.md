@@ -348,7 +348,7 @@ think.isFile("/home/welefen/dirname"); //false
 #### think.isFileAsync(file)
 
 * `file` {Mixed} 要检测的文件路径
-* `return` {Boolean}
+* `return` {Promise}
 
 异步检测是否是文件，返回一个 Promise。该方法在 `2.1.5` 版本中添加。
 
@@ -366,7 +366,7 @@ think.isDir("/home/welefen/dirname"); //true
 #### think.isDirAsync(dir)
 
 * `dir` {Mixed} 要检测的路径
-* `return` {Boolean}
+* `return` {Promise}
 
 异步检测是否是目录，返回 Promise。该方法在 `2.1.5` 版本中添加。
 
