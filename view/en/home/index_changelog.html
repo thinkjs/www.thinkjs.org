@@ -9,6 +9,64 @@
                 <i class="circle"></i>
                 <div class="dailycont">
                   <i class="arrowl"></i>
+                  <span><strong>2.2.5</strong>2016.06.17</span>
+                  <p>修复 Session 类型为 memory 时 timeout 失效的问题</p>
+                  <p>修复 think.isNumberString 检测控值结果为真的问题</p>
+                  <p>修复数据表字段是 _ 字符打头导致不能识别的问题</p>
+                  <p>修复自动数据库配置文件没有 type 导致不正确的问题</p>
+                  <p>修复 SQLite 下事务语法报错的问题</p>
+                  <p>修复 Mysql 下数据库连接异常关闭后有时候不能自动连接的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.2.4</strong>2016.05.25</span>
+                  <p>修复模型里 increment 和 decrement 方法字段为关键字导致报错的问题</p>
+                  <p>修复 postgreSQL 报错关闭连接的问题</p>
+                  <p>修复 postgreSQL 下 countSelect 方法含有 order 导致报错的问题</p>
+                  <p>修复 statusAction 错误大于 600 导致在部分 Node.js 版本报错的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.2.3</strong>2016.05.05</span>
+                  <p>关联模型里 where、limit 等参数设置支持动态的方式</p>
+                  <p>Logic 校验支持手动设置参数值</p>
+                  <p>修复 int:0 校验报类型错误的问题</p>
+                  <p>修复 view_parse hook 执行结果可能未达预期的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.2.2</strong>2016.04.27</span>
+                  <p>socket.io 支持 namespace</p>
+                  <p>修复 socket.io 配置 adapter 不生效的问题</p>
+                  <p>修复自动编译有时候报错不能消除的问题</p>
+                  <p>修复日志颜色在 windows 下显示的问题</p>
+                  <p>http.getPayload 方法支持返回 Buffer</p>
+                  <p>mongo 模型支持 beforeUpdate 方法</p>
+                  <p>模型支持 beforeSelect，beforeFind 和 beforeDelete 方法</p>
+                  <p>修复不能立即获取设置的 cookie 问题</p>
+                  <p>修复开发环境下数据表字段修改后模型里不能自动更新的问题</p>
+                  <p>使用 node-mysql2 模块替换原有的 node-mysql 模块（性能提升 2 倍）</p>
+                  <p>修复有时候没有处理 Project reject 导致有 warning 的问题</p>
+                  <p>模型添加 thenUpdate 方法</p>
+                  <p>http 对象添加 prop 方法</p>
+                  <p>修复 DB session 下新用户异常的问题</p>
+                  <p>修复 PostgreSQL 下插入不能获取 insertId 的问题</p>
+                  <p>更新依赖模块的版本号</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
                   <span><strong>2.2.1</strong>2016.03.30</span>
                   <p>Fix bug with ThinkJS versioning on create project</p>
                   <p>Fix error path missing one hierarchy</p>
