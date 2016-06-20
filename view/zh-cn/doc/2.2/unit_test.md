@@ -18,6 +18,15 @@ thinkjs new demo --es --test
 
 默认使用的测试框架是 `mocha`，代码覆盖率框架为 `istanbul`。
 
+### 加载 thinkjs
+
+测试项目里的代码，有写代码依赖了 think 这个全局对象，那么这时就要引入 thinkjs，可以通过下面的方式引入：
+
+```js
+var instance = new require('thinkjs');
+instance.load();
+```
+
 ### 书写单元测试
 
 可以用 `describe` 和 `it` 的方式来书写测试代码，如：
