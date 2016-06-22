@@ -10,12 +10,12 @@
                 <div class="dailycont">
                   <i class="arrowl"></i>
                   <span><strong>2.2.5</strong>2016.06.17</span>
-                  <p>修复 Session 类型为 memory 时 timeout 失效的问题</p>
-                  <p>修复 think.isNumberString 检测控值结果为真的问题</p>
-                  <p>修复数据表字段是 _ 字符打头导致不能识别的问题</p>
-                  <p>修复自动数据库配置文件没有 type 导致不正确的问题</p>
-                  <p>修复 SQLite 下事务语法报错的问题</p>
-                  <p>修复 Mysql 下数据库连接异常关闭后有时候不能自动连接的问题</p>
+                  <p>Fix bug with memory Session timeout lose efficacy.</p>
+                  <p>Fix bug with think.isNumberString valide empty value return true.</p>
+                  <p>Fix bug with table field start with _ can't be recognized.</p>
+                  <p>Fix bug with auto configured DB file missing type causes error.</p>
+                  <p>Fix bug with SQLite transation syntax error</p>
+                  <p>Fix bug with DB connection sometimes can not re-connect after connection exceptions.</p>
                 </div>
               </li>
               <li>
@@ -23,10 +23,10 @@
                 <div class="dailycont">
                   <i class="arrowl"></i>
                   <span><strong>2.2.4</strong>2016.05.25</span>
-                  <p>修复模型里 increment 和 decrement 方法字段为关键字导致报错的问题</p>
-                  <p>修复 postgreSQL 报错关闭连接的问题</p>
-                  <p>修复 postgreSQL 下 countSelect 方法含有 order 导致报错的问题</p>
-                  <p>修复 statusAction 错误大于 600 导致在部分 Node.js 版本报错的问题</p>
+                  <p>Fix bug with use keyword as method field in modal increment and decrement method casues error.</p>
+                  <p>Fix postgreSQL error causes connection close.</p>
+                  <p>Fix bug with countSelect with order in postgreSQL causes error.</p>
+                  <p>Fux bug with statusAction larger than 600 result in error in some Node.js versions.</p>
                 </div>
               </li>
               <li>
@@ -34,10 +34,10 @@
                 <div class="dailycont">
                   <i class="arrowl"></i>
                   <span><strong>2.2.3</strong>2016.05.05</span>
-                  <p>关联模型里 where、limit 等参数设置支持动态的方式</p>
-                  <p>Logic 校验支持手动设置参数值</p>
-                  <p>修复 int:0 校验报类型错误的问题</p>
-                  <p>修复 view_parse hook 执行结果可能未达预期的问题</p>
+                  <p>Support dynamic set parameters in where or limit relational modal, and so on.</p>
+                  <p>Support manual configure Logic validation parameters</p>
+                  <p>Fix bug with int:0 type validation error.</p>
+                  <p>Fix bug with view_parse hook result may not be as expected.</p>
                 </div>
               </li>
               <li>
@@ -45,22 +45,22 @@
                 <div class="dailycont">
                   <i class="arrowl"></i>
                   <span><strong>2.2.2</strong>2016.04.27</span>
-                  <p>socket.io 支持 namespace</p>
-                  <p>修复 socket.io 配置 adapter 不生效的问题</p>
-                  <p>修复自动编译有时候报错不能消除的问题</p>
-                  <p>修复日志颜色在 windows 下显示的问题</p>
-                  <p>http.getPayload 方法支持返回 Buffer</p>
-                  <p>mongo 模型支持 beforeUpdate 方法</p>
-                  <p>模型支持 beforeSelect，beforeFind 和 beforeDelete 方法</p>
-                  <p>修复不能立即获取设置的 cookie 问题</p>
-                  <p>修复开发环境下数据表字段修改后模型里不能自动更新的问题</p>
-                  <p>使用 node-mysql2 模块替换原有的 node-mysql 模块（性能提升 2 倍）</p>
-                  <p>修复有时候没有处理 Project reject 导致有 warning 的问题</p>
-                  <p>模型添加 thenUpdate 方法</p>
-                  <p>http 对象添加 prop 方法</p>
-                  <p>修复 DB session 下新用户异常的问题</p>
-                  <p>修复 PostgreSQL 下插入不能获取 insertId 的问题</p>
-                  <p>更新依赖模块的版本号</p>
+                  <p>socket.io support namespace.</p>
+                  <p>Fix bug with socket.io config adapter is not working.</p>
+                  <p>Fix bug with error won't update in auto-compile mode.</p>
+                  <p>Fix bug with log color display issues in windows.</p>
+                  <p>http.getPayload support returning Buffer.</p>
+                  <p>mongo modal support beforeUpdate method.</p>
+                  <p>Modal supoort beforeSelect, beforeFind and beforeDelete method.</p>
+                  <p>Fix bug with can not get the right cookie right after set cookie.</p>
+                  <p>Fix bug with model not auto-update after table field name changed in develop environment.</p>
+                  <p>Replace node-mysql with node-mysql2 (performance increase times)</p>
+                  <p>Fix bug result in no warning wihout handle Project reject</p>
+                  <p>Add method thenUpdate for model.</p>
+                  <p>Add prop method for http object.</p>
+                  <p>Fix bug with new user's DB session exception.</p>
+                  <p>Fix bug with PostgreSQL insert can't get insertId.</p>
+                  <p>Update dependencies version.</p>
                 </div>
               </li>
               <li>
@@ -68,8 +68,8 @@
                 <div class="dailycont">
                   <i class="arrowl"></i>
                   <span><strong>2.2.1</strong>2016.03.30</span>
-                  <p>Fix bug with ThinkJS versioning on create project</p>
-                  <p>Fix error path missing one hierarchy</p>
+                  <p>Fix bug with ThinkJS versioning on create project.</p>
+                  <p>Fix error path missing one hierarchy.</p>
                 </div>
               </li>
                <li>
@@ -77,23 +77,23 @@
                 <div class="dailycont">
                   <i class="arrowl"></i>
                   <span><strong>2.2.0</strong>2016.03.30</span>
-                  <p>Support ES2015+ Breakpoint Debugging</p>
-                  <p>Support error message locate to src/ folder</p>
-                  <p>Fix bug with can't fetch I18N error修复国际化错误信息获取不到的问题</p>
-                  <p>Reomve default field value fetched from database, fix bug with modify specify value reports error</p>
-                  <p>Fix bug with error info can't be clear if there are multiple compile errors on the same file</p>
-                  <p>Remove retainLines compile option</p>
-                  <p>Fix bug with different validation rule incorrect</p>
-                  <p>Fix bug with File Session fetch empty content cause Session losed</p>
-                  <p>Fix bug with addMany method returning the wrong value</p>
-                  <p>Fix bug with empty rules in data validation result in error</p>
-                  <p>Fix bug with mongo model aggregate method return incorrect value</p>
-                  <p>Fix bug with afterDelete take no effect</p>
-                  <p>Fix bug with type of BELONG_TO in Relation Model can't set fKey</p>
-                  <p>Change log_sql default to off on production environemnt</p>
-                  <p>Fix bug with metheds like sum with expression parameters report error</p>
-                  <p>Fix bug with Mysql not recognize database encoding</p>
-                  <p>Fix bug with postgresql field type can't be boolean</p>
+                  <p>Support ES2015+ Breakpoint Debugging.</p>
+                  <p>Support error message locate to src/ folder.</p>
+                  <p>Fix bug with can't fetch I18N error.</p>
+                  <p>Reomve default field value fetched from database, fix bug with modify specify value reports error.</p>
+                  <p>Fix bug with error info can't be clear if there are multiple compile errors on the same file.</p>
+                  <p>Remove retainLines compile option.</p>
+                  <p>Fix bug with different validation rule incorrect.</p>
+                  <p>Fix bug with File Session fetch empty content causes Session losed.</p>
+                  <p>Fix bug with addMany method returning the wrong value.</p>
+                  <p>Fix bug with empty rules in data validation result in error.</p>
+                  <p>Fix bug with mongo model aggregate method return incorrect value.</p>
+                  <p>Fix bug with afterDelete take no effect.</p>
+                  <p>Fix bug with type of BELONG_TO in Relation Model can't set fKey.</p>
+                  <p>Change log_sql default to off on production environemnt.</p>
+                  <p>Fix bug with metheds like sum with expression parameters report error.</p>
+                  <p>Fix bug with Mysql not recognize database encoding.</p>
+                  <p>Fix bug with postgresql field type can't be boolean.</p>
                 </div>
               </li>
               <li>
@@ -101,11 +101,11 @@
                 <div class="dailycont">
                   <i class="arrowl"></i>
                   <span><strong>2.1.8</strong>2016.03.15</span>
-                  <p>Fix bug with Mysql multi-connection reports Connection already Released error</p>
-                  <p>Fix bug with create project path partialiy incorrect</p>
-                  <p>Optimize when project start check module environment</p>
-                  <p>Fix parseGroup with expression reports error</p>
-                  <p>Add more error infomation when call non-exist Action</p>
+                  <p>Fix bug with Mysql multi-connection reports Connection already Released error.</p>
+                  <p>Fix bug with create project path partialiy incorrect.</p>
+                  <p>Optimize when project start check module environment.</p>
+                  <p>Fix parseGroup with expression reports error.</p>
+                  <p>Add more error infomation when call non-exist Action.</p>
                 </div>
               </li>
               <li>
@@ -113,10 +113,10 @@
                 <div class="dailycont">
                   <i class="arrowl"></i>
                   <span><strong>2.1.7</strong>2016.03.01</span>
-                  <p>Fix bug with not properly handle Promise cause error message</p>
-                  <p>Fix bug resulting in ObjectID can be class</p>
-                  <p>Fix model schema default value not support nesting</p>
-                  <p>Add log_error config to decide if print 500 error log</p>
+                  <p>Fix bug with not properly handle Promise causes error message.</p>
+                  <p>Fix bug resulting in ObjectID can be class.</p>
+                  <p>Fix model schema default value not support nesting.</p>
+                  <p>Add log_error config to decide if print 500 error log.</p>
                 </div>
               </li>
               <li>
@@ -127,7 +127,7 @@
                   <p>Fix bug with correlation model failed add due to missing part of data.</p>
                   <p>Fix bug with database table name contains keyword reports error.</p>
                   <p>Fix bug with model find method return multiple result in some conditions.</p>
-                  <p>Fix bug with file upload failed cause request can not be ended.</p>
+                  <p>Fix bug with file upload failed causes request can not be ended.</p>
                   <p>Remove listening to unhandledRejection event.</p>
                   <p>Fix bug with fetch method missing config parameter.</p>
                 </div>
@@ -170,7 +170,7 @@
                   <p>Service class added method model.</p>
                   <p>think.base added method parseModuleFromPath.</p>
                   <p>Fix bug with parsing model default value incorrect.</p>
-                  <p>Fix bug when model where condition is string, add another condition will cause error.</p>
+                  <p>Fix bug when model where condition is string, add another condition will causes error.</p>
                 </div>
               </li>
               <li>
@@ -192,7 +192,7 @@
                   <p>Fix bug with multiple hierachy controller can't be found.</p>
                   <p>Added deprected method getTableFields to compatible with former version.</p>
                   <p>Fix bug with baseAssign overrides custom settings.</p>
-                  <p>Fix bug with missing think.RUNTIME_PATH cause path incorrect.</p>
+                  <p>Fix bug with missing think.RUNTIME_PATH causes path incorrect.</p>
                 </div>
               </li>
               <li>
@@ -233,8 +233,8 @@
 
 
                   <p>Fix bug with nunjucks inherit file can't be found.</p>
-                  <p>Fix bug with escaped / in pathname cause parsing error.</p>
-                  <p>Fix bug with modifying data response by http.file will cause source data being modified.</p>
+                  <p>Fix bug with escaped / in pathname causes parsing error.</p>
+                  <p>Fix bug with modifying data response by http.file will causes source data being modified.</p>
                   <p>Add support path / no need to change to \\ in windows.</p>
                   <p>Fix bug resulting in nunjucks can place template files not only in root folder.</p>
                   <p>Added on production mode, prevent the page from outputting sensitive data.</p>
@@ -380,8 +380,8 @@
                   <p>Add think.adapter.base, all 'Adapter' are inherit from this base class.</p>
                   <p>Remove options config in view, and use 'adapter' as a substitution.</p>
                   <p>Fix change the bae file the parent will not update iit self.</p>
-                  <p>Fix third party middleware parse payload cause stop execution.</p>
-                  <p>Fix if file name contains special character cause the error message could not use uppercase.</p>
+                  <p>Fix third party middleware parse payload causes stop execution.</p>
+                  <p>Fix if file name contains special character causes the error message could not use uppercase.</p>
                   <p>Fix Session sometimes reports an error.</p>
                   <p>Fix can not access resource wihich URL contains Chinese Character.</p>
                   <p>Fix static resource Range head not handle properly.</p>
@@ -510,7 +510,7 @@
                   <span><strong>1.2.2</strong>2015.04.29</span>
                   <p>Fix issue of importing MongoDb starts with lowercase, thx @denvey.</p>
                   <p>websocket add timeout setting, default to 0 (never stop).</p>
-                  <p>Fix maliciously upload file cause Temp folder contains files.</p>
+                  <p>Fix maliciously upload file causes Temp folder contains files.</p>
                   <p>Note: skip npm version of 1.2.1 becuase it is no stable.</p>
                 </div>
               </li>
