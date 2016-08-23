@@ -93,3 +93,18 @@ module.exports = think.controller({
 
 -------
 transaction 接收一个回调函数，这个回调函数中处理真正的逻辑，并需要返回。
+
+### 操作多个模型
+
+如果同一个事务下要操作多个数据表数据，那么要复用同一个数据库连接（开启事务后，每次事务操作会开启一个独立的数据库连接）。可以通过 `db` 方法进行数据库连接复用。
+
+```js
+indexAction(){
+  let model = this.model('user');
+  await model.transaction(async () => {
+    //通过 db 方法将 user 模型的数据库连接传递给 article 模型
+    let model2 = this.model('article').db(model.db());
+    // do something
+  })
+}
+```
