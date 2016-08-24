@@ -20,14 +20,16 @@
   Options:
 
     -h, --help         output usage information
-    -V, --version      output the version number
-    -e, --es6          use es6 for project, used in `new` command
+    -v, --version      output the version number
+    -V                 output the version number
+    -e, --es           use es for project, used in `new` command
+    --es6              use es for project, used in `new` command
     -t, --ts           use TypeScript for project, used in `new` command
     -T, --test         add test dirs when create project, used in `new` command
     -r, --rest         create rest controller, used in `controller` command
     -M, --mongo        create mongo model, used in `model` command
     -R, --relation     create relation model, used in `model` command
-    -m, --mode <mode>  project mode type(mini, normal, module), default is module, used in `new` command
+    -m, --mode <mode>  project mode type(normal, module), default is module, used in `new` command
 ```
 
 ### 创建项目
