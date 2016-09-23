@@ -230,7 +230,7 @@ export default [
 
 ------
 
-假设访问的 URL 为 `http://www.example.com/admin/api`，那么解析后的 pathname 为 `admin/api`，匹配 `common` 里的规则时会命中 `admin` 模块，然后再对 `admin` 模块下的路由规则进行逐一匹配。通过这种方式后就可以大大减少路由规则匹配的数量，提供匹配效率。
+假设访问的 URL 为 `http://www.example.com/admin/api`，那么解析后的 pathname 为 `admin/api`，匹配 `common` 里的规则时会命中 `admin` 模块，然后再对 `admin` 模块下的路由规则进行逐一匹配。通过这种方式后就可以大大减少路由规则匹配的数量，提高匹配效率。
 
 ### 自定义首页路由
 
