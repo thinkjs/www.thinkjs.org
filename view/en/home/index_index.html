@@ -51,9 +51,8 @@
     }
     <span class="hljs-comment">//data is validated in logic</span>
     <span class="hljs-keyword">let</span> data = <span class="hljs-keyword">this</span>.post();
-    <span class="hljs-keyword">let</span> md5 = think.md5(<span class="hljs-string">'think_'</span> + data.pwd);
-    <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.model(<span class="hljs-string">'user'</span>).where({name: data.name, pwd: md5}).find();
-    <span class="hljs-keyword">if</span>(think.isEmpty(result)){
+    <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.model(<span class="hljs-string">'user'</span>).where({name: data.name}).find();
+    <span class="hljs-keyword">if</span>(!validateLogin(result)){
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.fail(<span class="hljs-string">'login fail'</span>);
     }
     <span class="hljs-comment">//set userInfo to session</span>
