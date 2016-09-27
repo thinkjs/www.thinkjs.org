@@ -92,7 +92,7 @@ const MYSQL_WRITE = {
   host: '10.0.10.2'
 }
 export default {
-  host: '127.0.0.l',
+  host: '127.0.0.1',
   adapter: {
     mysql: { 
       parser: function(options){ //mysql 的配置解析方法
