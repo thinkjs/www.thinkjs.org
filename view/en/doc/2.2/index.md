@@ -22,11 +22,9 @@ export default class extends think.controller.base {
     }
     //here you can use post() method to get all request data which has checked in logic
     let data = this.post();
-    let md5 = think.md5('think_' + data.pwd);
-    //take username and encrypted password to match data in database
-    let result = await this.model('user').where({name: data.name, pwd: md5}).find();
-    //if no result found, it means username or password error
-    if(think.isEmpty(result)){
+    //take username to match data in database
+    let result = await this.model('user').where({name: data.name}).find();
+    if(!validateLogin(result)){
       return this.fail('login fail');
     }
     //write user info into session after reciving user infomation
