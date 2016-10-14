@@ -9,6 +9,98 @@
                 <i class="circle"></i>
                 <div class="dailycont">
                   <i class="arrowl"></i>
+                  <span><strong>2.2.13</strong>2016.10.14</span>
+                  <p>创建项目默认回滚为多模块项目</p>
+                  <p>修复 PostgreSQL 的部分问题</p>
+                  <p>默认将数据库配置 prefix 设置为空</p>
+                  <p>修复关联模型中 BELONG_TO 里 model 被删除的问题</p>
+                  <p>模型 buildSql 方法添加参数可以控制是否加小括号</p>
+                  <p>完善 d.ts</p>
+                  <p>修复 parseType 时有 enum, set 类型的问题</p>
+                  <p>CSRF 校验时可以从 header 里取值</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.2.12</strong>2016.09.27</span>
+                  <p>修复静态资源访问漏洞的问题，请大家及时升级（之前修复的版本没有修复完全）</p>
+                  <p>修复 PostgreSQL 区分大小写的问题</p>
+                  <p>创建项目时默认模式为普通项目，默认用 ES6 方式</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.2.11</strong>2016.09.14</span>
+                  <p>修复 Logic 自动添加空数据的问题</p>
+                  <p>Header 头名称自动转为小写</p>
+                  <p>语言自动转为小写</p>
+                  <p>请求超时时打印超时日志</p>
+                  <p>修复实例化模型时，名称中含有斜杠导致报错的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.2.10</strong>2016.08.25</span>
+                  <p>修复数据库操作 add 返回 id 始终为 0 的问题</p>
+                  <p>修复数据库读写分离异常的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.2.9</strong>2016.08.16</span>
+                  <p>修复事务在并发下的问题</p>
+                  <p>修复控制器 fetch 方法 d.ts 描述问题</p>
+                  <p>修复 mongo 断开连接后不能自动重连的问题</p>
+                  <p>去除 mysql 模块动态安装的功能</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.2.8</strong>2016.08.04</span>
+                  <p>修复不能设置自定义 model 的问题</p>
+                  <p>使用 node-mysql 替代 node-mysql2</p>
+                  <p>修复执行事务窜的问题</p>
+                  <p>修复 Logic 添加默认值为空的问题</p>
+                  <p>修复 SQLite 下 addMany 方法返回值的问题</p>
+                  <p>修复设置 cookie 后重启获取值不对的问题</p>
+                  <p>修复自定义端口后，启动服务端口占用错误信息不对的问题</p>
+                  <p>Mongo 支持更新数据时忽略默认值</p>
+                  <p>Service 添加 this.service 方法</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.2.7</strong>2016.07.28</span>
+                  <p>修复 pathname 处理后在 windows 找不到的问题</p>
+                  <p>创建项目时，生成的 production 配置文件关闭 resource_on </p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
+                  <span><strong>2.2.6</strong>2016.07.28</span>
+                  <p>修复 PostgreSQL 自动转义的问题</p>
+                  <p>安装包里添加 src 目录</p>
+                  <p>修复静态资源访问任意文件的问题</p>
+                </div>
+              </li>
+              <li>
+                <i class="circle"></i>
+                <div class="dailycont">
+                  <i class="arrowl"></i>
                   <span><strong>2.2.5</strong>2016.06.17</span>
                   <p>Fix bug with memory Session timeout lose efficacy.</p>
                   <p>Fix bug with think.isNumberString valide empty value return true.</p>
