@@ -60,7 +60,7 @@ thinkjs new project_path --es; #project_path为项目存放的目录
 
 `注`： 从 `2.2.12` 版本开始，默认创建的项目即为 ES6 模式，不再需要加 `--es` 参数了。
 
-如果能看见类似下面的输出，表示项目创建成功了：
+如果能看见类似下面的输出(下面截图里的demo就是上面的project_path)，表示项目创建成功了：
 
 ```text
   create : demo/
