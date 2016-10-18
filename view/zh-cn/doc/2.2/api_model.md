@@ -866,7 +866,7 @@ export default class extends think.model.base {
 
 #### model.close()
 
-关于数据库连接，一般情况下不要直接调用。
+关闭数据库连接，一般情况下不要直接调用。
 
 
 #### model.getSchema(table)

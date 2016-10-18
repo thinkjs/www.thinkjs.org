@@ -847,7 +847,7 @@ export default class extends think.model.base {
 
 #### model.close()
 
-About database connection, normally donot invoke directly.
+Close database connection, normally donot invoke directly.
 
 
 #### model.getTableFields(table)
