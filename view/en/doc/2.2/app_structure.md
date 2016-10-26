@@ -4,27 +4,27 @@ After creating ThinkJS project, you will get the directory structure something l
 
 
 ```text
-   |-- nginx.conf  
+   |-- nginx.conf
    |-- package.json
-   |-- src  
-   |   |-- common  
-   |   |   |-- bootstrap 
+   |-- src
+   |   |-- common
+   |   |   |-- bootstrap
    |   |   |   |-- generate_icon.js
    |   |   |   `-- middleware.js
-   |   |   |-- config  
+   |   |   |-- config
    |   |   |   |-- config.js
-   |   |   |   |-- env  
+   |   |   |   |-- env
    |   |   |   |   |-- development.js
    |   |   |   |   `-- production.js
-   |   |   |   |-- hook.js 
-   |   |   |   |-- locale 
+   |   |   |   |-- hook.js
+   |   |   |   |-- locale
    |   |   |   |   |-- en.js
    |   |   |   |   `-- zh-cn.js
-   |   |   |   `-- route.js 
-   |   |   |-- controller 
+   |   |   |   `-- route.js
+   |   |   |-- controller
    |   |   |    `-- error.js
    |   |   `-- runtime
-   |   `-- home   
+   |   `-- home
    |       |-- config
    |       |-- controller
    |       |   |-- base.js
@@ -67,7 +67,7 @@ This is the nginx's configuration file. When deploy your project to the producti
 
 ### src
 
-`src` folder holds all of the source files, but you can only have it by using `--es6` option when create prjects. After start project, the source files in `src/` will be compiled automatically into the `app/` folder with same name.
+`src` folder holds all of the source files, but you can only have it when create prjects in `ES6` mode. After start project, the source files in `src/` will be compiled automatically into the `app/` folder with same name.
 
 ### src/common
 
@@ -128,7 +128,7 @@ This is a temp folder to store for example cache files, upload files and other f
 
 ### src/home
 
-`home` module is a default module for your project. You can change your default module to other directory by add `default_module` option and assign a value to it in `src/common/config/config.js`. 
+`home` module is a default module for your project. You can change your default module to other directory by add `default_module` option and assign a value to it in `src/common/config/config.js`.
 
 ### src/home/logic
 
@@ -147,7 +147,7 @@ export default class extends think.logic.base {
    * @return {} []
    */
   indexAction(){
-   
+
   }
 }
 ```
