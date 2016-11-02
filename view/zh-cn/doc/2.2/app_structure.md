@@ -3,27 +3,27 @@
 通过 thinkjs 命令创建完项目后，项目目录结构类似如下：
 
 ```text
-   |-- nginx.conf  
+   |-- nginx.conf
    |-- package.json
-   |-- src  
-   |   |-- common  
-   |   |   |-- bootstrap 
+   |-- src
+   |   |-- common
+   |   |   |-- bootstrap
    |   |   |   |-- generate_icon.js
    |   |   |   `-- middleware.js
-   |   |   |-- config  
+   |   |   |-- config
    |   |   |   |-- config.js
-   |   |   |   |-- env  
+   |   |   |   |-- env
    |   |   |   |   |-- development.js
    |   |   |   |   `-- production.js
-   |   |   |   |-- hook.js 
-   |   |   |   |-- locale 
+   |   |   |   |-- hook.js
+   |   |   |   |-- locale
    |   |   |   |   |-- en.js
    |   |   |   |   `-- zh-cn.js
-   |   |   |   `-- route.js 
-   |   |   |-- controller 
+   |   |   |   `-- route.js
+   |   |   |-- controller
    |   |   |    `-- error.js
    |   |   `-- runtime
-   |   `-- home   
+   |   `-- home
    |       |-- config
    |       |-- controller
    |       |   |-- base.js
@@ -66,7 +66,7 @@ nginx 的配置文件，建议线上使用 nginx 做反向代理。
 
 ### src
 
-源代码目录，使用 `--es6` 参数创建项目才有该目录。项目启动时会自动将 `src` 目录下的文件编译到 `app` 目录下。
+源代码目录，使用 `ES6` 模式创建项目才有该目录。项目启动时会自动将 `src` 目录下的文件编译到 `app` 目录下。
 
 如果没有使用 ES6 特性创建项目，则直接有 `app/` 目录。
 
@@ -149,7 +149,7 @@ export default class extends think.logic.base {
    * @return {} []
    */
   indexAction(){
-   
+
   }
 }
 ```
