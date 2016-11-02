@@ -160,7 +160,30 @@ export default {
   }
 }
 ```
+如果 redis 需要设置密码，那么需要稍微改动一下配置。
+```js
+/* src/common/config/websocket.js */
 
+import adapter from "socket.io-redis";
+import redis from "redis";
+
+const pub = redis.createClient(port, host, { auth_pass: pwd });
+const sub = redis.createClient(port, host, { return_buffers: true, auth_pass: pwd });
+
+export default {
+  on: true,
+  type: "socket.io",
+  adapter: {
+    "socket.io": {
+      adp: function(){
+        return adapter({ 
+          pubClient: pub, subClient: sub 
+        });
+      }
+    }
+  }
+}
+```
 
 具体请见 <http://socket.io/docs/using-multiple-nodes/>。
 
