@@ -6,7 +6,9 @@
 
 ### Logic 层
 
-Logic 目录在 `src/[module]/logic`，在通过命令 `thinkjs controller [name]` 创建 Controller 时会自动创建对应的 Logic。Logic 代码类似如下：
+Logic 目录在 `src/[module]/logic`，在通过命令 `thinkjs controller [name]` 创建 Controller 时会自动创建对应的 Logic。
+
+Logic 代码类似如下：
 
 ```js
 'use strict';
@@ -25,6 +27,8 @@ export default class extends think.logic.base {
   }
 }
 ```
+
+注：若自己手工创建时，Logic文件名和controller文件名相同
 
 其中，Logic 里的 Action 和 Controller 里的 Action 一一对应。Logic 里也支持 `__before` 和 `__after` 等魔术方法。
 
@@ -188,6 +192,29 @@ export default class extends think.logic.base {
     if(!flag){
       return this.fail('validate error', this.errors());
     }
+  }
+}
+```
+
+如果你在controller的action中使用了`this.isGet()` 或者 `this.isPost()` 来判断请求的话，在上面的代码中也需要加入对应的 `this.isGet()` 或者 `this.isPost()`，如：
+
+
+```js
+export default class extends think.logic.base {
+  indexAction(){
+  
+    //和controller中的action保持一致
+    if(this.isPost()) {
+      let rules = {
+        doc: "string|default:index",
+        version: "string|in:1.2,2.0|default:2.0"
+      }
+      let flag = this.validate(rules);
+      if(!flag){
+        return this.fail('validate error', this.errors());
+      }
+    }
+    
   }
 }
 ```
