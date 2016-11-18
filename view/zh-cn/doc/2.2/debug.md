@@ -37,7 +37,7 @@ ThinkJS 从 2.2.0 版本开始支持断点调试源代码，同时如果运行�
 ![alt](https://p.ssl.qhimg.com/t015067fdaf2d60cc7f.jpg)
 
 
-### 在 VS Code 下断点调试
+### 在 VS Code（v1.7+） 下断点调试
 
 #### 打开项目
 
@@ -51,9 +51,38 @@ ThinkJS 从 2.2.0 版本开始支持断点调试源代码，同时如果运行�
 
 ![alt](https://p.ssl.qhimg.com/t01b533ee06c25af9b1.jpg)
 
-选择 Node.js 后，会生成一个 `launch.json` 文件。修改里面的配置，将 `sourceMaps` 值改为 `true`（注意：有 2 个 sourceMaps key，都修改）。
+选择 Node.js 后，会生成一个 `launch.json` 文件。~~修改里面的配置，将 `sourceMaps` 值改为 `true`（注意：有 2 个 sourceMaps key，都修改）。~~
+编辑配置为
 
-![alt](https://p.ssl.qhimg.com/t01b68e5ed5191fea16.png)
+```
+{
+	// Use IntelliSense to learn about possible Node.js debug attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "启动程序",
+			"program": "${workspaceRoot}\\www\\development.js",
+			"cwd": "${workspaceRoot}",
+			"sourceMaps": true,
+			"outFiles": [
+				"${workspaceRoot}/app/**"
+			]
+		},
+		{
+			"type": "node",
+			"request": "attach",
+			"name": "附加到进程",
+			"port": 5858
+		}
+	]
+}
+```
+
+即：修改program配置，添加sourceMaps和outFiles配置。
 
 #### 启动服务
 
@@ -63,9 +92,8 @@ ThinkJS 从 2.2.0 版本开始支持断点调试源代码，同时如果运行�
 
 #### 开始调试
 
-回到代码模式，在 app/ 目录下的文件里加上断点（一定要是在 app/ 目录下的文件，不能是 src/ 下的文件）。如：
-
-![alt](https://p.ssl.qhimg.com/t01b4570fc8fa392118.png)
+回到代码模式，~~在 app/ 目录下的文件里加上断点（一定要是在 app/ 目录下的文件，不能是 src/ 下的文件）。~~
+在源码中直接添加断点即可调试。
 
 访问对应的页面，就可以看到代码显示的已经是源代码了，然后利用顶部的调试按钮就可以调试了。如：
 
