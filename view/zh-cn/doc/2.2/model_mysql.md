@@ -4,7 +4,7 @@ ThinkJS 对 Mysql 操作有很好的支持，底层使用的库为 <https://www.
 
 ### 连接池
 
-默认连接 Mysql 始终只有一个连接，如果想要多个连接，可以使用连接池的功能。修改配置 `sr/common/config/db.js`，如：
+默认连接 Mysql 始终只有一个连接，如果想要多个连接，可以使用连接池的功能。修改配置 `src/common/config/db.js`，如：
 
 ```js
 export default {
