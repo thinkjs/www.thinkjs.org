@@ -230,7 +230,7 @@ You can assigning value to template variable by using `assign` method in the con
 ##### Assignment of Single Variable
 
 ```js
-export default class extends think.controlle.base {
+export default class extends think.controller.base {
   indexAction(){
     this.assign('title', 'ThinkJS WebSite');
   }
@@ -240,7 +240,7 @@ export default class extends think.controlle.base {
 ##### Assignment of Multiple Variables
 
 ```js
-export default class extends think.controlle.base {
+export default class extends think.controller.base {
   indexAction(){
     this.assign({
       title: 'ThinkJS WebSite',
@@ -255,7 +255,7 @@ export default class extends think.controlle.base {
 You can get assigned values by `assign` after variable assignment. Such as:
 
 ```js
-export default class extends think.controlle.base {
+export default class extends think.controller.base {
   indexAction(){
     this.assign('title', 'ThinkJS 官网');
     let title = this.assign('title');
