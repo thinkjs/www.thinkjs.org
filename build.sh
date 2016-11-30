@@ -21,7 +21,8 @@ cp www/*.ico output/www/;
 cp www/*.js output/www/;
 cp package.json output/;
 cp nginx.conf output/;
-#cp pm2.json output/;
+cp pm2.json output/;
+cp renew_cert.sh output/;
 cp -r www/static/module/thinkjs output/www/static/module/
 
 npm run compile;

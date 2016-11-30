@@ -28,7 +28,6 @@
     "thinkjs": "2.2.x"
   },
   "devDependencies": {
-    "@q/stc-cdn-qstatic": "^1.0.4",
     "babel-cli": "6.x.x",
     "babel-core": "6.x.x",
     "babel-plugin-transform-runtime": "6.x.x",
