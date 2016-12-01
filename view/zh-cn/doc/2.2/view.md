@@ -244,7 +244,7 @@ export default {
 ##### 赋值单个变量
 
 ```js
-export default class extends think.controlle.base {
+export default class extends think.controller.base {
   indexAction(){
     this.assign('title', 'ThinkJS 官网');
   }
@@ -254,7 +254,7 @@ export default class extends think.controlle.base {
 ##### 赋值多个变量
 
 ```js
-export default class extends think.controlle.base {
+export default class extends think.controller.base {
   indexAction(){
     this.assign({
       title: 'ThinkJS 官网',
@@ -269,7 +269,7 @@ export default class extends think.controlle.base {
 变量赋值后也可以通过 `assign` 来获取赋过的值。如：
 
 ```js
-export default class extends think.controlle.base {
+export default class extends think.controller.base {
   indexAction(){
     this.assign('title', 'ThinkJS 官网');
     let title = this.assign('title');
