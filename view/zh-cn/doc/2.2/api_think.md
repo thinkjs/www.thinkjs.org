@@ -337,7 +337,7 @@ think.isIP("2031:0000:130f:0000:0000:09c0:876a:130b"); //true ip6
 * `file` {Mixed} 要检测的文件路径
 * `return` {Boolean}
 
-检测是否是文件，如果在不存在则返回 false
+检测是否是文件，如果不存在或者不是文件则返回 false
 
 ```js
 think.isFile("/home/welefen/a.txt"); //true
