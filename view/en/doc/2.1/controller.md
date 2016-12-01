@@ -402,7 +402,7 @@ export default {
 }
 ```
 
-Whit the above configuration, performing `this.fail(10001)` will automatically get corresponding error message, "get data error" in this case.
+With the above configuration, performing `this.fail(10001)` will automatically get corresponding error message, "get data error" in this case.
 
 ##### Friendly Error Number
 
