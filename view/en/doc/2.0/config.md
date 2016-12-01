@@ -131,7 +131,7 @@ export default {
 }
 ```
 
-Th `config/env/testing.js` and `config/env/produciton.js` have no default configuration.
+The `config/env/testing.js` and `config/env/produciton.js` have no default configuration.
 
 #### locale
 
