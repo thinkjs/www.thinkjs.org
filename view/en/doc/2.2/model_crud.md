@@ -162,7 +162,7 @@ Use `count` method to query total number of records that match the conditions:
 
 ```
 export default class extends think.model.base {
-  getMin(){
+  getCount(){
     // the total number where status = 'publish'
     return this.where({status: "publish"}).count();
   }
@@ -175,7 +175,7 @@ Use `sum` method to compute the sum of values of the same fields that match the 
 
 ```
 export default class extends think.model.base {
-  getMin(){
+  getSum(){
     // the sum of values of view_nums where status = 'publish'
     return this.where({status: "publish"}).sum("view_nums");
   }
@@ -188,7 +188,7 @@ Use `max` to find the largest value of the selected column:
 
 ```
 export default class extends think.model.base {
-  getMin(){
+  getMax(){
     // find the largest value of comments where status = 'publish'
     return this.where({status: "publish"}).max("comments");
   }
