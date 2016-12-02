@@ -408,7 +408,7 @@ Set query field.
 export default class extends think.controller.base {
   async indexAction(){
     let model = this.model('user');
-    // set string need to queyr, in string way, use comma to split
+    // set string need to query, in string way, use comma to split
     let data = await model.field('name,title').select();
   }
 }
