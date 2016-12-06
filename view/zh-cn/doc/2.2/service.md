@@ -34,4 +34,4 @@ export default class extends think.controller.base {
 }
 ```
 
-`注`：如果项目不是特别复杂，建议把 service 放在 `common` 模块下，可以就都可以方便的加载了。
+`注`：如果项目不是特别复杂，建议把 service 放在 `common` 模块下，就都可以方便的加载了。
