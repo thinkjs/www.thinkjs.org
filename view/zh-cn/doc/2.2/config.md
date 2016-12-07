@@ -239,8 +239,7 @@ export default {
   pathname_prefix: '',  //pathname 去除的前缀，路由解析中使用
   pathname_suffix: '.html', //pathname 去除的后缀，路由解析中使用
   hook_on: true,  //是否开启 hook
-  cluster_on: false, //是否开启 cluster
-
+  cluster_on: false, //是否开启 cluster，值为具体的数值时可以配置 `cluster` 的个数
   timeout: 120, //120 seconds
   auto_reload: false, //自动重新加载修改的文件，development 模式下使用
 
