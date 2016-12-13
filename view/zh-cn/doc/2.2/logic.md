@@ -227,7 +227,7 @@ export default class extends think.logic.base {
 
 ```html
 <%for(var field in errors){%>
-  <%-field%>:<%errors[field]%>
+  <%-field%>:<%-errors[field]%>
 <%}%>
 ```
 
