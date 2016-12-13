@@ -228,7 +228,7 @@ export default class extends think.controller.base {
 }
 ```
 
-model 方法更多使用方式请见 [API -> think.http.base](./api_think_http_base.html#toc-e2b)。
+model 方法更多使用方式请见 [API -> think.model.base](./api_model.html#toc-e2b)。
 
 ### http 对象
 
