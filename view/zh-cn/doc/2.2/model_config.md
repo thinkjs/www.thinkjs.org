@@ -76,7 +76,48 @@ export default class extends think.model.base {
 
 `count`，`sum`，`min`，`max` 等很多查询操作都会用到主键，用到这些操作时需要修改主键。
 
+### 配置多个数据库
 
+如果项目中有连接多个数据库的需求，可以通过下面的方式连接多个数据库。
+
+```js
+//src/common/config/db.js
+export default {
+  type: 'mysql',
+  mysql: {
+    host: '127.0.0.1',
+    port: '',
+    database: 'test1',
+    user: 'root1',
+    password: 'root1',
+    prefix: '',
+    encoding: 'utf8'
+  },
+  mysql2: {
+    type: 'mysql', //这里需要将 type 重新设置为 mysql
+    host: '127.0.0.1',
+    port: '',
+    database: 'test2',
+    user: 'root2',
+    password: 'root2',
+    prefix: '',
+    encoding: 'utf8'
+  }
+}
+```
+
+`注意`： `mysql2` 的配置中需要额外增加 `type` 字段将类型设置为 `mysql`。
+
+配置完成后，调用的地方可以通过下面的方式调用。
+
+```js
+export default class extends think.controller.base {
+  indexAction(){
+    let model1 = this.model('test'); //
+    let model2 = this.model('test', 'mysql2'); //指定使用 mysql2 的配置连接数据库
+  }
+}
+```
 
 ### 分布式数据库
 
