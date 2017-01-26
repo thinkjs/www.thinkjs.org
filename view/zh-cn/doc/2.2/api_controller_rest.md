@@ -96,7 +96,7 @@ export default class extends think.controller.rest {
 export default class extends think.controller.rest {
   * postAction(){
     let pk = yield this.modelInstance.getPk();
-    let data = this.post();
+    let data = this.get();
     delete data[pk];
     if(think.isEmpty(data)){
       return this.fail('data is empty');
@@ -137,7 +137,7 @@ export default class extends think.controller.rest {
       return this.fail('params error');
     }
     let pk = yield this.modelInstance.getPk();
-    let data = this.post();
+    let data = this.get();
     delete data[pk];
     if (think.isEmpty(data)) {
       return this.fail('data is empty');
