@@ -22,7 +22,7 @@ export default class extends think.controller.base {
     }
     //这里可以通过post方法获取所有的数据，数据已经在logic里做了校验
     let data = this.post();
-    //用户名去匹配数据库中对于的条目
+    //用户名去匹配数据库中对应的条目
     let result = await this.model('user').where({name: data.name}).find();
     if(!validateLogin(result)){
       return this.fail('login fail');
