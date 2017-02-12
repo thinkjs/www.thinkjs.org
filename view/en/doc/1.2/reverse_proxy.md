@@ -11,9 +11,9 @@ nginx 下的配置可以参考下面的方式：
 ```
 server {
     listen       80;
-    server_name meinv.ueapp.com;
+    server_name www.thinkjs.org;
     index index.js index.html index.htm;
-    root  /Users/welefen/Develop/git/meinv.ueapp.com/www;
+    root  /Users/welefen/Develop/git/www.thinkjs.org/www;
 
     if (-f $request_filename/index.html){rewrite (.*) $1/index.html break;
     }
@@ -36,8 +36,8 @@ server {
 
 需要改动 3 个地方：
 
-* `server_name meinv.ueapp.com` 将 server_name 改为项目对应的域名
-* `root  /Users/welefen/Develop/git/meinv.ueapp.com/www` 配置项目的根目录，一定要到 www 目录下
+* `server_name www.thinkjs.org` 将 server_name 改为项目对应的域名
+* `root  /Users/welefen/Develop/git/www.thinkjs.org/www` 配置项目的根目录，一定要到 www 目录下
 * `proxy_pass http://127.0.0.1:6666$request_uri;` 将端口 `6666` 改为项目里配置的端口
 
 ### 禁止端口访问
