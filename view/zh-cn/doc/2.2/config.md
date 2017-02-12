@@ -243,7 +243,7 @@ export default {
   timeout: 120, //120 seconds
   auto_reload: false, //自动重新加载修改的文件，development 模式下使用
 
-  resource_on: true, // 是否处理静态资源请求， porxy_on 开启下可以关闭该配置
+  resource_on: true, // 是否处理静态资源请求， proxy_on 开启下可以关闭该配置
   resource_reg: /^(static\/|[^\/]+\.(?!js|html)\w+$)/, //静态资源的正则
 
   route_on: true, //是否开启自定义路由
