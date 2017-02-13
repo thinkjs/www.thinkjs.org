@@ -65,9 +65,9 @@ Controller 或 Logic 里可以通过下面的方式读写 Session：
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //获取session
-    let value = yield this.session('userInfo');
+    let value = await this.session('userInfo');
   }
 }
 ```
@@ -76,9 +76,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //设置 session
-    yield this.session('userInfo', data);
+    await this.session('userInfo', data);
   }
 }
 ```
@@ -87,9 +87,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //清除当前用户的 session
-    yield this.session();
+    await this.session();
   }
 }
 ```
