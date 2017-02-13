@@ -74,7 +74,7 @@ export default class think.controller.base {
 
 后置魔术方法，在方法执行完成后在执行。
 
-### filename()
+### basename()
 
 * `return` {String} 返回当前类文件的名称
 
@@ -84,7 +84,7 @@ export default class think.controller.base {
 //假设当前类文件具体路径为 /home/xxx/project/app/controller/user.js
 class a extends think.base {
   test(){
-    var filename = this.filename();
+    var filename = this.basename();
     //returns 'user'
   }
 }
