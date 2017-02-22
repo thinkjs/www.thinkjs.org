@@ -297,19 +297,19 @@ Read, set and clean session.
 ##### Read Session
 
 ```js
-let value = yield http.session('userInfo');
+let value = await http.session('userInfo');
 ```
 
 ##### set Session
 
 ```js
-yield http.session('userInfo', data);
+await http.session('userInfo', data);
 ```
 
 ##### clean Session
 
 ```js
-yield http.session();
+await http.session();
 ```
 
 #### http.redirect(url, status)

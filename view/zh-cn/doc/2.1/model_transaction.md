@@ -19,15 +19,15 @@
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     let model = this.model('user');
     try{
-      yield model.startTrans();
-      let userId = yield model.add({name: 'xxx'});
-      let insertId = yield this.model('user_group').add({user_id: userId, group_id: 1000});
-      yield model.commit();
+      await model.startTrans();
+      let userId = await model.add({name: 'xxx'});
+      let insertId = await this.model('user_group').add({user_id: userId, group_id: 1000});
+      await model.commit();
     }catch(e){
-      yield model.rollback();
+      await model.rollback();
     }
   }
 }
@@ -60,11 +60,11 @@ module.exports = think.controller({
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(self){
+  async indexAction(self){
     let model = this.model('user');
-    let insertId = yield model.transaction( function * (){
-      let userId = yield model.add({name: 'xxx'});
-      return yield self.model('user_group').add({user_id: userId, group_id: 1000});
+    let insertId = await model.transaction( function * (){
+      let userId = await model.add({name: 'xxx'});
+      return await self.model('user_group').add({user_id: userId, group_id: 1000});
     })
   }
 }

@@ -209,8 +209,8 @@ WebSocket 建立连接时可以拿到 cookie，所以可以在 `open` 对应的 
 
 ```js
 export default class extends think.controller.base {
-  * openAction(){
-    let userInfo = yield this.session('userInfo');
+  async openAction(){
+    let userInfo = await this.session('userInfo');
     if(think.isEmpty(userInfo)){
 
     }

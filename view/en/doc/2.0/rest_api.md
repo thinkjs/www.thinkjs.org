@@ -57,8 +57,8 @@ Some REST APIs require authentication. Only after passing the validation can it 
 
 ```js
 export default class extends think.controller.rest {
-  * __before(){
-    let auth = yield this.checkAuth();
+  async __before(){
+    let auth = await this.checkAuth();
     if(!auth){
       return this.fail('no permissions'); // return directly when no permission
     }

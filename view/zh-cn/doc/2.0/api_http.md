@@ -297,19 +297,19 @@ http.cookie('name', null); //删除 cookie
 ##### 读取 Session
 
 ```js
-let value = yield http.session('userInfo');
+let value = await http.session('userInfo');
 ```
 
 ##### 设置 Session
 
 ```js
-yield http.session('userInfo', data);
+await http.session('userInfo', data);
 ```
 
 ##### 清除 Session
 
 ```js
-yield http.session();
+await http.session();
 ```
 
 #### http.redirect(url, status)

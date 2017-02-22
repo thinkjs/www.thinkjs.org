@@ -8,9 +8,9 @@ Use `add` method to add a new record, return value is the id of inserted record:
 
 ```js
 export default class extends think.controller.base {
-  * addAction(){
+  async addAction(){
     let model = this.model("user");
-    let insertId = yield model.add({name: "xxx", pwd: "yyy"});
+    let insertId = await model.add({name: "xxx", pwd: "yyy"});
   }
 }
 ```
@@ -21,9 +21,9 @@ Use `addMany` create many records:
 
 ```js
 export default class extends think.controller.base {
-  * addAction(){
+  async addAction(){
     let model = this.model("user");
-    let insertId = yield model.addMany([
+    let insertId = await model.addMany([
       {name: "xxx", pwd: "yyy"},
       {name: "xxx1", pwd: "yyy1"}
     ]);
@@ -39,10 +39,10 @@ Model provides `thenAdd` to support this manipulation:
 
 ```js
 export default class extends think.controller.base {
-  * addAction(){
+  async addAction(){
     let model = this.model("user");
     //first param is the data need to add, second param is the condition, if there is no result when query use second param, the data will be added
-    let result = yield model.thenAdd({name: "xxx", pwd: "yyy"}, {name: "xxx"});
+    let result = await model.thenAdd({name: "xxx", pwd: "yyy"}, {name: "xxx"});
     // result returns {id: 1000, type: "add"} or {id: 1000, type: "exist"}
   }
 }
@@ -57,9 +57,9 @@ Use `update` method to update data, return value is the influenced records:
 
 ```js
 export default class extends think.controlle.base {
-  * updateAction(){
+  async updateAction(){
     let model = this.model("user");
-    let affectedRows = yield model.where({name: "thinkjs"}).update({email: "admin@thinkjs.org"});
+    let affectedRows = await model.where({name: "thinkjs"}).update({email: "admin@thinkjs.org"});
   }
 }
 ```
@@ -98,9 +98,9 @@ Use `find` to query one line data, return value is the object:
 
 ```js
 export default class extends think.controller.base {
-  * listAction(){
+  async listAction(){
     let model = this.model("user");
-    let data = yield model.where({name: "thinkjs"}).find();
+    let data = await model.where({name: "thinkjs"}).find();
     //data returns {name: "thinkjs", email: "admin@thinkjs.org", ...}
   }
 }
@@ -114,9 +114,9 @@ Use `select` query many lines data, return value is results:
 
 ```js
 export default class extends think.controller.base {
-  * listAction(){
+  async listAction(){
     let model = this.model("user");
-    let data = yield model.limit(2).select();
+    let data = await model.limit(2).select();
     //data returns [{name: "thinkjs", email: "admin@thinkjs.org"}, ...]
   }
 }
@@ -130,9 +130,9 @@ It's common to show paginated data in page. You need to query the total counts f
 
 ```js
 export default class extends think.controller.base {
-  * listAction(){
+  async listAction(){
     let model = this.model("user");
-    let data = yield model.page(this.get("page"), 10).countSelect();
+    let data = await model.page(this.get("page"), 10).countSelect();
   }
 }
 ```
@@ -259,9 +259,9 @@ Use `delete` method to remove data, return the count of influenced row:
 
 ```js
 export default class extends think.controller.base {
-  * deleteAction(){
+  async deleteAction(){
     let model = this.model("user");
-    let affectedRows = yield model.where({id: [">", 100]}).delete();
+    let affectedRows = await model.where({id: [">", 100]}).delete();
   }
 }
 ```

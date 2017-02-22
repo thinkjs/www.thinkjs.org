@@ -57,8 +57,8 @@ export default class extends think.model.base {
   /**
    * 获取列表数据
    */
-  * getList(){
-    let data = yield this.field('title, content').where({
+  async getList(){
+    let data = await this.field('title, content').where({
       id: ['>', 100]
     }).order('id DESC').select();
     ...

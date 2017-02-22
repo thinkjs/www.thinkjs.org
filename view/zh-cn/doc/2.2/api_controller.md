@@ -260,9 +260,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //获取session
-    let value = yield this.session('userInfo');
+    let value = await this.session('userInfo');
   }
 }
 ```
@@ -271,9 +271,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //设置 session
-    yield this.session('userInfo', data);
+    await this.session('userInfo', data);
   }
 }
 ```
@@ -282,9 +282,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //清除当前用户的 session
-    yield this.session();
+    await this.session();
   }
 }
 ```
@@ -343,9 +343,9 @@ export default class extends think.controller.base {
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     // home/index_index.html
-    let content = yield this.fetch();
+    let content = await this.fetch();
   }
 }
 ```
@@ -355,9 +355,9 @@ export default class extends think.controller.base {
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     // home/index_detail.html
-    let content = yield this.fetch('detail');
+    let content = await this.fetch('detail');
   }
 }
 ```
@@ -367,9 +367,9 @@ export default class extends think.controller.base {
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     // home/user_detail.html
-    let content = yield this.fetch('user/detail');
+    let content = await this.fetch('user/detail');
   }
 }
 ```
@@ -379,9 +379,9 @@ export default class extends think.controller.base {
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     // admin/user_detail.html
-    let content = yield this.fetch('admin/user/detail');
+    let content = await this.fetch('admin/user/detail');
   }
 }
 ```
@@ -391,9 +391,9 @@ export default class extends think.controller.base {
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     // home/index_detail.xml
-    let content = yield this.fetch('detail.xml');
+    let content = await this.fetch('detail.xml');
   }
 }
 ```
@@ -403,9 +403,9 @@ export default class extends think.controller.base {
 ```js
 // 假设文件路径为 /foo/bar/app/home/controller/index.js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     // /home/xxx/aaa/bbb/c.html
-    let content = yield this.fetch('/home/xxx/aaa/bbb/c.html');
+    let content = await this.fetch('/home/xxx/aaa/bbb/c.html');
   }
 }
 ```

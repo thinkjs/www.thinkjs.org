@@ -67,9 +67,9 @@ If controller is a string, it will automactically to find this controller.
 ```js
 // invoke action of current module's controller
 export default class extends think.controller.base {
-  * indexAction(){
-    // invoke defail function in user controller
-        let value = yield this.action('user', 'detail');
+  async indexAction(){
+      // invoke defail function in user controller
+        let value = await this.action('user', 'detail');
   }
 }
 ```
@@ -77,9 +77,9 @@ export default class extends think.controller.base {
 ```js
 // invoke action in cross module's controller
 export default class extends think.controller.base {
-  * indexAction(){
+    async indexAction(){
     // invoke detail function of user controller in admin module
-    let value = yield this.action('admin/user', 'detail');
+    let value = await this.action('admin/user', 'detail');
   }
 }
 ```
@@ -94,9 +94,9 @@ Read or set cache, it is read cache when assign `value` to `undefined`, otherwis
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+    async indexAction(){
     // get cache
-    let value = yield this.cache('name');
+    let value = await this.cache('name');
   }
 }
 ```
@@ -105,9 +105,9 @@ When `value` is function, it means read cache, if cache's value didn't exist, it
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     // setup cache, when cache didn't exist, it invoke function automatically, and set cache at the same time
-    let value = yield this.cache('name', () => {
+      let value = await this.cache('name', () => {
       return this.model('user').select();
     });
   }
@@ -118,9 +118,9 @@ Setup cache and modify the type:
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     // setup cache, cache type is redis
-    yield this.cache('name', 'value', {
+      await this.cache('name', 'value', {
       type: 'redis'
     });
   }
@@ -140,8 +140,8 @@ Hook event can be assigned in `src/common/config/hook.js`, also it can be regist
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
-    let result = yield this.hook('parse_data');
+    async indexAction(){
+    let result = await this.hook('parse_data');
   }
 }
 ```

@@ -83,14 +83,14 @@ Get instance of model, it can read cross module.
 
 ```js
 export default class extends think.model.base {
-  * getList(){
+  async getList(){
     // get instance of user model
     let instance = this.model('user');
-    let list = yield instance.select();
+    let list = await instance.select();
     let ids = list.map(item => {
       return item.id;
     });
-    let data = yield this.where({id: ['IN', ids]}).select();
+    let data = await this.where({id: ['IN', ids]}).select();
     return data;
   }
 }

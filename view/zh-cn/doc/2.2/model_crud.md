@@ -8,9 +8,9 @@
 
 ```js
 export default class extends think.controller.base {
-  * addAction(){
+  async addAction(){
     let model = this.model('user');
-    let insertId = yield model.add({name: 'xxx', pwd: 'yyy'});
+    let insertId = await model.add({name: 'xxx', pwd: 'yyy'});
   }
 }
 ```
@@ -21,9 +21,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * addAction(){
+  async addAction(){
     let model = this.model('user');
-    let insertId = yield model.addMany([
+    let insertId = await model.addMany([
       {name: 'xxx', pwd: 'yyy'},
       {name: 'xxx1', pwd: 'yyy1'}
     ]);
@@ -39,10 +39,10 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * addAction(){
+  async addAction(){
     let model = this.model('user');
     //第一个参数为要添加的数据，第二个参数为添加的条件，根据第二个参数的条件查询无相关记录时才会添加
-    let result = yield model.thenAdd({name: 'xxx', pwd: 'yyy'}, {name: 'xxx'});
+    let result = await model.thenAdd({name: 'xxx', pwd: 'yyy'}, {name: 'xxx'});
     // result returns {id: 1000, type: 'add'} or {id: 1000, type: 'exist'}
   }
 }
@@ -57,9 +57,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controlle.base {
-  * updateAction(){
+  async updateAction(){
     let model = this.model('user');
-    let affectedRows = yield model.where({name: 'thinkjs'}).update({email: 'admin@thinkjs.org'});
+    let affectedRows = await model.where({name: 'thinkjs'}).update({email: 'admin@thinkjs.org'});
   }
 }
 ```
@@ -68,9 +68,9 @@ export default class extends think.controlle.base {
 
 ```js
 export default class extends think.controlle.base {
-  * updateAction(){
+  async updateAction(){
     let model = this.model('user');
-    let affectedRows = yield model.where('1=1').update({email: 'admin@thinkjs.org'});
+    let affectedRows = await model.where('1=1').update({email: 'admin@thinkjs.org'});
   }
 }
 ```
@@ -109,9 +109,9 @@ export default class extends think.model.base {
 
 ```js
 export default class extends think.controller.base {
-  * listAction(){
+  async listAction(){
     let model = this.model('user');
-    let data = yield model.where({name: 'thinkjs'}).find();
+    let data = await model.where({name: 'thinkjs'}).find();
     //data returns {name: 'thinkjs', email: 'admin@thinkjs.org', ...}
   }
 }
@@ -125,9 +125,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * listAction(){
+  async listAction(){
     let model = this.model('user');
-    let data = yield model.limit(2).select();
+    let data = await model.limit(2).select();
     //data returns [{name: 'thinkjs', email: 'admin@thinkjs.org'}, ...]
   }
 }
@@ -141,9 +141,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * listAction(){
+  async listAction(){
     let model = this.model('user');
-    let data = yield model.page(this.get('page'), 10).countSelect();
+    let data = await model.page(this.get('page'), 10).countSelect();
   }
 }
 ```
@@ -271,9 +271,9 @@ export default {
 
 ```js
 export default class extends think.controller.base {
-  * deleteAction(){
+  async deleteAction(){
     let model = this.model('user');
-    let affectedRows = yield model.where({id: ['>', 100]}).delete();
+    let affectedRows = await model.where({id: ['>', 100]}).delete();
   }
 }
 ```

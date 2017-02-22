@@ -67,9 +67,9 @@ export default class extends think.controller.base {
 ```js
 //调用当前模块下controller里的action
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //调用user controller下的detail方法
-    let value = yield this.action('user', 'detail');
+    let value = await this.action('user', 'detail');
   }
 }
 ```
@@ -77,9 +77,9 @@ export default class extends think.controller.base {
 ```js
 //跨模块调用controller里的action
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //调用admin模块user controller下的detail方法
-    let value = yield this.action('admin/user', 'detail');
+    let value = await this.action('admin/user', 'detail');
   }
 }
 ```
@@ -94,9 +94,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //获取缓存
-    let value = yield this.cache('name');
+    let value = await this.cache('name');
   }
 }
 ```
@@ -105,9 +105,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //获取缓存，缓存不存在时自动调用 function，并设置缓存
-    let value = yield this.cache('name', () => {
+    let value = await this.cache('name', () => {
       return this.model('user').select();
     });
   }
@@ -118,9 +118,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //设置缓存，缓存类型使用redis
-    yield this.cache('name', 'value', {
+    await this.cache('name', 'value', {
       type: 'redis'
     });
   }
@@ -140,8 +140,8 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
-    let result = yield this.hook('parse_data');
+  async indexAction(){
+    let result = await this.hook('parse_data');
   }
 }
 ```

@@ -82,11 +82,11 @@ export default class extends think.model.base {
   * getList(){
     //获取 user 模型实例
     let instance = this.model('user');
-    let list = yield instance.select();
+    let list = await instance.select();
     let ids = list.map(item => {
       return item.id;
     });
-    let data = yield this.where({id: ['IN', ids]}).select();
+    let data = await this.where({id: ['IN', ids]}).select();
     return data;
   }
 }

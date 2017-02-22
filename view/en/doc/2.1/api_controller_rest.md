@@ -74,14 +74,14 @@ Get resource data, if id exist, then get one, or get the list.
 ```js
 // function implementation, it can been modified if need.
 export default class extends think.controller.rest {
-  * getAction(){
+  async getAction(){
     let data;
     if (this.id) {
-      let pk = yield this.modelInstance.getPk();
-      data = yield this.modelInstance.where({[pk]: this.id}).find();
+      let pk = await this.modelInstance.getPk();
+      data = await this.modelInstance.where({[pk]: this.id}).find();
       return this.success(data);
     }
-    data = yield this.modelInstance.select();
+    data = await this.modelInstance.select();
     return this.success(data);
   }
 }
@@ -94,14 +94,14 @@ Add data.
 ```js
 // function implementation, it can been modified if need.
 export default class extends think.controller.rest {
-  * postAction(){
-    let pk = yield this.modelInstance.getPk();
+  async postAction(){
+    let pk = await this.modelInstance.getPk();
     let data = this.post();
     delete data[pk];
     if(think.isEmpty(data)){
       return this.fail('data is empty');
     }
-    let insertId = yield this.modelInstance.add(data);
+    let insertId = await this.modelInstance.add(data);
     return this.success({id: insertId});
   }
 }
@@ -114,12 +114,12 @@ Delete data.
 ```js
 // function implementaion, it can been modified if need.
 export default class extends think.controller.rest {
-  * deleteAction(){
+  async deleteAction(){
     if (!this.id) {
       return this.fail('params error');
     }
-    let pk = yield this.modelInstance.getPk();
-    let rows = yield this.modelInstance.where({[pk]: this.id}).delete();
+    let pk = await this.modelInstance.getPk();
+    let rows = await this.modelInstance.where({[pk]: this.id}).delete();
     return this.success({affectedRows: rows});
   }
 }
@@ -132,17 +132,17 @@ Update data.
 ```js
 // function implementaion, it can been modified if need.
 export default class extends think.controller.rest {
-  * putAction(){
+  async putAction(){
     if (!this.id) {
       return this.fail('params error');
     }
-    let pk = yield this.modelInstance.getPk();
+    let pk = await this.modelInstance.getPk();
     let data = this.post();
     delete data[pk];
     if (think.isEmpty(data)) {
       return this.fail('data is empty');
     }
-    let rows = yield this.modelInstance.where({[pk]: this.id}).update(data);
+    let rows = await this.modelInstance.where({[pk]: this.id}).update(data);
     return this.success({affectedRows: rows});
   }
 }
