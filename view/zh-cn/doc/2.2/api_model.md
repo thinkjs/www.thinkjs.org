@@ -79,7 +79,7 @@ module.exports = think.model({
 
 ```js
 export default class extends think.model.base {
-  * getList(){
+  async getList(){
     //获取 user 模型实例
     let instance = this.model('user');
     let list = await instance.select();
