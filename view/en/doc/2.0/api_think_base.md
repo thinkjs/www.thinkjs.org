@@ -59,8 +59,8 @@ export default class think.controller.base {
    * pre-magic function
    * @return {Promise} []
    */
-  * __before(){
-    let userInfo = yield this.session('userInfo');
+  async __before(){
+    let userInfo = await this.session('userInfo');
     // if not login yet, it will jump to login page.
     if(think.isEmpty(userInfo)){
       return this.redirect('/logic');

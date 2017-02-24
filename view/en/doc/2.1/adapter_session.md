@@ -65,9 +65,9 @@ Controller or Logic can read/write session.
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //get session
-    let value = yield this.session('userInfo');
+    let value = await this.session('userInfo');
   }
 }
 ```  
@@ -76,9 +76,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //set session
-    yield this.session('userInfo', data);
+    await this.session('userInfo', data);
   }
 }
 ```
@@ -87,9 +87,9 @@ export default class extends think.controller.base {
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
+  async indexAction(){
     //clear session of current user
-    yield this.session();
+    await this.session();
   }
 }
 ```

@@ -285,8 +285,8 @@ If you don't want to outputing template, and only want to get the rendered conte
 
 ```js
 export default class extends think.controller.base {
-  * indexAction(){
-    let content = yield this.fetch();
+  async indexAction(){
+    let content = await this.fetch();
     ...
   }
 }

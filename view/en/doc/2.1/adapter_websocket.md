@@ -170,8 +170,8 @@ Websocket can get cookie when connected. So, you can check if the user is logged
 
 ```js
 export default class extends think.controller.base {
-  * openAction(){
-    let userInfo = yield this.session('userInfo');
+  async openAction(){
+    let userInfo = await this.session('userInfo');
     if(think.isEmpty(userInfo)){
 
     }
