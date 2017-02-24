@@ -94,6 +94,7 @@ export default class extends think.controller.rest {
 ```js
 //方法实现，可以根据需要修改
 export default class extends think.controller.rest {
+
   async postAction(){
     let pk = await this.modelInstance.getPk();
     let data = this.get();
