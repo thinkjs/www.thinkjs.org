@@ -97,13 +97,6 @@ thinkjs new project_path; #project_path为项目存放的目录
 npm install --registry=https://registry.npm.taobao.org --verbose
 ```
 
-### 编译项目
-
-~~如果创建项目时加上了 `--es6` 参数，代码需要编译后才能运行。那么需要先在项目下执行命令 `npm run watch-compile` ，这样文件有修改后就会自动编译了。~~
-
-~~执行命令后会挂起一个进程，注意不要结束这个进程，其他命令可以再新开一个标签页里执行。~~
-
-`注`：`2.0.6` 版本开始内置了自动编译的功能，无需再执行该命令，直接启动服务即可。如果是老项目可以将 ThinkJS 升级到最新版本，然后在文件 `www/index.js` 加入代码 `instance.compile();` 即可（放在 `instance.run()` 之前）。
 
 ### 启动项目
 

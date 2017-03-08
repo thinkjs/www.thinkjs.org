@@ -20,7 +20,6 @@ After installing thinkjs module globally, there should be the thinkjs commands i
 
     -h, --help         output usage information
     -V, --version      output the version number
-    -e, --es6          use es6 for project, used in `new` command
     -r, --rest         create rest controller, used in `controller` command
     -M, --mongo        create mongo model, used in `model` command
     -R, --relation     create relation model, used in `model` command
@@ -35,13 +34,6 @@ You can create a project by run command `thinkjs new <projectPath>`:
 thinkjs new thinkjs_demo;
 ```
 
-#### ES6 Way
-
-If you want to create an ES6 mode project, `--es6` option is required. Thus, codes in the generated files are all in ES6 syntax.
-
-```sh
-thinkjs new thinkjs_demo --es6
-```
 
 #### Set Project Mode
 
