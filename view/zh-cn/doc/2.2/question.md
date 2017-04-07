@@ -428,7 +428,7 @@ export default class extends think.controller.base {
   async __before(){
     //部分 action 下不检查
     let blankActions = ['login'];
-    if(blankActions.indexOf(this.http.action)){
+    if(blankActions.indexOf(this.http.action) >= 0){
       return;
     }
     let userInfo = await this.session('userInfo');
