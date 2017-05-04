@@ -359,7 +359,7 @@ export default class extends think.controller.base {
 Action 里给当前控制器添加了属性 `navType`，那么模版里就可以直接通过 `controller.navType` 来使用。
 
 ```text
-<%if(controller.navType === 'home')%>
+<%if(controller.navType === 'home'){%>
   <li className="action">home</li>
 <%}else{%>
   <li>home</li>
