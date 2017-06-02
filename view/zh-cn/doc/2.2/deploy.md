@@ -119,4 +119,4 @@ export default {
 ```
 设置 `cluster_on` 值为具体的数值可以配置 `cluster` 的个数。
 
-`注`：如果使用 PM2 来部署，并且开启了 cluster 模式，那么就无需在开启 ThinkJS 里的 cluster。
+`注`：如果使用 PM2 来部署，并且开启了 cluster 模式，那么就无需再开启 ThinkJS 里的 cluster。
