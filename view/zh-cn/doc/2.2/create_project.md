@@ -117,4 +117,4 @@ npm install --registry=https://registry.npm.taobao.org --verbose
 
 如果是在远程机器，需要通过远程机器的 IP 访问，同时要保证 8360 端口可访问。
 
-> 如果你还没有自己的服务器，可以到![这里体验](https://www.qcloud.com/developer/labs/lab/10098)一下搭建安装Thinkjs
+> 如果你还没有自己的服务器，可以到[这里体验](https://www.qcloud.com/developer/labs/lab/10098)一下搭建安装Thinkjs
