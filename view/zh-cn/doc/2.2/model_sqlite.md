@@ -36,7 +36,7 @@ export default {
 ```js
 export default {
   type: 'sqlite',
-  adatper: {
+  adapter: {
     sqlite: {
       path: '/path/to/store/sqlite' //设置存储数据文件的目录
     }

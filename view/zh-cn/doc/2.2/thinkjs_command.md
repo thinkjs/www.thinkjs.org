@@ -22,8 +22,6 @@
     -h, --help         output usage information
     -v, --version      output the version number
     -V                 output the version number
-    -e, --es           use es for project, used in `new` command
-    --es6              use es for project, used in `new` command
     -t, --ts           use TypeScript for project, used in `new` command
     -T, --test         add test dirs when create project, used in `new` command
     -r, --rest         create rest controller, used in `controller` command

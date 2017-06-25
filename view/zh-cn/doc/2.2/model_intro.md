@@ -32,7 +32,7 @@ thinkjs model home/user
 
 #### model.schema
 
-数据表字段定义，默认会从数据库种读取，读到的信息类似如下：
+数据表字段定义，默认会从数据库中读取，读到的信息类似如下：
 
 ```js
 {
@@ -63,7 +63,7 @@ export default class extends think.model.base {
       default: function() { //first_name 和 last_name 的组合，这里不能用 Arrows Function
         return this.first_name + this.last_name;
       }
-    }
+    },
     create_time: { //创建时间
       default: () => { //获取当前时间
         return moment().format('YYYY-MM-DD HH:mm:ss')

@@ -203,7 +203,7 @@ example:
 ```
 export default {
   admin: {
-    reg: /^(account|admin) // account和admin 都命中admin模块
+    reg: /^(account|admin)/ // account和admin 都命中admin模块
   }
 }
 ```
