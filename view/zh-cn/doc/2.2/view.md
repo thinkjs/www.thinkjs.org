@@ -256,7 +256,7 @@ export default class extends think.controller.base {
 ```js
 export default class extends think.controller.base {
   indexAction(){
-    this.assign({
+    this.assign('data',{
       title: 'ThinkJS 官网',
       author: 'thinkjs'
     });
