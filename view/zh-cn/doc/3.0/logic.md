@@ -227,7 +227,6 @@ module.exports = class extends think.Logic {
         trim: true,
         default: 'thinkjs'
       },
-      default: ['name1', 'name2'],
       method: 'GET'
     }
   }
@@ -251,7 +250,6 @@ module.exports = class extends think.Logic {
         trim: true,
         default: 'thinkjs'
       },
-      default: ['name1', 'name2'],
       method: 'GET'
     }
   }
