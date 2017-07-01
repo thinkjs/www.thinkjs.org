@@ -954,8 +954,8 @@ module.exports = class extends think.Logic {
         regexp: /thinkjs/g
       }
     }
+    this.validate();
+    // todo
   }
-  this.validate();
-  // todo
 }
 ```
