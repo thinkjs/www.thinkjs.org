@@ -46,7 +46,7 @@ think.logger.error(new Error('error'));
 - `maxLogSize`：单日志文件最大大小，单位为 KB，默认日志没有大小限制。
 - `backups`：最大分块地址文件数，默认为 5。
 - `absolute`：`filename` 是否为绝对路径地址，如果 `filename` 是绝对路径，`absolute` 的值需要设置为 `true`。
-- `layouts`：定义日志输出的格式，自定义日志输出格式可参考 [log4js 文档](https://github.com/nomiddlename/log4js-node/wiki/Layouts)。
+- `layouts`：定义日志输出的格式。
 
 #### 日期文件
 
@@ -87,12 +87,63 @@ think.logger.error(new Error('error'));
     - `SSS` - 毫秒数（不建议配置该格式以毫秒级来归类日志）
     - `O` - 当前时区
 - `alwaysIncludePattern`：如果 `alwaysIncludePattern` 设置为 `true`，则初始文件直接会被命名为 `xx.log-2017-07-01`，然后隔天会生成 `xx.log-2017-07-02` 的新文件。
-- `layouts`：定义日志输出的格式，自定义日志输出格式可参考 [log4js 文档](https://github.com/nomiddlename/log4js-node/wiki/Layouts)。
+- `layouts`：定义日志输出的格式。
 
 
 ### Level
 
+日志等级用来表示该日志的级别，目前支持如下级别：
+
+- ALL
+- ERROR
+- WARN
+- INFO
+- DEBUG
+
 ### Layout
+
+`Console`, `File` 和 `DateFile` 类型都支持 `layout` 参数，表示输出日志的格式，值为对象，下面是一个简单的示例：
+
+```javascript
+const path = require('path');
+const {File} = require('think-logger3');
+
+module.exports = {
+  type: 'file',
+  file: {
+    handle: File,
+    backups: 10,
+    absolute: true,
+    maxLogSize: 50 * 1024,  //50M
+    filename: path.join(think.ROOT_PATH, 'logs/xx.log'),
+    layouts: {
+      type: 'coloured',
+      pattern: '%[[%d] [%p]%] - %m',
+    }
+  }
+}
+```
+
+layouts 支持如下参数：
+
+- `type`：目前支持如下类型
+    - basic
+    - coloured
+    - messagePassThrough
+    - dummy
+    - pattern
+    - 自定义输出类型可参考 [Adding your own layouts](https://nomiddlename.github.io/log4js-node/layouts.html#adding-your-own-layouts)
+- `pattern`：输出格式字串，目前支持如下格式化参数
+    - `%r` - `.toLocaleTimeString()` 输出的时间格式，例如 `下午5:13:04`。
+    - `%p` - 日志等级
+    - `%h` - 机器名称
+    - `%m` - 日志内容
+    - `%d` - 时间，默认以 ISO8601 规范格式化，可选规范有 `ISO8601`, `ISO8601_WITH_TZ_OFFSET`, `ABSOUTE`, `DATE` 或者任何可支持格式化的字串，例如 `%d{DATE}` 或者 `%d{yyyy/MM/dd-hh.mm.ss}`。
+    - `%%` - 输出 `%` 字符串
+    - `%n` - 换行
+    - `%z` - 从 `process.pid` 中获取的进程 ID
+    - `%[` - 颜色块开始区域
+    - `%]` - 颜色块结束区域
 
 ### 自定义 handle
 
