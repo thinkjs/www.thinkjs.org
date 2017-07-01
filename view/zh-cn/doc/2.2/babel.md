@@ -33,4 +33,4 @@ instance.compile({
 });
 ```
 
-后续上线前编译执行 `npm run compile` 实际上是调用 `package.json` 里对应的 `compile` 命令，所以若果有 `presets` 或者 `plugins` 修改的话，`compile` 命令也要对应改下。
+后续上线前编译执行 `npm run compile` 实际上是调用 `package.json` 里对应的 `compile` 命令，所以如果有 `presets` 或者 `plugins` 修改的话，`compile` 命令也要对应改下。
