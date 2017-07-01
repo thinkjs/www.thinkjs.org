@@ -33,6 +33,7 @@
       "国际化": "i18n",
       "定时任务": "crontab",
       "线上部署": "deploy",
-      "单元测试": "unit_test"
+      "单元测试": "unit_test",
+      "日志记录": "logger"
     }
   }
