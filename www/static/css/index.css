@@ -1,5 +1,7 @@
 /* common set */
 .wrap {width: 1100px;margin: 0 auto;position: relative;}
+h4{font-size: 22px}
+h5{font-size: 20px !important}
 /*icon*/
 .arrowd,.arrowl,.circle{ position:absolute;right:10px;top:15px;width:13px; height:6px; line-height:0; font-size:0; background:url(../img/icon-a.png) no-repeat 0 0; vertical-align:middle;}
 .versel .arrowd{ background-position:0 -16px;}
