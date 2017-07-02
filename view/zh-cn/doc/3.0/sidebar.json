@@ -22,7 +22,8 @@
       "CRUD 操作": "model_crud",
       "事务": "model_transaction",
       "关联模型": "model_relation",
-      "MySQL": "model_mysql"
+      "MySQL": "model_mysql",
+      "API": "model_api"
     },
     "扩展功能": {
       "Service": "service",
