@@ -6,6 +6,7 @@
     "进阶应用": {
       "项目结构": "app_structure",
       "启动流程": "flow",
+      "Context": "context",
       "Middleware": "middleware",
       "Logic": "logic",
       "Controller": "controller",
@@ -29,11 +30,8 @@
       "Session": "session",
       "Cache": "cache",
       "REST API": "rest_api",
-      "静态资源访问": "resource",
-      "国际化": "i18n",
       "定时任务": "crontab",
       "线上部署": "deploy",
-      "单元测试": "unit_test",
-      "日志记录": "logger"
+      "单元测试": "unit_test"
     }
   }
