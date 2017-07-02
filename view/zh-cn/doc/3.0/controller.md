@@ -57,10 +57,6 @@ module.exports = class extends think.Controller {
 }
 ```
 
-### 空操作 __call
-
-
-
 ### ctx 对象
 
 controller 实例化时会传入 `ctx` 对象，在 controller 里可以通过 `this.ctx` 来获取 ctx 对象。并且 controller 上很多方法也是通过调用 ctx 里的方法来实现的。
