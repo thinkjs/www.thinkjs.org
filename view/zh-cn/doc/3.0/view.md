@@ -67,6 +67,9 @@ this.assign(); //获取所有赋的值
 ```
 const content1 = await this.render(); //根据当前请求解析的 controller 和 action 自动匹配模板文件
 const content2 = await this.render('doc'); //指定文件名
+
+const content3 = await this.render('doc', 'ejs'); //切换模板类型
+const content4 = await this.render('doc', {type: 'ejs', xxx: 'yyy'});//切换模板类型，并配置额外的参数
 ```
 
 #### display
@@ -77,6 +80,9 @@ const content2 = await this.render('doc'); //指定文件名
 return this.display(); //根据当前请求解析的 controller 和 action 自动匹配模板文件
 
 return this.display('doc'); //指定文件名
+
+return this.display('doc', 'ejs'); //切换模板类型
+return this.display('doc', {type: 'ejs', xxx: 'yyy'});//切换模板类型，并配置额外的参数
 ```
 
 ### 支持的 Adapter

@@ -32,7 +32,7 @@ module.exports = [
 * `src/extend/response.js` 扩展 Koa 里的 response 对象
 * `src/extend/context.js` 扩展 ctx 对象
 * `src/extend/controller.js` 扩展 controller 类
-* `src/extend/logic.js` 扩展 logic 类
+* `src/extend/logic.js` 扩展 logic 类，logic 继承 controller 类，所以 logic 包含 controller 类所有方法
 
 比如：我们想给 `ctx` 添加个 `isMobile` 方法来判断当前请求是不是手机访问，可以通过下面的方式：
 
