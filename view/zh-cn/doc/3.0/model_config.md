@@ -36,8 +36,6 @@
 * `tablePrefix` 表前缀
 * `tableName` 表名，不包含前缀
 
-#### ES6 方式
-
 ```js
 module.exports = class extends think.Model {
   constructor(...args) {
@@ -46,18 +44,6 @@ module.exports = class extends think.Model {
     this.tableName = 'user2'; //将对应的数据表名设置为 user2
   }
 }
-```
-
-#### 动态创建类方式
-
-```js
-module.exports = think.model({
-  tablePrefix: '', //直接通过属性来设置表前缀和表名
-  tableName: 'user2',
-  init: function(){
-    this.super('init', arguments);
-  }
-})
 ```
 
 ### 修改主键
