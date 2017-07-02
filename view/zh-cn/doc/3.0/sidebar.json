@@ -1,14 +1,14 @@
 {
     "快速入门": {
       "介绍": "index",
-      "快速入门": "create_project",
-      "常见问题": "question"
+      "快速入门": "create_project"
     },
     "进阶应用": {
       "项目结构": "app_structure",
+      "启动流程": "flow",
       "Middleware": "middleware",
-      "Controller": "controller",
       "Logic": "logic",
+      "Controller": "controller",
       "View": "view",
       "Config": "config",
       "Router": "route",
