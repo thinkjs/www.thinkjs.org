@@ -12,7 +12,7 @@
       "Controller": "controller",
       "View": "view",
       "Config": "config",
-      "Router": "route",
+      "Router": "router",
       "Adapter": "adapter",
       "Extend": "extend"
     },
@@ -29,10 +29,6 @@
       "Service": "service",
       "Cookie": "cookie",
       "Session": "session",
-      "Cache": "cache",
-      "REST API": "rest_api",
-      "定时任务": "crontab",
-      "线上部署": "deploy",
-      "单元测试": "unit_test"
+      "Cache": "cache"
     }
   }
