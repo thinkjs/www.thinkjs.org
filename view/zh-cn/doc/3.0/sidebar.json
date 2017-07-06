@@ -17,6 +17,7 @@
       "框架扩展": "extend"
     },
     "进阶应用": {
+      "think 对象": "think",
       "启动自定义": "bootstrap",
       "Service": "service",
       "Cookie": "cookie",
@@ -34,6 +35,8 @@
       "API": "model_api"
     },
     "扩展功能": {
-      "线上部署": "deploy"
+      "多模块项目": "multi_module",
+      "线上部署": "deploy",
+      "定时任务": "crontab"
     }
   }
