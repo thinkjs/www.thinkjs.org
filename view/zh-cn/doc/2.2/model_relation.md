@@ -178,7 +178,7 @@ export default class extends think.model.relation {
 
 一对多的关系。
 
-加入当前模型名为 `post`，关联表的模型名为 `comment`，那么配置字段 `key` 默认值为 `id`，配置字段 `fKey` 默认值为 `post_id`。
+假如当前模型名为 `post`，关联表的模型名为 `comment`，那么配置字段 `key` 默认值为 `id`，配置字段 `fKey` 默认值为 `post_id`。
 
 ```js
 'use strict';
