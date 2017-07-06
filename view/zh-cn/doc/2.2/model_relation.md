@@ -96,6 +96,7 @@ export default class extends think.model.relation {
 * `page` 关联表查询时设置的 page
 * `rModel` 多对多下，对应的关联关系模型名
 * `rfKey` 多对多下，对应里的关系关系表对应的 key
+* `relation` 配置深层级的关联关系显示，比如关闭深层级的关联查询
 
 如果只用设置关联类型，不用设置其他字段信息，可以通过下面简单的方式：
 
@@ -177,7 +178,7 @@ export default class extends think.model.relation {
 
 一对多的关系。
 
-加入当前模型名为 `post`，关联表的模型名为 `comment`，那么配置字段 `key` 默认值为 `id`，配置字段 `fKey` 默认值为 `post_id`。
+假如当前模型名为 `post`，关联表的模型名为 `comment`，那么配置字段 `key` 默认值为 `id`，配置字段 `fKey` 默认值为 `post_id`。
 
 ```js
 'use strict';
@@ -390,6 +391,40 @@ export default class extends think.model.relation {
   }
   getList2(){
     return this.setRelation(true).select();
+  }
+}
+```
+
+#### 关闭深层级的关联关系
+
+有时候有多级关联关系，比如：a 关联了 b，b 又关联了 c，这时候查询会把 a、b、c 的数据都查询出来了。在有些情况下，我们不需要 c 的数据，不想在查询 c 了，这时候可以配置 relation 来解决。
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      comment: {
+        type: think.model.HAS_MANY,
+        relation: false //关闭更深层级的关联查询
+      }
+    };
+  }
+}
+```
+
+除了完全关闭外，也可以设置部分关闭。如：
+
+```js
+export default class extends think.model.relation {
+  init(...args){
+    super.init(...args);
+    this.relation = {
+      comment: {
+        type: think.model.HAS_MANY,
+        relation: 'xxx' //关闭名为 xxx 的关联查询，保留其他的关联查询
+      }
+    };
   }
 }
 ```

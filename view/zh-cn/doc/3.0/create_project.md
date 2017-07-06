@@ -35,3 +35,40 @@ $ npm start;
 
 打开浏览器访问 `http://127.0.0.1:8360/`，如果是在远程机器上创建的项目，需要把 IP 换成对应的地址。
 
+### 项目结构
+
+默认创建的项目结构如下：
+
+```text
+|--- development.js   //开发环境下的入口文件
+|--- nginx.conf  //nginx 配置文件
+|--- package.json
+|--- pm2.json //pm2 配置文件
+|--- production.js //生成环境入口文件
+|--- README.md
+|--- src
+| |--- bootstrap  //启动字执行目录 
+| | |--- master.js //Master 进程下自动执行
+| | |--- worker.js //Wokre 进程下自动执行
+| |--- config  //配置文件目录
+| | |--- adapter.js  // adapter 配置 
+| | |--- config.js  // 默认配置文件 
+| | |--- config.production.js  //生产环境下的默认配置文件，和 config.js 合并 
+| | |--- extend.js  //项目扩展配置文件 
+| | |--- middleware.js //中间件配置文件 
+| | |--- router.js //自定义路由配置文件
+| |--- controller  //控制器目录 
+| | |--- base.js
+| | |--- index.js
+| |--- logic //logic 目录
+| | |--- index.js
+| |--- model //模型目录
+| | |--- index.js
+|--- view  //模板目录
+| |--- index_index.html
+|--- www
+| |--- static  //存放静态资源目录
+| | |--- css
+| | |--- img
+| | |--- js
+```

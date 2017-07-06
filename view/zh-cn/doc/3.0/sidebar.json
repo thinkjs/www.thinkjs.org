@@ -1,20 +1,29 @@
 {
     "快速入门": {
       "介绍": "index",
-      "快速入门": "create_project"
+      "快速入门": "create_project",
+      "升级指南": "upgrade"
+    },
+    "基础功能": {
+      "启动流程": "flow",
+      "配置": "config",
+      "Context": "context",
+      "中间件": "middleware",
+      "Logic": "logic",
+      "控制器": "controller",
+      "视图": "view",
+      "路由": "router",
+      "Adapter": "adapter",
+      "框架扩展": "extend"
     },
     "进阶应用": {
-      "项目结构": "app_structure",
-      "启动流程": "flow",
-      "Context": "context",
-      "Middleware": "middleware",
-      "Logic": "logic",
-      "Controller": "controller",
-      "View": "view",
-      "Config": "config",
-      "Router": "route",
-      "Adapter": "adapter",
-      "Extend": "extend"
+      "think 对象": "think",
+      "启动自定义": "bootstrap",
+      "Service": "service",
+      "Cookie": "cookie",
+      "Session": "session",
+      "Cache": "cache",
+      "日志": "logger"
     },
     "模型": {
       "介绍": "model_intro",
@@ -22,16 +31,12 @@
       "CRUD 操作": "model_crud",
       "事务": "model_transaction",
       "关联模型": "model_relation",
-      "MySQL": "model_mysql"
+      "MySQL": "model_mysql",
+      "API": "model_api"
     },
     "扩展功能": {
-      "Service": "service",
-      "Cookie": "cookie",
-      "Session": "session",
-      "Cache": "cache",
-      "REST API": "rest_api",
-      "定时任务": "crontab",
+      "多模块项目": "multi_module",
       "线上部署": "deploy",
-      "单元测试": "unit_test"
+      "定时任务": "crontab"
     }
   }
