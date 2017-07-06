@@ -61,6 +61,15 @@ module.exports = class extends think.Controller {
 
 controller 实例化时会传入 `ctx` 对象，在 controller 里可以通过 `this.ctx` 来获取 ctx 对象。并且 controller 上很多方法也是通过调用 ctx 里的方法来实现的。
 
+
+### 多级控制器
+
+有时候项目比较复杂，文件较多，所以希望根据功能进行一些划分。如：用户端的功能放在一块、管理端的功能放在一块。
+
+这时可以借助多级控制器来完成这个功能，在 `src/controller/` 目录下创建 `user/` 和 `admin/` 目录，然后用户端的功能文件都放在 `user/` 目录下，管理端的功能文件都放在 `admin/` 目录下。
+
+访问时带上对应的目录名，路由解析时会优先匹配目录下的控制器。
+
 ### API
 
 

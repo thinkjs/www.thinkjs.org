@@ -1,6 +1,6 @@
 ## Extend
 
-3.0 里引入了 Extend 机制，方便对框架进行扩展。支持的扩展类型为：`think`，`application`，`context`，`request`，`response`，`controller` 和 `logic`。
+虽然框架内置了很多功能，但在实际项目开发中，提供的功能还是远远不够的。3.0 里引入了 Extend 机制，方便对框架进行扩展。支持的扩展类型为：`think`，`application`，`context`，`request`，`response`，`controller` 和 `logic`。
 
 框架内置的很多功能也是 Extend 来实现的，如：`Session`，`Cache`。
 
@@ -75,12 +75,27 @@ module.exports = {
 
 通过也给 controller 扩展 `isMobile` 属性后，后续在 controller 里可以直接使用 `this.isMobile` 了。
 
+当然这样扩展后，只能在当前项目里使用这些功能，如果要在其他项目中使用，可以将这些扩展发布为一个 npm 模块。
+
+发布的模块中在入口文件里需要定义对应的类型的扩展，如：
+
+```
+const controllerExtend = require('./controller.js');
+const contextExtend = require('./context.js');
+
+// 模块入口文件
+module.exports = {
+  controller: controllerExtend,
+  context: contextExtend
+}
+```
+
 ### Extend 里使用 app 对象
 
 有些 Extend 需要使用一些 app 对象上的数据，那么可以导出为一个函数，配置时把 app 对象传递进去即可。
 
 ```
-//src/config/extend.js
+// src/config/extend.js
 const model = require('think-model');
 module.exports = [
   model(think.app) //将 think.app 传递给 model 扩展

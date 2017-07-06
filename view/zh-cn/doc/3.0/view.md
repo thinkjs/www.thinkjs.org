@@ -36,6 +36,8 @@ exports.view = {
 }
 ```
 
+这里用的模板引擎是 `nunjucks`，项目中可以根据需要修改。
+
 ### 具体使用
 
 配置了 Extend 和 Adapter 后，就可以在 Controller 里使用了。如：
