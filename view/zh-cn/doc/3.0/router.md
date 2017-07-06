@@ -1,6 +1,6 @@
 ## 路由
 
-当用户访问一个 URL 时，最终执行哪个模块(module)下哪个控制器(controller)的哪个操作(action)，这是路由模块解析后决定的。除了默认的解析外，ThinkJS 提供了一套灵活的路由机制，让 URL 更加简单友好。路由在 Thinkjs 中是以中间件（middleware）的形式存在的。
+当用户访问一个 URL 时，最终执行哪个模块（module）下哪个控制器（controller）的哪个操作（action），这是路由模块解析后决定的。除了默认的解析外，ThinkJS 提供了一套灵活的路由机制，让 URL 更加简单友好。路由在 ThinkJS 中是以中间件（middleware）的形式存在的。
 
 ### 路由参数配置
 
@@ -35,7 +35,7 @@ module.exports = [
 ThinkJS 里提供了下面的配置可以去除 `pathname` 的某些前缀和后缀。在路由中间件配置文件中：
 
 ```js
-export default {
+{
   prefix: [],
   suffix: ['.html'],
   // 其他配置...
@@ -89,7 +89,7 @@ module.exports = [
 当项目比较复杂时，可能希望将不同的功能部署在不同的域名下，但代码还是在一个项目下。ThinkJS 提供子域名来处理这个需求，在路由中间件配置文件中：
 
 ```js
-export default {
+{
   subdomainOffset: 2,
   prefix: [],
   suffix: ['.html'],
