@@ -14,16 +14,16 @@ const ejs = require('think-view-ejs');
 const path = require('path');
 
 exports.view = {
-  type: 'nunjucks',
-  common: {
+  type: 'nunjucks', // 默认的模板引擎为 nunjucks
+  common: { //通用配置
     viewPath: path.join(think.ROOT_PATH, 'view'),
     sep: '_',
     extname: '.html'
   },
-  nunjucks: {
+  nunjucks: { // nunjucks 的具体配置
     handle: nunjucks
   },
-  ejs: {
+  ejs: { // ejs 的具体配置
     handle: ejs,
     viewPath: path.join(think.ROOT_PATH, 'view/ejs/'),
   }
@@ -35,12 +35,12 @@ exports.cache = {
 ```
 
 * `type` 默认使用 Adapter 的类型，具体调用时可以传递参数改写
-* `common` 配置通用的一些参数
+* `common` 配置通用的一些参数，会跟具体的 adapter 参数作合并
 * `nunjucks,ejs` 配置特定类型的 Adapter 参数，最终获取到的参数是 common 参数与该参数进行合并
 * `handle` 对应类型的处理函数，一般为一个类
 
 
-实际项目中，一般一个 Adapter 的配置比较多，并且项目里也会用到多个 Adapter，这样 adapter.js 配置文件就会比较长，这时候可以根据功能进行分拆。
+<!-- 实际项目中，一般一个 Adapter 的配置比较多，并且项目里也会用到多个 Adapter，这样 adapter.js 配置文件就会比较长，这时候可以根据功能进行分拆。
 
 比如：创建目录 `src/config/adapter/`，将每一个功能作为一个独立文件来配置，`adapter/view.js`、`adapter/model.js`。
 
@@ -49,7 +49,7 @@ exports.cache = {
 ```
 exports.view = require('./adapter/view.js');
 exports.model = require('./adapter/model.js');
-```
+``` -->
 
 ### 项目中创建 Adapter
 
@@ -63,7 +63,7 @@ Adapter 文件放在 `src/adapter/` 目录下，如：`src/adapter/cache/xcache.
 exports.cache = {
   type: 'file',
   xcache: {
-    handle: 'xcache', //这里配置字符串，项目启动时会自动在 src/adapter 目录下查找
+    handle: 'xcache', //这里配置字符串，项目启动时会自动查找 src/adapter/cache/xcache.js 文件
     ...
   }
 }
