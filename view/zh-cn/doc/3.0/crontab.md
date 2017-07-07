@@ -24,7 +24,7 @@ module.exports = [{
 ### 配置项参数
 
 * `interval` {String|Number} 时间间隔
-* `cron` {String} cron task
+* `cron` {String} 定时任务时间表达式,如 `0 */1 * * *`
 * `worker` {String} 任务执行方式, *one*或者*all*, 默认是*one*
 * `handle` {Function|String} 执行任务,执行相应函数或者是路由地址,如 `crontab/test`
 * `immediate` {Boolean} 是否立即执行,默认是 `false`
