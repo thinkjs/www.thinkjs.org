@@ -1,79 +1,94 @@
 ## Cookie
 
+由于 HTTP(S) 协议是一个无状态的协议，所以多次请求之间并不知道是来自同一个用户。这样就会带来很多问题，如：有些页面用户登录后才能访问，页面内容根据用户相关。
+
+在早期时代，解决方案一般是生成一个随机 token，以后每次请求都会携带这个 token 来识别用户。这需要在 form 表单中插入一个包含 token 的隐藏域，或者放在 URL 请求的参数上。
+
+这种方式虽然能解决问题，但给开发带来很大的不便，也不利于页面地址的传播。为了解决这个问题，[RFC 2965](https://tools.ietf.org/html/rfc2965) 引用了 Cookie，请求时携带 `Cookie` 头信息，接口响应时通过 `Set-Cookie` 字段设置 Cookie。
+
+### Cookie 格式
+
+请求时 Cookie 格式为：
+
+```
+Cookie: name1=value1; name2=value2; name3=value3 //多个 Cookie 之间用 `; ` 隔开
+```
+设置 Cookie 格式为：
+
+```
+Set-Cookie: key1=value1; path=path; domain=domain; max-age=max-age-in-seconds; expires=date-in-GMTString-format; secure; httponly
+Set-Cookie: key2=value2; path=path; domain=domain; max-age=max-age-in-seconds; expires=date-in-GMTString-format; secure; httponly
+```
+
+* `key=value` 名称、值的键值对
+* `path=path` 设置在哪个路径下生效，大部分时候设置为 `/`，这样可以在所有路径下生效
+* `domain=domain` 设置在哪个域名下生效，会验证 domain 的合法性
+* `max-age=max-age-in-seconds` 存活时间，一般跟 expires 配套使用
+* `expires=date-in-GMTString-format` 失效日期
+* `secure` 只在 `HTTPS` 下生效
+* `httponly` 只在 HTTP 请求中携带，JS 无法获取
+
+如果不设置 `max-age` 和 `expires`，那么 Cookie 会随着浏览器的进程退出而销毁。对于不希望 JS 能够获取到 Cookie，一般设置 `httponly` 属性，比如：用户 Session 对应的 Cookie。
+
+虽然标准里并没有对 Cookie 的大小限制的规定，但浏览器一般都会有限制，所以不能将太大的文本保存在 Cookie 中（一般不能超过 4K）。
+
 ### 配置
-没有默认配置。需要在`src/config/config.js`中添加 cookie 配置，比如：
+
+框架中是通过 [cookies](https://github.com/pillarjs/cookies) 模块来进行 Cookie 的读取与设置的，支持如下的配置：
+
+* `maxAge`: a number representing the milliseconds from `Date.now()` for expiry
+* `expires`: a `Date` object indicating the cookie's expiration date (expires at the end of session by default).
+* `path`: a string indicating the path of the cookie (`/` by default).
+* `domain`: a string indicating the domain of the cookie (no default).
+* `secure`: a boolean indicating whether the cookie is only to be sent over HTTPS (`false` by default for HTTP, `true` by default for HTTPS).
+* `httpOnly`: a boolean indicating whether the cookie is only to be sent over HTTP(S), and not made available to client JavaScript (`true` by default).
+* `sameSite`: a boolean or string indicating whether the cookie is a "same site" cookie (`false` by default). This can be set to `'strict'`, `'lax'`, or `true` (which maps to `'strict'`).
+* `signed`: a boolean indicating whether the cookie is to be signed (`false` by default). If this is true, another cookie of the same name with the `.sig` suffix appended will also be sent, with a 27-byte url-safe base64 SHA1 value representing the hash of _cookie-name_=_cookie-value_ against the first [Keygrip](https://www.npmjs.com/package/keygrip) key. This signature key is used to detect tampering the next time a cookie is received.
+* `overwrite`: a boolean indicating whether to overwrite previously set cookies of the same name (`false` by default). If this is true, all cookies set during the same request with the same name (regardless of path or domain) are filtered out of the Set-Cookie header when setting this cookie.
+
+
+如果需要修改上面的配置，可以在配置文件 `src/config/config.js` 中修改。如：
 
 ```js
 module.exports = {
   cookie: {
     domain: '', 
     path: '/',
-    httponly: false, // 是否 http only
-    secure: false,
-    timeout: 0  // 有效时间，0 表示载浏览器进程内有效，单位为秒。
+    maxAge: 10 * 3600 * 1000, // 10个小时
+    signed: true,
+    keys: [] // 当 sign 为 true 时，使用 keygrip 库加密时的密钥
   }
 }
 ```
 
-### 获取 cookie
-在 controller 或者 logic 中，可以通过`this.cookie`方法来获取 cookie。如：
+### 操作 cookie
+
+在 ctx、controller、logic 中，提供了 cookie 方法来操作 cookie。
+
+#### 获取 cookie
 
 ```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    let cookie = this.cookie('theme'); // 获取名为 theme 的 cookie
-  }
-}
+const theme = this.cookie('theme')
 ```
-`this.ctx`也提供了`cookie`方法来设置 cookie。如：
+
+#### 设置 cookie
 
 ```js
-this.ctx.cookie('theme');
+this.cookie('theme', 'gray'); 
+this.cookie('theme', 'yellow', { // 设定 cookie 时指定额外的配置
+  maxAge: 10 * 1000,
+  path: '/theme'
+})
 ```
-### 设置 cookie
-在 controller 或者 logic 中，可以通过 `this.cookie`方法来设置 cookie。如：
+
+#### 删除 cookie
 
 ```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    let cookie = this.cookie('theme', 'default'); // 将 cookie theme 值设置为 default
-  }
-}
-```
-`this.ctx`也提供了`cookie`方法来设置 cookie。如：
-
-```js
-this.ctx.cookie('theme', 'default');
-```
-如果希望在设置 cookie 时改变配置参数，可以通过第三个参数来控制。比如：
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    let cookie = this.cookie('theme', 'default', {
-      timeout: 7 * 24 * 3600 // 设置 cookie 有效期为 7 天
-    }); // 将 cookie theme 值设置为 default
-  }
-}
-
+this.cookie('theme', null)
+this.cookie('theme', null, {
+  domain: '',
+  path: ''
+})
 ```
 
-### 删除 cookie
-
-在 controller 或者 logic 中，可以通过`this.cookie`方法来删除。比如：
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    let cookie = this.cookie('theme', null); //  删除名为 theme 的 cookie
-  }
-}
-
-```
-
-`this.ctx`也提供了`cookie`方法来删除 cookie。如：
-
-```js
-this.ctx.cookie('theme', null);
-
-```
+删除 cookie 时需要和设置 cookie 时同样的 domain 和 path 配置，否则会因为不匹配导致 cookie 删除不成功。
