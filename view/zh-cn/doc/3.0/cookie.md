@@ -36,15 +36,15 @@ Set-Cookie: key2=value2; path=path; domain=domain; max-age=max-age-in-seconds; e
 
 框架中是通过 [cookies](https://github.com/pillarjs/cookies) 模块来进行 Cookie 的读取与设置的，支持如下的配置：
 
-* `maxAge`: a number representing the milliseconds from `Date.now()` for expiry
-* `expires`: a `Date` object indicating the cookie's expiration date (expires at the end of session by default).
-* `path`: a string indicating the path of the cookie (`/` by default).
-* `domain`: a string indicating the domain of the cookie (no default).
-* `secure`: a boolean indicating whether the cookie is only to be sent over HTTPS (`false` by default for HTTP, `true` by default for HTTPS).
-* `httpOnly`: a boolean indicating whether the cookie is only to be sent over HTTP(S), and not made available to client JavaScript (`true` by default).
-* `sameSite`: a boolean or string indicating whether the cookie is a "same site" cookie (`false` by default). This can be set to `'strict'`, `'lax'`, or `true` (which maps to `'strict'`).
-* `signed`: a boolean indicating whether the cookie is to be signed (`false` by default). If this is true, another cookie of the same name with the `.sig` suffix appended will also be sent, with a 27-byte url-safe base64 SHA1 value representing the hash of _cookie-name_=_cookie-value_ against the first [Keygrip](https://www.npmjs.com/package/keygrip) key. This signature key is used to detect tampering the next time a cookie is received.
-* `overwrite`: a boolean indicating whether to overwrite previously set cookies of the same name (`false` by default). If this is true, all cookies set during the same request with the same name (regardless of path or domain) are filtered out of the Set-Cookie header when setting this cookie.
+* `maxAge`: cookie的超时时间，表示当前时间（`Date.now()`）之后的毫秒数。
+* `expires`: `Date` 对象，表示cookie的到期时间（不指定的话，默认是在会话结束时过期）。
+* `path`: 字符串，表示 cookie 的路径（默认是`/`）。
+* `domain`: 字符串，表示 cookie 的域（没有默认值）。
+* `secure`: 布尔值，表示是否只通过 HTTPS 发送该 cookie（`false`时默认通过HTTP发送，`true`时默认通过HTTPS发送）。
+* `httpOnly`: 布尔值，表示是否只通过 HTTP(S)发送该 cookie，而不能被客户端的 JavaScript 访问到（默认是`true`）。
+* `sameSite`: 布尔值或字符串，表示是否该 cookie 是一个“同源” cookie（默认是`false`）。可以将其设置为`'strict'`，`'lax'`，或`true` （等价于`strict`）。
+* `signed`: 布尔值，表示是否要将该 cookie 签名（默认是`false`）。如果设为`true`，还会发送另一个带有`.sig`后缀的同名 cookie，值为一个 27 字节的 url-safe base64 SHA1 值，表示_cookie-name _ = _ cookie-value_的散列值，相对于第一个[ Keygrip]（https://www.npmjs.com/package/keygrip）键。 此签名密钥用于在下次接收到 cookie 时检测篡改。
+* `overwrite`: 布尔值，表示是否覆盖以前设置的同名 cookie（默认为false）。如果设为`true`，在同一个请求中设置的相同名称（不管路径或域）的所有 cookie 将在设置此 cookie 时从 Set-Cookie 头中过滤掉。
 
 
 如果需要修改上面的配置，可以在配置文件 `src/config/config.js` 中修改。如：
