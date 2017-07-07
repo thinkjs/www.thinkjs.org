@@ -4,7 +4,7 @@
 
 在早期时代，解决方案一般是生成一个随机 token，以后每次请求都会携带这个 token 来识别用户。这需要在 form 表单中插入一个包含 token 的隐藏域，或者放在 URL 请求的参数上。
 
-这种方式虽然能解决问题，但给开发带来很大的不便，也不利于页面地址的传播。为了解决这个问题，[RFC 2965](https://tools.ietf.org/html/rfc2965) 引用了 Cookie，请求时携带 `Cookie` 头信息，接口响应时通过 `Set-Cookie` 字段设置 Cookie。
+这种方式虽然能解决问题，但给开发带来很大的不便，也不利于页面地址的传播。为了解决这个问题，[RFC 2965](https://tools.ietf.org/html/rfc2965) 引用了 Cookie 机制，请求时携带 `Cookie` 头信息，响应时通过 `Set-Cookie` 字段设置 Cookie。
 
 ### Cookie 格式
 
@@ -13,7 +13,7 @@
 ```
 Cookie: name1=value1; name2=value2; name3=value3 //多个 Cookie 之间用 `; ` 隔开
 ```
-设置 Cookie 格式为：
+响应时 Cookie 格式为：
 
 ```
 Set-Cookie: key1=value1; path=path; domain=domain; max-age=max-age-in-seconds; expires=date-in-GMTString-format; secure; httponly
@@ -56,14 +56,14 @@ module.exports = {
     path: '/',
     maxAge: 10 * 3600 * 1000, // 10个小时
     signed: true,
-    keys: [] // 当 sign 为 true 时，使用 keygrip 库加密时的密钥
+    keys: [] // 当 signed 为 true 时，使用 keygrip 库加密时的密钥
   }
 }
 ```
 
 ### 操作 cookie
 
-在 ctx、controller、logic 中，提供了 cookie 方法来操作 cookie。
+在 ctx、controller、logic 中，提供了 `cookie` 方法来操作 cookie。
 
 #### 获取 cookie
 
@@ -92,3 +92,23 @@ this.cookie('theme', null, {
 ```
 
 删除 cookie 时需要和设置 cookie 时同样的 domain 和 path 配置，否则会因为不匹配导致 cookie 删除不成功。
+
+### 常见问题
+
+#### 输出内容后能否再发送 cookie？
+
+由于发送 cookie 是通过 `Set-Cookie` header 字段来完成的，HTTP 协议中，规定 header 信息必须在内容之前发送，所以输出内容后不能再发送 cookie 信息。
+
+如果强制在输出内容之后发送 cookie 等 header 信息，会出现类似下面的错误：
+
+```
+[ERROR] - Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (_http_outgoing.js:346:11)
+    at Cookies.set (think-demo/node_modules/thinkjs/node_modules/cookies/index.js:115:13)
+    at Object.cookie (think-demo/node_modules/thinkjs/lib/extend/context.js:260:21)
+    at IndexController.cookie (think-demo/node_modules/thinkjs/lib/extend/controller.js:181:21)
+    at Timeout._onTimeout (think-demo/src/controller/index.js:10:12)
+    at tryOnTimeout (timers.js:224:11)
+    at Timer.listOnTimeout (timers.js:198:5)
+
+```
