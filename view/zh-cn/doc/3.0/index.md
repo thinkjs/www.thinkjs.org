@@ -14,4 +14,4 @@ ThinkJS 是一款面向未来的 Node.js 开发框架，整合了很多最佳实
 
 ### 架构
 
-[![](https://p0.ssl.qhimg.com/t01fca08714d911a26a.jpg)](https://p0.ssl.qhimg.com/t01fca08714d911a26a.jpg)
+[![](https://p5.ssl.qhimg.com/t0127dc46905fdcef9c.jpg)](https://p5.ssl.qhimg.com/t0127dc46905fdcef9c.jpg)
