@@ -70,8 +70,8 @@ module.exports = [
 
 ```js
 module.exports = [
-  [/\/v1\/user(?:\/(\w+))?/, 'v1/user?id=:1', 'rest'], //v1 版本
-  [/\/v2\/user(?:\/(\w+))?/, 'v2/user?id=:1', 'rest']  //v2 版本
+  [/\/v1\/user(?:\/(\d+))?/, 'v1/user?id=:1', 'rest'], //v1 版本
+  [/\/v2\/user(?:\/(\d+))?/, 'v2/user?id=:1', 'rest']  //v2 版本
 ]
 ```
 
