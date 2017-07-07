@@ -36,3 +36,22 @@ module.exports = {
     think.messenger.broadcast('test', data)
   }
   ```
+
+
+### 自定义进程通信
+
+有时候内置的一些通信方式还不能满足所有的需求，这时候可以自定义进程通信。由于 Master 进程执行时调用 `src/bootstrap/master.js`，Worker 进程执行时调用 `src/bootstrap/worker.js`，那么处理进程通信就比较简单。
+
+```js
+// src/bootstrap/master.js
+process.on('message', (worker, message) => {
+  // 接收到特定的消息进程处理
+  if(message && message.act === 'xxx'){
+
+  }
+})
+
+// src/bootstrap/worker.js
+process.send({act: 'xxxx', ...args}); //发送数据到 Master 进程
+
+```

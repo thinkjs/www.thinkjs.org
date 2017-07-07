@@ -346,7 +346,7 @@ json 的方式输出内容。
 * `charset` {Boolean} 是否自动追加 charset
 
 设置 Content-Type。-->
-
+<!--
 #### controller.download(filePath, contentType, fileName)
 
 * `filePath` {String} 下载文件的具体路径
@@ -383,49 +383,13 @@ module.exports = class extends think.Controller {
     this.download(filePath, 'text/html', 'b.txt');
   }
 }
-```
+```-->
 
 #### controller.success(data, message)
 
-* `data` {Mixed} 要输出的数据
-* `message` {String} 追加的message
+格式化输出一个正常的数据，一般是操作成功后输出，等同于 [ctx.success](/doc/3.0/context.html#success-data-message)。
 
-格式化输出一个正常的数据，一般是操作成功后输出。
-
-```js
-http.success({name: 'thinkjs'});
-//writes
-{
-  errno: 0,
-  errmsg: '',
-  data: {
-    name: 'thinkjs'
-  }
-}
-```
-
-这样客户端就可以根据 `errno` 是否为 `0` 为判断当前请求是否正常。
 
 #### controller.fail(errno, errmsg, data)
 
-* `errno` {Number} 错误号
-* `errmsg` {String} 错误信息
-* `data` {Mixed} 额外的数据
-
-格式化输出一个异常的数据，一般是操作失败后输出。
-
-`注`：字段名 `errno` 和 `errmsg` 可以在配置里进行修改。
-
-```js
-http.fail(100, 'fail')
-//writes
-{
-  errno: 100,
-  errmsg: 'fail',
-  data: ''
-}
-```
-
-这样客户端就可以拿到具体的错误号和错误信息，然后根据需要显示了。
-
-`注`：字段名 `errno` 和 `errmsg` 可以在配置里进行修改。
+格式化输出一个异常的数据，一般是操作失败后输出，等同于 [ctx.fail](/doc/3.0/context.html#fail-errno-errmsg-data)。

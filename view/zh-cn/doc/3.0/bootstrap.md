@@ -11,6 +11,23 @@
 
 所以可以将一些需要在系统启动时就需要执行的逻辑放在对应的文件里执行。
 
+如果有一些代码需要在 Master 和 Worker 进程下都调用，那么可以放在一个单独的文件里，然后 master.js 和 worker.js 去 required。
+
+```js
+// src/bootstrap/common.js
+global.commonFn = function(){
+
+}
+
+// src/bootstrap/master.js
+require('./common.js')
+
+
+// src/boostrap/worker.js
+require('./common.js')
+
+```
+
 ### 启动服务前执行
 
 有时候需要在 node 启动 http 服务之前做一些特殊的逻辑处理，如：从数据库中读取配置并设置，从远程还在一些数据设置到缓存中。
