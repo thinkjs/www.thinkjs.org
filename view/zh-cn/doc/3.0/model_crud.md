@@ -15,6 +15,20 @@ module.exports = class extends think.Controller {
 }
 ```
 
+有时候需要借助数据库的一些函数来添加数据，如：时间戳使用 mysql 的 `CURRENT_TIMESTAMP` 函数，这时可以借助 `exp` 表达式来完成。
+
+```js
+export default class extends think.controller.base {
+  async addAction(){
+    let model = this.model('user');
+    let insertId = await model.add({
+      name: 'test',
+      time: ['exp', 'CURRENT_TIMESTAMP()']
+    });
+  }
+}
+```
+
 #### 添加多条数据
 
 使用 `addMany` 方法可以添加多条数据，如：
@@ -71,6 +85,21 @@ module.exports = class extends think.Controller {
   async updateAction(){
     let model = this.model('user');
     let affectedRows = await model.where('1=1').update({email: 'admin@thinkjs.org'});
+  }
+}
+```
+
+有时候更新值需要借助数据库的函数或者其他字段，这时候可以借助 `exp` 来完成。
+
+```js
+export default class extends think.controlle.base {
+  async updateAction(){
+    let model = this.model('user');
+    let affectedRows = await model.where('1=1').update({
+      email: 'admin@thinkjs.org',
+      view_nums: ['exp', 'view_nums+1'],
+      update_time: ['exp', 'CURRENT_TIMESTAMP()']
+    });
   }
 }
 ```
