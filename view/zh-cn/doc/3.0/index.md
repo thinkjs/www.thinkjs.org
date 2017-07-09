@@ -2,7 +2,7 @@
 
 ThinkJS 是一款面向未来的 Node.js 开发框架，整合了很多最佳实践，让企业级开发变得更加简单、高效。从 3.0 开始，ThinkJS 基于 koa 2.x，完全兼容 koa 里的 middleware 等插件。
 
-同时，ThinkJS 支持 Extend 和 Adapter 等方式，方便扩展框架里的各种功能。
+同时，ThinkJS 支持 Middleware、Extend 和 Adapter 等方式，方便扩展框架里的各种功能。
 
 ### 特性
 
