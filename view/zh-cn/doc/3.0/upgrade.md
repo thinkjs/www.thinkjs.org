@@ -4,7 +4,7 @@
 
 ### 核心变化
 
-3.0 抛弃了已有的核心架构，基于 Koa 2.x 版本构建，兼容 Koa 里的所有功能。主要变化为：
+3.0 抛弃了 2.x 的核心架构，基于 Koa 2.x 版本构建，兼容 Koa 里的所有功能。主要变化为：
 
 * 之前的 `http` 对象改为 `ctx` 对象
 * 执行完全改为调用 `middleware` 来完成
@@ -15,9 +15,9 @@
 2.x 中项目启动时，会自动加载 `src/bootstrap/` 目录下的所有文件。3.0 中不再自动加载所有的文件，而是改为：
 
 * 在 Master 进程中加载 `src/boostrap/master.js` 文件
-* 在 Woker 进程中加载 `src/boostrap/worker.js` 文件
+* 在 Worker 进程中加载 `src/boostrap/worker.js` 文件
 
-如果还要加载其他的文件，那么可以在对应的文件中 require 进去。
+如果还要加载其他的文件，那么可以在对应的文件中使用 `require` 方式引入进去。
 
 ### 配置
 
