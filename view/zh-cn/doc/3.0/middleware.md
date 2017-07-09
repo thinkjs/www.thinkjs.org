@@ -160,7 +160,7 @@ module.exports = [
 
 #### middleware 配置是否需要考虑顺序？
 
-middleaware 执行是安排配置的顺序执行的，所以需要开发者考虑配置单顺序。
+middleaware 执行是按照配置的排列顺序执行的，所以需要开发者考虑配置的顺序。
 
 #### 怎么看当前环境下哪些 middleware 生效？
 
