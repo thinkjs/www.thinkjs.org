@@ -53,8 +53,7 @@ module.exports = (options, app) => {
 }
 ```
 
-这里 middleware 接收的参数除了 options 外，还多了个 `app` 对象，该对象为 Koa Application 的实例。
-
+这里 middleware 接收的参数除了 options 外，还多了个 `app` 对象，该对象为 Koa Application 的实例。middleware 执行是一个洋葱模型，中可以通过 next 来控制是否执行后续的行为。
 
 
 #### enable
