@@ -25,7 +25,7 @@
 
 ### hook 和 middleware
 
-移除 3.x 里的 hook 和 middleware，改为 Koa 里的 middleware，middleware 的管理放在 `src/config/middleware.js` 配置文件中。
+移除 2.x 里的 hook 和 middleware，改为 Koa 里的 middleware，middleware 的管理放在 `src/config/middleware.js` 配置文件中。
 
 2.x 下的 middleware 类无法在 3.0 下使用，3.0 下可以直接使用 Koa 的 middleware。
 
