@@ -43,7 +43,7 @@ module.exports = [
 
 middleware 的处理函数，可以用系统内置的，也可以是引入外部的，也可以是项目里的 middleware。
 
-middleware 的函数格式为：
+handle 的函数格式为：
 
 ```js
 module.exports = (options, app) => {
@@ -74,7 +74,7 @@ module.exports = (options, app) => {
 ```js
 module.exports = [
   {
-    handle: 
+    options: {} 
   }
 ]
 ```
