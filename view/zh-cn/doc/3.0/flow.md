@@ -29,9 +29,9 @@
     - 加载 `src/bootstrap/worker.js` 启动文件。
     - 监听 process 里的 `onUncaughtException` 和 `onUnhandledRejection` 错误事件，并进行处理。可以在配置 `src/config.js` 自定义这二个错误的处理函数。
     - 等待 `think.beforeStartServer` 注册的启动前处理函数执行，这里可以注册一些服务启动前的事务处理。
-        - 如果自定义了创建服务配置 `createServer`，那么执行这个函数 `createServer(port, host, callback)` 来创建服务。
-        - 如果没有自定义，则通过 `think.app.listen` 来启动服务。
-        - 服务启动完成时，触发 `appReady` 事件，其他地方可以通过 `think.app.on("appReady")` 监听。
+    - 如果自定义了创建服务配置 `createServer`，那么执行这个函数 `createServer(port, host, callback)` 来创建服务。
+    - 如果没有自定义，则通过 `think.app.listen` 来启动服务。
+    - 服务启动完成时，触发 `appReady` 事件，其他地方可以通过 `think.app.on("appReady")` 监听。
     - 创建的服务赋值给 `think.app.server` 对象。
 
 服务启动后，会打印下面的日志：
