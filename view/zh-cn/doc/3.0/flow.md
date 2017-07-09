@@ -84,9 +84,7 @@ function middlewareFunction(options){
 }
 ```
 
-在 Logic 和 Controller 中，提供了 `__before` 和 `__after` 这些魔术方法，如果想在这些魔术方法里阻止后续的行为执行怎么办呢？
-
-可以通过返回 `false` 来处理，如：
+在 Logic 和 Controller 中，提供了 `__before` 和 `__after` 这些魔术方法，如果想在这些魔术方法里阻止后续的行为执行，可以通过返回 `false` 来处理：
 
 ```js
 __before(){
