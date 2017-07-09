@@ -65,7 +65,7 @@
     - [controller](https://github.com/thinkjs/think-controller) 根据解析出来的 controller 和 action，调用 controller 里的对应的方法。
         - 具体的调用策略和 logic 完全一致
         - 如果不存在，那么当前请求返回 404
-        - action 执行完成时，可以将结果放在 `this.body` 属性上用户返回给用户。
+        - action 执行完成时，可以将结果放在 `this.body` 属性上然后返回给用户。
 * 当 Worker 报错，触发 `onUncaughtException` 或者 `onUnhandledRejection` 事件，或者 Worker 异常退出时，Master 会捕获到错误，重新 fork 一个新的 Worker 进程，并杀掉当前的进程。
 
 可以看到，所有的用户请求处理都是通过 middleware 来完成的。具体的项目中，可以根据需求，组装更多的 middleware 来处理用户的请求。
