@@ -49,13 +49,13 @@ $ npm start;
 |--- src
 | |--- bootstrap  //启动自执行目录 
 | | |--- master.js //Master 进程下自动执行
-| | |--- worker.js //Wokre 进程下自动执行
+| | |--- worker.js //Worker 进程下自动执行
 | |--- config  //配置文件目录
-| | |--- adapter.js  // adapter 配置 
+| | |--- adapter.js  // adapter 配置文件 
 | | |--- config.js  // 默认配置文件 
 | | |--- config.production.js  //生产环境下的默认配置文件，和 config.js 合并 
-| | |--- extend.js  //项目扩展配置文件 
-| | |--- middleware.js //中间件配置文件 
+| | |--- extend.js  //extend 配置文件 
+| | |--- middleware.js //middleware 配置文件 
 | | |--- router.js //自定义路由配置文件
 | |--- controller  //控制器目录 
 | | |--- base.js
@@ -67,7 +67,7 @@ $ npm start;
 |--- view  //模板目录
 | |--- index_index.html
 |--- www
-| |--- static  //存放静态资源目录
+| |--- static  //静态资源目录
 | | |--- css
 | | |--- img
 | | |--- js
