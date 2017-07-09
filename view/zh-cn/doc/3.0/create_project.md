@@ -44,7 +44,7 @@ $ npm start;
 |--- nginx.conf  //nginx 配置文件
 |--- package.json
 |--- pm2.json //pm2 配置文件
-|--- production.js //生成环境入口文件
+|--- production.js //生产环境入口文件
 |--- README.md
 |--- src
 | |--- bootstrap  //启动字执行目录 
