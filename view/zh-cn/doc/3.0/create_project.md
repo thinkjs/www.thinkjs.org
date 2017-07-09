@@ -44,10 +44,10 @@ $ npm start;
 |--- nginx.conf  //nginx 配置文件
 |--- package.json
 |--- pm2.json //pm2 配置文件
-|--- production.js //生产环境入口文件
+|--- production.js //生产环境下的入口文件
 |--- README.md
 |--- src
-| |--- bootstrap  //启动字执行目录 
+| |--- bootstrap  //启动自执行目录 
 | | |--- master.js //Master 进程下自动执行
 | | |--- worker.js //Wokre 进程下自动执行
 | |--- config  //配置文件目录
