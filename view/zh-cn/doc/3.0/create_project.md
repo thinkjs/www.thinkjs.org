@@ -13,6 +13,12 @@ $ npm install -g think-cli
 
 如果是从 `2.x` 升级，需要将之前的命令删除，然后重新安装。
 
+### 卸载旧版本命名
+
+```sh
+$ npm uninstall -g thinkjs
+```
+
 ### 创建项目
 
 执行 `thinkjs new [project_name]` 来创建项目，如：
@@ -47,7 +53,7 @@ $ npm start;
 |--- production.js //生产环境下的入口文件
 |--- README.md
 |--- src
-| |--- bootstrap  //启动自执行目录 
+| |--- bootstrap  //启动自动执行目录 
 | | |--- master.js //Master 进程下自动执行
 | | |--- worker.js //Worker 进程下自动执行
 | |--- config  //配置文件目录
