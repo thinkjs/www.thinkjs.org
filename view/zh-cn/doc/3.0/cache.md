@@ -14,7 +14,7 @@
 ```js
 const fileCache = require('think-cache-file');
 const redisCache = require('think-cache-redis');
-const memcacheCache = require('think-cache-memcache);
+const memcacheCache = require('think-cache-memcache');
 const path = require('path');
 
 exports.cache = {
