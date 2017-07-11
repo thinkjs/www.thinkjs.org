@@ -13,6 +13,8 @@
 
 ```js
 const fileCache = require('think-cache-file');
+const redisCache = require('think-cache-redis');
+const memcacheCache = require('think-cache-memcache);
 const path = require('path');
 
 exports.cache = {
@@ -25,6 +27,19 @@ exports.cache = {
     cachePath: path.join(think.ROOT_PATH, 'runtime/cache'), // 必须是绝对路径
     pathDepth: 1,
     gcInterval: 24 * 60 * 60 * 1000 // gc
+  },
+  redis: {
+    handle: redisCache,
+    port: 6379,
+    host: '127.0.0.1',
+    password: ''
+  },
+  memcache: {
+    handle: memcacheCache,
+    hosts: ['127.0.0.1:11211'],
+    maxValueSize: 1048576,
+    netTimeout: 5000,
+    reconnect: true
   }
 }
 
@@ -40,6 +55,8 @@ exports.cache = {
 * `pathDepth`：缓存文件路径的深度，这是为了避免在根目录下创建太多文件，从而超过操作系统的限制以及降低查找效率。
 * `gcInterval`：缓存的垃圾回收时间间隔。
 
+redis 方式的参数，参考 [https://github.com/luin/ioredis/blob/master/lib/redis.js](https://github.com/luin/ioredis/blob/master/lib/redis.js)。
+memcache 方式的参数，参考 [http://memcache-plus.com/](http://memcache-plus.com/)。
 
 ### 使用方法
 在 controller 或 logic 中，使用`this.cache(name, value, options)`来操作缓存。
