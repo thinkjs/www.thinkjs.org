@@ -43,7 +43,7 @@ module.exports = [
 
 middleware 的处理函数，可以用系统内置的，也可以是引入外部的，也可以是项目里的 middleware。
 
-middleware 的函数格式为：
+handle 的函数格式为：
 
 ```js
 module.exports = (options, app) => {
@@ -53,8 +53,7 @@ module.exports = (options, app) => {
 }
 ```
 
-这里 middleware 接收的参数除了 options 外，还多了个 `app` 对象，该对象为 Koa Application 的实例。
-
+这里 middleware 接收的参数除了 options 外，还多了个 `app` 对象，该对象为 Koa Application 的实例。middleware 执行是一个洋葱模型，中可以通过 next 来控制是否执行后续的行为。
 
 
 #### enable
@@ -75,7 +74,7 @@ module.exports = (options, app) => {
 ```js
 module.exports = [
   {
-    handle: 
+    options: {} 
   }
 ]
 ```
@@ -161,7 +160,7 @@ module.exports = [
 
 #### middleware 配置是否需要考虑顺序？
 
-middleaware 执行是安排配置的顺序执行的，所以需要开发者考虑配置单顺序。
+middleaware 执行是按照配置的排列顺序执行的，所以需要开发者考虑配置的顺序。
 
 #### 怎么看当前环境下哪些 middleware 生效？
 

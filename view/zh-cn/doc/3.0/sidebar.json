@@ -24,7 +24,10 @@
       "Session": "session",
       "Cache": "cache",
       "日志": "logger",
-      "多进程": "multi_process"
+      "多进程": "multi_process",
+      "Babel 转译": "babel",
+      "RESTful API": "rest",
+      "国际化与本地化": "i18n"
     },
     "模型": {
       "介绍": "model_intro",

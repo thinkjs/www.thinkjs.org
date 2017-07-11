@@ -13,6 +13,12 @@ $ npm install -g think-cli
 
 如果是从 `2.x` 升级，需要将之前的命令删除，然后重新安装。
 
+### 卸载旧版本命名
+
+```sh
+$ npm uninstall -g thinkjs
+```
+
 ### 创建项目
 
 执行 `thinkjs new [project_name]` 来创建项目，如：
@@ -44,18 +50,18 @@ $ npm start;
 |--- nginx.conf  //nginx 配置文件
 |--- package.json
 |--- pm2.json //pm2 配置文件
-|--- production.js //生成环境入口文件
+|--- production.js //生产环境下的入口文件
 |--- README.md
 |--- src
-| |--- bootstrap  //启动字执行目录 
+| |--- bootstrap  //启动自动执行目录 
 | | |--- master.js //Master 进程下自动执行
-| | |--- worker.js //Wokre 进程下自动执行
+| | |--- worker.js //Worker 进程下自动执行
 | |--- config  //配置文件目录
-| | |--- adapter.js  // adapter 配置 
+| | |--- adapter.js  // adapter 配置文件 
 | | |--- config.js  // 默认配置文件 
 | | |--- config.production.js  //生产环境下的默认配置文件，和 config.js 合并 
-| | |--- extend.js  //项目扩展配置文件 
-| | |--- middleware.js //中间件配置文件 
+| | |--- extend.js  //extend 配置文件 
+| | |--- middleware.js //middleware 配置文件 
 | | |--- router.js //自定义路由配置文件
 | |--- controller  //控制器目录 
 | | |--- base.js
@@ -67,7 +73,7 @@ $ npm start;
 |--- view  //模板目录
 | |--- index_index.html
 |--- www
-| |--- static  //存放静态资源目录
+| |--- static  //静态资源目录
 | | |--- css
 | | |--- img
 | | |--- js

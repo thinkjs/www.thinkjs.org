@@ -8,7 +8,7 @@
 
 此外为 app 扩展了更多的属性。
 
-* `think.app.think` 等同于 think 对象，方便有些地方传入了 app 对象，但又要使用 think 对象上的其他方法
+* `think.app.think` 等同于 think 对象，方便有些地方传入了 app 对象，同时要使用 think 对象上的其他方法
 * `think.app.modules` 模块列表，单模块项目下为空数组
 * `think.app.controllers` 存放项目下的 controller 文件，便于后续快速调用
 * `think.app.logics` 存放项目下的 logic 文件

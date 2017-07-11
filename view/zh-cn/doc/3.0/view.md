@@ -57,7 +57,7 @@ module.exports = class extends think.Controller {
 
 ```
 this.assign('title', 'thinkjs'); //单条赋值
-this.assign({title: 'thinkjs', name: 'test'}); //单条赋值
+this.assign({title: 'thinkjs', name: 'test'}); //多条赋值
 this.assign('title'); //获取之前赋过的值，如果不存在则为 undefined
 this.assign(); //获取所有赋的值
 ```

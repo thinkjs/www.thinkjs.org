@@ -167,7 +167,6 @@ i.icon-fet8{ background-position:-70px -210px;}
 .hd-tips{background-color: #fff07b;color: #988328;height: 42px;line-height: 42px;text-align: center;}
 
 @media screen and (max-width: 640px){
-  .hd-tips{display: none;}
   .header{height:auto;}
   .wrap{width: 100%;}
   .logo{margin: 10px auto;float: none}

@@ -7,7 +7,7 @@
 * `router.js` 自定义路由配置
 * `middleware.js` middlware 配置
 * `validator.js` 数据校验配置
-* `extend.js` 项目扩展功能配置
+* `extend.js` extend 配置
 
 ### 配置格式
 
