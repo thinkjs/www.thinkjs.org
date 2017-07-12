@@ -606,7 +606,7 @@ module.exports = class extends think.Logic {
   indexAction(){
     let rules = {
       name: {
-        equals: 'username',
+        different: 'username',
         method: 'GET'
       }
     }
