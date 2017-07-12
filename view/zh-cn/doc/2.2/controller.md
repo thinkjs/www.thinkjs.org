@@ -95,7 +95,7 @@ module.exports = think.controller(Base, {
 
 ### init 方法
 
-ES6 里的 class 有 contructor 方法，但动态创建的类就没有该方法了，为了统一初始化执行的方法，将该方法统一定义为 `init`。
+ES6 里的 class 有 constructor 方法，但动态创建的类就没有该方法了，为了统一初始化执行的方法，将该方法统一定义为 `init`。
 
 该方法在类实例化的时候自动调用，无需手工调用。
 
