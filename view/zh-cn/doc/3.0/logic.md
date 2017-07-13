@@ -235,7 +235,7 @@ module.exports = class extends think.Logic {
 
 #### 校验后数据的自动转换
 
-对于指定为 `int`、`float`、`numeric` 数据类型的字段在校验之后，会自动对数据进行 `parseFloat` 转换。
+对于指定为 `int`、`float` 数据类型的字段在校验之后，会自动对数据进行 `parseFloat` 转换。
 
 ```js
 module.exports = class extends think.Logic {
