@@ -171,54 +171,15 @@ module.exports = class extends think.Controller {
 
 #### controller.get(name)
 
-* `name` {String} 参数名
-
-获取 GET 参数值。
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    //获取一个参数值
-    let value = this.get('xxx');
-    //获取所有的参数值
-    let values = this.get();
-  }
-}
-```
+获取 query 参数，等同于 [ctx.param](/3.0/context.html#param-name-value)。由于 ctx.get 已经被 Koa 使用，所以无法添加 ctx.get 方法。
 
 #### controller.post(name)
 
-* `name` {String} 参数名
-
-获取 POST 提交的参数。
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    //获取一个参数值
-    let value = this.post('xxx');
-    //获取所有的 POST 参数值
-    let values = this.post();
-  }
-}
-```
+获取 POST 提交的参数，等同于 [ctx.post](/doc/3.0/context.html#post-name-value)。
 
 #### controller.file(name)
 
-* `name` {String} 上传文件对应的字段名
-
-获取上传的文件，返回值是个对象，包含下面的属性：
-
-```js
-{
-  fieldName: 'file', //表单字段名称
-  originalFilename: filename, //原始的文件名
-  path: filepath, //文件保存的临时路径，使用时需要将其移动到项目里的目录，否则请求结束时会被删除
-  size: 1000 //文件大小
-}
-```
-
-如果文件不存在，那么值为一个空对象 `{}`。该方法等同于 ctx.file 方法。
+等同于 [ctx.file](/doc/3.0/context.html#file-name-value) 方法。
 
 #### controller.header(name, value)
 
@@ -238,18 +199,7 @@ module.exports = class extends think.Controller {
 
 #### controller.expires(time)
 
-* `time` {Number} 过期时间，单位为秒
-
-强缓存，设置 `Cache-Control` 和 `Expires` 头信息。
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    this.expires(86400); //设置过期时间为 1 天。
-  }
-}
-```
-该方法等同于 ctx.expires 方法。
+设置 Cache-Control 和 Expires 缓存头，等同于 [ctx.expires](/doc/3.0/context.html#expires-time)。
 
 #### controller.referer(onlyHost)
 
@@ -263,40 +213,7 @@ module.exports = class extends think.Controller {
 
 #### controller.cookie(name, value, options)
 
-* `name` {String} cookie 名
-* `value` {String} cookie 值
-* `options` {Object}
-
-获取、设置或者删除 cookie。
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    //获取 cookie 值
-    let value = this.cookie('think_name');
-  }
-}
-```
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    //设置 cookie 值
-    this.cookie('think_name', value, {
-      timeout: 3600 * 24 * 7 //有效期为一周
-    });
-  }
-}
-```
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    //删除 cookie
-    this.cookie('think_name', null); 
-  }
-}
-```
+操作 cookie，等同于 [ctx.cookie](/doc/3.0/context.html#cookie-name-value-options)。
 
 #### controller.redirect(url)
 
