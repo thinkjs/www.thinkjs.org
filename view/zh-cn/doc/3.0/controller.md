@@ -203,13 +203,6 @@ module.exports = class extends think.Controller {
 }
 ```
 
-#### controller.param(name)
-
-* `name` {String} 参数名
-
-获取参数值，优先从 POST 里获取，如果取不到再从 GET 里获取。
-
-
 #### controller.file(name)
 
 * `name` {String} 上传文件对应的字段名
