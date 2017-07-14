@@ -8,6 +8,7 @@ var localstorage = require('stc-localstorage');
 var localstorageAdapter = require('stc-localstorage-ejs');
 
 stc.config({
+  cluster: false,
   product: 'thinkjs',
   include: ['www/static', 'view_build'],
   exclude: [/\.bak$/],

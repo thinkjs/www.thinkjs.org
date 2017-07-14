@@ -39,8 +39,8 @@
 ```text
 [2017-07-02 13:36:40.646] [INFO] - Server running at http://127.0.0.1:8360
 [2017-07-02 13:36:40.649] [INFO] - ThinkJS version: 3.0.0-beta1
-[2017-07-02 13:36:40.649] [INFO] - Enviroment: development
-[2017-07-02 13:36:40.649] [INFO] - Workers: 8
+[2017-07-02 13:36:40.649] [INFO] - Enviroment: development  // 当前运行的环境
+[2017-07-02 13:36:40.649] [INFO] - Workers: 8   // 子进程数量
 ```
 
 ### 用户请求处理

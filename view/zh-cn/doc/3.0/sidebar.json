@@ -12,7 +12,7 @@
       "Logic": "logic",
       "控制器": "controller",
       "视图": "view",
-      "路由": "router",
+      "Router": "router",
       "Adapter": "adapter",
       "框架扩展": "extend"
     },
