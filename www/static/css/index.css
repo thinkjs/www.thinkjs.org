@@ -147,9 +147,11 @@ i.icon-fet8{ background-position:-70px -210px;}
 .page-con .wechat img:nth-child(3n+1){margin-right: 25px;}
 .page-con .wechat img:nth-child(3n+2){margin-right: 25px;margin-left: 25px;}
 .page-con .wechat img:nth-child(3n+3){margin-left: 25px;}
-.page-con table{width: 100%;border-spacing:0;border-collapse:collapse;}
-.page-con table th{vertical-align:bottom;border-bottom:2px solid #ddd;padding: 8px;line-height: 20px;}
-.page-con table td{vertical-align:top;border-top:1px solid #ddd;padding: 8px;line-height: 20px;}
+.page-con table{width: 100%;border-spacing:0;border-collapse:collapse;border: 1px solid #dfe2e5;margin-bottom: 10px}
+.page-con table th{vertical-align:bottom;border:1px solid #dfe2e5;padding: 8px;line-height: 20px;}
+.page-con table thead th{font-weight: bold}
+.page-con table td{vertical-align:top;border:1px solid #dfe2e5;padding: 8px;line-height: 20px;}
+.page-con table tr:nth-child(2n){background-color: #f6f8fa}
 .page-con img.cup{width:495px;height:451px;}
 
 .r-fixed{position: fixed;width: 48px;left: 50%;margin-left: 548px;bottom: 10px;}

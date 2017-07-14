@@ -51,7 +51,7 @@ module.exports = [
 
 #### prefix & suffix
 
-有时候为了搜索引擎优化或者一些其他的原因，URL 上会多加一些东西。比如：当前页面是一个动态页面，为了 SEO，会在 URL 后面加上 `.html` 后缀假装当前页面是一个静态页面，但 `.html` 对于路由解析来说是无用的，是要去除的。
+有时候为了搜索引擎优化或者一些其他的原因，URL 上会多加一些东西。比如：当前页面是一个动态页面，为了 SEO，会在 URL 后面加上 `.html` 后缀假装页面是一个静态页面，但 `.html` 对于路由解析来说是无用的，是要去除的。
 
 这时候可以通过 `prefix` 和 `suffix` 配置来去除一些前置或者后置的特定值，如：
 
@@ -72,26 +72,53 @@ module.exports = [
 
 ```js
 {
-  subdomainOffset: 2,
-  subdomain: {
+  subdomainOffset: 2, // 域名偏移量
+  subdomain: { // 子域名映射详细配置
     'aaa.bbb': 'aaa'
   }
 }
 ```
 
-域名偏移 `subdomainOffset` 默认为 2， 例如对于域名 aaa.bbb.example.com， `this.ctx.subdomains` 为 `['news', 'zm']`, 当域名偏移为 3 时，`this.ctx.subdomains` 为 `['zm']`。
+在做子域名映射时，需要解析出当前域名的子域名具体是什么？这时候就需要用到域名偏移量  `subdomainOffset` 了，该配置默认值为 2， 例如：对于域名 aaa.bbb.example.com， 解析后的子域名列表为 `["aaa", "bbb"]`, 当域名偏移量为 3 时，解析后的子域名列表为 `["aaa"]`，解析后的值保存在 `ctx.subdomains` 属性上。如果当前域名是个 IP，那么解析后的 ctx.subdomains 始终为空数组。
 
-如果路由中间件配置的 `subdomain` 项中存在 `this.ctx.subdomains.join(,)` 对应的 key，此 key 对应的值将会被附加到 `pathname` 上，然后再进行路由的解析。
+在进行子域名匹配时，会将 `ctx.subdomains` 转为字符串（`join(",")`）然后跟 `subdomain` 配置进行匹配。如果匹配到了 `subdomain` 里的配置，那么会将对应的值前缀补充到 `pathname` 值上。如：当访问 `http://aaa.bbb.example.com/api_lib/inbox/123`，由于配置了 `'aaa.bbb': 'aaa'`, 那么得到的 pathname 将为 `/aaa/api_lib/inbox/123`，匹配顺序为按配置依次向后匹配，如果匹配到了，那么会终止后续的匹配。
 
-对于上述配置，当我们访问 `http://zm.news.so.com:8360/api_lib/inbox/123`，我们得到的 `pathname` 将为 `/news/api_lib/inbox/123`。
+如果 `subdomain` 配置是一个数组，那么会自动将数组转化为对象，方便后续进行匹配。
 
-另外 `subdomain` 的配置也可以为一个数组，我们会将数组转化为对象。例如 `subdomain: ['admin', 'user']`将会被转化为 `subdomain: {admin: 'admin', user: 'user'}`。
+```js
+subdomain: ['admin', 'user'] 
+
+// 转化为
+subdomain: {
+  admin: 'admin', 
+  user: 'user'
+}
+```
+
+### 路由解析
+
+通过 `prefix & suffix` 和 `subdomain` 预处理后，得到真正后续要解析的 `pathname`。默认的路由解析规则为 `/controller/action`，如果是多模块项目，那么规则为 `/module/controller/action`，根据这个规则解析出对应的 `module`、`controller`、`action` 值。
+
+如果 controller 有子级，那么会优先匹配子级 controller，然后再匹配 action。
+
+| pathname  | 项目类型  | 子级控制器  |  module | controller  | action | 备注 |
+|---|---|---|---|---|---|---|
+| / | 单模块 | 无 | | index | index | controller、action 为配置的默认值 |
+| /user | 单模块 | 无 | | user | index | action 为配置的默认值 |
+| /user/login | 单模块 | 无 | | user | login |  |
+| /console/user/login | 单模块 | 有 | | console/user | login | 有子级控制器 console/user |
+| /console/user/login/aaa/bbb | 单模块 | 有 | | console/user | login | 剩余的 aaa/bbb 不再解析 |
+| /admin/user | 多模块 | 无 | admin | user | index | 多模块项目，有名为 admin 的模块 |
+| /admin/console/user/login | 多模块 | 有 | admin | console/user | login | | | 
 
 
+解析后的 module、controller、action 分别放在 `ctx.module`、`ctx.controller`、`ctx.action` 上，方便后续调用处理。如果不想要默认的路由解析，那么可以通过配置 `enableDefaultRouter: false` 关闭。
 
-### 路由规则
+### 自定义路由规则
 
-单模块路由规则配置文件 `src/config/router.js`，路由规则为二维数组：
+虽然默认的路由解析方式能够满足需求，但有时候会导致 URL 看起来不够优雅，我们更希望 URL 比较简短，这样会更利于记忆和传播。框架提供了自定义路由来处理这种需求。
+
+自定义路由规则配置文件 `src/config/router.js`，路由规则为二维数组：
 
 ```js
 module.exports = [
@@ -99,37 +126,106 @@ module.exports = [
   [/fonts\/(.*)/i, '/fonts/:1', 'get,post'],
 ];
 ```
+每一条路由规则也为一个数组，数组里面的项分别对应为：`match`、`pathname`、`method`、`options`：
 
-路由的匹配规则为：从前向后逐一匹配，如果命中到了该项规则，则不再向后匹配。 对于每一条匹配规则，参数为：
+* `match` {String | RegExp} pathname 匹配规则，可以是字符串或者正则。如果是字符串，那么会通过 [path-to-regexp](https://github.com/pillarjs/path-to-regexp) 模块转为正则
+* `pathname` {String} 匹配后映射后的 pathname，后续会根据这个映射的 pathname 解析出对应的 controller、action
+* `method` {String} 该条路由规则支持的请求类型，默认为所有。多个请求类型中间用逗号隔开，如：`get,post`
+* `options` {Object} 额外的选项，如：跳转时指定 statusCode
 
-```js
-[
-  match,      // url 匹配规则, 预先使用 path-to-regexp 转换
-  path,       // 对应的操作（action）的路径
-  method,     // 允许匹配的请求类型，多个请求类型之间逗号分隔，get|post|redirect|rest|cli
-  [options]   // 额外参数，如 method=redirect时，指定跳转码 {statusCode: 301}
-]
-```
+路由的匹配规则为：从前向后逐一匹配，如果命中到了该项规则，则不再向后匹配。
 
-### 路由解析
+#### 获取 match 中匹配的值
 
-对于匹配规则中的 `match` 会使用 [path-to-regexp](https://github.com/pillarjs/path-to-regexp) 预先转换：
+配置规则时，有时候需要在 pathname 中获取 match 中匹配到的值，这时候可以通过字符串匹配或者正则分组来获取。
+
+##### 字符串路由
+
 
 ```js
 module.exports = [
-  ['/api_libs/(.*)/:id', '/libs/:1/', 'get'],
+  ['/user/:name', 'user']
 ]
 ```
+字符串匹配的格式为 `:name` 的方式，当匹配到这条路由后，会获取到 `:name` 对应的值，最终转化为对应的参数，以便于后续获取。
 
-对于 `match` 中的 `:c`(c 为字符串)，在 `match` 匹配 `pathname` 之后获取到 `c` 的值，`c` 的值会被附加到 `this.ctx`； `path` 可以引用 `match` 匹配 `pathname` 之后的结果，对于 `path` 中的 `:n`(n 为数字)， 会被 `match` 匹配 `pathname` 的第 n 个引用结果替换。
+对于上面的路由，假如访问的路径为 `/user/thinkjs`，那么 `:name` 匹配到的值为 `thinkjs`，这时会追加个名为 name 的参数，controller 里可以通过 `this.get("name")` 来获取这个参数。
 
-路由识别默认根据 `[模块]/控制器/操作/...` 来识别过滤后的 `pathname`，从而对应到最终要执行的操作(action)。
+##### 正则路由
 
-例如，对于上述规则，在访问 URL `http:/www.thinkjs.org/api_libs/inbox/123` 时，规则的 `path` 将变为 `/libs/inbox/`, 同时`{id: '123'}` 会附加到 `this.ctx` 上。之后对 `pathname` 进行解析，就对应到了 `libs` 控制器（controller）下的 `inbox` 操作（action）。在 `inboxAction` 下可以通过 `this.ctx.param('id')` 获取到 `id` 的值 `123`。
+```js
+module.exports = [
+  [\/user\/(\w+)/, 'user?name=:1']
+]
+```
+对于上面的路由，假如访问的路径为 `/user/thinkjs`，那么正则中的分组 `(\w+)` 匹配到的值为 `thinkjs`，这样在第二个参数可以通过 `:1` 来获取这个值。对于正则中有多个分组，那么可以通过 `:1`、`:2`、`:3` 这样来获取对应匹配的值。
 
 
+#### Redirect
+
+有时候项目经过多次重构后，URL 地址可能会发生一些变化，为了兼容之前的 URL，一般需要把之前的 URL 跳转到新的 URL 上。这里可以通过将 `method` 设置为 `redirect` 来完成。
+
+```js
+module.exporst = [
+  ['/usersettings', '/user/setting', 'redirect', {statusCode: 301}]
+]
+```
+当访问地址为 `/usersettings` 时会自动跳转到 `/user/setting`，同时指定此次请求的 statusCode 为 301。
+
+#### RESTful
+
+有时候希望提供 RESTful API，这时候也可以借助自定义路由来完成，相关文档请移步到 [RESTful API](/doc/3.0/rest.html)。
+
+### 动态添加自定义路由
+
+有时候我们需要开发一些定制化很高的系统，如：通用的 CMS 系统，这些系统一般都可以配置一些页面的访问规则。这时候一些自定义路由就不能写死了，而是需要把后台配置的规则保存早数据库中，然后动态配置自定义路由规则。
+
+这时候可以借助 `think.beforeStartServer` 方法在服务启动之前从数据库里读到最新的自定义路由规则，然后通过 `routerChange` 事件来处理。
+
+```js
+// src/bootstrap/worker.js
+
+think.beforeStartServer(async () => {
+  const config = think.model('config');
+  const data = await config.where({key: 'router'}).find(); // 将所有的自定义路由保存在字段为 router 的数据上
+  const routers = JSON.parse(data.value);
+  think.app.emit('routerChange', routers); // 触发 routerChange 事件，便于对自定义路由进行格式化，将字符串转成对应的正则处理
+})
+
+```
 
 ### 常见问题
 
 #### 怎么查看当前地址解析后的 controller 和 action 分别对应什么？
 
+解析后的 controller 和 action 分别放在了 `ctx.controller` 和 `ctx.action` 上，有时候我们希望快速知道当前访问的路径最后解析的 controller 和 action 是什么，这时候可以借助 `debug` 来快速看到。
+
+```
+DEBUG=think-router npm start
+```
+
+[think-router](https://github.com/thinkjs/think-router) 在路由解析时打印了相关的调试信息，通过 `DEBUG=think-router` 来开启，开启后会在控制台下看到如下的调试信息：
+
+```
+think-router matchedRule: {"match":{"keys":[]},"path":"console/service/func","method":"GET","options":{},"query":{}} +53ms
+think-router RouterParser: path=/console/service/func, module=, controller=console/service, action=func, query={} +0ms
+```
+
+`matchedRule` 为命中了哪个自定义路由，`RouterParser` 为解析出来的值。
+
+当然通过 debug 信息也能快速定位后有时候有些自定义路由没能生效的问题。
+
+#### 如何优化自定义路由匹配性能？
+
+由于自定义路由是从前往后依次匹配的，直到规则命中才停止往后继续匹配，如果规则很靠后的话就需要把前面的规则都走一遍，这样可能会有点慢。这时候可以结合每个接口的流量情况，把重要的路由放在前面，不重要的路由放在后面来提升性能。
+
+#### 正则路由建议
+
+对于正则路由，默认并不是严格匹配，这样可能会有正则性能问题，同时可能会容易对其他的路由产生影响，这时候可以通过 `^` 和 `$` 进行严格匹配。
+
+```js
+module.exports = [
+  [/^\/user$/, 'user']
+]
+```
+对于上面的路由，只有访问地址为 `/user` 时才会命中该条规则，这样可以减少对其他路由的影响。如果去掉 `^` 和 `$`，那么访问 `/console/user/thinkjs` 也会命中上面的路由，实际上我们可能写了其他的路由来匹配这个地址，但被这条规则提前命中了，这样给开发带来了一些困难。
