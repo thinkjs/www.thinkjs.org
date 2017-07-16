@@ -31,7 +31,7 @@ Thinkjs 内置了 Session 功能。框架已经为 controller 和 context 添加
 
 ### 如何配置Session
 
-配置文件`src/config/adapter.js`，添加如下选项（假设你默认使用 Cookie 方式的 Session）：
+配置文件`src/config/adapter/session.js`，添加如下选项（假设你默认使用 Cookie 方式的 Session）：
 
 ```
 const cookieSession = require('think-session-cookie');
