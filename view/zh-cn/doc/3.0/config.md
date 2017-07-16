@@ -1,6 +1,6 @@
 ## 配置
 
-实际项目中，肯定需要各种配置，包括：框架需要的配置以及项目自定义的配置。ThinkJS 中所有的配置文件都是放在 `src/config/` 目录下，并根据不同的功能划分为不同的配置文件。
+实际项目中，肯定需要各种配置，包括：框架需要的配置以及项目自定义的配置。ThinkJS 将所有的配置都统一管理，文件都放在 `src/config/` 目录下，并根据不同的功能划分为不同的配置文件。
 
 * `config.js` 通用的一些配置
 * `adapter.js` adapter 配置
@@ -25,15 +25,15 @@ module.exports = {
 }
 ```
 
-配置值即可以是一个简单的字符串，也可以是一个复杂的对象。具体是什么类型根据具体的需求来决定。
+配置值即可以是一个简单的字符串，也可以是一个复杂的对象，具体是什么类型根据具体的需求来决定。
 
 ### 多环境配置
 
-有些配置需要在不同的环境下配置不同的值，如：数据库的配置在开发环境和生产环境是不一样的。此时可以通过环境下对应不同的配置文件来完成。
+有些配置需要在不同的环境下配置不同的值，如：数据库的配置在开发环境和生产环境是不一样的，此时可以通过环境下对应不同的配置文件来完成。
 
 多环境配置文件格式为：`[name].[env].js`，如：`config.development.js`，`config.production.js`
 
-在以上的配置文件中，`config.js` 和 `adapter.js` 是支持不同环境配置文件的。
+在以上的配置文件中，目前只有 `config.js` 和 `adapter.js` 是支持不同环境配置文件的。
 
 ### 配置合并方式
 
@@ -50,7 +50,7 @@ module.exports = {
 
 `[env]` 为当前环境名称。最终会将这些配置按顺序合并在一起，同名的 key 后面会覆盖前面的。
 
-配置加载是通过 [think-loader](https://github.com/thinkjs/think-loader/) 模块实现的，具体代码见： <https://github.com/thinkjs/think-loader/blob/master/loader/config.js>。
+配置加载是通过 [think-loader](https://github.com/thinkjs/think-loader/) 模块实现的，获取到合并后的配置后，通过 [think-config](https://github.com/thinkjs/think-config/) 模块实例化后放在 `think.config` 上，后续通过 `think.config` 来获取或者设置配置。
 
 ### 使用配置
 
@@ -62,8 +62,16 @@ module.exports = {
 
 实际上，`ctx.config` 和 `controller.config` 是基于 `think.config` 包装的一种更方便的获取配置的方式。
 
-```
+```js
 const redis = ctx.config('redis'); //获取 redis 配置
+```
+
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    const redis = this.config('redis'); // 在 controller 中通过 this.config 获取配置
+  }
+}
 ```
 
 ### 动态设置配置
@@ -91,3 +99,12 @@ think.beforeStartServer(async () => {
 #### config.js 和 adapter.js 中的 key 能否重名？
 
 `不能`。由于 config.js 和 adapter.js 是合并在一起的，所以要注意这二个配置不能有相同的 key，否则会被覆盖。
+
+<!-- 
+#### 怎么查看合并后的所有配置？
+
+系统启动时，会合并 config.js 和 adapter.js 的配置，最终会将配置写到文件 `runtime/config/[env].json` 文件中，如：当前 env 是 `development`，那么写入的文件为 `runtime/config/development.json`。
+
+配置写入文件时，是通过 `JSON.stringify` 将配置转化为字符串，由于 JSON.stringify 不支持正则、函数等之类的转换，所以配置中由于字段的值是正则或者函数时，生成的配置文件中将看不到这些字段对应的值。
+
+-->

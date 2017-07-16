@@ -114,11 +114,11 @@ i.icon-fet8{ background-position:-70px -210px;}
 .doc{margin-top: 30px;font-size: 16px;line-height: 1.6}
 .doc ul{margin-left: 20px;}
 .doc li{list-style-type: disc;}
-.doc pre{background: #fff !important;}
 .doc h1, .doc .h1, .doc h2, .doc .h2, .doc h3, .doc .h3{margin-top: 30px;margin-bottom: 20px;font-weight: normal;}
 .doc h4, .doc .h4, .doc h5, .doc .h5, .doc h6, .doc .h6{margin-top: 20px;margin-bottom: 15px; font-weight: normal;}
-.doc pre {border: none;padding: 10px 0;border-left: 1px solid #89B1D4;padding-left: 10px;border-radius: 0;font-size: 14px;}
+.doc pre {border: none;padding: 10px 0;border-radius: 5px;background: #f5f5f5;padding-left: 10px;font-size: 14px;}
 .doc pre code{padding: 0 !important;}
+.hljs{background: #f5f5f5 !important;}
 
 .doc h3, 
 .doc h4,

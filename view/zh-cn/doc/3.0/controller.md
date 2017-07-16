@@ -1,10 +1,10 @@
 ## Controller
 
-控制器是一类操作的集合，用来响应用户同一类的请求。比如：将用户相关的操作都放在 `user.js` 里，每一个操作就是里面一个 Action。
+MVC 模型中，控制器是用户请求的逻辑处理部分。比如：将用户相关的操作都放在 `user.js` 里，每一个操作就是里面一个 Action。
 
 ### 创建 Controller
 
-创建的 controller 都需要继承自 `think.Controller` 类，这样就能使用一些内置的方法。当然项目一般会创建一些通用的基类，然后实际的 controller 都继承自这个基类。
+项目中的 controller 需要继承 `think.Controller` 类，这样能使用一些内置的方法。当然项目中可以创建一些通用的基类，然后实际的 controller 都继承自这个基类。
 
 项目创建时会自动创建了一个名为 `base.js` 的基类，其他 controller 继承该类即可。
 
@@ -59,21 +59,50 @@ module.exports = class extends think.Controller {
 
 ### ctx 对象
 
-controller 实例化时会传入 `ctx` 对象，在 controller 里可以通过 `this.ctx` 来获取 ctx 对象。并且 controller 上很多方法也是通过调用 ctx 里的方法来实现的。
+controller 实例化时会传入 [ctx](/doc/3.0/context.html) 对象，在 controller 里可以通过 `this.ctx` 来获取 ctx 对象。并且 controller 上很多方法也是通过调用 ctx 里的方法来实现的。
 
+如果子类中需要重写 constructor 方法，那么需要调用父类中的 constructor，并将 ctx 参数传递进去：
+
+```js
+const Base = require('./base.js');
+module.exports = class extends Base {
+  constructor(ctx){
+    super(ctx); // 调用父级的 constructor 方法，并把 ctx 传递进去
+    // 其他额外的操作
+  }
+}
+```
 
 ### 多级控制器
 
 有时候项目比较复杂，文件较多，所以希望根据功能进行一些划分。如：用户端的功能放在一块、管理端的功能放在一块。
 
-这时可以借助多级控制器来完成这个功能，在 `src/controller/` 目录下创建 `user/` 和 `admin/` 目录，然后用户端的功能文件都放在 `user/` 目录下，管理端的功能文件都放在 `admin/` 目录下。
+这时可以借助多级控制器来完成这个功能，在 `src/controller/` 目录下创建 `user/` 和 `admin/` 目录，然后用户端的功能文件都放在 `user/` 目录下，管理端的功能文件都放在 `admin/` 目录下。访问时带上对应的目录名，路由解析时会优先匹配目录下的控制器。
 
-访问时带上对应的目录名，路由解析时会优先匹配目录下的控制器。
+假如控制器下有 console 子目录，下有 user.js 文件，即：`src/controller/console/user.js`，当访问请求为 `/console/user/login` 时，会优先解析出 Controller 为 `console/user`，Action 为 `login`。
+
+### 阻止后续逻辑
+
+Controller 里的处理顺序依次为 `__before`、`xxxAction`、`__after`，有时候在一些特定的场景下，需要提前结束请求，阻止后续的逻辑继续执行。这时候可以通过 `return false` 来处理。
+
+```js
+module.exports = class extends think.Controller {
+  __before() {
+    if(!user.isLogin) {
+      return false; // 这里 return false，那么 xxxAction 和 __after 不再执行
+    }
+  }
+  xxxAction() {
+    // action 里 return false，那么 __after 则不再执行
+  }
+  __after() {
+
+  }
+}
+```
 
 ### API
 
-
-### 属性
 
 #### controller.ctx
 
@@ -100,6 +129,14 @@ module.exports = class extends think.Controller {
 
 获取当前请求用户的 ip，等同于 ctx.ip 方法。
 
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    const ip = this.ip; // 获取用户的 IP
+  }
+}
+```
+
 
 #### controller.ips
 
@@ -114,15 +151,46 @@ module.exports = class extends think.Controller {
 
 获取当前请求的类型，转化为小写。
 
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    const method = this.method; // 获取当前请求类型
+    if(method === 'options') {
+
+    }
+  }
+}
+```
+
 #### controller.isGet
 
 * `return` {Boolean}
 
 判断是否是 GET 请求。
 
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    if(this.isGet) { // 如果是 GET 请求
+
+    }
+  }
+}
+```
+
 #### controller.isPost
 
 * `return` {Boolean}
+
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    if(this.isPost) { // 如果是 POST 请求
+
+    }
+  }
+}
+```
 
 判断是否是 POST 请求。
 
@@ -130,13 +198,33 @@ module.exports = class extends think.Controller {
 
 * `return` {Boolean}
 
-是否是命令行下调用。
+是否是命令行下调用，等同于 `think.isCli`。
+
+
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    if(this.isCli) { // 如果是命令行调用
+
+    }
+  }
+}
+```
 
 #### controller.userAgent
 
-获取 userAgent。
+获取当前请求的 userAgent。
 
-### 方法
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    const userAgent = (this.userAgent || '').toLowerCase();
+    if(userAgent.indexOf('spider') > -1) {
+
+    }
+  }
+}
+```
 
 #### controller.isMethod(method)
 
@@ -144,6 +232,14 @@ module.exports = class extends think.Controller {
 * `return` {Boolean}
 
 判断当前的请求类型是否是指定的类型。
+
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    const isDelete = this.isMethod('DELETE'); // 是否是 DELETE 请求
+  }
+}
+```
 
 
 #### controller.isAjax(method)
@@ -223,26 +319,11 @@ module.exports = class extends think.Controller {
 
 #### controller.jsonp(data, callback)
 
-* `data` {Mixed} 要输出的内容
-* `callback` {String} callback方法名
-
-jsonp 的方法输出内容，获取 callback 名称安全过滤后输出。
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    this.jsonp({name: 'thinkjs'}, 'callback_fn_name');
-    //writes
-    'callback_fn_name({name: "thinkjs"})'
-  }
-}
-```
+输出 jsonp 格式内容，等用于 [ctx.jsonp](/doc/3.0/context.html#jsonp-data-callbackfield)。
 
 #### controller.json(data)
 
-* `data` {Mixed} 要输出的内容
-
-json 的方式输出内容。
+json 的方式输出内容，等同于 [ctx.json](/doc/3.0/context.html#json-data)。
 
 #### controller.status(status)
 
