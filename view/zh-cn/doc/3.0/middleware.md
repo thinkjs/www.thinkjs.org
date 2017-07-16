@@ -24,7 +24,7 @@ module.exports = options => {
 const defaultOptions = {
   consoleExecTime: true // 是否打印执行时间的配置
 }
-module.exports = (options => {}) => {
+module.exports = (options = {}) => {
   options = Object.assign({}, defaultOptions, options);
   return (ctx, next) => {
     if(!options.consoleExecTime) {
