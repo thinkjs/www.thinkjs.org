@@ -118,7 +118,7 @@ subdomain: {
 
 虽然默认的路由解析方式能够满足需求，但有时候会导致 URL 看起来不够优雅，我们更希望 URL 比较简短，这样会更利于记忆和传播。框架提供了自定义路由来处理这种需求。
 
-自定义路由规则配置文件 `src/config/router.js`，路由规则为二维数组：
+自定义路由规则配置文件为 `src/config/router.js`，路由规则为二维数组：
 
 ```js
 module.exports = [
@@ -133,7 +133,7 @@ module.exports = [
 * `method` {String} 该条路由规则支持的请求类型，默认为所有。多个请求类型中间用逗号隔开，如：`get,post`
 * `options` {Object} 额外的选项，如：跳转时指定 statusCode
 
-路由的匹配规则为：从前向后逐一匹配，如果命中到了该项规则，则不再向后匹配。
+自定义路由在服务启动时读到 `think.app.routers` 对象上，路由的匹配规则为：从前向后逐一匹配，如果命中到了该项规则，则不再向后匹配。
 
 #### 获取 match 中匹配的值
 
@@ -189,7 +189,7 @@ think.beforeStartServer(async () => {
   const config = think.model('config');
   const data = await config.where({key: 'router'}).find(); // 将所有的自定义路由保存在字段为 router 的数据上
   const routers = JSON.parse(data.value);
-  think.app.emit('routerChange', routers); // 触发 routerChange 事件，便于对自定义路由进行格式化，将字符串转成对应的正则处理
+  think.app.emit('routerChange', routers); // 触发 routerChange 事件，将新的自定义路由设置到 think.app.routers 对象上
 })
 
 ```
@@ -229,3 +229,21 @@ module.exports = [
 ]
 ```
 对于上面的路由，只有访问地址为 `/user` 时才会命中该条规则，这样可以减少对其他路由的影响。如果去掉 `^` 和 `$`，那么访问 `/console/user/thinkjs` 也会命中上面的路由，实际上我们可能写了其他的路由来匹配这个地址，但被这条规则提前命中了，这样给开发带来了一些困难。
+
+#### 能使用第三方的路由解析器么？
+
+框架默认的路由解析是通过 [think-router](https://github.com/thinkjs/think-router) 来完成的，如果想替换为第三方的路由解析器，那么可以将 `src/config/middleware.js` 里的路由配置替换为对应的模块，然后将解析后的 module、controller、action 值保存在 `ctx` 对象上，以便后续的中间件处理。
+
+```js
+// 第三方路由解析模块示例，具体代码可以参考 https://github.com/thinkjs/think-router
+module.exports = (options, app) => {
+  return (ctx, next) => {
+    const routers = app.routers; // 拿到所有的自定义路由配置
+    ... 
+    ctx.module = ''; // 将解析后的 module、controller、action 保存在 ctx 上
+    ctx.controller = '';
+    ctx.action = '';
+    return next();
+  }
+}
+```
