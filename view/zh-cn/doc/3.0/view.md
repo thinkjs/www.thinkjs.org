@@ -38,6 +38,32 @@ exports.view = {
 
 这里用的模板引擎是 `nunjucks`，项目中可以根据需要修改。
 
+### 模板预处理
+
+有时候需要对模板进行预处理，比较常见的操作是给 `nunjucks` 引擎增加 `Filter`。这时候你就可以使用 `beforeRender` 方法。
+
+```js
+const nunjucks = require('think-view-nunjucks');
+const path = require('path');
+
+exports.view = {
+  type: 'nunjucks',
+  common: {
+    viewPath: path.join(think.ROOT_PATH, 'view'), //模板文件的根目录
+    sep: '_', //Controller 与 Action 之间的连接符
+    extname: '.html' //文件扩展名
+  },
+  nunjucks: {
+    handle: nunjucks,
+    beforeRender(env, nunjucks, config) {
+      env.addFilter('utc', time => (new Date(time)).toUTCString());
+    }
+  }
+}
+```
+
+其中不同模板引擎 `beforeRender()` 方法传入的参数可能不同，可在 https://github.com/thinkjs/think-awesome#view 项目中找到对应的模板引擎查看。
+
 ### 具体使用
 
 配置了 Extend 和 Adapter 后，就可以在 Controller 里使用了。如：
