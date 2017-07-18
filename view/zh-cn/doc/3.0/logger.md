@@ -19,26 +19,23 @@ think.logger.error(new Error('error'));
 
 #### 文件
 
-如果想要将日志输出到文件，你可以这么设置：
+如果想要将日志输出到文件，将以下内容追加到 `src/config/adapter.js` 文件中：
+```javascript
+const path = require('path');
+const {File} = require('think-logger3');
 
-- 将以下内容追加到 `src/config/adapter/logger.js` 文件中：
-    ```javascript
-    const path = require('path');
-    const {File} = require('think-logger3');
+exports.logger = {
+  type: 'file',
+  file: {
+    handle: File,
+    backups: 10,
+    absolute: true,
+    maxLogSize: 50 * 1024,  //50M
+    filename: path.join(think.ROOT_PATH, 'logs/xx.log')
+  }
+}
 
-    module.exports = {
-      type: 'file',
-      file: {
-        handle: File,
-        backups: 10,
-        absolute: true,
-        maxLogSize: 50 * 1024,  //50M
-        filename: path.join(think.ROOT_PATH, 'logs/xx.log')
-      }
-    }
-    
-    ```
-- 编辑 `src/config/adater.js` 文件，增加 `exports.logger = require('./adapter/logger.js')`。
+```
 
 该配置表示系统会将日志写入到 `logs/xx.log` 文件中。当该文件超过 `maxLogSize` 值时，会创建一个新的文件 `logs/xx.log.1`。当日志文件数超过 `backups` 值时，旧的日志分块文件会被删除。文件类型目前支持如下参数：
 
@@ -50,27 +47,24 @@ think.logger.error(new Error('error'));
 
 #### 日期文件
 
-如果想要将日志按照日期文件划分的话，可以如下配置：
+如果想要将日志按照日期文件划分的话，将以下内容追加到 `src/config/adapter.js` 文件中：
+```javascript
+const path = require('path');
+const {DateFile} = require('think-logger3');
 
-- 将以下内容追加到 `src/config/adapter/logger.js` 文件中：
-    ```javascript
-    const path = require('path');
-    const {DateFile} = require('think-logger3');
+exports.logger = {
+  type: 'dateFile',
+  dateFile: {
+    handle: DateFile,
+    level: 'ALL',
+    absolute: true,
+    pattern: '-yyyy-MM-dd',
+    alwaysIncludePattern: false,
+    filename: path.join(think.ROOT_PATH, 'logs/xx.log')
+  }
+}
 
-    module.exports = {
-      type: 'dateFile',
-      dateFile: {
-        handle: DateFile,
-        level: 'ALL',
-        absolute: true,
-        pattern: '-yyyy-MM-dd',
-        alwaysIncludePattern: false,
-        filename: path.join(think.ROOT_PATH, 'logs/xx.log')
-      }
-    }
-    
-    ```
-- 编辑 `src/config/adater.js` 文件，增加 `exports.logger = require('./adapter/logger.js')`。
+```
 
 该配置会将日志写入到 `logs/xx.log` 文件中。隔天，该文件会被重命名为 `xx.log-2017-07-01`（时间以当前时间为准），然后会创建新的 `logs/xx.log` 文件。时间文件类型支持如下参数：
 
