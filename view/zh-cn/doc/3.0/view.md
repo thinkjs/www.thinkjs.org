@@ -13,7 +13,7 @@ module.exports = [
 ]
 ```
 
-通过添加 view 的扩展，让项目有渲染模板文件的能力。
+通过添加 [view](https://github.com/thinkjs/think-view) 的扩展，让项目有渲染模板文件的能力。
 
 ### 配置 View Adapter
 
@@ -75,7 +75,7 @@ const assignData = this.assign();
 
 #### render
 
-获取渲染后的内容。
+获取渲染后的内容，该方法为异步方法，需要通过 async/await 处理。
 
 ```js
 //根据当前请求解析的 controller 和 action 自动匹配模板文件
@@ -83,14 +83,18 @@ const content1 = await this.render();
 
 //指定文件名
 const content2 = await this.render('doc'); 
-const content2 = await this.render('doc/detail'); 
+const content3 = await this.render('doc/detail'); 
+const content4 = await this.render('doc_detail');
 
-//切换模板类型
-const content3 = await this.render('doc', 'ejs'); 
+//不指定文件名但切换模板类型
+const content5 = await this.render(undefined, 'ejs');
+
+//指定文件名且切换模板类型
+const content6 = await this.render('doc', 'ejs'); 
 
 //切换模板类型，并配置额外的参数
 //切换模板类型时，需要在 adapter 配置里配置对应的类型
-const content4 = await this.render('doc', {
+const content7 = await this.render('doc', {
   type: 'ejs', 
   xxx: 'yyy'
 });
@@ -98,7 +102,7 @@ const content4 = await this.render('doc', {
 
 #### display
 
-渲染并输出内容，该方法实际上是调用了 `render` 方法，然后将渲染后的内容赋值到 `ctx.body` 属性上。
+渲染并输出内容，该方法实际上是调用了 `render` 方法，然后将渲染后的内容赋值到 `ctx.body` 属性上。该方法为异步方法，需要通过 async/await 处理。
 
 ```js
 //根据当前请求解析的 controller 和 action 自动匹配模板文件
@@ -107,8 +111,12 @@ await this.display();
 //指定文件名
 await this.display('doc'); 
 await this.display('doc/detail'); 
+await this.display('doc_detail');
 
-//切换模板类型
+//不指定文件名切换模板类型
+await this.display(undefined, 'ejs');
+
+//指定文件名且切换模板类型
 await this.display('doc', 'ejs'); 
 
 //切换模板类型，并配置额外的参数
@@ -145,10 +153,35 @@ exports.view = {
 
 其中不同模板引擎 `beforeRender()` 方法传入的参数可能不同，可在 https://github.com/thinkjs/think-awesome#view 项目中找到对应的模板引擎查看。
 
-
 ### 默认注入的参数
 
+除了手工通过 `assign` 方法注册一些变量到模板外，系统在渲染模板的时候，自动注入 `controller`、`config`、`ctx` 变量，以便于在模板里直接使用。
 
-### 支持的 Adapter
+#### controller
 
-View 支持的 Adapter 见 <https://github.com/thinkjs/think-awesome#view>。
+当前控制器实例，在模板里可以直接调用控制器上的属性和方法。
+
+```
+{{ if controller.type === 'xx' }}
+  <p>当前 type 为 xx</p>
+{{ endif }}
+```
+
+这里以 `nunjucks` 模板引擎举例，如果是调用控制器里的方法，那么方法必须为一个同步方法。
+
+#### config
+
+所有的配置，在模板里可以直接通过 `config.xxx` 来获取配置，如果属性不存在，那么值为 `undefined`。
+
+
+#### ctx
+
+当前请求的 Context 对象，在模板里可以通过直接通过 `ctx.xxx` 调用其属性或者 `ctx.yyy()` 调用其方法。
+
+如果是调用其方法，那么方法必须为一个同步方法。
+
+### 支持的模板引擎
+
+目前官方支持的模板引擎有: [pug](https://github.com/thinkjs/think-view-pug)、[nunjucks](https://github.com/thinkjs/think-view-nunjucks)、[handlebars](https://github.com/thinkjs/think-view-handlebars)、[ejs](https://github.com/thinkjs/think-view-ejs)。
+
+如果你实现了新的模板引擎支持，欢迎提交到 <https://github.com/thinkjs/think-awesome#view>。
