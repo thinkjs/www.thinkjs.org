@@ -25,28 +25,171 @@ module.exports = class extends think.Controller {
 
 框架里继承了该对象，并通过 Extend 机制扩展了很多非常有用的属性和方法。
 
-
 ### Koa 内置 API
-
-
 #### req
 
-Node's `request` object.
+Node 的 `request` 对象。
 
 #### res
 
-Node's `response` object.
+Node 的 `response` 对象。
 
-Bypassing Koa's response handling is not supported. Avoid using the following node properties:
+**不支持**绕开 Koa 对 response 的处理。 避免使用如下 node 属性:
 
-* res.statusCode
-* res.writeHead()
-* res.write()
-* res.end()
+- `res.statusCode`
+- `res.writeHead()`
+- `res.write()`
+- `res.end()`
 
 #### request
 
-A koa `Request` object.
+koa 的 `Request` 对象。
+
+#### response
+
+koa的 `Response` 对象。
+
+#### state
+
+在中间件之间传递信息以及将信息发送给前端视图时，推荐的命名空间。
+
+```js
+ctx.state.user = await User.find(id);
+```
+
+#### app
+
+应用实例引用。
+
+#### cookies.get(name, [options])
+
+获取名为 `name` 的 cookie，接受的 `options` 如下：
+
+- `signed` 请求的 cookie 应该被签名
+
+koa 使用 [cookies](https://github.com/jed/cookies) 模块，options 被直接传递过去。
+
+#### cookies.set(name, value, [options])
+
+设置 cookie `name` 为 `value`，接受的 `options` 如下：
+
+- `maxAge` 有效期，值为从 Date.now() 往后的毫秒数
+
+
+- `signed` 对 cookie 值签名
+- `expires` cookie 的过期时间， `Date`类型
+- `path` cookie 路径, 默认 `/'`
+- `domain` cookie 域名
+- `secure` secure cookie
+- `httpOnly` 服务器才能访问 cookie, 默认 **true**
+- `overwrite` 布尔值，表示是否覆盖以前设置的同名 cookie（默认为false）。如果设为`true`，在同一个请求中设置的相同名称（不管路径或域）的所有 cookie 将在设置此 cookie 时从 Set-Cookie 头中过滤掉。
+
+koa 使用 [cookies](https://github.com/jed/cookies) 模块，options 被直接传递过去。
+
+#### throw([msg], [status], [properties])
+
+辅助方法，抛出包含 `.status` 属性的错误，默认为 `500`。该方法让 Koa 能够根据实际情况响应。并且支持如下组合：
+
+```javascript
+this.throw(403)
+this.throw('name required', 400)
+this.throw(400, 'name required')
+this.throw('something exploded')
+```
+
+例如 `this.throw('name required', 400)` 等价于：
+
+```javascript
+var err = new Error('name required');
+err.status = 400;
+throw err;
+```
+
+注意，这些是用户级别的错误，被标记了 `err.expose`，即这些消息可以用于响应客户端。显然，当你不想泄露失败细节的时候，不能用它来传递错误消息。
+
+你可以传递一个 `properties` 对象，该对象会被合并到 error 中，有助于修改传递给上游中间件的机器友好的错误。
+
+```javascript
+this.throw(401, 'access_denied', { user: user });
+this.throw('access_denied', { user: user });
+```
+
+koa 使用 [http-errors](https://github.com/jshttp/http-errors) 创建错误对象。
+
+#### assert(value, [msg], [status], [properties])
+
+当 `!value`为真时抛出错误的辅助方法，与 `.throw()` 相似。类似于 node 的 [assert()](http://nodejs.org/api/assert.html) 方法。
+
+```
+this.assert(this.user, 401, 'User not found. Please login!');
+```
+
+koa 使用 [http-assert](https://github.com/jshttp/http-assert) 实现断言.
+
+#### respond
+
+如不想使用 koa 内置的 response 处理方法，可以设置 `ctx.respond = false;`。这时你可以自己设置原始的 `res` 对象来处理响应。
+
+注意这样使用是 __不__被 Koa 支持的。因为这样有可能会破坏 Koa 的中间件和 Koa 本身提供的功能。这种用法只是作为一种 hack ，给那些想要在Koa中使用传统的`fn(req, res)`的方法和中间件的人提供一种便捷方式。
+
+#### Request 别名
+
+下面的访问器和别名同 [Request](http://koa.rednode.cn/#request) 等价：
+
+- `ctx.header`
+- `ctx.headers`
+- `ctx.method`
+- `ctx.method=`
+- `ctx.url`
+- `ctx.url=`
+- `ctx.originalUrl`
+- `ctx.origin`
+- `ctx.href`
+- `ctx.path`
+- `ctx.path=`
+- `ctx.query`
+- `ctx.query=`
+- `ctx.querystring`
+- `ctx.querystring=`
+- `ctx.host`
+- `ctx.hostname`
+- `ctx.fresh`
+- `ctx.stale`
+- `ctx.socket`
+- `ctx.protocol`
+- `ctx.secure`
+- `ctx.ip`
+- `ctx.ips`
+- `ctx.subdomains`
+- `ctx.is()`
+- `ctx.accepts()`
+- `ctx.acceptsEncodings()`
+- `ctx.acceptsCharsets()`
+- `ctx.acceptsLanguages()`
+- `ctx.get()`
+
+#### Response 别名
+
+下面的访问器和别名同 [Response](http://koa.rednode.cn/#response) 等价:
+
+- `ctx.body`
+- `ctx.body=`
+- `ctx.status`
+- `ctx.status=`
+- `ctx.message`
+- `ctx.message=`
+- `ctx.length=`
+- `ctx.length`
+- `ctx.type=`
+- `ctx.type`
+- `ctx.headerSent`
+- `ctx.redirect()`
+- `ctx.attachment()`
+- `ctx.set()`
+- `ctx.append()`
+- `ctx.remove()`
+- `ctx.lastModified=`
+- `ctx.etag=`
 
 ### 框架扩展 API
 
