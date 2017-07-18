@@ -50,6 +50,46 @@ A koa `Request` object.
 
 ### 框架扩展 API
 
+#### module
+
+路由解析后的模块名，单模块项目下该属性值始终为空。默认是通过 [think-router](https://github.com/thinkjs/think-router) 模块解析。
+
+```js
+module.exports = class extends think.Controller {
+  __before() {
+    // 获取解析后的 module
+    // 由于 module 已经被 node 使用，所以这里建议变量名不要为 module
+    const m = this.ctx.module;
+  }
+}
+```
+
+#### controller
+
+路由解析后的控制器名，默认是通过 [think-router](https://github.com/thinkjs/think-router) 模块解析。
+
+```js
+module.exports = class extends think.Controller {
+  __before() {
+    // 获取解析后的 controller
+    const controller = this.ctx.controller;
+  }
+}
+```
+
+#### action
+
+路由解析后的操作名，默认是通过 [think-router](https://github.com/thinkjs/think-router) 模块解析。
+
+```js
+module.exports = class extends think.Controller {
+  __before() {
+    // 获取解析后的 action
+    const action = this.ctx.action;
+  }
+}
+```
+
 #### userAgent
 
 可以通过 `ctx.userAgent` 属性获取用户的 userAgent。
