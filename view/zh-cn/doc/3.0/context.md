@@ -1,10 +1,94 @@
 ## Context
 
-Context 是 Koa 中处理用户请求中的一个对象，包含了 `request` 和 `response`，在 middleware 和 controller 中使用，一般简称为 `ctx`。
+Context 是 Koa 中处理用户请求中的一个对象，贯穿整个请求生命周期。一般在 middleware、controller、logic 中使用，简称为 `ctx`。
 
-ThinkJS 里继承了该对象，但扩展了更多的方法以便使用。这些方法是通过 Extend 来实现的，具体代码见 <https://github.com/thinkjs/thinkjs/blob/3.0/lib/extend/context.js>。
+```js
+// 在 middleware 中使用 ctx 对象
+module.exports = options => {
+  // 调用时 ctx 会作为第一个参数传递进来
+  return (ctx, next) => {
+    ... 
+  }
+}
+```
 
-### API
+```js
+// 在 controller 中使用 ctx 对象
+module.exports = class extends think.Controller {
+  indexAction() {
+    // controller 中 ctx 作为类的属性存在，属性名为 ctx
+    // controller 实例化时会自动把 ctx 传递进来
+    const ip = this.ctx.ip; 
+  }
+}
+```
+
+框架里继承了该对象，并通过 Extend 机制扩展了很多非常有用的属性和方法。
+
+
+### Koa 内置 API
+
+
+#### req
+
+Node's `request` object.
+
+#### res
+
+Node's `response` object.
+
+Bypassing Koa's response handling is not supported. Avoid using the following node properties:
+
+* res.statusCode
+* res.writeHead()
+* res.write()
+* res.end()
+
+#### request
+
+A koa `Request` object.
+
+### 框架扩展 API
+
+#### module
+
+路由解析后的模块名，单模块项目下该属性值始终为空。默认是通过 [think-router](https://github.com/thinkjs/think-router) 模块解析。
+
+```js
+module.exports = class extends think.Controller {
+  __before() {
+    // 获取解析后的 module
+    // 由于 module 已经被 node 使用，所以这里建议变量名不要为 module
+    const m = this.ctx.module;
+  }
+}
+```
+
+#### controller
+
+路由解析后的控制器名，默认是通过 [think-router](https://github.com/thinkjs/think-router) 模块解析。
+
+```js
+module.exports = class extends think.Controller {
+  __before() {
+    // 获取解析后的 controller
+    const controller = this.ctx.controller;
+  }
+}
+```
+
+#### action
+
+路由解析后的操作名，默认是通过 [think-router](https://github.com/thinkjs/think-router) 模块解析。
+
+```js
+module.exports = class extends think.Controller {
+  __before() {
+    // 获取解析后的 action
+    const action = this.ctx.action;
+  }
+}
+```
 
 #### userAgent
 

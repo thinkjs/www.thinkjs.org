@@ -235,7 +235,7 @@ module.exports = class extends think.Logic {
 
 #### 校验后数据的自动转换
 
-对于指定为 `int`、`float`、`numeric` 数据类型的字段在校验之后，会自动对数据进行 `parseFloat` 转换。
+对于指定为 `int`、`float` 数据类型的字段在校验之后，会自动对数据进行 `parseFloat` 转换。
 
 ```js
 module.exports = class extends think.Logic {
@@ -279,15 +279,8 @@ module.exports = class extends think.Logic {
 // src/config/validator.js
 module.exports = {
   rules: {
-    /**
-     * @param  {Mixed} value        [相应字段的请求值]
-     * @param  {Mixed} parsedValue  [校验规则的参数值]
-     * @param  {String} validName   [校验规则的参数名称]
-     * @return {Boolean}            [校验结果]
-     */
-    eqValid(value, parsedValue, validName) {
-      console.log(value, parsedValue, validName); // 'jack', 'lucy', 'eqValid'
-      return value === parsedValue;
+    eqValid(value, { ctx, currentQuery, parsedValidValue, rule, rules, validName, validValue }) {
+      return value === parsedValidValue;
     }
   },
   messages: {
@@ -296,6 +289,20 @@ module.exports = {
 }
 
 ```
+自定义的校验方法会被注入下面的参数，对于上述例子来说
+(
+  value: ,                // name1 参数，在相应的请求中的值，此处为 ctx['param']['name1']
+  {
+    ctx,                  // 所有请求类型集合
+    currentQuery,         // name1 对应请求类型，此处为 ctx['param']
+    parsedValidValue,     // name1 在 _eqValid 方法解析返回的结果
+    rule,                 // name1 的校验规则内容
+    rules,                // 所有的校验规则内容
+    validName,            // 此处为 'eqValid'
+    validValue            // 此处为 'lucy'
+  }
+)
+
 
 #### 解析校验规则参数
 
@@ -323,27 +330,12 @@ module.exports = class extends think.Logic {
 // src/config/validator.js
 module.exports = {
   rules: {
-    /**
-     * 需要下划线开头的同名方法
-     * @param  {Mixed}  validValue [校验规则的参数值]
-     * @param  {Mixed}  query      [校验规则method指定的参数来源下的参数]
-     * @param  {String} validName  [校验规则的参数名称]
-     * @return {Mixed}             [解析之后的校验规则的参数值]
-     */
-    _eqValid(validValue, query, validName){
-      console.log(validValue, query, validName); // 'name2', {name1: 'tom', name2: 'lily'}, 'eqValid'
-      let parsedValue = query[validValue];
+    _eqValid(validValue, { ctx, currentQuery, rule, rules, validName }){
+      let parsedValue = currentQuery[validValue];
       return parsedValue;
     },
 
-    /**
-     * @param  {Mixed} value        [相应字段的请求值]
-     * @param  {Mixed} parsedValue  [_eqValid方法返回的解析之后的校验规则的参数值]
-     * @param  {String} validName   [校验规则的参数名称]
-     * @return {Boolean}            [校验结果]
-     */
-    eqValid(value, parsedValue, validName) {
-      console.log(value, parsedValue, validName); // 'tom', 'lily', 'eqValid'
+    eqValid(value, { ctx, currentQuery, parsedValidValue, rule, rules, validName, validValue }) {
       return value === parsedValue;
     }
   },
@@ -352,6 +344,8 @@ module.exports = {
   }
 }
 ```
+
+解析参数 `_eqValid` 注入的第一个参数是当前校验规则的值（对于本例子，validValue 为 'name2'），其他参数意义同上面的介绍。
 
 #### 自定义错误信息
 
@@ -606,7 +600,7 @@ module.exports = class extends think.Logic {
   indexAction(){
     let rules = {
       name: {
-        equals: 'username',
+        different: 'username',
         method: 'GET'
       }
     }

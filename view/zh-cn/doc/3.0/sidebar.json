@@ -5,14 +5,14 @@
       "升级指南": "upgrade"
     },
     "基础功能": {
-      "启动流程": "flow",
+      "运行流程": "flow",
       "配置": "config",
       "Context": "context",
       "中间件": "middleware",
       "Logic": "logic",
       "控制器": "controller",
       "视图": "view",
-      "路由": "router",
+      "Router": "router",
       "Adapter": "adapter",
       "框架扩展": "extend"
     },

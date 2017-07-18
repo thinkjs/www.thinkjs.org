@@ -9,7 +9,7 @@
 * `redis`Redis 缓存
 
 ### 缓存配置
-配置文件`src/config/adapter.js`，添加如下选项（假设你默认使用 file 类型的 Cache）：
+配置文件`src/config/adapter/cache.js`，添加如下选项（假设你默认使用 file 类型的 Cache）：
 
 ```js
 const fileCache = require('think-cache-file');

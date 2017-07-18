@@ -2,10 +2,10 @@
 
 一般的项目我们推荐使用单模块项目，如果项目较为复杂的话，可以使用[多级控制器](/doc/3.0/controller.html#toc-04e)来按功能划分。如果这些还不能满足项目复杂度的需求，那么可以创建多模块项目。
 
-创建项目时可以指定 `--mode=multi` 参数创建多模块项目。
+创建项目时可以指定 `--mode=module` 参数创建多模块项目。
 
 ```sh
-thinkjs new demo --mode=multi
+thinkjs new demo --mode=module
 ```
 
 ### 项目结构

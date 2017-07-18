@@ -1,6 +1,24 @@
-## 启动流程
+## 运行流程
 
-本文档带领大家一起看看 ThinkJS 是如何启动服务和处理用户请求的。
+Node.js 提供了 [http](https://nodejs.org/api/http.html) 模块直接创建 HTTP 服务，用来响应用户的请求，比如 Node.js 官网提供的创建 HTTP 服务的例子：
+
+```js
+const http = require('http');
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World\n');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+```
+ ThinkJS 也是调用 `http.createServer` 的方式来创建服务的，所以整个运行流程包含了启动服务和响应用户请求二个部分。
 
 ### 系统服务启动
 
@@ -39,8 +57,8 @@
 ```text
 [2017-07-02 13:36:40.646] [INFO] - Server running at http://127.0.0.1:8360
 [2017-07-02 13:36:40.649] [INFO] - ThinkJS version: 3.0.0-beta1
-[2017-07-02 13:36:40.649] [INFO] - Enviroment: development
-[2017-07-02 13:36:40.649] [INFO] - Workers: 8
+[2017-07-02 13:36:40.649] [INFO] - Enviroment: development  // 当前运行的环境
+[2017-07-02 13:36:40.649] [INFO] - Workers: 8   // 子进程数量
 ```
 
 ### 用户请求处理
@@ -70,24 +88,4 @@
 
 可以看到，所有的用户请求处理都是通过 middleware 来完成的。具体的项目中，可以根据需求，组装更多的 middleware 来处理用户的请求。
 
-### 阻止后续行为
 
-上面说到，处理用户请求的所有逻辑都是通过执行 middleware 来完成的。middleware 执行是一个洋葱模型，中可以通过 next 来控制是否执行后续的行为。
-
-```js
-function middlewareFunction(options){
-  return (ctx, next) => {
-    if(userLogin){ //这里判断如果用户登录了才执行后续的行为
-      return next();
-    }
-  }
-}
-```
-
-在 Logic 和 Controller 中，提供了 `__before` 和 `__after` 这些魔术方法，如果想在这些魔术方法里阻止后续的行为执行，可以通过返回 `false` 来处理：
-
-```js
-__before(){
-  if(!userLogin) return false; //这里用户未登录时返回了 false，那么后面的 xxxAction 不再执行
-}
-```

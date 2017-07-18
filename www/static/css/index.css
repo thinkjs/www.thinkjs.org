@@ -114,11 +114,11 @@ i.icon-fet8{ background-position:-70px -210px;}
 .doc{margin-top: 30px;font-size: 16px;line-height: 1.6}
 .doc ul{margin-left: 20px;}
 .doc li{list-style-type: disc;}
-.doc pre{background: #fff !important;}
 .doc h1, .doc .h1, .doc h2, .doc .h2, .doc h3, .doc .h3{margin-top: 30px;margin-bottom: 20px;font-weight: normal;}
 .doc h4, .doc .h4, .doc h5, .doc .h5, .doc h6, .doc .h6{margin-top: 20px;margin-bottom: 15px; font-weight: normal;}
-.doc pre {border: none;padding: 10px 0;border-left: 1px solid #89B1D4;padding-left: 10px;border-radius: 0;font-size: 14px;}
+.doc pre {border: none;padding: 10px 0;border-radius: 5px;background: #f5f5f5;padding-left: 10px;font-size: 14px;}
 .doc pre code{padding: 0 !important;}
+.hljs{background: #f5f5f5 !important;}
 
 .doc h3, 
 .doc h4,
@@ -147,9 +147,11 @@ i.icon-fet8{ background-position:-70px -210px;}
 .page-con .wechat img:nth-child(3n+1){margin-right: 25px;}
 .page-con .wechat img:nth-child(3n+2){margin-right: 25px;margin-left: 25px;}
 .page-con .wechat img:nth-child(3n+3){margin-left: 25px;}
-.page-con table{width: 100%;border-spacing:0;border-collapse:collapse;}
-.page-con table th{vertical-align:bottom;border-bottom:2px solid #ddd;padding: 8px;line-height: 20px;}
-.page-con table td{vertical-align:top;border-top:1px solid #ddd;padding: 8px;line-height: 20px;}
+.page-con table{width: 100%;border-spacing:0;border-collapse:collapse;border: 1px solid #dfe2e5;margin-bottom: 10px}
+.page-con table th{vertical-align:bottom;border:1px solid #dfe2e5;padding: 8px;line-height: 20px;}
+.page-con table thead th{font-weight: bold}
+.page-con table td{vertical-align:top;border:1px solid #dfe2e5;padding: 8px;line-height: 20px;}
+.page-con table tr:nth-child(2n){background-color: #f6f8fa}
 .page-con img.cup{width:495px;height:451px;}
 
 .r-fixed{position: fixed;width: 48px;left: 50%;margin-left: 548px;bottom: 10px;}
