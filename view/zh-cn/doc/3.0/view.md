@@ -13,22 +13,23 @@ module.exports = [
 ]
 ```
 
-通过添加 view 的扩展，让框架有渲染模板文件的能力。
+通过添加 view 的扩展，让项目有渲染模板文件的能力。
 
 ### 配置 View Adapter
 
 在 `src/config/adapter.js` 中添加如下的配置，如果已经存在则不需要再添加：
 
-```
+```js
 const nunjucks = require('think-view-nunjucks');
 const path = require('path');
 
+// 视图的 adapter 名称为 view
 exports.view = {
-  type: 'nunjucks',
+  type: 'nunjucks', // 这里指定默认的模板引擎是 nunjucks
   common: {
     viewPath: path.join(think.ROOT_PATH, 'view'), //模板文件的根目录
     sep: '_', //Controller 与 Action 之间的连接符
-    extname: '.html' //文件扩展名
+    extname: '.html' //模板文件扩展名
   },
   nunjucks: {
     handle: nunjucks
@@ -55,37 +56,70 @@ module.exports = class extends think.Controller {
 
 给模板赋值。
 
-```
-this.assign('title', 'thinkjs'); //单条赋值
-this.assign({title: 'thinkjs', name: 'test'}); //多条赋值
-this.assign('title'); //获取之前赋过的值，如果不存在则为 undefined
-this.assign(); //获取所有赋的值
+```js
+//单条赋值
+this.assign('title', 'thinkjs'); 
+
+//多条赋值
+this.assign({
+  title: 'thinkjs', 
+  name: 'test'
+}); 
+
+//获取之前赋过的值，如果不存在则为 undefined
+const title = this.assign('title'); 
+
+//获取所有赋的值
+const assignData = this.assign(); 
 ```
 
 #### render
 
 获取渲染后的内容。
 
-```
-const content1 = await this.render(); //根据当前请求解析的 controller 和 action 自动匹配模板文件
-const content2 = await this.render('doc'); //指定文件名
+```js
+//根据当前请求解析的 controller 和 action 自动匹配模板文件
+const content1 = await this.render(); 
 
-const content3 = await this.render('doc', 'ejs'); //切换模板类型
-const content4 = await this.render('doc', {type: 'ejs', xxx: 'yyy'});//切换模板类型，并配置额外的参数
+//指定文件名
+const content2 = await this.render('doc'); 
+const content2 = await this.render('doc/detail'); 
+
+//切换模板类型
+const content3 = await this.render('doc', 'ejs'); 
+
+//切换模板类型，并配置额外的参数
+//切换模板类型时，需要在 adapter 配置里配置对应的类型
+const content4 = await this.render('doc', {
+  type: 'ejs', 
+  xxx: 'yyy'
+});
 ```
 
 #### display
 
-渲染并输出内容。
+渲染并输出内容，该方法实际上是调用了 `render` 方法，然后将渲染后的内容赋值到 `ctx.body` 属性上。
 
+```js
+//根据当前请求解析的 controller 和 action 自动匹配模板文件
+await this.display(); 
+
+//指定文件名
+await this.display('doc'); 
+await this.display('doc/detail'); 
+
+//切换模板类型
+await this.display('doc', 'ejs'); 
+
+//切换模板类型，并配置额外的参数
+await this.display('doc', {
+  type: 'ejs', 
+  xxx: 'yyy'
+});
 ```
-return this.display(); //根据当前请求解析的 controller 和 action 自动匹配模板文件
 
-return this.display('doc'); //指定文件名
+### 默认注入的参数
 
-return this.display('doc', 'ejs'); //切换模板类型
-return this.display('doc', {type: 'ejs', xxx: 'yyy'});//切换模板类型，并配置额外的参数
-```
 
 ### 支持的 Adapter
 
