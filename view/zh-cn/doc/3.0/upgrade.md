@@ -38,6 +38,11 @@
 
 将基类 `think.model.base` 改为 `think.Model`。
 
+#### View
+
+模板的配置由原来的 `src/common/config/view.js` 迁移至 `src/config/config.js` 中，配置方法和之前基本一致。
+
+其中老版本的 `preRender()` 方法已经废弃，新方法名为 `beforeRender()`。`nunjucks` 模板引擎的参数顺序由原来的 `preRender(nunjucks, env, config)` 修改为 `beforeRender(env, nunjucks, config)`。
 
 ### 升级建议
 
