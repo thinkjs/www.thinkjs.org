@@ -252,6 +252,48 @@ module.exports = class extends think.Logic {
 ```
 如果 url 中存在参数 `age=26`， 在经过 Logic 层校验之后，typeof this.param('age') 为 `number` 类型。
 
+#### 自定义错误中的规则名称
+
+```js
+module.exports = class extends think.Logic {
+  indexAction(){
+    this.rules = {
+      username: {
+        required: true
+      }
+    }
+  }
+}
+```
+对于上述规则，在验证失败的情况下 this.validateErrors 将为 {username: 'username can not be blank'}。但是有时想让错误自定义为 '用户名不能为空'。需要如下操作：
+
+首先在 `src/config/validator.js` 中复写掉默认的 `required` 错误信息：
+
+```js
+module.exports = {
+  messages: {
+    required: '{name} 不能为空',
+  }
+}
+
+```
+
+然后要将 `username` 替换成别名 `用户名`，需要为校验规则添加 `aliasName` :
+
+```js
+module.exports = class extends think.Logic {
+  indexAction(){
+    this.rules = {
+      username: {
+        required: true,
+        aliasName: '用户名'
+      }
+    }
+  }
+}
+```
+
+
 #### 全局定义校验规则
 
 在单模块下项目下的 `config` 目录下建立 `valadator.js` 文件；在多模块项目下的 `common/config` 目录下建立 `valadator.js`。在 `valadator.js` 中添加自定义的校验方法：
