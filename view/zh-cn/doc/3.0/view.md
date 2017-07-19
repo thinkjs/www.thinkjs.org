@@ -32,7 +32,11 @@ exports.view = {
     extname: '.html' //模板文件扩展名
   },
   nunjucks: {
-    handle: nunjucks
+    handle: nunjucks,
+    beforeRender: () => {}, // 模板渲染预处理
+    options: { // 模板引擎额外的配置参数
+
+    }
   }
 }
 ```
@@ -152,6 +156,37 @@ exports.view = {
 ```
 
 其中不同模板引擎 `beforeRender()` 方法传入的参数可能不同，可在 https://github.com/thinkjs/think-awesome#view 项目中找到对应的模板引擎查看。
+
+### 修改模板引擎默认参数
+
+有时候想修改模板引擎的一些参数，如：修改左右定界符，这时候可以通过 `options` 完成：
+
+```js
+const nunjucks = require('think-view-nunjucks');
+const path = require('path');
+
+exports.view = {
+  type: 'nunjucks',
+  common: {
+    viewPath: path.join(think.ROOT_PATH, 'view'), //模板文件的根目录
+    sep: '_', //Controller 与 Action 之间的连接符
+    extname: '.html' //文件扩展名
+  },
+  nunjucks: {
+    handle: nunjucks,
+    options: {
+      tags: { // 修改定界符相关的参数
+        blockStart: '<%',
+        blockEnd: '%>',
+        variableStart: '<$',
+        variableEnd: '$>',
+        commentStart: '<#',
+        commentEnd: '#>'
+      }
+    }
+  }
+}
+```
 
 ### 默认注入的参数
 
