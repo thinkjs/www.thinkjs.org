@@ -296,7 +296,7 @@ module.exports = class extends think.Logic {
 
 #### 全局定义校验规则
 
-在单模块下项目下的 `config` 目录下建立 `valadator.js` 文件；在多模块项目下的 `common/config` 目录下建立 `valadator.js`。在 `valadator.js` 中添加自定义的校验方法：
+在单模块下项目下的 `config` 目录下建立 `validator.js` 文件；在多模块项目下的 `common/config` 目录下建立 `validator.js`。在 `validator.js` 中添加自定义的校验方法：
 
 例如, 我们想要验证 `GET` 请求中的 `name1` 参数是否等于字符串 `lucy` 可以如下添加校验规则; 访问你的服务器地址/index/?name1=jack
 
