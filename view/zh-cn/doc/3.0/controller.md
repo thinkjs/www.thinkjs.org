@@ -57,6 +57,21 @@ module.exports = class extends think.Controller {
 }
 ```
 
+### 魔术方法 __call
+
+当解析后的 url 对应的控制器存在，但 Action 不存在时，会试图调用控制器下的魔术方法 `__call`。这里可以对不存在的方法进行统一处理。
+
+```js
+module.exports = class extends think.Controller {
+  indexAction(){
+
+  }
+  __call(){
+    //如果相应的Action不存在则调用改方法
+  }
+}
+```
+
 ### ctx 对象
 
 controller 实例化时会传入 [ctx](/doc/3.0/context.html) 对象，在 controller 里可以通过 `this.ctx` 来获取 ctx 对象。并且 controller 上很多方法也是通过调用 ctx 里的方法来实现的。
