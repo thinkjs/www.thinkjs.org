@@ -19,7 +19,11 @@ module.exports = class extends Base {
 }
 ```
 
-创建完成后，框架会监听变化然后重启服务。这时访问 `http://127.0.0.1:8360/user/index` 就可以看到输出的 `hello word!`
+创建完成后，框架会监听文件变化然后重启服务。这时访问 `http://127.0.0.1:8360/user/index` 就可以看到输出的 `hello word!`
+
+### Action 执行
+
+Action 执行是通过中间件 [think-controller](https://github.com/thinkjs/think-controller) 来完成的，通过 `ctx.action` 值在 controller 寻找 `xxxAction` 的方法名并调用，且调用相关的魔术方法。
 
 ### 前置操作 __before
 
@@ -74,7 +78,7 @@ module.exports = class extends think.Controller {
 
 ### ctx 对象
 
-controller 实例化时会传入 [ctx](/doc/3.0/context.html) 对象，在 controller 里可以通过 `this.ctx` 来获取 ctx 对象。并且 controller 上很多方法也是通过调用 ctx 里的方法来实现的。
+Controller 实例化时会传入 [ctx](/doc/3.0/context.html) 对象，在 Controller 里可以通过 `this.ctx` 来获取 ctx 对象，并且 Controller 上很多方法也是通过调用 ctx 里的方法来实现的。
 
 如果子类中需要重写 constructor 方法，那么需要调用父类中的 constructor，并将 ctx 参数传递进去：
 
@@ -96,7 +100,7 @@ module.exports = class extends Base {
 
 假如控制器下有 console 子目录，下有 user.js 文件，即：`src/controller/console/user.js`，当访问请求为 `/console/user/login` 时，会优先解析出 Controller 为 `console/user`，Action 为 `login`。
 
-### 阻止后续逻辑
+### 阻止后续逻辑执行
 
 Controller 里的处理顺序依次为 `__before`、`xxxAction`、`__after`，有时候在一些特定的场景下，需要提前结束请求，阻止后续的逻辑继续执行。这时候可以通过 `return false` 来处理。
 
@@ -116,12 +120,34 @@ module.exports = class extends think.Controller {
 }
 ```
 
+### 获取参数、表单值
+
+对于 URL 上传递的参数或者表单上传的值，框架直接做了解析，可以直接通过对应的方法获取。
+对于 URL 上传递的参数，在 Action 中可以通过 [get](/doc/3.0/controller.html#toc-b4e) 方法获取。对于表单提交的字段或者文件可以通过 [post](/doc/3.0/controller.html#toc-3d4) 和 [file](/doc/3.0/controller.html#toc-88b) 方法获取。表单数据解析是通过中间件 [think-payload](https://github.com/thinkjs/think-payload) 来完成的，解析后的数据放在 `ctx.request.body` 对象上，最后包装成 post 和 file 方法供使用。
+
+### 透传数据
+
+由于用户的请求处理经过了中间件、Logic、Controller 等多层的处理，有时候希望在这些环节中透传一些数据，这时候可以通过 `ctx.state.xxx` 来完成。
+
+```js
+// 中间件中设置 state
+(ctx, next) => {
+  ctx.state.userInfo = {};
+}
+
+// Logic、Controller 中获取 state
+indexAction() {
+  const userInfo = this.ctx.state.userInfo;
+}
+```
+透传数据时避免直接在 `ctx` 对象上添加属性，这样可能会覆盖已有的属性，引起一些奇怪的问题。
+
 ### API
 
 
 #### controller.ctx
 
-传递进来的 ctx 对象。
+传递进来的 `ctx` 对象。
 
 #### controller.body
 
