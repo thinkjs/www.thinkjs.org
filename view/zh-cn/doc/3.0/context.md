@@ -1,4 +1,4 @@
-## Context
+## Context / 上下文
 
 Context 是 Koa 中处理用户请求中的一个对象，贯穿整个请求生命周期。一般在 middleware、controller、logic 中使用，简称为 `ctx`。
 

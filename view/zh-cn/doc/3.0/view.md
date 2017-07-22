@@ -1,4 +1,4 @@
-## View
+## View / 视图
 
 由于某些项目下并不需要 View 的功能，所以 3.0 里并没有直接内置 View 的功能，而是通过 Extend 和 Adapter 来实现的。
 

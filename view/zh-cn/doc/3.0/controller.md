@@ -1,4 +1,4 @@
-## Controller
+## Controller / 控制器
 
 MVC 模型中，控制器是用户请求的逻辑处理部分。比如：将用户相关的操作都放在 `user.js` 里，每一个操作就是里面一个 Action。
 

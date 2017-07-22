@@ -8,13 +8,13 @@
       "运行流程": "flow",
       "配置": "config",
       "Context": "context",
-      "中间件": "middleware",
+      "Middleware": "middleware",
       "Logic": "logic",
-      "控制器": "controller",
-      "视图": "view",
+      "Controller": "controller",
+      "View": "view",
       "Router": "router",
       "Adapter": "adapter",
-      "框架扩展": "extend"
+      "Extend": "extend"
     },
     "进阶应用": {
       "think 对象": "think",

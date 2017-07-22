@@ -1,4 +1,4 @@
-## 配置
+## Config / 配置
 
 实际项目中，肯定需要各种配置，包括：框架需要的配置以及项目自定义的配置。ThinkJS 将所有的配置都统一管理，文件都放在 `src/config/` 目录下，并根据不同的功能划分为不同的配置文件。
 
@@ -108,3 +108,7 @@ think.beforeStartServer(async () => {
 配置写入文件时，是通过 `JSON.stringify` 将配置转化为字符串，由于 JSON.stringify 不支持正则、函数等之类的转换，所以配置中由于字段的值是正则或者函数时，生成的配置文件中将看不到这些字段对应的值。
 
 -->
+
+#### 多模块项目配置文件存放位置？
+
+以上文档中描述的配置文件路径都是单模块项目下的，多模块项目下配置文件的路径为 `src/common/config/`，配置文件名称以及格式和单模块相同，如：`src/common/config/config.js`、`src/common/config/adapter.js`、`src/common/config/middleware.js` 等。

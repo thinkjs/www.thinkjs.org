@@ -1,4 +1,4 @@
-## Middleware
+## Middleware / 中间件
 
 Middleware 称之为中间件，是 Koa 中一个非常重要的概念，利用中间件，可以很方便的处理用户的请求。由于 ThinkJS 3.0 是基于 Koa@2 版本之上构建的，所以完全兼容 Koa 里的中间件。
 
