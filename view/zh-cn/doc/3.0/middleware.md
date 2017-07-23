@@ -209,3 +209,20 @@ module.exports = [
 可以通过 `DEBUG=koa:application node development.js` 来启动项目，这样控制台下会看到 `koa:application use ...` 相关的信息。
 
 注意：如果启动了多个 worker，那么会打印多遍。
+
+#### 怎么透传数据到 Logic、Controlelr 中？
+
+有时候需要在中间件里设置一些数据，然后在后续的 Logic、Controller 中获取，此时可以通过 `ctx.state` 完成，具体请见 [透传数据](/doc/3.0/controller.html#toc-247)。
+
+#### 怎么设置数据到 GET/POST 数据中？
+
+在中间件里可以通过 `ctx.param`、`ctx.post` 等方法来获取 query 参数或者表单提交上来的数据，但有些中间件里希望设置一些参数值、表单值以便在后续的 Logic、Controller 中获取，这时候可以通过 `ctx.param`、`ctx.post` 设置：
+
+```js
+// 设置参数 name=value，后续在 Logic、Controller 中可以通过 this.get('name') 获取该值
+// 如果原本已经有该参数，那么会覆盖
+ctx.param('name', 'value');
+
+// 设置 post 值，后续 Logic、Controller 中可以通过 this.post('name2') 获取该值
+ctx.post('name2', 'value');
+```
