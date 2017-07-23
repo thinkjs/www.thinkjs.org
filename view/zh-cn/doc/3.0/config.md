@@ -35,6 +35,15 @@ module.exports = {
 
 在以上的配置文件中，目前只有 `config.js` 和 `adapter.js` 是支持不同环境配置文件的。
 
+### 系统默认配置
+
+系统内置一些默认配置，方便项目里直接使用，具体有：
+
+* [config.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/config.js) 通用的默认配置
+* [adapter.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/adapter.js) adapter 默认配置
+* [adapter.production.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/adapter.production.js) adapter 生产环境默认配置
+* [extend.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/extend.js) extend 默认配置
+
 ### 配置合并方式
 
 系统启动时，会对配置合并，最终提供给开发者使用。具体流程为：
