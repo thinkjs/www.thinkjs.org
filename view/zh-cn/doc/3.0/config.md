@@ -121,3 +121,29 @@ think.beforeStartServer(async () => {
 #### 多模块项目配置文件存放位置？
 
 以上文档中描述的配置文件路径都是单模块项目下的，多模块项目下配置文件的路径为 `src/common/config/`，配置文件名称以及格式和单模块相同，如：`src/common/config/config.js`、`src/common/config/adapter.js`、`src/common/config/middleware.js` 等。
+
+多模块项目下有些配置可以放在模块目录下，路径为：`/src/[module]/config/`，`[module]` 为具体的模块名称。
+
+#### 如何查看配置文件的详细加载情况？
+
+有时候希望查看配置文件的详细加载情况，这时候可以通过 `DEBUG=think-loader-config-* npm start` 来启动项目查看。
+
+```text
+think-loader-config-40322 load file: /Users/welefen/demo/app/config/adapter.js +3ms
+think-loader-config-40323 load file: /Users/welefen/demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40320 load file: /Users/welefen/demo/app/config/adapter.js +4ms
+think-loader-config-40323 load file: /Users/welefen/demo/app/config/adapter.js +3ms
+think-loader-config-40325 load file: /Users/welefen/demo/app/config/config.js +0ms
+think-loader-config-40325 load file: /Users/welefen/demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40325 load file: /Users/welefen/demo/app/config/adapter.js +3ms
+think-loader-config-40321 load file: /Users/welefen/demo/app/config/config.js +0ms
+think-loader-config-40321 load file: /Users/welefen/demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40321 load file: /Users/welefen/demo/app/config/adapter.js +3ms
+think-loader-config-40324 load file: /Users/welefen/demo/app/config/config.js +0ms
+think-loader-config-40319 load file: /Users/welefen/demo/app/config/config.js +0ms
+think-loader-config-40319 load file: /Users/welefen/demo/node_modules/thinkjs/lib/config/adapter.js +6ms
+think-loader-config-40324 load file: /Users/welefen/demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40319 load file: /Users/welefen/demo/app/config/adapter.js +7ms
+think-loader-config-40324 load file: /Users/welefen/demo/app/config/adapter.js +8ms
+```
+由于服务是通过 Master + 多个 Worker 启动的，debug 信息会打印多遍，这里为了区分加上了进程的 pid 值，如：`think-loader-config-40322` 为进程 pid 为 `40322` 下的配置文件加载情况。
