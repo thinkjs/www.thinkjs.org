@@ -5,6 +5,33 @@
 
 Babel 会将 `src/` 目录转译到 `app/` 目录下，并添加对应的 `sourceMap` 文件。
 
+### Babel 转译规则
+
+默认使用的 preset 为 [babel-preset-think-node](https://github.com/thinkjs/babel-preset-think-node)，在入口文件 `development.js` 里引用：
+
+```js
+const Application = require('thinkjs');
+const babel = require('think-babel');
+const watcher = require('think-watcher');
+const notifier = require('node-notifier');
+
+const instance = new Application({
+  ROOT_PATH: __dirname,
+  watcher: watcher,
+  transpiler: [babel, {
+    presets: ['think-node'] // 默认使用 babel-preset-think-node
+  }],
+  notifier: notifier.notify.bind(notifier),
+  env: 'development'
+});
+
+instance.run();
+
+```
+
+babel-preset-think-node 只会转译 [es2015-modules-commonjs](http://babeljs.io/docs/plugins/transform-es2015-modules-commonjs/)、[exponentiation-operator](http://babeljs.io/docs/plugins/transform-exponentiation-operator/)、[trailing-function-commas](http://babeljs.io/docs/plugins/syntax-trailing-function-commas/)、[async-to-generator](http://babeljs.io/docs/plugins/transform-async-to-generator/)、[object-rest-spread](http://babeljs.io/docs/plugins/transform-object-rest-spread/)，如果这些转译不能满足需求的话，可以根据需要自己定制 babel preset。
+
+
 ### 关闭 Babel 转译
 
 如果项目运行的 Node 版本大于 `7.6.0`（推荐使用 8.x.x LTS 版本），那么已经支持 `async/await` 了，就可以关闭 Babel 转译了。
