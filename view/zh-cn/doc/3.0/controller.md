@@ -23,7 +23,13 @@ module.exports = class extends Base {
 
 ### Action 执行
 
-Action 执行是通过中间件 [think-controller](https://github.com/thinkjs/think-controller) 来完成的，通过 `ctx.action` 值在 controller 寻找 `xxxAction` 的方法名并调用，且调用相关的魔术方法。
+Action 执行是通过中间件 [think-controller](https://github.com/thinkjs/think-controller) 来完成的，通过 `ctx.action` 值在 controller 寻找 `xxxAction` 的方法名并调用，且调用相关的魔术方法，具体顺序为：
+
+* 实例化 Controller 类，传入 `ctx` 对象
+* 如果方法 [__before](/doc/3.0/controller.html#toc-083) 存在则调用，如果返回值为 `false`，则停止继续执行
+* 如果方法 `xxxAction` 存在则执行，如果返回值为 `false`，则停止继续执行
+* 如果方法 `xxxAction` 不存在但 [__call](/doc/3.0/controller.html#toc-fcb) 方法存在，则调用，如果返回值为 `false`，则停止继续执行
+* 如果方法 [__afater](/doc/3.0/controller.html#toc-e16) 存在则执行
 
 ### 前置操作 __before
 
