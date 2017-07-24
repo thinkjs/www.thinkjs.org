@@ -10,16 +10,14 @@
         log_sql: true,
         log_connect: true,
       },
-      adapter: {
-        mysql: {
-          host: '127.0.0.1',
-          port: '',
-          database: '', //数据库名称
-          user: '', //数据库帐号
-          password: '', //数据库密码
-          prefix: 'think_',
-          encoding: 'utf8'
-        }
+      mysql: {
+        host: '127.0.0.1',
+        port: '',
+        database: '', //数据库名称
+        user: '', //数据库帐号
+        password: '', //数据库密码
+        prefix: 'think_',
+        encoding: 'utf8'
       }
     };
     ```
@@ -119,15 +117,13 @@ const MYSQL_WRITE = {
 }
 module.exports = {
   host: '127.0.0.1',
-  adapter: {
-    mysql: { 
-      parser(options) { //mysql 的配置解析方法
-        let sql = options.sql; //接下来要执行的 SQL 语句
-        if(sql.indexOf('SELECT') === 0){ //SELECT 查询
-          return MYSQL_READ;
-        }
-        return MYSQL_WRITE;
+  mysql: { 
+    parser(options) { //mysql 的配置解析方法
+      let sql = options.sql; //接下来要执行的 SQL 语句
+      if(sql.indexOf('SELECT') === 0){ //SELECT 查询
+        return MYSQL_READ;
       }
+      return MYSQL_WRITE;
     }
   }
 }
