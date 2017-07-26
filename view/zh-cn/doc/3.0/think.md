@@ -47,15 +47,15 @@ think 对象上集成了 [think-helper](https://github.com/thinkjs/think-helper)
 
 #### think.Logic
 
-logic 基类。
+logic 基类，继承 `think.Controller`。
 
-#### think.controller(name, ctx, m)
+<!-- #### think.controller(name, ctx, m)
 
 * `name` {String} 控制器名称
 * `ctx` {Object} Koa ctx 对象
 * `m` {String} 模块名，多模块项目下使用
 
-获取控制器的实例，不存在则报错。
+获取控制器的实例，不存在则报错。 -->
 
 #### think.beforeStartServer(fn)
 
