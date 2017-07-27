@@ -33,10 +33,6 @@ think 对象上集成了 [think-helper](https://github.com/thinkjs/think-helper)
 
 当前运行环境，等同于 `think.app.env`，值在 `development.js` 之类的入口文件中定义。
 
-#### think.isCli
-
-是否为命令行调用。
-
 #### think.version
 
 当前 ThinkJS 的版本号。

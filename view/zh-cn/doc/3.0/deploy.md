@@ -6,7 +6,7 @@
 
 如果项目中的代码是需要转译的，虽然在开发环境时会实时将 `src/` 目录转译到 `app/` 目录，但代码上线时建议执行 `npm run compile` 命令重新转译一下，避免一些意外的影响。或者在一个干净的目录拉取最新的代码，然后执行转译的命令。
 
-如果修改了 [babel preset](/doc/3.0/babel.html#toc-2cb)，那么需要把 package.json 里的 compile 命令作对应的修改。
+如果修改了 [babel preset](/doc/3.0/babel.html#toc-2cb)，那么需要把 package.json 里的 compile 命令（babel src/ --presets think-node --out-dir app/）作对应的修改。
 
 如果代码不需要转译，那么直接上线 `src/` 目录的代码即可。
 
@@ -97,13 +97,27 @@ welefen           3963   0.0  0.2  3135796  40960 s001  S+   11:14AM   0:00.31 n
 
 ##### 重启服务
 
-当代码修改后，需要重启服务，最简单的办法就是找到主进程的 pid，然后通过 `kill -9 PID` 杀死进程然后重新启动。如果不想中断服务，那么可以给主进程发送信号来完成：
+当代码修改后，需要重启服务，最简单的办法就是找到主进程的 pid，然后通过 `kill -9 PID` 杀死进程然后重新启动。如果不想中断服务，那么可以给主进程发送 `SIGUSR2` 信号来完成：
 
 ```
 kill -s USR2 PID
 ```
 
 比如上面打印出来的日志中主进程的 pid 为 3963，那么可以通过 `kill -s USR2 3963` 来无中断重启服务。当然每次这么执行比较麻烦，可以包装成一个简单的脚本来执行。
+
+```sh
+#!/bin/sh
+cd PROJECT_PATH; # 进入项目根目录
+nodepid=`ps auxww | grep node | grep production.js | grep -v grep | awk '{print $2}' `
+if [ -z "$nodepid" ]; then
+    echo 'node service is not running'
+    nohup node production.js > ~/file.log 2>&1 & 
+else
+    echo 'node service is running'
+    kill -s USR2 $nodepid 2>/dev/null
+    echo 'gracefull restart'
+fi
+```
 
 ### 使用 nginx
 
@@ -113,7 +127,7 @@ kill -s USR2 PID
 * 静态资源使用 nginx 直接提供服务性能更高
 * HTTPS 服务用 nginx 提供性能更高
 
-创建项目时，会在项目根目录下创建了一个名为 `nginx.conf` 的配置文件，该文件为 nginx 的配置文件：
+创建项目时，会在项目根目录下创建了一个名为 `nginx.conf` 的配置文件：
 
 ```
 server {
