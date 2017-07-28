@@ -40,9 +40,66 @@ module.exports = {
 系统内置一些默认配置，方便项目里直接使用，具体有：
 
 * [config.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/config.js) 通用的默认配置
+
+  ```js
+  {
+    port: 8360, // server port
+    host: '127.0.0.1', // server host
+    workers: 0, // server workers num, if value is 0 then get cpus num
+    createServer: undefined, // create server function
+    startServerTimeout: 3000, // before start server time
+    reloadSignal: 'SIGUSR2', // reload process signal
+    onUnhandledRejection: err => think.logger.error(err), // unhandledRejection handle
+    onUncaughtException: err => think.logger.error(err), // uncaughtException handle
+    processKillTimeout: 10 * 1000, // process kill timeout, default is 10s
+    enableAgent: false, // enable agent worker
+    jsonpCallbackField: 'callback', // jsonp callback field
+    jsonContentType: 'application/json', // json content type
+    errnoField: 'errno', // errno field
+    errmsgField: 'errmsg', // errmsg field
+    defaultErrno: 1000, // default errno
+    validateDefaultErrno: 1001 // validate default errno
+  };
+  ```
 * [adapter.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/adapter.js) adapter 默认配置
+
+  ```js
+  exports.logger = {
+    type: 'console',
+    console: {
+      handle: ConsoleLogger
+    },
+    file: {
+      handle: FileLogger,
+      filename: path.join(think.ROOT_PATH, 'logs/file.log'),
+      maxLogSize: 50 * 1024, // 50M
+      backups: 10 // max chunk number
+    },
+    dateFile: {
+      handle: DateFileLogger,
+      level: 'ALL',
+      filename: path.join(think.ROOT_PATH, 'logs/file.log'),
+      pattern: '-yyyy-MM-dd',
+      alwaysIncludePattern: false
+    }
+  };
+  ```
 * [adapter.production.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/adapter.production.js) adapter 生产环境默认配置
+  ```js
+  exports.logger = {
+    type: 'dateFile'
+  };
+  ```
 * [extend.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/extend.js) extend 默认配置
+  ```js
+  const cache = require('think-cache');
+  const session = require('think-session');
+
+  module.exports = [
+    cache,
+    session
+  ];
+  ```
 
 ### 配置合并方式
 
@@ -129,21 +186,21 @@ think.beforeStartServer(async () => {
 有时候希望查看配置文件的详细加载情况，这时候可以通过 `DEBUG=think-loader-config-* npm start` 来启动项目查看。
 
 ```text
-think-loader-config-40322 load file: /Users/welefen/demo/app/config/adapter.js +3ms
-think-loader-config-40323 load file: /Users/welefen/demo/node_modules/thinkjs/lib/config/adapter.js +5ms
-think-loader-config-40320 load file: /Users/welefen/demo/app/config/adapter.js +4ms
-think-loader-config-40323 load file: /Users/welefen/demo/app/config/adapter.js +3ms
-think-loader-config-40325 load file: /Users/welefen/demo/app/config/config.js +0ms
-think-loader-config-40325 load file: /Users/welefen/demo/node_modules/thinkjs/lib/config/adapter.js +5ms
-think-loader-config-40325 load file: /Users/welefen/demo/app/config/adapter.js +3ms
-think-loader-config-40321 load file: /Users/welefen/demo/app/config/config.js +0ms
-think-loader-config-40321 load file: /Users/welefen/demo/node_modules/thinkjs/lib/config/adapter.js +5ms
-think-loader-config-40321 load file: /Users/welefen/demo/app/config/adapter.js +3ms
-think-loader-config-40324 load file: /Users/welefen/demo/app/config/config.js +0ms
-think-loader-config-40319 load file: /Users/welefen/demo/app/config/config.js +0ms
-think-loader-config-40319 load file: /Users/welefen/demo/node_modules/thinkjs/lib/config/adapter.js +6ms
-think-loader-config-40324 load file: /Users/welefen/demo/node_modules/thinkjs/lib/config/adapter.js +5ms
-think-loader-config-40319 load file: /Users/welefen/demo/app/config/adapter.js +7ms
-think-loader-config-40324 load file: /Users/welefen/demo/app/config/adapter.js +8ms
+think-loader-config-40322 load file: //demo/app/config/adapter.js +3ms
+think-loader-config-40323 load file: /demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40320 load file: /demo/app/config/adapter.js +4ms
+think-loader-config-40323 load file: /demo/app/config/adapter.js +3ms
+think-loader-config-40325 load file: /demo/app/config/config.js +0ms
+think-loader-config-40325 load file: /demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40325 load file: /demo/app/config/adapter.js +3ms
+think-loader-config-40321 load file: /demo/app/config/config.js +0ms
+think-loader-config-40321 load file: /demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40321 load file: /demo/app/config/adapter.js +3ms
+think-loader-config-40324 load file: /demo/app/config/config.js +0ms
+think-loader-config-40319 load file: /demo/app/config/config.js +0ms
+think-loader-config-40319 load file: /demo/node_modules/thinkjs/lib/config/adapter.js +6ms
+think-loader-config-40324 load file: /demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40319 load file: /demo/app/config/adapter.js +7ms
+think-loader-config-40324 load file: /demo/app/config/adapter.js +8ms
 ```
 由于服务是通过 Master + 多个 Worker 启动的，debug 信息会打印多遍，这里为了区分加上了进程的 pid 值，如：`think-loader-config-40322` 为进程 pid 为 `40322` 下的配置文件加载情况。
