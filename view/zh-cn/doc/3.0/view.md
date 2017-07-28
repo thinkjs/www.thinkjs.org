@@ -253,9 +253,4 @@ module.exports = class extends think.Controller {
 
 #### 如何关闭视图的功能？
 
-有的项目只是提供 API 接口的功能，不需要模板渲染。创建项目时默认加载了视图的扩展，如果不需要视图的功能，可以修改 `src/config/extend.js`，将视图的扩展去除即可。
-
-
-~~`const view = require('think-view');`~~
-
-~~`view`, //make application support view~~
+有的项目只是提供 API 接口的功能，不需要模板渲染。创建项目时默认加载了视图的扩展，如果不需要视图的功能，可以修改 `src/config/extend.js`，将视图的扩展去除。修改 `src/config/adapter.js`，将视图的 adapter 配置去除。
