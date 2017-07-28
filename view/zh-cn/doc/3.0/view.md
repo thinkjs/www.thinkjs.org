@@ -13,7 +13,7 @@ module.exports = [
 ]
 ```
 
-通过添加 [view](https://github.com/thinkjs/think-view) 的扩展，让项目有渲染模板文件的能力。
+通过添加视图的扩展，让项目有渲染模板文件的能力，视图扩展是通过模块[think-view](https://github.com/thinkjs/think-view) 实现的。
 
 ### 配置 View Adapter
 
@@ -250,3 +250,12 @@ module.exports = class extends think.Controller {
 ```
 
 如果 `display` 方法是在异步的方法里调用，那么需要将异步方法包装成 Promise，然后将其返回。
+
+#### 如何关闭视图的功能？
+
+有的项目只是提供 API 接口的功能，不需要模板渲染。创建项目时默认加载了视图的扩展，如果不需要视图的功能，可以修改 `src/config/extend.js`，将视图的扩展去除即可。
+
+
+~~`const view = require('think-view');`~~
+
+~~`view`, //make application support view~~
