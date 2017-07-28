@@ -25,6 +25,7 @@ const defaultOptions = {
   consoleExecTime: true // 是否打印执行时间的配置
 }
 module.exports = (options = {}) => {
+  // 合并传递进来的配置
   options = Object.assign({}, defaultOptions, options);
   return (ctx, next) => {
     if(!options.consoleExecTime) {
@@ -54,6 +55,21 @@ app.use(execTime({}));  // 需要将这个中间件第一个注册，如果还�
 ```
 
 通过 `app.use` 的方式使用中间件，不利于中间件的统一维护。为了方便管理和使用中间件，框架使用统一的配置文件来管理中间件，配置文件为 `src/config/middleware.js`。
+
+#### 扩展 app 参数
+
+默认的中间件外层一般只是传递了 `options` 参数，有的中间件需要读取 app 相关的信息，框架在这块做了扩展，自动将 app 对象传递到中间件中。
+
+```js
+module.exports = (options, app) => {
+  // 这里的 app 为 think.app 对象
+  return (ctx, next) => {
+
+  }
+}
+```
+
+如果在中间件中需要用到 think 对象上的一些属性或者方法，那么可以通过 `app.think.xxx` 来获取。
 
 ### 配置格式
 
@@ -226,3 +242,21 @@ ctx.param('name', 'value');
 // 设置 post 值，后续 Logic、Controller 中可以通过 this.post('name2') 获取该值
 ctx.post('name2', 'value');
 ```
+
+#### 中间件的配置是否可以放在 config.js 中？
+
+`不合适`，中间件提供了 `options` 参数用来设置配置，不需要把额外的参数配置放在 config.js 中。
+
+```js
+module.exports = [
+  {
+    handle: xxxMiddleware,
+    options: { // 传递给中间件的配置
+      key1: value1,
+      key2: think.env === 'development' ? value2 : value3
+    }
+  }
+]
+```
+
+如果有些配置根 `env` 相关，那么可以在此进行判断。
