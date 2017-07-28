@@ -220,3 +220,33 @@ exports.view = {
 目前官方支持的模板引擎有: [pug](https://github.com/thinkjs/think-view-pug)、[nunjucks](https://github.com/thinkjs/think-view-nunjucks)、[handlebars](https://github.com/thinkjs/think-view-handlebars)、[ejs](https://github.com/thinkjs/think-view-ejs)。
 
 如果你实现了新的模板引擎支持，欢迎提交到 <https://github.com/thinkjs/think-awesome#view>。
+
+### 常见问题
+
+#### 为什么调用了 display 方法还是 404 错误？
+
+有时候会遇到在 Action 里调用 `display` 方法，但页面还是显示 404 错误的情况：
+
+```
+NotFoundError: url `/index/page` not found.
+```
+
+这是因为 `display` 方法是个异步方法，前面没有加 await 或者没有 return 导致的。正确的用法为：
+
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    return this.display(); // 通过 return 将 display 的异步返回
+  }
+}
+```
+
+```js
+module.exports = class extends think.Controller {
+  async indexAction() {
+    await this.display(); // 通过 await 等待 display 方法的返回
+  }
+}
+```
+
+如果 `display` 方法是在异步的方法里调用，那么需要将异步方法包装成 Promise，然后将其返回。
