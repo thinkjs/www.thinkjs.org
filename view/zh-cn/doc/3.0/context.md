@@ -84,7 +84,7 @@ module.exports = class extends think.Controller {
 
 辅助方法，抛出包含 `.status` 属性的错误，默认为 `500`。该方法让 Koa 能够根据实际情况响应。并且支持如下组合：
 
-```javascript
+```js
 ctx.throw(403)
 ctx.throw('name required', 400)
 ctx.throw(400, 'name required')
@@ -725,7 +725,7 @@ if(userAgent.indexOf('spider')){
 
 可以通过 `ctx.isGet` 判断当前请求类型是否是 `GET`。
 
-```
+```js
 const isGet = ctx.isGet;
 if(isGet){
   ...
@@ -736,7 +736,7 @@ if(isGet){
 
 可以通过 `ctx.isPost` 判断当前请求类型是否是 `POST`。
 
-```
+```js
 const isPost = ctx.isPost;
 if(isPost){
   ...
@@ -747,7 +747,7 @@ if(isPost){
 
 可以通过 `ctx.isCli` 判断当前请求类型是否是 `CLI`（命令行调用）。
 
-```
+```js
 const isCli = ctx.isCli;
 if(isCli){
   ...
@@ -777,7 +777,7 @@ const referer2 = ctx.referer(true); // www.thinkjs.org
 
 判断当前请求类型与 method 是否相同。
 
-```
+```js
 const isPut = ctx.isMethod('PUT');
 ```
 
@@ -788,7 +788,7 @@ const isPut = ctx.isMethod('PUT');
 
 判断是否是 ajax 请求（通过 header 中 `x-requested-with` 值是否为 `XMLHttpRequest` 判断），如果执行了 method，那么也会判断请求类型是否一致。
 
-```
+```js
 const isAjax = ctx.isAjax();
 const isPostAjax = ctx.isAjax('POST');
 ```
@@ -800,7 +800,7 @@ const isPostAjax = ctx.isAjax('POST');
 
 判断是否是 jsonp 请求。
 
-```
+```js
 const isJsonp = ctx.isJson('callback');
 if(isJsonp){
   ctx.jsonp(data);
@@ -815,7 +815,7 @@ if(isJsonp){
 
 输出 jsonp 格式的数据，返回值为 false。可以通过配置 `jsonContentType` 指定返回的 `Content-Type`。
 
-```
+```js
 ctx.jsonp({name: 'test'});
 
 //output
@@ -831,7 +831,7 @@ jsonp111({
 
 输出 json 格式的数据，返回值为 false。可以通过配置 `jsonContentType` 指定返回的 `Content-Type`。
 
-```
+```js
 ctx.json({name: 'test'});
 
 //output
@@ -882,7 +882,7 @@ ctx.json({name: 'test'});
 
 设置 `Cache-Control` 和 `Expires` 缓存头。
 
-```
+```js
 ctx.expires('1h'); //缓存一小时
 ```
 
@@ -895,7 +895,7 @@ ctx.expires('1h'); //缓存一小时
 
 获取、设置配置项，内部调用 `think.config` 方法。
 
-```
+```js
 ctx.config('name'); //获取配置
 ctx.config('name', value); //设置配置值
 ctx.config('name', undefined, 'admin'); //获取 admin 模块下配置值，多模块项目下生效
@@ -909,7 +909,7 @@ ctx.config('name', undefined, 'admin'); //获取 admin 模块下配置值，多�
 
 获取、设置 URL 上的参数值。由于 `get`、`query` 等名称已经被 Koa 使用，所以这里只能使用 param。
 
-```
+```js
 ctx.param('name'); //获取参数值，如果不存在则返回 undefined
 ctx.param(); //获取所有的参数值，包含动态添加的参数
 ctx.param('name1,name2'); //获取指定的多个参数值，中间用逗号隔开
@@ -925,7 +925,7 @@ ctx.param({name: 'value', name2: 'value2'}); //重新设置多个参数值
 
 获取、设置 POST 数据。
 
-```
+```js
 ctx.post('name'); //获取 POST 值，如果不存在则返回 undefined
 ctx.post(); //获取所有的 POST 值，包含动态添加的数据
 ctx.post('name1,name2'); //获取指定的多个 POST 值，中间用逗号隔开
@@ -939,9 +939,9 @@ ctx.post({name: 'value', name2: 'value2'}); //重新设置多个 POST 值
 * `value` {Mixed} 参数值
 * `return` {Mixed}
 
-获取、设置文件数据。
+获取、设置文件数据，文件会保存在临时目录下，为了安全，请求结束后会删除。如果需要使用对应的文件，可以通过 `fs.rename` 方法移动到其他地方。
 
-```
+```js
 ctx.file('name'); //获取 FILE 值，如果不存在则返回 undefined
 ctx.file(); //获取所有的 FILE 值，包含动态添加的数据
 ctx.file('name', value); //重新设置 FILE 值
@@ -950,7 +950,7 @@ ctx.file({name: 'value', name2: 'value2'}); //重新设置多个 FILE 值
 
 文件的数据格式为：
 
-```
+```js
 {
   "size": 287313, //文件大小
   "path": "/var/folders/4j/g57qvmmd1lb_9h605w_d38_r0000gn/T/upload_fa6bf8c44179851f1cfec99544b4ef22", //临时存放的位置
@@ -959,6 +959,27 @@ ctx.file({name: 'value', name2: 'value2'}); //重新设置多个 FILE 值
   "mtime": "2017-07-02T07:55:23.763Z" //最后修改时间
 }
 ```
+
+文件上传是通过 [think-payload](https://github.com/thinkjs/think-payload) 模块解析的，可以配置限制文件大小之类的参数。
+
+```js
+const fs = require('fs');
+const path = require('path');
+const rename = think.promisify(fs.rename, fs); // 通过 promisify 方法把 rename 方法包装成 Promise 接口
+module.exports = class extends think.Controller {
+  async indexAction(){
+    const file = this.file('image');
+    // 如果上传的是 png 格式的图片文件，则移动到其他目录
+    if(file && file.type === 'image/png') {
+      const filepath = path.join(think.ROOT_PATH, 'runtime/upload/a.png');
+      think.mkdir(path.dirname(filepath));
+      await rename(file.path, filepath)
+    }
+  }
+}
+```
+
+
 
 #### ctx.cookie(name, value, options)
 
@@ -969,14 +990,18 @@ ctx.file({name: 'value', name2: 'value2'}); //重新设置多个 FILE 值
 
 获取、设置 Cookie 值。
 
-```
+```js
 ctx.cookie('name'); //获取 Cookie
 ctx.cookie('name', value); //设置 Cookie
 ctx.cookie(name, null); //删除 Cookie
+ctx.cookie(name, null, {
+  path: '/'
+})
 ```
 
 设置 Cookie 时，如果 value 的长度大于 4094，则触发 `cookieLimit` 事件，该事件可以通过 `think.app.on("cookieLimit")` 来捕获。
 
+删除 Cookie 时，必须要设置 `domain`、`path` 等参数和设置的时候相同，否则因为浏览器的同源策略无法删除。
 
 #### ctx.service(name, m, ...args)
 
@@ -986,7 +1011,7 @@ ctx.cookie(name, null); //删除 Cookie
 
 获取 service，如果是类则实例化，否则直接返回。
 
-```
+```js
 // 获取 src/service/github.js 模块
 const github = ctx.service('github');
 ```
