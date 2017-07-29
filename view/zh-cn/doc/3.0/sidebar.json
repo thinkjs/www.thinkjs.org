@@ -14,7 +14,8 @@
       "View": "view",
       "Router": "router",
       "Adapter": "adapter",
-      "Extend": "extend"
+      "Extend": "extend",
+      "异步处理": "async"
     },
     "进阶应用": {
       "think 对象": "think",
