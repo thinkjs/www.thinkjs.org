@@ -157,24 +157,13 @@ indexAction() {
 
 #### controller.body
 
-* `return` {String}
-
-设置或者获取返回内容
-
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    this.body = 'hello world';
-  }
-}
-```
+设置或者获取返回内容，等同于 [ctx.body](/doc/3.0/context.html#toc-688)。
 
 #### controller.ip
 
 * `return` {String}
 
-获取当前请求用户的 ip，等同于 ctx.ip 方法。
+获取当前请求用户的 ip，等同于 [ctx.ip](/doc/3.0/context.html#toc-5d1)。
 
 ```js
 module.exports = class extends think.Controller {
@@ -187,22 +176,18 @@ module.exports = class extends think.Controller {
 
 #### controller.ips
 
-* `return` {Array}
-
-获取当前请求链路的所有 ip，等同于 ctx.ips 方法。
+获取当前请求链路的所有 ip，等同于 [ctx.ips](/doc/3.0/context.html#toc-f4e)。
 
 
 #### controller.method
 
-* `return` {String}
-
-获取当前请求的类型，转化为小写。
+获取当前请求的类型，等同于 [ctx.method](/doc/3.0/context.html#toc-972)。
 
 ```js
 module.exports = class extends think.Controller {
   indexAction() {
     const method = this.method; // 获取当前请求类型
-    if(method === 'options') {
+    if(method === 'OPTIONS') {
 
     }
   }
@@ -211,9 +196,7 @@ module.exports = class extends think.Controller {
 
 #### controller.isGet
 
-* `return` {Boolean}
-
-判断是否是 GET 请求。
+判断是否是 GET 请求，等同于 [ctx.isGet](/doc/3.0/context.html#toc-15d)。
 
 ```js
 module.exports = class extends think.Controller {
@@ -227,7 +210,8 @@ module.exports = class extends think.Controller {
 
 #### controller.isPost
 
-* `return` {Boolean}
+判断是否是 POST 请求，等同于 [ctx.isPost](/doc/3.0/context.html#toc-056)。
+
 
 ```js
 module.exports = class extends think.Controller {
@@ -239,13 +223,11 @@ module.exports = class extends think.Controller {
 }
 ```
 
-判断是否是 POST 请求。
-
 #### controller.isCli
 
 * `return` {Boolean}
 
-是否是命令行下调用，等同于 `think.isCli`。
+是否是命令行下调用，等同于 [ctx.isCli](/doc/3.0/context.html#toc-e64)。
 
 
 ```js
@@ -260,7 +242,7 @@ module.exports = class extends think.Controller {
 
 #### controller.userAgent
 
-获取当前请求的 userAgent。
+获取当前请求的 userAgent，等同于 [ctx.userAgent](/doc/3.0/context.html#toc-125)。
 
 ```js
 module.exports = class extends think.Controller {
@@ -275,10 +257,7 @@ module.exports = class extends think.Controller {
 
 #### controller.isMethod(method)
 
-* `method` {String} 类型
-* `return` {Boolean}
-
-判断当前的请求类型是否是指定的类型。
+判断当前的请求类型是否是指定的类型，等同于 [ctx.isMethod](/doc/3.0/context.html#toc-dd7)。
 
 ```js
 module.exports = class extends think.Controller {
@@ -291,10 +270,7 @@ module.exports = class extends think.Controller {
 
 #### controller.isAjax(method)
 
-* `method` {String}
-* `return` {Boolean}
-
-判断是否是 Ajax 请求。如果指定了 method，那么请求类型也要相同。
+判断是否是 Ajax 请求。如果指定了 method，那么请求类型也要相同，等同于 [ctx.isAjax](/doc/3.0/context.html#toc-677)。
 
 ```js
 module.exports = class extends think.Controller {
@@ -307,22 +283,19 @@ module.exports = class extends think.Controller {
 
 #### controller.isJsonp(callback)
 
-* `callback` {String} callback 名称
-* `return` {Boolean}
-
-是否是 jsonp 请求。
+是否是 jsonp 请求，等同于 [ctx.isJsonp](/doc/3.0/context.html#toc-178)。
 
 #### controller.get(name)
 
-获取 query 参数，等同于 [ctx.param](/3.0/context.html#param-name-value)。由于 ctx.get 已经被 Koa 使用，所以无法添加 ctx.get 方法。
+获取 query 参数，等同于 [ctx.param](/doc/3.0/context.html#toc-f5e)。由于 ctx.get 已经被 Koa 使用，所以无法添加 ctx.get 方法。
 
 #### controller.post(name)
 
-获取 POST 提交的参数，等同于 [ctx.post](/doc/3.0/context.html#post-name-value)。
+获取 POST 提交的参数，等同于 [ctx.post](/doc/3.0/context.html#toc-29b)。
 
 #### controller.file(name)
 
-等同于 [ctx.file](/doc/3.0/context.html#file-name-value) 方法。
+等同于 [ctx.file](/doc/3.0/context.html#toc-322) 方法。
 
 #### controller.header(name, value)
 
@@ -342,13 +315,11 @@ module.exports = class extends think.Controller {
 
 #### controller.expires(time)
 
-设置 Cache-Control 和 Expires 缓存头，等同于 [ctx.expires](/doc/3.0/context.html#expires-time)。
+设置 Cache-Control 和 Expires 缓存头，等同于 [ctx.expires](/doc/3.0/context.html#toc-f99)。
 
 #### controller.referer(onlyHost)
 
-* `referrer` {Boolean} 是否只需要 host
-
-获取 referrer。
+获取 referrer，等同于 [ctx.referer](/doc/3.0/context.html#toc-38c)。
 
 #### controller.referrer(onlyHost)
 
@@ -356,36 +327,36 @@ module.exports = class extends think.Controller {
 
 #### controller.cookie(name, value, options)
 
-操作 cookie，等同于 [ctx.cookie](/doc/3.0/context.html#cookie-name-value-options)。
+操作 cookie，等同于 [ctx.cookie](/doc/3.0/context.html#toc-a67)。
 
 #### controller.redirect(url)
 
-页面跳转，等用于 [ctx.redirect]()。
+页面跳转，等用于 [ctx.redirect](/doc/3.0/context.html#toc-3e0)。
 
 #### controller.jsonp(data, callback)
 
-输出 jsonp 格式内容，等用于 [ctx.jsonp](/doc/3.0/context.html#jsonp-data-callbackfield)。
+输出 jsonp 格式内容，等用于 [ctx.jsonp](/doc/3.0/context.html#toc-45f)。
 
 #### controller.json(data)
 
-json 的方式输出内容，等同于 [ctx.json](/doc/3.0/context.html#json-data)。
+json 的方式输出内容，等同于 [ctx.json](/doc/3.0/context.html#toc-77f)。
 
 #### controller.status(status)
 
-设置状态码。
+设置状态码，等同于 [ctx.status](/doc/3.0/context.html#toc-606)。
 
 #### controller.success(data, message)
 
-格式化输出一个正常的数据，一般是操作成功后输出，等同于 [ctx.success](/doc/3.0/context.html#success-data-message)。
+格式化输出一个正常的数据，一般是操作成功后输出，等同于 [ctx.success](/doc/3.0/context.html#toc-526)。
 
 
 #### controller.fail(errno, errmsg, data)
 
-格式化输出一个异常的数据，一般是操作失败后输出，等同于 [ctx.fail](/doc/3.0/context.html#fail-errno-errmsg-data)。
+格式化输出一个异常的数据，一般是操作失败后输出，等同于 [ctx.fail](/doc/3.0/context.html#toc-c4f)。
 
 #### controller.download(filepath, filename)
 
-下载文件，等同于 [ctx.download](/doc/3.0/context.html#download-filepath-filename)。
+下载文件，等同于 [ctx.download](/doc/3.0/context.html#toc-b4e)。
 
 #### controller.controller(name, m)
 
