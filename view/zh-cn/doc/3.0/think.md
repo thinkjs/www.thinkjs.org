@@ -419,4 +419,31 @@ think.rmdir('/usr/local/bin/thinkjs', true).then(()=>{
 })
 ```
 
+### 常见问题
+
+#### think 对象是否推荐在插件里使用？
+
+不建议在插件里（middleware、adapter、extend）里直接使用 think 对象，那样会让插件代码不方便单元测试。如果非要使用的话可以传入 `app` 对象，然后通过 `app.think.xxx` 来使用 think 对象上的属性或者方法。
+
+```js
+// src/config/middleware.js
+module.exports = [
+  {
+    handle: xxx
+  }
+];
+
+
+// xxx middleware
+module.exports = (options, app) => {
+  return (ctx, next) => {
+    // 通过 app.think.modules 获取项目的模块列表
+    const modules = app.think.modules;
+    // 如果是多模块项目下（单模块项目长度始终为 0）
+    if(modules.length) {
+
+    }
+  }
+}
+```
 
