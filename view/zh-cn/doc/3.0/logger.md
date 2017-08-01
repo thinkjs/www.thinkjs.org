@@ -124,7 +124,7 @@ module.exports = {
 }
 ```
 
-layouts 支持如下参数：
+默认的 `Console` 的输出格式是 `%[[%d] [%z] [%p]%] - %m`，即 `[时间] [进程ID] [日志等级] - 日志内容`。 目前 layouts 支持如下参数：
 
 - `type`：目前支持如下类型
     - basic
