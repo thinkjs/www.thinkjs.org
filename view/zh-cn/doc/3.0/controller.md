@@ -1,4 +1,4 @@
-## Controller
+## Controller / 控制器
 
 MVC 模型中，控制器是用户请求的逻辑处理部分。比如：将用户相关的操作都放在 `user.js` 里，每一个操作就是里面一个 Action。
 
@@ -19,7 +19,17 @@ module.exports = class extends Base {
 }
 ```
 
-创建完成后，框架会监听变化然后重启服务。这时访问 `http://127.0.0.1:8360/user/index` 就可以看到输出的 `hello word!`
+创建完成后，框架会监听文件变化然后重启服务。这时访问 `http://127.0.0.1:8360/user/index` 就可以看到输出的 `hello word!`
+
+### Action 执行
+
+Action 执行是通过中间件 [think-controller](https://github.com/thinkjs/think-controller) 来完成的，通过 `ctx.action` 值在 controller 寻找 `xxxAction` 的方法名并调用，且调用相关的魔术方法，具体顺序为：
+
+* 实例化 Controller 类，传入 `ctx` 对象
+* 如果方法 [__before](/doc/3.0/controller.html#toc-083) 存在则调用，如果返回值为 `false`，则停止继续执行
+* 如果方法 `xxxAction` 存在则执行，如果返回值为 `false`，则停止继续执行
+* 如果方法 `xxxAction` 不存在但 [__call](/doc/3.0/controller.html#toc-fcb) 方法存在，则调用，如果返回值为 `false`，则停止继续执行
+* 如果方法 [__afater](/doc/3.0/controller.html#toc-e16) 存在则执行
 
 ### 前置操作 __before
 
@@ -57,9 +67,24 @@ module.exports = class extends think.Controller {
 }
 ```
 
+### 魔术方法 __call
+
+当解析后的 url 对应的控制器存在，但 Action 不存在时，会试图调用控制器下的魔术方法 `__call`。这里可以对不存在的方法进行统一处理。
+
+```js
+module.exports = class extends think.Controller {
+  indexAction(){
+
+  }
+  __call(){
+    //如果相应的Action不存在则调用改方法
+  }
+}
+```
+
 ### ctx 对象
 
-controller 实例化时会传入 [ctx](/doc/3.0/context.html) 对象，在 controller 里可以通过 `this.ctx` 来获取 ctx 对象。并且 controller 上很多方法也是通过调用 ctx 里的方法来实现的。
+Controller 实例化时会传入 [ctx](/doc/3.0/context.html) 对象，在 Controller 里可以通过 `this.ctx` 来获取 ctx 对象，并且 Controller 上很多方法也是通过调用 ctx 里的方法来实现的。
 
 如果子类中需要重写 constructor 方法，那么需要调用父类中的 constructor，并将 ctx 参数传递进去：
 
@@ -81,7 +106,7 @@ module.exports = class extends Base {
 
 假如控制器下有 console 子目录，下有 user.js 文件，即：`src/controller/console/user.js`，当访问请求为 `/console/user/login` 时，会优先解析出 Controller 为 `console/user`，Action 为 `login`。
 
-### 阻止后续逻辑
+### 阻止后续逻辑执行
 
 Controller 里的处理顺序依次为 `__before`、`xxxAction`、`__after`，有时候在一些特定的场景下，需要提前结束请求，阻止后续的逻辑继续执行。这时候可以通过 `return false` 来处理。
 
@@ -101,33 +126,44 @@ module.exports = class extends think.Controller {
 }
 ```
 
+### 获取参数、表单值
+
+对于 URL 上传递的参数或者表单上传的值，框架直接做了解析，可以直接通过对应的方法获取。
+对于 URL 上传递的参数，在 Action 中可以通过 [get](/doc/3.0/controller.html#toc-b4e) 方法获取。对于表单提交的字段或者文件可以通过 [post](/doc/3.0/controller.html#toc-3d4) 和 [file](/doc/3.0/controller.html#toc-88b) 方法获取。表单数据解析是通过中间件 [think-payload](https://github.com/thinkjs/think-payload) 来完成的，解析后的数据放在 `ctx.request.body` 对象上，最后包装成 post 和 file 方法供使用。
+
+### 透传数据
+
+由于用户的请求处理经过了中间件、Logic、Controller 等多层的处理，有时候希望在这些环节中透传一些数据，这时候可以通过 `ctx.state.xxx` 来完成。
+
+```js
+// 中间件中设置 state
+(ctx, next) => {
+  ctx.state.userInfo = {};
+}
+
+// Logic、Controller 中获取 state
+indexAction() {
+  const userInfo = this.ctx.state.userInfo;
+}
+```
+透传数据时避免直接在 `ctx` 对象上添加属性，这样可能会覆盖已有的属性，引起一些奇怪的问题。
+
 ### API
 
 
 #### controller.ctx
 
-传递进来的 ctx 对象。
+传递进来的 `ctx` 对象。
 
 #### controller.body
 
-* `return` {String}
-
-设置或者获取返回内容
-
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    this.body = 'hello world';
-  }
-}
-```
+设置或者获取返回内容，等同于 [ctx.body](/doc/3.0/context.html#toc-688)。
 
 #### controller.ip
 
 * `return` {String}
 
-获取当前请求用户的 ip，等同于 ctx.ip 方法。
+获取当前请求用户的 ip，等同于 [ctx.ip](/doc/3.0/context.html#toc-5d1)。
 
 ```js
 module.exports = class extends think.Controller {
@@ -140,22 +176,18 @@ module.exports = class extends think.Controller {
 
 #### controller.ips
 
-* `return` {Array}
-
-获取当前请求链路的所有 ip，等同于 ctx.ips 方法。
+获取当前请求链路的所有 ip，等同于 [ctx.ips](/doc/3.0/context.html#toc-f4e)。
 
 
 #### controller.method
 
-* `return` {String}
-
-获取当前请求的类型，转化为小写。
+获取当前请求的类型，等同于 [ctx.method](/doc/3.0/context.html#toc-972)。
 
 ```js
 module.exports = class extends think.Controller {
   indexAction() {
     const method = this.method; // 获取当前请求类型
-    if(method === 'options') {
+    if(method === 'OPTIONS') {
 
     }
   }
@@ -164,9 +196,7 @@ module.exports = class extends think.Controller {
 
 #### controller.isGet
 
-* `return` {Boolean}
-
-判断是否是 GET 请求。
+判断是否是 GET 请求，等同于 [ctx.isGet](/doc/3.0/context.html#toc-15d)。
 
 ```js
 module.exports = class extends think.Controller {
@@ -180,7 +210,8 @@ module.exports = class extends think.Controller {
 
 #### controller.isPost
 
-* `return` {Boolean}
+判断是否是 POST 请求，等同于 [ctx.isPost](/doc/3.0/context.html#toc-056)。
+
 
 ```js
 module.exports = class extends think.Controller {
@@ -192,13 +223,11 @@ module.exports = class extends think.Controller {
 }
 ```
 
-判断是否是 POST 请求。
-
 #### controller.isCli
 
 * `return` {Boolean}
 
-是否是命令行下调用，等同于 `think.isCli`。
+是否是命令行下调用，等同于 [ctx.isCli](/doc/3.0/context.html#toc-e64)。
 
 
 ```js
@@ -213,7 +242,7 @@ module.exports = class extends think.Controller {
 
 #### controller.userAgent
 
-获取当前请求的 userAgent。
+获取当前请求的 userAgent，等同于 [ctx.userAgent](/doc/3.0/context.html#toc-125)。
 
 ```js
 module.exports = class extends think.Controller {
@@ -228,10 +257,7 @@ module.exports = class extends think.Controller {
 
 #### controller.isMethod(method)
 
-* `method` {String} 类型
-* `return` {Boolean}
-
-判断当前的请求类型是否是指定的类型。
+判断当前的请求类型是否是指定的类型，等同于 [ctx.isMethod](/doc/3.0/context.html#toc-dd7)。
 
 ```js
 module.exports = class extends think.Controller {
@@ -244,10 +270,7 @@ module.exports = class extends think.Controller {
 
 #### controller.isAjax(method)
 
-* `method` {String}
-* `return` {Boolean}
-
-判断是否是 Ajax 请求。如果指定了 method，那么请求类型也要相同。
+判断是否是 Ajax 请求。如果指定了 method，那么请求类型也要相同，等同于 [ctx.isAjax](/doc/3.0/context.html#toc-677)。
 
 ```js
 module.exports = class extends think.Controller {
@@ -260,22 +283,19 @@ module.exports = class extends think.Controller {
 
 #### controller.isJsonp(callback)
 
-* `callback` {String} callback 名称
-* `return` {Boolean}
-
-是否是 jsonp 请求。
+是否是 jsonp 请求，等同于 [ctx.isJsonp](/doc/3.0/context.html#toc-178)。
 
 #### controller.get(name)
 
-获取 query 参数，等同于 [ctx.param](/3.0/context.html#param-name-value)。由于 ctx.get 已经被 Koa 使用，所以无法添加 ctx.get 方法。
+获取 query 参数，等同于 [ctx.param](/doc/3.0/context.html#toc-f5e)。由于 ctx.get 已经被 Koa 使用，所以无法添加 ctx.get 方法。
 
 #### controller.post(name)
 
-获取 POST 提交的参数，等同于 [ctx.post](/doc/3.0/context.html#post-name-value)。
+获取 POST 提交的参数，等同于 [ctx.post](/doc/3.0/context.html#toc-29b)。
 
 #### controller.file(name)
 
-等同于 [ctx.file](/doc/3.0/context.html#file-name-value) 方法。
+等同于 [ctx.file](/doc/3.0/context.html#toc-322) 方法。
 
 #### controller.header(name, value)
 
@@ -295,13 +315,11 @@ module.exports = class extends think.Controller {
 
 #### controller.expires(time)
 
-设置 Cache-Control 和 Expires 缓存头，等同于 [ctx.expires](/doc/3.0/context.html#expires-time)。
+设置 Cache-Control 和 Expires 缓存头，等同于 [ctx.expires](/doc/3.0/context.html#toc-f99)。
 
 #### controller.referer(onlyHost)
 
-* `referrer` {Boolean} 是否只需要 host
-
-获取 referrer。
+获取 referrer，等同于 [ctx.referer](/doc/3.0/context.html#toc-38c)。
 
 #### controller.referrer(onlyHost)
 
@@ -309,78 +327,69 @@ module.exports = class extends think.Controller {
 
 #### controller.cookie(name, value, options)
 
-操作 cookie，等同于 [ctx.cookie](/doc/3.0/context.html#cookie-name-value-options)。
+操作 cookie，等同于 [ctx.cookie](/doc/3.0/context.html#toc-a67)。
 
 #### controller.redirect(url)
 
-* `url` {String} 要跳转的 url
-
-页面跳转。
+页面跳转，等用于 [ctx.redirect](/doc/3.0/context.html#toc-3e0)。
 
 #### controller.jsonp(data, callback)
 
-输出 jsonp 格式内容，等用于 [ctx.jsonp](/doc/3.0/context.html#jsonp-data-callbackfield)。
+输出 jsonp 格式内容，等用于 [ctx.jsonp](/doc/3.0/context.html#toc-45f)。
 
 #### controller.json(data)
 
-json 的方式输出内容，等同于 [ctx.json](/doc/3.0/context.html#json-data)。
+json 的方式输出内容，等同于 [ctx.json](/doc/3.0/context.html#toc-77f)。
 
 #### controller.status(status)
 
-* `status` {Number} 状态码，默认为 404
-
-设置状态码。
-
-<!--#### controller.type(type, charset)
-
-* `type` {String} Content-Type
-* `charset` {Boolean} 是否自动追加 charset
-
-设置 Content-Type。-->
-<!--
-#### controller.download(filePath, contentType, fileName)
-
-* `filePath` {String} 下载文件的具体路径
-* `content-Type` {String} Content-Type
-* `fileName` {String} 保存的文件名
-
-下载文件。
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    let filePath = think.RESOUCE_PATH + '/a.txt';
-    //自动识别 Content-Type，保存的文件名为 a.txt
-    this.download(filePath);
-  }
-}
-```
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    let filePath = think.RESOUCE_PATH + '/a.log';
-    //自动识别 Content-Type，保存的文件名为 b.txt
-    this.download(filePath, 'b.txt');
-  }
-}
-```
-
-```js
-module.exports = class extends think.Controller {
-  indexAction(){
-    let filePath = think.RESOUCE_PATH + '/a.log';
-    //指定 Content-Type 为 text/html，保存的文件名为 b.txt
-    this.download(filePath, 'text/html', 'b.txt');
-  }
-}
-```-->
+设置状态码，等同于 [ctx.status](/doc/3.0/context.html#toc-606)。
 
 #### controller.success(data, message)
 
-格式化输出一个正常的数据，一般是操作成功后输出，等同于 [ctx.success](/doc/3.0/context.html#success-data-message)。
+格式化输出一个正常的数据，一般是操作成功后输出，等同于 [ctx.success](/doc/3.0/context.html#toc-526)。
 
 
 #### controller.fail(errno, errmsg, data)
 
-格式化输出一个异常的数据，一般是操作失败后输出，等同于 [ctx.fail](/doc/3.0/context.html#fail-errno-errmsg-data)。
+格式化输出一个异常的数据，一般是操作失败后输出，等同于 [ctx.fail](/doc/3.0/context.html#toc-c4f)。
+
+#### controller.download(filepath, filename)
+
+下载文件，等同于 [ctx.download](/doc/3.0/context.html#toc-b4e)。
+
+#### controller.controller(name, m)
+
+* `name` {String} 控制器名称
+* `m` {String} 模块名，多模块项目下有效
+* `return` {Object} 控制器实例
+
+获取另一个控制器的实例，如果不存在则报错。
+
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    // 获取其他控制器实例，然后调用其方法
+    const userController = this.controller('console/user');
+    userController.xxx();
+  }
+}
+```
+
+#### controller.action(controller, name, m)
+
+* `controller` {String|Object} 控制器名称
+* `name` {String} Action 名称
+* `m` {String} 模块名，多模块项目下有效
+* `return` {Mixed}
+
+调用其他模块下的 Action 方法，会调用 `__before`、`__after` 之类的魔术方法。
+
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    // 调用 user 控制器的 loginAction 方法
+    const ret = this.action('user', 'login';)
+  }
+}
+```

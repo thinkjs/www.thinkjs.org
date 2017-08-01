@@ -1,4 +1,4 @@
-## 配置
+## Config / 配置
 
 实际项目中，肯定需要各种配置，包括：框架需要的配置以及项目自定义的配置。ThinkJS 将所有的配置都统一管理，文件都放在 `src/config/` 目录下，并根据不同的功能划分为不同的配置文件。
 
@@ -34,6 +34,72 @@ module.exports = {
 多环境配置文件格式为：`[name].[env].js`，如：`config.development.js`，`config.production.js`
 
 在以上的配置文件中，目前只有 `config.js` 和 `adapter.js` 是支持不同环境配置文件的。
+
+### 系统默认配置
+
+系统内置一些默认配置，方便项目里直接使用，具体有：
+
+* [config.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/config.js) 通用的默认配置
+
+  ```js
+  {
+    port: 8360, // server port
+    host: '127.0.0.1', // server host
+    workers: 0, // server workers num, if value is 0 then get cpus num
+    createServer: undefined, // create server function
+    startServerTimeout: 3000, // before start server time
+    reloadSignal: 'SIGUSR2', // reload process signal
+    onUnhandledRejection: err => think.logger.error(err), // unhandledRejection handle
+    onUncaughtException: err => think.logger.error(err), // uncaughtException handle
+    processKillTimeout: 10 * 1000, // process kill timeout, default is 10s
+    enableAgent: false, // enable agent worker
+    jsonpCallbackField: 'callback', // jsonp callback field
+    jsonContentType: 'application/json', // json content type
+    errnoField: 'errno', // errno field
+    errmsgField: 'errmsg', // errmsg field
+    defaultErrno: 1000, // default errno
+    validateDefaultErrno: 1001 // validate default errno
+  };
+  ```
+* [adapter.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/adapter.js) adapter 默认配置
+
+  ```js
+  exports.logger = {
+    type: 'console',
+    console: {
+      handle: ConsoleLogger
+    },
+    file: {
+      handle: FileLogger,
+      filename: path.join(think.ROOT_PATH, 'logs/file.log'),
+      maxLogSize: 50 * 1024, // 50M
+      backups: 10 // max chunk number
+    },
+    dateFile: {
+      handle: DateFileLogger,
+      level: 'ALL',
+      filename: path.join(think.ROOT_PATH, 'logs/file.log'),
+      pattern: '-yyyy-MM-dd',
+      alwaysIncludePattern: false
+    }
+  };
+  ```
+* [adapter.production.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/adapter.production.js) adapter 生产环境默认配置
+  ```js
+  exports.logger = {
+    type: 'dateFile'
+  };
+  ```
+* [extend.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/extend.js) extend 默认配置
+  ```js
+  const cache = require('think-cache');
+  const session = require('think-session');
+
+  module.exports = [
+    cache,
+    session
+  ];
+  ```
 
 ### 配置合并方式
 
@@ -108,3 +174,33 @@ think.beforeStartServer(async () => {
 配置写入文件时，是通过 `JSON.stringify` 将配置转化为字符串，由于 JSON.stringify 不支持正则、函数等之类的转换，所以配置中由于字段的值是正则或者函数时，生成的配置文件中将看不到这些字段对应的值。
 
 -->
+
+#### 多模块项目配置文件存放位置？
+
+以上文档中描述的配置文件路径都是单模块项目下的，多模块项目下配置文件的路径为 `src/common/config/`，配置文件名称以及格式和单模块相同，如：`src/common/config/config.js`、`src/common/config/adapter.js`、`src/common/config/middleware.js` 等。
+
+多模块项目下有些配置可以放在模块目录下，路径为：`/src/[module]/config/`，`[module]` 为具体的模块名称。
+
+#### 如何查看配置文件的详细加载情况？
+
+有时候希望查看配置文件的详细加载情况，这时候可以通过 `DEBUG=think-loader-config-* npm start` 来启动项目查看。
+
+```text
+think-loader-config-40322 load file: //demo/app/config/adapter.js +3ms
+think-loader-config-40323 load file: /demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40320 load file: /demo/app/config/adapter.js +4ms
+think-loader-config-40323 load file: /demo/app/config/adapter.js +3ms
+think-loader-config-40325 load file: /demo/app/config/config.js +0ms
+think-loader-config-40325 load file: /demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40325 load file: /demo/app/config/adapter.js +3ms
+think-loader-config-40321 load file: /demo/app/config/config.js +0ms
+think-loader-config-40321 load file: /demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40321 load file: /demo/app/config/adapter.js +3ms
+think-loader-config-40324 load file: /demo/app/config/config.js +0ms
+think-loader-config-40319 load file: /demo/app/config/config.js +0ms
+think-loader-config-40319 load file: /demo/node_modules/thinkjs/lib/config/adapter.js +6ms
+think-loader-config-40324 load file: /demo/node_modules/thinkjs/lib/config/adapter.js +5ms
+think-loader-config-40319 load file: /demo/app/config/adapter.js +7ms
+think-loader-config-40324 load file: /demo/app/config/adapter.js +8ms
+```
+由于服务是通过 Master + 多个 Worker 启动的，debug 信息会打印多遍，这里为了区分加上了进程的 pid 值，如：`think-loader-config-40322` 为进程 pid 为 `40322` 下的配置文件加载情况。

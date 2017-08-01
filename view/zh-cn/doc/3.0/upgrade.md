@@ -44,6 +44,10 @@
 
 其中老版本的 `preRender()` 方法已经废弃，新方法名为 `beforeRender()`。`nunjucks` 模板引擎的参数顺序由原来的 `preRender(nunjucks, env, config)` 修改为 `beforeRender(env, nunjucks, config)`。
 
+#### 阻止后续执行
+
+移除了 `think.prevent` 等阻止后续执行的方法，替换为在 `__before`、`xxxAction`、`__after` 中返回 `false` 来阻止后续代码继续执行。 
+
 ### 升级建议
 
 由于 3.0 改动了很多东西，所以不太容易基于原有项目代码简单修改来升级。建议使用新的脚手架工具创建项目，然后一一将之前的代码拷贝到新项目中进行修改。

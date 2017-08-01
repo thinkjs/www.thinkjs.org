@@ -1,8 +1,8 @@
-## Extend
+## Extend / 扩展
 
-虽然框架内置了很多功能，但在实际项目开发中，提供的功能还是远远不够的。3.0 里引入了 Extend 机制，方便对框架进行扩展。支持的扩展类型为：`think`，`application`，`context`，`request`，`response`，`controller` 和 `logic`。
+虽然框架内置了很多功能，但在实际项目开发中，提供的功能还是远远不够的。3.0 里引入了 Extend 机制，方便对框架进行扩展。支持的扩展类型为：`think`、`application`、`context`、`request`、`response`、`controller` 和 `logic`。
 
-框架内置的很多功能也是 Extend 来实现的，如：`Session`，`Cache`。
+框架内置的很多功能也是 Extend 来实现的，如：`Session`、`Cache`。
 
 ### Extend 配置
 
@@ -10,13 +10,9 @@ Extend 配置文件为 `src/config/extend.js`，格式为数组：
 
 ```js
 const view = require('think-view');
-const fetch = require('think-fetch');
-const model = require('think-model');
 
 module.exports = [
-  view, //make application support view
-  fetch, // HTTP request client
-  model(think.app)
+  view //make application support view
 ];
 ```
 
@@ -92,7 +88,7 @@ module.exports = {
 
 ### Extend 里使用 app 对象
 
-有些 Extend 需要使用一些 app 对象上的数据，那么可以导出为一个函数，配置时把 app 对象传递进去即可。
+有些 Extend 需要使用一些 `app` 对象上的数据，那么可以导出为一个函数，配置时把 `app` 对象传递进去即可。
 
 ```
 // src/config/extend.js
@@ -102,8 +98,14 @@ module.exports = [
 ];
 ```
 
-当然传了 app 对象，也可以根据需要传递其他对象。
+当然除了传 `app` 对象，也可以根据需要传递其他对象。
 
 ### 推荐 Extend 列表
 
 推荐的 Extend 列表见 <https://github.com/thinkjs/think-awesome#extends>，如果你开发了比较好的 Extend，也欢迎发 Pull Request。
+
+### 常见问题
+
+#### 多模块项目的扩展配置文件路径？
+
+多模块项目下，扩展配置文件的路径为 `src/common/config/extend.js`，配置格式和单模块项目的格式相同。

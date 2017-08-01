@@ -1,4 +1,4 @@
-## Router
+## Router / 路由
 
 当用户访问一个地址时，需要有一个对应的逻辑进行处理。传统的处理方式下，一个请求对应的一个文件，如访问时 `/user/about.php`，那么就会在项目对应的目录下有 `/user/about.php` 这个实体文件。这种方式虽然能解决问题，但会导致文件很多，同时可能很多文件里逻辑功能其实比较简单。
 
@@ -29,15 +29,15 @@ module.exports = [
   {
     handle: 'router',
     options: {
-      defaultModule: 'home',        
-      defaultController: 'index',   
-      defaultAction: 'index',       
-      prefix: [],                   
-      suffix: ['.html'],            
-      enableDefaultRouter: true,   
-      subdomainOffset: 2,         
-      subdomain: {},               
-      denyModules: []             
+      defaultModule: 'home',
+      defaultController: 'index',
+      defaultAction: 'index',
+      prefix: [],
+      suffix: ['.html'],
+      enableDefaultRouter: true,
+      subdomainOffset: 2,
+      subdomain: {},
+      denyModules: []
     }
   }
 ];
@@ -86,11 +86,11 @@ module.exports = [
 如果 `subdomain` 配置是一个数组，那么会自动将数组转化为对象，方便后续进行匹配。
 
 ```js
-subdomain: ['admin', 'user'] 
+subdomain: ['admin', 'user']
 
 // 转化为
 subdomain: {
-  admin: 'admin', 
+  admin: 'admin',
   user: 'user'
 }
 ```
@@ -109,7 +109,7 @@ subdomain: {
 | /console/user/login | 单模块 | 有 | | console/user | login | 有子级控制器 console/user |
 | /console/user/login/aaa/bbb | 单模块 | 有 | | console/user | login | 剩余的 aaa/bbb 不再解析 |
 | /admin/user | 多模块 | 无 | admin | user | index | 多模块项目，有名为 admin 的模块 |
-| /admin/console/user/login | 多模块 | 有 | admin | console/user | login | | | 
+| /admin/console/user/login | 多模块 | 有 | admin | console/user | login | | |
 
 
 解析后的 module、controller、action 分别放在 `ctx.module`、`ctx.controller`、`ctx.action` 上，方便后续调用处理。如果不想要默认的路由解析，那么可以通过配置 `enableDefaultRouter: false` 关闭。
@@ -149,7 +149,13 @@ module.exports = [
 ```
 字符串匹配的格式为 `:name` 的方式，当匹配到这条路由后，会获取到 `:name` 对应的值，最终转化为对应的参数，以便于后续获取。
 
-对于上面的路由，假如访问的路径为 `/user/thinkjs`，那么 `:name` 匹配到的值为 `thinkjs`，这时会追加个名为 name 的参数，controller 里可以通过 `this.get("name")` 来获取这个参数。
+对于上面的路由，假如访问的路径为 `/user/thinkjs`，那么 `:name` 匹配到的值为 `thinkjs`，这时会追加个名为 name 的参数，controller 里可以通过 `this.get("name")` 来获取这个参数。当然在 `pathname` 中也是可以引用 `:name` ，如：
+
+```js
+module.exports = [
+  ['/user/:name', 'user/info/:name']
+]
+```
 
 ##### 正则路由
 
@@ -239,7 +245,7 @@ module.exports = [
 module.exports = (options, app) => {
   return (ctx, next) => {
     const routers = app.routers; // 拿到所有的自定义路由配置
-    ... 
+    ...
     ctx.module = ''; // 将解析后的 module、controller、action 保存在 ctx 上
     ctx.controller = '';
     ctx.action = '';

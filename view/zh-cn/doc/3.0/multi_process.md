@@ -55,3 +55,18 @@ process.on('message', (worker, message) => {
 process.send({act: 'xxxx', ...args}); //发送数据到 Master 进程
 
 ```
+
+### 常见问题
+
+#### 子进程如何通知主进程重启服务？
+
+有时候做一些通用的系统，需要有自动更新的功能（如：博客系统的更新功能），代码更新后，需要重启服务才能使其生效，如果每次都要手工重启服务必然不方便。框架提供了 `think-cluster-reload-workers` 指令让子进程可以通知主进程重启服务，这样就不用手工重启服务了。如：
+
+```js
+async upgrade() {
+  await downloadCodeFromRemote(); // 从远程下载更新包
+  await unzipCode(); // 解压缩代码
+  await installDependencies(); // 重新安装依赖，可能有新的依赖
+  process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
+}
+```

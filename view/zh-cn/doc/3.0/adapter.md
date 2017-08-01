@@ -1,8 +1,8 @@
-## Adapter
+## Adapter / 适配器
 
-Adapter 是用来解决一类功能的多种实现，这些实现提供一套相同的接口。如：支持多种数据库，支持多种模版引擎等。通过这种方式，可以很方便的再不同的类型中进行切换。
+Adapter 是用来解决一类功能的多种实现，这些实现提供一套相同的接口，类似设计模式里的工厂模式。如：支持多种数据库，支持多种模版引擎等。通过这种方式，可以很方便的在不同的类型中进行切换。
 
-框架提供了多种 Adapter，如： View，Model，Cache，Session，Websocket 等。
+框架默认提供了很多种 Adapter，如： View，Model，Cache，Session，Websocket，项目中也可以根据需要进行扩展，也可以引入第三方的 Adapter。
 
 ### Adapter 配置
 
@@ -40,16 +40,32 @@ exports.cache = {
 * `handle` 对应类型的处理函数，一般为一个类
 
 
-<!-- 实际项目中，一般一个 Adapter 的配置比较多，并且项目里也会用到多个 Adapter，这样 adapter.js 配置文件就会比较长，这时候可以根据功能进行分拆。
+Adapter 配置支持运行环境，可以根据不同的运行环境设置不同的配置，如：在开发环境和生产环境的数据库一般都是不一样的，这时候可以通过 `adapter.development.js` 和 `adapter.production.js` 来配置，系统启动后会读取对应的运行环境配置和默认配置进行合并。
 
-比如：创建目录 `src/config/adapter/`，将每一个功能作为一个独立文件来配置，`adapter/view.js`、`adapter/model.js`。
+假如现在是在生产环境下，那么会读取 `adapter.production.js` 和 `adapter.js` 配置进行合并生成最终的 adapter 配置。
 
-然后 `src/config/adapter.js` 里的内容可以为：
+### 配置解析
 
+adapter 配置存储了所有类型下的详细配置，具体使用时需要对其解析，选择对应的一种进行使用。比如上面的配置文件中，配置了 nunjucks 和 ejs 二种模板引擎的详细配置，但具体使用时一种场景下肯定只会用其一种模板引擎。
+
+adapter 的配置解析是通过 [think-helper](https://github.com/thinkjs/think-helper) 模块中的 `parseAdapterConfig` 方法来完成的，如：
+
+```js
+const helper = require('think-helper');
+const viewConfig = think.config('view'); // 获取 view adapter 的详细配置
+const nunjucksConfig = helper.parseAdatperConfig(viewConfig, 'nunjucks'); // 获取 nunjucks 的配置
+const ejsConfig = helper.parseAdatperConfig(viewConfig, 'ejs') // 获取 ejs 的配置
 ```
-exports.view = require('./adapter/view.js');
-exports.model = require('./adapter/model.js');
-``` -->
+
+通过 `parseAdapterConfig` 方法就可以拿到对应类型的配置，然后就可以调用对应的 `handle`，传入配置然后执行了。
+
+当然，配置解析并不需要使用者在项目中具体调用，一般都是在插件对应的方法里已经处理。
+
+### Adapter 使用
+
+Adapter 都是一类功能的不同实现，一般是不能独立使用的，而是配合对应的扩展使用。如：view Adapter（think-view-nunjucks、think-view-ejs）配合 [think-view](https://github.com/thinkjs/think-view) 扩展进行使用。
+
+项目安装 think-view 扩展后，提供了对应的方法来渲染模板，但渲染不同的模板需要的模板引擎有对应的 Adapter 来实现，也就是配置中的 `handle` 字段。
 
 ### 项目中创建 Adapter
 
@@ -72,3 +88,9 @@ exports.cache = {
 ### 支持的 Adapter
 
 框架支持的 Adapter 为 <https://github.com/thinkjs/think-awesome#adapters>。
+
+### 常见问题
+
+#### 多模块项目的配置文件路径？
+
+多模块项目的 Adapter 配置文件路径为 `src/common/config/adapter.js`。
