@@ -193,9 +193,12 @@ module.exporst = [
 
 think.beforeStartServer(async () => {
   const config = think.model('config');
-  const data = await config.where({key: 'router'}).find(); // 将所有的自定义路由保存在字段为 router 的数据上
+  // 将所有的自定义路由保存在字段为 router 的数据上
+  const data = await config.where({key: 'router'}).find(); 
   const routers = JSON.parse(data.value);
-  think.app.emit('routerChange', routers); // 触发 routerChange 事件，将新的自定义路由设置到 think.app.routers 对象上
+  // 触发 routerChange 事件，将新的自定义路由设置到 think.app.routers 对象上
+  // routers 格式和自定义路由格式相同，二维数组
+  think.app.emit('routerChange', routers); 
 })
 
 ```

@@ -166,14 +166,12 @@ think.beforeStartServer(async () => {
 
 `不能`。由于 config.js 和 adapter.js 是合并在一起的，所以要注意这二个配置不能有相同的 key，否则会被覆盖。
 
-<!-- 
 #### 怎么查看合并后的所有配置？
 
 系统启动时，会合并 config.js 和 adapter.js 的配置，最终会将配置写到文件 `runtime/config/[env].json` 文件中，如：当前 env 是 `development`，那么写入的文件为 `runtime/config/development.json`。
 
 配置写入文件时，是通过 `JSON.stringify` 将配置转化为字符串，由于 JSON.stringify 不支持正则、函数等之类的转换，所以配置中由于字段的值是正则或者函数时，生成的配置文件中将看不到这些字段对应的值。
 
--->
 
 #### 多模块项目配置文件存放位置？
 
