@@ -118,7 +118,7 @@ subdomain: {
 
 虽然默认的路由解析方式能够满足需求，但有时候会导致 URL 看起来不够优雅，我们更希望 URL 比较简短，这样会更利于记忆和传播。框架提供了自定义路由来处理这种需求。
 
-自定义路由规则配置文件为 `src/config/router.js`，路由规则为二维数组：
+自定义路由规则配置文件为 `src/config/router.js`（多模块项目放在 `src/common/config/router.js`），路由规则为二维数组：
 
 ```js
 module.exports = [

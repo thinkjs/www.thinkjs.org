@@ -1,12 +1,12 @@
 ## Adapter / 适配器
 
-Adapter 是用来解决一类功能的多种实现，这些实现提供一套相同的接口，类似设计模式里的工厂模式。如：支持多种数据库，支持多种模版引擎等。通过这种方式，可以很方便的在不同的类型中进行切换。
+Adapter 是用来解决一类功能的多种实现，这些实现提供一套相同的接口，类似设计模式里的工厂模式。如：支持多种数据库，支持多种模版引擎等。通过这种方式，可以很方便的在不同的类型中进行切换。Adapter 一般配合 Extend 一起使用。
 
 框架默认提供了很多种 Adapter，如： View，Model，Cache，Session，Websocket，项目中也可以根据需要进行扩展，也可以引入第三方的 Adapter。
 
 ### Adapter 配置
 
-Adapter 的配置文件为 `src/config/adapter.js`，格式如下：
+Adapter 的配置文件为 `src/config/adapter.js`（多模块项目文件为 `src/common/config/adapter.js`），格式如下：
 
 ```js
 const nunjucks = require('think-view-nunjucks');
@@ -36,7 +36,7 @@ exports.cache = {
 
 * `type` 默认使用 Adapter 的类型，具体调用时可以传递参数改写
 * `common` 配置通用的一些参数，会跟具体的 adapter 参数作合并
-* `nunjucks,ejs` 配置特定类型的 Adapter 参数，最终获取到的参数是 common 参数与该参数进行合并
+* `nunjucks` `ejs` 配置特定类型的 Adapter 参数，最终获取到的参数是 common 参数与该参数进行合并
 * `handle` 对应类型的处理函数，一般为一个类
 
 
@@ -46,9 +46,9 @@ Adapter 配置支持运行环境，可以根据不同的运行环境设置不同
 
 ### 配置解析
 
-adapter 配置存储了所有类型下的详细配置，具体使用时需要对其解析，选择对应的一种进行使用。比如上面的配置文件中，配置了 nunjucks 和 ejs 二种模板引擎的详细配置，但具体使用时一种场景下肯定只会用其一种模板引擎。
+Adapter 配置存储了所有类型下的详细配置，具体使用时需要对其解析，选择对应的一种进行使用。比如上面的配置文件中，配置了 nunjucks 和 ejs 二种模板引擎的详细配置，但具体使用时一种场景下肯定只会用其一种模板引擎。
 
-adapter 的配置解析是通过 [think-helper](https://github.com/thinkjs/think-helper) 模块中的 `parseAdapterConfig` 方法来完成的，如：
+Adapter 的配置解析是通过 [think-helper](https://github.com/thinkjs/think-helper) 模块中的 `parseAdapterConfig` 方法来完成的，如：
 
 ```js
 const helper = require('think-helper');
@@ -63,15 +63,13 @@ const ejsConfig = helper.parseAdatperConfig(viewConfig, 'ejs') // 获取 ejs 的
 
 ### Adapter 使用
 
-Adapter 都是一类功能的不同实现，一般是不能独立使用的，而是配合对应的扩展使用。如：view Adapter（think-view-nunjucks、think-view-ejs）配合 [think-view](https://github.com/thinkjs/think-view) 扩展进行使用。
+Adapter 都是一类功能的不同实现，一般是不能独立使用的，而是配合对应的扩展一起使用。如：view Adapter（think-view-nunjucks、think-view-ejs）配合 [think-view](https://github.com/thinkjs/think-view) 扩展进行使用。
 
 项目安装 think-view 扩展后，提供了对应的方法来渲染模板，但渲染不同的模板需要的模板引擎有对应的 Adapter 来实现，也就是配置中的 `handle` 字段。
 
 ### 项目中创建 Adapter
 
-除了引入外部的 Adapter 外，项目内也可以创建 Adapter 来使用。
-
-Adapter 文件放在 `src/adapter/` 目录下，如：`src/adapter/cache/xcache.js`，表示加了一个名为 `xcache` 的 cache Adapter 类型，然后该文件实现 cache 类型一样的接口即可。
+除了引入外部的 Adapter 外，项目内也可以创建 Adapter 来使用。Adapter 文件放在 `src/adapter/` 目录下，如：`src/adapter/cache/xcache.js`（多模块项目放在 `src/common/adapter/cache/xcache.js`），表示加了一个名为 `xcache` 的 cache Adapter 类型，然后该文件实现 cache 类型一样的接口即可。
 
 实现完成后，就可以直接通过字符串引用这个 Adapter 了，如：
 
@@ -85,12 +83,6 @@ exports.cache = {
 }
 ```
 
-### 支持的 Adapter
+### 推荐的 Adapter
 
-框架支持的 Adapter 为 <https://github.com/thinkjs/think-awesome#adapters>。
-
-### 常见问题
-
-#### 多模块项目的配置文件路径？
-
-多模块项目的 Adapter 配置文件路径为 `src/common/config/adapter.js`。
+框架推荐的 Adapter 为 <https://github.com/thinkjs/think-awesome#adapters>。

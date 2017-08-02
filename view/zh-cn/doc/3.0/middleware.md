@@ -54,7 +54,7 @@ const execTime = require('koa-execTime'); // 引入统计执行时间的模块
 app.use(execTime({}));  // 需要将这个中间件第一个注册，如果还有其他中间件放在后面注册
 ```
 
-通过 `app.use` 的方式使用中间件，不利于中间件的统一维护。为了方便管理和使用中间件，框架使用统一的配置文件来管理中间件，配置文件为 `src/config/middleware.js`。
+通过 `app.use` 的方式使用中间件，不利于中间件的统一维护。
 
 #### 扩展 app 参数
 
@@ -72,6 +72,8 @@ module.exports = (options, app) => {
 如果在中间件中需要用到 think 对象上的一些属性或者方法，那么可以通过 `app.think.xxx` 来获取。
 
 ### 配置格式
+
+为了方便管理和使用中间件，框架使用统一的配置文件来管理中间件，配置文件为 `src/config/middleware.js`（多模块项目配置文件为 `sr/common/config/middleware.js`）。
 
 ```js
 const path = require('path')
