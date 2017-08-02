@@ -38,14 +38,6 @@
 thinkjs new thinkjs_demo
 ```
 
-#### 创建 ES6/7 项目
-
-如果想使用 ES6/7 特性开发项目，那么创建项目时需要加上 `--es` 参数，这样生成文件的代码都是 ES6/7 语法的。如：
-
-```sh
-thinkjs new thinkjs_demo --es
-```
-
 #### 创建 TypeScript 项目
 
 如果想使用 TypeScript 来开发项目，那么创建项目时需要加上 `--ts` 参数，这样生成文件的代码都是 TypeScript 语法的。如：
