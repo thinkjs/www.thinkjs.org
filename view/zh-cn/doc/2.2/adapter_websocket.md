@@ -189,7 +189,7 @@ export default {
 
 #### socket.io client
 
-浏览器端需要引入 socket.io client，下载地址为：<http://socket.io/download/>。
+浏览器端需要引入 socket.io client，下载地址为：<https://cdnjs.com/libraries/socket.io/>。
 
 ```js
 var socket = io('http://localhost:8360');
