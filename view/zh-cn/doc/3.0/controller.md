@@ -148,6 +148,23 @@ indexAction() {
 ```
 透传数据时避免直接在 `ctx` 对象上添加属性，这样可能会覆盖已有的属性，引起一些奇怪的问题。
 
+### 常见问题
+
+#### 怎么获取 req 和 res 对象？
+
+有时候需要获取 Node 的 `req` 和 `res` 对象，这时候可以通过 `this.ctx.req` 和 `this.ctx.res` 获取，如：
+
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    const req = this.ctx.req;
+    const res = this.ctx.res;
+    // do something with req & res
+  }
+}
+```
+
+
 ### API
 
 
@@ -393,3 +410,4 @@ module.exports = class extends think.Controller {
   }
 }
 ```
+
