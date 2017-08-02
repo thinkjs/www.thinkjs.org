@@ -158,11 +158,10 @@ module.exports = class extends think.Controller {
 ```js
 // src/config/middleware.js
 
-const trace = require('think-trace');
 module.exports = [
   ...
   {
-    handle: trace, 
+    handle: 'trace', 
     options: {
       sourceMap: false,
       debug: true, // 是否打印详细的错误信息
