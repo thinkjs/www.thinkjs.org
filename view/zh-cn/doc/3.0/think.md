@@ -2,7 +2,9 @@
 
 框架中内置 `think` 全局对象，方便在项目中随时随地使用。
 
-### think.app
+### API
+
+#### think.app
 
 `think.app` 为 Koa [Application](https://github.com/koajs/koa/blob/master/lib/application.js#L61) 对象的实例，系统启动时生成。
 
@@ -25,7 +27,19 @@ think.app.on('appReady', () => {
 })
 ```
 
-### API
+#### think.ROOT_PATH
+
+项目的根目录，其他目录可以通过该目录来生成，如：
+
+```js
+const runtimePath = path.join(think.ROOT_PATH, 'runtime/');
+const viewPath = path.join(think.ROOT_PATH, 'view/');
+```
+
+#### think.APP_PATH
+
+APP 根目录，默认为 `${think.ROOT_PATH}/app`，如果项目不需要转译的话，那么默认路径为：`${think.ROOT_PATH}/src`。
+
 
 #### think.env
 
@@ -34,6 +48,26 @@ think.app.on('appReady', () => {
 #### think.version
 
 当前 ThinkJS 的版本号。
+
+#### think.config(name, value, m)
+
+* `name` {String} 配置名
+* `value` {Mixed} 配置值
+* `m` {String} 模块名，多模块项目下使用
+
+读取或者设置配置，该功能由 [think-config](https://github.com/thinkjs/think-config) 模块实现。在 context、controller、logic 上可以直接通过 `this.config` 方法来操作配置。
+
+```js
+// 获取配置
+const value1 = think.config('name');
+// 指定模块获取配置，多模块项目下有效
+const value2 = think.config('name', undefined, 'admin');
+
+// 设置配置
+think.config('name', 'value');
+// 指定模块设置配置值
+think.config('name', 'value', 'admin');
+```
 
 #### think.Controller
 

@@ -126,7 +126,7 @@ module.exports = {
 * 在 controller 中，可以通过 `controller.config(key)` 来获取配置
 * 其他情况下，可以通过 `think.config(key)` 来获取配置
 
-实际上，`ctx.config` 和 `controller.config` 是基于 `think.config` 包装的一种更方便的获取配置的方式。
+实际上，`ctx.config` 和 `controller.config` 是基于 [think.config](/doc/3.0/think.html#toc-929) 包装的一种更方便的获取配置的方式。
 
 ```js
 const redis = ctx.config('redis'); //获取 redis 配置
