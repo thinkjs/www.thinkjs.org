@@ -71,11 +71,29 @@ think.config('name', 'value', 'admin');
 
 #### think.Controller
 
-控制器基类。
+控制器基类，其他控制器类继承该类。
+
+```js
+// src/controller/user.js
+module.exports = class userController extends think.Controller {
+  indexAction() {
+
+  }
+}
+```
 
 #### think.Logic
 
-Logic 基类，继承 `think.Controller`。
+Logic 基类，继承自 `think.Controller`。
+
+```js
+// src/logic/user.js
+module.exports = class userLogic extends think.Logic {
+  indexAction() {
+
+  }
+}
+```
 
 
 #### think.beforeStartServer(fn)
