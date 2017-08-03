@@ -136,7 +136,7 @@ module.exports = class extends think.Logic {
       }
       let flag = this.validate(rules);
       if(!flag){
-        return this.fail('validate error', this.errors());
+        return this.fail('validate error', this.validateErrors);
       }
     }
 
