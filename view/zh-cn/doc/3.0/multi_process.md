@@ -44,7 +44,8 @@ module.exports = {
 
 ```js
 // src/bootstrap/master.js
-process.on('message', (worker, message) => {
+const cluster = require('cluster');
+cluster.on('message', (worker, message) => {
   // 接收到特定的消息进程处理
   if(message && message.act === 'xxx'){
 
