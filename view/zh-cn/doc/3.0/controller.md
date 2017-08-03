@@ -410,4 +410,6 @@ module.exports = class extends think.Controller {
   }
 }
 ```
+#### controller.service(name, m, ...args)
 
+实例化 Service 类，等同于 [think.service](/doc/3.0/think.html#toc-014)。

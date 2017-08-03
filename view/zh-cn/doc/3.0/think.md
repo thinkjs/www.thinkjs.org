@@ -95,6 +95,29 @@ module.exports = class userLogic extends think.Logic {
 }
 ```
 
+#### think.Service
+
+Service 基类，其他 Service 类继承该类。
+
+```js
+// src/service/sms.js
+module.exports = class extends think.Service {
+
+}
+```
+
+#### think.service(name, m, ...args)
+
+* `name` {String} Service 名称
+* `m` {String} 模块名，多模块项目下有效
+* `...args` {Array} 实例化 Service 类需要的参数。单模块项目下，会把 `m` 参数补充导 args 里。
+
+实例化 Service 类，如果导出的对象不是个类，那么直接返回。
+
+```js
+const instance1 = think.service('sms');
+const instance2 = think.service('sms', 'admin');
+```
 
 #### think.beforeStartServer(fn)
 

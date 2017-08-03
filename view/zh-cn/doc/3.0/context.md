@@ -1009,7 +1009,7 @@ ctx.cookie(name, null, {
 * `m` {String} 模块名，多模块项目下生效
 * `return` {Mixed}
 
-获取 service，如果是类则实例化，否则直接返回。
+获取 service，如果是类则实例化，否则直接返回。等同于 [think.service](/doc/3.0/think.html#toc-014)。
 
 ```js
 // 获取 src/service/github.js 模块
