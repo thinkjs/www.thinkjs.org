@@ -30,7 +30,7 @@
       "RESTful API": "rest",
       "国际化与本地化": "i18n"
     },
-    "模型": {
+    "模型/数据库": {
       "介绍": "model_intro",
       "数据库配置": "model_config",
       "CRUD 操作": "model_crud",

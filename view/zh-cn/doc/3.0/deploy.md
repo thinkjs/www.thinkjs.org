@@ -123,7 +123,7 @@ fi
 
 虽然 Node.js 自身可以直接创建 HTTP(S) 服务，但生产环境不建议直接把 Node 服务可以对外直接访问，而是在前面用 WebServer（如：nginx） 来挡一层，这样有多个好处：
 
-* 可以更好做负载均衡
+* 可以更好做负载均衡，比如：同一个项目，启动多个端口的服务，用 nginx 做负载
 * 静态资源使用 nginx 直接提供服务性能更高
 * HTTPS 服务用 nginx 提供性能更高
 
@@ -164,6 +164,10 @@ server {
 
 项目中需要将 `server_name`、`root`、`port` 字段值根据实际情况配置，然后将配置文件软链到 nginx 的配置文件目录下，最后重启 nginx 服务即可（可以通过 `nginx -s reload` 重新加载配置文件）。
 
-#### HTTPS
+--------
 
-现代网站强制建议使用 HTTPS 访问，这样可以提供网站内容的安全性，避免内容被监听、篡改等问题。如果不愿意支付证书的费用，可以使用 [Let's Encrypt](https://letsencrypt.org/) 提供的免费 SSL/TLS 证书。
+如果还是想直接通过 Node.js 提供服务，也是可以的，可以直接监听 80 或者 443 的端口（部分环境下需要 `sudo` 执行才能监听这二个端口）。
+
+### HTTPS
+
+现代网站强制建议使用 HTTPS 访问，这样可以提供网站内容的安全性，避免内容被监听、篡改等问题。如果不愿意支付证书的费用，可以使用 [Let's Encrypt](https://letsencrypt.org/) 提供的免费 SSL/TLS 证书，可以参见文章 [Let's Encrypt，免费好用的 HTTPS 证书](https://imququ.com/post/letsencrypt-certificate.html)。
