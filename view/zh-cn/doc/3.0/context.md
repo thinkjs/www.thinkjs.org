@@ -286,7 +286,9 @@ Return the request socket.
 
 具体的判断策略为：如果 `req.socket.encrypted` 为真，那么直接返回 `https`，否则如果配置了 `app.proxy` 为 true，那么从 `X-Forwarded-Proto` header 里获取，默认值为 `http`。
 
-这么做是因为有时候并不会让 Node.js 直接对外提供服务，而是在前面用 web server（如：nginx）挡一层，web server 来提供 HTTP(S) 服务，web server 与 Node.js 之间始终用 HTTP 交互，这时候 Node.js 拿到始终都是 `http`。当前真实的协议只有 web server 知道，Node.js 并不知道，所以要让 Node.js 拿到真实的协议时，就需要 webserver 与 Node.js 定义特殊的字段来获取了，这里推荐的自定义 header 为 `X-Forwarded-Proto`。为了安全性，只有设置了 `app.proxy` 为 true 是才这样获取（production.js 里默认配置了为 true）。
+这么做是因为有时候并不会让 Node.js 直接对外提供服务，而是在前面用 web server（如：nginx）挡一层，由 web server 来提供 HTTP(S) 服务，web server 与 Node.js 之间始终用 HTTP 交互。
+
+这时候 Node.js 拿到的协议始终都是 `http`，真实的协议只有 web server 知道，所以要让 Node.js 拿到真实的协议时，就需要 webserver 与 Node.js 定义特殊的字段来获取，推荐的自定义 header 为 `X-Forwarded-Proto`。为了安全性，只有设置了 `app.proxy` 为 true 是才会这样获取（`production.js` 里默认配置了为 true）。
 
 ```sh
 ssl on;
