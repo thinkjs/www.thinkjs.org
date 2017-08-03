@@ -1,6 +1,6 @@
 ## Extend / 扩展
 
-虽然框架内置了很多功能，但在实际项目开发中，提供的功能还是远远不够的。3.0 里引入了扩展机制，方便对框架进行扩展。支持的扩展类型为：`think`、`application`、`context`、`request`、`response`、`controller` 和 `logic`。
+虽然框架内置了很多功能，但在实际项目开发中，提供的功能还是远远不够的。3.0 里引入了扩展机制，方便对框架进行扩展。支持的扩展类型为：`think`、`application`、`context`、`request`、`response`、`controller`、`logic` 和 `service`。
 
 框架内置的很多功能也是扩展来实现的，如：`Session`、`Cache`。
 
@@ -22,13 +22,14 @@ module.exports = [
 
 除了引入外部的 Extend 来丰富框架的功能，也可以在项目中对对象进行扩展，扩展文件放在 `src/extend/` 目录下（[多模块](/doc/3.0/multi_module.html)项目放在 `src/common/extend/` 下）。
 
-* `src/extend/think.js` 扩展 think 对象，如： think.xxx
-* `src/extend/application.js` 扩展 think.app 对象，Koa 里的 application 实例
-* `src/extend/request.js` 扩展 Koa 里的 request 对象
-* `src/extend/response.js` 扩展 Koa 里的 response 对象
-* `src/extend/context.js` 扩展 ctx 对象
-* `src/extend/controller.js` 扩展 controller 类
-* `src/extend/logic.js` 扩展 logic 类，logic 继承 controller 类，所以 logic 包含 controller 类所有方法
+* `src/extend/think.js` 扩展 think 对象，think.xxx
+* `src/extend/application.js` 扩展 Koa 里的 app 对象（think.app）
+* `src/extend/request.js` 扩展 Koa 里的 request 对象（think.app.request）
+* `src/extend/response.js` 扩展 Koa 里的 response 对象（think.app.response）
+* `src/extend/context.js` 扩展 ctx 对象（think.app.context）
+* `src/extend/controller.js` 扩展 controller 类（think.Controller）
+* `src/extend/logic.js` 扩展 logic 类（think.Logic）- logic 继承 controller 类，所以 logic 包含 controller 类所有方法
+* `src/extend/service.js` 扩展 service 类（think.Service）
 
 比如：我们想给 `ctx` 添加个 `isMobile` 方法来判断当前请求是不是手机访问，可以通过下面的方式：
 
