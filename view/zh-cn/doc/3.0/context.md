@@ -282,8 +282,31 @@ Return the request socket.
 
 #### ctx.protocol
 
-Return request protocol, "https" or "http". Supports X-Forwarded-Proto when app.proxy is true.
+获取请求的协议类型，值为 `https` 或者 `http`，当 `app.proxy` 配置为 true 值支持从 `X-Forwarded-Proto` header 里获取。
 
+具体的判断策略为：如果 `req.socket.encrypted` 为真，那么直接返回 `https`，否则如果配置了 `app.proxy` 为 true，那么从 `X-Forwarded-Proto` header 里获取，默认值为 `http`。
+
+这么做是因为有时候并不会让 Node.js 直接对外提供服务，而是在前面用 web server（如：nginx）挡一层，web server 来提供 HTTP(S) 服务，web server 与 Node.js 之间始终用 HTTP 交互，这时候 Node.js 拿到始终都是 `http`。当前真实的协议只有 web server 知道，Node.js 并不知道，所以要让 Node.js 拿到真实的协议时，就需要 webserver 与 Node.js 定义特殊的字段来获取了，这里推荐的自定义 header 为 `X-Forwarded-Proto`。为了安全性，只有设置了 `app.proxy` 为 true 是才这样获取（production.js 里默认配置了为 true）。
+
+```sh
+ssl on;
+# SSL certificate
+ssl_certificate /usr/local/nginx/ssl/domain.crt;
+ssl_certificate_key /usr/local/nginx/ssl/domain.key;
+
+location = /index.js {
+  proxy_http_version 1.1;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header Host $http_host;
+  proxy_set_header X-Forwarded-Proto "https"; # 这里告知 Node.js 当前协议是 https
+  proxy_set_header X-NginX-Proxy true;
+  proxy_set_header Upgrade $http_upgrade;
+  proxy_set_header Connection "upgrade";
+  proxy_pass http://127.0.0.1:$node_port$request_uri;
+  proxy_redirect off;
+}
+```
 
 #### ctx.secure
 
