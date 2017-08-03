@@ -11,11 +11,11 @@ fs.readFile(filepath, 'utf8', (err, content) => {
   ...
 })
 ```
-这种方式下，当业务逻辑复杂后，很容易出现 [callback hell](http://callbackhell.com/) 的问题。为了解决这个问题，相继出现了 event、thunk、Promise、Generator function、Async functions 等解决方案，最终 `Async functions` 方案胜出，ThinkJS 也直接选用这种方式来解决异步问题。
+这种方式下，当业务逻辑复杂后，很容易出现 [callback hell](http://callbackhell.com/) 的问题。为了解决这个问题，相继出现了 event、thunk、Promise、Generator function、Async functions 等解决方案，最终 `Async functions` 方案胜出，ThinkJS 也直接选用这种方案来解决异步问题。
 
 ### Async functions
 
-Async functions 使用 async/await 语法定义函数，如：
+Async functions 使用 `async/await` 语法定义函数，如：
 
 ```js
 async function fn() {
@@ -29,7 +29,7 @@ async function fn() {
 * await 后面需要接 Promise，如果不是 Promise，则不会等待处理
 * 返回值肯定为 Promise
 
-返回值和 await 后面接的表达式均为 Promise，也就是 Async functions 以 Promise 为基础。如果 await 后面的表达式返回值不是 Promime，那么需要通过一些方式将其包装为 Promise。
+返回值和 await 后面接的表达式均为 Promise，也就是说 Async functions 以 Promise 为基础。如果 await 后面的表达式返回值不是 Promime，那么需要通过一些方式将其包装为 Promise。
 
 #### 项目中使用
 
@@ -46,8 +46,6 @@ module.exports = class extends think.Controller {
 ```
 
 虽然使用 Async functions 解决异步问题时比较优雅，但需要 Node.js 的版本 `>=7.6.0` 才支持，如果在之前的版本中使用，需要借助 Babel 进行转译（由于框架只是要求 Node.js 版本大于 6.0，所以默认创建的项目是带 Babel 转译的，将 Async functions 转译为 Generator functions + co 的方式）。
-
-`ThinkJS 3.0 项目中不再支持 Generator，需要使用 Async functions`
 
 #### 和 Generator 区别
 
@@ -181,7 +179,7 @@ module.exports = [
 
 ### timeout
 
-有时候需要延迟处理一些事务，最常见的办法就是通过 `setTimeout` 函数来处理，但 setTimeout 本身并不返回 Promise，这个时候我们就需要把其包装成 Promise。
+有时候需要延迟处理一些事务，最常见的办法就是通过 `setTimeout` 函数来处理，但 setTimeout 本身并不返回 Promise，这时候如果里面的执行函数报错了是无法捕获到的，这时候需要装成 Promise。
 
 框架提供了 `think.timeout` 方法可以快速包装成 Promise，如：
 
@@ -206,4 +204,4 @@ module.exports = class extends think.Controller {
 
 #### 项目中是不是不能使用 Generator？
 
-是的，ThinkJS 3.x 中不再支持 Generator，异步都用 Async functions 来处理，配合 Promise，是一种目前最优雅的解决异步问题的方式。
+是的，ThinkJS 3.x 中不再支持 Generator，异步都用 Async functions 来处理，配合 Promise，是目前最优雅的解决异步问题的方案。
