@@ -129,12 +129,31 @@ module.exports = (options, app) => {
 
 #### options
 
-传递给中间件的配置项，格式为一个对象。
+传递给中间件的配置项，格式为一个对象，中间件里获取到这个配置。
 
 ```js
 module.exports = [
   {
-    options: {} 
+    options: {
+      key: value
+    } 
+  }
+]
+```
+
+有时候需要的配置项需要从远程获取，如：配置值保存在数据库中，这时候就要异步从数据库中获取，这时候可以将 options 定义为一个函数来完成：
+
+```js
+module.exports = [
+  {
+    // 将 options 定义为一个异步函数，将获取到的配置返回
+    options: async () => {
+      const config = await getConfigFromDb();
+      return {
+        key: config.key,
+        value: config.value
+      }
+    }
   }
 ]
 ```
