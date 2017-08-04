@@ -202,7 +202,7 @@ exports.view = {
 {{ endif }}
 ```
 
-这里以 `nunjucks` 模板引擎举例，如果是调用控制器里的方法，那么方法必须为一个同步方法。
+这里以 `nunjucks` 模板引擎举例，如果是调用控制器里的方法，那么方法必须为一个**同步方法**。
 
 #### config
 
@@ -213,7 +213,7 @@ exports.view = {
 
 当前请求的 Context 对象，在模板里可以通过直接通过 `ctx.xxx` 调用其属性或者 `ctx.yyy()` 调用其方法。
 
-如果是调用其方法，那么方法必须为一个同步方法。
+如果是调用其方法，那么方法必须为一个**同步方法**。
 
 ### 支持的模板引擎
 
@@ -254,3 +254,17 @@ module.exports = class extends think.Controller {
 #### 如何关闭视图的功能？
 
 有的项目只是提供 API 接口的功能，不需要模板渲染。创建项目时默认加载了视图的扩展，如果不需要视图的功能，可以修改 `src/config/extend.js`，将视图的扩展去除。修改 `src/config/adapter.js`，将视图的 adapter 配置去除。
+
+#### 怎么在模板里使用 session/cache 的功能？
+
+有时候需要在模板里获取 session/cache 相关的信息，但由于 session/cache 的操作都是异步的，所以无法直接调用 `controller.session` 来操作，需要在 Action 里获取到数据然后赋值导模板中，如：
+
+```js
+module.exports = class extends think.Controller {
+  async indexAction() {
+    const userInfo = await this.session('userInfo');
+    this.assign('userInfo', userInfo);
+  }
+}
+```
+获取到 `userInfo` 并赋值后，在模板里就可以通过 `userInfo.xxx` 获取对应的值了。
