@@ -107,10 +107,10 @@ module.exports = {
 
 * 加载 `[ThinkJS]/lib/config.js`
 * 加载 `[ThinkJS]/lib/config.[env].js`
-* 加载 `[ThinkJS]/lib/adapter.js`
-* 加载 `[ThinkJS]/lib/adapter.[env].js`
 * 加载 `src/config/config.js`
 * 加载 `src/config/config.[env].js`
+* 加载 `[ThinkJS]/lib/adapter.js`
+* 加载 `[ThinkJS]/lib/adapter.[env].js`
 * 加载 `src/config/adapter.js`
 * 加载 `src/config/adapter.[env].js`
 
