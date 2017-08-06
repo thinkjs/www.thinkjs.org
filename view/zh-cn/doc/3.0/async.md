@@ -51,7 +51,7 @@ module.exports = class extends think.Controller {
 
 虽然 Async functions 和 Generator 从语法糖上看起来很相似，但其实还是有很多的区别，具体为：
 
-* 为解决异步而生，`async/await` 更加语义化。而 Generator 本身是个迭代器，发现可以用来解决异步问题
+* 为解决异步而生，`async/await` 更加语义化。而 Generator 本身是个迭代器，只是被发现可以用来解决异步问题
 * 要求 await 后面必须是 Promise 接口，而 yield 后面没有任何限制
 * 不需要额外的执行器，Generator 需要借助 [co](https://github.com/tj/co) 这样的执行器
 * 可以定义为 Arrow functions 的方式，而 Generator function 不能
@@ -159,7 +159,7 @@ module.exports = class extends think.Controller {
 module.exports = [
   ...
   {
-    handle: 'trace', 
+    handle: 'trace',
     options: {
       sourceMap: false,
       debug: true, // 是否打印详细的错误信息
