@@ -73,7 +73,7 @@ const parseFile = async (filepath) => {
 }
 ```
 
-由于 Promise resolve 时只能有一个参数，如果有的 callback 接口返回多个值，那么就不能用 `think.promisify` 快速包装了，这时候需要手工处理，如：
+对于回调函数不是 `callback(err, data)` 形式的函数，就不能用 `think.promisify` 快速包装了，这时候需要手工处理，如：
 
 ```js
 const exec = require('child_process').exec;
