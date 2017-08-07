@@ -18,6 +18,7 @@
 * `think.app.services` 存放 service 文件
 * `think.app.routers` 存放自定义路由配置
 * `think.app.validators` 存放校验配置
+* `think.app.server` 创建 HTTP 服务后的 server 对象
 
 如果想要查下这些属性具体的值，可以在 `appReady` 事件中进行。
 
