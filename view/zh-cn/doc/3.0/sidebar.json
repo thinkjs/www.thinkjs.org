@@ -17,6 +17,10 @@
       "Extend": "extend",
       "异步/错误处理": "async"
     },
+    "模型/数据库": {
+      "关系数据库": "relation_model",
+      "MongoDB": "mongo"
+    },
     "进阶应用": {
       "think 对象": "think",
       "启动自定义": "bootstrap",
@@ -29,15 +33,6 @@
       "Babel 转译": "babel",
       "RESTful API": "rest",
       "国际化与本地化": "i18n"
-    },
-    "模型/数据库": {
-      "介绍": "model_intro",
-      "数据库配置": "model_config",
-      "CRUD 操作": "model_crud",
-      "事务": "model_transaction",
-      "关联模型": "model_relation",
-      "MySQL": "model_mysql",
-      "API": "model_api"
     },
     "扩展功能": {
       "多模块项目": "multi_module",
