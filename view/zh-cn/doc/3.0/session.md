@@ -41,8 +41,8 @@ exports.session = {
   type: 'cookie',
   common: {
     cookie: {
-      name: 'test',
-      keys: ['werwer', 'werwer'],
+      name: 'ThinkJS',
+      keys: ['signature key2', 'signature key1'],
       signed: true
     }
   },
@@ -50,7 +50,7 @@ exports.session = {
     handle: cookieSession,
     cookie: {
       maxAge: 1009990 * 1000,
-      keys: ['welefen', 'suredy'],
+      keys: ['signature key2', 'signature key1'],
       encrypt: true
     }
   },

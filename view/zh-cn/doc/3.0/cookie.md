@@ -43,7 +43,7 @@ Set-Cookie: key2=value2; path=path; domain=domain; max-age=max-age-in-seconds; e
 * `secure`: 布尔值，表示是否只通过 HTTPS 发送该 cookie（`false`时默认通过HTTP发送，`true`时默认通过HTTPS发送）。
 * `httpOnly`: 布尔值，表示是否只通过 HTTP(S)发送该 cookie，而不能被客户端的 JavaScript 访问到（默认是`true`）。
 * `sameSite`: 布尔值或字符串，表示是否该 cookie 是一个“同源” cookie（默认是`false`）。可以将其设置为`'strict'`，`'lax'`，或`true` （等价于`strict`）。
-* `signed`: 布尔值，表示是否要将该 cookie 签名（默认是`false`）。如果设为`true`，还会发送另一个带有`.sig`后缀的同名 cookie，值为一个 27 字节的 url-safe base64 SHA1 值，表示_cookie-name _ = _ cookie-value_的散列值，相对于第一个[ Keygrip]（https://www.npmjs.com/package/keygrip）键。 此签名密钥用于在下次接收到 cookie 时检测篡改。
+* `signed`: 布尔值，表示是否要将该 cookie 签名（默认是`false`）。如果设为`true`，还会发送另一个带有`.sig`后缀的同名 cookie，值为一个 27 字节的 url-safe base64 SHA1 值，表示_cookie-name _ = _ cookie-value_的散列值，相对于第一个 [Keygrip](https://www.npmjs.com/package/keygrip) 键。 此签名密钥用于在下次接收到 cookie 时检测篡改。
 * `overwrite`: 布尔值，表示是否覆盖以前设置的同名 cookie（默认为false）。如果设为`true`，在同一个请求中设置的相同名称（不管路径或域）的所有 cookie 将在设置此 cookie 时从 Set-Cookie 头中过滤掉。
 
 
