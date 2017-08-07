@@ -119,6 +119,10 @@ module.exports = class extends think.Model {
 #### 删除数据
 #### 手动执行 SQL 语句
 
+#### 设置主键
+
+#### 设置 schema
+
 ### 事务
 #### 手工操作事务
 #### transaction
