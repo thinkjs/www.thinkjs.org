@@ -27,7 +27,7 @@ server.listen(port, hostname, () => {
 * 根据不同的环境（Master 进程、Worker 进程、命令行调用）处理不同的逻辑
 * 如果是 Master 进程
     - 加载配置文件，生成 `think.config` 和 `think.logger` 对象。
-    - 加载文件 `src/bootstrap/matser.js` 文件
+    - 加载文件 `src/bootstrap/master.js` 文件
     - 如果配置文件监听服务，那么开始监听文件的变化，目录为 `src/`。
     - 文件修改后，如果配置文件编译服务，那么会对文件进行编译，编译到 `app/` 目录下。
     - 根据配置 `workers` 来 fork 对应数目的 Worker。Worker 进程启动完成后，触发 `appReady` 事件。（可以通过 `think.app.on("appReady")` 来捕获）
