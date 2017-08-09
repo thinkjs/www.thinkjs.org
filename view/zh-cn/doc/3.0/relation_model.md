@@ -2,7 +2,7 @@
 
 ### 介绍
 
-在项目开发中，经常需要操作数据库（如：增删改查等功能），同时还要注意 SQL 注入等安全问题。为此框架提供了模型功能，方便操作数据库。
+在项目开发中，经常需要操作数据库（如：增删改查等功能），手工拼写 SQL 语句非常麻烦，同时还要注意 SQL 注入等安全问题。为此框架提供了模型功能，方便操作数据库。
 
 ### 扩展模型功能
 
@@ -242,17 +242,134 @@ const user2 = think.model('admin/user'); // 实例化后台的 user 模型
 
 ### 关联查询
 
-数据库中表经常会跟其他数据表有关联，数据操作时需要连同关联的表一起操作。如：一个博客文章会有分类、标签、评论，以及属于哪个用户。支持的类型如下：
+数据库中表经常会跟其他数据表有关联，数据操作时需要连同关联的表一起操作。如：一个博客文章会有分类、标签、评论，以及属于哪个用户，支持的类型有：一对一、一对一（属于）、一对多和多对多。
 
-* `think.Model.HAS_ONE` 一对一模型
-* `think.Model.BELONG_TO` 一对一（属于）
-* `think.Model.HAS_MANY` 一对多
-* `think.Model.MANY_TO_MANY` 多对多
+可以通过 [model.relation](/doc/3.0/relation_model.html#toc-548) 属性配置详细的关联关系。
 
 #### 一对一
+
+一对一关联，表示当前表含有一个附属表。假设当前表的模型名为 `user`，关联表的模型名为 `info`，那么配置中字段 `key` 的默认值为 `id`，字段 `fKey` 的默认值为 `user_id`。
+
+```js
+module.exports = class extends think.Model {
+  get relation() {
+    return {
+      info: think.Model.HAS_ONE
+    };
+  }
+}
+```
+
+执行查询操作时，可以得到类似如下的数据：
+
+```js
+[
+  {
+    id: 1,
+    name: '111',
+    info: { //关联表里的数据信息
+      user_id: 1,
+      desc: 'info'
+    }
+  }, ...]
+```
+
 #### 一对一（属于）
+
+一对一关联，属于某个关联表，和 HAS_ONE 是相反的关系。假设当前模型名为 `info`，关联表的模型名为 `user`，那么配置字段 `key` 的默认值为 `user_id`，配置字段 `fKey` 的默认值为 `id`。
+
+
+```js
+module.exports = class extends think.Model {
+  get relation() {
+    return {
+      user: think.Model.BELONG_TO
+    }
+  }
+}
+```
+
+执行查询操作时，可以得到类似下面的数据：
+
+```js
+[
+  {
+    id: 1,
+    user_id: 1,
+    desc: 'info',
+    user: {
+      name: 'thinkjs'
+    }
+  }, ...
+]
+```
+
 #### 一对多
+
+一对多的关系。假如当前模型名为 `post`，关联表的模型名为 `comment`，那么配置字段 `key` 默认值为 `id`，配置字段 `fKey` 默认值为 `post_id`。
+
+```js
+module.exports = class extends think.Model {
+  get relation() {
+    return {
+      comment: {
+        type: think.Model.HAS_MANY
+      }
+    }
+  }
+}
+```
+
+执行查询数据时，可以得到类似下面的数据：
+
+```js
+[{
+  id: 1,
+  title: 'first post',
+  content: 'content',
+  comment: [{
+    id: 1,
+    post_id: 1,
+    name: 'welefen',
+    content: 'first comment'
+  }, ...]
+}, ...]
+```
+
+如果关联表的数据需要分页查询，可以通过 [model.setRelation](/doc/3.0/relation_model.html#toc-d7a) 方法进行。
+
 #### 多对多
+
+多对多关系。假设当前模型名为 `post`，关联模型名为 `cate`，那么需要一个对应的关联关系表。配置字段 `rModel` 默认值为 `post_cate`，配置字段 `rfKey` 默认值为 `cate_id`。
+
+
+```js
+module.exports = class extends think.Model {
+  get relation() {
+    return {
+      cate: {
+        type: think.Model.MANY_TO_MANY,
+        rModel: 'post_cate',
+        rfKey: 'cate_id'
+      }
+    }
+  }
+}
+```
+
+查询出来的数据结构为：
+
+```js
+[{
+  id: 1,
+  title: 'first post',
+  cate: [{
+    id: 1,
+    name: 'cate1',
+    post_id: 1
+  }, ...]
+}, ...]
+```
 
 ### 分布式/读写分离
 
@@ -284,6 +401,12 @@ exports.model = {
 ```
 
 `parser` 里可以根据 sql 返回不同的配置，会将返回的配置和默认的配置进行合并。
+
+### 常见问题
+
+#### 数据库的连接数最大连接数是多少？
+
+假设项目有二个集群，每个集群有十台机器，机器机器开启了四个 worker，数据库配置的连接池里的连接数为五，那么总体的最大连接数为：`2 * 10 * 4 * 5 = 400`
 
 ### API
 
@@ -343,6 +466,7 @@ module.exports = class extends think.Model {
 
 ```js
 module.exports = class extends think.Model {
+  // 配置关联关系
   get relation() {
     return {
       cate: { // 配置跟分类的关联关系
@@ -359,20 +483,197 @@ module.exports = class extends think.Model {
 
 每个关联关系支持的配置如下：
 
-* `type` 关联关系类型，支持的类型有：`think.Model.HAS_ONE`、`think.Model.BELONG_TO`、`think.Model.HAS_MANY`、`think.Model.MANY_TO_MANY`
-* `model` 关联表的模型名，默认为配置的 key，这里为 `cate`
-* `name` 对应的数据字段名，默认为配置的 key，这里为 `cate`
-* `key` 当前模型的关联 key
-* `fKey` 关联表与只对应的 key
-* `field` 关联表查询时设置的 field，如果需要设置，必须包含 `fKey` 对应的值
-* `where` 关联表查询时设置的 where 条件
-* `order` 关联表查询时设置的 order
-* `limit` 关联表查询时设置的 limit
-* `page` 关联表查询时设置的 page
-* `rModel` 多对多关系下，对应的关联关系模型名
-* `rfKey` 多对多关系下，对应里的关系关系表对应的 key
+* `type` 关联关系类型，默认为 `think.Model.HAS_ONE`
 
-#### model.setRelation()
+  ```
+  一对一：think.Model.HAS_ONE
+  一对一（属于）：think.Model.BELONG_TO
+  一对多：think.Model.HAS_MANY
+  多对多：think.Model.MANY_TO_MANY
+  ```
+* `model` 关联表的模型名，默认为配置的 key
+
+  ```
+  实例化对应关联模型的时候使用，会通过 const relationModel = this.model(item.model) 去实例化关联模型
+  ```
+* `name` 对应的数据字段名，默认为配置的 key，查询到数据后，保存字段的名称。
+
+  ```
+  // 原始数据
+  const originData = {
+    id: 1,
+    email: ''
+  }
+  // 设置对应的数据字段名为 cate
+  // 那么最终生成的数据为
+  const targetData = {
+    id: 1,
+    email: '',
+    cate: {
+
+    }
+  }
+  ```
+* `key` 当前模型的关联 key
+
+  ```
+  一对一、一对多、多对多下默认值为当前模型的主键，如：id
+  一对一（属于）下默认值为关联表名称和 id 的组合，如：cate_id
+  ```
+* `fKey` 关联表与只对应的 key
+
+  ```
+  一对一、一对多、多对多下默认值为关联表名称和 id 的组合，如：cate_id
+  一对一（属于）下默认值为当前模型的主键，如：id
+  ```
+
+* `field` 关联表查询时设置的 field，默认值为 `*`。如果需要设置，必须包含 `fKey` 对应的值，支持函数。
+
+  ```
+  // 设置 field 字段
+  get relation() {
+    return {
+      cate: {
+        field: 'id,name' // 只查询 id, name 字段
+      }
+    }
+  }
+
+  // 设置 field 为 function
+  get relation() {
+    return {
+      cate: {
+        // rModel 为关联模型的实例，model 为当前模型的实例
+        field: (rModel, model) => { 
+          return 'id,name'
+        }
+      }
+    }
+  }
+  ```
+* `where` 关联表查询时设置的 where 条件，支持函数
+* `order` 关联表查询时设置的 order，支持函数
+* `limit` 关联表查询时设置的 limit，支持函数
+* `page` 关联表查询时设置的 page，支持函数
+* `rModel` 多对多关系下，对应的关联关系模型名，默认值为二个模型名的组合，如：`article_cate`
+
+  ```
+  多对多关联模型下，一般需要一个中间的关联表维护关联关系，如：article（文章）和 cate（分类）是多对多的关联关系，那么就需要一个文章-分类的中间关系表（article_cate），rModel 为配置的中间关联表的模型名称
+  ```
+* `rfKey` 多对多关系下，关系表对应的 key
+* `relation` 是否关闭关联表的关联关系
+
+  ```
+  // 如果关联表还配置了关联关系，那么查询时还会一并查询
+  // 有时候不希望查询关联表的关联数据，那么就可以通过 relation 属性关闭
+  get relation() {
+    return {
+      cate: {
+        relation: false // 关闭关联表的所有关联关系，可以避免关联死循环等各种问题
+      }
+    }
+  }
+  ```
+
+#### model.setRelation(name, value)
+
+设置关联关系后，查询等操作都会自动查询关联表的数据。如果某些情况下不需要查询关联表的数据，可以通过 `setRelation` 方法临时关闭关联关系查询。
+
+##### 全部关闭
+
+通过 `setRelation(false)` 关闭所有的关联关系查询。
+
+```js
+module.exports = class extends think.Model {
+  constructor(...args){
+    super(...args);
+    this.relation = {
+      comment: think.Model.HAS_MANY,
+      cate: think.Model.MANY_TO_MANY
+    };
+  }
+  getList(){
+    return this.setRelation(false).select();
+  }
+}
+```
+
+##### 部分启用
+
+通过 `setRelation('comment')` 只查询 `comment` 的关联数据，不查询其他的关联关系数据。
+
+```js
+module.exports = class extends think.Model {
+  constructor(...args){
+    super(...args);
+    this.relation = {
+      comment: think.Model.HAS_MANY,
+      cate: think.Model.MANY_TO_MANY
+    };
+  }
+  getList2(){
+    return this.setRelation('comment').select();
+  }
+}
+```
+
+##### 部分关闭
+
+通过 `setRelation('comment', false)` 关闭 `comment` 的关联关系数据查询。
+
+```js
+module.exports = class extends think.Model {
+  constructor(...args){
+    super(...args);
+    this.relation = {
+      comment: think.Model.HAS_MANY,
+      cate: think.Model.MANY_TO_MANY
+    };
+  }
+  getList2(){
+    return this.setRelation('comment', false).select();
+  }
+}
+```
+
+##### 重新全部启用
+
+通过 `setRelation(true)` 重新启用所有的关联关系数据查询。
+
+```js
+module.exports = class extends think.Model {
+  constructor(...args){
+    super(...args);
+    this.relation = {
+      comment: think.Model.HAS_MANY,
+      cate: think.Model.MANY_TO_MANY
+    };
+  }
+  getList2(){
+    return this.setRelation(true).select();
+  }
+}
+```
+
+##### 动态更改配置项
+
+虽然通过 relation 属性配置了关联关系，但有时候调用的时候希望动态修改某些值，如：设置分页，这时候也可以通过 setRelation 方法来完成。
+
+```js
+module.exports = class extends think.Model {
+  constructor(...args){
+    super(...args);
+    this.relation = {
+      comment: think.Model.HAS_MANY,
+      cate: think.Model.MANY_TO_MANY
+    };
+  }
+  getList2(page){
+    // 动态设置 comment 的分页
+    return this.setRelation('comment', {page}).select();
+  }
+}
+```
 
 #### model.db(db)
 
@@ -1341,7 +1642,7 @@ module.exports = class extends think.Controller {
 分页查询，一般需要结合 `page` 方法一起使用。如：
 
 ```js
-module.exports = class extends think.controller.base {
+module.exports = class extends think.Controller {
   async listAction(){
     let model = this.model('user');
     let data = await model.page(this.get('page')).countSelect();
@@ -1367,7 +1668,7 @@ module.exports = class extends think.controller.base {
 有时候总条数是放在其他表存储的，不需要再查当前表获取总条数了，这个时候可以通过将第一个参数 `options` 设置为总条数来查询。
 
 ```js
-module.exports = class extends think.controller.base {
+module.exports = class extends think.Controller {
   async listAction(){
     const model = this.model('user');
     const total = 256;
@@ -1383,7 +1684,75 @@ module.exports = class extends think.controller.base {
 * `num` {Boolean | Number} 需要的条数
 * `return` {Promise}
 
-获取特定字段的值。
+获取特定字段的值，可以设置 where、group 等条件。
+
+** 获取单个字段的所有列表 **
+
+```js
+module.exports = class extends think.Controller {
+  async listAction(){
+    const data = await this.model('user').getField('c_id');
+    // data = [1, 2, 3, 4, 5]
+  }
+}
+```
+
+** 指定个数获取单个字段的列表 **
+
+```js
+module.exports = class extends think.Controller {
+  async listAction(){
+    const data = await this.model('user').getField('c_id', 3);
+    // data = [1, 2, 3]
+  }
+}
+```
+
+** 获取单个字段的一个值 **
+
+```js
+module.exports = class extends think.Controller {
+  async listAction(){
+    const data = await this.model('user').getField('c_id', true);
+    // data = 1
+  }
+}
+```
+
+** 获取多个字段的所有列表 **
+
+```js
+module.exports = class extends think.Controller {
+  async listAction(){
+    const data = await this.model('user').getField('c_id,d_name');
+    // data = {c_id: [1, 2, 3, 4, 5], d_name: ['a', 'b', 'c', 'd', 'e']}
+  }
+}
+
+```
+
+
+** 获取指定个数的多个字段的所有列表 **
+
+```js
+module.exports = class extends think.Controller {
+  async listAction(){
+    const data = await this.model('user').getField('c_id,d_name', 3);
+    // data = {c_id: [1, 2, 3], d_name: ['a', 'b', 'c']}
+  }
+}
+```
+
+** 获取多个字段的单一值 **
+
+```js
+module.exports = class extends think.Controller {
+  async listAction(){
+    const data = await this.model('user').getField('c_id,d_name', true);
+    // data = {c_id: 1, d_name: 'a'}
+  }
+}
+```
 
 #### model.count(field)
 
@@ -1476,7 +1845,7 @@ module.exports = class extends think.Model{
 * `sqlOptions` {String | Object} 要执行的 sql 选项
 * `return` {Promise} 查询的数据
 
-指定 SQL 语句执行查询，`sqlOptions` 会通过 [parseSql](/doc/3.0/relation_model.html#toc-a15) 方法解析。
+指定 SQL 语句执行查询，`sqlOptions` 会通过 [parseSql](/doc/3.0/relation_model.html#toc-a15) 方法解析，使用该方法执行 SQL 语句时需要自己处理安全问题。
 
 ```js
 module.exports = class extends think.Model {
@@ -1492,7 +1861,7 @@ module.exports = class extends think.Model {
 * `sqlOptions` {String | Object} 要操作的 sql 选项
 * `return` {Promise} 
 
-执行 SQL 语句，`sqlOptions` 会通过 [parseSql](/doc/3.0/relation_model.html#toc-a15) 方法解析。
+执行 SQL 语句，`sqlOptions` 会通过 [parseSql](/doc/3.0/relation_model.html#toc-a15) 方法解析，使用该方法执行 SQL 语句时需要自己处理安全问题。
 
 ```js
 module.exports = class extends think.Model {
