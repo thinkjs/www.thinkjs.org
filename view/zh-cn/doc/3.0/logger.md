@@ -71,7 +71,7 @@ exports.logger = {
 - `level`：日志等级
 - `filename`：日志文件地址
 - `absolute`：`filename` 是否为绝对路径地址，如果 `filename` 是绝对路径，`absolute` 的值需要设置为 `true`。
-- `pattern`：该参数定义时间格式字串，新的时间文件会按照该格式格式化后追加到原有的文件名后面。目前支持如下格式化参数：
+- `pattern`：该参数定义时间格式字符串，新的时间文件会按照该格式格式化后追加到原有的文件名后面。目前支持如下格式化参数：
     - `yyyy` - 四位数年份，也可以使用 `yy` 获取末位两位数年份
     - `MM` - 数字表示的月份，有前导零
     - `dd` - 月份中的第几天，有前导零的2位数字
@@ -127,7 +127,7 @@ module.exports = {
     - dummy
     - pattern
     - 自定义输出类型可参考 [Adding your own layouts](https://nomiddlename.github.io/log4js-node/layouts.html#adding-your-own-layouts)
-- `pattern`：输出格式字串，目前支持如下格式化参数
+- `pattern`：输出格式字符串，目前支持如下格式化参数
     - `%r` - `.toLocaleTimeString()` 输出的时间格式，例如 `下午5:13:04`。
     - `%p` - 日志等级
     - `%h` - 机器名称
@@ -141,7 +141,7 @@ module.exports = {
 
 ### 自定义 handle
 
-如果觉得提供的日志输出类型不满足大家的需求，可以自定义日志处理的 `handle`。自定义 handle 需要实现一下几个方法：
+如果觉得提供的日志输出类型不满足大家的需求，可以自定义日志处理的 `handle`。自定义 handle 需要实现以下几个方法：
 
 ```javascript
 module.exports = class {
