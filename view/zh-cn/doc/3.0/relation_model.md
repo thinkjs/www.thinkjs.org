@@ -223,6 +223,7 @@ const user2 = think.model('admin/user'); // 实例化后台的 user 模型
 * [join](/doc/3.0/relation_model.html#toc-48b) 指定 SQL 语句中的 join
 * [union](/doc/3.0/relation_model.html#toc-ad1) 指定 SQL 语句中的 union
 * [having](/doc/3.0/relation_model.html#toc-be2) 指定 SQL 语句中的 having
+* [cache](/doc/3.0/relation_model.html#toc-fb8) 设置查询缓存 
 
 #### 添加数据
 
@@ -2032,6 +2033,48 @@ module.exports = class extends think.Model {
       let result = await userCate.add({user_id: insertId, cate_id: 100});
       return result;
     })
+  }
+}
+```
+
+#### model.cache(key, config)
+
+* `key` {String} 缓存 key，如果不设置会获取 SQL 语句的 md5 值作为 key
+* `config` {Mixed} 缓存配置
+* `return` {this}
+
+设置查询缓存，只在 `select`、`find`、`getField` 等查询相关的方法下有效。会自动合并 cache Adapter、model cache 的配置。
+
+```js
+// cache adapter 配置
+exports.cache = {
+  type: 'file',
+  file: {
+    handle: fileCache,
+    ...
+  }
+}
+// model adapter 配置
+exports.model = {
+  type: 'mysql',
+  mysql: {
+    handle: mysqlModel,
+    ...
+    cache: { // 额外的缓存配置
+      type: 'file',
+      handle: fileCache
+    }
+  }
+}
+```
+
+最终会将 cache adapter 配置、model cache 配置、以及参数里的配置合并起来作为 cache 的配置。
+
+```js
+module.exports = class extends think.Controller {
+  indexAction() {
+    // 设置缓存 key 为 userList，有效期为 2 个小时
+    return this.model('user').cache('userList', {timeout: 2 * 3600 * 1000}).select();
   }
 }
 ```
