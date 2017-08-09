@@ -700,7 +700,15 @@ const user = think.model('user');
 
 #### model.config
 
-实例化模型时传入的配置
+实例化模型时传入的配置，模型实例化时会自动传递，不用手工赋值。
+
+```js
+{
+  host: '127.0.0.1',
+  port: 3306,
+  ...
+}
+```
 
 #### model.tablePrefix
 
@@ -1387,11 +1395,13 @@ module.exports = class extends think.Model {
 
 #### model.add(data, options)
 
-* `data` {Object} 要添加的数据
+* `data` {Object} 要添加的数据，如果数据里某些字段在数据表里不存在会自动被过滤掉
 * `options` {Object} 操作选项，会通过 [parseOptions](/doc/3.0/relation_model.html#toc-d91) 方法解析
 * `return` {Promise} 返回插入的 ID
 
 添加一条数据，返回值为插入数据的 id。
+
+如果数据表没有主键或者没有设置 `auto increment` 等属性，那么返回值可能为 0。如果插入数据时手动设置主键的值，那么返回值也可能为 0。
 
 ```js
 module.exports = class extends think.Controller {
@@ -1517,7 +1527,7 @@ module.exports = class extends think.Controller {
 有时候更新值需要借助数据库的函数或者其他字段，这时候可以借助 `exp` 来完成。
 
 ```js
-export default class extends think.controlle.base {
+module.exports = class extends think.Controller {
   async updateAction(){
     let model = this.model('user');
     let affectedRows = await model.where('1=1').update({
@@ -1542,7 +1552,7 @@ export default class extends think.controlle.base {
 
 * `dataList` {Array} 要更新的数据列表
 * `options` {Object} 操作选项，会通过 [parseOptions](/doc/3.0/relation_model.html#toc-d91) 方法解析
-* `return` {Promise}
+* `return` {Promise} 影响的行数
 
 更新多条数据，dataList 里必须包含主键的值，会自动设置为更新条件。
 
@@ -1591,7 +1601,7 @@ module.exports = class extends think.Model {
 
 #### model.find(options)
 
-* `options` {Object} 操作选项
+* `options` {Object} 操作选项，会通过 [parseOptions](/doc/3.0/relation_model.html#toc-d91) 方法解析
 * `return` {Promise} 返回单条数据
 
 查询单条数据，返回的数据类型为对象。如果未查询到相关数据，返回值为 `{}`。
@@ -1845,7 +1855,7 @@ module.exports = class extends think.Model{
 * `sqlOptions` {String | Object} 要执行的 sql 选项
 * `return` {Promise} 查询的数据
 
-指定 SQL 语句执行查询，`sqlOptions` 会通过 [parseSql](/doc/3.0/relation_model.html#toc-a15) 方法解析，使用该方法执行 SQL 语句时需要自己处理安全问题。
+指定 SQL 语句执行查询，`sqlOptions` 会通过 [parseSql](/doc/3.0/relation_model.html#toc-ec3) 方法解析，使用该方法执行 SQL 语句时需要自己处理安全问题。
 
 ```js
 module.exports = class extends think.Model {
@@ -1861,7 +1871,7 @@ module.exports = class extends think.Model {
 * `sqlOptions` {String | Object} 要操作的 sql 选项
 * `return` {Promise} 
 
-执行 SQL 语句，`sqlOptions` 会通过 [parseSql](/doc/3.0/relation_model.html#toc-a15) 方法解析，使用该方法执行 SQL 语句时需要自己处理安全问题。
+执行 SQL 语句，`sqlOptions` 会通过 [parseSql](/doc/3.0/relation_model.html#toc-ec3) 方法解析，使用该方法执行 SQL 语句时需要自己处理安全问题。
 
 ```js
 module.exports = class extends think.Model {
@@ -1872,12 +1882,13 @@ module.exports = class extends think.Model {
 ```
 
 
-#### model.parseSql(sqlOptions)
+#### model.parseSql(sqlOptions, ...args)
 
-* `sql` {String | Object} 要解析的 SQL 语句
+* `sqlOptions` {String | Object} 要解析的 SQL 语句
+* `...args` {Array} 解析的数据
 * `return` {Object}
 
-解析 SQL 语句，将 SQL 语句中的 `__TABLENAME__` 解析为对应的表名。
+解析 SQL 语句，将 SQL 语句中的 `__TABLENAME__` 解析为对应的表名。通过 [util.format](https://nodejs.org/api/util.html#util_util_format_format_args) 将 args 数据解析导 sql 中。
 
 ```js
 module.exports = class extends think.Model {
