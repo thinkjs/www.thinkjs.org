@@ -83,9 +83,45 @@ exports.model = {
 
 #### SQLite
 
+Mysql 的 Adapter 为 [think-model-sqlite](https://github.com/thinkjs/think-model-sqlite)，底层基于 [sqlite3](https://github.com/mapbox/node-sqlite3) 库实现，使用连接池的方式连接数据库，默认连接数为 1。
+
+```js
+const sqlite = require('think-model-sqlite');
+exports.model = {
+  type: 'mysql',
+  sqlite: {
+    handle: sqlite, // Adapter handle
+    path: path.join(think.ROOT_PATH, 'runtime/sqlite'), // sqlite 保存的目录
+    database: '', // 数据库名
+    connectionLimit: 1, // 连接池的连接个数，默认为 1
+    prefix: '', // 数据表前缀，如果一个数据库里有多个项目，那项目之间的数据表可以通过前缀来区分
+  }
+}
+```
+
 #### PostgreSQL
 
-#### 其他
+
+Mysql 的 Adapter 为 [think-model-postgresql](https://github.com/thinkjs/think-model-postgresql)，底层基于 [pg](https://github.com/brianc/node-postgres) 库实现，使用连接池的方式连接数据库，默认连接数为 1。
+
+```js
+const postgresql = require('think-model-postgresql');
+exports.model = {
+  type: 'mysql',
+  postgresql: {
+    handle: postgresql, // Adapter handle
+    user: 'root', // 用户名
+    password: '', // 密码
+    database: '', // 数据库
+    host: '127.0.0.1', // host 
+    port: 3211, // 端口
+    connectionLimit: 1, // 连接池的连接个数，默认为 1
+    prefix: '', // 数据表前缀，如果一个数据库里有多个项目，那项目之间的数据表可以通过前缀来区分
+  }
+}
+```
+
+除了用 host 和 port 连接数据库外，也可以通过 `connectionString` 来连接，更多配置选项请见 <https://node-postgres.com/features/connecting>
 
 ### 创建模型文件
 
