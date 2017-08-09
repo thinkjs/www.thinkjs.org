@@ -445,6 +445,10 @@ exports.model = {
 
 假设项目有二个集群，每个集群有十台机器，机器机器开启了四个 worker，数据库配置的连接池里的连接数为五，那么总体的最大连接数为：`2 * 10 * 4 * 5 = 400`
 
+#### 如何查看相关调试信息？
+
+模型使用的 debug 名称为 `think-model`，可以通过 `DEBUG=think-model npm start` 启动服务然后查看调试信息。
+
 ### API
 
 #### model.schema
