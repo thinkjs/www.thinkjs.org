@@ -29,7 +29,7 @@ async function fn() {
 * await 后面需要接 Promise，如果不是 Promise，则不会等待处理
 * 返回值肯定为 Promise
 
-返回值和 await 后面接的表达式均为 Promise，也就是说 Async functions 以 Promise 为基础。如果 await 后面的表达式返回值不是 Promime，那么需要通过一些方式将其包装为 Promise。
+返回值和 await 后面接的表达式均为 Promise，也就是说 Async functions 以 Promise 为基础。如果 await 后面的表达式返回值不是 Promise，那么需要通过一些方式将其包装为 Promise。
 
 #### 项目中使用
 
