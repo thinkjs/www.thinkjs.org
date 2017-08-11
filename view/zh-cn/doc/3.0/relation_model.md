@@ -787,6 +787,18 @@ module.exports = class extends think.Model {
 }
 ```
 
+有时候不想写模型文件，而是在控制器里直接实例化，这时候又想改变主键的名称，那么可以通过设置 `_pk` 属性的方式，如：
+
+```js
+module.exports = class extends think.Controller {
+  async indexAction() {
+    const user = this.model('user');
+    user._pk = 'user_id'; // 通过 _pk 属性设置 pk
+    const data = await user.select();
+  }
+}
+```
+
 #### model.options
 
 模型操作的一些选项，设置 where、limit、group 等操作时最终都会解析到 options 选项上，格式为：
