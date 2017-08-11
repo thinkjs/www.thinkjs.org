@@ -51,6 +51,22 @@ module.exports = class extends think.Controller {
   }
 }
 ```
+如果类继承需要调用父级的 `__before` 方法的话，可以通过 `super.__before` 来完成，如：
+
+```js
+module.exports = class extends Base {
+  async __before(){
+    // 通过 Promise.resolve 将返回值包装为 Promise
+    // 如果返回值确定为 Promise，那么就不需要再包装了
+    return Promise.resolve(super.__before()).then(flag => {
+      // 如果父级想阻止后续继承执行会返回 false，这里判断为 false 的话不再继续执行了。
+      if(flag === false) return false;
+
+      // 其他逻辑代码
+    })
+  }
+}
+```
 
 ### 后置操作 __after
 
@@ -164,6 +180,22 @@ module.exports = class extends think.Controller {
 }
 ```
 
+#### async/await 和 super 同时使用为什么报错？
+
+目前 Babel 的稳定版还是 `6.x`，这个版本下如果同时使用了 async/await 和 super，那么编译后的代码有问题导致报错，需要等待 7.0 的版本，具体见 <https://github.com/babel/babel/issues/3930>。
+
+目前的解决办法是，不要 async/await 和 super 同时使用，如果必须有 super 调用，那么就直接用 Promise 的方式。如：
+
+```js
+module.exports = class extends Base {
+  aaa () {
+    // 通过 Promise.resolve 将父级方法返回值包装为 Promise，然后就可以用 then 方法了
+    return Promise.resolve(super.aaa()).then(data => {
+      ...
+    })
+  }
+}
+```
 
 ### API
 
