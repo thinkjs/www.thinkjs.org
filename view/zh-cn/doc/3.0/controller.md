@@ -419,7 +419,17 @@ json 的方式输出内容，等同于 [ctx.json](/doc/3.0/context.html#toc-77f)
 module.exports = class extends think.Controller {
   indexAction() {
     // 获取其他控制器实例，然后调用其方法
+    const userController = this.controller('user');
+    userController.xxx();
+  }
+  index2Action() {
+    // 获取子级控制器实例，然后调用其方法
     const userController = this.controller('console/user');
+    userController.xxx();
+  }
+  index3Action() {
+    // 获取 admin 模块下控制器实例，然后调用其方法
+    const userController = this.controller('console/user', 'admin');
     userController.xxx();
   }
 }
@@ -427,18 +437,26 @@ module.exports = class extends think.Controller {
 
 #### controller.action(controller, name, m)
 
-* `controller` {String|Object} 控制器名称
+* `controller` {String | Object} 控制器名称，会通过 `this.controller` 获取到控制器实例
 * `name` {String} Action 名称
-* `m` {String} 模块名，多模块项目下有效
+* `m` {String, Optional} 模块名，多模块项目下有效
 * `return` {Mixed}
 
-调用其他模块下的 Action 方法，会调用 `__before`、`__after` 之类的魔术方法。
+调用其他控制器下的 Action 方法，会自动调用 `__before`、`__after` 之类的魔术方法。
 
 ```js
 module.exports = class extends think.Controller {
   indexAction() {
     // 调用 user 控制器的 loginAction 方法
-    const ret = this.action('user', 'login';)
+    const ret = this.action('user', 'login');
+  }
+  index2Action() {
+    // 调用 front/user 控制器（子级控制器）的 loginAction 方法
+    const ret = this.action('front/user', 'login');
+  }
+  index3Action() {
+    // 调用 admin 模块下（多模块项目） user 控制器的 loginAction 方法
+    const ret = this.action('user', 'login', 'admin');
   }
 }
 ```
