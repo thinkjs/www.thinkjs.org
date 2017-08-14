@@ -358,6 +358,18 @@ test().then((result)=>{
 })
 ```
 
+#### think.omit(obj, props)
+
+* `obj` {Object} 要操作的对象
+* `props` {String | Array} 要忽略的属性，如果是字符串，多个值用逗号隔开
+
+忽略对象中的某些属性，返回新的对象
+
+```js
+const value = think.omit({a: 1, b: 2, c: 3}, 'a,b');
+// value is {c: 3}
+```
+
 #### think.md5(str)
 
 * `str` {String}
