@@ -1,6 +1,5 @@
 ## 关系数据库
 
-### 介绍
 
 在项目开发中，经常需要操作数据库（如：增删改查等功能），手工拼写 SQL 语句非常麻烦，同时还要注意 SQL 注入等安全问题。为此框架提供了模型功能，方便操作数据库。
 
@@ -83,7 +82,7 @@ exports.model = {
 
 #### SQLite
 
-Mysql 的 Adapter 为 [think-model-sqlite](https://github.com/thinkjs/think-model-sqlite)，底层基于 [sqlite3](https://github.com/mapbox/node-sqlite3) 库实现，使用连接池的方式连接数据库，默认连接数为 1。
+SQLite 的 Adapter 为 [think-model-sqlite](https://github.com/thinkjs/think-model-sqlite)，底层基于 [sqlite3](https://github.com/mapbox/node-sqlite3) 库实现，使用连接池的方式连接数据库，默认连接数为 1。
 
 ```js
 const sqlite = require('think-model-sqlite');
@@ -102,7 +101,7 @@ exports.model = {
 #### PostgreSQL
 
 
-Mysql 的 Adapter 为 [think-model-postgresql](https://github.com/thinkjs/think-model-postgresql)，底层基于 [pg](https://github.com/brianc/node-postgres) 库实现，使用连接池的方式连接数据库，默认连接数为 1。
+PostgreSQL 的 Adapter 为 [think-model-postgresql](https://github.com/thinkjs/think-model-postgresql)，底层基于 [pg](https://github.com/brianc/node-postgres) 库实现，使用连接池的方式连接数据库，默认连接数为 1。
 
 ```js
 const postgresql = require('think-model-postgresql');
