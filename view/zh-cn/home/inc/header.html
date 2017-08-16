@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ThinkJS - 使用 ES6/7 特性开发 Node.js 项目，支持 TypeScript</title>
+<title><%-title%></title>
 <meta name="renderer" content="webkit">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="always">
@@ -31,17 +31,24 @@
 <body>
 <div class="header">
   <div class="wrap clearfix">
-        <div class="logo"><a href="/" title="ThinkJS"></a></div>
+        <div class="logo">
+            <a href="/" title="ThinkJS"></a>
+            
+        </div>
         <div class="headr">
             <ul class="nav">
-                <li><a target="_blank" href="https://github.com/thinkjs/thinkjs"> <img height="20" src="/static/other/icon/star.svg" alt="github star"> </a></li>
+                <li>
+                    <a target="_blank" href="https://github.com/thinkjs/thinkjs">
+                        <img height="20" src="https://img.shields.io/github/stars/75team/thinkjs.svg?style=social&label=Star" alt="github star" style="vertical-align:middle"> 
+                    </a>
+                </li>
                 <li <%if(currentNav === 'doc'){%>class="current"<%}%>><a href="/<%-lang%>/doc/index.html">文档</a></li>
                 <!-- <li class="firekylin"><a href="https://github.com/75team/firekylin" target="_blank">FireKylin</a></li> -->
-                <li <%if(currentNav === 'demo'){%>class="current"<%}%>><a href="/<%-lang%>/demo.html">示例/教程</a></li>
+                <!-- <li <%if(currentNav === 'demo'){%>class="current"<%}%>><a href="/<%-lang%>/demo.html">示例/教程</a></li> -->
                 <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/<%-lang%>/changelog.html">更新日志</a></li>
-                <li <%if(currentNav === 'plugin'){%>class="current"<%}%>><a href="/<%-lang%>/plugin.html">插件</a></li>
+                <li><a href="https://github.com/thinkjs/think-awesome" target="_blank">Awesome</a></li>
                 <!-- <li class="discuss"><a href="http://wenda.thinkjs.org/" target="_blank">社区</a></li> -->
-                <!-- <li class="donate"><a href="/donate.html">捐赠</a></li> -->
+                <li class="donate"><a href="/donate.html">捐赠</a></li>
             </ul>
             <%if(hasVersion){%>
             <div class="version" id="version">
