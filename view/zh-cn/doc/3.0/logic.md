@@ -717,6 +717,7 @@ module.exports = class extends think.Logic {
         byteLength: {min: 2, max: 4} // 字节长度需要在 2 - 4 之间
         // byteLength: {min: 2} // 字节最小长度需要为 2
         // byteLength: {max: 4} // 字节最大长度需要为 4
+        // byteLength: 10 // 字节长度需要等于 10
       }
     }
   }
@@ -898,7 +899,8 @@ module.exports = class extends think.Logic {
       field_name: {
         length: {min: 10}, //长度不能小于10
         // length: {max: 20}, //长度不能大于10
-        // length: {min: 10, max: 20} //长度需要在 10 - 20 之间
+        // length: {min: 10, max: 20}, //长度需要在 10 - 20 之间
+        // length: 10 //长度需要等于10
       }
     }
     this.validate();
