@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="3007px" height="887px" viewBox="0 0 3007 887" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="77.8913459%" cy="100%" fx="77.8913459%" fy="100%" r="125.474034%" id="radialGradient-1">
+            <stop stop-color="#37A9C3" offset="0%"></stop>
+            <stop stop-color="#27599F" offset="99.1569675%"></stop>
+        </radialGradient>
+        <polygon id="path-2" points="384.213158 0 768.295425 221.75 768.295425 665.25 384.213158 887 0.130891647 665.25 0.130891647 221.75"></polygon>
+    </defs>
+    <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M1030,286.5 C1051,287 1072,287 1093,287.5 C1141,288.5 1153,300 1154.5,315 C1154.5,317 1155,318.5 1155,320.5 C1155.5,327.5 1156.5,329 1159,329 C1161,329 1162.5,327 1162.5,322.5 C1162.5,317 1164,282.5 1164,267.5 C1164,264.5 1164,261.5 1161.5,261.5 C1159.5,261.5 1155,263 1147.5,264 C1139.5,265.5 1128,266.5 1112,266.5 L924.5,266.5 C918.5,266.5 899.5,265.5 885,264 C871.5,263 866.5,258 863,258 C861,258 859,264.5 858,267.5 C857,271.5 847,314.5 847,319.5 C847,322.5 848,324 849.5,324 C851.5,324 853,323 854.5,319 C856,315.5 857.5,312 863,303.5 C871,291.5 883,288 914,287.5 C938.5,287 963.5,287 988,286.5 L988,498 C988,546 988,585.5 985.5,606.5 C983.5,621 981,632 971,634 C966.5,635 960.5,636 956,636 C953,636 952,637.5 952,639 C952,642 954.5,643 960,643 C975,643 1006.5,641.5 1009,641.5 C1011.5,641.5 1043,643 1070.5,643 C1076,643 1078.5,641.5 1078.5,639 C1078.5,637.5 1077.5,636 1074.5,636 C1070,636 1059,635 1052,634 C1037,632 1034,621 1032.5,606.5 C1030,585.5 1030,546 1030,498 L1030,286.5 Z M1296.5,455.5 C1295,455.5 1293.5,455.5 1293.5,453 L1293.5,444 C1293.5,378 1293.5,367 1294,353.5 C1295,339.5 1298,331 1310.5,329 C1316,328 1317.5,328 1320.5,328 C1323.5,328 1325.5,327 1325.5,325 C1325.5,322.5 1323,321.5 1318,321.5 C1304,321.5 1275,323 1273,323 C1266.5,323 1242.5,321.5 1221,321.5 C1216,321.5 1213.5,322 1213.5,325 C1213.5,326.5 1215.5,328 1219,328 C1223,328 1228,328.5 1232.5,329 C1247,330.5 1250.5,340 1251.5,353 C1252.5,366.5 1252.5,379.5 1252.5,445.5 L1252.5,519.5 C1252.5,560.5 1253,594 1250,612 C1248.5,623 1246.5,632.5 1237.5,634.5 C1233.5,635.5 1229.5,636 1225.5,636 C1221,636 1220,638 1220,639.5 C1220,642 1223,643 1228,643 C1241,643 1271.5,641.5 1273,641.5 C1275.5,641.5 1305,643 1330.5,643 C1335,643 1337,641.5 1337,639.5 C1337,637.5 1334.5,636 1331,636 C1327,636 1319.5,635.5 1313,634.5 C1300,633 1297.5,623 1296,612 C1293.5,594 1293.5,561.5 1293.5,521 L1293.5,476.5 C1293.5,474 1294.5,473.5 1296,473.5 L1477.5,473.5 C1479,473.5 1480.5,474.5 1480.5,476.5 L1480.5,521 C1480.5,561.5 1480.5,593 1478,611 C1476.5,622.5 1474,633.5 1465.5,635 C1461.5,636 1458,636 1454,636 C1450,636 1448.5,637.5 1448.5,639 C1448.5,642 1451,643 1456,643 C1469.5,643 1498.5,641.5 1500.5,641.5 C1503,641.5 1532,643 1557,643 C1562,643 1564.5,642 1564.5,639.5 C1564.5,637.5 1562,636 1558,636 C1553.5,636 1547,635.5 1540.5,634.5 C1527.5,633 1525,623 1523.5,611 C1521.5,593 1521.5,560.5 1521.5,519.5 L1521.5,444.5 C1521.5,378.5 1521.5,367 1522,353.5 C1523,339.5 1525,331.5 1538.5,329.5 C1541.5,329 1545.5,328.5 1548.5,328.5 C1552.5,328.5 1554,326.5 1554,325 C1554,322 1551,321.5 1546,321.5 C1531,321.5 1503,323 1501,323 C1499,323 1469.5,321.5 1448.5,321.5 C1444,321.5 1441.5,322 1441.5,325 C1441.5,327 1444,328.5 1447.5,328.5 C1451.5,328.5 1456.5,329 1460,329.5 C1476.5,332.5 1478.5,339.5 1479.5,353 C1480.5,366.5 1480.5,378 1480.5,444 L1480.5,453 C1480.5,455.5 1479,455.5 1477.5,455.5 L1296.5,455.5 Z M1675.5,519.5 C1675.5,557 1675.5,592.5 1673,610.5 C1671.5,622.5 1670,632.5 1661.5,634.5 C1657.5,635.5 1652,636 1649.5,636 C1645,636 1643,637.5 1643,639.5 C1643,642 1646.5,643 1651,643 C1665,643 1694.5,641.5 1696,641.5 C1698.5,641.5 1727.5,643 1753,643 C1758,643 1760,641.5 1760,639.5 C1760,637.5 1759,636.5 1754.5,636 C1752.5,636 1742,635.5 1735.5,634 C1722.5,631 1720.5,625.5 1718.5,611 C1716,593 1716.5,558 1716.5,519.5 L1716.5,444.5 C1716.5,378.5 1716,367 1717,353.5 C1718,339 1719.5,331.5 1734,329.5 C1737.5,329 1740,329 1743,328.5 C1747,328 1748.5,327 1748.5,325 C1748.5,322.5 1746,321.5 1741,321.5 C1727,321.5 1698,323 1696,323 C1694.5,323 1666,321.5 1650.5,321.5 C1645,321.5 1643,322.5 1643,325 C1643,327 1645,328 1648.5,328.5 C1651.5,329 1655,329 1660,330 C1670.5,332 1673.5,339.5 1674.5,353 C1675.5,366.5 1675.5,378.5 1675.5,444.5 L1675.5,519.5 Z M1858,580.5 C1858,617 1855.5,630.5 1844.5,634 C1838,636 1832.5,636 1829,636 C1824,636 1822,637.5 1822,639.5 C1822,642.5 1825,643 1829.5,643 C1851,643 1869.5,641.5 1873,641.5 C1876.5,641.5 1894.5,643 1921.5,643 C1927,643 1929.5,642 1929.5,639.5 C1929.5,637.5 1927.5,636 1923.5,636 C1919.5,636 1911,636 1903,634 C1890.5,631 1887.5,618 1886.5,583.5 L1880,388 C1892.5,401 1942.5,453 1994.5,507 C2038,549.5 2107.5,618.5 2109.5,619.5 C2134,642.5 2139,646 2142.5,646 C2146,646 2147,643.5 2147,618.5 L2148,367.5 C2148,337.5 2151.5,332.5 2163,330 C2168.5,329 2172.5,329 2175.5,328.5 C2178.5,328 2180,326.5 2180,324.5 C2180,322 2178.5,321.5 2173,321.5 C2153.5,321.5 2138,323 2133,323 C2128.5,323 2107.5,321.5 2086,321.5 C2081,321.5 2077,322 2077,324.5 C2077,326.5 2078,328.5 2083,328.5 C2086.5,328.5 2094,329 2102.5,330.5 C2116,334 2119,343 2119.5,370 L2125,578 C2112,566 2062,514.5 2023,476.5 C1953,405 1883.5,334 1879,329 C1875.5,325.5 1867,315.5 1863.5,315.5 C1859.5,315.5 1858,320.5 1858,336 C1858.5,419 1858,342 1858,580.5 L1858,580.5 Z M2332,444.5 C2332,378.5 2331.5,367 2332.5,353.5 C2333.5,339 2335,331.5 2349.5,329.5 C2353,329 2355.5,329 2358.5,328.5 C2362.5,328 2364,327 2364,325 C2364,322.5 2361.5,321.5 2356.5,321.5 C2342.5,321.5 2313.5,323 2311.5,323 C2310,323 2281.5,321.5 2266,321.5 C2260.5,321.5 2258.5,322.5 2258.5,325 C2258.5,327 2260.5,328 2264,328.5 C2267,329 2270.5,329 2275.5,330 C2286,332 2289,339.5 2290,353 C2291,366.5 2291,378.5 2291,444.5 L2291,519.5 C2291,557 2291,592.5 2288.5,610.5 C2287,622.5 2285.5,632.5 2277,634.5 C2273,635.5 2267.5,636 2265,636 C2260.5,636 2258.5,637.5 2258.5,639.5 C2258.5,642 2262,643 2266.5,643 C2280.5,643 2310,641.5 2311.5,641.5 C2314,641.5 2343,643 2368.5,643 C2373.5,643 2375.5,641.5 2375.5,639.5 C2375.5,637.5 2374.5,636.5 2370,636 C2368,636 2357.5,635.5 2351,634 C2338,631 2336,625.5 2334,611 C2331.5,593 2332,558 2332,519.5 L2332,480 C2371.5,526.5 2451.5,608.5 2474,624.5 C2494,638.5 2504,643 2543,643 L2575.5,643 C2581,643 2583.5,642 2583.5,640 C2583.5,637.5 2581,636.5 2576.5,636 C2568,635 2570.5,635.5 2565,634.5 C2545,630 2528,621 2493,589 C2472,570 2391,490 2364,462 C2386,442 2429.5,399.5 2466,366.5 C2492,343 2498.5,337.5 2510.5,333.5 C2516.5,331 2527,329 2535,328.5 C2539,328 2540.5,326.5 2540.5,324.5 C2540.5,322.5 2539.5,321.5 2532.5,321.5 C2526,321.5 2498.5,323 2483.5,323 C2467.5,323 2452.5,321.5 2449.5,321.5 C2445.5,321.5 2444.5,323 2444.5,324.5 C2444.5,326.5 2446.5,327.5 2450,328.5 C2456,330.5 2458,333 2458,336.5 C2458,342 2456,344.5 2432,371 C2409.5,395.5 2355,447.5 2332,468 L2332,444.5 Z M2688.5,410 C2688.5,332 2688.5,318 2689.5,302 C2690.5,284.5 2693.5,274.5 2707,273 C2711.5,272.5 2715.5,272 2719,272 C2722,272 2724.5,271 2724.5,269 C2724.5,266 2722,265 2716.5,265 C2701.5,265 2670,266.5 2667.5,266.5 C2665,266.5 2633,265 2610.5,265 C2605,265 2603,266.5 2603,268.5 C2603,270.5 2605,272 2608.5,272 C2613,272 2620,272.5 2624,273.5 C2640.5,277 2644.5,285 2645.5,302 C2646.5,318 2646.5,332 2646.5,410 L2646.5,554.5 C2646.5,683.5 2631,710 2598.5,743 C2594,747.5 2587,753.5 2581,757 C2576.5,760 2574,761.5 2574,764.5 C2574,766.5 2576,767.5 2577.5,767.5 C2579,767.5 2580,767 2581,766.5 C2586,764 2594,758.5 2600.5,754 C2641,726 2663,702.5 2673.5,677.5 C2688.5,642 2688.5,611 2688.5,530 L2688.5,410 Z M2888.5,650 C2915.5,650 2942.5,644 2964,629 C2998.5,604.5 3006.5,566.5 3006.5,546 C3006.5,506 2992.5,475 2933.5,428.5 L2919.5,417.5 C2871.5,380 2858.5,362 2858.5,333.5 C2858.5,297 2885.5,275.5 2920,275.5 C2966,275.5 2979.5,296.5 2982.5,302 C2985.5,307.5 2988.5,321 2989,327 C2989.5,331 2990,333.5 2993,333.5 C2995.5,333.5 2996.5,330 2996.5,322 C2996.5,288 2998.5,271.5 2998.5,269 C2998.5,266.5 2997.5,265.5 2993.5,265.5 C2989.5,265.5 2985.5,265 2976,263 C2963.5,260 2949,258 2929.5,258 C2866,258 2826,294.5 2826,348 C2826,382 2838,413 2891,456.5 L2913.5,475 C2956.5,510.5 2971,530.5 2971,565 C2971,597 2947.5,631.5 2899.5,631.5 C2866,631.5 2833,617.5 2825.5,580.5 C2824,573.5 2824,566.5 2824,562 C2824,558 2823.5,556.5 2820.5,556.5 C2818,556.5 2817,559 2816.5,564.5 C2816,572.5 2814,592.5 2814,617.5 C2814,631 2814.5,633 2821.5,636.5 C2842,646.5 2865,650 2888.5,650 L2888.5,650 Z" id="ThinkJS" fill="url(#radialGradient-1)"></path>
+        <g id="Group-2">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <use id="Polygon" stroke="#979797" xlink:href="#path-2"></use>
+            <g id="pattern" mask="url(#mask-3)">
+                <g transform="translate(-1111.000000, -680.000000)" id="Group">
+                    <g>
+                        <polygon id="Shape" stroke="#1C3182" stroke-width="1.51" fill="#1C3182" points="2130 1528 1740 1601 2286 1535"></polygon>
+                        <polygon id="Shape" stroke="#1B2C7F" stroke-width="1.51" fill="#1B2C7F" points="2286 1535 1740 1601 2352 1536"></polygon>
+                        <polygon id="Shape" stroke="#2F6598" stroke-width="1.51" fill="#2F6598" points="2239 725 2296 976 2408 917"></polygon>
+                        <polygon id="Shape" stroke="#1B3D87" stroke-width="1.51" fill="#1B3D87" points="2256 1241 2347 1340 2417 1137"></polygon>
+                        <polygon id="Shape" stroke="#1E478D" stroke-width="1.51" fill="#1E478D" points="2279 1106 2256 1241 2417 1137"></polygon>
+                        <polygon id="Shape" stroke="#1E5790" stroke-width="1.51" fill="#1E5790" points="2408 917 2296 976 2417 1137"></polygon>
+                        <polygon id="Shape" stroke="#205291" stroke-width="1.51" fill="#205291" points="2296 976 2279 1106 2417 1137"></polygon>
+                        <polygon id="Shape" stroke="#1A357F" stroke-width="1.51" fill="#1A357F" points="2347 1340 2370 1447 2417 1137"></polygon>
+                        <polygon id="Shape" stroke="#326894" stroke-width="1.51" fill="#326894" points="2239 725 2408 917 2424 797"></polygon>
+                        <polygon id="Shape" stroke="#436F97" stroke-width="1.51" fill="#436F97" points="2284 641 2239 725 2424 797"></polygon>
+                        <polygon id="Shape" stroke="#4E718E" stroke-width="1.51" fill="#4E718E" points="2388 478 2314 563 2424 797"></polygon>
+                        <polygon id="Shape" stroke="#497093" stroke-width="1.51" fill="#497093" points="2314 563 2284 641 2424 797"></polygon>
+                        <polygon id="Shape" stroke="#6F7B8A" stroke-width="1.51" fill="#6F7B8A" points="2394 0 2388 478 2424 797"></polygon>
+                        <polygon id="Shape" stroke="#225A8C" stroke-width="1.51" fill="#225A8C" points="2408 917 2417 1137 2424 797"></polygon>
+                        <polygon id="Shape" stroke="#346AA0" stroke-width="1.51" fill="#346AA0" points="2239 725 2166 897 2296 976"></polygon>
+                        <polygon id="Shape" stroke="#1D3184" stroke-width="1.51" fill="#1D3184" points="2347 1340 2177 1358 2370 1447"></polygon>
+                        <polygon id="Shape" stroke="#1C2C80" stroke-width="1.51" fill="#1C2C80" points="2177 1358 2286 1535 2370 1447"></polygon>
+                        <polygon id="Shape" stroke="#152771" stroke-width="1.51" fill="#152771" points="2286 1535 2352 1536 2370 1447"></polygon>
+                        <polygon id="Shape" stroke="#1F3A8B" stroke-width="1.51" fill="#1F3A8B" points="2256 1241 2177 1358 2347 1340"></polygon>
+                        <polygon id="Shape" stroke="#1F2F87" stroke-width="1.51" fill="#1F2F87" points="2177 1358 2135 1461 2286 1535"></polygon>
+                        <polygon id="Shape" stroke="#2D64A1" stroke-width="1.51" fill="#2D64A1" points="2166 897 2191 970 2296 976"></polygon>
+                        <polygon id="Shape" stroke="#255C9C" stroke-width="1.51" fill="#255C9C" points="2191 970 2279 1106 2296 976"></polygon>
+                        <polygon id="Shape" stroke="#274B9F" stroke-width="1.51" fill="#274B9F" points="2045 1101 2081 1257 2256 1241"></polygon>
+                        <polygon id="Shape" stroke="#244E9B" stroke-width="1.51" fill="#244E9B" points="2045 1101 2256 1241 2279 1106"></polygon>
+                        <polygon id="Shape" stroke="#1C2C80" stroke-width="1.51" fill="#1C2C80" points="2135 1461 2130 1528 2286 1535"></polygon>
+                        <polygon id="Shape" stroke="#54779E" stroke-width="1.51" fill="#54779E" points="2169 536 2239 725 2284 641"></polygon>
+                        <polygon id="Shape" stroke="#295AA2" stroke-width="1.51" fill="#295AA2" points="2191 970 2045 1101 2279 1106"></polygon>
+                        <polygon id="Shape" stroke="#1D3A88" stroke-width="1.51" fill="#1D3A88" points="1927 1486 1740 1601 2130 1528"></polygon>
+                        <polygon id="Shape" stroke="#567AA6" stroke-width="1.51" fill="#567AA6" points="2169 536 2067 694 2239 725"></polygon>
+                        <polygon id="Shape" stroke="#244095" stroke-width="1.51" fill="#244095" points="2081 1257 2177 1358 2256 1241"></polygon>
+                        <polygon id="Shape" stroke="#4474A8" stroke-width="1.51" fill="#4474A8" points="2067 694 2166 897 2239 725"></polygon>
+                        <polygon id="Shape" stroke="#2C63AB" stroke-width="1.51" fill="#2C63AB" points="2099 959 2045 1101 2191 970"></polygon>
+                        <polygon id="Shape" stroke="#3D79AF" stroke-width="1.51" fill="#3D79AF" points="2067 694 1983 816 2078 918"></polygon>
+                        <polygon id="Shape" stroke="#3C73AD" stroke-width="1.51" fill="#3C73AD" points="2067 694 2078 918 2166 897"></polygon>
+                        <polygon id="Shape" stroke="#5F81AA" stroke-width="1.51" fill="#5F81AA" points="2028 570 2067 694 2169 536"></polygon>
+                        <polygon id="Shape" stroke="#3167A8" stroke-width="1.51" fill="#3167A8" points="2166 897 2099 959 2191 970"></polygon>
+                        <polygon id="Shape" stroke="#263996" stroke-width="1.51" fill="#263996" points="1959 1357 2135 1461 2177 1358"></polygon>
+                        <polygon id="Shape" stroke="#26429A" stroke-width="1.51" fill="#26429A" points="2081 1257 1959 1357 2177 1358"></polygon>
+                        <polygon id="Shape" stroke="#356AAC" stroke-width="1.51" fill="#356AAC" points="2078 918 2099 959 2166 897"></polygon>
+                        <polygon id="Shape" stroke="#5983AC" stroke-width="1.51" fill="#5983AC" points="2028 570 2014 646 2067 694"></polygon>
+                        <polygon id="Shape" stroke="#21348A" stroke-width="1.51" fill="#21348A" points="1927 1486 2130 1528 2135 1461"></polygon>
+                        <polygon id="Shape" stroke="#253B95" stroke-width="1.51" fill="#253B95" points="1959 1357 1927 1486 2135 1461"></polygon>
+                        <polygon id="Shape" stroke="#2550A1" stroke-width="1.51" fill="#2550A1" points="2045 1101 1959 1281 2081 1257"></polygon>
+                        <polygon id="Shape" stroke="#26499E" stroke-width="1.51" fill="#26499E" points="1959 1281 1959 1357 2081 1257"></polygon>
+                        <polygon id="Shape" stroke="#2F6CAE" stroke-width="1.51" fill="#2F6CAE" points="2078 918 1918 1021 2099 959"></polygon>
+                        <polygon id="Shape" stroke="#2968AD" stroke-width="1.51" fill="#2968AD" points="1918 1021 2045 1101 2099 959"></polygon>
+                        <polygon id="Shape" stroke="#2557A5" stroke-width="1.51" fill="#2557A5" points="1895 1192 1959 1281 2045 1101"></polygon>
+                        <polygon id="Shape" stroke="#1D418C" stroke-width="1.51" fill="#1D418C" points="1828 1503 1740 1601 1927 1486"></polygon>
+                        <polygon id="Shape" stroke="#447EB0" stroke-width="1.51" fill="#447EB0" points="1955 796 1983 816 2067 694"></polygon>
+                        <polygon id="Shape" stroke="#3373B0" stroke-width="1.51" fill="#3373B0" points="1983 816 1918 1021 2078 918"></polygon>
+                        <polygon id="Shape" stroke="#4D81AE" stroke-width="1.51" fill="#4D81AE" points="2014 646 1955 796 2067 694"></polygon>
+                        <polygon id="Shape" stroke="#2763AA" stroke-width="1.51" fill="#2763AA" points="1918 1021 1895 1192 2045 1101"></polygon>
+                        <polygon id="Shape" stroke="#327DB4" stroke-width="1.51" fill="#327DB4" points="1784 854 1918 1021 1955 796"></polygon>
+                        <polygon id="Shape" stroke="#367AB1" stroke-width="1.51" fill="#367AB1" points="1955 796 1918 1021 1983 816"></polygon>
+                        <polygon id="Shape" stroke="#4885B2" stroke-width="1.51" fill="#4885B2" points="1807 769 1955 796 2014 646"></polygon>
+                        <polygon id="Shape" stroke="#548EB2" stroke-width="1.51" fill="#548EB2" points="1755 567 1807 769 2014 646"></polygon>
+                        <polygon id="Shape" stroke="#256AAE" stroke-width="1.51" fill="#256AAE" points="1831 1050 1895 1192 1918 1021"></polygon>
+                        <polygon id="Shape" stroke="#3987B5" stroke-width="1.51" fill="#3987B5" points="1807 769 1784 854 1955 796"></polygon>
+                        <polygon id="Shape" stroke="#2458A5" stroke-width="1.51" fill="#2458A5" points="1895 1192 1804 1232 1959 1281"></polygon>
+                        <polygon id="Shape" stroke="#2553A2" stroke-width="1.51" fill="#2553A2" points="1804 1232 1798 1392 1959 1281"></polygon>
+                        <polygon id="Shape" stroke="#264B9F" stroke-width="1.51" fill="#264B9F" points="1959 1281 1798 1392 1959 1357"></polygon>
+                        <polygon id="Shape" stroke="#26459C" stroke-width="1.51" fill="#26459C" points="1798 1392 1927 1486 1959 1357"></polygon>
+                        <polygon id="Shape" stroke="#2979B4" stroke-width="1.51" fill="#2979B4" points="1784 854 1831 1050 1918 1021"></polygon>
+                        <polygon id="Shape" stroke="#234496" stroke-width="1.51" fill="#234496" points="1798 1392 1828 1503 1927 1486"></polygon>
+                        <polygon id="Shape" stroke="#2367AD" stroke-width="1.51" fill="#2367AD" points="1831 1050 1761 1157 1895 1192"></polygon>
+                        <polygon id="Shape" stroke="#2360A9" stroke-width="1.51" fill="#2360A9" points="1761 1157 1804 1232 1895 1192"></polygon>
+                        <polygon id="Shape" stroke="#267DB6" stroke-width="1.51" fill="#267DB6" points="1784 854 1728 1059 1831 1050"></polygon>
+                        <polygon id="Shape" stroke="#2985B9" stroke-width="1.51" fill="#2985B9" points="1645 942 1728 1059 1784 854"></polygon>
+                        <polygon id="Shape" stroke="#2659A6" stroke-width="1.51" fill="#2659A6" points="1663 1334 1798 1392 1804 1232"></polygon>
+                        <polygon id="Shape" stroke="#4F97B8" stroke-width="1.51" fill="#4F97B8" points="1755 567 1638 716 1807 769"></polygon>
+                        <polygon id="Shape" stroke="#254C9B" stroke-width="1.51" fill="#254C9B" points="1798 1392 1650 1454 1828 1503"></polygon>
+                        <polygon id="Shape" stroke="#2372B2" stroke-width="1.51" fill="#2372B2" points="1728 1059 1761 1157 1831 1050"></polygon>
+                        <polygon id="Shape" stroke="#204991" stroke-width="1.51" fill="#204991" points="1650 1454 1740 1601 1828 1503"></polygon>
+                        <polygon id="Shape" stroke="#2461AA" stroke-width="1.51" fill="#2461AA" points="1732 1188 1663 1334 1804 1232"></polygon>
+                        <polygon id="Shape" stroke="#2365AC" stroke-width="1.51" fill="#2365AC" points="1761 1157 1732 1188 1804 1232"></polygon>
+                        <polygon id="Shape" stroke="#3D91B9" stroke-width="1.51" fill="#3D91B9" points="1638 716 1784 854 1807 769"></polygon>
+                        <polygon id="Shape" stroke="#2855A4" stroke-width="1.51" fill="#2855A4" points="1663 1334 1650 1454 1798 1392"></polygon>
+                        <polygon id="Shape" stroke="#3090BC" stroke-width="1.51" fill="#3090BC" points="1559 841 1645 942 1784 854"></polygon>
+                        <polygon id="Shape" stroke="#3797BD" stroke-width="1.51" fill="#3797BD" points="1638 716 1559 841 1784 854"></polygon>
+                        <polygon id="Shape" stroke="#5AA0B8" stroke-width="1.51" fill="#5AA0B8" points="1642 551 1638 716 1755 567"></polygon>
+                        <polygon id="Shape" stroke="#236EB0" stroke-width="1.51" fill="#236EB0" points="1728 1059 1732 1188 1761 1157"></polygon>
+                        <polygon id="Shape" stroke="#1F4E90" stroke-width="1.51" fill="#1F4E90" points="1650 1454 1580 1590 1740 1601"></polygon>
+                        <polygon id="Shape" stroke="#2373B2" stroke-width="1.51" fill="#2373B2" points="1728 1059 1572 1180 1732 1188"></polygon>
+                        <polygon id="Shape" stroke="#2469AE" stroke-width="1.51" fill="#2469AE" points="1572 1180 1663 1334 1732 1188"></polygon>
+                        <polygon id="Shape" stroke="#2289BC" stroke-width="1.51" fill="#2289BC" points="1645 942 1500 1000 1728 1059"></polygon>
+                        <polygon id="Shape" stroke="#2281B9" stroke-width="1.51" fill="#2281B9" points="1500 1000 1572 1180 1728 1059"></polygon>
+                        <polygon id="Shape" stroke="#59A5BB" stroke-width="1.51" fill="#59A5BB" points="1545 596 1638 716 1642 551"></polygon>
+                        <polygon id="Shape" stroke="#2A5EA8" stroke-width="1.51" fill="#2A5EA8" points="1533 1354 1650 1454 1663 1334"></polygon>
+                        <polygon id="Shape" stroke="#276AAE" stroke-width="1.51" fill="#276AAE" points="1572 1180 1533 1354 1663 1334"></polygon>
+                        <polygon id="Shape" stroke="#2770B1" stroke-width="1.51" fill="#2770B1" points="1486 1286 1533 1354 1572 1180"></polygon>
+                        <polygon id="Shape" stroke="#3AA0C0" stroke-width="1.51" fill="#3AA0C0" points="1516 799 1559 841 1638 716"></polygon>
+                        <polygon id="Shape" stroke="#27599F" stroke-width="1.51" fill="#27599F" points="1533 1354 1580 1590 1650 1454"></polygon>
+                        <polygon id="Shape" stroke="#2994BF" stroke-width="1.51" fill="#2994BF" points="1559 841 1500 1000 1645 942"></polygon>
+                        <polygon id="Shape" stroke="#4BA5BE" stroke-width="1.51" fill="#4BA5BE" points="1545 596 1516 799 1638 716"></polygon>
+                        <polygon id="Shape" stroke="#51ACBF" stroke-width="1.51" fill="#51ACBF" points="1462 609 1516 799 1545 596"></polygon>
+                        <polygon id="Shape" stroke="#2899C1" stroke-width="1.51" fill="#2899C1" points="1455 951 1500 1000 1559 841"></polygon>
+                        <polygon id="Shape" stroke="#2C9CC1" stroke-width="1.51" fill="#2C9CC1" points="1450 913 1455 951 1559 841"></polygon>
+                        <polygon id="Shape" stroke="#2B60A8" stroke-width="1.51" fill="#2B60A8" points="1533 1354 1468 1350 1580 1590"></polygon>
+                        <polygon id="Shape" stroke="#2B61A1" stroke-width="1.51" fill="#2B61A1" points="1468 1350 1349 1487 1580 1590"></polygon>
+                        <polygon id="Shape" stroke="#49ABC1" stroke-width="1.51" fill="#49ABC1" points="1462 609 1414 765 1516 799"></polygon>
+                        <polygon id="Shape" stroke="#2282B9" stroke-width="1.51" fill="#2282B9" points="1500 1000 1454 1212 1572 1180"></polygon>
+                        <polygon id="Shape" stroke="#2577B4" stroke-width="1.51" fill="#2577B4" points="1454 1212 1486 1286 1572 1180"></polygon>
+                        <polygon id="Shape" stroke="#296096" stroke-width="1.51" fill="#296096" points="1349 1487 1237 1585 1580 1590"></polygon>
+                        <polygon id="Shape" stroke="#30A0C2" stroke-width="1.51" fill="#30A0C2" points="1516 799 1450 913 1559 841"></polygon>
+                        <polygon id="Shape" stroke="#2A6EAF" stroke-width="1.51" fill="#2A6EAF" points="1486 1286 1474 1295 1533 1354"></polygon>
+                        <polygon id="Shape" stroke="#2B6DAE" stroke-width="1.51" fill="#2B6DAE" points="1474 1295 1468 1350 1533 1354"></polygon>
+                        <polygon id="Shape" stroke="#318DBA" stroke-width="1.51" fill="#318DBA" points="1231 1048 1250 1168 1454 1212"></polygon>
+                        <polygon id="Shape" stroke="#2999C1" stroke-width="1.51" fill="#2999C1" points="1455 951 1231 1048 1500 1000"></polygon>
+                        <polygon id="Shape" stroke="#2A8FBD" stroke-width="1.51" fill="#2A8FBD" points="1231 1048 1454 1212 1500 1000"></polygon>
+                        <polygon id="Shape" stroke="#35A5C3" stroke-width="1.51" fill="#35A5C3" points="1414 765 1450 913 1516 799"></polygon>
+                        <polygon id="Shape" stroke="#2A75B2" stroke-width="1.51" fill="#2A75B2" points="1454 1212 1474 1295 1486 1286"></polygon>
+                        <polygon id="Shape" stroke="#37A9C3" stroke-width="1.51" fill="#37A9C3" points="1414 765 1343 807 1450 913"></polygon>
+                        <polygon id="Shape" stroke="#30A0C2" stroke-width="1.51" fill="#30A0C2" points="1285 915 1231 1048 1455 951"></polygon>
+                        <polygon id="Shape" stroke="#3074B1" stroke-width="1.51" fill="#3074B1" points="1285 1271 1468 1350 1474 1295"></polygon>
+                        <polygon id="Shape" stroke="#2E79B3" stroke-width="1.51" fill="#2E79B3" points="1454 1212 1285 1271 1474 1295"></polygon>
+                        <polygon id="Shape" stroke="#57B5C0" stroke-width="1.51" fill="#57B5C0" points="1210 613 1414 765 1462 609"></polygon>
+                        <polygon id="Shape" stroke="#356AA9" stroke-width="1.51" fill="#356AA9" points="1290 1452 1349 1487 1468 1350"></polygon>
+                        <polygon id="Shape" stroke="#3572AE" stroke-width="1.51" fill="#3572AE" points="1285 1271 1290 1452 1468 1350"></polygon>
+                        <polygon id="Shape" stroke="#3182B6" stroke-width="1.51" fill="#3182B6" points="1250 1168 1285 1271 1454 1212"></polygon>
+                        <polygon id="Shape" stroke="#30A0C2" stroke-width="1.51" fill="#30A0C2" points="1450 913 1285 915 1455 951"></polygon>
+                        <polygon id="Shape" stroke="#36A6C3" stroke-width="1.51" fill="#36A6C3" points="1343 807 1285 915 1450 913"></polygon>
+                        <polygon id="Shape" stroke="#4DB4C2" stroke-width="1.51" fill="#4DB4C2" points="1210 613 1343 807 1414 765"></polygon>
+                        <polygon id="Shape" stroke="#52BAC2" stroke-width="1.51" fill="#52BAC2" points="1210 613 1110 751 1343 807"></polygon>
+                        <polygon id="Shape" stroke="#41B6C4" stroke-width="1.51" fill="#41B6C4" points="1110 751 1187 878 1343 807"></polygon>
+                        <polygon id="Shape" stroke="#33699E" stroke-width="1.51" fill="#33699E" points="1290 1452 1237 1585 1349 1487"></polygon>
+                        <polygon id="Shape" stroke="#3BADC3" stroke-width="1.51" fill="#3BADC3" points="1187 878 1285 915 1343 807"></polygon>
+                        <polygon id="Shape" stroke="#3A7BB0" stroke-width="1.51" fill="#3A7BB0" points="1285 1271 1193 1263 1290 1452"></polygon>
+                        <polygon id="Shape" stroke="#4078AE" stroke-width="1.51" fill="#4078AE" points="1193 1263 1118 1438 1290 1452"></polygon>
+                        <polygon id="Shape" stroke="#32A3C2" stroke-width="1.51" fill="#32A3C2" points="1198 1032 1231 1048 1285 915"></polygon>
+                        <polygon id="Shape" stroke="#3785B5" stroke-width="1.51" fill="#3785B5" points="1250 1168 1193 1263 1285 1271"></polygon>
+                        <polygon id="Shape" stroke="#37A9C3" stroke-width="1.51" fill="#37A9C3" points="1187 878 1198 1032 1285 915"></polygon>
+                        <polygon id="Shape" stroke="#396EA1" stroke-width="1.51" fill="#396EA1" points="1118 1438 1237 1585 1290 1452"></polygon>
+                        <polygon id="Shape" stroke="#399EBF" stroke-width="1.51" fill="#399EBF" points="1198 1032 1124 1114 1231 1048"></polygon>
+                        <polygon id="Shape" stroke="#3A6C98" stroke-width="1.51" fill="#3A6C98" points="1118 1438 1125 1608 1237 1585"></polygon>
+                        <polygon id="Shape" stroke="#3797BC" stroke-width="1.51" fill="#3797BC" points="1231 1048 1124 1114 1250 1168"></polygon>
+                        <polygon id="Shape" stroke="#3B8EB8" stroke-width="1.51" fill="#3B8EB8" points="1124 1114 1193 1263 1250 1168"></polygon>
+                        <polygon id="Shape" stroke="#4DB8C3" stroke-width="1.51" fill="#4DB8C3" points="1110 751 1062 831 1187 878"></polygon>
+                        <polygon id="Shape" stroke="#448EB6" stroke-width="1.51" fill="#448EB6" points="1124 1114 1057 1225 1193 1263"></polygon>
+                        <polygon id="Shape" stroke="#4782B1" stroke-width="1.51" fill="#4782B1" points="1057 1225 1118 1438 1193 1263"></polygon>
+                        <polygon id="Shape" stroke="#43AAC2" stroke-width="1.51" fill="#43AAC2" points="1187 878 1004 990 1198 1032"></polygon>
+                        <polygon id="Shape" stroke="#5FBFC1" stroke-width="1.51" fill="#5FBFC1" points="1058 737 1110 751 1210 613"></polygon>
+                        <polygon id="Shape" stroke="#6CC4BF" stroke-width="1.51" fill="#6CC4BF" points="948 593 1058 737 1210 613"></polygon>
+                        <polygon id="Shape" stroke="#4DB2C1" stroke-width="1.51" fill="#4DB2C1" points="1062 831 1004 990 1187 878"></polygon>
+                        <polygon id="Shape" stroke="#44A3BF" stroke-width="1.51" fill="#44A3BF" points="1004 990 1124 1114 1198 1032"></polygon>
+                        <polygon id="Shape" stroke="#507FAD" stroke-width="1.51" fill="#507FAD" points="1057 1225 972 1418 1118 1438"></polygon>
+                        <polygon id="Shape" stroke="#4BA1BD" stroke-width="1.51" fill="#4BA1BD" points="1004 990 1048 1120 1124 1114"></polygon>
+                        <polygon id="Shape" stroke="#4995B8" stroke-width="1.51" fill="#4995B8" points="1048 1120 1057 1225 1124 1114"></polygon>
+                        <polygon id="Shape" stroke="#486F8F" stroke-width="1.51" fill="#486F8F" points="968 1557 883 1602 1125 1608"></polygon>
+                        <polygon id="Shape" stroke="#457099" stroke-width="1.51" fill="#457099" points="1118 1438 968 1557 1125 1608"></polygon>
+                        <polygon id="Shape" stroke="#4F77A2" stroke-width="1.51" fill="#4F77A2" points="972 1418 968 1557 1118 1438"></polygon>
+                    </g>
+                </g>
+            </g>
+            <polygon id="Polygon" stroke="#FFFFFF" stroke-width="30" points="384.214009 49 725.428018 246 725.428018 640 384.214009 837 43 640 43 246"></polygon>
+            <path d="M417.75,335 L480.25,335 C516.25,335 535.25,336 553.75,338.5 L553.75,271.5 C534.75,274 516.25,275 480.25,275 L282.25,275 C253.75,275 232.25,274 214.25,271.5 L214.25,338.5 C231.75,336 253.25,335 282.75,335 L350.25,335 L350.25,608 C350.25,635 349.25,652 346.25,673 L421.75,673 C418.75,652.5 417.75,635 417.75,608 L417.75,335 Z" id="T" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

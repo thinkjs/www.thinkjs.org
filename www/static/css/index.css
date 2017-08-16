@@ -9,8 +9,8 @@ h5{font-size: 20px !important}
 .circle{ right:none; left:-9px;top:18px; width:16px; height:16px; background-position: 0 -32px;}
 /* header */
  .header { position:relative;height:76px;background: #ffffff; border-bottom:1px solid #dfdfdf; box-shadow: 0 1px 2px rgba(0,0,0,0.1)}
-.logo {float:left;width:146px;height: 55px;margin-top:10px;}
-.logo a{display: block;background: url(../img/logo.png) no-repeat; width: 147px;height: 55px;}
+.logo {float:left;height: 55px;margin-top:10px;text-align: center;}
+.logo a{display: block;height: 55px;}
 .headr {float:right;margin-top: 20px;}
 .nav { display:inline-block; *display:inline;*zoom:1; height:40px; line-height:40px; vertical-align:middle;margin-right: 20px;}
 .nav li{ float:left; margin:0 15px;}
