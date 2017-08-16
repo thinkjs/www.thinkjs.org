@@ -1,57 +1,31 @@
-## Session
+## Session / 会话
 
-Thinkjs 内置了 Session 功能。框架已经为 controller 和 context 添加了`session`方法。我们支持用多种方式存储 session，包括：cookie，mysql，file，redis 等。
+WEB 请求中经常通过 session 来维持会话的，框架通过 [think-session](https://github.com/thinkjs/think-session) 和 Adapter 来支持 session 功能。
 
-### 支持的Session存储方式
+### 配置扩展和 Adapter
 
-* `cookie` Cookie方式
-* `mysql` Mysql数据库方式
-* `file` 文件方式
-* `redis` Redis方式
+修改扩展配置文件 `src/config/extend.js`（多模块项目为 `src/common/config/extend.js`），添加下面的配置：
 
-#### Mysql session
-
-使用`mysql`类型的 Session 需要创建对应的数据表，可以用下面的 SQL 语句创建
-
+```js
+const session = require('think-session');
+module.exports = [
+  session
+]
 ```
-  DROP TABLE IF EXISTS `think_session`;
-  CREATE TABLE `think_session` (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `cookie` varchar(255) NOT NULL DEFAULT '',
-    `data` text,
-    `expire` bigint(11) NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `cookie` (`cookie`),
-    KEY `expire` (`expire`)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-```
-#### redis Session
-使用`redis`类型的Session需要依赖`think-redis`模块。
 
-### 如何配置Session
+修改 Adapter 配置文件 `src/config/adapter.js`（多模块项目为 `src/common/config/adapter.js`），添加下面的配置：
 
-配置文件`src/config/adapter/session.js`，添加如下选项（假设你默认使用 Cookie 方式的 Session）：
-
-```
-const cookieSession = require('think-session-cookie');
+```js
 const fileSession = require('think-session-file');
 
 exports.session = {
-  type: 'cookie',
+  type: 'file',
   common: {
     cookie: {
-      name: 'ThinkJS',
-      keys: ['signature key2', 'signature key1'],
+      name: 'thinkjs',
+      keys: ['signature key'],
       signed: true
-    }
-  },
-  cookie: {
-    handle: cookieSession,
-    cookie: {
-      maxAge: 1009990 * 1000,
-      keys: ['signature key2', 'signature key1'],
-      encrypt: true
     }
   },
   file: {
@@ -60,37 +34,81 @@ exports.session = {
   }
 }
 ```
-接下来解释一下这个配置文件的各种参数：
-* `type`：默认使用的 Session 类型，具体调用时可以传递参数改写（见“使用`session`方法”一节）
-* `common`：配置通用的一些参数，会跟具体的 Adapter 参数合并
-* `cookie,file,mysql`：配置特定类型的 Adapter 参数，最终获取到的参数是 common 参数与该参数进行合并后的结果。我们注意到，在这几个配置里面都有一个`handle`参数。
-* `handle`：对应类型的处理函数，一般为一个类。
+支持的 session 类型列表见：<https://github.com/thinkjs/think-awesome#session>，其中 cookie 选项为 session 设置 cookie 时的配置项，会和 `think.config('cookie')` 值进行合并，name 字段值为 session 对应 cookie 的名字。
 
-具体看一下 Cookie 方式的参数。`handle`上面已经介绍过，略过不表。
-* `maxAge`：该 session 要在 cookie 中保留多长时间
-* `keys`：当`encrypt`参数为`true`时，需要提供`keys`数组。该数组充当了加解密的密钥。
-* `encrypt`：为`true`表示需要加密存储 session。
 
-接着看一下file方式的参数：
-* `sessionPath`：存储 session 的文件的路径。在本例中，如果使用文件方式，会将 session 存储*'/path_of_your_project/runtime/session'*下。
+### 注入的方法
 
-### 使用`session`方法：
+添加 think-session 扩展后，会注入 `ctx.session` 和 `controller.session` 方法，其中 controller.session 是 ctx.cache 方法的包装，会读取当前请求下对应的缓存配置。
 
-#### 读取Session
-* `this.session()`获取所有的 session 数据
-* `this.session(name)`获取`name`对应的 session 数据
+#### 读取 session
 
-#### 设置Session
-* `this.session(name, value)`设置 session 数据。
+```js
+module.exports = class extends think.Controller {
+  // 获取 session
+  async indexAction() {
+    const data = await this.session('name');
+  }
+}
+```
 
-#### 清除Session
-* `this.session(null)`删除所有的 session 数据。
+#### 设置 session
 
-#### 在读取／设置／清除时，改写默认配置
-例如：
+```js
+module.exports = class extends think.Controller {
+  // 设置 session
+  async indexAction() {
+    await this.session('name', 'value');
+  }
+}
+```
 
-* `this.session(name, undefined, options)`以`options`配置项来获取 session 数据。
+#### 删除 session
 
-`options`配置项会与 adapter 中的默认配置合并。如果有相同的配置属性，对每个 ctx，首次调用`this.session`时，将以`options`的配置属性为准。
+```js
+module.exports = class extends think.Controller {
+  // 删除整个 session
+  async indexAction() {
+    await this.session(null);
+  }
+}
+```
 
-*注意：对于每个 ctx，session 只会初始化一次。*
+### 常见问题
+
+#### 一个请求下能操作不能类型的 session 么？
+
+不能。session 数据是异步更新的，所以一个请求下只允许使用一种 session。
+
+#### session 数据是怎么同步的？
+
+当 session 数据改变后，并不会立即更新到 session 容器里（为了性能考虑），而是在请求结束时统一更新。
+
+```js
+this.ctx.res.once('finish', () => {
+  this.flush(); // 在请求时将 session flush 导存储容器中
+});
+```
+
+#### 如何获取 session 对应 cookie 的值？
+
+session 对应 cookie 的值是不能手工设置的，而是框架自动生成，生成方式为 [think.uuid](/doc/3.0/think.html#toc-9ac)。后续 Action 中可以通过 `this.cookie('thinkjs')` （thinkjs 为 session 对应 cookie 的字段名称）。
+
+#### 如何限制同一个帐号在不同的端登录？
+
+有些情况下，只允许一个帐号在一个端下登录，如果换了一个端，需要把之前登录的端踢下线（默认情况下，同一个帐号可以在不同的端下同时登录的）。这时候可以借助一个服务保存用户唯一标识和 session cookie 值的对应关系，如果同一个用户，但 cookie 不一样，则不允许登录或者把之前的踢下线。如：
+
+```js
+// 当用户登录成功后
+const cookie = this.cookie('thinkjs');
+const uid = userInfo.id;
+await this.redis.set(`uid-${uid}`, cookie);
+
+// 请求时，判断 session cookie 值是否相同
+const userInfo = await this.session('userInfo');
+const cookie = this.cookie('thinkjs');
+const saveCookie = await this.redis.get(`uid-${userInfo.id}`);
+if(saveCookie && saveCookie !== cookie) {
+  // 不是最近一台登录的设备
+}
+```

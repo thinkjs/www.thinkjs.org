@@ -1,91 +1,110 @@
-## Cache
-在项目中，我们需要使用缓存来优化性能。Thinkjs 提供了多种方式的缓存方式，包括：文件缓存，Memcache 缓存，Redis 缓存。
+## Cache / 缓存
 
-### 缓存类型
-系统默认支持的缓存类型如下：
+在项目中，我们经常用到缓存的功能，并且可能要用到不同类型的缓存。框架通过 [think-cache](https://github.com/thinkjs/think-cache) 扩展和对应的 Adapter 来操作缓存。
 
-* `file`文件缓存
-* `memcache`Memcache 缓存
-* `redis`Redis 缓存
+### 配置扩展和 Adapter
 
-### 缓存配置
-配置文件`src/config/adapter/cache.js`，添加如下选项（假设你默认使用 file 类型的 Cache）：
+修改扩展配置文件 `src/config/extend.js`（多模块项目为 `src/common/config/extend.js`），添加下面的配置：
+
+```js
+const cache = require('think-cache');
+module.exports = [
+  cache
+]
+```
+
+修改 Adapter 配置文件 `src/config/adapter.js`（多模块项目为 `src/common/config/adapter.js`），添加下面的配置：
 
 ```js
 const fileCache = require('think-cache-file');
-const redisCache = require('think-cache-redis');
-const memcacheCache = require('think-cache-memcache');
-const path = require('path');
 
 exports.cache = {
   type: 'file',
   common: {
-    timeout: 24 * 60 * 60 * 1000, // millisecond
+    timeout: 24 * 60 * 60 * 1000 // 单位：毫秒
   },
   file: {
     handle: fileCache,
-    cachePath: path.join(think.ROOT_PATH, 'runtime/cache'), // 必须是绝对路径
+    cachePath: path.join(think.ROOT_PATH, 'runtime/cache'), // 缓存文件存放的路径
     pathDepth: 1,
-    gcInterval: 24 * 60 * 60 * 1000 // gc
-  },
-  redis: {
-    handle: redisCache,
-    port: 6379,
-    host: '127.0.0.1',
-    password: ''
-  },
-  memcache: {
-    handle: memcacheCache,
-    hosts: ['127.0.0.1:11211'],
-    maxValueSize: 1048576,
-    netTimeout: 5000,
-    reconnect: true
+    gcInterval: 24 * 60 * 60 * 1000 // 清理过期缓存定时时间
   }
 }
-
 ```
-接下来解释一下这个配置文件的各种参数：
-* `type`：默认使用的 Cache 类型，具体调用时可以传递参数改写（见“使用方法”一节）
-* `common`：配置通用的一些参数，会跟具体的 Adapter 参数合并
-* `file`：配置特定类型的 Adapter 参数，最终获取到的参数是 common 参数与该参数进行合并后的结果。注意，需要提供一个`handle`参数。
-* `handle`：对应类型的处理函数，一般为一个类。
+支持的缓存类型列表见：<https://github.com/thinkjs/think-awesome#cache>。
 
-具体看一下 file 方式的参数。`handle`上面已经介绍过了，看其它参数。
-* `cachePath`：缓存文件的根目录（绝对路径）。
-* `pathDepth`：缓存文件路径的深度，这是为了避免在根目录下创建太多文件，从而超过操作系统的限制以及降低查找效率。
-* `gcInterval`：缓存的垃圾回收时间间隔。
+### 注入的方法
 
-redis 方式的参数，参考 [https://github.com/luin/ioredis/blob/master/lib/redis.js](https://github.com/luin/ioredis/blob/master/lib/redis.js)。
-memcache 方式的参数，参考 [http://memcache-plus.com/](http://memcache-plus.com/)。
+添加 think-cache 扩展后，会注入 `think.cache`、`ctx.cache` 和 `controller.cache` 方法，其中 ctx.cache 和 controller.cache 都是 think.cache 方法的包装，会读取当前请求下对应的缓存配置。
 
-### 使用方法
-在 controller 或 logic 中，使用`this.cache(name, value, options)`来操作缓存。
-
-* `name` {String} 缓存的键
-* `value` {Mixed} 缓存值
-* `options` {Object} 缓存选项
-* `return` {Promise} 操作返回 Promise 对象
-
-当`value`是`undefined`时表示读取缓存。
-当`value`是`null`时表示删除缓存。
-当`value`是函数时，表示获取缓存，如果获取不到，则调用该函数取得返回值，然后将返回值设置到缓存中并返回该值。
+#### 获取缓存
 
 ```js
-//获取缓存
-this.cache('name').then(data => {});
-
-//指定缓存类型获取，从 redis 里获取缓存
-this.cache('name', undefined, {type: 'redis'});
-
-//如果缓存 userList 不存在，则查询数据库，并将值设置到缓存中
-this.cache('userList', () => {
-  return this.model('user').select();
-});
-
-//设置缓存
-this.cache('name', 'value');
-
-//删除缓存
-this.cache('name', null);
-
+module.exports = class extends think.Controller {
+  // 获取缓存
+  async indexAction() {
+    const data = await this.cache('name');
+  }
+  // 指定缓存类型获取，从 redis 里获取缓存，需要配置对应的 adapter
+  async index2Action() {
+    const data = await this.cache('name', undefined, 'redis');
+  }
+}
 ```
+
+操作缓存的时候一般都是先读取缓存，如果不存在，再从对应的地方获取然后再写入缓存，如果每次都这么操作会导致代码写起来很麻烦。支持 value 为函数的方式来读取缓存。
+
+```js
+module.exports = class extends think.Controller {
+  // 如果缓存存在，直接读取缓存
+  // 如果缓存不存在，则执行 value 函数，然后将返回值设置到缓存中并返回。
+  // 如果 value 函数里有异步操作，需要返回 Promise
+  async indexAction() {
+    const data = await this.cache('name', () => {
+      return getDataFromApi();
+    });
+  }
+}
+```
+
+#### 设置缓存
+
+```js
+module.exports = class extends think.Controller {
+  // 设置缓存
+  async indexAction() {
+     await this.cache('name', 'value');
+  }
+  // 设置缓存，切换类型
+  async index2Action() {
+    await this.cache('name', 'value', 'redis');
+  }
+}
+```
+
+#### 删除缓存
+
+```js
+module.exports = class extends think.Controller {
+  // 删除缓存
+  async indexAction() {
+    await this.cache('name', null);
+  }
+  // 删除缓存，切换类型
+  async index2Action() {
+    await this.cache('name', null, 'redis');
+  }
+}
+```
+
+### 缓存 gc
+
+有些缓存容器在设置值的时候可以设置超时时间，如：Memcache、Redis，这样数据会自动过期然后删除。但有些缓存容器是没有自动删除的功能的，如：File、Db 等，这个时候就需要处理缓存过期后的清理。
+
+缓存过期清理添加了 `gcInterval` 配置用来配置清理的时间间隔，最小为一个小时。表示为：一个小时执行一次缓存容器的 `gc` 方法，具体的清理逻辑在缓存的 gc 方法中定义，由 [think-gc](https://github.com/thinkjs/think-gc) 模块负责调度。
+
+### 常见问题
+
+#### 数据可以缓存在 Node.js 的内存中么？
+
+理论上是可以的，但并不建议这么做。当缓存数据量暴涨时会导致内存占用量过大，进而影响用户请求的处理，得不偿失。
