@@ -19,6 +19,7 @@
     }
   ],
   "dependencies": {
+    "babel-preset-es2015-loose": "^8.0.0",
     "babel-runtime": "6.x.x",
     "highlight.js": "^8.8.0",
     "marked": "0.3.5",
