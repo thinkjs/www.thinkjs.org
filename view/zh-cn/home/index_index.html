@@ -38,7 +38,7 @@
 <span class="hljs-keyword">module.exports</span> = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">think.Controller</span> </span>{
   <span class="hljs-comment">//login action</span>
   <span class="hljs-keyword">async</span> loginAction(){
-    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.isGet()){
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.isGet){
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.display();
     }
     <span class="hljs-comment">//data is validated in logic</span>
