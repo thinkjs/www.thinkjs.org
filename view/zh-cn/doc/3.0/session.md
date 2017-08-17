@@ -39,7 +39,7 @@ exports.session = {
 
 ### 注入的方法
 
-添加 think-session 扩展后，会注入 `ctx.session` 和 `controller.session` 方法，其中 controller.session 是 ctx.cache 方法的包装，会读取当前请求下对应的缓存配置。
+添加 think-session 扩展后，会注入 `ctx.session` 和 `controller.session` 方法，其中 controller.session 是 ctx.session 方法的包装，会读取当前请求下对应的配置。
 
 #### 读取 session
 
