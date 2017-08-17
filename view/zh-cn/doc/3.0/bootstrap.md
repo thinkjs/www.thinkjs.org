@@ -56,7 +56,7 @@ module.exports = {
 系统默认是通过 Koa 里的 listen 方法来创建 http 服务的，如果想要创建 https 服务，此时需要自定义创建服务，可以通过 `createServer` 配置来完成。
 
 ```js
-//src/config/config.js
+// src/config/config.js
 const https = require('https');
 const fs = require('fs');
 
@@ -66,9 +66,9 @@ const options = {
 };
 
 module.exports = {
-  // app 为 Koa app 对象
-  createServer: function(app, ...args){
-    https.createServer(options, app.callback()).listen(...args);
+  // 只需要创建服务，不需要 listen
+  createServer: function(callback){
+    https.createServer(options, callback);
   }
 }
 ```
