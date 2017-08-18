@@ -61,45 +61,6 @@ module.exports = {
     validateDefaultErrno: 1001 // validate default errno
   };
   ```
-* [adapter.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/adapter.js) adapter 默认配置
-
-  ```js
-  exports.logger = {
-    type: 'console',
-    console: {
-      handle: ConsoleLogger
-    },
-    file: {
-      handle: FileLogger,
-      filename: path.join(think.ROOT_PATH, 'logs/file.log'),
-      maxLogSize: 50 * 1024, // 50M
-      backups: 10 // max chunk number
-    },
-    dateFile: {
-      handle: DateFileLogger,
-      level: 'ALL',
-      filename: path.join(think.ROOT_PATH, 'logs/file.log'),
-      pattern: '-yyyy-MM-dd',
-      alwaysIncludePattern: false
-    }
-  };
-  ```
-* [adapter.production.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/adapter.production.js) adapter 生产环境默认配置
-  ```js
-  exports.logger = {
-    type: 'dateFile'
-  };
-  ```
-* [extend.js](https://github.com/thinkjs/thinkjs/blob/3.0/lib/config/extend.js) extend 默认配置
-  ```js
-  const cache = require('think-cache');
-  const session = require('think-session');
-
-  module.exports = [
-    cache,
-    session
-  ];
-  ```
 
 ### 配置合并方式
 
