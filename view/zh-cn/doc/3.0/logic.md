@@ -973,7 +973,7 @@ module.exports = class extends think.Logic {
 
 #### array
 
-需要为数组，`array: true`，对于指定为 `array` 类型的字段，如果字段对应的值是字符串不做处理；如果字段对应的值是字符串，进行 `split(,)` 处理；其他情况转化为 `[字段值]`。
+需要为数组，`array: true`，对于指定为 `array` 类型的字段，如果字段对应的值是数组不做处理；如果字段对应的值是字符串，进行 `split(,)` 处理；其他情况转化为 `[字段值]`。
 
 #### boolean
 
