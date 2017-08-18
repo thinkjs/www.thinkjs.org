@@ -140,7 +140,7 @@ think.isArray({}); // false
 
 #### think.isBoolean(boolean)
 
-* `boolean` {any} 
+* `boolean` {any}
 
 判断输入是否是布尔值
 
@@ -148,21 +148,27 @@ think.isArray({}); // false
 think.isBoolean(false); // true
 ```
 
+#### think.isInt(any)
+
+* `any` {any}
+
+判断输入的是否是整数
+
 #### think.isNull(any)
 
-* `any` {any} 
+* `any` {any}
 
 判断输入是 `null`，也可以直接通过 `xxx === null` 来判断。
 
 #### think.isNullOrUndefined(any)
 
-* `any` {any} 
+* `any` {any}
 
 判断输入是 `null` 或者 `undefined`
 
 #### think.isNumber(number)
 
-* `number` {any} 
+* `number` {any}
 
 判断输入是否是数字
 
@@ -172,73 +178,73 @@ think.isNumber(1); // true
 
 #### think.isString(str)
 
-* `str` {any} 
+* `str` {any}
 
 判断输入是是否是字符串
 
 #### think.isSymbol(any)
 
-* `any` {any} 
+* `any` {any}
 
 判断输入是是否是 Symbol 类型
 
 #### think.isUndefined(any)
 
-* `any` {any} 
+* `any` {any}
 
 判断输入是是否是 undefined，也可以直接通过 `xxx === undefined` 来判断。
 
 #### think.isRegExp(reg)
 
-* `reg` {any} 
+* `reg` {any}
 
 判断输入是是否是正则对象
 
 #### think.isDate(date)
 
-* `date` {any} 
+* `date` {any}
 
 判断输入是是否是日期对象
 
 #### think.isError(error)
 
-* `error` {any} 
+* `error` {any}
 
 判断输入是是否是Error类型
 
 #### think.isFunction(any)
 
-* `any` {any} 
+* `any` {any}
 
 判断输入是是否是函数类型
 
 #### think.isPrimitive(any)
 
-* `any` {any} 
+* `any` {any}
 
 判断输入是是否是原始类型，包含：`null`、`string`、`boolean`、`number`、`symbol`、`undefined`。
 
 #### think.isIP(ip)
 
-* `ip` {String} 
+* `ip` {String}
 
 判断一个字符串是否是 ip 地址，IP v4 或者 IP v6，等同于 `net.isIP`。
 
 #### think.isBuffer(buffer)
 
-* `buffer` {any} 
+* `buffer` {any}
 
 判断输入是否是一个Buffer对象，等同于 `Buffer.isBuffer`。
 
 #### think.isIPv4(ip)
 
-* `ip` {String} 
+* `ip` {String}
 
 判断一个字符串是否是 IP v4 地址，等同于 `net.isIPv4`。
 
 #### think.isIPv6(ip)
 
-* `ip` {String} 
+* `ip` {String}
 
 判断一个字符串是否是 IP v6 地址，等同于 `net.isIPv6`
 
@@ -248,7 +254,7 @@ think.isNumber(1); // true
 
 #### think.isObject(obj)
 
-* `obj` {any} 
+* `obj` {any}
 
 判断一个输入是否为 Object，通过 Object.prototype.toString.call(obj) 是否为 `[object Object]` 判断
 
@@ -315,7 +321,7 @@ think.snakeCase('indexIndex');
 
 ```js
 think.isNumberString('419');
-// return true 
+// return true
 ```
 
 #### think.isTrueEmpty(any)
@@ -325,8 +331,8 @@ think.isNumberString('419');
 判断是否是真正的空，`undefined`、`null`、`''`、`NaN` 为 true，其他为 false。
 
 ```js
-think.isTrueEmpty(null); 
-// return true 
+think.isTrueEmpty(null);
+// return true
 ```
 
 #### think.isEmpty(any)
@@ -337,7 +343,7 @@ think.isTrueEmpty(null);
 
 ```js
 think.isEmpty(null);
-// return true 
+// return true
 ```
 
 #### think.defer()
@@ -415,7 +421,7 @@ think.datetime(1501406894849)
 
 #### think.ms(str)
 
-* `str` {String} 
+* `str` {String}
 * `return` {Number}
 
 把一个语义化的时间转成毫秒，如果转换失败则抛异常，使用 [ms](https://github.com/zeit/ms) 库转换。
@@ -473,7 +479,7 @@ think.chmod('/usr/local/bin', '0775')
 
 * `path` {String} 要创建的目录
 * `mode` {String} 文件夹权限，默认为 `0777`
-* `return` {Boolean} 
+* `return` {Boolean}
 
 创建文件夹。创建成功返回 true, 失败返回 false。
 
