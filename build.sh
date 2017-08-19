@@ -27,8 +27,8 @@ cp -r www/static/module/thinkjs output/www/static/module/
 
 npm run compile;
 cp -r app output/;
-cp -r ssl output/;
+#cp -r ssl output/;
 
 cd output;
 rm -rf www/static/other/icon/*;
-tar zcf ../output.tar.gz *;
+#tar zcf ../output.tar.gz *;
