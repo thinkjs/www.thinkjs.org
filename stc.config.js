@@ -2,8 +2,8 @@ var stc = require('stc');
 var htmlCompress = require('stc-html-compress');
 var uglify = require('stc-uglify');
 var cssCompress = require('stc-css-compress');
-var cdn = require('stc-cdn');
-var cdnAdapter = require('@q/stc-cdn-qstatic');
+//var cdn = require('stc-cdn');
+//var cdnAdapter = require('@q/stc-cdn-qstatic');
 var localstorage = require('stc-localstorage');
 var localstorageAdapter = require('stc-localstorage-ejs');
 
@@ -36,15 +36,15 @@ stc.workflow({
       appId : 'd0ac6c56'
     }
   },
-  cdn: {
-    plugin: cdn, 
-    exclude: [/\/doc\//],
-    options: {
-      adapter: cdnAdapter, 
-      https: true,
-      exclude: [/other\/icon/]
-    }
-  }
+  // cdn: {
+  //   plugin: cdn, 
+  //   exclude: [/\/doc\//],
+  //   options: {
+  //     adapter: cdnAdapter, 
+  //     https: true,
+  //     exclude: [/other\/icon/]
+  //   }
+  // }
 });
 
 stc.start();
