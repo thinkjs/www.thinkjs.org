@@ -7,6 +7,8 @@ rm -rf view_build/;
 mkdir view_build;
 cp -r view/* view_build;
 
+npm run compile;
+
 node www/production.js home/generate/single;
 node www/production.js home/generate/html;
 
