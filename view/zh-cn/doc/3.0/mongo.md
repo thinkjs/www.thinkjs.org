@@ -115,7 +115,7 @@ const user2 = think.mongo('admin/user'); // 实例化后台的 user 模型
 
 #### 如何在项目中使用 mongoose？
 
-后续会创建 `think-mongoose` 模块，让在项目里方便使用 mongoose，敬请期待。
+提供了 [think-mongoose](https://github.com/thinkjs/think-mongoose) 模块，可以在项目直接使用 Mongoose 里的一些操作。
 
 ### API
 
