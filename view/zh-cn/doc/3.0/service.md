@@ -49,6 +49,7 @@ sms.xxx();
 // src/service/sms.js
 module.exports = class extends think.Service {
   constructor(key, secret) {
+    super();
     this.key = key;
     this.secret = secret;
   }
@@ -68,6 +69,7 @@ sms.xxx();
 // src/home/service/sms.js
 module.exports = class extends think.Service {
   constructor(key, secret) {
+    super();
     this.key = key;
     this.secret = secret;
   }
