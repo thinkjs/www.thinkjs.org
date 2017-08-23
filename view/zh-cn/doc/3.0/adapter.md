@@ -65,7 +65,7 @@ exports.view = {
 }
 ```
 
-可以看到，common 里的配置会被合并导 nunjucks 和 ejs 中，后续再获取的时候就不用在合并 common 里的配置了。
+可以看到，common 里的配置会被合并到 nunjucks 和 ejs 中，后续再获取的时候就不用再合并 common 里的配置了。
 
 ### Adapter 配置解析
 
