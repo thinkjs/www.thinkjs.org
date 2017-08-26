@@ -48,6 +48,15 @@ module.exports = [
 * `PUT /user/:id` 更新一个用户，执行 `putAction`
 * `DELETE /user/:id` 删除一个用户，执行 `deleteAction`
 
+如果有一系列路由都是 RESTful 路由的话，每次都添加自定义路由也太麻烦了，这时候可以修改一下自定义路由的配置文件，例如：
+
+```js
+module.exports = [
+  [/\/api\/(\w+)(?:\/(\d+))?/, 'api/:1?id=:2', 'rest']
+];
+```
+这样表示所有以 `/api` 开头的二级路由都会被指定成 RESTful 路由。
+
 ### 数据校验
 
 Controller 里的方法执行时并不会对传递过来的数据进行校验，数据校验可以放在 Logic 里处理，文件为 `src/logic/user.js`，具体的 Action 与 Controller 里一一对应。具体的使用方式请见 [Logic](/doc/3.0/logic.html)。
