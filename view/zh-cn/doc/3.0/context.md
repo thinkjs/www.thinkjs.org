@@ -7,7 +7,7 @@ Context 是 Koa 中处理用户请求中的一个对象，贯穿整个请求生�
 module.exports = options => {
   // 调用时 ctx 会作为第一个参数传递进来
   return (ctx, next) => {
-    ... 
+    ...
   }
 }
 ```
@@ -18,7 +18,7 @@ module.exports = class extends think.Controller {
   indexAction() {
     // controller 中 ctx 作为类的属性存在，属性名为 ctx
     // controller 实例化时会自动把 ctx 传递进来
-    const ip = this.ctx.ip; 
+    const ip = this.ctx.ip;
   }
 }
 ```
@@ -94,7 +94,7 @@ ctx.throw('something exploded')
 例如 `this.throw('name required', 400)` 等价于：
 
 ```js
-var err = new Error('name required');
+let err = new Error('name required');
 err.status = 400;
 throw err;
 ```
@@ -124,7 +124,7 @@ Koa 使用 [http-assert](https://github.com/jshttp/http-assert) 实现断言.
 
 如不想使用 Koa 内置的 response 处理方法，可以设置 `ctx.respond = false;`。这时你可以自己设置原始的 `res` 对象来处理响应。
 
-注意这样使用是 __不__被 Koa 支持的，因为这样有可能会破坏 Koa 的中间件和 Koa 本身提供的功能。这种用法只是作为一种 hack ，给那些想要在Koa中使用传统的`fn(req, res)`的方法和中间件的人提供一种便捷方式。
+注意这样使用是 __不__被 Koa 支持的，因为这样有可能会破坏 Koa 的中间件和 Koa 本身提供的功能。这种用法只是作为一种 hack ，为那些想要在Koa中使用传统的`fn(req, res)`的方法和中间件的人提供一种便捷方式。
 
 #### ctx.header
 
@@ -916,7 +916,7 @@ ctx.expires('1h'); //缓存一小时
 * `name` {Mixed} 配置名
 * `value` {Mixed} 配置值
 * `m` {String} 模块名，多模块项目下生效
-* `return` {Mixed} 
+* `return` {Mixed}
 
 获取、设置配置项，内部调用 `think.config` 方法。
 
