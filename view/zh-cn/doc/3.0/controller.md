@@ -68,6 +68,19 @@ module.exports = class extends Base {
 }
 ```
 
+如果不需要 Babel 转译，那么可以用下面更简洁的方式：
+
+```js
+module.exports = class extends Base {
+  async __before(){
+    const flag = await super.__before();
+    // 如果父级想阻止后续继承执行会返回 false，这里判断为 false 的话不再继续执行了。
+    if(flag === false) return false;
+    ...
+  }
+}
+```
+
 ### 后置操作 __after
 
 后置操作 `__after` 与 `__before` 对应，只是在具体的 Action 执行之后执行，如果具体的 Action 执行返回了 `false`，那么 `__after` 不再执行。
