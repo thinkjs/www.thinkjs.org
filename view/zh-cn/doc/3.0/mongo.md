@@ -38,6 +38,27 @@ exports.model = {
   }
 }
 ```
+
+可以支持多个 host 和 port， 如：
+
+```js
+exports.model = {
+  type: 'mongo', // 默认使用的类型，调用时可以指定参数切换
+  common: { // 通用配置
+    logConnect: true, // 是否打印数据库连接信息
+    logger: msg => think.logger.info(msg) // 打印信息的 logger
+  },
+  mongo: {
+    host: ['127.0.0.1', '10.16.1.2'],
+    port: [27017, 27018],
+    user: '',
+    password: '',
+    database: '', // 数据库名称
+    options: ''
+  }
+}
+```
+
 更多配置选项请见 <http://mongodb.github.io/node-mongodb-native/2.0/tutorials/urls/>。
 
 ### 创建模型文件
