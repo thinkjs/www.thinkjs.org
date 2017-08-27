@@ -111,7 +111,7 @@ module.exports = {
     maxLogSize: 50 * 1024,  //50M
     filename: path.join(think.ROOT_PATH, 'logs/xx.log'),
     layout: {
-      type: 'patterm',
+      type: 'pattern',
       pattern: '%[[%d] [%p]%] - %m',
     }
   }
