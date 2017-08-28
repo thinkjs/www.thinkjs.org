@@ -81,7 +81,7 @@ exports.logger = {
     - `SSS` - 毫秒数（不建议配置该格式以毫秒级来归类日志）
     - `O` - 当前时区
 - `alwaysIncludePattern`：如果 `alwaysIncludePattern` 设置为 `true`，则初始文件直接会被命名为 `xx.log-2017-07-01`，然后隔天会生成 `xx.log-2017-07-02` 的新文件。
-- `layouts`：定义日志输出的格式。
+- `layout`：定义日志输出的格式。
 
 
 ### Level
@@ -118,7 +118,7 @@ module.exports = {
 }
 ```
 
-默认的 `Console` 的输出格式是 `%[[%d] [%z] [%p]%] - %m`，即 `[时间] [进程ID] [日志等级] - 日志内容`。 目前 layouts 支持如下参数：
+默认的 `Console` 的输出格式是 `%[[%d] [%z] [%p]%] - %m`，即 `[时间] [进程ID] [日志等级] - 日志内容`。 目前 layout 支持如下参数：
 
 - `type`：目前支持如下类型
     - basic
