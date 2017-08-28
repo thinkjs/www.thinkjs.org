@@ -76,4 +76,8 @@ export default class extends base {
     this.assign('title', this.locale('title-event'));
     return this.display();
   }
+
+  newAction(){
+    return this.display();
+  }
 }
