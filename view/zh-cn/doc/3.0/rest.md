@@ -30,7 +30,7 @@ RESTful Controller 创建后并不能立即对其访问，需要添加对应的[
 
 ```js
 module.exports = [
-  [/\/user(?:\/(\d+))?/, 'user?id=:1', 'rest'] 
+  [/\/user(?:\/(\d+))?/, 'user?id=:1', 'rest']
 ]
 ```
 
@@ -48,7 +48,7 @@ module.exports = [
 * `PUT /user/:id` 更新一个用户，执行 `putAction`
 * `DELETE /user/:id` 删除一个用户，执行 `deleteAction`
 
-如果有一系列路由都是 RESTful 路由的话，每次都添加自定义路由也太麻烦了，这时候可以修改一下自定义路由的配置文件，例如：
+如果有一系列路由都是 RESTful 路由的话，每次都添加自定义路由势必有些麻烦，这时候可以修改一下自定义路由的配置文件，例如：
 
 ```js
 module.exports = [
@@ -79,7 +79,7 @@ module.exports = class extends think.Controller {
     const postId = this.get('postId');
     const commentId = this.get('id');
     const comment = this.model('comment');
-    if(commentId) { // 获取单条评论的详细信息 
+    if(commentId) { // 获取单条评论的详细信息
       const data = await comment.where({post_id: postId, id: commentId}).find();
       return this.success(data);
     } else { // 获取单条文章下的评论列表
@@ -109,7 +109,7 @@ module.exports = [
 
 ```js
 module.exports = [
-  [/\/user(?:\/(\w+))?/, 'user?id=:1', 'rest'] 
+  [/\/user(?:\/(\w+))?/, 'user?id=:1', 'rest']
 ]
 ```
 
