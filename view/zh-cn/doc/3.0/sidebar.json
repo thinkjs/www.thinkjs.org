@@ -31,6 +31,7 @@
       "日志": "logger",
       "多进程": "multi_process",
       "Babel 转译": "babel",
+      "WebSocket": "websocket",
       "RESTful API": "rest",
       "国际化与本地化": "i18n"
     },
