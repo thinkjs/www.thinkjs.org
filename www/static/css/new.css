@@ -15,7 +15,6 @@
 html, body {
   width: 100%;
   height: 100%;
-  color: #F5F5F5;
   background: url('/static/img/new/bg_.jpg') #111 no-repeat 50% 0;
   background-size: cover;
 }
