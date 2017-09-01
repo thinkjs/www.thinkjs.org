@@ -146,7 +146,7 @@ module.exports = class extends think.Logic {
 
 如果返回值为 `false`，那么可以通过访问 `this.validateErrors` 属性获取详细的错误信息。拿到错误信息后，可以通过 `this.fail` 方法把错误信息以 JSON 格式输出，也可以通过 `this.display` 方法输出一个页面，Logic 继承了 Controller 可以调用 Controller 的 方法。
 
-##### 自动调用校验方法
+#### 自动调用校验方法
 
 多数情况下都是校验失败后，输出一个 JSON 错误信息。如果不想每次都手动调用 `this.validate` 进行校验，可以通过将校验规则赋值给 `this.rules` 属性进行自动校验，如：
 
@@ -181,6 +181,50 @@ module.exports = class extends think.Logic {
 ```
 
 将校验规则赋值给 `this.rules` 属性后，会在这个 Action 执行完成后自动校验，如果有错误则直接输出 JSON 格式的错误信息。
+
+#### 多action复用校验规则
+
+对于多个action有时我们想要复用一些校验规则，例如对于 `logic` 中的 `indexAction` 与 `homeAction` 都要校验 `app_id` 字段必填，可以将 `app_id` 的校验提到 `scope` 中：
+
+```js
+module.exports = class extends think.Logic {
+  get scope() {
+    return {
+      app_id: {
+        required: true
+      }
+    }
+  }
+
+  indexAction(){
+    let rules = {
+      email: {
+        required: true
+      }
+    }
+
+    // 自定义 app_id 的错误信息
+    let msgs = {
+      app_id: '{name} 不能为空(自定义错误)',
+    }
+
+    if(!this.validate(rules, msgs)) {
+      return this.fail(this.validateErrors);
+    }
+  }
+
+  homeAction() {
+    // email 校验的简化写法
+    // 此时 app_id 使用默认错误信息
+    this.rules = {
+      email: {
+        required: true
+      }
+    }
+  }
+
+}
+```
 
 #### 数组校验
 
