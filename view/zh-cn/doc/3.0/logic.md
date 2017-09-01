@@ -1001,6 +1001,15 @@ module.exports = class extends think.Logic {
 
 #### image
 
+```js
+let rules = {
+  file: {
+    required: true, // required 默认为false
+    image: true,
+    method: 'file' // 文件通过post提交，验证文件需要制定 method 为 `file`
+  }
+}
+```
 上传的文件需要为图片，`image: true`。
 
 #### startWith
