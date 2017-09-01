@@ -87,7 +87,7 @@ SQLite 的 Adapter 为 [think-model-sqlite](https://github.com/thinkjs/think-mod
 ```js
 const sqlite = require('think-model-sqlite');
 exports.model = {
-  type: 'mysql',
+  type: 'sqlite',
   sqlite: {
     handle: sqlite, // Adapter handle
     path: path.join(think.ROOT_PATH, 'runtime/sqlite'), // sqlite 保存的目录
@@ -106,7 +106,7 @@ PostgreSQL 的 Adapter 为 [think-model-postgresql](https://github.com/thinkjs/t
 ```js
 const postgresql = require('think-model-postgresql');
 exports.model = {
-  type: 'mysql',
+  type: 'postgresql',
   postgresql: {
     handle: postgresql, // Adapter handle
     user: 'root', // 用户名
