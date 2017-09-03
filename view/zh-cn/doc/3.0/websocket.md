@@ -152,7 +152,7 @@ module.exports = class extends think.Controller {
 
 在 Action 里可以通过 `this.ctx.io` 来获取 `io` 对象，该对象为 socket.io 的一个实例。
 
-io 对象包含的方法参见 [https://socket.io/docs/server-api/#server](https://socket.io/docs/server-api/#server)。
+io 对象包含的方法参见文档 [https://socket.io/docs/server-api/#server](https://socket.io/docs/server-api/#server)。
 
 #### 设置 path
 
