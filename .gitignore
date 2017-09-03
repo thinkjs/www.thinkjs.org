@@ -41,3 +41,4 @@ view_build/
 .idea
 
 deploy.sh
+.DS_Store
