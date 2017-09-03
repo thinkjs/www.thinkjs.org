@@ -339,7 +339,7 @@ think.isTrueEmpty(null);
 
 * `any` {any}
 
-判断对象是否为空， `undefined`, `null` ,`''`, `NaN`, `[]`, `{}`, `0`, `false` 为 true，其他为 false。
+判断对象是否为空， `undefined`, `null` ,`''`, `NaN`, `[]`, `{}`, `0`, `false` 为 true，其他为 false。
 
 ```js
 think.isEmpty(null);
