@@ -106,7 +106,7 @@ module.exports = class extends think.Controller {
 
   }
   __call(){
-    //如果相应的Action不存在则调用改方法
+    //如果相应的Action不存在则调用该方法
   }
 }
 ```
