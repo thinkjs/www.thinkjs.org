@@ -6,7 +6,7 @@
 
 在集群环境中，WebSocket 要求使用粘性会话，来确保给定客户端请求命中相同的 worker，否则其握手机制将无法正常工作。 为了实现这一点，需要开启 `stickyCluster` 配置。
 
-为了保证性能，`stickyCluster` 功能默认是关闭的，项目如果需要开启，可以修改配置文件 `src/config.js`：
+为了保证性能，`stickyCluster` 功能默认是关闭的，项目如果需要开启，可以修改配置文件 `src/config/config.js`：
 
 ```js
 module.exports = {
