@@ -17,6 +17,17 @@ module.exports = {
 
 ### 配置 WebSocket
 
+WebSocket 是以 `extend` 的形式集成到 ThinkJS 的，首先要配置 `src/config/extend.js`:
+
+```js
+const websocket = require('think-websocket');
+
+module.exports = [
+  // ...
+  websocket(think.app),
+];
+```
+
 WebSocket 的各个实现是以 `adapter` 的形式存在的，以 `socket.io` 为例（使用 [think-websocket-socket.io](https://github.com/thinkjs/think-websocket-socket.io) 进行了封装），在 `src/config/adapter.js` 中配置如下：
 
 ```js
