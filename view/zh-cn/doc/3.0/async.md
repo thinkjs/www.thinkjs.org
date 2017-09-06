@@ -99,7 +99,7 @@ return new Promise((resolve, reject) => {
 
 ```js
 module.exports = class extends think.Contoller {
-  indexAction() {
+  async indexAction() {
     try {
       await getDataFromApi1();
       await getDataFromApi2();
@@ -118,7 +118,7 @@ module.exports = class extends think.Contoller {
 
 ```js
 module.exports = class extends think.Controller {
-  indexAction() {
+  async indexAction() {
     // 通过 catch 将 rejected promise 转换为 resolved promise
     const result = await getDataFromApi1().catch(err => {
       return think.isError(err) ? err : new Error(err)
