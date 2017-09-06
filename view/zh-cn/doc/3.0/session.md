@@ -76,7 +76,7 @@ module.exports = class extends think.Controller {
 
 ### 常见问题
 
-#### 一个请求下能操作不能类型的 session 么？
+#### 一个请求下能操作不同类型的 session 么？
 
 不能。session 数据是异步更新的，所以一个请求下只允许使用一种 session。
 
