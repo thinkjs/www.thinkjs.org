@@ -245,8 +245,8 @@ const user = think.mongo('user');
 
 #### mongo.limit(offset, length)
 
-* `offset` {Number} SQL 语句里的 offset
-* `length` {Number} SQL 语句里的 length
+* `offset` {Number} 起始位置(类似于 SQL 语句里的 offset)
+* `length` {Number} 长度(类俗语 SQL 语句里的 length)
 * `return` {this}
 
 设置 SQL 语句里的 `limit`，会赋值到 `this.options.limit` 属性上，便于后续解析。
@@ -254,9 +254,9 @@ const user = think.mongo('user');
 ```js
 module.exports = class extends think.Mongo() {
   async getList() {
-    // SQL: SELECT * FROM `test_d` LIMIT 10
+    // 前 10 条
     const list1 = await this.limit(10).select();
-    // SQL: SELECT * FROM `test_d` LIMIT 10,20
+    // 11 ~ 20条
     const list2 = await this.limit(10, 20).select();
   }
 }
@@ -274,9 +274,7 @@ module.exports = class extends think.Mongo() {
 ```js
 module.exports = class extends think.Mongo() {
   async getList() {
-    // SQL: SELECT * FROM `test_d` LIMIT 0,10
     const list1 = await this.page(1).select(); // 查询第一页，每页 10 条
-    // SQL: SELECT * FROM `test_d` LIMIT 20,20
     const list2 = await this.page(2, 20).select(); // 查询第二页，每页 20 条
   }
 }
@@ -306,14 +304,14 @@ exports.model = {
 ```js
 module.exports = class extends think.Mongo{
   async getList() {
-    const data1 = await this.where(where).select();
+    const data = await this.where(where).select();
   }
 }
 ```
 
 #### model.field(field)
 
-* `field` {String} 查询字段，支持 `AS`。
+* `field` {String} 查询字段。
 * `return` {this}
 
 设置查询字段，设置后会赋值到 `this.options.field` 属性上，便于后续解析。
@@ -324,8 +322,6 @@ module.exports = class extends think.Mongo{
     const data1 = await this.field('d_name').select();
 
     const data2 = await this.field('c_id,d_name').select();
-
-    const data3 = await this.field('c_id AS cid, d_name').select();
   }
 }
 ```
@@ -339,7 +335,7 @@ module.exports = class extends think.Mongo{
 
 设置当前模型对应的表名，如果 hasPrefix 为 false，那么表名会追加 `tablePrefix`，最后的值会设置到 `this.options.table` 属性上。
 
-如果没有设置该属性，那么最后解析时通过 `mode.tableName` 属性获取表名。
+如果没有设置该属性，那么最后解析时通过 `model.tableName` 属性获取表名。
 
 
 #### model.parseOptions(options)
@@ -372,7 +368,7 @@ options = {
 * `order` {String | Array | Object} 排序方式
 * `return` {this}
 
-设置 SQL 中的排序方式。会添加 `this.options.order` 属性，便于后续分析。
+设置排序方式。会添加 `this.options.order` 属性，便于后续分析。
 
 #### model.group(group)
 
