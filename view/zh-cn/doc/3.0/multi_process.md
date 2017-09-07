@@ -45,7 +45,7 @@ module.exports = {
   })
   think.messenger.consume('consumeEvent');
   ```
-  
+
 * `think.messenger.map` 执行所有进程下的任务，并返回任务结果集（结果集需要通过 JSON.stringify 在进程间传递，结果集不能太大，如果太大的话可以通过其他的存储传递，如：文件）
 
   ```js
@@ -62,7 +62,7 @@ module.exports = {
   }
   ```
 
-注：consume 和 map 方法需要 [think-cluster](https://github.com/thinkjs/think-cluster) 的版本 `>=1.2.0`。
+注：consume 和 map 方法需要 [think-cluster](https://github.com/thinkjs/think-cluster) 的版本 `>=1.3.0`。
 
 ### 自定义进程通信
 
