@@ -526,7 +526,7 @@ module.exports = class extends think.Controller {
 
 当 where 条件未命中到任何数据时添加数据，命中数据则更新该数据。
 
-#### updateMany(dataList, options)
+#### model.updateMany(dataList, options)
 
 * `dataList` {Array} 要更新的数据列表
 * `options` {Object} 操作选项，会通过 [parseOptions](/doc/3.0/relation_model.html#toc-d91) 方法解析
@@ -665,3 +665,50 @@ module.exports = class extends think.Controller {
   }
 }
 ```
+#### model.sum(field)
+
+* `field` {String} 字段名
+* `return` {Number|Array} 返回求和结果
+
+没有分组情况下，默认返回数字，有人组的情况下返回分组信息以及求和结果，如下示例：
+
+```js
+module.exports = class extends think.Controller {
+  async listAction(){
+    let model = this.mongo('user');
+    // ret1 = 123  没有分组情况下，返回数字
+    let ret1 = await m.sum('age');		
+    // ret2 = [{group:'thinkjs1',total:6},{group:'thinkjs2',total:8}]
+    // 有分组的情况返回[{group:xxx,total:xxx}...]
+    let ret2 = await m.group('name').sum('age'); 
+	// ret3 = [{group:{name:'thinkjs',version'1.0'},total:6},{group:{name:'thinkjs',version'2.0'},total:8},]
+    let ret3 = await m.where({name:'thinkjs'}).order('version ASC').group('name,version').sum('age'); 
+  }
+}
+```
+
+#### model.aggregate(options)
+* `options` {Object} 操作选项，会通过 [parseOptions](/doc/3.0/relation_model.html#toc-d91) 方法解析
+* `return` {Promise}
+
+聚合操作，详见[Aggregation](https://docs.mongodb.com/manual/reference/sql-aggregation-comparison/)
+
+#### model.mapReduce(map,reduce,out)
+* `map` {	function | string} mapping方法
+* `reduce` {	function | string} reduce方法
+* `out` {Object} 其他配置
+* `return` {Promise}
+* 
+集合中 Map-Reduce 操作，详见[MapReduce](http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#mapReduce)
+
+#### model.createIndex(indexes,options)
+* `indexes` {	string | object} 索引名
+* `options` {Object} 操作选项
+* `return` {Promise}
+
+创建索引，详见[ensureIndex](http://mongodb.github.io/node-mongodb-native/2.2/api/Db.html#ensureIndex)
+
+#### model.getIndexes()
+* `return` {Promise}
+
+获取索引
