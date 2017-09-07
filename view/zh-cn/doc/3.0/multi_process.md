@@ -42,7 +42,9 @@ module.exports = {
   // src/bootstrap/worker.js
   think.messenger.on('consumeEvent', () => {
     // 该回调函数只会在一个进程下执行
-  })
+  });
+
+  //调用事件，只会在一个进程下执行一次
   think.messenger.consume('consumeEvent');
   ```
 
