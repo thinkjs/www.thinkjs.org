@@ -79,10 +79,19 @@ module.exports = class extends think.Controller {
   async index2Action() {
     await this.cache('name', 'value', 'redis');
   }
+  // 设置缓存，切换类型
+  async index2Action() {
+    await this.cache('name', 'value', {
+      type: 'redis',
+      timeout: 24 * 60 * 60 * 1000
+    });
+  }
 }
 ```
 
 #### 删除缓存
+
+将缓存值设置为 `null` 为删除缓存。
 
 ```js
 module.exports = class extends think.Controller {
