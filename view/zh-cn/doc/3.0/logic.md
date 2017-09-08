@@ -93,6 +93,20 @@ module.exports = class extends think.Logic {
 
 有时候在 `POST` 类型下，可能会获取上传的文件或者获取 URL 上的参数，这时候就需要指定获取数据的方式了。支持的获取数据方式为 `GET`，`POST` 和 `FILE`。
 
+```js
+module.exports = class extends think.Logic {
+  indexAction(){
+    let rules = {
+      username: {
+        required: true,
+        method: 'GET'       // 指定获取数据的方式
+      }
+    }
+    let flag = this.validate(rules);
+  }
+}
+```
+
 #### 字段默认值
 
 使用 `default:value` 来指定字段的默认值，如果当前字段值为空，会把默认值赋值给该字段，然后执行后续的规则校验。
@@ -116,7 +130,7 @@ module.exports = class extends think.Logic {
     let flag = this.validate(rules);
     if(!flag){
       return this.fail('validate error', this.validateErrors);
-      // 如果出错，返回
+      // 如果校验失败，返回
       // {"errno":1000,"errmsg":"validate error","data":{"username":"username can not be blank"}}
     }
   }
@@ -381,8 +395,8 @@ module.exports = {
 (
   value: ,                // name1 参数，在相应的请求中的值，此处为 ctx['param']['name1']
   {
-    ctx,                  // 所有请求类型集合
-    currentQuery,         // name1 对应请求类型，此处为 ctx['param']
+    ctx,                  // ctx 对象
+    currentQuery,         // name1 对应请求类型，此处为 ctx['param'] （表示从 ctx 中获取到 get 类型的参数）
     parsedValidValue,     // name1 在 _eqValid 方法解析返回的结果
     rule,                 // name1 的校验规则内容
     rules,                // 所有的校验规则内容
