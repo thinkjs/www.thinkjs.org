@@ -1,0 +1,3 @@
+[submodule "view/zh-cn/doc"]
+	path = view/zh-cn/doc
+	url = git@github.com:thinkjs/cn.thinkjs.org.git
