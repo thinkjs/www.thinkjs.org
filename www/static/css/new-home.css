@@ -1,0 +1,196 @@
+
+  body {
+    overflow: hidden;
+  }
+  .header {
+    position: initial;
+    height: auto;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  #main {
+    height: 100%;
+    padding-top: 40px;
+    padding-bottom: 0;
+  }
+  .logo {
+    margin-top: 20px;
+    height: 52px;
+  }
+  a.navbar-brand, a.navbar-brand:hover {
+    height: 32px;
+    width: 115px;
+    background-image: url('/static/img/logo.svg');
+  }
+  .nav {
+    height: 32px;
+    line-height: 32px;
+  }
+
+  .nav li a {
+    color: #DDD;
+  }
+
+  .nav > li > a:hover, .nav > li > a:focus {
+    color: #FFF;
+    background: none !important;
+  }
+
+  .nav .lang {
+    margin-left: 0;
+  }
+  .nav .lang a {
+    color: #FFF;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .algolia-autocomplete {
+    min-width: 140px;
+    text-align: right;
+  }
+  #search {
+    width: 35px;
+    border: none;
+    color: #FFF;
+    font-size: 14px;
+    padding: 0 0 0 15px;
+    line-height: 32px;
+    background: url('/static/img/search.svg') rgba(255, 255, 255, 0.2) 25px center no-repeat;
+    transition: all .5s;
+  }
+  #search:focus {
+    width: 120px;
+    background-position-x: 110px;
+  }
+  .head {
+    font-size: 4rem;
+  }
+  #main h3 {
+    font-size: 2rem;
+  }
+  .head, #main h3 {
+    color: #FFF;
+  }
+
+  .buttons>.button {
+    background: url('data:image/svg+xml;utf-8,<svg width="280px" height="60px" viewBox="0 0 280 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-1"><stop stop-color="#37A9C3" offset="0%"></stop><stop stop-color="#2553A2" offset="100%"></stop></linearGradient><rect id="path-2" x="0" y="0" width="280" height="60" rx="30"></rect><mask id="mask-3" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="280" height="60" fill="white"><use xlink:href="#path-2"></use></mask></defs><use id="Rectangle" stroke="url(#linearGradient-1)" mask="url(#mask-3)" stroke-width="4" fill="none" xlink:href="#path-2"></use></svg>');
+    background-size: cover;
+    width: 280px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 100px;
+    color: #FFF;
+  }
+
+  .buttons>.button:hover {
+    background: #1B8EFF;
+  }
+
+  .footer {
+    background: transparent;
+    position: absolute;
+    bottom: 0;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+    background: rgba(0,0,0,0.41);
+    padding: 10px 0;
+  }
+  .footer .wrap{
+    color: #999;
+  }
+  .footer .wrap > div {
+    display: inline-block;
+  }
+  .footer .wrap > div + div {
+    margin-left: 20px;
+  }
+  .footer .wrap .ft-copy {
+    display: block;
+    border: none;
+    padding: 0;
+    color: #FFF;
+    margin-left: 0;
+  }
+  .footer .wrap a, .footer .wrap a:hover, .footer .wrap a:visited {
+    color: #FFF;
+  }
+  
+  .github-corner:hover .octo-arm{
+      animation:octocat-wave 560ms ease-in-out
+  }
+  @keyframes octocat-wave{
+      0%,100%{transform:rotate(0)}
+      20%,60%{transform:rotate(-25deg)}
+      40%,80%{transform:rotate(10deg)}
+  }
+  @media (max-width:500px){
+      .github-corner:hover .octo-arm{
+      animation:none
+      }
+      .github-corner .octo-arm{
+      animation:octocat-wave 560ms ease-in-out
+      }
+  }
+  @media (max-width:1300px){
+    .wrap {width: 900px;}
+  }
+  @media (max-width:1000px){
+    .wrap {width: 800px;}
+  }
+  @media (max-width:850px){
+    .wrap {width: 620px;}
+    .nav li {
+      margin: 0 5px;
+    }
+    .nav li form, .nav li.lang {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .logo {
+      padding-top: 0;
+    }
+    .buttons > .button {
+      width: 200px;
+      height: 43px;
+      line-height: 43px;
+    }
+  }
+  @media screen and (max-width: 640px) {
+    .wrap {
+      width: 100%;
+    }
+    .logo {
+      padding-top: 20px;
+      margin-top: 0;
+    }
+    .headr {
+      border-top: none;
+    }
+    .footer .wrap > .ft-about, .footer .wrap >  .ft-copy {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    .nav li {
+      margin: 0;
+    }
+    .head {
+      font-size: 2rem;
+    }
+    #main h3 {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+  }
+  @media screen and (max-width: 320px) {
+    #main {
+      padding-top: 20px;
+    }
+  }
