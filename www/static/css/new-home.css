@@ -154,6 +154,9 @@
     .wrap {
       width: 100%;
     }
+    .nav li a {
+      color: #FFF;
+    }
     .logo {
       padding-top: 20px;
       margin-top: 0;
@@ -175,6 +178,12 @@
     #main h3 {
       font-size: 1rem;
       margin-bottom: 2rem;
+    }
+    .footer .wrap > div {
+      display: block;
+    }
+    .footer .wrap > div + div {
+      margin-left: 0;
     }
   }
   @media screen and (max-width: 320px) {
