@@ -26,7 +26,7 @@ a.navbar-brand, a.navbar-brand:hover {
   width: 130px;
   /* margin-top: 17px; */
   text-indent: -999em;
-  background: url('/static/img/new/logo-title.svg');
+  background: url('/static/img/logo.svg');
   background-size: cover;
 }
 
@@ -93,19 +93,25 @@ a.navbar-brand, a.navbar-brand:hover {
 .buttons>.button:hover:after {
 	width: 100%;
 }
-
+.algolia-autocomplete {
+  min-width: 140px;
+  text-align: right;
+}
 #search {
-  font-size: 18px;
-  line-height: 18px;
-  outline: none;
-  width: 140px;
-  border: 1px solid #a8a8a8;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 35px;
-  color: #a8a8a8;
-  background: url('/static/img/search.svg') 10px center no-repeat;
+  width: 35px;
+  border: none;
+  color: #FFF;
+  font-size: 14px;
+  padding: 0 0 0 15px;
+  line-height: 32px;
+  background: url('/static/img/search.svg') rgba(255, 255, 255, 0.2) 25px center no-repeat;
+  transition: all .5s;
   border-radius: 100px;
+}
+#search:focus {
+  width: 120px;
+  outline: none;
+  background-position-x: 110px;
 }
 
 .footer {
@@ -152,4 +158,25 @@ a.navbar-brand, a.navbar-brand:hover {
   font-size: 18px;
  }
 
+}
+
+
+/** doc page **/
+/* .wrap {
+  width: auto;
+}
+*/
+.header {
+  height: 80px;
+  border-bottom: 1px solid #EEE;
+}
+.logo {
+  margin-top: 24px;
+}
+a.navbar-brand, a.navbar-brand:hover {
+  height: 32px;
+  width: 115px;
+} 
+.nav li form, .nav li.lang {
+  display: none;
 }

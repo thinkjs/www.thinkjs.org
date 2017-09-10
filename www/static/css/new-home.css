@@ -2,6 +2,9 @@
   body {
     overflow: hidden;
   }
+  .wrap {
+    width: 1100px;
+  }
   .header {
     position: initial;
     height: auto;
@@ -38,7 +41,11 @@
     background: none !important;
   }
 
+  .nav li form {
+    display: inherit;
+  }
   .nav .lang {
+    display: inherit !important;
     margin-left: 0;
   }
   .nav .lang a {
@@ -47,25 +54,6 @@
     border-radius: 4px;
     font-size: 12px;
     border: 1px solid rgba(255, 255, 255, 0.5);
-  }
-
-  .algolia-autocomplete {
-    min-width: 140px;
-    text-align: right;
-  }
-  #search {
-    width: 35px;
-    border: none;
-    color: #FFF;
-    font-size: 14px;
-    padding: 0 0 0 15px;
-    line-height: 32px;
-    background: url('/static/img/search.svg') rgba(255, 255, 255, 0.2) 25px center no-repeat;
-    transition: all .5s;
-  }
-  #search:focus {
-    width: 120px;
-    background-position-x: 110px;
   }
   .head {
     font-size: 4rem;
