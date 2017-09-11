@@ -1,6 +1,8 @@
 #!/bin/sh
 cd /home/welefen/git/www.thinkjs.org;
 git pull;
+git submodule init;
+git submodule update;
 npm i;
 sh build.sh
 cd output;
