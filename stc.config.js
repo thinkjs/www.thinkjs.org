@@ -6,6 +6,7 @@ var cssCompress = require('stc-css-compress');
 //var cdnAdapter = require('@q/stc-cdn-qstatic');
 var localstorage = require('stc-localstorage');
 var localstorageAdapter = require('stc-localstorage-ejs');
+var version = require('stc-resource-version');
 
 stc.config({
   cluster: false,
@@ -24,6 +25,10 @@ stc.workflow({
   cssCompress: {
     plugin: cssCompress,
     exclude: [/\.min\./]
+  },
+  version: {
+    plugin: version,
+    include: [{type: 'tpl'}]
   },
   htmlCompress: {plugin: htmlCompress},
   localstorage: {

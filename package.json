@@ -40,6 +40,7 @@
     "stc-html-compress": "^1.0.1",
     "stc-localstorage": "^1.0.4",
     "stc-localstorage-ejs": "^1.0.3",
+    "stc-resource-version": "^1.0.1",
     "stc-uglify": "^1.0.1"
   },
   "repository": {
