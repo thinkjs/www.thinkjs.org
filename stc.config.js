@@ -26,10 +26,7 @@ stc.workflow({
     plugin: cssCompress,
     exclude: [/\.min\./]
   },
-  version: {
-    plugin: version,
-    include: [{type: 'tpl'}]
-  },
+  
   htmlCompress: {plugin: htmlCompress},
   localstorage: {
     include: [{type: 'tpl'}],
@@ -40,6 +37,10 @@ stc.workflow({
       minLength : 200,
       appId : 'd0ac6c56'
     }
+  },
+  version: {
+    plugin: version,
+    include: [{type: 'tpl'}]
   },
   // cdn: {
   //   plugin: cdn, 
