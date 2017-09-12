@@ -50,6 +50,7 @@ export default class extends base {
       let docPath = rootPath + '/' + lang + '/doc';
       let versions = fs.readdirSync(docPath);
       versions.forEach(version => {
+        if(version === '.git') return;
         this.generateSingleDoc(lang, version);
       })
     }) 
