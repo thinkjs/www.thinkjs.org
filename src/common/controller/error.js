@@ -19,7 +19,7 @@ export default class extends think.controller.base {
       lang = supportLangs[0];
     }
     this.lang(lang, true);
-    
+
 
     let module = 'common';
     if(think.mode !== think.mode_module){
@@ -31,21 +31,21 @@ export default class extends think.controller.base {
     return this.display(file, options);
   }
   /**
-   * Bad Request 
+   * Bad Request
    * @return {Promise} []
    */
   _400Action(){
     return this.displayErrorPage(400);
   }
   /**
-   * Forbidden 
+   * Forbidden
    * @return {Promise} []
    */
   _403Action(){
     return this.displayErrorPage(403);
   }
   /**
-   * Not Found 
+   * Not Found
    * @return {Promise}      []
    */
   _404Action(){

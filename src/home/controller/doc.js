@@ -67,7 +67,7 @@ export default class extends base {
     }else{
       if(doc === 'single'){
         filePath = `${think.RESOURCE_PATH}/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
-        if(think.isFile(!filePath)){
+        if(!think.isFile(filePath)){
           filePath = this.generateSingleDoc(this.http.lang().toLowerCase(), this.get('version'));
         }
       }
@@ -86,7 +86,7 @@ export default class extends base {
         this.assign('title', `${match[1]}${this.locale("title-doc-suffix", version)}`);
       }
     }
-    
+
 
     this.assign('markedContent', markedContent);
     this.assign('doc', doc);
@@ -97,13 +97,13 @@ export default class extends base {
    */
   async indexAction(){
     //this.expires(86400);
-    
+
     //redirect index doc, avoid relative path in doc
     let doc = this.get('doc');
     if(!doc){
       return this.redirect('/doc/index.html');
     }
-    
+
     this.assign('currentNav', 'doc');
     this.assign('hasBootstrap', true);
     this.assign('hasVersion', true);
@@ -201,7 +201,7 @@ export default class extends base {
     if(!keyword){
       return this.display();
     }
-    
+
     let result = await this.getSearchResult(keyword);
     this.assign('searchResult', result);
     this.display();
