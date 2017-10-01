@@ -11,7 +11,7 @@ pids
 lib-cov
 
 # Coverage directory used by tools like istanbul
-coverage
+coverage/
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
@@ -19,26 +19,20 @@ coverage
 # node-waf configuration
 .lock-wscript
 
-# Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
-
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
+node_modules/
 
-app/
+# IDE config
+.idea
+.DS_Store
+
+# output
 output/
 output.tar.gz
-www/static/other/icon/*.bak
 
-ssl/
+runtime/
+app/
 
-www/static/module/thinkjs/*.md
-
-view_build/
-
-# webstorm project directory
-.idea
-
-deploy.sh
-.DS_Store
+config.development.js
+adapter.development.js
