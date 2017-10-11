@@ -14,9 +14,10 @@
   }
 
   #main {
-    height: 100%;
-    padding-top: 40px;
+    padding-top: 0px;
     padding-bottom: 0;
+    position: relative;
+    height:100%;
   }
   .logo {
     margin-top: 20px;
@@ -60,9 +61,18 @@
   }
   #main h3 {
     font-size: 2rem;
+    margin-bottom: 1rem;
   }
   .head, #main h3 {
     color: #FFF;
+  }
+  #main > .container {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    margin-top: -72px;
   }
 
   .buttons>.button {
@@ -107,7 +117,7 @@
   .footer .wrap a, .footer .wrap a:hover, .footer .wrap a:visited {
     color: #FFF;
   }
-  
+
   .github-corner:hover .octo-arm{
       animation:octocat-wave 560ms ease-in-out
   }

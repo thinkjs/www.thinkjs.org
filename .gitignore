@@ -42,3 +42,5 @@ view_build/
 
 deploy.sh
 .DS_Store
+
+package-lock.json
