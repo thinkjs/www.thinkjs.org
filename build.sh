@@ -33,4 +33,4 @@ cp -r app output/;
 
 cd output;
 rm -rf www/static/other/icon/*;
-#tar zcf ../output.tar.gz *;
+tar zcf ../output.tar.gz *;
