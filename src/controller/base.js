@@ -1,23 +1,25 @@
 import fs from 'fs';
-import path from 'path';
-
 import marked from "marked";
 import markToc from "marked-toc";
 import highlight from 'highlight.js';
 
-export default class extends think.controller.base {
-  /**
-   * before magic method
-   * @return {} []
-   */
+module.exports = class extends think.Controller {
   __before(){
     this.assign({
-      title: this.locale('title-home'),
+      title: this.getI18n()('title-home'),
       currentNav: '',
       hasBootstrap: false,
       hasVersion: false,
-      lang: this.http.lang()
+      lang: this.ctx.lang
     });
+  }
+  /**
+   * display
+   */
+  display(){
+    const lang = this.ctx.lang || 'zh-cn';
+    const html = this.ctx.controller + think.config('view.ejs.sep') + this.ctx.action;
+    super.display(`${lang}/home/${html}`);
   }
   /**
    * generate toc name
@@ -85,4 +87,4 @@ export default class extends think.controller.base {
     doc = doc.join('\n\n');
     fs.writeFileSync(filePath, doc);
   }
-}
+};

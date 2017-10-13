@@ -1,8 +1,6 @@
-'use strict';
+const Base = require('./base.js');
 
-import base from './base.js';
-
-export default class extends base {
+module.exports = class extends Base {
   /**
    * homepage
    * @return {} []
@@ -16,7 +14,7 @@ export default class extends base {
    */
   changelogAction(){
     this.assign('currentNav', 'changelog');
-    this.assign('title', this.locale('title-changelog'));
+    this.assign('title', this.getI18n()('title-changelog'));
     return this.display();
   }
   /**
@@ -25,7 +23,7 @@ export default class extends base {
    */
   demoAction(){
     this.assign('currentNav', 'demo');
-    this.assign('title', this.locale('title-demo'));
+    this.assign('title', this.getI18n()('title-demo'));
     //this.assign('hasBootstrap', true);
     return this.display();
   }
@@ -35,7 +33,7 @@ export default class extends base {
    */
   pluginAction(){
     this.assign('currentNav', 'plugin');
-    this.assign('title', this.locale('title-plugin'));
+    this.assign('title', this.getI18n()('title-plugin'));
     //this.assign('hasBootstrap', true);
     return this.display();
   }
@@ -44,9 +42,8 @@ export default class extends base {
    * @return {[type]} [description]
    */
   donateAction(){
-    this.lang('zh-cn', true);
     this.assign('currentNav', 'donate');
-    this.assign('title', this.locale('title-donate'));
+    this.assign('title', this.getI18n()('title-donate'));
     return this.display();
   }
   /**
@@ -54,30 +51,27 @@ export default class extends base {
    * @return {} []
    */
   aboutAction(){
-    this.lang('zh-cn', true);
-    this.assign('title', this.locale('title-about'));
+    this.assign('title', this.getI18n()('title-about'));
     return this.display();
   }
   /**
    * spending page
-   * @return {} 
+   * @return {}
    */
   spendingAction(){
-    this.lang('zh-cn', true);
-    this.assign('title', this.locale('title-spending'));
+    this.assign('title', this.getI18n()('title-spending'));
     return this.display();
   }
   /**
    * event
-   * @return {} 
+   * @return {}
    */
   eventAction(){
-    this.lang('zh-cn', true);
-    this.assign('title', this.locale('title-event'));
+    this.assign('title', this.getI18n()('title-event'));
     return this.display();
   }
 
   newAction(){
     return this.display();
   }
-}
+};
