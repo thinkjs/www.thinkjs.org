@@ -1,8 +1,8 @@
 {
   "apps": [{
-    "name": "www.thinkjs3.org",
+    "name": "www.thinkjs.org",
     "script": "production.js",
-    "cwd": "/Users/coderzsmac/Desktop/www.thinkjs3.org",
+    "cwd": "/home/welefen/www/www.thinkjs.org",
     "exec_mode": "fork",
     "max_memory_restart": "1G",
     "autorestart": true,

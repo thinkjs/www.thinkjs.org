@@ -9,8 +9,8 @@ cp -r view/* view_build;
 
 npm run compile;
 
-# node production.js generate/single;
-# node production.js generate/html;
+node production.js generate/single;
+node production.js generate/html;
 
 DEBUG=pluginMatchedFiles,pluginTotalTime node stc.config.js;
 

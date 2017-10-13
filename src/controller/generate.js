@@ -17,7 +17,7 @@ module.exports = class extends base {
    * @return {} []
    */
   htmlAction() {
-    const files = think.getFiles(this.rootPath).filter(file => {
+    const files = think.getdirFiles(this.rootPath).filter(file => {
       const ext = path.extname(file);
       return ext === '.md';
     });
@@ -38,6 +38,7 @@ module.exports = class extends base {
     const langs = fs.readdirSync(rootPath);
     langs.forEach(lang => {
       const docPath = rootPath + '/' + lang + '/doc';
+      if (!think.isDirectory(docPath)) return;
       const versions = fs.readdirSync(docPath);
       versions.forEach(version => {
         if (!/^\d+\.\d+$/.test(version)) return;

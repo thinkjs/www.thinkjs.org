@@ -69,7 +69,7 @@ module.exports = class extends think.Controller {
    * @return {} []
    */
   generateSingleDoc(lang, version) {
-    const filePath = `${think.RESOURCE_PATH}/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
+    const filePath = `${think.ROOT_PATH}/www/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
     think.mkdir(path.dirname(filePath));
 
     const jsonPath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/sidebar.json`;

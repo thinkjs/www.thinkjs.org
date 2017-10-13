@@ -59,7 +59,7 @@ export default class extends base {
       markedContent = fs.readFileSync(htmlPath, 'utf8');
     } else {
       if (doc === 'single') {
-        filePath = `${think.RESOURCE_PATH}/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
+        filePath = `${think.ROOT_PATH}/www/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
         if (think.isFile(!filePath)) {
           filePath = this.generateSingleDoc(this.ctx.lang.toLowerCase(), this.get('version'));
         }
