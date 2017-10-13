@@ -1,23 +1,13 @@
-'use strict';
-
-import base from './base.js';
-import fs from 'fs';
-import path from 'path';
-
-
-
+const base = require('./base.js');
+const fs = require('fs');
+const path = require('path');
 /**
  * invoke in command line
  */
-export default class extends base {
-
-  init(http){
-    super.init(http);
+module.exports = class extends base {
+  __before() {
     this.rootPath = think.ROOT_PATH + '/view_build';
-  }
-
-  __before(){
-    if(!think.cli){
+    if (!think.cli) {
       this.fail();
     }
   }
@@ -26,34 +16,33 @@ export default class extends base {
    * mardown to html
    * @return {} []
    */
-  htmlAction(){
-    let files = think.getFiles(this.rootPath).filter(file => {
-      let ext = path.extname(file);
+  htmlAction() {
+    const files = think.getFiles(this.rootPath).filter(file => {
+      const ext = path.extname(file);
       return ext === '.md';
     });
     files.forEach(file => {
-      let filePath = this.rootPath + '/' + file;
-      let htmlPath = filePath.replace('.md', '.html');
-      let content = this.markdownToHtml(filePath);
+      const filePath = this.rootPath + '/' + file;
+      const htmlPath = filePath.replace('.md', '.html');
+      const content = this.markdownToHtml(filePath);
       fs.writeFileSync(htmlPath, content);
-      //fs.unlinkSync(filePath);
+      // fs.unlinkSync(filePath);
     });
   }
   /**
    * single doc page
    * @return {} []
    */
-  singleAction(){
-    let rootPath = think.ROOT_PATH + '/view';
-    let langs = fs.readdirSync(rootPath);
+  singleAction() {
+    const rootPath = think.ROOT_PATH + '/view';
+    const langs = fs.readdirSync(rootPath);
     langs.forEach(lang => {
-      let docPath = rootPath + '/' + lang + '/doc';
-      let versions = fs.readdirSync(docPath);
+      const docPath = rootPath + '/' + lang + '/doc';
+      const versions = fs.readdirSync(docPath);
       versions.forEach(version => {
-        if(!/^\d+\.\d+$/.test(version)) return;
+        if (!/^\d+\.\d+$/.test(version)) return;
         this.generateSingleDoc(lang, version);
-      })
-    }) 
+      });
+    });
   }
-
-}
+};

@@ -9,8 +9,8 @@ cp -r view/* view_build;
 
 npm run compile;
 
-node www/production.js home/generate/single;
-node www/production.js home/generate/html;
+# node production.js generate/single;
+# node production.js generate/html;
 
 DEBUG=pluginMatchedFiles,pluginTotalTime node stc.config.js;
 
@@ -19,8 +19,8 @@ cd output;
 mv view_build view;
 cd ..;
 
-cp www/*.ico output/www/;
-cp www/*.js output/www/;
+# cp www/*.ico output/www/;
+# cp www/*.js output/www/;
 cp package.json output/;
 cp nginx.conf output/;
 cp pm2.json output/;

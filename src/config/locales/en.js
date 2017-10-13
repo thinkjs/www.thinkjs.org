@@ -13,10 +13,10 @@ module.exports = {
     },
     ordinal: function(number) {
       var b = number % 10;
-      return (~~(number % 100 / 10) === 1) ? 'th' :
-        (b === 1) ? 'st' :
-          (b === 2) ? 'nd' :
-            (b === 3) ? 'rd' : 'th';
+      return (~~(number % 100 / 10) === 1) ? 'th'
+        : (b === 1) ? 'st'
+          : (b === 2) ? 'nd'
+            : (b === 3) ? 'rd' : 'th';
     },
     currency: {
       symbol: '$'
@@ -26,13 +26,13 @@ module.exports = {
     ]
   },
   translation: {
-    "messages" : {
-      "" : {
-        "domain" : "messages",
-        "lang"   : "en",
-        "plural_forms" : "nplurals=2; plural=(n != 1);",
+    'messages': {
+      '': {
+        'domain': 'messages',
+        'lang': 'en',
+        'plural_forms': 'nplurals=2; plural=(n != 1);'
       },
-      "some key" : [ "some key"],
+      'some key': ['some key'],
       'title-home': ['ThinkJS - use full ES6/7 features to develop Node.js applications, support TypeScript'],
       'title-changelog': 'Changelog - ThinkJS',
       'title-doc-suffix': ' - ThinkJS Documentation',
@@ -47,13 +47,13 @@ module.exports = {
       'all-doc': 'All documentation',
       'back2top': 'Back to top'
     },
-    "setting" : {
-      "" : {
-        "domain" : "setting",
-        "lang"   : "en",
-        "plural_forms" : "nplurals=2; plural=(n != 1);",
+    'setting': {
+      '': {
+        'domain': 'setting',
+        'lang': 'en',
+        'plural_forms': 'nplurals=2; plural=(n != 1);'
       },
-      "some key" : [ "some key in setting domain"]
+      'some key': ['some key in setting domain']
     }
-  },
-}
+  }
+};

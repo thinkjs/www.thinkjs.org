@@ -5,14 +5,14 @@ module.exports = class extends Base {
    * homepage
    * @return {} []
    */
-  indexAction(){
+  indexAction() {
     return this.display();
   }
   /**
    * changelog page
    * @return {} []
    */
-  changelogAction(){
+  changelogAction() {
     this.assign('currentNav', 'changelog');
     this.assign('title', this.getI18n()('title-changelog'));
     return this.display();
@@ -21,27 +21,27 @@ module.exports = class extends Base {
    * demo list
    * @return {} []
    */
-  demoAction(){
+  demoAction() {
     this.assign('currentNav', 'demo');
     this.assign('title', this.getI18n()('title-demo'));
-    //this.assign('hasBootstrap', true);
+    // this.assign('hasBootstrap', true);
     return this.display();
   }
   /**
    * plugin page
    * @return {[type]} [description]
    */
-  pluginAction(){
+  pluginAction() {
     this.assign('currentNav', 'plugin');
     this.assign('title', this.getI18n()('title-plugin'));
-    //this.assign('hasBootstrap', true);
+    // this.assign('hasBootstrap', true);
     return this.display();
   }
   /**
    * donate page
    * @return {[type]} [description]
    */
-  donateAction(){
+  donateAction() {
     this.assign('currentNav', 'donate');
     this.assign('title', this.getI18n()('title-donate'));
     return this.display();
@@ -50,7 +50,7 @@ module.exports = class extends Base {
    * about page
    * @return {} []
    */
-  aboutAction(){
+  aboutAction() {
     this.assign('title', this.getI18n()('title-about'));
     return this.display();
   }
@@ -58,7 +58,7 @@ module.exports = class extends Base {
    * spending page
    * @return {}
    */
-  spendingAction(){
+  spendingAction() {
     this.assign('title', this.getI18n()('title-spending'));
     return this.display();
   }
@@ -66,12 +66,12 @@ module.exports = class extends Base {
    * event
    * @return {}
    */
-  eventAction(){
+  eventAction() {
     this.assign('title', this.getI18n()('title-event'));
     return this.display();
   }
 
-  newAction(){
+  newAction() {
     return this.display();
   }
 };

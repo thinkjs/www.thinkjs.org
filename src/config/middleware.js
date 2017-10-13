@@ -29,24 +29,24 @@ module.exports = [
     options: {}
   },
   {
-    handle: ()=> {
-      return (ctx, next)=> {
-        let supportLangs = think.config('locale.support');
-        let lang = ctx.path.split('/')[1]; //从 URL 中获取语言
-        if(supportLangs.indexOf(lang) > -1){
+    handle: () => {
+      return (ctx, next) => {
+        const supportLangs = think.config('locale.support');
+        const lang = ctx.path.split('/')[1]; // 从 URL 中获取语言
+        if (supportLangs.indexOf(lang) > -1) {
           ctx.path = ctx.path.substring(lang.length + 1);
           ctx.lang = lang;
-        }else{
+        } else {
           ctx.lang = 'zh-cn';
         }
         return next();
-      }
+      };
     }
   },
   {
     handle: 'router',
     options: {
-      suffix: ['.html'],
+      suffix: ['.html']
     }
   },
   'logic',

@@ -1,5 +1,4 @@
-export default class extends think.Logic {
-
+module.exports = class extends think.Logic {
   constructor(...args) {
     super(...args);
     if (this.ctx.lang === 'en') {
@@ -30,7 +29,7 @@ export default class extends think.Logic {
   indexAction() {
     this.rules = {
       version: this.version
-    }
+    };
   }
 
   /**
@@ -43,7 +42,7 @@ export default class extends think.Logic {
       keyword: {
         required: true
       }
-    }
+    };
   }
 
   /**
@@ -52,7 +51,7 @@ export default class extends think.Logic {
    */
   singleAction() {
     this.rules = {
-      version: this.version,
-    }
+      version: this.version
+    };
   }
-}
+};
