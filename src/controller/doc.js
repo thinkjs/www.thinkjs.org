@@ -186,7 +186,7 @@ export default class extends base {
     this.assign('hasVersion', true);
     this.getSideBar();
 
-    const keyword = this.get('keyword').trim();
+    const keyword = this.cmdFilter(this.get('keyword'));
     this.assign('keyword', keyword);
     if (!keyword) {
       return this.display();
@@ -195,5 +195,11 @@ export default class extends base {
     const result = await this.getSearchResult(keyword);
     this.assign('searchResult', result);
     this.display();
+  }
+
+  cmdFilter(keyword) {
+    keyword = keyword.trim();
+    keyword = keyword.replace(/[^\S ]/g, '');
+    return keyword.replace("'", "\\'");
   }
 }
