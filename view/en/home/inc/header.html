@@ -43,11 +43,15 @@
                 <li <%if(currentNav === 'demo'){%>class="current"<%}%>><a href="/<%-lang%>/demo.html">Demo</a></li>
                 <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/<%-lang%>/changelog.html">ChangeLog</a></li>
                 <li <%if(currentNav === 'plugin'){%>class="current"<%}%>><a href="/<%-lang%>/plugin.html">Plugin</a></li>
+                <li>
+                    <a href="/doc/3.0/index.html" style="margin-left: 10px">中文</a>
+                </li>
             </ul>
             <%if(hasVersion){%>
             <div class="version" id="version">
                 <a href="javascript:;" class="versel"><span><%-version%></span><i class="arrowd"></i></a>
                 <ul id="verlist" class="verlist">
+                    <li><a href="/<%-lang%>/doc/3.0/index.html">3.0</a></li>
                     <li><a href="/<%-lang%>/doc/2.1/index.html">2.1</a></li>
                     <li><a href="/<%-lang%>/doc/2.0/index.html">2.0</a></li>
                     <li><a href="/<%-lang%>/doc/1.2/index.html">1.2</a></li>
