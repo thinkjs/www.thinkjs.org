@@ -14,7 +14,6 @@ export default class extends base {
     const key = `sidebar_${lang}_${version}`;
     let data = await this.cache(key);
     
-    console.log(key, data);
     if (!data) {
       const filePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/sidebar.json`;
       const content = fs.readFileSync(filePath);
