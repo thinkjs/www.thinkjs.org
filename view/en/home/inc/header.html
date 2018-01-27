@@ -27,37 +27,62 @@
 <link href="/static/module/bootstrap/css/bootstrap.css" rel="stylesheet" data-ls="css_bootstrap" />
 <%}%>
 <link href="/static/css/index.css" rel="stylesheet" data-ls="css_index" />
+<link rel="stylesheet" href="/static/css/new.css">
 </head>
 <body class="en">
-<div class="header">
-  <div class="wrap clearfix">
+  <div class="header">
+    <div class="wrap clearfix">
         <div class="logo">
-            <a href="/" title="ThinkJS">
-                <img src="/static/img/logo.svg" height="55px"/>
-            </a>
+          <a class="navbar-brand" href="/" title="ThinkJS">
+            ThinkJS
+          </a>
         </div>
         <div class="headr">
-            <ul class="nav">
-                <li <%if(currentNav === 'doc'){%>class="current"<%}%>><a href="/<%-lang%>/doc/index.html">Documentation</a></li>
-                <!-- <li class="firekylin"><a href="https://github.com/75team/firekylin" target="_blank">FireKylin</a></li> -->
-                <li <%if(currentNav === 'demo'){%>class="current"<%}%>><a href="/<%-lang%>/demo.html">Demo</a></li>
-                <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/<%-lang%>/changelog.html">ChangeLog</a></li>
-                <li <%if(currentNav === 'plugin'){%>class="current"<%}%>><a href="/<%-lang%>/plugin.html">Plugin</a></li>
-                <li>
-                    <a href="/doc/3.0/index.html" style="margin-left: 10px">中文</a>
-                </li>
-            </ul>
-            <%if(hasVersion){%>
-            <div class="version" id="version">
-                <a href="javascript:;" class="versel"><span><%-version%></span><i class="arrowd"></i></a>
-                <ul id="verlist" class="verlist">
-                    <li><a href="/<%-lang%>/doc/3.0/index.html">3.0</a></li>
-                    <li><a href="/<%-lang%>/doc/2.1/index.html">2.1</a></li>
-                    <li><a href="/<%-lang%>/doc/2.0/index.html">2.0</a></li>
-                    <li><a href="/<%-lang%>/doc/1.2/index.html">1.2</a></li>
-                </ul>
-            </div>
-            <%}%>
+          <ul class="nav">
+            <li>
+              <form method="get" action="/zh-cn/doc/3.0/search">
+                <span 
+                  class="algolia-autocomplete" 
+                  style="position: relative; display: inline-block; direction: ltr;"
+                >
+                  <input 
+                    type="text" 
+                    id="search" 
+                    class="ds-input" 
+                    autocomplete="off" 
+                    spellcheck="false" 
+                    role="combobox" 
+                    aria-autocomplete="list" 
+                    aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" 
+                    dir="auto" 
+                    style="position: relative; vertical-align: top;" name="keyword"
+                  >
+                </span>
+              </form>
+            </li>
+            <li <%if(currentNav === 'doc'){%>class="current"<%}%>><a href="/doc/index.html">Documentation</a></li>
+            <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/changelog.html">Change Log</a></li>
+            <li><a href="https://github.com/thinkjs/think-awesome">Awesome</a></li>
+            <li <%if(currentNav === 'donate'){%>class="current"<%}%>><a href="/donate.html">Donate</a></li>
+            <li>
+            <form action="/zh-cn/doc/3.0/search"> <span class="algolia-autocomplete" style="position:relative;display:inline-block;direction:ltr"> <input type="text" id="search" class="ds-input" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position:relative;vertical-align:top" name="keyword"> </span></form>
+            </li>
+            <li>
+                <a href="/zh-cn/doc/3.0/index.html" style="margin-left: 10px">中</a>
+            </li>
+          </ul>
+          <%if(hasVersion){%>
+          <div class="version" id="version">
+              <a href="javascript:;" class="versel"><span><%-version%></span><i class="arrowd"></i></a>
+              <ul id="verlist" class="verlist">
+                  <li><a href="/<%-lang%>/doc/3.0/index.html">3.0</a></li>
+                  <li><a href="/<%-lang%>/doc/2.2/index.html">2.2</a></li>
+                  <li><a href="/<%-lang%>/doc/2.1/index.html">2.1</a></li>
+                  <li><a href="/<%-lang%>/doc/2.0/index.html">2.0</a></li>
+                  <li><a href="/<%-lang%>/doc/1.2/index.html">1.2</a></li>
+              </ul>
+          </div>
+          <%}%>
         </div>
+      </div>
     </div>
-</div>
