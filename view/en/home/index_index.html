@@ -1,139 +1,115 @@
-<%include inc/header.html %>
-<div class="banarea" style="background-image:url(/static/img/banbg.jpg)">
-  <div class="wrap">
-      <h1 class="slogan">The Web framework beyond your dreams</h1>
-      <h3 class="slogan-desc">Use the full ES6/7 features to develop Node.js applications</h3>
-      <a href="/doc.html" class="btn-link">Getting Started</a>
+<!DOCTYPE html>
+<!--!
+
+ _______ _     _       _        _  _____
+|__   __| |   (_)     | |      | |/ ____|
+   | |  | |__  _ _ __ | | __   | | (___
+   | |  | '_ \| | '_ \| |/ /   | |\___ \
+   | |  | | | | | | | |   < |__| |____) |
+   |_|  |_| |_|_|_| |_|_|\_\____/|_____/
+
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title><%-title%></title>
+<meta name="renderer" content="webkit">
+<meta name="format-detection" content="telephone=no">
+<meta name="referrer" content="always">
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<link rel="apple-touch-icon" href="/static/img/favicon.png">
+<meta name="keywords" content="ThinkJS, Node.js, io.js, MVC, Restful, Generator Function, ES6, ES7, Promise">
+<meta name="description" content="ThinkJS 2.0 had completelly been rewritten with brand-new ECMAScript 6/7 features. By using ES7's async/await or ES6's Generator Function features, ThinkJS 2.0 could thoroughly solve the asynchronous nesting problem within Node.js">
+<%lscookie='header'%>
+<link href="/static/css/reset.css" rel="stylesheet" data-ls="css_reset" />
+<link href="/static/module/highlight/styles/github-gist.css" rel="stylesheet" data-ls="css_github" >
+<%if(hasBootstrap){%>
+<link href="/static/module/bootstrap/css/bootstrap.css" rel="stylesheet" data-ls="css_bootstrap" />
+<%}%>
+<link href="/static/css/index.css" rel="stylesheet" data-ls="css_index" />
+<link rel="stylesheet" href="/static/css/new.css">
+<link rel="stylesheet" href="/static/css/new-home.css">
+</head>
+<body>
+  <a href="https://github.com/thinkjs/thinkjs" class="github-corner" aria-label="View source on Github">
+    <svg width="72" height="72" viewBox="0 0 250 250" style="fill:#fff; color:#FFF; position: absolute; top: 0px; border: 0; right: 0;" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" fill="rgba(0,0,0,0.41)"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+        </svg>
+    </a>
+  <div class="header">
+    <div class="wrap clearfix">
+          <div class="logo">
+              <a class="navbar-brand" href="/" title="ThinkJS">
+                ThinkJS
+              </a>
+          </div>
+          <div class="headr">
+              <ul class="nav">
+                <li <%if(currentNav === 'doc'){%>class="current"<%}%>><a href="/doc/index.html">Documentation</a></li>
+                <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/changelog.html">Change Log</a></li>
+                <li><a href="https://github.com/thinkjs/think-awesome">Awesome</a></li>
+                <li <%if(currentNav === 'donate'){%>class="current"<%}%>><a href="/donate.html">Donate</a></li>
+                <li>
+                  <form action="/en/doc/3.0/search"> <span class="algolia-autocomplete" style="position:relative;display:inline-block;direction:ltr"> <input type="text" id="search" class="ds-input" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position:relative;vertical-align:top" name="keyword"> </span></form>
+                </li>
+                <li class="lang">
+                  <a href="/zh-cn">中</a>
+                </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+<section id="main">
+  <div class="container">
+    <img src="/static/img/new/logo.png" id="logo">
+    <h1 class="head">ThinkJS</h1>
+    <h3>Use the full ES6/7 features to develop Node.js applications.</h3>
+    <div class="buttons">
+      <a href="/doc.html" class="button">Get Started</a>
     </div>
-</div>
-<div class="banbot">
+  </div>
+</section>
+<div class="footer" style="opacity:0.3">
   <div class="wrap">
-        <p>Check out the latest developments in the <a href="https://github.com/75team/thinkjs" class="blue">GitHub repo</a></p>
-        <div class="share">
-        
-<!--           <a target="_blank" href="https://github.com/75team/thinkjs">
-            <img height="20" src="https://img.shields.io/github/stars/75team/thinkjs.svg?style=social&label=Star" alt="github star">
-          </a>
-          <a target="_blank" href="http://badge.fury.io/js/thinkjs">
-            <img height="20" src="https://img.shields.io/npm/v/thinkjs.svg?style=flat-square" alt="npm version">
-          </a>
-          <a target="_blank" href="https://travis-ci.org/75team/thinkjs">
-            <img height="20" src="https://img.shields.io/travis/75team/thinkjs.svg?style=flat-square" alt="npm build">
-          </a>
-          <a target="_blank" href="https://coveralls.io/github/75team/thinkjs">
-            <img height="20" src="https://img.shields.io/coveralls/75team/thinkjs.svg?style=flat-square" alt="coverage">
-          </a> -->
-          <a target="_blank" href="https://github.com/75team/thinkjs">
-            <img height="20" src="/static/other/icon/star.svg" alt="github star">
-          </a>
-          <a target="_blank" href="https://github.com/75team/thinkjs">
-            <img height="20" src="/static/other/icon/version.svg" alt="npm version">
-          </a>
-          <a target="_blank" href="https://github.com/75team/thinkjs">
-            <img height="20" src="/static/other/icon/build.svg" alt="npm build">
-          </a>
-          <a target="_blank" href="https://github.com/75team/thinkjs">
-            <img height="20" src="/static/other/icon/coverage.svg" alt="coverage">
-          </a>
-        </div>
+    <div class="ft-link">
+      <span class="ft-title">Awesome Links：</span>
+      <a href="https://www.75team.com" target="_blank">75team</a> / <a href="https://www.w3ctech.com" target="_blank">w3ctech</a>
     </div>
+    <div class="ft-project">
+      <span class="ft-title">Projects：</span>
+      <a href="http://www.75team.com/weekly/" target="_blank">75Weekly</a> / <a href="https://firekylin.org" target="_blank">FireKylin</a>
+    </div>
+    <div class="ft-about">
+      QQ Group: 339337680
+    </div>
+    <div class="ft-copy">
+        <p>@2013 - <%-(new Date).getFullYear()%> ThinkJS</p>
+    </div>
+  </div>
 </div>
-<div class="flinfo">  
-  <div class="wrap">
-      <div class="tit"><h3>Use ES6/7 features to develop Node.js applications</h3></div>
-<!--     <p class="tips">借助 Babel 编译，可以大胆的在项目使用 ES6/7 语法。</p> -->
-        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">//user controller, home/controller/user.js</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">think</span>.<span class="hljs-title">controller</span>.<span class="hljs-title">base</span> </span>{
-  <span class="hljs-comment">//login action</span>
-  <span class="hljs-keyword">async</span> loginAction(){
-    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.isGet()){
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.display();
-    }
-    <span class="hljs-comment">//data is validated in logic</span>
-    <span class="hljs-keyword">let</span> data = <span class="hljs-keyword">this</span>.post();
-    <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.model(<span class="hljs-string">'user'</span>).where({name: data.name}).find();
-    <span class="hljs-keyword">if</span>(!validateLogin(result)){
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.fail(<span class="hljs-string">'login fail'</span>);
-    }
-    <span class="hljs-comment">//set userInfo to session</span>
-    <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.session(<span class="hljs-string">'userInfo'</span>, result);
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.success();
+<script>
+var body = document.body;
+var header = document.querySelector('.header');
+var footer = document.querySelector('.footer');
+var main = document.querySelector('#main .container');
+
+window.onresize = (function calcMainheight() {
+  var shouldBeHeight = body.clientHeight - header.clientHeight - footer.clientHeight - 40;
+  if(shouldBeHeight < main.clientHeight) {
+    var scaleSize = (shouldBeHeight / main.clientHeight).toFixed(2);
+    main.style.transform = 'scale(' + scaleSize + ')';
+    main.parentNode.style.padding = 0;
   }
-}
-</code></pre>
-    </div>
-</div>
-<div class="flfet"> 
-  <div class="wrap">
-      <div class="tit2"><h3>FEATURES</h3></div>
-<!--       <p class="tips">Make Async Easy Based On ES6</p> -->
-        <ul class="fetlist">
-          <li>
-              <i class="icon-fet1"></i>
-              <p><strong>Supports ES6/7 features</strong>Writing code with full ES6/7 features (Generator Function, Class, Async & Await etc.), and the Babel-compiled code will run on Node.js runtime stably.</p>
-            </li>
-          <li>
-              <i class="icon-fet2"></i>
-              <p><strong>Rich database support</strong>Supports Mysql, Sqlite, Mongodb with highly encapsulated and easy to use methods, in which SQL injection filters are also implemented.</p>
-            </li>
-          <li>
-              <i class="icon-fet3"></i>
-              <p><strong>Hook & Middleware</strong>Rich hooks and middlewares are provided for conduct the user requests.</p>
-            </li>
-          <li>
-              <i class="icon-fet4"></i>
-              <p><strong>REST API</strong>Auto-generate REST API, no need extra coding. Data level authorization controlling that make you can allow or disallow data access to certain user</p>
-            </li>
-          <li>
-              <i class="icon-fet5"></i>
-              <p><strong>Supports WebSocket</strong>Only need write one set of code to support common WebSocket clients like socket.io and sockjs.</p>
-            </li>
-          <li>
-              <i class="icon-fet6"></i>
-              <p><strong>Rich Adaptors</strong>Easy switching between Cache, Store, Session and Template, to change your application's behavior without concerning with what's behind it.</p>
-            </li>
-          <li>
-              <i class="icon-fet7"></i>
-              <p><strong>Hot Module Replacement(HMR)</strong>In development mode, HMR monitors file changes and replaces them in the active runtime, no need to restart Node.js.</p>
-            </li>
-          <li>
-              <i class="icon-fet8"></i>
-              <p><strong>Common Line Interface</strong>Supports invoke Action in CLI, easier to execute timed task.</p>
-          </li>
-        </ul>
-    </div>
-</div>
-<div class="fluser">  
-  <div class="wrap">
-        <ul class="userlist">
-          <li>
-              <p class="usertalk">ThinkJS has established the benchmark of usability and innovativeness, it represents high level standard among Node frameworks. I wish everyone contribute to it and to build up a prosperous community together.</p>
-                <div class="userinfo clearfix">
-                  <img src="/static/img/portrait_yueying.jpg" alt="月影" />
-                    <p>
-                      <strong>Ying Yue</strong>Leader of 75team, the biggest front-end team of QIHOO 360(NYSE)
-                    </p>
-                </div>
-            </li>
-          <li>
-              <p class="usertalk">ThinkJS 2.0 is disruptive innovation, it condenses the author's painstaking efforts, we belive it's performance, productivity and extensibility will bring the developers more surprise and shock!</p>
-                <div class="userinfo clearfix">
-                  <img src="/static/img/portrait_lisongfeng.jpg" alt="李松峰" />
-                    <p>
-                      <strong>Songfeng Li</strong>Translator of the Chinese-Edition of <i>Prefessional JavaScript for Web Developers</i>
-                    </p>
-                </div>
-            </li>
-          <li>
-              <p class="usertalk">The best part of ThinkJS is it has a smooth learning curve and easy to use! It is a good choice whether you use it on project or learning Node.js! w3ctech is developed use ThinkJS.</p>
-                <div class="userinfo clearfix">
-                  <img src="/static/img/portrait_zhouyubo.jpg" alt="周裕波" />
-                    <p>
-                      <strong>Yubo Zhou</strong>Co-founder of w3ctech, the biggest front-end developers community in China
-                    </p>
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>
-<%include inc/footer.html %>
+
+  return calcMainheight;
+})();
+
+</script>
+<!--<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F1bb90f69156081a47c0ac82de9a02a34' type='text/javascript'%3E%3C/script%3E"));
+</script>-->
+</body>
+</html>

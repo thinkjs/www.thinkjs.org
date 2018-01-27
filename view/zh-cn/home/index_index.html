@@ -47,10 +47,10 @@
           </div>
           <div class="headr">
               <ul class="nav">
-                <li <%if(currentNav === 'doc'){%>class="current"<%}%>><a href="/doc/index.html">Documentation</a></li>
-                <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/changelog.html">Change Log</a></li>
-                <li><a href="https://github.com/thinkjs/think-awesome">Awesome</a></li>
-                <li <%if(currentNav === 'donate'){%>class="current"<%}%>><a href="/donate.html">Donate</a></li>
+                <li <%if(currentNav === 'doc'){%>class="current"<%}%>><a href="/doc/index.html">官方文档</a></li>
+                <li <%if(currentNav === 'changelog'){%>class="current"<%}%>><a href="/changelog.html">更新日志</a></li>
+                <li><a href="https://github.com/thinkjs/think-awesome">最佳实践</a></li>
+                <li <%if(currentNav === 'donate'){%>class="current"<%}%>><a href="/donate.html">捐赠我们</a></li>
                 <li>
                   <form action="/zh-cn/doc/3.0/search"> <span class="algolia-autocomplete" style="position:relative;display:inline-block;direction:ltr"> <input type="text" id="search" class="ds-input" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position:relative;vertical-align:top" name="keyword"> </span></form>
                 </li>
@@ -89,6 +89,24 @@
     </div>
   </div>
 </div>
+<script>
+var body = document.body;
+var header = document.querySelector('.header');
+var footer = document.querySelector('.footer');
+var main = document.querySelector('#main .container');
+
+window.onresize = (function calcMainheight() {
+  var shouldBeHeight = body.clientHeight - header.clientHeight - footer.clientHeight - 40;
+  if(shouldBeHeight < main.clientHeight) {
+    var scaleSize = (shouldBeHeight / main.clientHeight).toFixed(2);
+    main.style.transform = 'scale(' + scaleSize + ')';
+    main.parentNode.style.padding = 0;
+  }
+
+  return calcMainheight;
+})();
+
+</script>
 <!--<script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F1bb90f69156081a47c0ac82de9a02a34' type='text/javascript'%3E%3C/script%3E"));
