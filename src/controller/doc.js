@@ -13,7 +13,7 @@ export default class extends base {
     // todo
     const key = `sidebar_${lang}_${version}`;
     let data = await this.cache(key);
-    
+
     if (!data) {
       const filePath = `${think.ROOT_PATH}/view/${lang}/doc/${version}/sidebar.json`;
       const content = fs.readFileSync(filePath);
@@ -61,7 +61,7 @@ export default class extends base {
     } else {
       if (doc === 'single') {
         filePath = `${think.ROOT_PATH}/www/static/module/thinkjs/thinkjs_${lang}_${version}.md`;
-        if (think.isFile(!filePath)) {
+        if (!think.isFile(filePath)) {
           filePath = this.generateSingleDoc(this.ctx.lang.toLowerCase(), this.get('version'));
         }
       }
@@ -104,7 +104,7 @@ export default class extends base {
 
     try {
       await this.getDoc();
-      await this.display('doc/index');
+      await this.display('doc_index');
     } catch (err) {
       think.logger.error(err);
     }
@@ -140,7 +140,7 @@ export default class extends base {
       const pos = item.indexOf(':');
       const filename = item.substr(0, pos);
       if (!(filename in data)) {
-        data[filename] = {filename: filename, text: []};
+        data[filename] = { filename: filename, text: [] };
       }
       let text = item.substr(pos + 1);
       text = this.escapeHtml(text).replace(new RegExp(keyword, 'ig'), a => {

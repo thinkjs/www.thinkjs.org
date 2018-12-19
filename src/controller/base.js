@@ -17,9 +17,9 @@ module.exports = class extends think.Controller {
   /**
    * display
    */
-  display() {
+  display(html) {
     const lang = this.ctx.lang || 'zh-cn';
-    const html = this.ctx.controller + think.config('view.ejs.sep') + this.ctx.action;
+    html = html || this.ctx.controller + think.config('view.ejs.sep') + this.ctx.action;
     super.display(`${lang}/home/${html}`);
   }
   /**
