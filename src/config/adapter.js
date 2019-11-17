@@ -1,3 +1,4 @@
+const os = require('os');
 const fileCache = require('think-cache-file');
 const ejs = require('think-view-ejs');
 const fileSession = require('think-session-file');
@@ -12,7 +13,7 @@ const isNow = think.env === 'now';
  * @type {Object}
  */
 exports.cache = {
-  type: 'file',
+  type: isNow ? 'tmpFile' : 'file',
   common: {
     timeout: 60 * 60 * 1000 // millisecond
   },
@@ -21,6 +22,12 @@ exports.cache = {
     cachePath: path.join(think.ROOT_PATH, 'runtime/cache'), // absoulte path is necessarily required
     pathDepth: 1,
     gcInterval: 60 * 60 * 1000 // gc interval
+  },
+  tmpFile: {
+    handle: fileCache,
+    cachePath: path.join(os.tmpdir(), 'cache'),
+    pathDepth: 1,
+    gcInterval: 60 * 60 * 1000
   }
 };
 
@@ -53,7 +60,7 @@ exports.model = {
  * @type {Object}
  */
 exports.session = {
-  type: 'file',
+  type: isNow ? 'tmpFile' : 'file',
   common: {
     cookie: {
       name: 'thinkjs'
@@ -64,6 +71,10 @@ exports.session = {
   file: {
     handle: fileSession,
     sessionPath: path.join(think.ROOT_PATH, 'runtime/session')
+  },
+  tmpFile: {
+    handle: fileSession,
+    sessionPath: path.join(os.tmpdir, 'session')
   }
 };
 
