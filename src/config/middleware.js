@@ -1,5 +1,6 @@
 const path = require('path');
 const isDev = think.env === 'development';
+const isNow = think.env === 'now';
 
 module.exports = [
   {
@@ -11,7 +12,7 @@ module.exports = [
   },
   {
     handle: 'resource',
-    enable: isDev,
+    enable: isDev || isNow,
     options: {
       root: path.join(think.ROOT_PATH, 'www'),
       publicPath: /^\/(static|favicon\.ico)/

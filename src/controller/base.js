@@ -1,6 +1,6 @@
 const fs = require('fs');
 const marked = require('marked');
-const markToc = require('marked-toc');
+const markToc = require('markdown-toc');
 const highlight = require('highlight.js');
 const path = require('path');
 
@@ -41,7 +41,7 @@ module.exports = class extends think.Controller {
   markdownToHtml(filePath) {
     const content = fs.readFileSync(filePath, 'utf8');
 
-    const tocContent = marked(markToc(content)).replace(/<a\s+href="#([^"]+)">([^<>]+)<\/a>/g, (a, b, c) => {
+    const tocContent = marked(markToc(content).content).replace(/<a\s+href="#([^"]+)">([^<>]+)<\/a>/g, (a, b, c) => {
       return `<a href="#${this.generateTocName(c)}">${c}</a>`;
     });
 
