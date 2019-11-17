@@ -6,7 +6,7 @@
     "start": "node development.js",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
-    "now-build": "sh update.sh"
+    "now-build": "sh bin/update.sh"
   },
   "dependencies": {
     "highlight.js": "^9.12.0",
