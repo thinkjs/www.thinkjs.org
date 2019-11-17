@@ -1,8 +1,8 @@
 const fs = require('fs');
 const childProcess = require('child_process');
-const base = require('./base.js');
+const Base = require('./base.js');
 
-export default class extends base {
+module.exports = class extends Base {
   /**
    * get sidebar json
    * @return {} []
@@ -173,7 +173,7 @@ export default class extends base {
       '"': '&quot;',
       "'": '&#39;'
     };
-    return (str + '').replace(/[<>'"]/g, function(a) {
+    return (str + '').replace(/[<>'"]/g, function (a) {
       return htmlMaps[a];
     });
   }

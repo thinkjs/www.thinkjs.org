@@ -1,6 +1,6 @@
-import path from 'path';
-import {exec} from 'child_process';
-import Base from './base';
+const path = require('path');
+const { exec } = require('child_process');
+const Base = require('./base');
 
 module.exports = class extends Base {
   updateAction() {

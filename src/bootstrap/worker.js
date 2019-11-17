@@ -1,4 +1,4 @@
-import fs from 'fs';
+const fs = require('fs');
 
 const viewPath = think.ROOT_PATH + '/view';
 const dirnames = fs.readdirSync(viewPath);

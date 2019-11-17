@@ -15,6 +15,7 @@
     "think-cache": "^1.0.6",
     "think-cache-file": "^1.0.8",
     "think-i18n": "^1.2.3",
+    "think-loader": "^1.2.0",
     "think-logger3": "^1.0.0",
     "think-model": "^1.0.0",
     "think-model-mysql": "^1.0.0",
@@ -30,8 +31,6 @@
     "babel-preset-think-node": "^1.0.0",
     "eslint": "^4.16.0",
     "eslint-config-think": "^1.0.0",
-    "node-notifier": "^5.2.1",
-    "think-babel": "^1.0.3",
     "think-inspect": "0.0.2",
     "think-watcher": "^3.0.0"
   },
