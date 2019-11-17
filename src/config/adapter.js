@@ -74,7 +74,7 @@ exports.session = {
   },
   tmpFile: {
     handle: fileSession,
-    sessionPath: path.join(os.tmpdir, 'session')
+    sessionPath: path.join(os.tmpdir(), 'session')
   }
 };
 
