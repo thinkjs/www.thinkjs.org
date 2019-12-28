@@ -1,12 +1,13 @@
 {
-  "name": "thinkjs-application",
+  "name": "thinkjs-official",
   "description": "application created by thinkjs",
   "version": "1.2.0",
   "scripts": {
     "start": "node development.js",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
-    "now-build": "sh bin/update.sh"
+    "now-build": "sh bin/update.sh",
+    "pkg-build": "pkg ./ --out-path=dist"
   },
   "dependencies": {
     "highlight.js": "^9.12.0",
@@ -25,7 +26,7 @@
     "think-view": "^1.0.0",
     "think-view-ejs": "0.0.11",
     "think-view-nunjucks": "^1.0.1",
-    "thinkjs": "^3.0.0"
+    "thinkjs": "^3.2.11"
   },
   "devDependencies": {
     "eslint": "^4.16.0",
@@ -34,5 +35,18 @@
   },
   "repository": "",
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "bin": "pkg.js",
+  "pkg": {
+    "assets": [
+      "src/**/*",
+      "view/**/*",
+      "www/**/*"
+    ],
+    "targets": [
+      "node10-linux-x64",
+      "node10-macos-x64",
+      "node10-win-x64"
+    ]
+  }
 }

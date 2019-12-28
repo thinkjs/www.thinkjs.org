@@ -7,6 +7,7 @@ const { Console, File, DateFile } = require('think-logger3');
 const path = require('path');
 const isDev = think.env === 'development';
 const isNow = think.env === 'now';
+const isPkg = think.env === 'pkg';
 
 /**
  * cache adapter config
@@ -19,7 +20,7 @@ exports.cache = {
   },
   file: {
     handle: fileCache,
-    cachePath: path.join(think.ROOT_PATH, 'runtime/cache'), // absoulte path is necessarily required
+    cachePath: path.join(think.RUNTIME_PATH, 'cache'), // absoulte path is necessarily required
     pathDepth: 1,
     gcInterval: 60 * 60 * 1000 // gc interval
   },
@@ -70,7 +71,7 @@ exports.session = {
   },
   file: {
     handle: fileSession,
-    sessionPath: path.join(think.ROOT_PATH, 'runtime/session')
+    sessionPath: path.join(think.RUNTIME_PATH, 'session')
   },
   tmpFile: {
     handle: fileSession,
@@ -116,6 +117,6 @@ exports.logger = {
     absolute: true,
     pattern: '-yyyy-MM-dd',
     alwaysIncludePattern: true,
-    filename: path.join(think.ROOT_PATH, 'logs/app.log')
+    filename: path.join(isPkg ? process.cwd() : think.ROOT_PATH, 'logs/app.log')
   }
 };
