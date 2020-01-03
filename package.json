@@ -7,7 +7,8 @@
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
     "now-build": "sh bin/update.sh",
-    "pkg-build": "pkg ./ --out-path=dist"
+    "pkg-build": "pkg ./ --out-path=dist",
+    "compile": "babel --no-babelrc src/ --presets think-node --out-dir app/"
   },
   "dependencies": {
     "highlight.js": "^9.12.0",
