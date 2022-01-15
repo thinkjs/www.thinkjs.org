@@ -13,7 +13,7 @@
   "dependencies": {
     "highlight.js": "^9.12.0",
     "markdown-toc": "^1.2.0",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "natives": "^1.1.6",
     "think-cache": "^1.0.0",
     "think-cache-file": "^1.0.8",
