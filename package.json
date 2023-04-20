@@ -26,7 +26,7 @@
     "think-session-file": "^1.0.5",
     "think-view": "^1.0.0",
     "think-view-ejs": "0.0.11",
-    "think-view-nunjucks": "^1.0.1",
+    "think-view-nunjucks": "^1.0.11",
     "thinkjs": "^3.2.11"
   },
   "devDependencies": {
