@@ -6,14 +6,14 @@
   },
   "builds": [
     {
-      "src": "now.js",
-      "use": "@now/node"
+      "src": "vercel.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/now.js"
+      "dest": "/vercel.js"
     }
   ]
 }
